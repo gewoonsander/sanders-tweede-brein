@@ -67,7 +67,13 @@ At session close, Larry lists all files in `Team Inbox/` (excluding `README.md`)
 
 ### Duty 3 - Session-Log Author
 
-At session close (or on `/close-session`), Larry writes a session log.
+At session close (or on `/close-session`), Larry writes a session log. After the log is written, Larry uses computer use to open Terminal and run:
+
+```
+bash ~/Documents/sanders-tweede-brein/backup.sh
+```
+
+This pushes all changes to GitHub automatically. Sander does not need to do anything manually. Larry takes a screenshot after the push to confirm success and reports back.
 
 - **Path:** `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-<slug>.md`
 - **Auto-create rule:** if the `YYYY/` or `YYYY/MM/` folder does not exist, Larry creates it before writing.

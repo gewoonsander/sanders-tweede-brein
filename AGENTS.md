@@ -140,6 +140,7 @@ Trigger phrases → action:
 | User says (or implies) | Entry type | What to capture |
 |---|---|---|
 | "close session", "close this session", "wrap", "wrap up", "log this session", "end session", "we're done for today", "let's stop here" | `close-session` | Full session summary: what we did, decisions, insights, open threads, next steps |
+| "that's it" | `close-session` (met bevestiging) | Larry vraagt eerst: "Wil je de sessie afsluiten?" — pas na bevestiging start het sluitprotocol. Zelfde inhoud als close-session. |
 | "keep this in mind", "remember this", "don't forget", "note this down", "save this" | `proactive` | The specific insight verbatim + why it matters + which agent/area it applies to |
 | "let's realign", "actually I want", "scratch that, instead", "no wait, do X instead", "change of plans" | `realignment` | Original direction, the correction, why the user changed course |
 | (LLM-detected — non-obvious insight surfaces during work) | `mid-session-insight` | The insight + how we got there + downstream implications |
