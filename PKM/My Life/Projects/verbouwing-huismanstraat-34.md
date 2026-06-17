@@ -72,6 +72,7 @@ Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing
 - Afzuigkap: doorvoer buitenmuur of recirculatie?
 - Spoelbak aanwezig in keuken of apart regelen?
 - Transport keuken van Almere (bestelwagen/aanhanger 11 juli)
+- **Beslissing 17-06-2026:** warm water voor wasmeubel clientkamer → doortrekken vanuit huidige keuken (niet via warmtepomp)
 
 Afgesproken acties kortere termijn (april 2026 Sander & Marieke):
 - Warmtepomp plaatsen (locatie: hal, per aanwijzing FH team) — Sparrow P60 + Boilervat WBL 300 + buffervat WBF 100
