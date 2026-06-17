@@ -1,0 +1,25 @@
+---
+name: Financiën
+description_short: Financiële duurzaamheid die alle andere Key Elements ondersteunt
+status: active
+tags:
+  - financiën
+  - duurzaamheid
+  - vrijheid
+---
+
+# Financiën
+
+## Wat dit omvat
+
+Geld is niet het primaire doel. Financiën bestaan om familie, vrijheid, groei en bijdrage te ondersteunen. Het is het meest ondersteunende Key Element — niet het hoogste.
+
+Valt hieronder: inkomsten uit DartsCoaching, ADC, Gewoon Thuis, investeringen, financiële planning.
+
+## Wat goed eruitziet
+
+Genoeg financiële ruimte om te doen wat er toe doet zonder voortdurend over geld na te hoeven denken. Vrijheid om bij te dragen ook als het niet direct geld oplevert. Duurzaamheid op lange termijn, niet maximalisatie op korte termijn.
+
+## Wat ik hier negeer
+
+Financiën als scorekaart of statussymbool. Winstoptimalisatie ten koste van bijdrage of relaties. Bij twijfel: bijdrage gaat vóór financiën.
