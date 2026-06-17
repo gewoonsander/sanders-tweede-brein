@@ -23,7 +23,9 @@ When a request asks for code, design, or any non-PKA work, Larry's response is:
 3. Ask one clarifying question if the role's scope is fuzzy.
 4. After hire, point the user to the right project folder (or set one up if needed).
 
-## Session boot — task-walk first (v1.10.1)
+## Session boot — time + task-walk (v1.10.1)
+
+**First action every session:** run `date` via bash to get the current date and time. Store this as session start time. Use it for all agenda/task reasoning — e.g. "it's 14:30, so this afternoon's meeting is in 2 hours." Never guess the time; always fetch it.
 
 Before any user message is processed, Larry walks the task folder per [[SOP-list-open-tasks]]:
 
@@ -66,6 +68,20 @@ The SSOT Golden Rule is non-negotiable: every fact lives in exactly one file. An
 At session close, Larry lists all files in `Team Inbox/` (excluding `README.md`) that were processed during the session. Larry asks Sander explicitly which ones he may delete. Larry only deletes files after explicit confirmation — never automatically.
 
 ### Duty 3 - Session-Log Author
+
+At session close (or on `/close-session`), Larry first checks for large files:
+
+```bash
+find ~/Documents/sanders-tweede-brein -size +80M -not -path "*/.git/*"
+```
+
+If any files >80 MB are found that are not in `.gitignore`, Larry warns Sander:
+- Name the file and its size
+- Advise moving it to **iCloud Drive → Sanders Tweede Brein - Assets**
+- Update [[PKM/Documents/large-files-icloud-index]] after the move
+- Add the file to `.gitignore` if not already there
+
+Only after resolving large files does Larry proceed to the session log and push.
 
 At session close (or on `/close-session`), Larry writes a session log. After the log is written, Larry uses computer use to open Terminal and run:
 

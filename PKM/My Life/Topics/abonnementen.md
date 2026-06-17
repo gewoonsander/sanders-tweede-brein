@@ -37,6 +37,8 @@ Levend overzicht van alle terugkerende betalingen. Wordt automatisch bijgehouden
 | [[mollie]] | Betalingsverwerker | Maandelijks (transactietarief) | Maand | Maandelijks | Automatisch | Betalen |
 | [[plugandpay]] – Lite | Jaarabonnement | €180,00 excl. BTW (€217,80 incl.) | Jaar | 01-05-2027 | Automatische incasso | Verkoop / tooling |
 | VMB Advies ([[bart]]) | Boekhouder | ? | Maand | Maandelijks | ? | Boekhouding |
+| n8n Cloud Start | Automatiseringstool (workflows / koppelingen) | €240,00 excl. btw (€290,40 incl.) | Jaar | vóór 08-10-2026 | MasterCard •••• 6948 | Automatisering / tooling |
+| WPMU DEV Premium | WordPress plugin suite (hosting, security, SEO, etc.) voor klantwebsites | $495,00 (50% agency-korting op $990) | Jaar | ~24-03-2027 | MasterCard •••• 6948 | WordPress / hosting |
 | Versio | Hosting / reseller | ? | Maand | Maandelijks | Automatisch | Hosting |
 
 ### Klantdomeinen
@@ -49,7 +51,7 @@ Levend overzicht van alle terugkerende betalingen. Wordt automatisch bijgehouden
 
 | Dienst | Blocker | Actie |
 |--------|---------|-------|
-| e-Boekhouden.nl | Overleg met [[bart]] op 17-06-2026: welke data heeft hij nodig uit het archief? | Export maken → opzeggen. Betaal nu dubbel (e-Boekhouden + Jortt via Bart). |
+| e-Boekhouden.nl | Bart onderzoekt: (a) kosten archieffunctie activeren of (b) exportfunctie gebruiken voor 7-jaar bewaarplicht. Beslissing volgt na maandag 22-06-2026. | Na maandag: keuze maken → uitvoeren → opzeggen. |
 
 ## Opgezegde abonnementen
 
@@ -83,6 +85,7 @@ Bekende vaste lasten per maand (excl. BTW, afgerond):
 | **Plug&Pay Lite** (jaarlijks ÷ 12) | ~€15,00 |
 | **Canva Pro** (jaarlijks ÷ 12) | ~€7,56 |
 | **GoDaddy** (jaarlijks ÷ 12) | ~€0,81 |
-| **Minimum bekende maandlast** | **~€160/maand** |
+| **n8n Cloud Start** (jaarlijks ÷ 12) | ~€20,00 |
+| **Minimum bekende maandlast** | **~€180/maand** |
 
 *Bedragen met ? worden ingevuld zodra Penn een nieuwe factuur van die dienst verwerkt.*
