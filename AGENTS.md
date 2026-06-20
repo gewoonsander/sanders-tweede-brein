@@ -149,6 +149,17 @@ Triggers are case-insensitive. Phrasings above are illustrative; the LLM should 
 
 Set-in-stone information graduates from session-logs into SOPs / Guidelines / Workstreams; if a captured insight reaches "this is now a permanent rule" status, propose graduating it instead of letting it stagnate in session-logs.
 
+### Close-session git backup (mandatory final step)
+
+Every `close-session` entry (full trigger or confirmed "that's it") ends with a git backup of the whole myPKA repo, **after** the session-log file itself has been written:
+
+1. `git add -A` (stage everything, including new session-log, new notes, new images, edited files).
+2. `git commit -m "Session backup YYYY-MM-DD HH:MM"` (use the actual close timestamp).
+3. `git push` to `origin`.
+4. Report the result to the user in one line (committed + pushed, or what failed and why).
+
+If the repo has no remote configured, or push fails (auth, conflict, offline), tell the user explicitly — never silently skip the backup. This step is not optional and does not require the user to ask for it each time; it is part of what "close session" means in this myPKA.
+
 This section is the authoritative, canonical, LLM-agnostic spec — the natural-language trigger phrases above are the universal path that every host honors. The `/close-session` slash command is **not** required and is **not** shipped in the scaffold: it is a Claude-Code-only convenience that the adapter generates at setup time (see ADAPTER-PROMPT §7-bis) into `.claude/commands/close-session.md`, derived from this protocol. Hosts without slash commands (ChatGPT, Cursor, Cline, Gemini CLI, Codex, and any other LLM that reads `AGENTS.md`) skip the slash command entirely and honor the exact same contract via the trigger phrases above.
 
 ## External Knowledge Import Triggers (LLM-agnostic)

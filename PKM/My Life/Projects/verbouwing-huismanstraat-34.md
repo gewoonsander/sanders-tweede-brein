@@ -402,7 +402,7 @@ Subsidie zelf aanvragen via rvo.nl na installatie — meldcode KA28310
 - [ ] Stalen balk: leverancier uitzoeken + monteur regelen
 - [ ] Keuze maken: beton uithakken zelf of uitbesteden
 - [ ] LTV radiatoren bestellen (slaapkamer A, eetkamer, keuken)
-- [ ] **Verhuisbus Albero bevestigen** — Marieke heeft bus gereserveerd; ⏳ wacht op merk/model van Albero (actie al uitgezet) om te bepalen of keuken in één rit past
+- [x] **Verhuisbus Albero bevestigen** — Opel Movano, kenteken VPN83J, buitenmaten 600×205×252 cm (gesloten opbouw). Inschatting laadruimte ~3,7–4,1 m lang, ~1,38 m tussen wielkasten, ~1,9–2,1 m hoog. Keuken (langste los onderdeel: aanrechtblad 2,33 m) past naar verwachting in één rit; hoge kasten (200–220 cm) moeten waarschijnlijk liggend vervoerd worden i.v.m. laadhoogte.
 - [ ] **Gezamenlijke woonkeuken leegmaken** — voordat keuken op muur geschetst kan worden
 - [ ] **Keuken op muur schetsen** (voor Ralf) — exacte positie buitenmuur, binnenmuur, koofje
 - [ ] **3e elektrakast bijplaatsen** — afstemmen met elektricien; ruimte controleren in halletje voordeur

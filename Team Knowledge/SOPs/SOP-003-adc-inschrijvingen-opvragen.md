@@ -31,10 +31,14 @@ Voer deze SOP uit wanneer Sander vraagt:
 
 | Seizoen | Dart Atlas URL | Status |
 |---|---|---|
-| Winmau Benelux Trophy 2026 – East Netherlands | https://www.dartsatlas.com/seasons/ijkvdm44k7eC | ✅ actief |
-| Winmau Benelux Open 2026 – East Netherlands | _nog niet aangemaakt door John Lokken_ | ⏳ verwacht volgende week |
+| Winmau Benelux Trophy 2026 – East Netherlands | https://www.dartsatlas.com/seasons/ijkvdm44k7eC | ✅ afgerond (laatste Regional Amateur Finals 20-06-2026) |
+| Winmau Benelux Open 2026 – East Netherlands | https://www.dartsatlas.com/seasons/uoGtg6XqtbQH | ✅ actief (volgende seizoen) |
 
-**Updaten** zodra John de Benelux Open-URL aanmaakt: voeg de URL toe aan bovenstaande tabel.
+**Winmau Benelux Open 2026 — planning:**
+- Pub Qualifiers: 29-06-2026 / 20-09-2026
+- Regional Amateur Finals 1 & 2: 26-09-2026 (locatie tbd)
+- Regional Elite Finals: 27-09-2026 (locatie tbd)
+- Hoofdtoernooi: 03-10-2026, Fletcher Hotel De Holthurnsche Hof, Berg en Dal
 
 ## Procedure
 

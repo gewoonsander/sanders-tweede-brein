@@ -49,44 +49,85 @@ Haal op: finale-uitslag (winnaar + runner-up + score), alle KO-resultaten.
 
 ### Stap 1.3 — Groepsstandingen + gemiddelden
 
-Fetch: `https://www.dartsatlas.com/tournaments/fyn1U1tqdoCL/groups`
+Fetch: `https://www.dartsatlas.com/tournaments/[ID]/groups`
 
-Haal op: groepsindeling, eindstanden, gemiddelden per speler.
+Haal op: groepsindeling, eindstanden, gemiddelden per speler. Hieruit volgt ook het aantal groepen (N).
 
-### Stap 1.4 — Spelerspagina's (efficiënt: 3 per groep)
+### Stap 1.4 — Match-ID's per groep (compleet, geen sampling)
 
-Fetch per groep **maximaal 3 spelerspagina's** — dat levert alle unieke match-URLs op zonder overkill.
+⚠️ **Vervangt de oude aanpak via spelerspagina's** — die liep risico op gemiste wedstrijden door de "max 3 per groep"-beperking (nodig vanwege rate limiting). Onderstaande aanpak is wél compleet, zonder dat risico.
 
-URL-formaat: `https://www.dartsatlas.com/tournaments/[ID]/player_stats/[SPELER_ID]`
+Voor elke groep (1 t/m N): navigeer naar `https://www.dartsatlas.com/tournaments/[ID]/group/[N]`.
 
-Doel: verzamel alle unieke match-IDs voor stap 1.5. Elke wedstrijd staat in twee spelerspagina's — haal elke match-ID maar één keer op.
+Deze pagina toont in een sidebar de **volledige wedstrijdenlijst van die groep** (bij 6 spelers: alle 15 wedstrijden, per ronde). Gebruik de `find`-tool (of lees de links in de pagina) om alle match-links op te halen, bijvoorbeeld:
 
-**Let op rate limiting:** Dart Atlas begint lege responses te geven bij >8-10 requests in korte tijd. Haal spelerspagina's sequentieel op als er problemen zijn.
+> "all match result rows in the right sidebar list (Round 1, Round 2, etc.) - get their links/hrefs"
+
+Dit levert per groep alle unieke match-ID's in één keer op — `href="/matches/[MATCH_ID]"` — zonder spelerspagina's te hoeven bezoeken en zonder rate-limiting-risico op gemiste wedstrijden.
+
+**KO-wedstrijden (kwartfinale, halve finale, finale)** staan niet op de groep-pagina's — die haal je op via `https://www.dartsatlas.com/tournaments/[ID]/results` (zie stap 1.2).
+
+**Let op rate limiting bij stap 1.5:** Dart Atlas begint lege responses te geven bij >8-10 requests in korte tijd. Haal wedstrijdpagina's sequentieel op als er problemen zijn — dat blijft relevant, ook met deze completere match-ID-verzameling.
 
 ### Stap 1.5 — Wedstrijdpagina's (checkouts)
 
-Fetch alle unieke wedstrijdpagina's.
+⚠️ **Gebruik de parallelle fetch-methode hieronder — niet screenshots, niet één-voor-één navigeren.** Geverifieerd op een heel toernooi (32 wedstrijden): exact dezelfde uitkomst als screenshots, maar in **1 tool-call in plaats van 64-100**.
 
-URL-formaat: `https://www.dartsatlas.com/matches/[MATCH_ID]`
+**Waarom dit werkt:** de browser-tab is al ingelogd op dartsatlas.com (zelfde sessie/cookies). Vanuit die pagina kan je met `fetch()` de HTML van alle andere wedstrijdpagina's tegelijk ophalen — zónder de tab te laten navigeren. Dat omzeilt de bot-blokkade die `WebFetch` (los van de browser) krijgt, en je hoeft niet te wachten op laden/scrollen per wedstrijd.
 
-**Wat zoeken:**
+Zorg dat de tab al op een dartsatlas.com-pagina staat (bijv. na stap 1.1-1.4), en voer dan deze JavaScript uit via `javascript_exec` met **alle verzamelde match-ID's in één keer**:
 
-Per leg: identificeer de **laatste niet-nul score van de winnaar** in die leg. Dit is de checkout-waarde.
+```js
+(async () => {
+  function extractCheckouts(doc) {
+    function ownText(el) {
+      let t = '';
+      for (const node of el.childNodes) if (node.nodeType === 3) t += node.textContent;
+      return t.trim();
+    }
+    const legHeaders = [...doc.querySelectorAll('h2, h3, h4, h5')].filter(h => /^Leg \d+$/.test(h.textContent.trim()));
+    return legHeaders.map(h => {
+      const div = h.nextElementSibling;
+      const summary = [...div.children].find(c => c.className === 'leg-throws-summary');
+      const uls = [...summary.children].filter(u => u.className.startsWith('player'));
+      const players = uls.map(ul => ({cls: ul.className, throws: [...ul.children].map(li => ownText(li))}));
+      const winnerUl = players.find(p => p.cls.includes(' won'));
+      return winnerUl ? winnerUl.throws[winnerUl.throws.length - 1] : null;
+    });
+  }
+  const ids = [/* alle match-ID's uit stap 1.2 + 1.4, als strings */];
+  const results = await Promise.all(ids.map(async id => {
+    const resp = await fetch('/matches/' + id);
+    const html = await resp.text();
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return {id, title: doc.title, checkouts: extractCheckouts(doc)};
+  }));
+  const highFinishes = [];
+  results.forEach(r => r.checkouts.forEach(c => { if (c && parseInt(c) >= 100) highFinishes.push({match: r.title, checkout: c}); }));
+  return JSON.stringify({matchCount: results.length, highFinishes, allResults: results});
+})();
+```
 
-- Checkout ≥ 100 → noteren als **hoge finish** met naam speler en waarde
+**Hoe de checkout-extractie werkt:** elke `<li>` binnen `.leg-throws-summary` heeft een eigen tekstnode (vóór de decoratieve `<span>`'s voor dart-count/resterende score/missed-doubles) met de daadwerkelijk gegooide score die beurt. De laatste `<li>` in de UL van de winnende speler (class bevat `" won"`) is de checkout.
+
+**Resultaat:** `highFinishes` geeft direct alle checkouts ≥100 met wedstrijdnaam. `allResults` geeft per wedstrijd de volledige checkout-lijst (één waarde per leg) voor wie alles wil nalopen. Classificeer zoals voorheen:
+- Checkout ≥ 100 → hoge finish
 - Checkout ≥ 140 → apart markeren als bijzonder hoge finish
 - Checkout = 170 of hoger → maximale finish, extra vermeldenswaardig
 
-**Formaat per beurt:** `[darts] [resterende score tegenstander] [gegooid]`
-- Winnaar van de leg: middelste kolom = 0
-- Verliezer van de leg: middelste kolom = wat zij over hadden toen de ander finishte
-- Bust (overgooi): score = 0 → overslaan bij bepalen checkout
+**Spelersnaam bij checkout:** `doc.title` geeft "Speler1 vs Speler2" (linker vs rechter in de oorspronkelijke matchup). Als je moet weten wélke van de twee de checkout gooide, voeg `winnerCls` toe aan de extractie (begint met `player1`/`player2`) en koppel dat aan de volgorde in de title.
 
-**Prioriteit bij rate limiting:** Haal KO-wedstrijden (finale, SF, QF) als eerste op — die hebben de meeste kans op hoge finishes bij hogere gemiddelden.
+**Rate limiting:** bij zeer grote toernooien (40+ wedstrijden) kan een enkele `Promise.all` met alle fetches tegelijk nog steeds tegen rate limits aanlopen. Splits dan in batches van ~20 met een korte pauze tussen batches, of val terug op sequentieel fetchen binnen dezelfde `(async () => {...})()`-structuur.
+
+**Fallback:** als de fetch-methode onverwacht leeg/foutief teruggeeft (bijv. door een wijziging in de site-structuur), val terug op losse navigatie + dezelfde extractielogica per wedstrijd (zie git-historie van dit bestand voor de vorige stap-voor-stap versie), of als laatste redmiddel op screenshots.
 
 ### Stap 1.6 — 180's per speler
 
-Uit de spelerspagina's (stap 1.4) lees je al het 180-veld per speler. Geen extra fetches nodig.
+Het 180-aantal staat niet in de groep-sidebar (stap 1.4) — dat geeft alleen wedstrijduitslagen, geen losse statistieken. Hiervoor blijven spelerspagina's nodig:
+
+URL-formaat: `https://www.dartsatlas.com/tournaments/[ID]/player_stats/[SPELER_ID]`
+
+Alle speler-ID's volgen uit de groepenpagina (stap 1.3) — dus in tegenstelling tot vroeger hoeft deze fetch niet meer gecombineerd te worden met match-ID-verzameling (die loopt nu via stap 1.4). Dat betekent: deze 180-fetch kan los en compleet voor alle spelers gebeuren, zonder dat een gemiste fetch ook wedstrijden laat ontbreken.
 
 **⚠️ Bekende beperking — onvolledige 180-dekking bij rate limiting:**
 

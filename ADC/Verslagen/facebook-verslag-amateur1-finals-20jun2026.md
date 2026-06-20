@@ -5,14 +5,14 @@ datum: 2026-06-20
 locatie: Dartclub de Rijnvogels, Driel
 winnaar: Keano de Wit
 aangemaakt: 2026-06-20
-status: concept — wacht op foto winnaar
+status: gepubliceerd
 ---
 
 # Facebook-verslag — Regional Amateur I Finals 20 juni 2026
 
 > ✅ Automatisch ingevuld: winnaar, finale-uitslag, gemiddelden, 180's, hoge finishes, kwalificatie EC, seizoenslink
-> ⚠️ Hoge finishes: 1 wedstrijd ongecontroleerd (Ivo vs Paul groepsfase — rate limiting). Kans op extra hoge finish klein.
-> 📸 Ontbreekt: foto van Keano de Wit (handmatig toevoegen)
+> ✅ Hoge finishes: alle 9 wedstrijden van het toernooi gecontroleerd (volledige dekking, geen gok meer) — bevestigd: 110 (Paul Kalashnikov) en 100 (Keano de Wit)
+> 📸 Foto van Keano de Wit toegevoegd (aangeleverd via Team Inbox)
 > 💬 Optioneel: quote van Keano (handmatig toevoegen)
 
 ---
@@ -26,13 +26,17 @@ Gefeliciteerd aan **Keano de Wit** met het winnen van de Regional Amateur I Fina
 Keano kroonde zich tot winnaar na een spannende finale op het scherpst van de snede: hij versloeg **Paul Kalashnikov** met **5–4** in een zenuwslopende Best of 9 (gem. 71,33 vs 70,23). Waanzinnig duel! 🔥
 
 Met deze overwinning plaatst Keano zich voor de **ADC European Classic 2026** — dikverdiend! 👏
+👉 https://www.amateurdarts.eu/TOURNAMENTS/EUROPEAN-CLASSIC/
 
 Een groot dankjewel aan **Dartclub de Rijnvogels** voor de geweldige accommodatie en de fijne sfeer! 🎯
 
 ---
 
-📊 Dit was de **finale** van de Regional Amateur I-categorie — het slottoernooi voor de beste spelers met een gemiddelde tussen 60 en 70 die zich dit seizoen hebben gekwalificeerd voor de **Winmau Benelux Trophy 2026 – Regio Oost**. Met dit toernooi sluit de ranglijst voor deze categorie. Binnenkort start een nieuwe ranking voor de **Winmau Benelux Open 2026** — houd de pagina in de gaten!
+📊 Dit was de **finale** van de Regional Amateur I-categorie — het slottoernooi voor de beste spelers met een gemiddelde tussen 60 en 70 die zich dit seizoen hebben gekwalificeerd voor de **Winmau Benelux Trophy 2026 – Regio Oost**. Bekijk de eindstand van dit seizoen hier:
 👉 https://www.dartsatlas.com/seasons/ijkvdm44k7eC/player_standings
+
+Met dit toernooi sluit de ranglijst voor deze categorie. Binnenkort start een nieuwe ranking voor de **Winmau Benelux Open 2026** — houd de pagina in de gaten!
+👉 https://www.dartsatlas.com/seasons/uoGtg6XqtbQH
 
 ---
 
@@ -63,7 +67,7 @@ Desiree Geel — 1
 
 ---
 
-📸 *[Foto van Keano de Wit toevoegen]*
+![[Images/2026/06/2026-06-20-keano-de-wit-winnaar-amateur1-finals.jpeg]]
 
 Sharing is caring — tag de deelnemers en deel dit bericht! 🔄
 
