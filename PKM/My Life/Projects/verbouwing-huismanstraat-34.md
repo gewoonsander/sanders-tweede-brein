@@ -10,6 +10,7 @@ tags:
   - duurzaamheid
   - woning
 source_doc: https://docs.google.com/document/d/1wl2knsy5w6Zrr96zwlPNiSyvN2mthqkiGVOjKxghu-M
+google_calendar_id: 45d45622761114be21ee14d998a5d04dd7d0cb540898d45f56bc11b4f2f0ff10@group.calendar.google.com
 energielabel: C
 ---
 
@@ -401,6 +402,7 @@ Subsidie zelf aanvragen via rvo.nl na installatie — meldcode KA28310
 - [ ] Stalen balk: leverancier uitzoeken + monteur regelen
 - [ ] Keuze maken: beton uithakken zelf of uitbesteden
 - [ ] LTV radiatoren bestellen (slaapkamer A, eetkamer, keuken)
+- [ ] **Verhuisbus Albero bevestigen** — Marieke heeft bus gereserveerd; ⏳ wacht op merk/model van Albero (actie al uitgezet) om te bepalen of keuken in één rit past
 - [ ] **Gezamenlijke woonkeuken leegmaken** — voordat keuken op muur geschetst kan worden
 - [ ] **Keuken op muur schetsen** (voor Ralf) — exacte positie buitenmuur, binnenmuur, koofje
 - [ ] **3e elektrakast bijplaatsen** — afstemmen met elektricien; ruimte controleren in halletje voordeur

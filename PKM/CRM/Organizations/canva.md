@@ -18,6 +18,10 @@ Online design platform voor social media, presentaties, documenten en meer. Canv
 
 Actief Canva Pro-abonnement voor GewoonSander. Jaarlijkse facturering via sander@gewoonsander.nl.
 
+## Integratie met Larry (Cowork)
+
+Canva is gekoppeld als MCP-tool in Cowork. Larry kan via deze koppeling ontwerpen aanmaken, aanpassen, genereren en exporteren vanuit Canva. Vraag Larry gewoon wat je wil maken.
+
 ## Notes
 
 - VAT-nummer: EU372042198

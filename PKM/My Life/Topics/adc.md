@@ -34,6 +34,19 @@ Valt hieronder: venues, spelers, regio's, pub qualifiers, finales, toernooiopera
 - Hoe versterkt de ADC-rol de bredere coachingsmissie?
 - Welke spelers of relaties verdienen een eigen CRM-entry?
 - Hoe groeit de ADC-community op een duurzame manier?
+- Hoe richten we sander.voz@amateurdarts.eu goed in? (doorsturen, handtekening, labels, etc.)
+- Kan Dart Atlas twee toernooien (Amateur I + II) tegelijk draaien op dezelfde dag/locatie? → wacht op reactie John Lokken (mail verstuurd ~20 jun)
+
+## ADC e-mailadres
+
+Sander heeft een officieel ADC-e-mailadres gekoppeld aan zijn functie als regiomanager:
+**sander.voz@amateurdarts.eu**
+
+Inrichten nog te doen — zie open vragen.
+
+## Procedures
+
+- [[SOP-003-adc-inschrijvingen-opvragen]] — live inschrijvingen ophalen van Dart Atlas
 
 ## Bronnen
 

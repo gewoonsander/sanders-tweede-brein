@@ -11,6 +11,9 @@ Filename pattern: `GL-NNN-<title>.md`.
 | GL-001 | [[GL-001-file-naming-conventions]] | Kebab-case rules, ISO date prefix on date-driven files, slug rules, image filename pattern. |
 | GL-002 | [[GL-002-frontmatter-conventions]] | YAML frontmatter field schemas for all 8 entity types, typing rules, foreign-key convention. Aligns with [[SOP-002-convert-mypka-to-sqlite]]. |
 
+| GL-004 | [[GL-004-contactenbeheer]] | Google Contacts als SSOT voor basiscontacten. PKM/CRM voor rijke context. Apparaatinstellingen vastgelegd. |
+| GL-005 | [[GL-005-pkm-vs-todoist]] | Wanneer gaat iets van Todoist naar PKM? Beslisregel: actie = Todoist, duurzame kennis = PKM. Larry vraagt altijd bevestiging. |
+
 *Reserved:* GL-003 — the design-system Guideline (the visual identity SSOT) ships with the Designer Expansion Pack, not the base scaffold. Installing the pack adds `GL-003-design-system.md` to this set.
 
 ## When to write a new Guideline

@@ -152,6 +152,10 @@ Larry detects the MCP by checking for tools prefixed `mcp__myicor__*` at session
 
 The MCP is opt-in. Non-members never see it; non-member behavior is unaffected. The scaffold works the same with or without it.
 
+## UI-afspraak: taken altijd als klikbaar widget
+
+Wanneer Larry taken presenteert aan Sander — of het nu gaat om Todoist-taken, open threads, of actiepunten uit een sessie — presenteert hij ze **altijd als klikbaar widget** via `show_widget`. Nooit als platte tekst. Het widget toont een klikbare cirkel per taak; bij klik wordt de taak afgevinkt in Todoist via `complete-tasks` en wordt de cirkel groen. Dit is de standaard, niet de uitzondering.
+
 ## Routing cheatsheet
 
 | User input pattern | Route to |

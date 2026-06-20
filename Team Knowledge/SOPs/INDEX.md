@@ -10,6 +10,7 @@ Filename pattern: `SOP-NNN-<title>.md`. See [[GL-001-file-naming-conventions]] f
 |---|---|---|---|
 | SOP-001 | [[SOP-001-how-to-add-a-new-specialist]] | Nolan | Step-by-step procedure to draft and onboard a new team specialist. References [[GL-001-file-naming-conventions]]. |
 | SOP-002 | [[SOP-002-convert-mypka-to-sqlite]] | Silas (run by the user via paste-into-LLM prompt) | Generate a SQLite mirror of your myPKA on demand. Markdown stays canonical; SQLite is a derived performance layer. Body is a paste-into-LLM prompt. |
+| SOP-003 | [[SOP-003-adc-inschrijvingen-opvragen]] | Larry (via Mack) | Live inschrijvingen ophalen van Dart Atlas voor ADC Regio Oost. Triggered by vragen als "hoeveel mensen doen mee" of "update ADC-toernooien". |
 
 *Reserved (genuinely open for future agents):* SOP-003 onward (SOP-003, SOP-004, SOP-005, SOP-006, SOP-007, SOP-008, SOP-009, SOP-010). Do not back-fill these slots without coordinating across the team. SOP-007–010 were vacated when the design SOPs moved into the Designer Expansion Pack — a fresh pack install claims the lowest free slots starting at SOP-003.
 
