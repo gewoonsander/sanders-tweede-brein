@@ -17,12 +17,16 @@ Na afloop van een ADC-toernooi in Regio Oost genereert dit workstream een kant-e
 
 ## Triggers
 
-Voer dit workstream uit wanneer Sander vraagt:
+⚠️ **Staande regel (sinds 21-06-2026):** elk ADC-toernooi in Regio Oost krijgt standaard een verslag — dit is geen opt-in meer, Sander hoeft er niet apart om te vragen. Zodra een toernooi is afgelopen (zichtbaar via `/seasons/[ID]/tournaments/results` of omdat Sander meldt dat een toernooi gespeeld is), start Larry dit workstream proactief.
+
+Expliciete triggers (blijven ook werken, voor het geval Sander toch zelf vraagt):
 
 - "Maak verslag [toernooinaam]"
 - "Maak het verslag voor [locatie]"
 - "Schrijf het Facebook-bericht voor het toernooi van [datum/locatie]"
 - Of een andere variant die vraagt om een toernooi-bericht na afloop
+
+**Proactieve detectie:** bij een dagstart of inboxensessie checkt Larry of er die dag een ADC-toernooi in Regio Oost gepland stond/heeft gespeeld (agenda + `/seasons/[ID]/tournaments/results`). Zo ja → verslag opstellen zonder dat Sander het vraagt, en aan Sander voorleggen zodra het concept klaar is (inclusief de vraag om een winnaarsfoto, zoals altijd).
 
 ## Benodigde input van Sander (voor je begint)
 

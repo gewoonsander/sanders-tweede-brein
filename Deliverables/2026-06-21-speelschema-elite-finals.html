@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Speelschema — Regional Elite Finals</title>
+<style>
+  @page { size: A4 landscape; margin: 6mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background: #ffffff;
+    color: #2c2c2a;
+    font-size: 9px;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 2px 4px 5px;
+    border-bottom: 2px solid #173404;
+    margin-bottom: 5px;
+  }
+  .header img { height: 30px; width: 30px; object-fit: contain; border-radius: 5px; }
+  .header .divider { width: 1px; height: 22px; background: #d3d1c7; }
+  .header .titles h1 { font-size: 13px; margin: 0; color: #173404; }
+  .header .titles p { font-size: 9px; margin: 1px 0 0; color: #5f5e5a; }
+  .bracket {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .round {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1;
+    gap: 4px;
+  }
+  .round-title {
+    text-align: center;
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: #888780;
+    margin-bottom: 1px;
+  }
+  .match {
+    border: 1px solid #b4b2a9;
+    border-radius: 5px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+  .match .slot {
+    padding: 3px 5px;
+    border-bottom: 1px solid #ebe9e2;
+    min-height: 13px;
+    display: flex;
+    align-items: center;
+    font-size: 8px;
+  }
+  .match .slot:last-child { border-bottom: none; }
+  .match .slot.bye { background: #eaf3de; font-weight: 600; color: #173404; }
+  .match .slot.empty { color: #b4b2a9; font-style: italic; }
+  .match .slot.card { font-weight: 600; color: #0c447c; }
+  .bottom-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .panel {
+    flex: 1;
+    border: 1px solid #d3d1c7;
+    border-radius: 6px;
+    padding: 5px 7px;
+  }
+  .panel h2 {
+    font-size: 8px;
+    margin: 0 0 3px;
+    color: #173404;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .prize-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8px;
+  }
+  .prize-table td {
+    padding: 1px 3px;
+    border-bottom: 1px solid #ebe9e2;
+  }
+  .prize-table td.amount {
+    text-align: right;
+    font-weight: 600;
+    color: #173404;
+  }
+  .panel p {
+    margin: 0 0 3px;
+    font-size: 8px;
+    line-height: 1.3;
+    color: #5f5e5a;
+  }
+  .panel p b { color: #2c2c2a; }
+  .footer-note {
+    margin-top: 5px;
+    font-size: 7px;
+    color: #888780;
+    text-align: center;
+  }
+  .email-section {
+    margin-top: 6px;
+    border: 1px solid #d3d1c7;
+    border-radius: 6px;
+    padding: 6px 8px;
+  }
+  .email-section h2 {
+    font-size: 9px;
+    margin: 0 0 2px;
+    color: #173404;
+  }
+  .email-section .intro {
+    font-size: 8px;
+    color: #5f5e5a;
+    margin: 0 0 5px;
+    line-height: 1.3;
+  }
+  .email-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px 10px;
+  }
+  .email-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    font-size: 7.5px;
+    border-bottom: 1px dotted #d3d1c7;
+    padding-bottom: 1px;
+  }
+  .email-row .pname {
+    flex: 0 0 32%;
+    color: #2c2c2a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .email-row .pemail {
+    flex: 1;
+    color: #b4b2a9;
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="data:image/jpeg;base64,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" alt="ADC Benelux">
+    <div class="divider"></div>
+    <img src="data:image/png;base64,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" alt="Dartcafe Dubbel 10">
+    <div class="titles">
+      <h1>Winmau Benelux Trophy 2026 — Regional Elite Finals</h1>
+      <p>Dartcafé Dubbel 10, Arnhem — 21 juni 2026, 14:00 uur — Best of 9 legs — 24 deelnemers</p>
+    </div>
+  </div>
+
+  <div class="bracket">
+
+    <div class="round">
+      <div class="round-title">Ronde 1 (kaarttrekking)</div>
+      <div class="match"><div class="slot card">Schoppen A</div><div class="slot card">Schoppen 9</div></div>
+      <div class="match"><div class="slot card">Schoppen 5</div><div class="slot card">Schoppen K</div></div>
+      <div class="match"><div class="slot card">Schoppen 2</div><div class="slot card">Schoppen 10</div></div>
+      <div class="match"><div class="slot card">Schoppen 6</div><div class="slot card">Hartenaas</div></div>
+      <div class="match"><div class="slot card">Schoppen 3</div><div class="slot card">Schoppen J</div></div>
+      <div class="match"><div class="slot card">Schoppen 7</div><div class="slot card">Ruitenaas</div></div>
+      <div class="match"><div class="slot card">Schoppen 4</div><div class="slot card">Schoppen Q</div></div>
+      <div class="match"><div class="slot card">Schoppen 8</div><div class="slot card">Klaveraas</div></div>
+    </div>
+
+    <div class="round">
+      <div class="round-title">Ronde van 16</div>
+      <div class="match"><div class="slot bye">Ricardo Ulrich (1)</div><div class="slot empty">winnaar R1-1</div></div>
+      <div class="match"><div class="slot bye">Jesper Kistemaker (8)</div><div class="slot empty">winnaar R1-2</div></div>
+      <div class="match"><div class="slot bye">Gino Artz (5)</div><div class="slot empty">winnaar R1-3</div></div>
+      <div class="match"><div class="slot bye">Sander v. Ockenburg-Zwaan (4)</div><div class="slot empty">winnaar R1-4</div></div>
+      <div class="match"><div class="slot bye">John Lutgens (3)</div><div class="slot empty">winnaar R1-5</div></div>
+      <div class="match"><div class="slot bye">Mark Schlaghecke (6)</div><div class="slot empty">winnaar R1-6</div></div>
+      <div class="match"><div class="slot bye">Mark Van Ovost (7)</div><div class="slot empty">winnaar R1-7</div></div>
+      <div class="match"><div class="slot bye">jeffrey mansveld (2)</div><div class="slot empty">winnaar R1-8</div></div>
+    </div>
+
+    <div class="round">
+      <div class="round-title">Kwartfinale</div>
+      <div class="match"><div class="slot empty">winnaar A</div><div class="slot empty">winnaar B</div></div>
+      <div class="match"><div class="slot empty">winnaar C</div><div class="slot empty">winnaar D</div></div>
+      <div class="match"><div class="slot empty">winnaar E</div><div class="slot empty">winnaar F</div></div>
+      <div class="match"><div class="slot empty">winnaar G</div><div class="slot empty">winnaar H</div></div>
+    </div>
+
+    <div class="round">
+      <div class="round-title">Halve finale</div>
+      <div class="match"><div class="slot empty">winnaar QF1</div><div class="slot empty">winnaar QF2</div></div>
+      <div class="match"><div class="slot empty">winnaar QF3</div><div class="slot empty">winnaar QF4</div></div>
+    </div>
+
+    <div class="round">
+      <div class="round-title">Finale</div>
+      <div class="match"><div class="slot empty">winnaar SF1</div><div class="slot empty">winnaar SF2</div></div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">Groene vakken (1-8) = seeds/bye-spelers op basis van regionale ranglijst. Ronde 1-plekken zijn vooraf gekoppeld aan een speelkaart, zo verdeeld dat opeenvolgende kaarten altijd in een ander deel van het schema vallen. Elke niet-geseede speler trekt bij aankomst blind een kaart en schrijft zijn naam op de bijbehorende plek.</div>
+
+  <div class="bottom-row">
+    <div class="panel">
+      <h2>Prijzengeld vandaag — totaal €400 cash</h2>
+      <table class="prize-table">
+        <tr><td>1e plaats — winnaar</td><td class="amount">€200</td></tr>
+        <tr><td>2e plaats — finalist</td><td class="amount">€100</td></tr>
+        <tr><td>3e plaats — halve finalist</td><td class="amount">€50</td></tr>
+        <tr><td>3e plaats — halve finalist</td><td class="amount">€50</td></tr>
+      </table>
+    </div>
+    <div class="panel">
+      <h2>Op naar de Main Tournament</h2>
+      <p>Alle deelnemers mogen mee naar de <b>Main Tournament</b>, za 27 juni, Fletcher Hotel De Korenbeurs, Made.</p>
+      <p>Winnaar ontvangt <b>€2.500</b> + plek op het <b>ADC Global Championship 2026</b>.</p>
+      <p>Info: dartsatlas.com/tournaments/iLCE6ub3lYyO</p>
+    </div>
+    <div class="panel">
+      <h2>Pub Qualifiers — vervolg</h2>
+      <p>Pub Qualifiers blijven doorgaan op de huidige locaties, daarna spelen we voor de <b>Benelux Open 2026</b>.</p>
+      <p>Enige wijziging: locatie <b>Beesd is afgehaakt</b>.</p>
+    </div>
+  </div>
+
+  <div class="email-section">
+    <h2>Blijf op de hoogte — laat je e-mailadres achter</h2>
+    <p class="intro">Dart Atlas geeft geen e-mailadressen vrij, dus als je directer op de hoogte gehouden wilt worden van ADC Regio Oost (toernooien, wijzigingen, etc.), schrijf je adres erbij — helemaal vrijblijvend.</p>
+    <div class="email-grid">
+      <div class="email-row"><span class="pname">Danio Aalders</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Gino Artz</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Colin Delsink</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Rick Heijdemann</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Raoul Hendriks</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Rick Hiddink</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Sjors Kathmann</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Jesper Kistemaker</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Dani Lieftink</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Gert Lieftink</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">John Lutgens</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">jeffrey mansveld</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Stefan Post</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Kevin Rooks</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Mark Schlaghecke</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Luca Schoppema</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Ricardo Ulrich</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Sander v. Ockenburg-Zwaan</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Mark Van Ovost</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Daimen van Schie</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Tonny Veenhof</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Ryan Verhaegh</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">John Wolsheumer</span><span class="pemail">_______________________</span></div>
+      <div class="email-row"><span class="pname">Lo Wolswijk</span><span class="pemail">_______________________</span></div>
+    </div>
+  </div>
+
+</body>
+</html>
