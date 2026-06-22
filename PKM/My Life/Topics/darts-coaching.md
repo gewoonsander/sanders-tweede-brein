@@ -44,3 +44,4 @@ Valt hieronder: coachingscliënten, workshops, cursussen, [[dart-buddies]] commu
 - [[bijdrage]]
 - [[passie]]
 - [[CRM/People/joppe-bakens]]
+- Vertrouwensladder trainingsmethodiek — zie journal [[2026-06-21]]

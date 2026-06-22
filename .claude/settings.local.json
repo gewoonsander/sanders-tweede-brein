@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/sandervanockenburg-zwaan/.claude/projects -maxdepth 1 -iname \"*tweede-brein*\" -o -iname \"*sander*\" 2>/dev/null)",
+      "mcp__fdeec444-3c97-487b-9a2e-854e233f6c7f__list_events",
+      "WebFetch(domain:www.dartsatlas.com)",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__get_page_text",
+      "mcp__Claude_in_Chrome__find",
+      "mcp__Claude_in_Chrome__computer",
+      "mcp__Claude_in_Chrome__javascript_tool",
+      "WebFetch(domain:youtu.be)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "mcp__6b0d982b-9531-4059-8cb7-00cff63457d7__search_threads",
+      "mcp__038b67df-1277-4cd5-b6e4-150bccb71b78__find-tasks-by-date"
+    ]
+  }
+}
