@@ -37,6 +37,20 @@ Valt hieronder: coachingscliënten, workshops, cursussen, [[dart-buddies]] commu
 - **Workflow:** transcriptie → Larry maakt samenvatting → samenvatting gedeeld met Rick en Joppe
 - Dit is een herhalende taak die Larry elke keer oppakt zodra Sander de transcriptie aanlevert
 
+## Idee: Mastercaller Double Game als contentformat
+
+Gezien via Facebook-video (Bull's Darts, uitleg door **Jacques Nieuwlaat**) van het **Mastercaller Double Game** — een trainingsspel/scoreboard van Bull's Darts.
+
+**Spelconcept (samengevat):**
+- Gooi pijl 1 en 2 op 20 of 19 (vrije keuze), pijl 3 moet de bijbehorende dubbel raken.
+- Mis je 20/19 met pijl 1 of 2, of mis je de dubbel met pijl 3 → kruisje (X) voor die beurt. 5 pogingen per dubbel.
+- Punten: 1 punt per triple, 1 punt per dubbel (single+single+dubbel = 1, single+triple+dubbel = 2, triple+triple+dubbel = 3). Eindscore minus 1 punt per kruisje.
+- Combineert scoring-druk met afsluit-druk — vergelijkbaar met een wedstrijdsituatie waarin je moet uitgooien.
+
+**Mogelijke toepassing voor DartsCoaching.nl:** content/instructievideo, groepsoefening, of individuele pressure-drill. Nog uit te werken — geen concrete planning, puur als idee vastgelegd.
+
+Bronnen: [Bull's Darts productpagina](https://www.bulls.nl/products/scoreboards/mastercaller-double-game-scoreboard/), [YouTube uitleg NL](https://www.youtube.com/watch?v=m8m8tTWnp-s).
+
 ## Bronnen
 
 - [[dart-buddies]]

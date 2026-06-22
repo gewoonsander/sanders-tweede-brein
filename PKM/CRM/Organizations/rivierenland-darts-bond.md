@@ -49,3 +49,28 @@ Regionale dartsbond voor Nijmegen en omstreken. Organiseert teamcompetitie en in
 **Website gebouwd door:** [[gewoon-sander]] — Sander heeft de RDB-website ontwikkeld als webproject.
 
 **Domein:** RIVIERENLANDDARTSBOND.NL via GoDaddy. Verlenging: april 2026 (€9.67). Volgende verlenging: **april 2027** (reminder maart 2027). Zie [[2026-04-13-godaddy-receipt-rivierenlanddartsbond-nl]].
+
+## Bestuurswisseling 2026
+
+**ALV:** 4 juli 2026 — officiële verkiezing nieuw bestuur.
+
+**Nieuw bestuur (elect):**
+- Voorzitter: **Danny** — wil verantwoordelijkheden actief spreiden (geen concentratie meer bij één persoon)
+- Communicatie/website/socials: **[[emiel-theloosen]]**
+- Wedstrijdsecretariaat: eigen verantwoordelijke (naam nog onbekend)
+- Toernooien: eigen verantwoordelijke (naam nog onbekend)
+
+**Oud-bestuur context:**
+- **Nick** had alles onder zich: website, communicatie, toernooien, Facebook — raakte overbelast (ook privé: schoonzus ziek). Website en contacten liepen daardoor vast. Canva-account: onduidelijk of persoonlijk of RDB → navragen bij Nick.
+- **Serge Taber** had destijds gratis Google Workspace ingericht — legacy account met ~7-8 e-mailadressen.
+
+**Communicatieprobleem dat opgelost wordt:**
+- Alles liep via Facebook; mensen zonder Facebook misten de bestuurscrisis volledig.
+- Website stond stil, WhatsApp-kanaal ongebruikt.
+- Oplossing: website wordt het centrale kanaal, Facebook en website in sync.
+
+**Infrastructuur:**
+- Hosting: WPMU Dev (dedicated) — beheerd door Sander
+- E-mail: Google Workspace legacy (gratis, ~7-8 accounts)
+- WordPress (huidige installatie) + nieuwe installatie naast elkaar (Emiel bouwt offline)
+- Doelstelling: website live ná ALV 4 juli met bestuursinformatie + nieuwsberichten seizoensstart

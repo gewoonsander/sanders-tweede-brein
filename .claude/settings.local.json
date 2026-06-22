@@ -24,7 +24,10 @@
       "mcp__n8n-mcp__get_workflow_details",
       "mcp__n8n-mcp__get_execution",
       "mcp__n8n-mcp__execute_workflow",
-      "mcp__f7c1332a-41ef-4633-815c-4ae8c1169b3e__copy_file"
+      "mcp__f7c1332a-41ef-4633-815c-4ae8c1169b3e__copy_file",
+      "WebSearch",
+      "WebFetch(domain:www.dartswarehouse.nl)",
+      "WebFetch(domain:www.youtube.com)"
     ]
   }
 }
