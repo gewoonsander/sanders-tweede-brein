@@ -14,7 +14,17 @@
       "Bash(git commit *)",
       "Bash(git push *)",
       "mcp__6b0d982b-9531-4059-8cb7-00cff63457d7__search_threads",
-      "mcp__038b67df-1277-4cd5-b6e4-150bccb71b78__find-tasks-by-date"
+      "mcp__038b67df-1277-4cd5-b6e4-150bccb71b78__find-tasks-by-date",
+      "mcp__n8n-mcp__list_credentials",
+      "mcp__n8n-mcp__search_nodes",
+      "mcp__n8n-mcp__get_node_types",
+      "mcp__n8n-mcp__validate_workflow",
+      "mcp__n8n-mcp__create_workflow_from_code",
+      "mcp__n8n-mcp__update_workflow",
+      "mcp__n8n-mcp__get_workflow_details",
+      "mcp__n8n-mcp__get_execution",
+      "mcp__n8n-mcp__execute_workflow",
+      "mcp__f7c1332a-41ef-4633-815c-4ae8c1169b3e__copy_file"
     ]
   }
 }

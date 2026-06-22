@@ -16,45 +16,81 @@ energielabel: C
 
 # Verbouwing Huismanstraat 34
 
-## Ruimtenamen (referentie)
+## Plattegronden
 
-Officiële namen voor alle ruimtes — te gebruiken in alle documentatie, taken en communicatie.
+![[Images/2026/06/2026-06-22-plattegrond-huismanstraat34-begane-grond.jpg]]
+![[Images/2026/06/2026-06-22-plattegrond-huismanstraat34-eerste-verdieping.jpg]]
 
-**Begane grond — voorhuis**
+**Afmetingen huis (uit plattegrond):**
+- Totale lengte: 22.9m (horizontaal, links→rechts)
+- Totale breedte: 10.6m (verticaal, voor→achter)
+- De Deel (links, grijs): 8.4m lang × ~10.6m breed
+- Voorhuis (rechts): ~14.5m lang × 10.6m breed
+- Begane grond maten langs de lengte (onderzijde): 5.3m | 3.6m | 3.0m | 3.2m | 3.3m | 3.8m
+- Begane grond maten langs de breedte (linkszijde): 2.2m | 2.0m | 3.9m | 3.6m
+- Begane grond maten langs de breedte (rechtszijde): 4.4m | 1.2m | 4.2m
+- 1e verdieping maten langs de lengte (onderzijde): 8.4m | 3.8m | 3.7m | 5.7m | 4.8m
+- 1e verdieping maten langs de breedte (linkszijde): 2.5m | 3.2m | 6.4m | 3.2m
+- 1e verdieping maten langs de breedte (rechtszijde): 5.8m | 9.5m | 4.4m
 
-| Huidige naam | Toekomstige naam | Notities |
-|---|---|---|
-| Privékeuken | Privékeuken | Met opkamer erboven via interne trap |
-| Opkamer | Opkamer | Bereikbaar via privékeuken, klein trappetje omhoog |
-| Kelder | Kelder | Bereikbaar via lange gang beneden, laag |
-| Kamer Ageeth / Kudus | Gezamenlijke woonkeuken | Verbouwing fase 1 |
-| Eetkamer | Slaapkamer cliënt X | Verbouwing: nieuwe deur via lange gang beneden |
-| Slaapkamer Thomas | Slaapkamer Thomas | — |
-| Lange gang beneden | Lange gang beneden | Aangrenzend: slaapkamer Thomas, privékeuken, slaapkamer cliënt X, kelder |
-| Halletje voordeur | Halletje voordeur | Meterkast, toekomstig warmtepomp, onder kantoor boven |
-| Centraal halletje | Centraal halletje | Deur naar lange gang + trap omhoog + deur naar badkamer beneden |
-| Badkamer beneden | Badkamer beneden | — |
-| Verfhok | Verfhok | — |
+---
 
-**Verdieping — voorhuis**
+## Ruimtenamen en kamer-nummering begane grond (referentie)
 
-| Naam | Notities |
-|---|---|
-| Slaapkamer Sander & Marieke | — |
-| Slaapkamer Xanne Lynn | Jongste dochter |
-| Slaapkamer Sem Lizzy | — |
-| Slaapkamer Merel Jasmijn | — |
-| Kantoor boven | Boven het halletje voordeur |
-| CV-hokje | In/bij kantoor boven, vermoedelijk groep 13 |
-| Badkamer boven | — |
-| WC boven | — |
-| Hal boven | — |
+Bevestigd 22-06-2026. 12 ruimtes, schaal 34px/m, maatvoering op basis van plattegrond.
+Nummering te gebruiken in alle documentatie, taken en communicatie.
+
+### Begane grond — kamernummering
+
+| Nr | Naam | Breedte | Diepte | Ligging | Notities |
+|---|---|---|---|---|---|
+| 1 | De Deel | 5.3m | 10.6m | West, vol hoogte | Groot agrarisch deel |
+| 2 | Garderobe | ~1.6m | ~2.4m | Noord, west centraalzone | Boven traphal |
+| 3 | Verfhok | ~1.5m | ~2.4m | Noord, oost centraalzone | Naast garderobe |
+| 4 | Traphal | 3.1m | ~2.1m | Noord, centraalzone midden | Trap naar 1e verdieping |
+| 5 | Slaapkamer Thomas | 3.9m | 4.4m | Noord, midden | — |
+| 6 | Gezamenlijke woonkeuken | 10.6m | 4.4m | Noord, oost | Verhoogd middendeel; verbouwing fase 1 |
+| 7 | Lange gang | ~14.5m | 1.2m | Midden, oost v. centraalzone | Verbindt alle kamers |
+| 8 | Centraal halletje | 3.1m | 1.2m | Midden, centraalzone | 4 deuren: N-oost→traphal, O→gang, Z-oost→voordeurhal, Z-west→badkamer |
+| 9 | Badkamer beneden | ~4.9m | 4.2m | Zuid, deels in Deel | Toegang via centraal halletje deur Z-west |
+| 10 | Voordeurhal | 3.0m | 4.2m | Zuid, centraalzone | Meterkast + warmtepomp; voordeur op zuidmuur midden |
+| 11 | Opkamer / Privékeuken | 6.5m | 4.2m | Zuid, midden | Opkamer bereikbaar via privékeuken |
+| 12 | Nieuwe cliëntenkamer | 3.8m | 4.2m | Zuid, oost | Verbouwing: nieuwe deur via lange gang |
+
+**Begane grond — horizontale maten (onderzijde)**
+- Rij 1: 5.3m (Deel) | 3.6m (centraalzone) | 3.0m (10) | 3.2m+3.3m (11) | 3.8m (12)
+- Rij 2 vanaf 8.4m: 4.0m | 4.0m | 2.7m | 3.5m
+- Maatvoering rechterzijde: 4.4m (noord) | 1.2m (gang) | 4.2m (zuid)
+
+### 1e Verdieping — kamernummering
+
+Bevestigd 22-06-2026. Maten: totaal 22.9m × 10.6m.
+Kolommen (vanaf 8.4m): 3.8m | 3.7m | 6.8m. Hoogte: 5.8m (noord) + 4.4m (zuid).
+
+| Nr | Naam | Breedte | Diepte | Ligging | Notities |
+|---|---|---|---|---|---|
+| 13 | Deel boven | 8.4m | ~9.9m | West, vol breedte | Boven De Deel (begane grond) |
+| 14 | Trappenhuis boven | 3.8m | ~2.5m | Noord, kolom A | Verbinding begane grond ↔ 1e verdieping |
+| 15 | Toilet boven | ~1.8m | ~2.5m | Noord, kolom B west | Klein toilet |
+| 16 | Badkamer boven | ~1.9m | ~2.5m | Noord, kolom B oost | Badkamer; aftakpunt warm/koud water voor leidingwerk |
+| 17 | Slaapkamer Xanne Lynn | 6.8m | 5.8m | Noord, kolom C | Grote slaapkamer; gipsplaten te verwijderen voor leidingdoorvoer |
+| 18 | Slaapkamer Sander & Marieke | 3.8m | 3.2m | Midden, kolom A | — |
+| 19 | Hal boven | ~3.7m | ~3.3m | Midden, kolom B/C | Overloop/hal tussen kamers |
+| 20 | Kantoor | 3.8m | ~4.4m | Zuid, kolom A | Boven voordeurhal (begane grond) |
+| 21 | Slaapkamer Sem Lizzy | 3.7m | ~4.4m | Zuid, kolom B | — |
+| 22 | Slaapkamer Merel Jasmijn | 6.8m | 4.4m | Zuid, kolom C | — |
+
+**1e Verdieping — horizontale maten**
+- Rij 1 vanaf 8.4m: 3.8m (kol. A) | 3.7m (kol. B) | 6.8m (kol. C)
+- Rij 2: 8.4m (Deel boven) | 5.7m | 4.8m
+- Rechterzijde: 5.8m (noord) | 4.4m (zuid) | 10.6m totaal
 
 **Deel / achterhuis**
 
 | Naam | Notities |
 |---|---|
-| De Deel | — |
+| De Deel (nr. 1) | Begane grond |
+| Deel boven (nr. 13) | 1e verdieping boven De Deel |
 | Toekomstige keuken Deel | Nog niet gebouwd; kookgroep (groep 16) ligt al klaar |
 
 ---
@@ -78,6 +114,61 @@ Sander en Marieke runnen Gewoon Thuis, een gezinshuis aan de Huismanstraat 34 in
 
 **Juni 2026 — Fase 0: voorbereiding + Fase 1 in uitvoering**
 Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing Fase 1 gepland voor 1 september 2026.
+
+### Gedetailleerde planningstabel (bijgewerkt 22-06-2026)
+
+| # | Wanneer | Wie | Werkzaamheden | Uren | Cumulatief | Cumulatief v.a. week 30 |
+|---|---------|-----|---------------|------|-----------|------------------------|
+| a | 26 juni (do) | Sander | Woonkeuken leegmaken + wasmeubel verwijderen + tijdelijk opslaan | ~5 uur | ~5 uur | — |
+| b | 3 juli (do) | Sander + Thomas | Schrootjes van de buitenmuur verwijderen | ~3 uur | ~8 uur | — |
+| c | 10 juli (do) | Sander (+ Thomas) | Houten vlonder verwijderen | ~3 uur | ~11 uur | — |
+| d | 11 juli (vr) | Sander | Keuken ophalen in Almere (bus Albero) | ~8 uur | ~19 uur | — |
+| e | Vóór 21 juli | Sander + Marieke | Keuken op muur schetsen + afvoerpositie bepalen | ~2 uur | ~21 uur | — |
+| f | Vóór 21 juli | Sander | Elektricien afstemmen over meterkastuitbreiding | ~1 uur | ~22 uur | — |
+| g | Uiterlijk 14 juli | Sander | Materialen meterkastuitbreiding bestellen (na gesprek elektricien) | ~0.5 uur | ~22.5 uur | — |
+| h | Vóór 21 juli | Elektricien + Sander | Meterkastuitbreiding — min. 9-10 nieuwe groepen | ~12 uur | ~34.5 uur | — |
+| h2 | Vóór 21 juli | Sander | Gipsplaten verwijderen slaapkamer Xanne Lynn (leidingroute vrijmaken) | ~3 uur | ~37.5 uur | — |
+| i | Week 30 — start 21 juli | Sander / Marktplaatsmannetje / Ralf | Buiten graven + gat boren door muur + rioolaansluiting | ~8-12 uur | ~57.5 uur | ~10 uur |
+| j | Week 30 — na (i) | Sander + Marktplaatsmannetje / Ralf | Manschat maken in vloer (toegang rioolaansluiting, tijdelijk) | ~2-4 uur | ~57 uur | ~13 uur |
+| k | Week 30 — ma-wo 21-23 juli | Ralf | Kozijn + deur + lambrisering aanhelen/bijwerken | ~20 uur | ~81 uur | ~33 uur |
+| l | Week 30 — di-vr 22-25 juli | Ralf + Sander + Marktplaatsmannetje | Leidingwerk: koof bouwen + elektra + water wegwerken via slaapkamer Xanne Lynn → WC → badkamer → koof keuken + aansluiting W/D | ~28-35 uur | ~108 uur | ~60 uur |
+| m | Week 30/31 ? | Ralf | Keuken plaatsen | ~24 uur | ~125 uur | ~77 uur |
+| n | Uitloop week 31-32 | Sander | Restpunten + kleine afwerkklussen | p.m. | p.m. | p.m. |
+| o | Na week 31 | Sander | Wasmeubel herplaatsen in nieuwe cliëntenkamer | ~2 uur | p.m. | p.m. |
+| p | Na 1 sept — p.m. | Ralf / p.m. | Privékeuken Sander & Marieke verbouwen | p.m. | p.m. | p.m. |
+
+**Marktplaatsmannetje:** ~40 uur beschikbaar in week 30, werkt onder leiding van Ralf.
+**Ralf:** alleen beschikbaar week 30 en week 31. Uitloop wordt door Sander opgepakt.
+
+#### Deeltaken per klus (uitgewerkt 22-06-2026)
+
+**Regel i — Buiten graven + gat boren + rioolaansluiting (~8-12 uur)**
+1. Grind/split opzij schuiven buiten
+2. Sleuf graven buiten langs de muur naar riool (~50cm diep, ~50cm breed)
+3. Gat boren door buitenmuur op diepte (marktplaatsmannetje met boorapparatuur)
+4. Graven binnen op plek van vlonder (vlonder is dan al weg)
+5. PVC rioolbuis leggen van binnen naar buiten door het boorgat
+6. T-stuk aanbrengen op bestaande riolering (geen bestaand aansluitpunt dichtbij)
+7. Boorgat rondom de buis afdichten/waterdicht maken
+8. Sleuf en grind buiten terugleggen
+*Riool ligt ~50cm van de buitenmuur. Buiten: grind/split, geen bestrating. Onzekerheid: T-stuk op bestaande riolering.*
+
+**Regel j — Manschat maken in vloer (~2-4 uur)**
+1. Betonvloer lokaal openbreken op aansluitplek (slijptol of boorhamer)
+2. Rioolaansluiting maken van binnenuit
+3. Opening dichten/beton terugstorten (keuken komt eroverheen, hoeft niet mooi)
+*Tijdelijke opening — geen permanente manschat. Onder vlonder: beton + zand.*
+
+**Regel k — Kozijn + deur + lambrisering (~20 uur)**
+1. Oud kozijn (85×210) uitbreken
+2. Opening dichtmetselen met kalkzandsteen (KZS) — beslissing 22-06-2026
+3. Wand afwerken/stukadoren aan beide zijden
+4. Oud kozijn herplaatsen voor nieuwe deuropening richting gang (~2 uur)
+5. Deur op maat maken + ophangen (~4 uur, inclusief op maat zagen)
+6. Lambrisering bijwerken over gesloten stuk (~85cm breed, 1m-1.2m hoog) — wand is 4.20m lang
+*Harm + Ralf schatten ~24 uur; Larry schat ~14-18 uur; gekozen compromis: 20 uur.*
+
+---
 
 ### Kortetermijnplanning (voor 1 september 2026)
 
@@ -172,7 +263,7 @@ Afzuigkap onder kastjes 2+3 — doorvoer buitenmuur nodig.
 
 | Apparaat/voorziening | Groep |
 |----------------------|-------|
-| Inductieplaat | Nieuw — 3-fase of 32A |
+| Inductiekookplaat (Siemens, Schott Ceran oppervlak, nr. 9000780830) | 3-fase of 32A |
 | Oven | Nieuw — 16A |
 | Combimagnetron | Nieuw — 16A |
 | Vaatwasser | Nieuw — 16A |
@@ -203,7 +294,7 @@ Ralf heeft de installatiebehoeften in kaart gebracht. Samenvatting:
 | Koelvriescombi | Liebherr Comfort BioFresh NoFrost | ~150W normaal | 16A eigen groep |
 | Espressomachine | Miele CVA 5065 | 2.700W | ~~niet nodig~~ — wordt niet gebruikt in deze keuken. Overbodig; eventueel los verkopen of tijdelijk in de Deel. |
 | Vaatwasser | AEG FSE73700P | max 2.200W / 10A | 16A |
-| Inductiekookplaat | Siemens 5-pits (foto ontbreekt) | ~7–11kW | 3-fase of 32A |
+| Inductiekookplaat | Siemens EH875FM27E (Schott Ceran 9000780830) — 5-pits | ~7-11kW | 3-fase of 32A |
 | Quooker | nog te kiezen | ~2.200W | 16A |
 | Afzuigkap | onbekend | laag | aftakken lichtgroep |
 | 2x werkblad wcd | — | laag | 1 wandcontactgroep |
@@ -234,14 +325,18 @@ Huidige bezetting (16 groepen):
 | 16 | Kookgroep — kabel klaar voor toekomstige keuken in de Deel |
 
 **Conclusie: meterkast uitbreiding nodig.**
-Er is slechts 1 vrije groep (6). Voor de nieuwe keuken in gezamenlijke woonkeuken zijn minimaal 5 nieuwe groepen nodig:
-- Inductiekookplaat → 3-fase 16A of 32A enkelfasig (**zwaarste punt, afstemmen met elektricien**)
+Er is slechts 1 vrije groep (6). Voor de nieuwe keuken in gezamenlijke woonkeuken zijn minimaal **9-10 nieuwe groepen** nodig:
+- Inductiekookplaat (Siemens EH875FM27E, Schott Ceran 9000780830) → **2× B16 2-polig** (enkelfasig 230V, geen 3-fase) — bevestigd via aansluitgegevens vorige eigenaar
 - Oven → 16A nieuw
-- Combi magnetron → 16A nieuw
+- Combimagnetron → 16A nieuw
 - Vaatwasser → 16A nieuw
 - Quooker → 16A nieuw
+- Wasmachine → 16A nieuw
+- Droger → 16A nieuw
+- Wandcontactdozen werkblad → 16A nieuw
 - Koelvriescombi → groep 6 (vrij)
 - Afzuigkap → aftakken via groep 15
+- Onderbouwlampen → aftakken lichtgroep
 
 ⚠️ De onderverdeler in de kast biedt mogelijk ruimte voor uitbreiding — bespreken met Ralf/elektricien.
 
@@ -251,7 +346,7 @@ Er is slechts 1 vrije groep (6). Voor de nieuwe keuken in gezamenlijke woonkeuke
 |---|-------|----------------|
 | 1 | Zit het CV-hokje op groep 13 (kantoor)? | Zekering 13 testen op moment dat computer niet in gebruik is |
 | 2 | Groep 7 vs. 10: welke stopcontacten slaapkamer Sem Lizzy zitten op welke groep? | Per stopcontact testen met zekering eruit |
-| 4 | Inductiekookplaat Siemens 5-pits: exact model + vermogen? | Foto van typeplaatje kookplaat maken bij ophalen in Almere |
+| 4 | Keramische kookplaat: model bevestigd — Schott Ceran 9000780830, 5-pits ✓ | — |
 | 5 | Locatie hoge kasten (oven/magnetron/koelkast) in nieuwe keuken — welke wand? | Bevestigen met Marieke |
 | 6 | Groep 15: bevat ook de eetkamer? (was eerder vermeld, niet bevestigd) | Zekering 15 testen |
 
@@ -288,7 +383,7 @@ Water (koud + eventueel warm vanuit badkamer boven) volgt dezelfde route achter 
 - ✓ Hoge kasten (koelkast + oven) aan binnenwand
 - ⬜ Zijn de elektragroepen al aanwezig in de meterkast? → nog afstemmen met elektricien
 - ⬜ Spoelbak: warm én koud water, of alleen koud?
-- ⬜ Dichtzetten oud kozijngat: kalkzandsteen/ytong vs. hout + gips?
+- ✓ Dichtzetten oud kozijngat: **kalkzandsteen (KZS)** gekozen — sneller dan metselwerk, solider dan gips op frame, én betere geluidsisolatie (hogere massa) — beslissing 22-06-2026
 - ⬜ Quooker: Ralf installeert of Sander zelf?
 
 Afgesproken acties kortere termijn (april 2026 Sander & Marieke):
