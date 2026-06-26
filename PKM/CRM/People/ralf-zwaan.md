@@ -38,6 +38,14 @@ Timmerwerk, loodgieterswerk, elektra, stucwerk, tegelen, schilderwerk, badkamers
 
 Christelijk ondernemer. Geeft ruimte aan sociaal ondernemerschap — heeft mensen begeleid met psychische klachten, vluchtelingen en re-integrerende TBS-ers binnen zijn bedrijf.
 
+## Terugkerend ritueel — Passieprojecten overleg
+
+Maandelijks 1-op-1 overleg tussen Sander en Ralf als zwagers. Doel: elkaar bijpraten over passieprojecten en (eigen) werk, bevragen, aanmoedigen en scherpen. Geen vaste agenda — onderwerpen wisselen per sessie.
+
+Formaat: onbekend (online of fysiek). Frequentie: ~1× per maand.
+
+Zie ook: [[ritueel-passieprojecten-ralf]] voor aantekeningen per sessie.
+
 ## Rol verbouwing Huismanstraat
 
 Helpt mee aan [[verbouwing-huismanstraat-34]]. Beschikbaar in week 31 (27 juli – 2 augustus 2026).

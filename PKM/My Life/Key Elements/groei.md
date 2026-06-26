@@ -22,6 +22,10 @@ Valt hieronder: persoonlijke ontwikkeling, ondernemerschap, leiderschap, AI, ken
 
 Elke maand iets begrijpen dat je vorige maand nog niet begreep. Systemen bouwen die meegroeien. AI en automatisering niet als speelgoed maar als multiplicator voor bijdrage. Kennis die je opdoet teruggeven via coaching en onderwijs.
 
+## Zie ook
+
+- [[mijn-verhaal]] — persoonlijk levensverhaal met sleutelmomenten
+
 ## Wat ik hier negeer
 
 Groei als consumeren. Meer cursussen, meer tools, meer input — zonder integratie en output. Groei telt pas als het verandert hoe je handelt of anderen helpt.

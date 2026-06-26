@@ -115,27 +115,28 @@ Sander en Marieke runnen Gewoon Thuis, een gezinshuis aan de Huismanstraat 34 in
 **Juni 2026 — Fase 0: voorbereiding + Fase 1 in uitvoering**
 Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing Fase 1 gepland voor 1 september 2026.
 
-### Gedetailleerde planningstabel (bijgewerkt 22-06-2026)
+### Gedetailleerde planningstabel (bijgewerkt 24-06-2026)
 
 | # | Wanneer | Wie | Werkzaamheden | Uren | Cumulatief | Cumulatief v.a. week 30 |
 |---|---------|-----|---------------|------|-----------|------------------------|
+| a0 | 25 juni (wo) | Sander (+ eventueel Thomas) | Tapijt verwijderen woonkeuken + vloer beoordelen | p.m. | p.m. | — |
 | a | 26 juni (do) | Sander | Woonkeuken leegmaken + wasmeubel verwijderen + tijdelijk opslaan | ~5 uur | ~5 uur | — |
 | b | 3 juli (do) | Sander + Thomas | Schrootjes van de buitenmuur verwijderen | ~3 uur | ~8 uur | — |
 | c | 10 juli (do) | Sander (+ Thomas) | Houten vlonder verwijderen | ~3 uur | ~11 uur | — |
 | d | 11 juli (vr) | Sander | Keuken ophalen in Almere (bus Albero) | ~8 uur | ~19 uur | — |
-| e | Vóór 21 juli | Sander + Marieke | Keuken op muur schetsen + afvoerpositie bepalen | ~2 uur | ~21 uur | — |
+| e | Vóór 21 juli | Sander + Marieke | Keuken op muur schetsen + afvoerpositie bepalen + stopcontacten bepalen + afzuigkap-gat aftekenen | ~2 uur | ~21 uur | — |
 | f | Vóór 21 juli | Sander | Elektricien afstemmen over meterkastuitbreiding | ~1 uur | ~22 uur | — |
-| g | Uiterlijk 14 juli | Sander | Materialen meterkastuitbreiding bestellen (na gesprek elektricien) | ~0.5 uur | ~22.5 uur | — |
+| g | Uiterlijk 14 juli | Sander | Materialen meterkastuitbreiding + keukenmaterialen bestellen (na gesprek elektricien) | ~0.5 uur | ~22.5 uur | — |
 | h | Vóór 21 juli | Elektricien + Sander | Meterkastuitbreiding — min. 9-10 nieuwe groepen | ~12 uur | ~34.5 uur | — |
-| h2 | Vóór 21 juli | Sander | Gipsplaten verwijderen slaapkamer Xanne Lynn (leidingroute vrijmaken) | ~3 uur | ~37.5 uur | — |
+| h2 | Vóór 21 juli | Sander | Voorbereidend leidingwerk vrijmaken: (1) gaten boren voor kabeldoorvoer trappenhuis (14) → WC boven (15); (2) WC eraf + WC-plaat eraf in WC boven (15); (3) knieschotten verwijderen badkamer boven (16); (4) knieschotten + afwerking verwijderen slaapkamer Xanne Lynn (17) | ~5 uur | ~39.5 uur | — |
 | i | Week 30 — start 21 juli | Sander / Marktplaatsmannetje / Ralf | Buiten graven + gat boren door muur + rioolaansluiting | ~8-12 uur | ~57.5 uur | ~10 uur |
 | j | Week 30 — na (i) | Sander + Marktplaatsmannetje / Ralf | Manschat maken in vloer (toegang rioolaansluiting, tijdelijk) | ~2-4 uur | ~57 uur | ~13 uur |
 | k | Week 30 — ma-wo 21-23 juli | Ralf | Kozijn + deur + lambrisering aanhelen/bijwerken | ~20 uur | ~81 uur | ~33 uur |
-| l | Week 30 — di-vr 22-25 juli | Ralf + Sander + Marktplaatsmannetje | Leidingwerk: koof bouwen + elektra + water wegwerken via slaapkamer Xanne Lynn → WC → badkamer → koof keuken + aansluiting W/D | ~28-35 uur | ~108 uur | ~60 uur |
+| l | Week 30 — di-vr 22-25 juli | Ralf + Sander + Marktplaatsmannetje | Leidingwerk: koof bouwen + elektra + water wegwerken via slaapkamer Xanne Lynn → WC → badkamer → koof keuken + aansluiting W/D + afzuigkap-gat boren (Ralf, diamantboor) + stroomleidingen infrezen in dekvloer voor oversteek naar binnenmuur hoge kasten | ~28-35 uur | ~108 uur | ~60 uur |
 | m | Week 30/31 ? | Ralf | Keuken plaatsen | ~24 uur | ~125 uur | ~77 uur |
-| n | Uitloop week 31-32 | Sander | Restpunten + kleine afwerkklussen | p.m. | p.m. | p.m. |
+| n | Uitloop week 31-32 | Sander | Restpunten + kleine afwerkklussen (o.a. spatwand achter keuken — nog te bepalen) + nieuwe gipsplaten aanbrengen in WC boven (15), badkamer boven (16) en slaapkamer Xanne Lynn (17) na leidingwerk | p.m. | p.m. | p.m. |
 | o | Na week 31 | Sander | Wasmeubel herplaatsen in nieuwe cliëntenkamer | ~2 uur | p.m. | p.m. |
-| p | Na 1 sept — p.m. | Ralf / p.m. | Privékeuken Sander & Marieke verbouwen | p.m. | p.m. | p.m. |
+| p | Na 1 sept — p.m. | p.m. (Marieke zoekt uit) | Privékeuken Sander & Marieke verbouwen — waarschijnlijk IKEA keuken; nog geen aannemer, geen planning | p.m. | p.m. | p.m. |
 
 **Marktplaatsmannetje:** ~40 uur beschikbaar in week 30, werkt onder leiding van Ralf.
 **Ralf:** alleen beschikbaar week 30 en week 31. Uitloop wordt door Sander opgepakt.
@@ -213,11 +214,18 @@ Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing
 - ✓ **Binnenwand** = 2 hoge kasten (koelkast + oven/magnetron)
 - ✓ **Warm water wasmeubel clientkamer** → doortrekken vanuit huidige keuken (niet via warmtepomp)
 
+**Beslissingen vastgelegd (24-06-2026):**
+- ✓ **Keukenpositie**: exact overgenomen van Marktplaats-indeling — aanrechtblad, spoelbak en kookplaat zijn al ingefreesd, positie staat vast
+- ✓ **Afzuigkap**: doorvoer buitenmuur — gat boren door Ralf (diamantboor), aftekenen bij regel e
+- ✓ **Stroomleidingen oversteek**: infrezen in bestaande dekvloer (van buitenmuur naar binnenmuur hoge kasten), onderdeel van leidingwerk (l)
+- ⚠️ **Quooker**: Marieke nakijken of deze werkend te maken is vóór keukenmontage (werkt momenteel niet)
+
 **Nog open (installatieplan):**
-- Exacte positie kookplaat + vaatwasser + spoelbak langs de 3,70m wand
-- Afzuigkap: doorvoer buitenmuur of recirculatie?
+- ~~Exacte positie kookplaat + vaatwasser + spoelbak~~ → opgelost, zie beslissingen 24-06-2026
+- ~~Afzuigkap: doorvoer buitenmuur of recirculatie?~~ → doorvoer buitenmuur besloten
 - Spoelbak aanwezig in keuken of apart regelen?
 - ⚠️ **Transport keuken van Almere** (bestelwagen/aanhanger 11 juli) — nog regelen!
+- **Spatwand** achter keuken: materiaal/uitvoering nog te bepalen (onderdeel restpunten n)
 
 **Keuken indeling — volledig overzicht (18-06-2026)**
 
@@ -259,19 +267,62 @@ Afzuigkap onder kastjes 2+3 — doorvoer buitenmuur nodig.
 
 3e hoge kast (Miele CVA 5065 espresso) → niet geplaatst; tijdelijk naar de Deel of verkopen.
 
-*Elektra — nieuwe groepen nodig:*
+*Elektra — nieuwe groepen nodig (bijgewerkt 25-06-2026):*
 
-| Apparaat/voorziening | Groep |
-|----------------------|-------|
-| Inductiekookplaat (Siemens, Schott Ceran oppervlak, nr. 9000780830) | 3-fase of 32A |
-| Oven | Nieuw — 16A |
-| Combimagnetron | Nieuw — 16A |
-| Vaatwasser | Nieuw — 16A |
-| Quooker | Nieuw — 16A |
-| Koelvriescombi | Groep 6 (vrij) |
-| Afzuigkap | Aftakken bestaande groep |
-| 2× dubbel stopcontact spatwand | Nieuw — wandcontactgroep |
-| Onderbouwlampen | Aftakken lichtgroep |
+| Apparaat | Kabel | Zekering | Groep | Opmerking |
+|----------|-------|----------|-------|-----------|
+| Inductiekookplaat (Siemens EH875FM27E) | YMVK 3×4mm² | 2× B16 2-polig | 2 nieuwe groepen | Enkelfasig, 2 aparte groepen |
+| Oven (Bauknecht BLZE 6200/IN) | YMVK 3×2.5mm² | B16 | 1 nieuwe groep | |
+| Combimagnetron (Bauknecht EMCHS 6244) | YMVK 3×2.5mm² | B16 | 1 nieuwe groep | |
+| Vaatwasser (AEG FSE73700P) | YMVK 3×2.5mm² | B16 | 1 nieuwe groep | |
+| Quooker | YMVK 3×2.5mm² | B16 | 1 nieuwe groep | |
+| Koelvriescombi (Liebherr) | YMVK 3×2.5mm² | B16 | 1 nieuwe groep | Groep 6 vrij maar kabel ligt elders — nieuwe kabel nodig |
+| Wasmachine | YMVK 3×2.5mm² | B16 | 1 nieuwe groep | |
+| Droger | YMVK 3×2.5mm² | B16 | 1 nieuwe groep | |
+| Afzuigkap + onderbouwlampen + wandcontactdozen spatwand | YMVK 3×2.5mm² | B16 | 1 nieuwe groep | Gecombineerd op één groep |
+
+**Totaal nieuwe groepen: 10**
+
+*Kabelroute meterkast (10) → woonkeuken (6):*
+Omhoog uit meterkast → onder vloer kantoor (20) → onder vloer slaapkamer S&M (18) → door trappenhuis (14) → langs toilet (15) → langs badkamer (16) → door slaapkamer Xanne Lynn (17) achter knieschot naar oostkant → naar beneden in koofje → woonkeuken (6). Geschatte lengte: ~30-32 meter per kabel. YMVK mag los bevestigd worden achter knieschot en langs plafond (NEN 1010). Bij doorboringen: stukje buis of wartel gebruiken.
+
+*Kabelspecificaties:*
+- YMVK 3×4mm² voor inductiekookplaat — 4mm² i.v.m. langdurige volledige belasting over lange route
+- YMVK 3×2.5mm² voor alle overige groepen
+- YMVK 3×1.5mm² niet nodig — lichtgroep gecombineerd op 2.5mm² groep
+
+*Bestellijst kabels (elektramat.nl, prijzen 25-06-2026):*
+
+| Product | Hoeveelheid | Prijs | Totaal |
+|---------|-------------|-------|--------|
+| YMVK 3×4mm² | 70 meter (2× 35m) | €3,24/m | €226,80 |
+| YMVK 3×2.5mm² | 3 rollen × 100m | €195,48/rol | €586,44 |
+| YMVK 3×1.5mm² | 35 meter | €1,42/m | €49,70 |
+| **Totaal kabel** | | | **€862,94** |
+
+*Kabelindeling in bundels (NEN 1010 reductiefactoren):*
+
+| Bundel | Kabels | Reductiefactor | Effectieve stroom | OK? |
+|--------|--------|---------------|-------------------|-----|
+| 1 | 2× YMVK 3×4mm² (inductie) | 0,80 | ~20A | ✓ |
+| 2 | 3× YMVK 3×2.5mm² (oven + vaatwasser + quooker) | 0,70 | ~11A | ✓ |
+| 3 | 3× YMVK 3×2.5mm² (wasmachine + droger + koelkast) | 0,70 | ~11A | ✓ |
+| 4 | 2× YMVK 3×2.5mm² (magnetron + afzuigkap/licht/wcd) | 0,80 | ~13A | ✓ |
+
+Bundels onderling op afstand houden. Inductiekabels (bundel 1) altijd apart van de rest.
+
+*Bestellijst compleet (elektramat.nl, prijzen 25-06-2026):*
+
+| Product | Hoeveelheid | Prijs | Totaal | Controleren |
+|---------|-------------|-------|--------|-------------|
+| YMVK 3×4mm² | 70 meter (2× 35m) | €3,24/m | €226,80 | — |
+| YMVK 3×2.5mm² | 3 rollen × 100m | €195,48/rol | €586,44 | — |
+| YMVK 3×1.5mm² | 35 meter | €1,42/m | €49,70 | — |
+| DEHA metalen montageband 12×0,75mm | 4 rollen × 10m | €8,46/rol | €33,84 | — |
+| WAGO lasklem 3-voudig 4mm² (221-413) | 1 pak × 50 stuks | €16,75 | €16,75 | ⚠️ controleer voorraad |
+| WAGO lasklem 5-voudig 2.5mm² (2273-205) | 1 pak × 100 stuks | €16,29 | €16,29 | ⚠️ controleer voorraad |
+| ABB inbouwdoos Ø16/19/20mm (MD4050) | p.m. stuks | €2,11/st | p.m. | ⚠️ controleer voorraad |
+| **Totaal (excl. p.m. posten)** | | | **€929,82** | |
 
 *Water & afvoer:*
 
@@ -436,11 +487,38 @@ Na bovenstaande: financiële balans opmaken → beslissen over pui en isolatie v
 
 **Trap, badkamers, zolder** — gedetailleerde maatvoering staat in het brondocument (link hierboven).
 
+## Afwerkvloer woonkeuken (verkenning 24-06-2026)
+
+**Situatie:**
+- Houten vlonder (panlatten 25mm + vuren schoten 20mm = 45mm totaal) is al verwijderd door Sander
+- Eronder: zand-cement dekvloer met daarop vastgelijmd tapijt (~10mm dik)
+- Beschikbare opbouwhoogte t.o.v. drempel: **70mm max**
+- Na tapijt verwijderen: effectief ~80mm beschikbaar
+
+**Tapijt en lijm (foto 24-06-2026):**
+- Vloer is zand-cement, ziet er redelijk vlak en intact uit
+- Tapijt heeft viltige onderkant → wijst op **dispersielijm** (niet bitumen) — goed nieuws
+- Lijmresten zijn lichtgekleurd/beige — bevestigt dispersielijm
+- Aanpak lijmresten: vloerschuurmachine (huurbaar) of schrapen + aceton op hardnekkige plekken
+
+**Gewenst eindresultaat:** industriële betonlook, passend bij de stijl van de ruimte
+
+**Voorkeursoplossing (nog te bevestigen na tapijt verwijderen):**
+1. Tapijt verwijderen (25 juni, Sander + eventueel Thomas)
+2. Lijmresten schuren/verwijderen
+3. Vloer beoordelen op vlakheid en beschadigingen
+4. Als vloer goed is: **slijpen + betonlook coating/impregnering** (~3-5mm opbouw) → ruim binnen 70mm
+5. Stroomleidingen oversteek infrezen in dekvloer vóór afwerking
+
+**Nog open:**
+- Vloerverwarming meenemen of niet? (nu of nooit)
+- Exacte keuze coating/gietvloer/slijpen na beoordeling vloer
+
 ## Styling
 
 - Wit: RAL 9016
 - Lichtgrijs: Sikkens JN0282
-- Eet/woonkamer-keuken: latex 9016, houtwerk lichtgrijs, vloer hout, balken hout
+- Eet/woonkamer-keuken: latex 9016, houtwerk lichtgrijs, vloer industriële betonlook, balken hout
 - Keuken: waarschijnlijk donkergrijs
 - Plafond: wit laten
 
@@ -502,6 +580,7 @@ Subsidie zelf aanvragen via rvo.nl na installatie — meldcode KA28310
 - [ ] **Keuken op muur schetsen** (voor Ralf) — exacte positie buitenmuur, binnenmuur, koofje
 - [ ] **3e elektrakast bijplaatsen** — afstemmen met elektricien; ruimte controleren in halletje voordeur
 - [ ] **Lengte elektrabuizen + waterleidingen berekenen** — route via kantoor → knieschot → koofje
+- [ ] **Waterleiding berekenen** — hoeveel meter waterleiding nodig van badkamer boven (16) naar woonkeuken (6) via knieschot Xanne Lynn (17)
 - [x] **Videobelafspraak Ralf** — afgerond 18-06-2026, beslissingen vastgelegd
 - [x] Meterkast geïnventariseerd → uitbreiding nodig (min. 5 nieuwe groepen)
 - [ ] **Elektricien/Ralf raadplegen over meterkastuitbreiding** — onderverdeler benutten of nieuwe groepen bijplaatsen?

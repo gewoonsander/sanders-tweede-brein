@@ -27,7 +27,14 @@
       "mcp__f7c1332a-41ef-4633-815c-4ae8c1169b3e__copy_file",
       "WebSearch",
       "WebFetch(domain:www.dartswarehouse.nl)",
-      "WebFetch(domain:www.youtube.com)"
+      "WebFetch(domain:www.youtube.com)",
+      "WebFetch(domain:superwhisper.com)",
+      "WebFetch(domain:www.getvoibe.com)",
+      "Bash(sips -s format jpeg -z 800 1067 /Users/sandervanockenburg-zwaan/Downloads/IMG_6209.HEIC --out /tmp/IMG_6209_small.jpg)",
+      "Bash(pdftotext \"/Users/sandervanockenburg-zwaan/Downloads/19981101 Azusa nieuws De God van de buren.pdf\" -)",
+      "WebFetch(domain:www.elektramat.nl)",
+      "mcp__fdeec444-3c97-487b-9a2e-854e233f6c7f__create_event",
+      "mcp__n8n-mcp__publish_workflow"
     ]
   }
 }

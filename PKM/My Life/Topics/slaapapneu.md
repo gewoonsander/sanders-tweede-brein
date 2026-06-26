@@ -29,8 +29,19 @@ BMI: 31. Gewicht: 88 kg. Direct gerelateerd aan ernst van de apneu — afvallen 
 
 ## Behandeling
 
-**Night Balance (SPT) — positietrainer**  
-Sander heeft een Night Balance mee naar huis gekregen voor een proefperiode van 4–6 weken. Dit apparaat traint de gebruiker om minder op de rug te slapen via trilsignalen.
+**Night Shift Sleep Positioner (Advanced Brain Monitoring) — positietrainer**
+Opgehaald bij Rijnstate op 17 juni 2026. Apparaat trilt als Sander op zijn rug gaat liggen, waardoor hij zichzelf corrigeert naar zijligging.
+
+**Ervaringen tot nu toe (26-06-2026):**
+- Sander merkt dat hij zichzelf corrigeert als het apparaat trilt — lijkt te werken
+- Marieke observeerde dat Sander zonder het apparaat (vergeten na laat darten) meer wakker was — sterke aanwijzing voor effect
+
+**Data uitlezen:**
+- App: "Night Shift Therapy" — iOS + Android, synct via Bluetooth
+- Rapport als PDF exporteerbaar vanuit app → mailen naar jezelf of arts
+- Webportal beschikbaar voor uitgebreidere weergave
+- Geen publieke API — PDF-export is de werkbare route voor PKM-integratie
+- Nog te doen: account aanmaken in app + eerste rapport exporteren
 
 Na de proefperiode: herevaluatie. Mogelijk retour KNO.
 
