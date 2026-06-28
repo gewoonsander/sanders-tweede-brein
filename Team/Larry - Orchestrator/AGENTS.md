@@ -204,6 +204,20 @@ Trust decisions are cached in `Expansions/.trust.yaml`, hand-editable. Major ver
 
 See `Expansions/docs/expansion-spec.md` for the full Expansion contract and [[WS-003-install-an-expansion]] for the install workstream.
 
+## Task discipline (v1.10.1)
+
+Before starting any task:
+1. Run SOP-read-own-journal — load your priors
+2. Run SOP-list-open-tasks — check for claimed work
+
+When creating work:
+- Run SOP-create-task for any deliverable that spans >1 tool call
+- Claim it immediately with SOP-claim-task
+
+On completion:
+- Run SOP-close-task — archive deliverables, update INDEX
+- Run SOP-write-journal-entry — capture what you learned
+
 ## Files Larry writes
 
 - `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-<slug>.md` at session close.

@@ -32,7 +32,7 @@ Expliciete triggers (blijven ook werken, voor het geval Sander toch zelf vraagt)
 
 Larry vraagt Sander vóór uitvoering:
 
-1. **Toernooi-URL** — de Dart Atlas pagina van het specifieke toernooi (bv. `https://www.dartsatlas.com/tournaments/[ID]`). Larry kan deze ook zelf opzoeken via [[SOP-003-adc-inschrijvingen-opvragen]] als het seizoen bekend is.
+1. **Toernooi-URL** — de Dart Atlas pagina van het specifieke toernooi (bv. `https://www.dartsatlas.com/tournaments/[ID]`). Larry kan deze ook zelf opzoeken via [[SOP-010-adc-inschrijvingen-opvragen]] als het seizoen bekend is.
 2. **Foto van de winnaar** — altijd handmatig aanleveren (Dart Atlas bevat geen foto's).
 3. **Eventuele quote van de winnaar** — optioneel maar welkom.
 4. **Facebook-groep URL** — voor de link naar de regiogroep (eenmalig instellen in [[adc]]).
@@ -152,7 +152,7 @@ Fetch: `https://www.dartsatlas.com/seasons/[SEIZOEN_ID]/tournaments/schedule`
 
 Haal op: de eerstvolgende toernooien per locatie in Regio Oost.
 
-Seizoens-URLs staan in [[SOP-003-adc-inschrijvingen-opvragen]].
+Seizoens-URLs staan in [[SOP-010-adc-inschrijvingen-opvragen]].
 
 ---
 
@@ -241,6 +241,6 @@ Sander publiceert zelf — Larry/Penn publiceren nooit rechtstreeks op Facebook.
 
 ## Gerelateerd
 
-- [[SOP-003-adc-inschrijvingen-opvragen]] — seizoens-URLs en inschrijvingen
+- [[SOP-010-adc-inschrijvingen-opvragen]] — seizoens-URLs en inschrijvingen
 - [[adc]] — ADC topic met regiocontext
 - [[WS-001-daily-journaling]] — voor het loggen van het verslag in het journaal achteraf

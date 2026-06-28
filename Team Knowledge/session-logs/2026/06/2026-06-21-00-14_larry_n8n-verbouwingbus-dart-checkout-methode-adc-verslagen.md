@@ -3,7 +3,7 @@ agent_id: larry
 session_id: n8n-verbouwingbus-dart-checkout-methode-adc-verslagen
 timestamp: 2026-06-21T00:14:00+02:00
 type: close-session
-linked_sops: ["SOP-003-adc-inschrijvingen-opvragen"]
+linked_sops: ["SOP-010-adc-inschrijvingen-opvragen"]
 linked_workstreams: ["WS-004-facebook-toernooi-verslag"]
 linked_guidelines: []
 ---

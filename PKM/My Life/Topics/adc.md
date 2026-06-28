@@ -46,7 +46,7 @@ Inrichten nog te doen — zie open vragen.
 
 ## Procedures
 
-- [[SOP-003-adc-inschrijvingen-opvragen]] — live inschrijvingen ophalen van Dart Atlas
+- [[SOP-010-adc-inschrijvingen-opvragen]] — live inschrijvingen ophalen van Dart Atlas
 
 ## Bronnen
 

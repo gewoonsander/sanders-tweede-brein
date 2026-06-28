@@ -47,4 +47,4 @@ De PKA evolueert geleidelijk naar:
 
 Bij elke beslissing, elk project, elke keuze: stel de vraag — **"Hoe ondersteunt dit de missie?"**
 
-Zie ook: [[GL-003-pka-modeling-principles]]
+Zie ook: [[GL-010-pka-modeling-principles]]
