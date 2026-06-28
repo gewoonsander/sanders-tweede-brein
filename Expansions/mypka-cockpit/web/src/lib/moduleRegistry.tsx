@@ -36,7 +36,7 @@
 import type { ComponentType } from 'react';
 import { lazy } from 'react';
 import type { LucideIcon } from 'lucide-react';
-import { Globe, HeartPulse, Inbox, Library as LibraryIcon, LineChart, ListTodo, Map as MapIcon, Package } from 'lucide-react';
+import { Globe, Headphones, HeartPulse, Inbox, Library as LibraryIcon, LineChart, ListTodo, Map as MapIcon, Package } from 'lucide-react';
 
 // Heavy module views go behind a lazy boundary (same idiom as the Workbench /
 // Board views in App.tsx) so they never enter the eager bundle. A React.lazy
@@ -70,6 +70,12 @@ const LibraryView = lazy(() =>
 const OuterWorldView = lazy(() =>
   import('../views/OuterWorldView').then((m) => ({ default: m.OuterWorldView })),
 );
+// Audiobooks module — dedicated cover-grid view for the audiobooks table in
+// mypka.db. Uses asin as PK; does NOT participate in library_registry.
+// Reads from GET /api/cockpit/audiobooks (server/audiobooksApi.js).
+const AudiobooksView = lazy(() =>
+  import('../views/AudiobooksView').then((m) => ({ default: m.AudiobooksView })),
+);
 
 // The sidebar groups an extension module can attach to. These mirror the
 // existing <div className="sidebar-group"> sections in Sidebar.tsx.
@@ -99,6 +105,11 @@ export interface CockpitModule {
   /** Optional: render the content area full-bleed instead of the centered
    *  reading column. Defaults to the reading column. */
   fullBleed?: boolean;
+  /** When true, the module route is active but no sidebar nav row is rendered.
+   *  Use when a surface is reachable via a link inside another view (e.g.
+   *  Audiobooks accessible from the Library picker) rather than directly from
+   *  the sidebar. */
+  hideFromNav?: boolean;
 }
 
 // THE REGISTRY. One entry per drop-in module. See
@@ -130,6 +141,11 @@ export const COCKPIT_MODULES: readonly CockpitModule[] = [
   // its first-class empty state) is one click away even on a bare scaffold; the
   // surface itself shows "no libraries yet" when `library_registry` is empty.
   { slug: 'library', navLabel: 'Library', navIcon: LibraryIcon, navSection: 'library', View: LibraryView },
+  // Audiobooks — cover-grid view for the audiobooks table. Route is live
+  // (#/audiobooks) but the entry point is the Library picker card, not a
+  // sidebar row. hideFromNav keeps it out of the sidebar while the route
+  // and lazy bundle remain fully active.
+  { slug: 'audiobooks', navLabel: 'Audiobooks', navIcon: Headphones, navSection: 'library', View: AudiobooksView, hideFromNav: true },
   // Outer World — the mymind-style store of saved external content (articles,
   // posts, videos, books, ideas, news). Lands in the sidebar 'library' group
   // beside Library. fullBleed: the masonry card grid owns its own width (the
@@ -150,7 +166,9 @@ export function moduleForSlug(slug: string): CockpitModule | undefined {
   return activeModules().find((m) => m.slug === slug);
 }
 
-/** Active modules attached to a given sidebar group, in registration order. */
+/** Active modules attached to a given sidebar group, in registration order.
+ *  Modules with hideFromNav:true are excluded — their route is live but they
+ *  don't appear in the sidebar. */
 export function modulesForSection(section: ModuleNavSection): readonly CockpitModule[] {
-  return activeModules().filter((m) => m.navSection === section);
+  return activeModules().filter((m) => m.navSection === section && !m.hideFromNav);
 }

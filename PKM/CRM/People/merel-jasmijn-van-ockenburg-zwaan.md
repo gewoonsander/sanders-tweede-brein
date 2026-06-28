@@ -17,3 +17,7 @@ tags:
 # Merel Jasmijn van Ockenburg-Zwaan
 
 Middelste dochter van [[sander-van-ockenburg-zwaan]] en [[marieke-van-ockenburg-zwaan]]. Geboren 13 november 2010.
+
+## School
+
+Guido de Brès, Arnhem.

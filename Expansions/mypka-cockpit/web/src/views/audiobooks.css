@@ -1,0 +1,201 @@
+/* audiobooks.css — Audiobooks module.
+   Tokens only — no hardcoded colours, font sizes, or spacing.
+   Verified against light + dark by token contract.
+   Depends on cockpit.css for: .filter-bar, .filter-search, .filter-facet,
+   .filter-search-input, .filter-search-icon, .filter-select, .library-empty,
+   .library-empty-mark, .library-empty-title, .library-empty-sub,
+   .library-noresults, .list-skeleton, .skeleton-block, .animate-fade-rise,
+   .view-error. */
+
+/* ── View wrapper ────────────────────────────────────────────────────────────── */
+.ab-view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Responsive grid — 2 columns on narrow, up to 5 on wide ─────────────────── */
+.ab-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────────── */
+.ab-card-li { list-style: none; }
+
+.ab-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 150ms ease, background-color 150ms ease;
+  height: 100%;
+}
+.ab-card:hover { border-color: var(--accent-brass); background: var(--surface-2); }
+
+/* ── Cover image area ────────────────────────────────────────────────────────── */
+.ab-card-cover-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--surface-2);
+  flex-shrink: 0;
+}
+
+.ab-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ab-cover--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--fg-subtle);
+  background: var(--accent-soft);
+}
+
+/* ── Finished badge (overlay, top-right corner of cover) ─────────────────────── */
+.ab-finished-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  min-width: 22px;
+  padding: 0 5px;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1;
+  background: var(--accent-brass);
+  color: var(--bg);
+}
+
+/* ── Card body ────────────────────────────────────────────────────────────────── */
+.ab-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px 12px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ab-card-title {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 580;
+  color: var(--fg);
+  line-height: 1.3;
+  /* Two-line clamp: keeps the grid uniform without sacrificing readability */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ab-card-authors {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ab-card-series {
+  margin: 0;
+  font-size: 0.6875rem;
+  color: var(--fg-subtle);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Meta row (runtime + rating) ─────────────────────────────────────────────── */
+.ab-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.ab-meta-chip {
+  font-size: 0.6875rem;
+  color: var(--fg-subtle);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+.ab-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.6875rem;
+  font-weight: 560;
+  color: var(--fg-muted);
+}
+
+.ab-rating-star {
+  color: var(--accent-brass);
+  fill: var(--accent-brass);
+  flex-shrink: 0;
+}
+
+/* ── Progress bar ─────────────────────────────────────────────────────────────── */
+.ab-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.ab-progress {
+  flex: 1 1 auto;
+  height: 4px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.ab-progress-fill {
+  height: 100%;
+  background: var(--accent-brass);
+  border-radius: 999px;
+  transition: width 300ms ease;
+}
+
+.ab-progress-label {
+  font-size: 0.625rem;
+  color: var(--fg-subtle);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Responsive adjustments ──────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .ab-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}

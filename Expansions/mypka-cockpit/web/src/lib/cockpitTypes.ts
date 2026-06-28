@@ -525,3 +525,42 @@ export interface OuterWorldItemResponse {
   found: boolean;
   item?: OuterWorldItemDetail;
 }
+
+// ── Audiobooks module ─────────────────────────────────────────────────────────
+
+/** One shaped audiobook row (server/audiobooksApi.js shapeRow). */
+export interface Audiobook {
+  asin: string;
+  title: string | null;
+  subtitle: string | null;
+  authors: string | null;
+  narrators: string | null;
+  series_title: string | null;
+  series_sequence: string | null;
+  /** Parsed, de-duplicated genre list (audiobooksApi.js parseGenres). */
+  genres: string[];
+  runtime_length_min: number | null;
+  /** Boolean — server normalises the "True"/"False" TEXT values. */
+  is_finished: boolean;
+  percent_complete: number | null;
+  rating: number | null;
+  num_ratings: number | null;
+  date_added: string | null;
+  release_date: string | null;
+  cover_url: string | null;
+  purchase_date: string | null;
+}
+
+/** GET /api/cockpit/audiobooks — the card grid. */
+export interface AudiobooksListResponse {
+  available: boolean;
+  total: number;
+  audiobooks: Audiobook[];
+}
+
+/** GET /api/cockpit/audiobooks/:asin — one audiobook. */
+export interface AudiobookDetailResponse {
+  available: boolean;
+  found: boolean;
+  audiobook?: Audiobook;
+}

@@ -23,6 +23,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Library as LibraryIcon, Search, ArrowLeft, ChevronRight, Info,
   ChefHat, Clapperboard, BookOpen, Wine, Dices, Gamepad2, Disc3, Map as MapIcon,
+  Headphones,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
@@ -99,7 +100,11 @@ function LibraryPicker() {
       <PageHeader
         title="Library"
         icon={LibraryIcon}
-        subtitle={libraries.length === 0 ? undefined : `${libraries.length} ${libraries.length === 1 ? 'collection' : 'collections'}`}
+        subtitle={(() => {
+          // +1 for the static Audiobooks card that always appears in the picker.
+          const total = libraries.length + 1;
+          return `${total} ${total === 1 ? 'collection' : 'collections'}`;
+        })()}
       />
       {libraries.length === 0 ? (
         <div className="library-empty">
@@ -117,6 +122,22 @@ function LibraryPicker() {
           {libraries.map((lib) => (
             <LibraryPickerCard key={lib.library_slug} lib={lib} />
           ))}
+          {/* Audiobooks is not part of library_registry — it has its own dedicated
+              view and route (#/audiobooks). A static card surfaces it here so it
+              lives alongside the data-driven library collections. */}
+          <li className="library-picker-li">
+            <a
+              className="library-picker-card"
+              href={hrefFor({ name: 'module', slug: 'audiobooks' })}
+              aria-label="Audiobooks"
+            >
+              <span className="library-picker-icon" aria-hidden="true">
+                <Headphones size={22} strokeWidth={1.5} />
+              </span>
+              <span className="library-picker-label">Audiobooks</span>
+              <ChevronRight size={16} strokeWidth={1.5} aria-hidden="true" className="library-picker-chevron" />
+            </a>
+          </li>
         </ul>
       )}
     </section>

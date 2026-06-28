@@ -20,7 +20,9 @@ Filename pattern: `SOP-NNN-<title>.md`. See [[GL-001-file-naming-conventions]] f
 | SOP-008 | [[SOP-008-build-an-infographic]] | Charta | Bouw een infographic op basis van het design system en een content-brief. |
 | SOP-009 | [[SOP-009-generate-a-styled-image]] | Pixel | Genereer een gestileerde afbeelding conform GL-003 via een externe image-generator. |
 
-*Reserved (genuinely open for future agents):* SOP-011+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
+| SOP-011 | [[SOP-011-adc-toernooi-analyse]] | Silas (schema/structuur) + Mack (fetches) | Data ophalen en analyseren uit Dart Atlas na een ADC-toernooi: basisinfo, eindstand, 180's, hoge finishes, top averages, snelste legs, volgende toernooien. Output is een gestructureerd markdown-blok als invoer voor WS-004/WS-006. |
+
+*Reserved (genuinely open for future agents):* SOP-012+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
 
 ## How to add a new SOP
 

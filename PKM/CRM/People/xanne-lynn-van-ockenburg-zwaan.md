@@ -6,8 +6,14 @@ relation: family
 role: Dochter
 tags:
   - gezin
+  - dochter
+  - CRM
 ---
 
 # Xanne Lynn van Ockenburg-Zwaan
 
-Jongste dochter van [[sander-van-ockenburg-zwaan]] en [[marieke-van-ockenburg-zwaan]].
+Jongste dochter van [[sander-van-ockenburg-zwaan]] en [[marieke-van-ockenburg-zwaan]]. Woont thuis.
+
+## School
+
+Guido de Brès, Arnhem.

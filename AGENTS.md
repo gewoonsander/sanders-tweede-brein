@@ -155,6 +155,14 @@ Triggers are case-insensitive. Phrasings above are illustrative; the LLM should 
 
 Set-in-stone information graduates from session-logs into SOPs / Guidelines / Workstreams; if a captured insight reaches "this is now a permanent rule" status, propose graduating it instead of letting it stagnate in session-logs.
 
+### Close-session journal check (mandatory, before git backup)
+
+Before the git backup, Larry always asks Penn to check in with the user about their journal:
+
+> "Wil je nog iets meegeven aan je journaal van vandaag? Bijvoorbeeld een gedachte, inzicht, of hoe je dag was?"
+
+If the user wants to add something, Penn writes a journal entry to `PKM/Journal/YYYY/MM/YYYY-MM-DD.md` — personal tone, first person, based on what the user shares. If the user says no or nothing, skip the journal step and proceed to git backup.
+
 ### Close-session git backup (mandatory final step)
 
 Every `close-session` entry (full trigger or confirmed "that's it") ends with a git backup of the whole myPKA repo, **after** the session-log file itself has been written:

@@ -44,6 +44,7 @@ import { registerJournalFeed } from './journalFeed.js';
 import { registerInvoicesRoutes } from './invoicesApi.js';
 import { registerSerendipityRoutes } from './serendipityApi.js';
 import { registerLibraryRoutes } from './libraryApi.js';
+import { registerAudiobooksRoutes } from './audiobooksApi.js';
 import { registerOuterWorldRoutes } from './outerWorldApi.js';
 import { registerAgentRoutes } from './agentApi.js';
 import { registerSessionLogsRoutes } from './sessionLogsApi.js';
@@ -1125,6 +1126,10 @@ registerSerendipityRoutes(app, { safe });
 // degrades to a calm { available:false } envelope when the library tables aren't
 // installed yet (bare scaffold). Queries live in libraryApi.js, NOT cockpit.js.
 registerLibraryRoutes(app, { safe });
+// Audiobooks module — dedicated read-only endpoints for the audiobooks table
+// (which uses asin as PK and doesn't participate in library_registry). Degrades
+// to { available:false } when the table is absent. Queries in audiobooksApi.js.
+registerAudiobooksRoutes(app, { safe });
 // Outer World module (DATA-CONTRACT §14): the mymind-style saved-content card
 // grid (enumerate, body-less) + one-item-by-slug (card → detail-large). Read-only
 // over mypka.db; embed_image/_favicon are LOCAL paths served via the existing
@@ -1256,7 +1261,7 @@ const APP_CSP = [
   "connect-src 'self'",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
-  "img-src 'self' data:",
+  "img-src 'self' data: https://m.media-amazon.com",
   "media-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",

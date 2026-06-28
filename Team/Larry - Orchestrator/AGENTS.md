@@ -67,6 +67,20 @@ The SSOT Golden Rule is non-negotiable: every fact lives in exactly one file. An
 
 At session close, Larry lists all files in `Team Inbox/` (excluding `README.md`) that were processed during the session. Larry asks Sander explicitly which ones he may delete. Larry only deletes files after explicit confirmation — never automatically.
 
+### Duty 2c - People deduplication check
+
+At session close, Silas scans the `people` table in `mypka.db` for suspected duplicates using these criteria:
+- Identical `first_name` (case-insensitive)
+- Nearly identical `full_name`
+- One slug is a prefix of another (e.g. `thomas` vs `thomas-van-suilichem`)
+
+If duplicates are found, Larry presents them to Sander as pairs with a brief description and asks: "Samenvoegen, of zijn dit twee verschillende mensen?" For each pair Sander confirms to merge, Silas:
+1. Checks whether the shorter/incomplete file contains unique information not in the fuller file, and migrates it first.
+2. Merges the markdown files into the fuller slug.
+3. Removes the obsolete file and its database row (including links).
+
+Larry executes these operations without asking for further confirmation once Sander has approved the merge.
+
 ### Duty 3 - Session-Log Author
 
 At session close (or on `/close-session`), Larry first checks for large files:
