@@ -39,11 +39,15 @@ interface SidebarProps {
   onToggle: () => void;
   onNavigate: () => void; // close the mobile drawer after a click
   onOpenSearch: () => void; // open the ⌘K command palette
+  folderCounts?: { inbox: number; deliverables: number };
 }
 
 // Mac shows ⌘K; everyone else shows Ctrl+K. navigator.platform is deprecated but
 // still the most reliable client-side OS hint for this cosmetic shortcut badge.
 const IS_MAC = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform);
+
+// Set to false to hide Fleeting Notes from the sidebar (route stays active).
+const SHOW_FLEETING_NOTES = false;
 
 // The five routes the "My AI Team" fly-out leads to. The trigger row stays lit
 // while any of them is the active route.
@@ -83,22 +87,30 @@ function NavRow({
 // section. A module without its pack (gated off / not installed) contributes
 // nothing — the section simply doesn't show its row.
 function ModuleRows({
-  section, route, onNavigate,
+  section, route, onNavigate, folderCounts,
 }: {
   section: ModuleNavSection; route: Route; onNavigate: () => void;
+  folderCounts?: { inbox: number; deliverables: number };
 }) {
   return (
     <>
-      {modulesForSection(section).map((m) => (
-        <NavRow
-          key={m.slug}
-          icon={m.navIcon}
-          label={m.navLabel}
-          href={hrefFor({ name: 'module', slug: m.slug })}
-          active={isActive(route, { name: 'module', slug: m.slug })}
-          onClick={onNavigate}
-        />
-      ))}
+      {modulesForSection(section).map((m) => {
+        const count =
+          m.slug === 'inbox' ? folderCounts?.inbox :
+          m.slug === 'deliverables' ? folderCounts?.deliverables :
+          undefined;
+        return (
+          <NavRow
+            key={m.slug}
+            icon={m.navIcon}
+            label={m.navLabel}
+            count={count != null && count > 0 ? count : undefined}
+            href={hrefFor({ name: 'module', slug: m.slug })}
+            active={isActive(route, { name: 'module', slug: m.slug })}
+            onClick={onNavigate}
+          />
+        );
+      })}
     </>
   );
 }
@@ -241,7 +253,7 @@ function TeamFlyout({ route, onNavigate }: { route: Route; onNavigate: () => voi
   );
 }
 
-export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSearch }: SidebarProps) {
+export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSearch, folderCounts }: SidebarProps) {
   // The Library group hosts drop-in library modules (recipes, films, …); it
   // disappears entirely while no module is attached to it.
   const libraryModules = modulesForSection('library');
@@ -264,8 +276,8 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
             <Sparkles size={18} strokeWidth={1.5} />
           </span>
           <div className="sidebar-brand-text">
-            <span className="sidebar-brand-title">myPKA Cockpit</span>
-            <span className="sidebar-brand-sub">Personal Knowledge Assistance</span>
+            <span className="sidebar-brand-title">Tweede Brein Cockpit</span>
+            <span className="sidebar-brand-sub">Sanders Tweede Brein</span>
           </div>
           {/* Collapse affordance lives IN the sidebar header (moved out of the top
               content bar). Collapses the rail on desktop; closes the drawer on mobile. */}
@@ -304,7 +316,7 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
           {topModules.length > 0 && (
             <div className="sidebar-group">
               <ul className="menu">
-                <ModuleRows section="top" route={route} onNavigate={onNavigate} />
+                <ModuleRows section="top" route={route} onNavigate={onNavigate} folderCounts={folderCounts} />
               </ul>
             </div>
           )}
@@ -320,10 +332,12 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
                 icon={NotebookPen} label="Journal" href={hrefFor({ name: 'journal' })}
                 active={isActive(route, { name: 'journal' })} onClick={onNavigate}
               />
-              <NavRow
-                icon={StickyNote} label="Fleeting Notes" href={hrefFor({ name: 'notes' })}
-                active={isActive(route, { name: 'notes' })} onClick={onNavigate}
-              />
+              {SHOW_FLEETING_NOTES && (
+                <NavRow
+                  icon={StickyNote} label="Fleeting Notes" href={hrefFor({ name: 'notes' })}
+                  active={isActive(route, { name: 'notes' })} onClick={onNavigate}
+                />
+              )}
               {/* Drop-in extension modules attached to the Overview group. */}
               <ModuleRows section="overview" route={route} onNavigate={onNavigate} />
             </ul>

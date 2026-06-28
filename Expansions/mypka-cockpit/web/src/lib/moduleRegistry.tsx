@@ -110,6 +110,9 @@ export interface CockpitModule {
    *  Audiobooks accessible from the Library picker) rather than directly from
    *  the sidebar. */
   hideFromNav?: boolean;
+  /** Live badge count shown next to the nav label. Set externally (e.g. from
+   *  App.tsx after fetching /api/cockpit/folder-counts). */
+  count?: number;
 }
 
 // THE REGISTRY. One entry per drop-in module. See

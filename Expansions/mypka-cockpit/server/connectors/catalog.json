@@ -40,6 +40,32 @@
       "help": "Shows ClickUp tasks assigned to you, with a link back to ClickUp."
     },
     {
+      "id": "jortt:gewoon-sander",
+      "label": "Jortt (Gewoon Sander)",
+      "kind": "task",
+      "category": "finance",
+      "module": "jorttTasks.js",
+      "factory": "makeJorttGewoonSanderConnector",
+      "keys": [
+        { "key": "JORTT_GEWOON_SANDER_CLIENT_ID_API_KEY", "label": "OAuth Client ID (Jortt → Instellingen → API)", "secret": true },
+        { "key": "JORTT_GEWOON_SANDER_CLIENT_SECRET_API_KEY", "label": "OAuth Client Secret (Jortt → Instellingen → API)", "secret": true }
+      ],
+      "help": "Shows open (SENT + OVERDUE) invoices as plannable cards with a deep link into Jortt. Read-only. OAuth 2.0 Client Credentials — no browser redirect needed."
+    },
+    {
+      "id": "jortt-customers:gewoon-sander",
+      "label": "Jortt klanten (Gewoon Sander)",
+      "kind": "task",
+      "category": "tasks",
+      "module": "jorttCustomers.js",
+      "factory": "makeJorttCustomersConnector",
+      "keys": [
+        { "key": "JORTT_GEWOON_SANDER_CLIENT_ID", "label": "OAuth Client ID (Jortt → Instellingen → API)", "secret": true },
+        { "key": "JORTT_GEWOON_SANDER_CLIENT_SECRET", "label": "OAuth Client Secret (Jortt → Instellingen → API)", "secret": true }
+      ],
+      "help": "Haalt alle klanten op uit Jortt (Gewoon Sander). Read-only. OAuth 2.0 Client Credentials — geen browser-redirect nodig. Beschikbaar op GET /api/cockpit/jortt/customers."
+    },
+    {
       "id": "email:starred",
       "label": "Email — starred (IMAP)",
       "kind": "task",

@@ -47,6 +47,7 @@ const OuterWorldView = lazy(() =>
 );
 
 interface NavResponse { types: NavType[] }
+interface FolderCountsResponse { inbox: number; deliverables: number }
 
 function useSidebarOpen() {
   // Default open on desktop, closed on mobile; remember the user's choice.
@@ -69,6 +70,7 @@ export default function App() {
   // this keeps it tracking. (The Settings switch reads/writes the same hook.)
   useTheme();
   const { data: nav } = useFetch<NavResponse>('/api/cockpit/nav');
+  const { data: folderCounts } = useFetch<FolderCountsResponse>('/api/cockpit/folder-counts');
   const [sidebarOpen, toggleSidebar, closeSidebar] = useSidebarOpen();
   const navTypes = nav?.types ?? [];
 
@@ -122,6 +124,7 @@ export default function App() {
         onToggle={toggleSidebar}
         onNavigate={onNavigate}
         onOpenSearch={() => setSearchOpen(true)}
+        folderCounts={folderCounts ?? undefined}
       />
 
       {searchOpen && <CommandPalette onClose={() => setSearchOpen(false)} />}

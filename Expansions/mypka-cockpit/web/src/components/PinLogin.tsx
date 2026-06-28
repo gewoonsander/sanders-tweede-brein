@@ -71,7 +71,7 @@ export function PinLogin({ onAuthed }: Props) {
         <div className="pin-mark" aria-hidden="true">
           <Lock size={22} strokeWidth={1.5} />
         </div>
-        <h1 id="pin-title" className="pin-title">myPKA Cockpit</h1>
+        <h1 id="pin-title" className="pin-title">Tweede Brein Cockpit</h1>
         <p className="pin-sub">{S.pin.subtitle}</p>
 
         <label className="pin-field-label" htmlFor="pin-input">{S.pin.fieldLabel}</label>
