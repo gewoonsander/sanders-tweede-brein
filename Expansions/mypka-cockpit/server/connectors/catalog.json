@@ -22,7 +22,7 @@
       "module": "todoistTasks.js",
       "factory": "makeTodoistConnector",
       "keys": [
-        { "key": "TODOIST_API_TOKEN", "label": "API token (Settings → Integrations → Developer)", "secret": true }
+        { "key": "TODOIST_API_KEY", "label": "API token (Settings → Integrations → Developer)", "secret": true }
       ],
       "help": "Shows your open Todoist tasks (title, notes, due date) with a link back to Todoist."
     },

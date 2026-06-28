@@ -17,6 +17,7 @@
 
 import { createTodoistClient } from './todoist.js';
 import { clampPriorityRank, weekWindow, dayInWeek, degraded, ok, DISPLAY_TZ } from './types.js';
+import { readEnvKey } from './env.js';
 
 const TIMEOUT_MS = 12_000;
 const SOURCE = 'todoist';
@@ -61,9 +62,11 @@ export function makeTodoistConnector(opts = {}) {
       const today = berlinToday();
       const window = weekWindow(weekStart, DISPLAY_TZ);
 
+      const token = readEnvKey('TODOIST_API_KEY');
+      if (!token) return degraded(id, 'no-token', 'Todoist is not connected (no token configured).');
       let client;
       try {
-        client = createTodoistClient();
+        client = createTodoistClient({ token });
       } catch {
         return degraded(id, 'no-token', 'Todoist is not connected (no token configured).');
       }
@@ -122,9 +125,11 @@ export function makeTodoistConnector(opts = {}) {
      * 'stale' (never prune/never strike-through on a blip).
      */
     async reconcileOpenIds() {
+      const token = readEnvKey('TODOIST_API_KEY');
+      if (!token) return { ok: false, ids: new Set() };
       let client;
       try {
-        client = createTodoistClient();
+        client = createTodoistClient({ token });
       } catch {
         return { ok: false, ids: new Set() };
       }

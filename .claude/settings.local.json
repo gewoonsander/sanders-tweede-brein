@@ -82,7 +82,21 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://m.media-amazon.com/images/I/51mVg0vm3+L._SL500_.jpg\")",
       "mcp__Claude_in_Chrome__tabs_context_mcp",
       "mcp__Claude_in_Chrome__read_console_messages",
-      "Bash(bash ~/Documents/sanders-tweede-brein/backup.sh)"
+      "Bash(bash ~/Documents/sanders-tweede-brein/backup.sh)",
+      "Bash(/opt/homebrew/bin/yt-dlp -x --audio-format mp3 --ffmpeg-location /opt/homebrew/bin -o \"/private/tmp/claude-501/-Users-sandervanockenburg-zwaan-Documents-sanders-tweede-brein/3d81c88e-2863-4de0-9aae-50e1f61f5344/scratchpad/whisper/audio2.%\\(ext\\)s\" \"https://youtu.be/WYZ9RjiSdn8?si=0jG2iIUPRKUhqi2A\")",
+      "Bash(/Users/sandervanockenburg-zwaan/Library/Python/3.9/bin/whisper \"/private/tmp/claude-501/-Users-sandervanockenburg-zwaan-Documents-sanders-tweede-brein/3d81c88e-2863-4de0-9aae-50e1f61f5344/scratchpad/whisper/audio2.mp3\" --model large-v3 --output_dir \"/private/tmp/claude-501/-Users-sandervanockenburg-zwaan-Documents-sanders-tweede-brein/3d81c88e-2863-4de0-9aae-50e1f61f5344/scratchpad/whisper/\")",
+      "Read(//Users/sandervanockenburg-zwaan/Documents/superwhisper/**)",
+      "Read(//Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/superwhisper/**)",
+      "Bash(which whisper *)",
+      "Read(//Users/sandervanockenburg-zwaan/**)",
+      "Bash(python3 -c \"import whisper; print\\('whisper python module aanwezig'\\)\")",
+      "Bash(pip3 show *)",
+      "Bash(pip show *)",
+      "Read(//opt/**)",
+      "Bash(whisper --help)",
+      "Bash(yt-dlp -x --audio-format mp3 -o \"/private/tmp/claude-501/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/787ee4c7-d5b9-4fd8-b146-c6c76f0cf2fd/scratchpad/yt_transcribe/%\\(title\\)s.%\\(ext\\)s\" \"https://youtu.be/WYZ9RjiSdn8?si=8EpG-bV6fb1QIlc6\")",
+      "Bash(whisper \"/private/tmp/claude-501/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/787ee4c7-d5b9-4fd8-b146-c6c76f0cf2fd/scratchpad/yt_transcribe/I Talk to My Phone. Saved in Local Folder. Claude Links my Thoughts for Me..mp3\" --model large-v3 --language en --output_dir \"/private/tmp/claude-501/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/787ee4c7-d5b9-4fd8-b146-c6c76f0cf2fd/scratchpad/yt_transcribe/\" --output_format txt)",
+      "Bash(launchctl load *)"
     ]
   },
   "enabledMcpjsonServers": [

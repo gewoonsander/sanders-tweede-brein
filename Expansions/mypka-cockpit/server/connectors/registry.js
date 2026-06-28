@@ -23,7 +23,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { hasEnv } from './env.js';
+import { hasEnv, readEnvKey } from './env.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CATALOG_PATH = path.resolve(__dirname, 'catalog.json');
@@ -41,7 +41,9 @@ const CATALOG_PATH = path.resolve(__dirname, 'catalog.json');
 // its .env key(s) resolve (the original calm not-connected posture). So a fresh
 // install with CONNECTORS_ENABLED=1 but no keys is still inert — the flag just
 // admits the example modules into the loader at all. Documented in .env.example.
-const CONNECTORS_ENABLED = process.env.CONNECTORS_ENABLED === '1';
+// Check process.env first (explicit shell env), then fall back to Team Knowledge/.env
+// (the vault where the cockpit's Connections page stores keys via its UI).
+const CONNECTORS_ENABLED = process.env.CONNECTORS_ENABLED === '1' || readEnvKey('CONNECTORS_ENABLED') === '1';
 
 // Module filenames must be plain basenames inside THIS folder — the catalog can
 // never reach outside the connectors directory.
