@@ -175,7 +175,12 @@
       "Bash(mkdir -p \"/Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/sanders-tweede-brein/.claude/memory\")",
       "Bash(cp -r \"/Users/sandervanockenburg-zwaan/.claude/projects/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/memory/.\" \"/Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/sanders-tweede-brein/.claude/memory/\")",
       "Bash(rm -rf \"/Users/sandervanockenburg-zwaan/.claude/projects/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/memory\")",
-      "Bash(ln -s \"/Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/sanders-tweede-brein/.claude/memory\" \"/Users/sandervanockenburg-zwaan/.claude/projects/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/memory\")"
+      "Bash(ln -s \"/Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/sanders-tweede-brein/.claude/memory\" \"/Users/sandervanockenburg-zwaan/.claude/projects/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/memory\")",
+      "mcp__f7c1332a-41ef-4633-815c-4ae8c1169b3e__read_file_content",
+      "mcp__f7c1332a-41ef-4633-815c-4ae8c1169b3e__search_files",
+      "mcp__f7c1332a-41ef-4633-815c-4ae8c1169b3e__list_recent_files",
+      "mcp__f7c1332a-41ef-4633-815c-4ae8c1169b3e__get_file_metadata",
+      "mcp__n8n-mcp__test_workflow"
     ]
   },
   "enabledMcpjsonServers": [

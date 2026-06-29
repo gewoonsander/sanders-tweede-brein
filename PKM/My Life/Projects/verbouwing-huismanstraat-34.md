@@ -119,7 +119,7 @@ Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing
 
 | # | Wanneer | Wie | Werkzaamheden | Uren | Cumulatief | Cumulatief v.a. week 30 |
 |---|---------|-----|---------------|------|-----------|------------------------|
-| a0 | 25 juni (wo) | Sander (+ eventueel Thomas) | Tapijt verwijderen woonkeuken + vloer beoordelen | p.m. | p.m. | — |
+| a0 | 25 juni (wo) | Sander (+ eventueel Thomas) | Tapijt verwijderen woonkeuken + vloer beoordelen | p.m. | p.m. | — | ✅ Grotendeels gedaan (29-06-2026). Lijmresten nog aanwezig. Vloer redelijk vlak. |
 | a | 26 juni (do) | Sander | Woonkeuken leegmaken + wasmeubel verwijderen + tijdelijk opslaan | ~5 uur | ~5 uur | — |
 | b | 3 juli (do) | Sander + Thomas | Schrootjes van de buitenmuur verwijderen | ~3 uur | ~8 uur | — |
 | c | 10 juli (do) | Sander (+ Thomas) | Houten vlonder verwijderen | ~3 uur | ~11 uur | — |
@@ -129,9 +129,9 @@ Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing
 | g | Uiterlijk 14 juli | Sander | Materialen meterkastuitbreiding + keukenmaterialen bestellen (na gesprek elektricien) | ~0.5 uur | ~22.5 uur | — |
 | h | Vóór 21 juli | Elektricien + Sander | Meterkastuitbreiding — min. 9-10 nieuwe groepen | ~12 uur | ~34.5 uur | — |
 | h2 | Vóór 21 juli | Sander | Voorbereidend leidingwerk vrijmaken: (1) gaten boren voor kabeldoorvoer trappenhuis (14) → WC boven (15); (2) WC eraf + WC-plaat eraf in WC boven (15); (3) knieschotten verwijderen badkamer boven (16); (4) knieschotten + afwerking verwijderen slaapkamer Xanne Lynn (17) | ~5 uur | ~39.5 uur | — |
-| i | Week 30 — start 21 juli | Sander / Marktplaatsmannetje / Ralf | Buiten graven + gat boren door muur + rioolaansluiting | ~8-12 uur | ~57.5 uur | ~10 uur |
+| i | Week 30 — start 20 juli | Sander / Marktplaatsmannetje / Ralf | Buiten graven + gat boren door muur + rioolaansluiting | ~8-12 uur | ~57.5 uur | ~10 uur |
 | j | Week 30 — na (i) | Sander + Marktplaatsmannetje / Ralf | Manschat maken in vloer (toegang rioolaansluiting, tijdelijk) | ~2-4 uur | ~57 uur | ~13 uur |
-| k | Week 30 — ma-wo 21-23 juli | Ralf | Kozijn + deur + lambrisering aanhelen/bijwerken | ~20 uur | ~81 uur | ~33 uur |
+| k | Week 30 — ma-wo 20-23 juli | Ralf | Kozijn + deur + lambrisering aanhelen/bijwerken | ~20 uur | ~81 uur | ~33 uur |
 | l | Week 30 — di-vr 22-25 juli | Ralf + Sander + Marktplaatsmannetje | Leidingwerk: koof bouwen + elektra + water wegwerken via slaapkamer Xanne Lynn → WC → badkamer → koof keuken + aansluiting W/D + afzuigkap-gat boren (Ralf, diamantboor) + stroomleidingen infrezen in dekvloer voor oversteek naar binnenmuur hoge kasten | ~28-35 uur | ~108 uur | ~60 uur |
 | m | Week 30/31 ? | Ralf | Keuken plaatsen | ~24 uur | ~125 uur | ~77 uur |
 | n | Uitloop week 31-32 | Sander | Restpunten + kleine afwerkklussen (o.a. spatwand achter keuken — nog te bepalen) + nieuwe gipsplaten aanbrengen in WC boven (15), badkamer boven (16) en slaapkamer Xanne Lynn (17) na leidingwerk | p.m. | p.m. | p.m. |
@@ -171,6 +171,24 @@ Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing
 
 ---
 
+### Weekplanning beschikbaarheid (week 25–35)
+
+| Week | Datums | Activiteiten/context | Wie beschikbaar voor klus |
+|------|--------|----------------------|---------------------------|
+| 25 | 15–21 jun | Voorbereiding starten | Sander + Marieke |
+| 26 | 22–28 jun | — | Sander |
+| 27 | 29 jun – 5 jul | Graafwerk / voorbereiding leidingen | Sander |
+| 28 | 6–12 jul | Za 11 juli: keuken halen Almere | Thomas + Sander |
+| 29 | 13–19 jul | Marieke vrij (15 juli afscheid Ageeth) | — *(Harm vervallen)* |
+| 30 | 20–26 jul | Marieke vrij, kids New Wine | Ralf + Sander + Marktplaatsmannetje |
+| 31 | 27 jul – 2 aug | Marieke werk | Ralf (uitloop) |
+| 32 | 3–9 aug | Marieke vrij | Uitloop optie Ralf |
+| 33 | 10–16 aug | Vakantie (Betteld) | — |
+| 34 | 17–23 aug | Vakantie (Betteld) | — |
+| 35 | 24–30 aug | Marieke werk | Oplevering richting 1 sept |
+
+---
+
 ### Kortetermijnplanning (voor 1 september 2026)
 
 **Twee ruimtes worden omgewisseld:**
@@ -181,7 +199,7 @@ Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing
 | Slaapkamer | Slaapkamer | Eetkamer + Keuken | Tweedehands keuken plaatsen + leidingwerk |
 
 **Aannemer: Ralf** *(Harm niet meer nodig — Ralf doet alles)*
-- Beschikbaar: week 30–31 (21 juli – 3 augustus 2026)
+- Beschikbaar: week 30–31 (20 juli – 3 augustus 2026)
 - Tarief: €60/uur ex BTW (zelfde als Harm)
 - Inschatting totaal: ~10–11 dagen
   - Kozijn/muur/deur (oud gat dicht + nieuw kozijn richting gang): ~3 dagen
@@ -213,6 +231,7 @@ Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing
 - ✓ **Buitenwand** = keuken (onderkasten + bovenkasten)
 - ✓ **Binnenwand** = 2 hoge kasten (koelkast + oven/magnetron)
 - ✓ **Warm water wasmeubel clientkamer** → doortrekken vanuit huidige keuken (niet via warmtepomp)
+- ⚠️ **Quooker** → Marieke beslist; hoogstwaarschijnlijk **niet installeren** tenzij het apparaat al gerepareerd is. Gevolg: als Quooker vervalt, 1 groep minder nodig → **9 nieuwe groepen** i.p.v. 10. Afstemmen met elektricien zodra Marieke beslissing heeft genomen (vóór elektrabestelling).
 
 **Beslissingen vastgelegd (24-06-2026):**
 - ✓ **Keukenpositie**: exact overgenomen van Marktplaats-indeling — aanrechtblad, spoelbak en kookplaat zijn al ingefreesd, positie staat vast
@@ -510,9 +529,22 @@ Na bovenstaande: financiële balans opmaken → beslissen over pui en isolatie v
 4. Als vloer goed is: **slijpen + betonlook coating/impregnering** (~3-5mm opbouw) → ruim binnen 70mm
 5. Stroomleidingen oversteek infrezen in dekvloer vóór afwerking
 
+**Status (29-06-2026):**
+- Tapijt grotendeels verwijderd door Sander
+- Lijmresten zitten er nog op — moet verder bewerkt worden (schuren/schrapen)
+- Vloer is redelijk vlak → goed nieuws, afwerkvloer is realistisch
+
+**Volgorde afwerkvloer (vastgelegd 29-06-2026):**
+1. Lijmresten volledig verwijderen (schuren/schrapen)
+2. **Eerst: leidingen infrezen in dekvloer** (elektra naar oven, droger, koelkast, etc.) — dit moet vóór de afwerkvloer
+3. Gleuven dichten na leidingwerk
+4. Afwerkvloer aanbrengen (coating/betonlook)
+
+⚠️ Urenschatting voor stap 1 t/m 4 nog te bepalen — opnemen in planning vóór week 30.
+
 **Nog open:**
 - Vloerverwarming meenemen of niet? (nu of nooit)
-- Exacte keuze coating/gietvloer/slijpen na beoordeling vloer
+- Exacte keuze coating/gietvloer/slijpen na verwijderen lijmresten
 
 ## Styling
 
@@ -521,6 +553,28 @@ Na bovenstaande: financiële balans opmaken → beslissen over pui en isolatie v
 - Eet/woonkamer-keuken: latex 9016, houtwerk lichtgrijs, vloer industriële betonlook, balken hout
 - Keuken: waarschijnlijk donkergrijs
 - Plafond: wit laten
+
+## Noodkeuken De Deel (besluit 29-06-2026)
+
+Om de privékeuken (fase p) ook aan te kunnen pakken wordt De Deel (ruimte 1) tijdelijk ingericht als eet- en kookruimte.
+
+**Al aanwezig:**
+- Oven
+- Grote tafel
+- Stoelen kunnen daarheen
+
+**Nog regelen:**
+- Aanrechtje plaatsen
+- Spoelbak + aansluiting → **Marieke zoekt dit uit**
+- Plaatsing organiseren
+
+⚠️ Urenschatting en planning nog open — volgt na keuze Marieke.
+
+---
+
+## Suggesties Marieke
+
+- ⬜ **Geluidsisolerend plafond cliëntenkamer** — optie toegevoegd door Marieke (29-06-2026). Nog niet besloten; afwegen op kosten (~40 uur volgens spreadsheet). **Beslissing vóór 20 juli** — zodat het eventueel meegenomen kan worden door het Marktplaatsmannetje in week 30. Sander + Marieke moeten dit uitdenken en kosten inschatten.
 
 ## Open threads
 
@@ -569,7 +623,8 @@ Subsidie zelf aanvragen via rvo.nl na installatie — meldcode KA28310
 
 ## Next steps
 
-- [ ] Beslissen: offerte FH Team accorderen (vervaldatum 10-07-2026)
+- [ ] **Container bestellen bij Van Dalen Containers, Huissen** — Sander — voor afvoer bouw- en sloopafval tijdens werkzaamheden
+- [ ] Beslissen: offerte FH Team accorderen (vervaldatum 10-07-2026) — **Marieke volgt op** (mail gestuurd aan Ferry, nog geen reactie per 29-06-2026)
 - [ ] Bij akkoord: 50% aanbetaling (±€12.254) overmaken
 - [ ] RVO-subsidie aanvragen na installatie via rvo.nl (meldcode KA28310)
 - [ ] Stalen balk: leverancier uitzoeken + monteur regelen
