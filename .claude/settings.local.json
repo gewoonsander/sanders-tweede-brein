@@ -175,7 +175,21 @@
       "Bash(mkdir -p \"/Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/sanders-tweede-brein/.claude/memory\")",
       "Bash(cp -r \"/Users/sandervanockenburg-zwaan/.claude/projects/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/memory/.\" \"/Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/sanders-tweede-brein/.claude/memory/\")",
       "Bash(rm -rf \"/Users/sandervanockenburg-zwaan/.claude/projects/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/memory\")",
-      "Bash(ln -s \"/Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/sanders-tweede-brein/.claude/memory\" \"/Users/sandervanockenburg-zwaan/.claude/projects/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/memory\")"
+      "Bash(ln -s \"/Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/sanders-tweede-brein/.claude/memory\" \"/Users/sandervanockenburg-zwaan/.claude/projects/-Users-sandervanockenburg-zwaan-Documents-Documenten---Mac-mini-van-Sander-sanders-tweede-brein/memory\")",
+      "mcp__claude_ai_Google_Calendar__list_events",
+      "mcp__claude_ai_Google_Calendar__list_calendars",
+      "Bash(system_profiler SPHardwareDataType)",
+      "Bash(defaults write *)",
+      "Bash(osascript *)",
+      "Bash(defaults read *)",
+      "Bash(open -a \"System Preferences\")",
+      "Bash(open \"x-apple.systempreferences:com.apple.preference.keyboard?Dictation\")",
+      "Bash(diskutil list *)",
+      "mcp__claude_ai_Google_Drive__search_files",
+      "mcp__claude_ai_Google_Drive__list_recent_files",
+      "Bash(grep -iE \"\\\\.\\(pdf|docx|doc|xlsx|xls|csv|txt\\)$\")",
+      "Bash(grep -v \"~\\\\$\")",
+      "Bash(qlmanage -t -s 800 -o /private/tmp/claude-501/-Users-GewoonSander-Documents-sanders-tweede-brein/14450f9c-5b8f-4885-9e24-d0ecf6b7fe7b/scratchpad ~/Documents/Naamloos-1.pdf ~/Documents/feedback.pdf ~/Documents/intelligentie.pdf)"
     ]
   },
   "enabledMcpjsonServers": [
