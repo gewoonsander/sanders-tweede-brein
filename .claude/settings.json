@@ -77,14 +77,24 @@
       "Bash(stat *)",
       "Bash(xargs *)",
       "Bash(rm *)",
-      "Bash(git status*)",
-      "Bash(git log*)",
-      "Bash(git diff*)",
-      "Bash(git add*)",
-      "Bash(git commit*)",
-      "Bash(git push*)",
+      "Bash(cat *)",
+      "Bash(git *)",
+      "Bash(cd ~/Documents/sanders-tweede-brein*)",
       "Bash(whisper *)",
       "Bash(osascript *)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AUDIO=$(find \"/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/Team Inbox/Audio Captures\" -type f \\( -name '*.wav' -o -name '*.m4a' -o -name '*.mp3' -o -name '*.aiff' \\) 2>/dev/null | wc -l | tr -d ' '); SCREENS=$(find \"/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/Team Inbox/Screenshots\" -type f 2>/dev/null | wc -l | tr -d ' '); DOCS=$(find \"/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/Team Inbox/Documents\" -type f 2>/dev/null | wc -l | tr -d ' '); MSG=''; [ \"$AUDIO\" -gt 0 ] && MSG=\"$MSG ${AUDIO} audio\"; [ \"$SCREENS\" -gt 0 ] && MSG=\"$MSG ${SCREENS} screenshots\"; [ \"$DOCS\" -gt 0 ] && MSG=\"$MSG ${DOCS} documenten\"; [ -n \"$MSG\" ] && echo \"{\\\"systemMessage\\\": \\\"Team Inbox wacht op verwerking:$MSG.\\\"}\"",
+            "async": true
+          }
+        ]
+      }
     ]
   }
 }

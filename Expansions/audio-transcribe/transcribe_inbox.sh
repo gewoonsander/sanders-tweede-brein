@@ -1,7 +1,7 @@
 #!/bin/bash
 
-INBOX="/Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/sanders-tweede-brein/Team Inbox/Audio Captures"
-DELIVERABLES="/Users/sandervanockenburg-zwaan/Documents/Documenten - Mac mini van Sander/sanders-tweede-brein/Deliverables"
+INBOX="/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/Team Inbox/Audio Captures"
+DELIVERABLES="/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/Deliverables"
 SCRATCH="/tmp/audio_transcribe_scratch"
 
 mkdir -p "$SCRATCH"

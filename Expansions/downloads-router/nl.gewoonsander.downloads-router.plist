@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>nl.gewoonsander.downloads-router</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/Expansions/downloads-router/route_downloads.sh</string>
+    </array>
+    <key>WatchPaths</key>
+    <array>
+        <string>/Users/sandervanockenburg-zwaan/Downloads</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/downloads-router.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/downloads-router-error.log</string>
+</dict>
+</plist>
