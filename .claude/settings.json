@@ -70,7 +70,21 @@
       "mcp__claude_ai_Todoist__get-workspace-insights",
       "mcp__claude_ai_Todoist__list-workspaces",
       "mcp__claude_ai_Todoist__user-info",
-      "Bash(ollama list)"
+      "Bash(ollama list)",
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Bash(ls *)",
+      "Bash(stat *)",
+      "Bash(xargs *)",
+      "Bash(rm *)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git push*)",
+      "Bash(whisper *)",
+      "Bash(osascript *)"
     ]
   }
 }
