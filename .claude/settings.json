@@ -81,7 +81,15 @@
       "Bash(git *)",
       "Bash(cd ~/Documents/sanders-tweede-brein*)",
       "Bash(whisper *)",
-      "Bash(osascript *)"
+      "Bash(osascript *)",
+      "Bash(defaults read *)",
+      "Bash(defaults write *)",
+      "Bash(bash ~/Documents/sanders-tweede-brein*)",
+      "Bash(launchctl *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(mkdir *)",
+      "Bash(touch *)"
     ]
   },
   "hooks": {

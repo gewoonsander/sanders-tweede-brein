@@ -42,15 +42,14 @@ Zie ook: [[software-en-tools]] voor software en abonnementen.
 - **Notities:** voer `system_profiler SPHardwareDataType` uit in een sessie op dit apparaat
 
 ### Apple MacBook Air
-- **Model:** *ophalen via terminal op dit apparaat*
-- **Chip:** *aanvullen*
-- **RAM:** *aanvullen*
-- **Opslag intern:** *aanvullen*
-- **Serienummer:** *aanvullen*
-- **Locatie:** *aanvullen*
+- **Model:** MacBook Air — MGN63N/A (MacBookAir10,1)
+- **Chip:** Apple M1 — 8 cores (4 performance + 4 efficiency)
+- **RAM:** 8 GB
+- **Serienummer:** FVFJDFPSQ6L4
+- **Locatie:** mobiel, meenemen
 - **Aanschafdatum:** *aanvullen*
 - **Garantie t/m:** *aanvullen*
-- **Notities:** voer `system_profiler SPHardwareDataType` uit in een sessie op dit apparaat
+- **Notities:** tweede brein draait hier; brein-alias ingesteld in ~/.zprofile
 
 ---
 

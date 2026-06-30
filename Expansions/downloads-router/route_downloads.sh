@@ -25,7 +25,7 @@ route_file() {
     [ "$size" -gt "$MAX_SIZE" ] && return
 
     case "$filename" in
-        Schermafbeelding*.png|Screenshot*.png|Schermafbeelding*.jpg|Screen\ Shot*.png)
+        Scherm*afbeelding*.png|Screenshot*.png|Scherm*afbeelding*.jpg|Screen\ Shot*.png)
             mv "$f" "$SCREENSHOTS/" && echo "Screenshot → Team Inbox/Screenshots: $filename"
             ;;
         *)
