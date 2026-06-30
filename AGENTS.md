@@ -133,6 +133,24 @@ No SQLite. No DB. Session logs are markdown. Cross-session learnings are appende
 
 Off on day one. Re-engages if [[Team/agent-index]] shrinks below 3 specialists.
 
+### 9. Interaction rule — single-letter choices (mandatory)
+
+Whenever Hermes or any specialist presents the user with a choice, always format it with a bold single-letter shortcut:
+
+```
+**A** — omschrijving optie A
+**B** — omschrijving optie B
+**C** — omschrijving optie C
+```
+
+Rules:
+- Maximum 4 options per choice.
+- Use capitals (A, B, C, D) or J/N for yes/no.
+- Always bold, followed by an em-dash and a short description.
+- Apply to every directional choice — not to open questions asking for information.
+
+Full spec: [[GL-013-interactie-enkelvoudige-keuzes]]
+
 ### 9. PKA operating context
 
 Cue rules route personal inputs to Penn. Business workstreams are handled by future specialists hired through Jethro, captured as Workstreams in Team Knowledge.
