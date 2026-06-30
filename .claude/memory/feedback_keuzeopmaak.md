@@ -11,4 +11,9 @@ Bij elke vraag waarbij de gebruiker een keuze moet maken, altijd de opties voorz
 
 **Why:** Sander wil efficiënt kunnen antwoorden zonder te hoeven typen, zeker omdat hij SuperWhisper gebruikt voor input.
 
-**How to apply:** Altijd, bij elke keuzevraag, ongeacht hoeveel opties er zijn. Dit geldt ook voor simpele ja/nee vragen: stel die dan als **(A)** Ja · **(B)** Nee. Geen enkele vraag zonder letteropties.
+**How to apply:** Altijd, bij elke keuzevraag, ongeacht hoeveel opties er zijn. Dit geldt ook voor:
+- Simpele ja/nee vragen: **(A)** Ja · **(B)** Nee
+- Informele sluitvragen aan het einde van een bericht ("wil je X of Y?")
+- Bijzinnen die een keuze bevatten, ook als ze niet als formele vraag zijn gesteld
+
+Geen enkele vraag — groot of klein, formeel of informeel — zonder letteropties.

@@ -25,7 +25,7 @@ Voorbeeld: `/rename-images ~/Pictures/uitzoeken`
    | Huidige naam | Voorgestelde naam |
    |---|---|
    | DSC09637.JPG | 2017-06-28-sander-achtertuin.jpg |
-   | gmd5.jpeg | dartbord-close-up.jpg |
+   | gmd5.jpeg | dartbord-bovenaanzicht.jpg |
    ```
 
 4. **Vraag bevestiging** voor je hernoemt:
@@ -38,6 +38,7 @@ Voorbeeld: `/rename-images ~/Pictures/uitzoeken`
 ## Regels
 
 - Volg [[GL-001-file-naming-conventions]] — kebab-case, kleine letters, geen spaties.
+- Gebruik altijd Nederlandse woorden in de voorgestelde naam. Nooit Engels.
 - Hernoem nooit zonder expliciete bevestiging van de gebruiker.
 - Als een afbeelding persoonsgegevens bevat (gezichten, namen), gebruik dan een generieke beschrijving tenzij de gebruiker de naam kent.
 - Bij twijfel over de inhoud: gebruik de meest beschrijvende term die je zeker weet.

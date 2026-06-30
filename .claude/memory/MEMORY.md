@@ -6,3 +6,4 @@
 - [myPKA Cockpit status](project_mypka_cockpit.md) — Todoist awaiting connector, Jortt geblokkeerd (ZZP-plan), Google Agenda Workspace-blokkade
 - [SuperWhisper abonnement opzeggen](project_superwhisper_abonnement.md) — op termijn opzeggen als Whisper-automatisering staat (~1 jaar resterend)
 - [Gmail links in overzichten](feedback_gmail_links.md) — altijd klikbare links per mail toevoegen via thread-ID
+- [Gratis tools voorkeur](feedback_gratis_tools.md) — altijd gratis alternatief eerst; Camtasia + Snagit opgezegd juni 2026

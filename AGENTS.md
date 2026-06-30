@@ -66,6 +66,23 @@ See [[Team/agent-index]] for the full routing table.
 
 **SOPs are skills, not 1:1 ownership.** Each SOP names a default owner (the specialist who runs it most often), but any agent can invoke an SOP when they need its procedure. Think of SOPs the way Claude skills work — discrete, named, callable. Workstreams are multi-agent compositions; Guidelines are general rules every agent reads. See [[Team Knowledge/INDEX]].
 
+## Skills Register
+
+All callable slash-command skills live in `.claude/commands/`. **Every agent must check this register before asking Athena to research externally or inventing an answer from scratch.** If a skill exists for the domain, use it.
+
+| Skill | Bestand | Eigenaar | Wanneer gebruiken |
+|---|---|---|---|
+| `/brainstorm` | `brainstorm.md` | Daedalus | Begin van elke development-taak — design-first, geen implementatie zonder ontwerp |
+| `/debate` | `debate.md` | Hermes | Als Sander al overtuigd is van een richting — bouw het sterkste tegenargument |
+| `/improve-skill` | `improve-skill.md` | Hermes | Wanneer een skill niet goed werkt — pas het skill-bestand permanent aan |
+| `/rename-images` | `rename-images.md` | Pixel / Daedalus | Hernoem afbeeldingen op basis van visuele analyse via Ollama vision |
+| `/sync-contact-to-google` | `sync-contact-to-google.md` | Daedalus | Synchroniseer een PKM-contactpersoon naar Google Contacts |
+| `/dagstart` | `dagstart.md` | Hermes | Ochtendroutine — agenda, open taken, inbox check, dagintentie |
+
+**Regel voor agents:** Tref je een kennishiaat aan in jouw domein? Controleer eerst deze tabel. Staat er een skill voor? Roep die aan. Staat er geen skill voor en is het structureel herbruikbaar? Meld dat aan Hermes — dan bouwen we de skill.
+
+**Hoe de register bij te houden:** Elke nieuwe skill die wordt aangemaakt in `.claude/commands/` krijgt direct een rij in deze tabel. Hermes is verantwoordelijk voor de consistentie.
+
 ## The folder map
 
 - `Team/` - one folder per specialist. Each holds an `AGENTS.md` contract.
