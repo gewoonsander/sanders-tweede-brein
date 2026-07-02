@@ -48,7 +48,10 @@ Regionale dartsbond voor Nijmegen en omstreken. Organiseert teamcompetitie en in
 
 **Website gebouwd door:** [[gewoon-sander]] — Sander heeft de RDB-website ontwikkeld als webproject.
 
-**Domein:** RIVIERENLANDDARTSBOND.NL via GoDaddy. Verlenging: april 2026 (€9.67). Volgende verlenging: **april 2027** (reminder maart 2027). Zie [[2026-04-13-godaddy-receipt-rivierenlanddartsbond-nl]].
+**Domeinen (3, allen via GoDaddy):**
+- **rivierenlanddartsbond.nl** — de officiële naam van de bond, later aangeschaft. Hoofddomein. Verlenging: april 2026 (€9,67). Vervaldatum bevestigd via GoDaddy op 2026-07-02: **4 mei 2027** (eerdere notitie "april 2027" hiermee gecorrigeerd). Zie [[2026-04-13-godaddy-receipt-rivierenlanddartsbond-nl]].
+- **rdbdarts.nl** — van oudsher het originele domein; hier zaten vroeger ook de legacy Google Workspace-producten aan (zie Serge Taber hieronder). Vervaldatum: 1 oktober 2026.
+- **mijnrdb.nl** — aangeschaft met het oog op een mogelijk toekomstig eigen inlog-/community-account voor leden. Vervaldatum: 21 juli 2027. **Lage prioriteit** — met het nieuwe bestuur (ALV 4 juli 2026) nog onzeker of dit ooit gebouwd wordt.
 
 ## Bestuurswisseling 2026
 

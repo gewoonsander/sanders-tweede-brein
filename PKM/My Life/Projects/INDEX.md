@@ -6,6 +6,12 @@ Bounded efforts with a finish line — a set of deliverables you cross off when 
 
 - [[side-project-mvp]] — seeded course sample. The canonical shape every Project file follows.
 - [[workshop-aanmelding-automatisering]] — Plug&Pay → Mailblue → Excel koppeling zodat Erin en Ray automatisch de deelnemerslijst ontvangen. Status: planning.
+- [[project_praktijkvoluitleven-migratie]] — hosting-migratie en doorlopend klantbeheer voor [[heleen-van-den-berg]] (Praktijk Voluit Leven).
+- [[project_rdb-emiel-website-overdracht]] — overdracht van website-toegang en informatie aan [[emiel-theloosen]] bij zijn aantreden in het RDB-bestuur.
+- [[verbouwing-huismanstraat-34]] — grote verbouwing Huismanstraat 34, duurzaamheid, target 2027-12-31.
+- [[verbouwing-beneden]] — verbouwing beneden, deadline 2026-08-08.
+- [[verbouwing-badkamer-toilet]] — verbouwing badkamer en toilet boven.
+- [[bouwlog-badkamer-toilet]] — logboek van de badkamer/toilet-verbouwing (let op: geen YAML-frontmatter, wijkt af van GL-002 — mogelijk bewust als vrij logboek).
 
 ## Naming
 

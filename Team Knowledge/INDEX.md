@@ -32,6 +32,12 @@ When the team learns something durable across sessions, Larry appends it to a "C
 **2026-06-12 — PKM/Documents naamconventie**
 Bestanden die Larry of Penn aanmaken in `PKM/Documents/` krijgen ALTIJD een ISO-datumprefix: `YYYY-MM-DD-<slug>.md`. De datum is de datum van het brondocument (offerte, rapport, mail), niet de verwerkingsdatum. Wikilinks in andere bestanden worden direct bijgewerkt bij hernoemen. Fout ontdekt in sessie 2026-06-12: bestanden waren aangemaakt zonder datumprefix en pas achteraf hernoemd.
 
+**2026-07-02 — WPMU Dev Hub Client Billing accepteert geen negatieve prijsopties**
+Bij het aanmaken van kortingsregels op facturen (bv. "korting op product X") accepteert het WPMU Dev Hub Client Billing-platform geen negatief bedrag in het prijsveld. Werkbare aanpak: zet het betreffende product/plan direct op €0,00 in plaats van een losse min-regel te tonen. Ontdekt tijdens het opzetten van de Heleen-factuur (zie [[project_praktijkvoluitleven-migratie]]).
+
+**2026-07-02 — Team/-mapnamen lopen achter op root AGENTS.md-teamnaamgeving**
+Root `AGENTS.md` beschrijft het team onder een nieuwe naamgeving (Hermes, Jethro, Athena, Daedalus, Atlas, Harmonia, Charta, Pixel, Bezalel, Argus, Nemesis), maar de fysieke `Team/`-map en de losse `AGENTS.md`-contracten daarin gebruiken nog de oude namen (Larry, Nolan, Pax, Mack, Silas, Iris, Charta, Pixel, Felix, Vex, Vera). Sessielogs gebruiken in de praktijk al consequent de nieuwe naam ("hermes" als agent-slug). Dit is een onvoltooide rename — nog niet zelfstandig gefixt (grote structurele wijziging, verdient bewuste aandacht i.p.v. stilzwijgend doorvoeren tijdens een Librarian-pas). Gevonden tijdens sessie 2026-07-02.
+
 ## Active session log
 
 The current session log lives in `session-logs/YYYY/MM/`. Larry writes one per session at close.

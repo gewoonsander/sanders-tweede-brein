@@ -28,3 +28,7 @@ Dartscoachingcliënt van Sander — sparringpartner voor coachingsgesprekken in 
 - Achternaam onbekend — aanvullen zodra bekend
 - Wat is zijn darts achtergrond / niveau?
 - Wat zijn zijn coachingsdoelen?
+
+## Actiepunten
+
+- [ ] **2026-07-02** — Er is een misverstand ontstaan met Darren; Sander wil dit uitpraten en hem vragen of hij morgen (2026-07-03) tijd heeft voor een online sessie. Oppakken vanavond (2026-07-02) of anders morgenvroeg.

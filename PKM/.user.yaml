@@ -17,12 +17,14 @@ roles:
   - Oprichter Dart Buddies community
 
 speech_to_text_corrections_extra:
+  - "RDP → RDB (Rivierenland Darts Bond, dartsbond-vereniging — voorheen verkeerd genoteerd als RDP)"
   - "Duits Coaching → DartsCoaching"
   - "Pluk en P → PlugAndPay"
   - "Ageet Herrense → cliënt Gewoon Thuis"
   - "Matthijs Cataw / Matthijs Cattouw → Mattijs Kattouw (goede vriend)"
   - "Guido de Bret / Guido de Br → Guido de Brès (school Arnhem)"
   - "Xandelin → Xanne Lynn"
+  - "Dern → Darren (dartscoachingcliënt)"
 
 vakantie_2026:
   van: 2026-08-08
@@ -53,13 +55,17 @@ voorkeuren:
 
 darts_competitie:
   - Dubbel team toernooi (money-in/money-out)
-  - RDP (Rivierenland Dartbonds) competitie
+  - RDB (Rivierenland Darts Bond) competitie
 
 webklanten:
   - praktijkgewoonzijn.nl (Marieke — blijft)
-  - RDP Rivierenland Dartbonds — website in beheer, wil waarschijnlijk mee stoppen
+  - RDB Rivierenland Darts Bond — website in beheer, wil waarschijnlijk mee stoppen
+  - praktijkvoluitleven.nl (Heleen van den Berg — actief, zie CRM)
+  - derotsputten.nl (De Rots Putten, gezinshuis Putten — actief, financieel nog achterstallig)
 
 open_beslissingen:
   - Webklanten afbouwen of niet (staat grotendeels stil)
-  - RDP website — doorgaan of stoppen?
+  - RDB website — doorgaan of stoppen? (nieuw bestuur per ALV 4 juli 2026, Emiel neemt communicatie/website over)
   - Gezondheid aanpakken (bewust geparkeerd voor later)
+  - devoordeligste.nl en led-voordelig.nl — ooit voor een klant aangeschaft, geen contact meer; waarschijnlijk laten verlopen maar nog geen definitieve beslissing (2026-07-02)
+  - dartscoaching.online — auto-renew staat uit en domein is gelockt; nog te bekijken wat de bedoeling hiermee is (2026-07-02)
