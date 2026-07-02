@@ -2,9 +2,9 @@
 
 - **Status:** Active (since v1.7.0)
 - **Type:** Workstream — a multi-agent composition. The agents below collaborate to deliver the outcome. New Workstreams emerge when patterns repeat across session-logs; this one ships pre-canonicalized because Expansions are a day-1 install/uninstall flow that needs the multi-agent choreography (Larry → Vex → Nolan → Mack → Silas → Larry) wired correctly out of the box. **Pre-canonicalized exception**, alongside [[WS-001-daily-journaling]] and [[WS-002-import-external-knowledge-base]].
-- **Owners:** **Larry** (orchestrator, pre-flight, post-install validation, archive, announcement). **Vex** (security review — gate). **Nolan** (team merge — copies agents, SOPs, guidelines, templates into your myPKA). **Mack** (connector wiring — env vars, MCP servers, runtime announcement). **Silas** (post-merge integrity check).
+- **Owners:** **Hermes** (orchestrator, pre-flight, post-install validation, archive, announcement). **Vex** (security review — gate). **Nolan** (team merge — copies agents, SOPs, guidelines, templates into your myPKA). **Mack** (connector wiring — env vars, MCP servers, runtime announcement). **Silas** (post-merge integrity check).
 - **References:** `Expansions/docs/expansion-spec.md` (locked manifest schema), [[GL-001-file-naming-conventions]], [[GL-002-frontmatter-conventions]], [[SOP-001-how-to-add-a-new-specialist]] (Nolan's hire procedure — adapted here for pack-shaped hires), [[Team/agent-index]].
-- **Triggered by:** any user phrasing that signals "install or uninstall an Expansion." See **Trigger contract** below. Also: Larry detects new folders in `Expansions/` on session boot and offers to run this workstream.
+- **Triggered by:** any user phrasing that signals "install or uninstall an Expansion." See **Trigger contract** below. Also: Hermes detects new folders in `Expansions/` on session boot and offers to run this workstream.
 
 ## Purpose
 
@@ -24,24 +24,24 @@ Take a folder dropped into `Expansions/`, validate it, security-review it, merge
 | "install the [X] Expansion" / "install Slack" / "install the App Developer pack" | Run this workstream from §1 |
 | "I dropped the [X] pack into Expansions/" / "there's a new folder in Expansions" | Detect → confirm → run §1 |
 | "uninstall [X]" / "remove the [X] Expansion" / "rip out [X]" | Run **§Uninstall** |
-| (Larry-detected at session boot — new folder in `Expansions/` with valid `expansion.yaml` and not yet recorded in `Expansions/INDEX.md`) | Announce + offer to run §1 |
+| (Hermes-detected at session boot — new folder in `Expansions/` with valid `expansion.yaml` and not yet recorded in `Expansions/INDEX.md`) | Announce + offer to run §1 |
 
 ## Pre-flight (before any agent does anything)
 
-Larry confirms the Expansion folder exists at `Expansions/<slug>/` and contains an `expansion.yaml` at its root. If not, Larry tells the user what's missing and stops.
+Hermes confirms the Expansion folder exists at `Expansions/<slug>/` and contains an `expansion.yaml` at its root. If not, Hermes tells the user what's missing and stops.
 
 ---
 
-## Step 1 — Larry: detect, parse, present preview
+## Step 1 — Hermes: detect, parse, present preview
 
-Larry reads `Expansions/<slug>/expansion.yaml` and validates against the schema in `Expansions/docs/expansion-spec.md`:
+Hermes reads `Expansions/<slug>/expansion.yaml` and validates against the schema in `Expansions/docs/expansion-spec.md`:
 
 1. **Required fields present?** `name`, `slug`, `version`, `description`, `category`, `expansion_type`, `requires_scaffold_version`, `requires_agents`, `license`, `author`. Missing or malformed → `invalid` row in `INDEX.md`, install blocked, surface the error to the user.
-2. **`requires_scaffold_version` matches?** Larry compares against `VERSION`. Mismatch → `incompatible` row, install blocked.
-3. **`requires_agents` present?** Larry checks each entry against `Team/agent-index.md`. Missing pre-hire → block install with "install [X] Expansion first" or "run SOP-001 to hire [X]".
-4. **Folder name = `slug`?** If not, Larry stops and asks the user to rename.
+2. **`requires_scaffold_version` matches?** Hermes compares against `VERSION`. Mismatch → `incompatible` row, install blocked.
+3. **`requires_agents` present?** Hermes checks each entry against `Team/agent-index.md`. Missing pre-hire → block install with "install [X] Expansion first" or "run SOP-001 to hire [X]".
+4. **Folder name = `slug`?** If not, Hermes stops and asks the user to rename.
 
-If all checks pass, Larry presents the **install preview** to the user:
+If all checks pass, Hermes presents the **install preview** to the user:
 
 ```
 Expansion: <name> v<version>
@@ -69,7 +69,7 @@ User answers `y` → §2. `n` → stop, write a session-log entry capturing the 
 
 ## Step 2 — Vex: security review (the gate)
 
-Vex audits the Expansion folder before any merge happens. This is a hard gate — Larry does not advance to §3 until Vex returns green or the user explicitly accepts a yellow flag.
+Vex audits the Expansion folder before any merge happens. This is a hard gate — Hermes does not advance to §3 until Vex returns green or the user explicitly accepts a yellow flag.
 
 Vex's checks:
 
@@ -83,8 +83,8 @@ Vex's checks:
 Vex returns one of:
 
 - **GREEN** → §3 (proceed).
-- **YELLOW** → Larry surfaces the flag to the user with Vex's reasoning. User overrides → §3. User declines → stop.
-- **RED** → install blocked. Larry tells the user why. No override path.
+- **YELLOW** → Hermes surfaces the flag to the user with Vex's reasoning. User overrides → §3. User declines → stop.
+- **RED** → install blocked. Hermes tells the user why. No override path.
 
 ---
 
@@ -101,7 +101,7 @@ For each `{ name, role, folder }` entry:
 3. Copy the entire `Expansions/<slug>/agents/<folder>/` directory to `Team/<folder>/`.
 4. Append a row to `Team/agent-index.md` for the new specialist (name, folder, role description). Format: match the existing index's row shape.
 5. Update root `AGENTS.md` "The team" table to bump the count and add the new row.
-6. Update `Team/Larry - Orchestrator/AGENTS.md` routing cheatsheet with any triggers the new agent should own (pulled from the agent's own AGENTS.md or from the Expansion's `ADAPT-EXPANSION.md` hint table).
+6. Update `Team/Hermes - Orchestrator/AGENTS.md` routing cheatsheet with any triggers the new agent should own (pulled from the agent's own AGENTS.md or from the Expansion's `ADAPT-EXPANSION.md` hint table).
 
 ### 3.2 SOPs (`adds_sops`) — auto-numbered
 
@@ -136,7 +136,7 @@ Silas validates your myPKA state after Nolan's merge:
 
 1. **Frontmatter compliance.** Any new template added under `Team Knowledge/Templates/` must validate against [[GL-002-frontmatter-conventions]]. Any new agent's AGENTS.md gets a structural sanity check (has Identity, Role, etc. sections).
 2. **`agent-index.md` consistency.** Every folder under `Team/` is listed in the index, and every index row points to an existing folder.
-3. **Wikilink resolution.** Every `[[wikilink]]` in the new files resolves to an existing target. Broken links → flag to Larry, do not auto-fix.
+3. **Wikilink resolution.** Every `[[wikilink]]` in the new files resolves to an existing target. Broken links → flag to Hermes, do not auto-fix.
 4. **INDEX.md consistency.** SOPs, Workstreams, Guidelines, Templates indexes match the actual folder contents.
 5. **No SSOT violations introduced.** New SOPs/Guidelines/Workstreams don't duplicate existing rules. Soft warning if Silas detects overlap.
 
@@ -179,25 +179,25 @@ For `expansion_type: runtime` or `hybrid` with a runtime block:
 
 ---
 
-## Step 6 — Larry: post-install validation
+## Step 6 — Hermes: post-install validation
 
-Larry runs `post_install_validation` from the manifest:
+Hermes runs `post_install_validation` from the manifest:
 
 - Each `{ type: "file_exists", path: "..." }` → check.
 - Each `{ type: "shell", cmd: "...", expect_exit: 0 }` → run, check exit code.
 - Each `{ type: "http", url: "...", expect_status: 200 }` → curl, check status.
 
-Failures → Larry surfaces them to the user. Two paths: (a) re-run the failing step (typically a re-prompt for env vars); (b) accept and continue with the issue logged.
+Failures → Hermes surfaces them to the user. Two paths: (a) re-run the failing step (typically a re-prompt for env vars); (b) accept and continue with the issue logged.
 
 ---
 
-## Step 7 — Larry: archive + announce
+## Step 7 — Hermes: archive + announce
 
 1. **Write session-log entry.** `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_larry_install-<slug>-v<version>.md`. Capture: which Expansion, version, agents added, SOPs added (with their new SOP-NNN numbers), Vex's verdict, env vars set (keys only, never values), runtime announced (yes/no), validation results, anomalies.
-2. **Archive the Expansion folder.** Move the live install marker to `Expansions/_installed/<slug>-<version>/.manifest.json` so the active `Expansions/` slot is freed (the actual files merged into `Team/` and `Team Knowledge/` are the canonical home now). The `.manifest.json` is a snapshot of `expansion.yaml` plus the install metadata (timestamp, who installed, sha256). This is what Larry reads to detect "is this Expansion installed?" on future session boots.
+2. **Archive the Expansion folder.** Move the live install marker to `Expansions/_installed/<slug>-<version>/.manifest.json` so the active `Expansions/` slot is freed (the actual files merged into `Team/` and `Team Knowledge/` are the canonical home now). The `.manifest.json` is a snapshot of `expansion.yaml` plus the install metadata (timestamp, who installed, sha256). This is what Hermes reads to detect "is this Expansion installed?" on future session boots.
 3. **Update `Expansions/INDEX.md`.** Add a row for the newly installed Expansion.
 4. **Announce the new specialists / capabilities** to the user. For agent packs: introduce each new agent by name and role. For connectors: tell the user which triggers now route to the connector and the SOP they own. For runtimes: confirm how to launch.
-5. **Walk through `post_install_steps`.** Larry reads each step aloud (figuratively) and either executes it or hands it to the user.
+5. **Walk through `post_install_steps`.** Hermes reads each step aloud (figuratively) and either executes it or hands it to the user.
 
 Done. The install workstream returns control to whatever the user asked for next.
 
@@ -207,9 +207,9 @@ Done. The install workstream returns control to whatever the user asked for next
 
 Symmetric. Triggered by "uninstall [X] Expansion", "remove [X]", "rip out [X]".
 
-### U1 — Larry: confirm + present uninstall preview
+### U1 — Hermes: confirm + present uninstall preview
 
-Larry reads `Expansions/_installed/<slug>-<version>/.manifest.json`. If not found, the Expansion is not installed — Larry tells the user. If found, Larry presents the **uninstall preview**:
+Hermes reads `Expansions/_installed/<slug>-<version>/.manifest.json`. If not found, the Expansion is not installed — Hermes tells the user. If found, Hermes presents the **uninstall preview**:
 
 ```
 Will remove:
@@ -242,7 +242,7 @@ For each `adds_guidelines`, `adds_workstreams`, `adds_templates`: same shape.
 
 ### U4 — Silas: post-uninstall integrity check
 
-Same as install §4, but checking that removed files left no dangling wikilinks, INDEX rows, or `agent-index` rows. Flag any orphans for Larry to clean up.
+Same as install §4, but checking that removed files left no dangling wikilinks, INDEX rows, or `agent-index` rows. Flag any orphans for Hermes to clean up.
 
 ### U5 — Larry: archive + session-log
 
@@ -257,18 +257,18 @@ Write the uninstall session-log entry. Update `Expansions/INDEX.md` to remove th
 | Situation | Behaviour |
 |---|---|
 | Vex flags YELLOW, user overrides | Logged in the session-log with explicit user-consent line. Vex re-audits if the Expansion is later updated. |
-| Vex flags RED | Install blocked. No override. Larry tells the user the specific concern. |
-| `requires_agents` missing | Install blocked. Larry tells the user "install <X> Expansion first" or "run SOP-001 to hire <X>". |
+| Vex flags RED | Install blocked. No override. Hermes tells the user the specific concern. |
+| `requires_agents` missing | Install blocked. Hermes tells the user "install <X> Expansion first" or "run SOP-001 to hire <X>". |
 | Collision: `Team/<folder>/` already exists | Nolan stops at §3. User chooses: rename (suffix `-from-<slug>`), skip that agent, or abort install. |
 | Collision: SOP slug already taken | Nolan auto-resolves by appending `-<slug>` to the SOP slug (e.g., `SOP-NNN-post-message-slack.md`). |
 | Mid-install failure | Nolan rolls back §3 writes. Mack rolls back §5 if reached. Vault returns to pre-install state. Failure logged. |
-| Post-install validation fails | Larry surfaces; user chooses re-run or accept. |
+| Post-install validation fails | Hermes surfaces; user chooses re-run or accept. |
 | User uninstalls then reinstalls a different version | The `_installed` archive shows the old version's footprint. New install proceeds normally; auto-numbering picks new SOP slots. |
 
 ---
 
 ## Owner agency
 
-Each agent in this workstream owns their step. If Vex's audit logic improves, Vex updates §2 directly (and tells Larry). If Nolan finds a better merge sequence, Nolan updates §3. Larry owns the orchestration shell (§1, §6, §7) and the trigger contract.
+Each agent in this workstream owns their step. If Vex's audit logic improves, Vex updates §2 directly (and tells Hermes). If Nolan finds a better merge sequence, Nolan updates §3. Hermes owns the orchestration shell (§1, §6, §7) and the trigger contract.
 
 The Expansion author owns their `expansion.yaml`, their bundled files, and the `post_install_validation` rules. They do not own this workstream — the scaffold owns the install procedure, every Expansion plugs into the same one.

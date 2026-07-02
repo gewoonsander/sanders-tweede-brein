@@ -1,10 +1,10 @@
 # SOP: Audit Content for Design-System Compliance
 
 - **Status:** Active (since v1.6.0)
-- **Default owner:** Iris
+- **Default owner:** Harmonia
 - **Reusable by any agent.** This is a skill, not a 1:1 ownership. Charta and Pixel can self-audit before delivering. The user can request a full deliverables sweep. Any specialist who needs to verify visual consistency against [[GL-003-design-system]] can run this procedure.
 - **Triggered by:** "audit my deliverables", "are my slides on-brand", "is this consistent with my brand", "the visuals look inconsistent across decks", new GL-003 token added that needs propagation, periodic sweep.
-- **References:** [[GL-003-design-system]] (the SSOT being audited against), [[SOP-006-author-a-design-system]] (the authoring partner skill), [[Team/Iris - Design System Architect/AGENTS]].
+- **References:** [[GL-003-design-system]] (the SSOT being audited against), [[SOP-006-author-a-design-system]] (the authoring partner skill), [[Team/Harmonia - Design System Architect/AGENTS]].
 
 ## Purpose
 
@@ -118,15 +118,15 @@ These are eligible for re-render against the current GL-003 next time they are t
 
 ### Step 6 — Surface to user; never auto-fix
 
-Present the report to the user (via Larry). Ask which violations they want fixed and in what order.
+Present the report to the user (via Hermes). Ask which violations they want fixed and in what order.
 
 For each approved fix:
 
 - **Charta** re-renders any HTML/CSS deliverable against the corrected tokens via [[SOP-008-build-an-infographic]].
 - **Pixel** regenerates any image deliverable with corrected prompts and references via [[SOP-009-generate-a-styled-image]].
-- **Iris** extends GL-003 if the violation surfaced a missing token via [[SOP-006-author-a-design-system]].
+- **Harmonia** extends GL-003 if the violation surfaced a missing token via [[SOP-006-author-a-design-system]].
 
-Iris does **not** silently rewrite the user's deliverables. The audit names; the user decides; Charta/Pixel/Iris execute.
+Harmonia does **not** silently rewrite the user's deliverables. The audit names; the user decides; Charta/Pixel/Harmonia execute.
 
 ### Step 7 — Session-log entry
 

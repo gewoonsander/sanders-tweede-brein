@@ -1,8 +1,8 @@
 # WS-001 - Daily Journaling
 
 - **Type:** Workstream — a multi-agent composition. The agents below collaborate to deliver the outcome. New Workstreams emerge when patterns repeat across session-logs; this one ships pre-canonicalized because daily journaling is a day-1 flow.
-- **Owners:** Penn (capture and writing), Larry (routing and Librarian pass)
-- **References:** [[SOP-001-how-to-add-a-new-specialist]], [[GL-001-file-naming-conventions]], [[Team/Penn - Journal Writer/AGENTS]], [[Team/Larry - Orchestrator/AGENTS]]
+- **Owners:** Penn (capture and writing), Hermes (routing and Librarian pass)
+- **References:** [[SOP-001-how-to-add-a-new-specialist]], [[GL-001-file-naming-conventions]], [[Team/Penn - Journal Writer/AGENTS]], [[Team/Hermes - Orchestrator/AGENTS]]
 - **Trigger:** any user input that contains a thought, observation, encounter, screenshot, photo, or voice note.
 - **Version:** 1.1.0 (2026-06-03) — Step 4 routing now enforces the My Life doctrine: every Goal anchors to exactly one Key Element, names a single carrier (Project OR Habit), passes the filter test, and Topics graduate into Key Elements rather than deepening forever. See the dated note at the foot of this file.
 
@@ -18,9 +18,9 @@ Turn raw daily inputs into structured PKM entries. The Journal is the inbox. Peo
 
 ## Choreography
 
-### Step 1 - Larry receives the input
+### Step 1 - Hermes receives the input
 
-Larry checks the routing cheatsheet in his AGENTS.md. Daily journaling triggers route to Penn.
+Hermes checks the routing cheatsheet in his AGENTS.md. Daily journaling triggers route to Penn.
 
 ### Step 2 - Penn writes the Journal entry
 
@@ -82,11 +82,11 @@ Before stubbing or linking anything in `PKM/My Life/`, run the doctrine checks. 
 3. **The single-carrier rule.** A Goal is carried by **one carrier — a Project OR a Habit, never both, never neither.** Projects and Habits are siblings: a Project when the work has a finish line, a Habit when it is an open-ended rhythm. Example: *"lose 20 kg"* is carried **either** by a Project (an 8-week program) **or** by a Habit (3 workouts a week) — pick one. If both seem needed, split the Goal or pick the dominant carrier.
 4. **Topic to Key Element promotion.** A Topic is where a new interest lands first. When a Topic crystallizes into a measurable pursuit the user intends to drive, propose **promoting it into a Key Element** — only then can a Goal anchor to it. Don't keep deepening a Topic that has become a pursuit. Example: *French* starts as a Topic; when it sharpens into "reach B2 fluency," it graduates into a Key Element, and a Goal can anchor there. The reverse holds too: a Key Element with no anchored Goals and no active push gets archived back down.
 
-These checks are proposals at capture time. Penn stubs the doctrine-correct shape and flags any anchor/carrier ambiguity to Larry rather than guessing.
+These checks are proposals at capture time. Penn stubs the doctrine-correct shape and flags any anchor/carrier ambiguity to Hermes rather than guessing.
 
-### Step 5 - Larry's Librarian pass at session close
+### Step 5 - Hermes's Librarian pass at session close
 
-At session close, Larry scans the new Journal entry, the new image (if any), and any newly created CRM or My Life stubs:
+At session close, Hermes scans the new Journal entry, the new image (if any), and any newly created CRM or My Life stubs:
 
 - Confirms `[[wikilinks]]` resolve.
 - Confirms images sit in `PKM/Images/YYYY/MM/`, not duplicated elsewhere.

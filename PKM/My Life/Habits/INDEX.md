@@ -6,6 +6,7 @@ Recurring rhythms with a cadence and a definition of done. A Habit is not a Goal
 
 - [[morning-build-session]] — seeded course sample. The canonical shape every Habit file follows.
 - [[een-cursus-tegelijk]] — wekelijkse check op openstaande cursus-taken, tegengaan van versnippering.
+- [[schimmelcreme-gebruiken]] — dagelijks Healthypharm Antischimmelcrème aanbrengen, gestart 2026-07-02.
 
 ## Naming
 

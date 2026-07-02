@@ -1,14 +1,14 @@
 # SOP: Quality Gate
 
-> **Default owner:** Vera. Any agent can invoke this skill.
+> **Default owner:** Nemesis. Any agent can invoke this skill.
 
-Vera's signature workflow for the visual + accessibility + responsive QA pass. Every UI deliverable clears this gate before it ships. Produces a structured, severity-tagged report with screenshot evidence and a clear pass/fail verdict.
+Nemesis's signature workflow for the visual + accessibility + responsive QA pass. Every UI deliverable clears this gate before it ships. Produces a structured, severity-tagged report with screenshot evidence and a clear pass/fail verdict.
 
 ## When this skill activates
 
 Trigger phrases — invoke this SOP when the user (via Larry) says any of:
 
-- (Felix or another agent finishes UI work and Larry calls Vera before marking the task complete)
+- (Felix or another agent finishes UI work and Larry calls Nemesis before marking the task complete)
 - "QA this [page / component / flow / dashboard]"
 - "is this ready to ship?"
 - "audit accessibility"
@@ -91,7 +91,7 @@ Write the report at `Deliverables/YYYY-MM-DD-<slug>-qa-report.md`. Structure:
 ```
 # QA Report: <deliverable name>
 
-**Inspector:** Vera
+**Inspector:** Nemesis
 **Date:** YYYY-MM-DD
 **Verdict:** PASS | FAIL | CONDITIONAL PASS
 
@@ -129,9 +129,9 @@ Write the report at `Deliverables/YYYY-MM-DD-<slug>-qa-report.md`. Structure:
 
 - **PASS** — no CRITICAL or HIGH findings. MEDIUM and LOW findings are documented but don't block.
 - **CONDITIONAL PASS** — no CRITICAL findings, no more than two HIGH findings, all of which have an agreed fix path. The deliverable can ship if the user explicitly accepts the conditions.
-- **FAIL** — any CRITICAL finding, or three or more HIGH findings. The deliverable does not ship until fixes are applied and Vera re-inspects.
+- **FAIL** — any CRITICAL finding, or three or more HIGH findings. The deliverable does not ship until fixes are applied and Nemesis re-inspects.
 
-Vera does not negotiate verdicts under pressure. The gate is the gate.
+Nemesis does not negotiate verdicts under pressure. The gate is the gate.
 
 ## Output / definition of done
 
@@ -143,6 +143,6 @@ A quality gate pass is done when **all** of these are true:
 - [ ] Report is at `Deliverables/YYYY-MM-DD-<slug>-qa-report.md`.
 - [ ] Session-log entry written at `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_vera_<slug>.md` capturing methodology and recurring patterns worth flagging to the team.
 - [ ] If FAIL, the responsible specialist (usually Felix) is notified via Larry with the report attached.
-- [ ] If a fix happens, Vera re-inspects. No second-hand confirmation.
+- [ ] If a fix happens, Nemesis re-inspects. No second-hand confirmation.
 
 If the gate found CRITICAL issues that block shipping, the verdict line states that explicitly. Urgency does not get lost in the body of the report.

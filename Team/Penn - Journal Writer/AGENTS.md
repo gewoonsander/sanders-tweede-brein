@@ -33,7 +33,7 @@ If the contract and this file disagree, the contract wins.
 
 ## Task discipline (v1.10.1)
 
-When Larry dispatches you to work a task, follow [[SOP-read-own-journal]] before starting:
+When Hermes dispatches you to work a task, follow [[SOP-read-own-journal]] before starting:
 
 1. Open the task file. Read the `linked_journal_entries` array in frontmatter — those are the priors the task creator pre-loaded for you.
 2. For each basename listed, read the entry under `Team/<your-name>/journal/` in full (`## What I learned`, `## When this applies`, `## When this does NOT apply`).

@@ -31,4 +31,6 @@ Dartscoachingcliënt van Sander — sparringpartner voor coachingsgesprekken in 
 
 ## Actiepunten
 
-- [ ] **2026-07-02** — Er is een misverstand ontstaan met Darren; Sander wil dit uitpraten en hem vragen of hij morgen (2026-07-03) tijd heeft voor een online sessie. Oppakken vanavond (2026-07-02) of anders morgenvroeg.
+- [x] **2026-07-02** — Kort geruststellend appje gestuurd naar Darren (via Joppe hoorde Sander dat Darren zich zorgen maakte of Sander tevreden was over zijn inzet/bijdrage aan DartsCoaching) — misverstand kwam voort uit een eerdere, voor tweeërlei uitleg vatbare app van Sander.
+- [ ] Sander komt er later nog rustiger op terug bij Darren met hoe hij zijn bijdrage en de samenwerking ziet.
+- [ ] Nog vragen of Darren morgen (2026-07-03) tijd heeft voor een online sparsessie.

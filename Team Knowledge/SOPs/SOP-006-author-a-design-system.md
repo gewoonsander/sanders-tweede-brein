@@ -1,10 +1,10 @@
 # SOP: Author a Design System
 
 - **Status:** Active (since v1.6.0)
-- **Default owner:** Iris
-- **Reusable by any agent.** This is a skill, not a 1:1 ownership. Any specialist can run this procedure when the user asks to set up or extend their visual identity. In practice Iris runs it, but if the team grows and another design-flavored agent gets hired, they can invoke this SOP without re-deriving the procedure.
+- **Default owner:** Harmonia
+- **Reusable by any agent.** This is a skill, not a 1:1 ownership. Any specialist can run this procedure when the user asks to set up or extend their visual identity. In practice Harmonia runs it, but if the team grows and another design-flavored agent gets hired, they can invoke this SOP without re-deriving the procedure.
 - **Triggered by:** "set up my design system", "let's pin my brand", "what colors / fonts / spacing should I use", "I want to add a new accent / type role / token", first creative request when [[GL-003-design-system]] is empty.
-- **References:** [[GL-003-design-system]] (the artifact this SOP populates), [[GL-001-file-naming-conventions]], [[Team/Iris - Design System Architect/AGENTS]], [[SOP-007-audit-content-for-design-system-compliance]] (the companion audit skill).
+- **References:** [[GL-003-design-system]] (the artifact this SOP populates), [[GL-001-file-naming-conventions]], [[Team/Harmonia - Design System Architect/AGENTS]], [[SOP-007-audit-content-for-design-system-compliance]] (the companion audit skill).
 
 ## Purpose
 
@@ -113,12 +113,12 @@ Save the file.
 
 ### Step 9 — Announce downstream impact
 
-Tell the user (and Larry):
+Tell the user (and Hermes):
 
 - Charta and Pixel now read GL-003 on every task.
 - Any in-flight deliverable that ran in fallback mode is flagged for re-render against the new GL-003.
 - Old deliverables are stale; they get re-rendered next time they're touched, not bulk-rebuilt now.
-- If a creative request lands and a section is still empty, the agent flags it back and Iris extends GL-003 in a follow-up session.
+- If a creative request lands and a section is still empty, the agent flags it back and Harmonia extends GL-003 in a follow-up session.
 
 ### Step 10 — Session-log entry
 

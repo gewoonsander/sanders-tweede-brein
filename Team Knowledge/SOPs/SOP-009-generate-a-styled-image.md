@@ -4,7 +4,7 @@
 - **Default owner:** Pixel
 - **Reusable by any agent.** This is a skill, not a 1:1 ownership. Charta can invoke this SOP when a layout draft needs a stylized finish. Penn can invoke it to turn a captured idea into a hero image. Any specialist who needs to produce a styled visual (thumbnail, social image, hero illustration, quote card, multi-reference composite) follows this procedure.
 - **Triggered by:** "make me a thumbnail", "stylize this", "create a hero image", "design a quote card", "use these references and generate X", "make this look photographic / illustrated / painted", "the image-gen isn't available in my LLM, can we still do this".
-- **References:** [[GL-003-design-system]], [[GL-001-file-naming-conventions]], [[Team/Pixel - Visual Specialist/AGENTS]], [[Team/Mack - Automation Specialist/AGENTS]] (for the connection-half handoff), [[SOP-008-build-an-infographic]] (when stylizing on top of a Charta layout).
+- **References:** [[GL-003-design-system]], [[GL-001-file-naming-conventions]], [[Team/Pixel - Visual Specialist/AGENTS]], [[Team/Daedalus - Automation Specialist/AGENTS]] (for the connection-half handoff), [[SOP-008-build-an-infographic]] (when stylizing on top of a Charta layout).
 
 ## Purpose
 
@@ -19,7 +19,7 @@ The procedure is stylistic. It does not invent text content; the user provides a
 ## What this SOP does not do
 
 - Does not lay out structural visual content (tables, grids, diagrams). That is [[SOP-008-build-an-infographic]] (Charta's skill). When a deliverable needs structure first, run [[SOP-008-build-an-infographic]] first, then this SOP for the finish.
-- Does not author the design system. That is [[SOP-006-author-a-design-system]] (Iris's skill).
+- Does not author the design system. That is [[SOP-006-author-a-design-system]] (Harmonia's skill).
 - Does not generate synthetic likenesses of real people. Reference photos required for any real person in frame.
 
 ## Inputs
@@ -43,7 +43,7 @@ Open [[GL-003-design-system]]. Confirm the sections this task needs are populate
 
 If a needed section is empty, **stop**. Two paths:
 
-1. Route to Iris first (run [[SOP-006-author-a-design-system]] for the missing section). Preferred for any non-trivial creative work.
+1. Route to Harmonia first (run [[SOP-006-author-a-design-system]] for the missing section). Preferred for any non-trivial creative work.
 2. Proceed in flagged "neutral-style fallback" mode: editorial photography default, neutral palette, system font for any text. The deliverable explicitly notes "GL-003 §X not populated; revisit when populated."
 
 ### Step 2 — Check image-gen capability

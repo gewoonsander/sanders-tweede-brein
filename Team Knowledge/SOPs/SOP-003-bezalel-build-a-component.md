@@ -1,8 +1,8 @@
 # SOP: Build a Component
 
-> **Default owner:** Felix. Any agent can invoke this skill.
+> **Default owner:** Bezalel. Any agent can invoke this skill.
 
-Felix's signature workflow for building a UI component end-to-end with design-system fidelity, type safety, accessibility, and a clean handoff to Vera's quality gate.
+Bezalel's signature workflow for building a UI component end-to-end with design-system fidelity, type safety, accessibility, and a clean handoff to Nemesis's quality gate.
 
 ## When this skill activates
 
@@ -15,7 +15,7 @@ Trigger phrases — invoke this SOP when the user (via Larry) says any of:
 - "extract this into a component"
 - "refactor this inline JSX into a proper component"
 
-If the request is "fix this component" or "this UI is broken," that's frontend triage, not a clean build — Felix can still use this SOP as a reference, but the inspect/refactor workflow is lighter than the new-build workflow below.
+If the request is "fix this component" or "this UI is broken," that's frontend triage, not a clean build — Bezalel can still use this SOP as a reference, but the inspect/refactor workflow is lighter than the new-build workflow below.
 
 ## Procedure
 
@@ -95,7 +95,7 @@ Don't over-optimize, but don't under-think:
 
 ### 8. Verify visually before declaring done
 
-TypeScript compiling is necessary but not sufficient. Before handing off to Vera:
+TypeScript compiling is necessary but not sufficient. Before handing off to Nemesis:
 
 1. **Render it.** Run the dev server. Look at the component in the browser.
 2. **Check three breakpoints.** Mobile (375px), tablet (768px), desktop (1280px).
@@ -103,15 +103,15 @@ TypeScript compiling is necessary but not sufficient. Before handing off to Vera
 4. **Tab through it.** Confirm focus order, focus indicators, keyboard activation.
 5. **Trigger every state.** Loading, empty, error, success, disabled, hover, focus.
 
-If anything looks wrong, fix it now. Vera's gate is faster when you've already cleared the obvious self-checks.
+If anything looks wrong, fix it now. Nemesis's gate is faster when you've already cleared the obvious self-checks.
 
 ### 9. Write the session-log entry
 
 At `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_felix_<component-slug>.md`. Capture what you built, which design tokens you used or extended, any pattern decisions worth preserving, and any follow-ups (e.g., "needs a Storybook story," "tablet breakpoint feels tight, may need a redesign pass").
 
-### 10. Hand off to Vera
+### 10. Hand off to Nemesis
 
-The build isn't done until Vera signs off. Larry routes the deliverable to Vera; Vera runs [[SOP-005-vera-quality-gate]] and returns a pass/fail. If Vera flags issues, fix them, then resubmit. Don't argue the gate.
+The build isn't done until Nemesis signs off. Larry routes the deliverable to Nemesis; Nemesis runs [[SOP-005-nemesis-quality-gate]] and returns a pass/fail. If Nemesis flags issues, fix them, then resubmit. Don't argue the gate.
 
 ## Output / definition of done
 
@@ -126,6 +126,6 @@ A component build is done when **all** of these are true:
 - [ ] Renders correctly at mobile, tablet, and desktop breakpoints.
 - [ ] Renders correctly in both color modes (if applicable).
 - [ ] Session-log entry written.
-- [ ] Vera's quality gate signed off.
+- [ ] Nemesis's quality gate signed off.
 
 If any box is unchecked, the component isn't shipped. It's "in progress."

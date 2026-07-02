@@ -1,10 +1,10 @@
 # GL-003 - Design System
 
-> **This Guideline is a general rule every creative agent reads on every relevant action.** Charta, Pixel, and any future visual specialist consume this file at the start of every task. Iris is the default author, but the values are the user's. This Guideline starts empty by design — Iris helps you populate it via [[SOP-006-author-a-design-system]]. Once filled, every creative agent reads from here for consistent style.
+> **This Guideline is a general rule every creative agent reads on every relevant action.** Charta, Pixel, and any future visual specialist consume this file at the start of every task. Harmonia is the default author, but the values are the user's. This Guideline starts empty by design — Harmonia helps you populate it via [[SOP-006-author-a-design-system]]. Once filled, every creative agent reads from here for consistent style.
 
-> **Empty is honest; placeholder is dangerous.** Until you've actually chosen a value, the placeholder stays. A populated-with-defaults design system silently sets choices you never made. If a section below is still showing `<your brand X>`, the agent reads that as "not yet pinned" and either routes to Iris first or works in flagged fallback mode.
+> **Empty is honest; placeholder is dangerous.** Until you've actually chosen a value, the placeholder stays. A populated-with-defaults design system silently sets choices you never made. If a section below is still showing `<your brand X>`, the agent reads that as "not yet pinned" and either routes to Harmonia first or works in flagged fallback mode.
 
-> **Edits are Iris-only.** The user proposes; Iris authors. Charta and Pixel only ever read this file. The split keeps the schema coherent — multiple authors silently drift it.
+> **Edits are Harmonia-only.** The user proposes; Harmonia authors. Charta and Pixel only ever read this file. The split keeps the schema coherent — multiple authors silently drift it.
 
 ---
 
@@ -101,12 +101,12 @@ Three short example sentences in your intended voice. These are the canonical re
 
 ## How agents use this file
 
-- **At session start, every creative agent reads this Guideline.** Charta and Pixel always; Iris on every authoring or audit task.
+- **At session start, every creative agent reads this Guideline.** Charta and Pixel always; Harmonia on every authoring or audit task.
 - **If a section the task needs is empty (still showing `<placeholder>` values),** the agent does not improvise. Two paths:
-  1. Route to Iris via [[SOP-006-author-a-design-system]] to populate.
+  1. Route to Harmonia via [[SOP-006-author-a-design-system]] to populate.
   2. Work in flagged fallback mode (neutral-style for Pixel, no-style for Charta) and note in the deliverable: "GL-003 §X not populated; revisit when populated."
 - **When this Guideline evolves,** in-flight deliverables that referenced the changed section are flagged for re-render. Older deliverables become stale candidates and get re-rendered next time they are touched (boy-scout rule), not bulk-rebuilt on the spot.
-- **Audit cadence.** Iris runs [[SOP-007-audit-content-for-design-system-compliance]] when the user requests it, when a token is added, or when drift is suspected. The audit names violations; the user decides which to fix.
+- **Audit cadence.** Harmonia runs [[SOP-007-audit-content-for-design-system-compliance]] when the user requests it, when a token is added, or when drift is suspected. The audit names violations; the user decides which to fix.
 
 ## References
 
@@ -116,4 +116,4 @@ Three short example sentences in your intended voice. These are the canonical re
 - [[SOP-009-generate-a-styled-image]] — Pixel's skill; reads from this Guideline.
 - [[GL-001-file-naming-conventions]] — slug, date, filename rules.
 - [[GL-002-frontmatter-conventions]] — entity frontmatter schema.
-- [[Team/Iris - Design System Architect/AGENTS]] — Iris's contract; the default author of this Guideline.
+- [[Team/Harmonia - Design System Architect/AGENTS]] — Harmonia's contract; the default author of this Guideline.

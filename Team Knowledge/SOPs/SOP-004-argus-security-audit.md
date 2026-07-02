@@ -1,8 +1,8 @@
 # SOP: Security Audit
 
-> **Default owner:** Vex. Any agent can invoke this skill.
+> **Default owner:** Argus. Any agent can invoke this skill.
 
-Vex's signature workflow for auditing the application surface — credentials, authorization, integrations, data handling — and producing a severity-tagged findings report with proof-of-exploit and fix recommendations.
+Argus's signature workflow for auditing the application surface — credentials, authorization, integrations, data handling — and producing a severity-tagged findings report with proof-of-exploit and fix recommendations.
 
 ## When this skill activates
 
@@ -82,7 +82,7 @@ For applications that store user data, especially PII:
 6. **Consent management:** if cookies, tracking, or analytics are in play, is consent recorded, scoped, and revocable?
 7. **Audit logging:** are admin / privileged operations logged? Who-did-what-when?
 
-Output for Phase 4: a list of data-handling findings with severity. If the user is in GDPR scope, Lex's legal interpretation drives which findings are mandatory; Vex's implementation review confirms the technical controls.
+Output for Phase 4: a list of data-handling findings with severity. If the user is in GDPR scope, Lex's legal interpretation drives which findings are mandatory; Argus's implementation review confirms the technical controls.
 
 ## Findings format
 
@@ -122,7 +122,7 @@ A security audit is done when **all** of these are true:
 - [ ] Every finding has proof-of-exploit, severity, fix recommendation, and a verification step.
 - [ ] Report is at `Deliverables/YYYY-MM-DD-<slug>-security-audit.md`.
 - [ ] Session-log entry written at `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_vex_<slug>.md` capturing methodology and what to investigate next.
-- [ ] No fixes applied without explicit user approval. Vex audits and recommends; the implementing specialist applies after approval.
+- [ ] No fixes applied without explicit user approval. Argus audits and recommends; the implementing specialist applies after approval.
 - [ ] If any CRITICAL findings exist, they are surfaced to the user immediately, not buried at the bottom of the report.
 
 If the audit found CRITICAL issues that block shipping, say so explicitly in the report's verdict line. Don't let urgency get lost.

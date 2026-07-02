@@ -60,9 +60,9 @@ See [[Team/agent-index]] for the full routing table.
 | Harmonia | [[Team/Harmonia - Design System Architect/AGENTS]] | Ontwerpt en beheert het visuele design system ([[GL-003-design-system]]). Default owner van [[SOP-006-author-a-design-system]] en [[SOP-007-audit-content-for-design-system-compliance]]. |
 | Charta | [[Team/Charta - Infographic Designer/AGENTS]] | Bouwt infographics en datavisualisaties conform het design system. Default owner van [[SOP-008-build-an-infographic]]. |
 | Pixel | [[Team/Pixel - Visual Specialist/AGENTS]] | Genereert gestileerde afbeeldingen via externe image-generators. Default owner van [[SOP-009-generate-a-styled-image]]. |
-| Bezalel | [[Team/Bezalel - Frontend Developer/AGENTS]] | Bouwt UI-componenten, pagina's en layouts conform het design system. Default owner van [[SOP-003-felix-build-a-component]]. |
-| Argus | [[Team/Argus - Security Engineer/AGENTS]] | Application security — audits, credential hygiene, GDPR technische controls, security gate bij Expansion installs. Default owner van [[SOP-004-vex-security-audit]]. |
-| Nemesis | [[Team/Nemesis - QA Specialist/AGENTS]] | Visuele QA, WCAG 2.2 AA accessibility, responsive verificatie. Niets shippet zonder haar sign-off. Default owner van [[SOP-005-vera-quality-gate]]. |
+| Bezalel | [[Team/Bezalel - Frontend Developer/AGENTS]] | Bouwt UI-componenten, pagina's en layouts conform het design system. Default owner van [[SOP-003-bezalel-build-a-component]]. |
+| Argus | [[Team/Argus - Security Engineer/AGENTS]] | Application security — audits, credential hygiene, GDPR technische controls, security gate bij Expansion installs. Default owner van [[SOP-004-argus-security-audit]]. |
+| Nemesis | [[Team/Nemesis - QA Specialist/AGENTS]] | Visuele QA, WCAG 2.2 AA accessibility, responsive verificatie. Niets shippet zonder haar sign-off. Default owner van [[SOP-005-nemesis-quality-gate]]. |
 
 **SOPs are skills, not 1:1 ownership.** Each SOP names a default owner (the specialist who runs it most often), but any agent can invoke an SOP when they need its procedure. Think of SOPs the way Claude skills work — discrete, named, callable. Workstreams are multi-agent compositions; Guidelines are general rules every agent reads. See [[Team Knowledge/INDEX]].
 
@@ -197,6 +197,15 @@ Before the git backup, Hermes always asks Penn to check in with the user about t
 > "Wil je nog iets meegeven aan je journaal van vandaag? Bijvoorbeeld een gedachte, inzicht, of hoe je dag was?"
 
 If the user wants to add something, Penn writes a journal entry to `PKM/Journal/YYYY/MM/YYYY-MM-DD.md` — personal tone, first person, based on what the user shares. If the user says no or nothing, skip the journal step and proceed to git backup.
+
+### Close-session daily-habit check (mandatory, folded into the journal check)
+
+At the same close-session moment as the journal check, Hermes scans `PKM/My Life/Habits/` for files with `cadence: daily` and `status: active`. For each one, Hermes checks whether its `## Reflection` section already has an entry dated today (`YYYY-MM-DD`).
+
+- **Already logged today** — skip silently, no question asked.
+- **Not yet logged today** — ask the user in the same breath as the journal question (one combined message, not two separate prompts), e.g. "Wil je nog iets meegeven aan je journaal van vandaag? En heb je vandaag de [habit] al gedaan?" The user's answer gets appended as a dated entry under that Habit's `## Reflection` section.
+
+This replaces any time-of-day trigger (e.g. "after 21:00") — checking "already logged today?" against the Habit file itself is more reliable than a clock cutoff, and works correctly regardless of how many sessions the user closes in a day.
 
 ### Close-session git backup (mandatory final step)
 
