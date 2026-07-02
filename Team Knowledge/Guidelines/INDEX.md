@@ -15,6 +15,7 @@ Filename pattern: `GL-NNN-<title>.md`.
 | GL-010 | [[GL-010-pka-modeling-principles]] | PKA-modelleringsprincipes (custom, hernummerd van GL-003). |
 | GL-011 | [[GL-011-contactenbeheer]] | Google Contacts als SSOT voor basiscontacten. PKM/CRM voor rijke context. Apparaatinstellingen vastgelegd. |
 | GL-012 | [[GL-012-pkm-vs-todoist]] | Wanneer gaat iets van Todoist naar PKM? Beslisregel: actie = Todoist, duurzame kennis = PKM. Larry vraagt altijd bevestiging. |
+| GL-014 | [[GL-014-todoist-taakformat]] | Todoist-taakformat: `actie > titel ⏰ tijd`, prioriteit alleen native veld, bronmateriaal-link, projectroutering. |
 
 | GL-003 | [[GL-003-design-system]] | Het visuele design system (SSOT voor typografie, kleur, layout, iconografie). Geinstalleerd via het Designer Pack. |
 

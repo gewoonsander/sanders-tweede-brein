@@ -18,9 +18,10 @@ Betaalpagina-platform voor webshops en dienstverleners. Plug&Pay Lite geeft toeg
 
 ## How we work together
 
-Actief Plug&Pay Lite jaarabonnement voor Gewoon Sander. Automatische incasso.
+Actief Plug&Pay Lite jaarabonnement voor Gewoon Sander. Automatische incasso. Account draait op `gewoonsander.nl` en wordt gebruikt voor de verkoop van het boek *Darttactiek – van beginner tot professional* (`gewoonsander.plugandpay.com`). Zie [[Deliverables/2026-07-01-postnl-verzending-design]] voor de verzendautomatisering die hierop aanhaakt.
 
 ## Notes
 
 - BTW-id: NL859112378B01
 - KvK: 72447842
+- **Idee (lange termijn):** boekverkoop mogelijk overhevelen naar [[dartscoaching-nl]], zodat dit Plug&Pay-abonnement opgezegd kan worden en er kosten bespaard worden. Nog geen concreet plan — zie open vraag in [[darts-coaching]].

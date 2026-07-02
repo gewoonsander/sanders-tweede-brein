@@ -1,0 +1,119 @@
+{
+  "name": "PostNL Verzending – Plug&Pay",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "postnl-bestelling",
+        "responseMode": "immediateResponse",
+        "options": {}
+      },
+      "id": "11111111-0001-4000-a000-000000000001",
+      "name": "Plug&Pay Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "postnl-bestelling"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.plugandpay.com/v2/orders/{{ $json[\"triggerable_id\"] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "options": {}
+      },
+      "id": "11111111-0002-4000-a000-000000000002",
+      "name": "Haal Bestelling Op",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [460, 300],
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "",
+          "name": "Plug&Pay API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================================\n// PostNL CSV Generatie — Plug&Pay Order → PostNL import\n// ============================================================\n// AANPASSEN: Als Plug&Pay andere veldnamen gebruikt, pas de\n// veldnamen hieronder aan. Check de n8n execution-log om\n// de exacte JSON-structuur van de Plug&Pay API-response te zien.\n// ============================================================\n\nconst raw = $json;\n\n// Plug&Pay v2 API response zit in .data\nconst order = raw.data || raw;\n\n// Adresgegevens — meerdere veldnamen als fallback\nconst billing = order.billing_address || order.billing || order.customer || {};\nconst shipping = order.shipping_address || order.delivery_address || billing;\n\nconst firstName = (shipping.first_name || billing.first_name || '').trim();\nconst lastName  = (shipping.last_name  || billing.last_name  || '').trim();\nconst fullName  = [firstName, lastName].filter(Boolean).join(' ');\n\nconst street      = (shipping.street || billing.street || '').trim();\nconst houseNumber = (shipping.house_number || billing.house_number ||\n                     shipping.street_number || billing.street_number || '').toString().trim();\nconst suffix      = (shipping.house_number_suffix || billing.house_number_suffix || '').trim();\nconst postalCode  = (shipping.postal_code || billing.postal_code ||\n                     shipping.zipcode || billing.zipcode || '').replace(/\\s/g, '').toUpperCase();\nconst city        = (shipping.city || billing.city || '').trim();\nconst country     = (shipping.country || billing.country ||\n                     shipping.country_code || billing.country_code || 'NL').trim().toUpperCase();\nconst email       = (billing.email || order.email ||\n                     (order.customer && order.customer.email) || '').trim();\nconst phone       = (billing.phone || billing.phone_number ||\n                     shipping.phone || '').trim();\nconst orderId     = String(order.id || order.order_id || $json.triggerable_id || 'onbekend');\n\n// ============================================================\n// PostNL CSV kolommen (puntkomma-gescheiden, UTF-8)\n// Productcode 3085 = Pakket NL (standaard)\n// Productcode 2928 = Brievenbuspakket\n// AANPASSEN: wijzig de productcode naar wat je gebruikt\n// ============================================================\nconst PRODUCTCODE = '3085';\n\nconst headers = [\n  'Naam',\n  'Bedrijfsnaam',\n  'Straat',\n  'Huisnummer',\n  'Toevoeging',\n  'Postcode',\n  'Woonplaats',\n  'Land',\n  'E-mailadres',\n  'Telefoonnummer',\n  'Kenmerk',\n  'Productcode'\n].join(';');\n\n// Veiligheidscheck: verwijder puntkomma's uit waarden (PostNL-vereiste)\nconst safe = (val) => String(val || '').replace(/;/g, '').substring(0, 35);\n\nconst row = [\n  safe(fullName),\n  safe(''),\n  safe(street),\n  safe(houseNumber),\n  safe(suffix),\n  safe(postalCode),\n  safe(city),\n  safe(country),\n  safe(email),\n  safe(phone),\n  safe('Bestelling ' + orderId),\n  PRODUCTCODE\n].join(';');\n\nconst csvContent = headers + '\\n' + row;\n\n// Validatie — log een waarschuwing als verplichte velden leeg zijn\nconst missing = [];\nif (!fullName)    missing.push('Naam');\nif (!street)      missing.push('Straat');\nif (!houseNumber) missing.push('Huisnummer');\nif (!postalCode)  missing.push('Postcode');\nif (!city)        missing.push('Woonplaats');\n\nif (missing.length > 0) {\n  console.log('WAARSCHUWING: Ontbrekende verplichte velden: ' + missing.join(', '));\n  console.log('Volledige Plug&Pay response:', JSON.stringify(raw, null, 2));\n}\n\n// Binary data voor e-mailbijlage\nreturn [{\n  json: {\n    orderId,\n    customerName: fullName,\n    city,\n    postalCode,\n    missingFields: missing,\n    csvContent\n  },\n  binary: {\n    attachment: {\n      data: Buffer.from(csvContent, 'utf-8').toString('base64'),\n      mimeType: 'text/csv',\n      fileName: 'postnl-bestelling-' + orderId + '.csv',\n      fileExtension: 'csv'\n    }\n  }\n}];\n"
+      },
+      "id": "11111111-0003-4000-a000-000000000003",
+      "name": "Genereer CSV",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "sendTo": "sander@gewoonsander.nl",
+        "subject": "=PostNL label klaar – {{ $node[\"Genereer CSV\"].json[\"customerName\"] }} ({{ $node[\"Genereer CSV\"].json[\"city\"] }}) #{{ $node[\"Genereer CSV\"].json[\"orderId\"] }}",
+        "emailType": "text",
+        "message": "=Hoi Sander,\n\nNieuwe bestelling ontvangen. Het PostNL CSV-bestand is als bijlage toegevoegd.\n\nBestelling:  #{{ $node[\"Genereer CSV\"].json[\"orderId\"] }}\nKlant:       {{ $node[\"Genereer CSV\"].json[\"customerName\"] }}\nPlaats:      {{ $node[\"Genereer CSV\"].json[\"city\"] }} {{ $node[\"Genereer CSV\"].json[\"postalCode\"] }}\n\nStappen om het label te printen:\n1. Open Mijn PostNL Business (mijnpostnl.postnl.nl)\n2. Ga naar Zendingen → Zendingen aanmaken → Importeren\n3. Upload de bijlage (postnl-bestelling-{{ $node[\"Genereer CSV\"].json[\"orderId\"] }}.csv)\n4. Controleer het adres en print het label\n\n{{ $node[\"Genereer CSV\"].json[\"missingFields\"].length > 0 ? \"LET OP: Ontbrekende velden: \" + $node[\"Genereer CSV\"].json[\"missingFields\"].join(\", \") + \". Controleer de CSV voor verzending.\" : \"Alle verplichte velden aanwezig.\" }}\n\nGroet,\nn8n automatisering",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "attachment"
+              }
+            ]
+          }
+        }
+      },
+      "id": "11111111-0004-4000-a000-000000000004",
+      "name": "Stuur CSV per Mail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [900, 300],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "",
+          "name": "Gmail sander@gewoonsander.nl"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Plug&Pay Webhook": {
+      "main": [
+        [
+          {
+            "node": "Haal Bestelling Op",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Haal Bestelling Op": {
+      "main": [
+        [
+          {
+            "node": "Genereer CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Genereer CSV": {
+      "main": [
+        [
+          {
+            "node": "Stuur CSV per Mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

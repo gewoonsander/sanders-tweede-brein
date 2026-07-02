@@ -1,0 +1,2823 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<auditfile>
+  <header>
+    <auditfileVersion>CLAIR2.00.00</auditfileVersion>
+    <companyID>Gezinshuis Gewoon 01</companyID>
+    <companyName>Gezinshuis Gewoon Thuis</companyName>
+    <companyAddress>Dotterlaan 31</companyAddress>
+    <companyCity>Nederland</companyCity>
+    <companyPostalCode>6832 BE</companyPostalCode>
+    <fiscalYear>2018</fiscalYear>
+    <startDate>2018-01-01</startDate>
+    <endDate>2018-12-31</endDate>
+    <currencyCode>EUR</currencyCode>
+    <dateCreated>2026-07-01</dateCreated>
+    <productID>e-Boekhouden.nl</productID>
+    <productVersion>3.0</productVersion>
+  </header>
+  <generalLedger>
+    <taxonomy>NL</taxonomy>
+    <ledgerAccount>
+      <accountID>0130</accountID>
+      <accountDesc>Inventarissen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>0140</accountID>
+      <accountDesc>Hardware</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>0200</accountID>
+      <accountDesc>Vervoermiddelen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>0740</accountID>
+      <accountDesc>Langlopende leningen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1000</accountID>
+      <accountDesc>Kas</accountDesc>
+      <accountType>FIN</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1010</accountID>
+      <accountDesc>Bank</accountDesc>
+      <accountType>FIN</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1011</accountID>
+      <accountDesc>Boodschappenpot</accountDesc>
+      <accountType>FIN</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1300</accountID>
+      <accountDesc>Debiteuren</accountDesc>
+      <accountType>DEB</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1400</accountID>
+      <accountDesc>Eigen Vermogen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1410</accountID>
+      <accountDesc>Privé-opnamen en stortingen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1500</accountID>
+      <accountDesc>Vorderingen (kortlopend)</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1600</accountID>
+      <accountDesc>Voorbelasting</accountDesc>
+      <accountType>VOOR</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1630</accountID>
+      <accountDesc>BTW Af te dragen Hoog</accountDesc>
+      <accountType>AF19</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1631</accountID>
+      <accountDesc>BTW af te dragen Laag</accountDesc>
+      <accountType>AF6</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1632</accountID>
+      <accountDesc>BTW af te dragen overig</accountDesc>
+      <accountType>AFOVERIG</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1650</accountID>
+      <accountDesc>BTW R/C</accountDesc>
+      <accountType>BTWRC</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1700</accountID>
+      <accountDesc>Crediteuren</accountDesc>
+      <accountType>CRED</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1800</accountID>
+      <accountDesc>Schulden (kortlopend)</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>2000</accountID>
+      <accountDesc>Kruisposten</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4010</accountID>
+      <accountDesc>Onkosten Walendino</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4011</accountID>
+      <accountDesc>Onkosten Daan</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4012</accountID>
+      <accountDesc>Onkosten AKP</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4013</accountID>
+      <accountDesc>Onkosten Yoram</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4335</accountID>
+      <accountDesc>Afschr. Inventarissen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4340</accountID>
+      <accountDesc>Afschr. Hardware</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4350</accountID>
+      <accountDesc>Afschrijvingen vervoermiddelen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4400</accountID>
+      <accountDesc>Brandstoffen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4420</accountID>
+      <accountDesc>Onderhoud vervoermiddelen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4440</accountID>
+      <accountDesc>Assuranties vervoermiddelen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4450</accountID>
+      <accountDesc>Wegenbelasting</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4490</accountID>
+      <accountDesc>Overige autokosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4495</accountID>
+      <accountDesc>Privégebruik autokosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4500</accountID>
+      <accountDesc>Contributies en abonnementen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4510</accountID>
+      <accountDesc>Reclame en advertenties</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4520</accountID>
+      <accountDesc>Representatie en verteer</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4530</accountID>
+      <accountDesc>Reis- en verblijfkosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4540</accountID>
+      <accountDesc>Relatiegeschenken</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4550</accountID>
+      <accountDesc>Bankkosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4590</accountID>
+      <accountDesc>Overige Kosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4591</accountID>
+      <accountDesc>Verhuiskosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4600</accountID>
+      <accountDesc>Kilometervergoeding</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4700</accountID>
+      <accountDesc>Kantoorbenodigdheden</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4710</accountID>
+      <accountDesc>Onkosten Zolder</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4740</accountID>
+      <accountDesc>Drukwerk, porti en vrachten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4750</accountID>
+      <accountDesc>Telefoon en internet</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4790</accountID>
+      <accountDesc>Overige kantoorKosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4810</accountID>
+      <accountDesc>Accountants- en administratiekosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4850</accountID>
+      <accountDesc>Cursussen/seminars</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4860</accountID>
+      <accountDesc>Vakliteratuur</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4900</accountID>
+      <accountDesc>Betalingsverschillen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4950</accountID>
+      <accountDesc>Oninbare vorderingen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>7000</accountID>
+      <accountDesc>Boodschappen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8000</accountID>
+      <accountDesc>Zorgvergoeding Yoram de Wilde</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8001</accountID>
+      <accountDesc>Woonvergoeding Yoram</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8002</accountID>
+      <accountDesc>Woonvergoeding</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8003</accountID>
+      <accountDesc>Eten Yoram de Wilde</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8010</accountID>
+      <accountDesc>Zorgvergoeding Walendino Kieft</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8011</accountID>
+      <accountDesc>Woonvergoeding Walendino Kieft</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8012</accountID>
+      <accountDesc>Kindgebonden kosten Walendino Kieft</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8013</accountID>
+      <accountDesc>Eten Walendino Kieft</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8020</accountID>
+      <accountDesc>Zorgvergoeding Daan van Ojik</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8021</accountID>
+      <accountDesc>Woonvergoeding Daan van Ojik</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8022</accountID>
+      <accountDesc>Kindgebonden kosten Daan van Ojik</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8023</accountID>
+      <accountDesc>Eten Daan van Ojik</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8030</accountID>
+      <accountDesc>Zorgvergoeding Ang Ko Phyo Oo</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8031</accountID>
+      <accountDesc>Woonvergoeding Ang Ko Phyo Oo</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8032</accountID>
+      <accountDesc>Kindgebonden Kosten Aung Ko Phyo Oo</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8033</accountID>
+      <accountDesc>Eten Aung Ko Phyo Oo</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8040</accountID>
+      <accountDesc>Zorgvergoeding Kudus</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8041</accountID>
+      <accountDesc>Woonvergoeding Kudus</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8042</accountID>
+      <accountDesc>Kindgebondenkosten Kudus</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8050</accountID>
+      <accountDesc>Zorgvergoeding Ageeth Gerritsen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8051</accountID>
+      <accountDesc>Woonvergoeding Ageeth Gerritsen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8052</accountID>
+      <accountDesc>Kindgebondenkosten Ageeth Gerritsen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8060</accountID>
+      <accountDesc>Zorgvergoeding Thomas</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8061</accountID>
+      <accountDesc>Woonvergoeding Thomas</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8062</accountID>
+      <accountDesc>Clientgebonden kosten Thomas</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8090</accountID>
+      <accountDesc>Boekresultaat verkoop- verlies</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8100</accountID>
+      <accountDesc>Woonvergoeding Lege Kamer</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>9000</accountID>
+      <accountDesc>Overige opbrengst/bate</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>9998</accountID>
+      <accountDesc>Eindresultaat</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>9999</accountID>
+      <accountDesc>Verrekeningen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+  </generalLedger>
+  <customersSuppliers>
+    <customerSupplier>
+      <custSupID>ALBEROZO</custSupID>
+      <type>D</type>
+      <taxRegistrationNr></taxRegistrationNr>
+      <companyName>Albero Zorg B.V.</companyName>
+      <contact>Alex</contact>
+      <streetAddress>
+        <address>Lodderhoeksestraat 10c</address>
+        <city>Angeren</city>
+        <postalCode>6687LR</postalCode>
+        <region></region>
+        <country></country>
+      </streetAddress>
+      <postalAddress>
+        <address>Lodderhoeksestraat 10c</address>
+        <city>Angeren</city>
+        <postalCode>6687LR</postalCode>
+        <region></region>
+        <country></country>
+      </postalAddress>
+      <telephone></telephone>
+      <fax></fax>
+      <eMail>facturen@alberozorggroep.nl</eMail>
+      <website></website>
+    </customerSupplier>
+  </customersSuppliers>
+  <transactions>
+    <numberEntries>7</numberEntries>
+    <totalDebit>145989.67</totalDebit>
+    <totalCredit>145989.67</totalCredit>
+    <journal>
+      <journalID>1300</journalID>
+      <description>Debiteuren</description>
+      <type>DEB</type>
+      <transaction>
+        <transactionID>131</transactionID>
+        <description>Zorg 1/12/2017 t/m 31/12/2017</description>
+        <period>1</period>
+        <transactionDate>2018-01-04</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>131.1.1</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0026</documentID>
+          <effectiveDate>2018-01-04</effectiveDate>
+          <description>Zorg 1/12/2017 t/m 31/12/2017</description>
+          <debitAmount>1774.13</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>131.3.3</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0026</documentID>
+          <effectiveDate>2018-01-04</effectiveDate>
+          <description>Zorg 1/12/2017 t/m 31/12/2017</description>
+          <creditAmount>1774.13</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>135</transactionID>
+        <description>Zorg 1/01/2018 t/m 31/01/2018</description>
+        <period>2</period>
+        <transactionDate>2018-02-09</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>135.1.4</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0029</documentID>
+          <effectiveDate>2018-02-09</effectiveDate>
+          <description>Zorg 1/01/2018 t/m 31/01/2018</description>
+          <debitAmount>1774.13</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>135.3.6</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0029</documentID>
+          <effectiveDate>2018-02-09</effectiveDate>
+          <description>Zorg 1/01/2018 t/m 31/01/2018</description>
+          <creditAmount>1774.13</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>137</transactionID>
+        <description>Zorg 1/2 t/m 28/02</description>
+        <period>3</period>
+        <transactionDate>2018-03-16</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>137.1.7</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0031</documentID>
+          <effectiveDate>2018-03-16</effectiveDate>
+          <description>Zorg 1/2 t/m 28/02</description>
+          <debitAmount>1602.44</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>137.3.9</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0031</documentID>
+          <effectiveDate>2018-03-16</effectiveDate>
+          <description>Zorg 1/2 t/m 28/02</description>
+          <creditAmount>1602.44</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>139</transactionID>
+        <description>Zorg 1/3 t/m 31/3
+verrekening tariefwijziging jan</description>
+        <period>5</period>
+        <transactionDate>2018-05-03</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>139.1.10</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0032</documentID>
+          <effectiveDate>2018-05-03</effectiveDate>
+          <description>Zorg 1/3 t/m 31/3
+verrekening tariefwijziging jan</description>
+          <debitAmount>2166.53</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>139.3.12</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0032</documentID>
+          <effectiveDate>2018-05-03</effectiveDate>
+          <description>Zorg 1/3 t/m 31/3
+verrekening tariefwijziging jan</description>
+          <creditAmount>2166.53</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>141</transactionID>
+        <description>Zorg 1/4 t/m 30/4</description>
+        <period>5</period>
+        <transactionDate>2018-05-03</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>141.1.13</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0035</documentID>
+          <effectiveDate>2018-05-03</effectiveDate>
+          <description>Zorg 1/4 t/m 30/4</description>
+          <debitAmount>1847.7</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>141.3.15</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0035</documentID>
+          <effectiveDate>2018-05-03</effectiveDate>
+          <description>Zorg 1/4 t/m 30/4</description>
+          <creditAmount>1847.7</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>161</transactionID>
+        <description>Zorg 1/7 t/m 31/7</description>
+        <period>8</period>
+        <transactionDate>2018-08-13</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>161.1.16</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0038</documentID>
+          <effectiveDate>2018-08-13</effectiveDate>
+          <description>Zorg 1/7 t/m 31/7</description>
+          <debitAmount>1909.29</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>161.3.18</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0038</documentID>
+          <effectiveDate>2018-08-13</effectiveDate>
+          <description>Zorg 1/7 t/m 31/7</description>
+          <creditAmount>1909.29</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>163</transactionID>
+        <description>Zorg 1/6 t/m 30/6</description>
+        <period>7</period>
+        <transactionDate>2018-07-20</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>163.1.19</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0037</documentID>
+          <effectiveDate>2018-07-20</effectiveDate>
+          <description>Zorg 1/6 t/m 30/6</description>
+          <debitAmount>1847.7</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>163.3.21</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0037</documentID>
+          <effectiveDate>2018-07-20</effectiveDate>
+          <description>Zorg 1/6 t/m 30/6</description>
+          <creditAmount>1847.7</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>187</transactionID>
+        <description>Zorg 1/5 t/m 31/5</description>
+        <period>7</period>
+        <transactionDate>2018-07-20</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>187.1.22</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0036</documentID>
+          <effectiveDate>2018-07-20</effectiveDate>
+          <description>Zorg 1/5 t/m 31/5</description>
+          <debitAmount>1909.29</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>187.3.24</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0036</documentID>
+          <effectiveDate>2018-07-20</effectiveDate>
+          <description>Zorg 1/5 t/m 31/5</description>
+          <creditAmount>1909.29</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>188</transactionID>
+        <description>Zorg 1/8 t/m 31/8</description>
+        <period>11</period>
+        <transactionDate>2018-11-28</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>188.1.25</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0039</documentID>
+          <effectiveDate>2018-11-28</effectiveDate>
+          <description>Zorg 1/8 t/m 31/8</description>
+          <debitAmount>1909.29</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>188.3.27</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0039</documentID>
+          <effectiveDate>2018-11-28</effectiveDate>
+          <description>Zorg 1/8 t/m 31/8</description>
+          <creditAmount>1909.29</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>189</transactionID>
+        <description>Zorg 1/9 t/m 30/9</description>
+        <period>11</period>
+        <transactionDate>2018-11-28</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>189.1.28</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0040</documentID>
+          <effectiveDate>2018-11-28</effectiveDate>
+          <description>Zorg 1/9 t/m 30/9</description>
+          <debitAmount>1847.7</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>189.3.30</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0040</documentID>
+          <effectiveDate>2018-11-28</effectiveDate>
+          <description>Zorg 1/9 t/m 30/9</description>
+          <creditAmount>1847.7</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>190</transactionID>
+        <description>Zorg 1/10 t/m 31/10</description>
+        <period>11</period>
+        <transactionDate>2018-11-28</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>190.1.31</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0041</documentID>
+          <effectiveDate>2018-11-28</effectiveDate>
+          <description>Zorg 1/10 t/m 31/10</description>
+          <debitAmount>1909.29</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>190.3.33</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0041</documentID>
+          <effectiveDate>2018-11-28</effectiveDate>
+          <description>Zorg 1/10 t/m 31/10</description>
+          <creditAmount>1909.29</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>230</transactionID>
+        <description>Zorg 1/11 t/m 30/11</description>
+        <period>12</period>
+        <transactionDate>2018-12-27</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>230.1.34</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0042</documentID>
+          <effectiveDate>2018-12-27</effectiveDate>
+          <description>Zorg 1/11 t/m 30/11</description>
+          <debitAmount>1847.7</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>230.3.36</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0042</documentID>
+          <effectiveDate>2018-12-27</effectiveDate>
+          <description>Zorg 1/11 t/m 30/11</description>
+          <creditAmount>1847.7</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+    </journal>
+    <journal>
+      <journalID>1700</journalID>
+      <description>Crediteuren</description>
+      <type>CRED</type>
+    </journal>
+    <journal>
+      <journalID>1000</journalID>
+      <description>Kas</description>
+      <type>FIN</type>
+    </journal>
+    <journal>
+      <journalID>1010</journalID>
+      <description>Bank</description>
+      <type>FIN</type>
+      <transaction>
+        <transactionID>93</transactionID>
+        <description>HR YT DE WILDE "HUUR FEBRUARI"
+</description>
+        <period>2</period>
+        <transactionDate>2018-02-05</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>93.1.37</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-02-05</effectiveDate>
+          <description>HR YT DE WILDE "HUUR FEBRUARI"
+</description>
+          <debitAmount>215</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>93.3.39</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-02-05</effectiveDate>
+          <description>HR YT DE WILDE "HUUR FEBRUARI"
+</description>
+          <creditAmount>215</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>94</transactionID>
+        <description>HR YT DE WILDE "HUUR MAART"
+</description>
+        <period>3</period>
+        <transactionDate>2018-03-14</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>94.1.40</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-03-14</effectiveDate>
+          <description>HR YT DE WILDE "HUUR MAART"
+</description>
+          <debitAmount>215</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>94.3.42</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-03-14</effectiveDate>
+          <description>HR YT DE WILDE "HUUR MAART"
+</description>
+          <creditAmount>215</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>96</transactionID>
+        <description>HR YT DE WILDE "HUUR APRIL + 5 EURO"
+</description>
+        <period>4</period>
+        <transactionDate>2018-04-06</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>96.1.43</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-04-06</effectiveDate>
+          <description>HR YT DE WILDE "HUUR APRIL + 5 EURO"
+</description>
+          <debitAmount>220</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>96.3.45</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-04-06</effectiveDate>
+          <description>HR YT DE WILDE "HUUR APRIL + 5 EURO"
+</description>
+          <creditAmount>220</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>97</transactionID>
+        <description>HR YT DE WILDE "GAS, WATER, LICHT EN ELEKTRA, APRI</description>
+        <period>5</period>
+        <transactionDate>2018-05-04</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>97.1.46</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-04</effectiveDate>
+          <description>HR YT DE WILDE "GAS, WATER, LICHT EN ELEKTRA, APRI</description>
+          <debitAmount>35</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>97.3.48</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-04</effectiveDate>
+          <description>HR YT DE WILDE "GAS, WATER, LICHT EN ELEKTRA, APRI</description>
+          <creditAmount>35</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>98</transactionID>
+        <description>HR YT DE WILDE "HUUR NOVEMBER"
+</description>
+        <period>11</period>
+        <transactionDate>2018-11-06</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>98.1.49</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-06</effectiveDate>
+          <description>HR YT DE WILDE "HUUR NOVEMBER"
+</description>
+          <debitAmount>215</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>98.3.51</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-06</effectiveDate>
+          <description>HR YT DE WILDE "HUUR NOVEMBER"
+</description>
+          <creditAmount>215</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>99</transactionID>
+        <description>HR YT DE WILDE "HUUR OKTOBER"
+</description>
+        <period>10</period>
+        <transactionDate>2018-10-25</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>99.1.52</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-10-25</effectiveDate>
+          <description>HR YT DE WILDE "HUUR OKTOBER"
+</description>
+          <debitAmount>215</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>99.3.54</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-10-25</effectiveDate>
+          <description>HR YT DE WILDE "HUUR OKTOBER"
+</description>
+          <creditAmount>215</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>105</transactionID>
+        <description>HR YT DE WILDE "ETEN DECEMBER(HUURBETALING VOLGT L</description>
+        <period>1</period>
+        <transactionDate>2018-01-03</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>105.1.55</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-01-03</effectiveDate>
+          <description>HR YT DE WILDE "ETEN DECEMBER(HUURBETALING VOLGT L</description>
+          <debitAmount>72.5</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>105.3.57</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-01-03</effectiveDate>
+          <description>HR YT DE WILDE "ETEN DECEMBER(HUURBETALING VOLGT L</description>
+          <creditAmount>72.5</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>106</transactionID>
+        <description>HR YT DE WILDE "ETEN JANUARI"
+</description>
+        <period>2</period>
+        <transactionDate>2018-02-05</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>106.1.58</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-02-05</effectiveDate>
+          <description>HR YT DE WILDE "ETEN JANUARI"
+</description>
+          <debitAmount>84.5</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>106.3.60</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-02-05</effectiveDate>
+          <description>HR YT DE WILDE "ETEN JANUARI"
+</description>
+          <creditAmount>84.5</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>107</transactionID>
+        <description>HR YT DE WILDE "ETEN FEBRUARI"
+</description>
+        <period>3</period>
+        <transactionDate>2018-03-14</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>107.1.61</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-03-14</effectiveDate>
+          <description>HR YT DE WILDE "ETEN FEBRUARI"
+</description>
+          <debitAmount>116.5</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>107.3.63</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-03-14</effectiveDate>
+          <description>HR YT DE WILDE "ETEN FEBRUARI"
+</description>
+          <creditAmount>116.5</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>108</transactionID>
+        <description>HR YT DE WILDE "ETEN MAART"
+</description>
+        <period>4</period>
+        <transactionDate>2018-04-06</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>108.1.64</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-04-06</effectiveDate>
+          <description>HR YT DE WILDE "ETEN MAART"
+</description>
+          <debitAmount>114</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>108.3.66</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-04-06</effectiveDate>
+          <description>HR YT DE WILDE "ETEN MAART"
+</description>
+          <creditAmount>114</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>109</transactionID>
+        <description>Y.T DE WILDE "ETEN 19 APRIL"
+</description>
+        <period>4</period>
+        <transactionDate>2018-04-19</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>109.1.67</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-04-19</effectiveDate>
+          <description>Y.T DE WILDE "ETEN 19 APRIL"
+</description>
+          <debitAmount>-9.17</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>109.3.69</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-04-19</effectiveDate>
+          <description>Y.T DE WILDE "ETEN 19 APRIL"
+</description>
+          <creditAmount>-9.17</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>110</transactionID>
+        <description>Y.T DE WILDE "BOODSCHAPPEN 3 MEI"
+</description>
+        <period>5</period>
+        <transactionDate>2018-05-03</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>110.1.70</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-03</effectiveDate>
+          <description>Y.T DE WILDE "BOODSCHAPPEN 3 MEI"
+</description>
+          <debitAmount>-9.8</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>110.3.72</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-03</effectiveDate>
+          <description>Y.T DE WILDE "BOODSCHAPPEN 3 MEI"
+</description>
+          <creditAmount>-9.8</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>111</transactionID>
+        <description>HR YT DE WILDE "ETEN APRIL"
+</description>
+        <period>5</period>
+        <transactionDate>2018-05-04</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>111.1.73</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-04</effectiveDate>
+          <description>HR YT DE WILDE "ETEN APRIL"
+</description>
+          <debitAmount>114</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>111.3.75</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-04</effectiveDate>
+          <description>HR YT DE WILDE "ETEN APRIL"
+</description>
+          <creditAmount>114</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>112</transactionID>
+        <description>HR YT DE WILDE "ETEN SEPTEMBER"
+</description>
+        <period>10</period>
+        <transactionDate>2018-10-25</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>112.1.76</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-10-25</effectiveDate>
+          <description>HR YT DE WILDE "ETEN SEPTEMBER"
+</description>
+          <debitAmount>69</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>112.3.78</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-10-25</effectiveDate>
+          <description>HR YT DE WILDE "ETEN SEPTEMBER"
+</description>
+          <creditAmount>69</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>113</transactionID>
+        <description>HR YT DE WILDE "ETEN OKTOBER"
+</description>
+        <period>11</period>
+        <transactionDate>2018-11-21</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>113.1.79</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-21</effectiveDate>
+          <description>HR YT DE WILDE "ETEN OKTOBER"
+</description>
+          <debitAmount>60</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>113.3.81</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-21</effectiveDate>
+          <description>HR YT DE WILDE "ETEN OKTOBER"
+</description>
+          <creditAmount>60</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>114</transactionID>
+        <description>HR YT DE WILDE "ETEN OKTOBER"
+</description>
+        <period>12</period>
+        <transactionDate>2018-12-11</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>114.1.82</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-12-11</effectiveDate>
+          <description>HR YT DE WILDE "ETEN OKTOBER"
+</description>
+          <debitAmount>54</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>114.3.84</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-12-11</effectiveDate>
+          <description>HR YT DE WILDE "ETEN OKTOBER"
+</description>
+          <creditAmount>54</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>116</transactionID>
+        <description>HR YT DE WILDE "GAS WATER, LICHT. AUGUSTUS EN SEPT</description>
+        <period>9</period>
+        <transactionDate>2018-09-11</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>116.1.85</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-09-11</effectiveDate>
+          <description>HR YT DE WILDE "GAS WATER, LICHT. AUGUSTUS EN SEPT</description>
+          <debitAmount>35</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>116.3.87</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-09-11</effectiveDate>
+          <description>HR YT DE WILDE "GAS WATER, LICHT. AUGUSTUS EN SEPT</description>
+          <creditAmount>35</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>117</transactionID>
+        <description>HR YT DE WILDE "HUUR MEI"
+</description>
+        <period>5</period>
+        <transactionDate>2018-05-04</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>117.1.88</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-04</effectiveDate>
+          <description>HR YT DE WILDE "HUUR MEI"
+</description>
+          <debitAmount>215</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>117.3.90</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-04</effectiveDate>
+          <description>HR YT DE WILDE "HUUR MEI"
+</description>
+          <creditAmount>215</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>118</transactionID>
+        <description>HR YT DE WILDE "HUUR SEPTEMBER EN AUGUSTUS"
+</description>
+        <period>9</period>
+        <transactionDate>2018-09-11</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>118.1.91</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-09-11</effectiveDate>
+          <description>HR YT DE WILDE "HUUR SEPTEMBER EN AUGUSTUS"
+</description>
+          <debitAmount>430</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>118.3.93</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-09-11</effectiveDate>
+          <description>HR YT DE WILDE "HUUR SEPTEMBER EN AUGUSTUS"
+</description>
+          <creditAmount>430</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>119</transactionID>
+        <description>HR YT DE WILDE "VEREFFENING GAS, WATER EN LICHT TM</description>
+        <period>11</period>
+        <transactionDate>2018-11-09</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>119.1.94</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-09</effectiveDate>
+          <description>HR YT DE WILDE "VEREFFENING GAS, WATER EN LICHT TM</description>
+          <debitAmount>142.5</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>119.3.96</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-09</effectiveDate>
+          <description>HR YT DE WILDE "VEREFFENING GAS, WATER EN LICHT TM</description>
+          <creditAmount>142.5</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>120</transactionID>
+        <description>HR YT DE WILDE "HUUR EN OVERIGE KOSTEN DECEMBER"
+</description>
+        <period>12</period>
+        <transactionDate>2018-12-11</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>120.1.97</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-12-11</effectiveDate>
+          <description>HR YT DE WILDE "HUUR EN OVERIGE KOSTEN DECEMBER"
+</description>
+          <debitAmount>250</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>120.3.99</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-12-11</effectiveDate>
+          <description>HR YT DE WILDE "HUUR EN OVERIGE KOSTEN DECEMBER"
+</description>
+          <creditAmount>250</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>132</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "RF7826"
+</description>
+        <period>1</period>
+        <transactionDate>2018-01-12</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>132.1.100</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0026</documentID>
+          <effectiveDate>2018-01-12</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF7826"
+</description>
+          <debitAmount>1774.13</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>132.3.101</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0026</documentID>
+          <effectiveDate>2018-01-12</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF7826"
+</description>
+          <creditAmount>1774.13</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>136</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "0029-7"
+</description>
+        <period>2</period>
+        <transactionDate>2018-02-23</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>136.1.102</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0029</documentID>
+          <effectiveDate>2018-02-23</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "0029-7"
+</description>
+          <debitAmount>1774.13</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>136.3.103</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0029</documentID>
+          <effectiveDate>2018-02-23</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "0029-7"
+</description>
+          <creditAmount>1774.13</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>138</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "RF4031"
+</description>
+        <period>3</period>
+        <transactionDate>2018-03-23</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>138.1.104</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0031</documentID>
+          <effectiveDate>2018-03-23</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF4031"
+</description>
+          <debitAmount>1602.44</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>138.3.105</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0031</documentID>
+          <effectiveDate>2018-03-23</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF4031"
+</description>
+          <creditAmount>1602.44</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>140</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "RF5634"
+</description>
+        <period>5</period>
+        <transactionDate>2018-05-15</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>140.1.106</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0032</documentID>
+          <effectiveDate>2018-05-15</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF5634"
+</description>
+          <debitAmount>2166.53</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>140.3.107</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0032</documentID>
+          <effectiveDate>2018-05-15</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF5634"
+</description>
+          <creditAmount>2166.53</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>142</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "RF2935"
+</description>
+        <period>5</period>
+        <transactionDate>2018-05-15</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>142.1.108</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0035</documentID>
+          <effectiveDate>2018-05-15</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF2935"
+</description>
+          <debitAmount>1847.7</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>142.3.109</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0035</documentID>
+          <effectiveDate>2018-05-15</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF2935"
+</description>
+          <creditAmount>1847.7</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>143</transactionID>
+        <description>SANDER ""
+</description>
+        <period>5</period>
+        <transactionDate>2018-05-24</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>143.1.110</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-24</effectiveDate>
+          <description>SANDER ""
+</description>
+          <creditAmount>15000</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>143.3.112</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-24</effectiveDate>
+          <description>SANDER ""
+</description>
+          <debitAmount>15000</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>144</transactionID>
+        <description>EDITH "VERSCHUIVING TBV HYPOTHEEK AFLOSSEN"
+</description>
+        <period>5</period>
+        <transactionDate>2018-05-24</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>144.1.113</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-24</effectiveDate>
+          <description>EDITH "VERSCHUIVING TBV HYPOTHEEK AFLOSSEN"
+</description>
+          <creditAmount>4500</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>144.3.115</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-05-24</effectiveDate>
+          <description>EDITH "VERSCHUIVING TBV HYPOTHEEK AFLOSSEN"
+</description>
+          <debitAmount>4500</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>145</transactionID>
+        <description>EDITH "AANVULLEN REKENING EN COMPENSATIE STUDIEGEL</description>
+        <period>9</period>
+        <transactionDate>2018-09-05</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>145.1.116</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-09-05</effectiveDate>
+          <description>EDITH "AANVULLEN REKENING EN COMPENSATIE STUDIEGEL</description>
+          <creditAmount>3750</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>145.3.118</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-09-05</effectiveDate>
+          <description>EDITH "AANVULLEN REKENING EN COMPENSATIE STUDIEGEL</description>
+          <debitAmount>3750</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>146</transactionID>
+        <description>EDITH "AANVULLEN LOPENDE REKENING"
+</description>
+        <period>12</period>
+        <transactionDate>2018-12-11</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>146.1.119</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-12-11</effectiveDate>
+          <description>EDITH "AANVULLEN LOPENDE REKENING"
+</description>
+          <creditAmount>2500</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>146.3.121</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-12-11</effectiveDate>
+          <description>EDITH "AANVULLEN LOPENDE REKENING"
+</description>
+          <debitAmount>2500</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>147</transactionID>
+        <description>EDITH ""
+</description>
+        <period>12</period>
+        <transactionDate>2018-12-28</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>147.1.122</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-12-28</effectiveDate>
+          <description>EDITH ""
+</description>
+          <creditAmount>7000</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>147.3.124</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-12-28</effectiveDate>
+          <description>EDITH ""
+</description>
+          <debitAmount>7000</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>159</transactionID>
+        <description>HR YT DE WILDE "HUUR 215, ETEN 85, GAS WATER LICHT</description>
+        <period>6</period>
+        <transactionDate>2018-06-11</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>159.1.125</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-06-11</effectiveDate>
+          <description>HR YT DE WILDE "HUUR 215, ETEN 85, GAS WATER LICHT</description>
+          <debitAmount>317.5</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>159.3.128</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-06-11</effectiveDate>
+          <description>HR YT DE WILDE "HUUR 215, ETEN 85, GAS WATER LICHT</description>
+          <creditAmount>85</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>159.3.129</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-06-11</effectiveDate>
+          <description>HR YT DE WILDE "HUUR 215, ETEN 85, GAS WATER LICHT</description>
+          <creditAmount>232.5</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>160</transactionID>
+        <description>HR YT DE WILDE "HUUR JULI, ETEN JUNI, ELEKTRISCHTE</description>
+        <period>7</period>
+        <transactionDate>2018-07-12</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>160.1.130</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-07-12</effectiveDate>
+          <description>HR YT DE WILDE "HUUR JULI, ETEN JUNI, ELEKTRISCHTE</description>
+          <debitAmount>292.5</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>160.3.133</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-07-12</effectiveDate>
+          <description>HR YT DE WILDE "HUUR JULI, ETEN JUNI, ELEKTRISCHTE</description>
+          <creditAmount>250</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>160.3.134</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-07-12</effectiveDate>
+          <description>HR YT DE WILDE "HUUR JULI, ETEN JUNI, ELEKTRISCHTE</description>
+          <creditAmount>42.5</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>162</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "38"
+</description>
+        <period>8</period>
+        <transactionDate>2018-08-20</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>162.1.135</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0038</documentID>
+          <effectiveDate>2018-08-20</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "38"
+</description>
+          <debitAmount>1909.29</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>162.3.136</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0038</documentID>
+          <effectiveDate>2018-08-20</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "38"
+</description>
+          <creditAmount>1909.29</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>164</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "37"
+</description>
+        <period>8</period>
+        <transactionDate>2018-08-20</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>164.1.137</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0037</documentID>
+          <effectiveDate>2018-08-20</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "37"
+</description>
+          <debitAmount>1847.7</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>164.3.138</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0037</documentID>
+          <effectiveDate>2018-08-20</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "37"
+</description>
+          <creditAmount>1847.7</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>165</transactionID>
+        <description>HR YT DE WILDE "ETEN JULI EN AUGUSTUS"
+</description>
+        <period>9</period>
+        <transactionDate>2018-09-17</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>165.1.139</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-09-17</effectiveDate>
+          <description>HR YT DE WILDE "ETEN JULI EN AUGUSTUS"
+</description>
+          <debitAmount>140</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>165.3.141</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-09-17</effectiveDate>
+          <description>HR YT DE WILDE "ETEN JULI EN AUGUSTUS"
+</description>
+          <creditAmount>140</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>166</transactionID>
+        <description>COOP 2124 "COOP 2124 ARNHEM, NL"
+</description>
+        <period>11</period>
+        <transactionDate>2018-11-07</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>166.1.142</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>COOP 2124 "COOP 2124 ARNHEM, NL"
+</description>
+          <creditAmount>3.7</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>166.3.144</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>COOP 2124 "COOP 2124 ARNHEM, NL"
+</description>
+          <debitAmount>3.7</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>167</transactionID>
+        <description>ALDI 006 ARNHEM "ALDI 006 ARNHEM ARNHEM, NL"
+</description>
+        <period>11</period>
+        <transactionDate>2018-11-07</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>167.1.145</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>ALDI 006 ARNHEM "ALDI 006 ARNHEM ARNHEM, NL"
+</description>
+          <creditAmount>22.73</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>167.3.147</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>ALDI 006 ARNHEM "ALDI 006 ARNHEM ARNHEM, NL"
+</description>
+          <debitAmount>22.73</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>168</transactionID>
+        <description>C&amp;M*E. VAN ASSELT "C&amp;M*E. VAN ASSELT ENSCHEDE, NL"</description>
+        <period>11</period>
+        <transactionDate>2018-11-07</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>168.1.148</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>C&amp;M*E. VAN ASSELT "C&amp;M*E. VAN ASSELT ENSCHEDE, NL"</description>
+          <creditAmount>6</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>168.3.150</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>C&amp;M*E. VAN ASSELT "C&amp;M*E. VAN ASSELT ENSCHEDE, NL"</description>
+          <debitAmount>6</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>169</transactionID>
+        <description>BJORG WILLEMSEN AGF "BJORG WILLEMSEN AGF DOORNENBU</description>
+        <period>11</period>
+        <transactionDate>2018-11-07</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>169.1.151</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>BJORG WILLEMSEN AGF "BJORG WILLEMSEN AGF DOORNENBU</description>
+          <creditAmount>9.2</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>169.3.153</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>BJORG WILLEMSEN AGF "BJORG WILLEMSEN AGF DOORNENBU</description>
+          <debitAmount>9.2</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>170</transactionID>
+        <description>DRIESLAG MARKET "DRIESLAG MARKET ARNHEM, NL"
+</description>
+        <period>11</period>
+        <transactionDate>2018-11-07</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>170.1.154</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>DRIESLAG MARKET "DRIESLAG MARKET ARNHEM, NL"
+</description>
+          <creditAmount>2.5</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>170.3.156</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>DRIESLAG MARKET "DRIESLAG MARKET ARNHEM, NL"
+</description>
+          <debitAmount>2.5</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>171</transactionID>
+        <description>DRIESLAG MARKET "DRIESLAG MARKET ARNHEM, NL"
+</description>
+        <period>11</period>
+        <transactionDate>2018-11-07</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>171.1.157</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>DRIESLAG MARKET "DRIESLAG MARKET ARNHEM, NL"
+</description>
+          <creditAmount>2.15</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>171.3.159</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>DRIESLAG MARKET "DRIESLAG MARKET ARNHEM, NL"
+</description>
+          <debitAmount>2.15</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>172</transactionID>
+        <description>ALBERT HEIJN 1108 "ALBERT HEIJN 1108 ARNHEM, NL"
+</description>
+        <period>11</period>
+        <transactionDate>2018-11-07</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>172.1.160</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>ALBERT HEIJN 1108 "ALBERT HEIJN 1108 ARNHEM, NL"
+</description>
+          <creditAmount>3.68</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>172.3.162</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>ALBERT HEIJN 1108 "ALBERT HEIJN 1108 ARNHEM, NL"
+</description>
+          <debitAmount>3.68</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>173</transactionID>
+        <description>ALBERT HEIJN 1108 "ALBERT HEIJN 1108 ARNHEM, NL"
+</description>
+        <period>11</period>
+        <transactionDate>2018-11-07</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>173.1.163</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>ALBERT HEIJN 1108 "ALBERT HEIJN 1108 ARNHEM, NL"
+</description>
+          <creditAmount>9.5</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>173.3.165</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-07</effectiveDate>
+          <description>ALBERT HEIJN 1108 "ALBERT HEIJN 1108 ARNHEM, NL"
+</description>
+          <debitAmount>9.5</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>176</transactionID>
+        <description>E.M.J. VAN OCKENBURG-ZWAAN "TERUGBETALING BOODSCHA</description>
+        <period>11</period>
+        <transactionDate>2018-11-16</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>176.1.166</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-16</effectiveDate>
+          <description>E.M.J. VAN OCKENBURG-ZWAAN "TERUGBETALING BOODSCHA</description>
+          <debitAmount>59.64</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>176.3.168</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-11-16</effectiveDate>
+          <description>E.M.J. VAN OCKENBURG-ZWAAN "TERUGBETALING BOODSCHA</description>
+          <creditAmount>59.64</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>184</transactionID>
+        <description>BOL.COM B.V. INZAKE BOL.COM " boek voor Yoram</description>
+        <period>7</period>
+        <transactionDate>2018-07-20</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>184.1.169</recordID>
+          <accountID>1010</accountID>
+          <documentID>2018720 Bol 48368379</documentID>
+          <effectiveDate>2018-07-20</effectiveDate>
+          <description>BOL.COM B.V. INZAKE BOL.COM " boek voor Yoram</description>
+          <creditAmount>15.44</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>184.3.171</recordID>
+          <accountID>4013</accountID>
+          <documentID>2018720 Bol 48368379</documentID>
+          <effectiveDate>2018-07-20</effectiveDate>
+          <description>BOL.COM B.V. INZAKE BOL.COM " boek voor Yoram</description>
+          <debitAmount>15.44</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>191</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "36"
+</description>
+        <period>8</period>
+        <transactionDate>2018-08-20</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>191.1.172</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0036</documentID>
+          <effectiveDate>2018-08-20</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "36"
+</description>
+          <debitAmount>1909.29</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>191.3.173</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0036</documentID>
+          <effectiveDate>2018-08-20</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "36"
+</description>
+          <creditAmount>1909.29</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>192</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "0039/0040/0041"
+</description>
+        <period>12</period>
+        <transactionDate>2018-12-05</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>192.1.174</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0041,0040,0039</documentID>
+          <effectiveDate>2018-12-05</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "0039/0040/0041"
+</description>
+          <debitAmount>5666.28</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>192.3.175</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0041</documentID>
+          <effectiveDate>2018-12-05</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "0039/0040/0041"
+</description>
+          <creditAmount>1909.29</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>192.3.176</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0040</documentID>
+          <effectiveDate>2018-12-05</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "0039/0040/0041"
+</description>
+          <creditAmount>1847.7</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>192.3.177</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0039</documentID>
+          <effectiveDate>2018-12-05</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "0039/0040/0041"
+</description>
+          <creditAmount>1909.29</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>193</transactionID>
+        <description>DE DOBBELSTEEN ARNHEM "DE DOBBELSTEEN ARNHEM ARNHE</description>
+        <period>12</period>
+        <transactionDate>2018-12-22</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>193.1.178</recordID>
+          <accountID>1010</accountID>
+          <documentID>20181222 Dobbelsteen</documentID>
+          <effectiveDate>2018-12-22</effectiveDate>
+          <description>DE DOBBELSTEEN ARNHEM "DE DOBBELSTEEN ARNHEM ARNHE</description>
+          <creditAmount>24.95</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>193.3.180</recordID>
+          <accountID>4013</accountID>
+          <documentID>20181222 Dobbelsteen</documentID>
+          <effectiveDate>2018-12-22</effectiveDate>
+          <description>DE DOBBELSTEEN ARNHEM "DE DOBBELSTEEN ARNHEM ARNHE</description>
+          <debitAmount>24.95</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>238</transactionID>
+        <description>RTL DOOR BUCKAROO INZAKE RTL DOOR BUCKAROO "XMWCGK</description>
+        <period>1</period>
+        <transactionDate>2018-01-19</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>238.1.181</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-01-19</effectiveDate>
+          <description>RTL DOOR BUCKAROO INZAKE RTL DOOR BUCKAROO "XMWCGK</description>
+          <creditAmount>3.99</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>238.3.183</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-01-19</effectiveDate>
+          <description>RTL DOOR BUCKAROO INZAKE RTL DOOR BUCKAROO "XMWCGK</description>
+          <debitAmount>3.99</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>239</transactionID>
+        <description>Nest Protect V2 Batterij (3 Stuks)
+</description>
+        <period>5</period>
+        <transactionDate>2018-05-24</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>239.1.184</recordID>
+          <accountID>1010</accountID>
+          <documentID>20180521 Alarmsystee</documentID>
+          <effectiveDate>2018-05-24</effectiveDate>
+          <description>Nest Protect V2 Batterij (3 Stuks)
+</description>
+          <creditAmount>349</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>239.3.186</recordID>
+          <accountID>4700</accountID>
+          <documentID>20180521 Alarmsystee</documentID>
+          <effectiveDate>2018-05-24</effectiveDate>
+          <description>Nest Protect V2 Batterij (3 Stuks)
+</description>
+          <debitAmount>349</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>673</transactionID>
+        <description>aansluitend saldo</description>
+        <period>12</period>
+        <transactionDate>2018-12-31</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>673.1.187</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-12-31</effectiveDate>
+          <description>aansluitend saldo</description>
+          <debitAmount>1774.13</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>673.3.189</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-12-31</effectiveDate>
+          <description>aansluitend saldo</description>
+          <creditAmount>1774.13</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+    </journal>
+    <journal>
+      <journalID>1011</journalID>
+      <description>Boodschappenpot</description>
+      <type>FIN</type>
+    </journal>
+    <journal>
+      <journalID>MEMO</journalID>
+      <description>Memoriaal</description>
+      <type>MEMO</type>
+      <transaction>
+        <transactionID>676</transactionID>
+        <description>Salderen met eigen vermogen</description>
+        <period>12</period>
+        <transactionDate>2018-12-31</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>676.1.190</recordID>
+          <accountID>1400</accountID>
+          <documentID>BAG</documentID>
+          <effectiveDate>2018-12-31</effectiveDate>
+          <description>Salderen met eigen vermogen</description>
+          <debitAmount>30979.68</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>676.3.191</recordID>
+          <accountID>1410</accountID>
+          <documentID>BAG</documentID>
+          <effectiveDate>2018-12-31</effectiveDate>
+          <description>Salderen met eigen vermogen</description>
+          <creditAmount>30979.68</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>678</transactionID>
+        <description>Verwerking resultaat 2018</description>
+        <period>12</period>
+        <transactionDate>2018-12-31</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>678.1.192</recordID>
+          <accountID>9998</accountID>
+          <documentID>BAG</documentID>
+          <effectiveDate>2018-12-31</effectiveDate>
+          <description>Verwerking resultaat 2018</description>
+          <debitAmount>25558.83</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>678.3.193</recordID>
+          <accountID>1400</accountID>
+          <documentID>BAG</documentID>
+          <effectiveDate>2018-12-31</effectiveDate>
+          <description>Verwerking resultaat 2018</description>
+          <creditAmount>25558.83</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+    </journal>
+    <journal>
+      <journalID>OPEN</journalID>
+      <description>Openingssaldi</description>
+      <type>OPEN</type>
+      <transaction>
+        <transactionID>10000194</transactionID>
+        <description>Openingssaldi</description>
+        <period>1</period>
+        <transactionDate>2018-01-01</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>194</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-01-01</effectiveDate>
+          <description>Openingssaldo</description>
+          <debitAmount>7968.84</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>195</recordID>
+          <accountID>1300</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-01-01</effectiveDate>
+          <description>Openingssaldo</description>
+          <creditAmount>0</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>196</recordID>
+          <accountID>1410</accountID>
+          <documentID></documentID>
+          <effectiveDate>2018-01-01</effectiveDate>
+          <description>Openingssaldo</description>
+          <creditAmount>7968.84</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+    </journal>
+  </transactions>
+</auditfile>

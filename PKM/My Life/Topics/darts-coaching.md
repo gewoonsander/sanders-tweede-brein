@@ -28,6 +28,7 @@ Valt hieronder: coachingscliënten, workshops, cursussen, [[dart-buddies]] commu
 - Hoe schaal ik coaching op zonder de persoonlijke verbinding te verliezen?
 - Welke producten of methoden kunnen impact vergroten zonder meer uren?
 - Evaluatie aandeel: blijft het 20% of groeit het naar 30%?
+- Kan de verkoop van *Darttactiek* op termijn via DartsCoaching.nl lopen in plaats van via het losse [[plugandpay]]-account op gewoonsander.nl? Zou het Plug&Pay-abonnement overbodig maken en kosten besparen. Nog geen concreet plan, puur als idee vastgelegd (01-07-2026).
 
 ## Tools & werkwijze
 

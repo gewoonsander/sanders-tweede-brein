@@ -5,6 +5,8 @@ An outcome with a horizon and an explicit definition of "shipped." Three load-be
 ## Active files
 
 - [[ship-mvp-by-q3]] — seeded course sample. The canonical shape every Goal file follows.
+- [[cursussen-afmaken]] — tegengaan van versnippering: gestarte cursussen afmaken of bewust loslaten.
+- [[leren-vibecoden-websites]] — vibecoding leren voor eigen/klant-websites (slapend).
 
 ## Naming
 

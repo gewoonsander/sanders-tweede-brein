@@ -55,19 +55,19 @@ Zie ook: [[software-en-tools]] voor software en abonnementen.
 
 ## Schermen (Monitors)
 
-### Monitor 1
-- **Merk/model:** *aanvullen*
-- **Locatie:** thuis, werkplek — primair scherm
+### Monitor 1 — Huawei
+- **Merk/model:** Huawei (exact model *aanvullen*)
+- **Locatie:** thuis, werkplek
 - **Aanschafdatum:** *aanvullen*
 - **Garantie t/m:** *aanvullen*
-- **Notities:** —
+- **Notities:** herkend als OBS-bron "macOS schermopname Huawei"
 
-### Monitor 2
-- **Merk/model:** *aanvullen*
-- **Locatie:** thuis, werkplek — tweede scherm
+### Monitor 2 — BenQ
+- **Merk/model:** BenQ (exact model *aanvullen*)
+- **Locatie:** thuis, werkplek
 - **Aanschafdatum:** *aanvullen*
 - **Garantie t/m:** *aanvullen*
-- **Notities:** —
+- **Notities:** herkend als OBS-bron "macOS schermopname Benq"
 
 ---
 
@@ -148,6 +148,7 @@ Zie ook: [[software-en-tools]] voor software en abonnementen.
 
 | Apparaat | Model | Locatie | Aankoop | Garantie t/m |
 |---|---|---|---|---|
+| Rowenta Force Cyclonic Effitech (stofzuiger-accessoire/kit) | REF RO7935EA/410-1426, type RO79OE0, CMMF 2211401222 — 220-240V, 50-60Hz, 500W, Made in France | *aanvullen* | *aanvullen* | *aanvullen* |
 | *aanvullen* | | | | |
 
 ---

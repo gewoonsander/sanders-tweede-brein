@@ -1,0 +1,1309 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<auditfile>
+  <header>
+    <auditfileVersion>CLAIR2.00.00</auditfileVersion>
+    <companyID>Gezinshuis Gewoon 01</companyID>
+    <companyName>Gezinshuis Gewoon Thuis</companyName>
+    <companyAddress>Dotterlaan 31</companyAddress>
+    <companyCity>Nederland</companyCity>
+    <companyPostalCode>6832 BE</companyPostalCode>
+    <fiscalYear>2017</fiscalYear>
+    <startDate>2017-01-01</startDate>
+    <endDate>2017-12-31</endDate>
+    <currencyCode>EUR</currencyCode>
+    <dateCreated>2026-07-01</dateCreated>
+    <productID>e-Boekhouden.nl</productID>
+    <productVersion>3.0</productVersion>
+  </header>
+  <generalLedger>
+    <taxonomy>NL</taxonomy>
+    <ledgerAccount>
+      <accountID>0130</accountID>
+      <accountDesc>Inventarissen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>0140</accountID>
+      <accountDesc>Hardware</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>0200</accountID>
+      <accountDesc>Vervoermiddelen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>0740</accountID>
+      <accountDesc>Langlopende leningen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1000</accountID>
+      <accountDesc>Kas</accountDesc>
+      <accountType>FIN</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1010</accountID>
+      <accountDesc>Bank</accountDesc>
+      <accountType>FIN</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1011</accountID>
+      <accountDesc>Boodschappenpot</accountDesc>
+      <accountType>FIN</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1300</accountID>
+      <accountDesc>Debiteuren</accountDesc>
+      <accountType>DEB</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1400</accountID>
+      <accountDesc>Eigen Vermogen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1410</accountID>
+      <accountDesc>Privé-opnamen en stortingen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1500</accountID>
+      <accountDesc>Vorderingen (kortlopend)</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1600</accountID>
+      <accountDesc>Voorbelasting</accountDesc>
+      <accountType>VOOR</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1630</accountID>
+      <accountDesc>BTW Af te dragen Hoog</accountDesc>
+      <accountType>AF19</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1631</accountID>
+      <accountDesc>BTW af te dragen Laag</accountDesc>
+      <accountType>AF6</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1632</accountID>
+      <accountDesc>BTW af te dragen overig</accountDesc>
+      <accountType>AFOVERIG</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1650</accountID>
+      <accountDesc>BTW R/C</accountDesc>
+      <accountType>BTWRC</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1700</accountID>
+      <accountDesc>Crediteuren</accountDesc>
+      <accountType>CRED</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>1800</accountID>
+      <accountDesc>Schulden (kortlopend)</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>2000</accountID>
+      <accountDesc>Kruisposten</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4010</accountID>
+      <accountDesc>Onkosten Walendino</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4011</accountID>
+      <accountDesc>Onkosten Daan</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4012</accountID>
+      <accountDesc>Onkosten AKP</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4013</accountID>
+      <accountDesc>Onkosten Yoram</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4335</accountID>
+      <accountDesc>Afschr. Inventarissen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4340</accountID>
+      <accountDesc>Afschr. Hardware</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4350</accountID>
+      <accountDesc>Afschrijvingen vervoermiddelen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4400</accountID>
+      <accountDesc>Brandstoffen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4420</accountID>
+      <accountDesc>Onderhoud vervoermiddelen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4440</accountID>
+      <accountDesc>Assuranties vervoermiddelen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4450</accountID>
+      <accountDesc>Wegenbelasting</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4490</accountID>
+      <accountDesc>Overige autokosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4495</accountID>
+      <accountDesc>Privégebruik autokosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4500</accountID>
+      <accountDesc>Contributies en abonnementen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4510</accountID>
+      <accountDesc>Reclame en advertenties</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4520</accountID>
+      <accountDesc>Representatie en verteer</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4530</accountID>
+      <accountDesc>Reis- en verblijfkosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4540</accountID>
+      <accountDesc>Relatiegeschenken</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4550</accountID>
+      <accountDesc>Bankkosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4590</accountID>
+      <accountDesc>Overige Kosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4591</accountID>
+      <accountDesc>Verhuiskosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4600</accountID>
+      <accountDesc>Kilometervergoeding</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4700</accountID>
+      <accountDesc>Kantoorbenodigdheden</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4710</accountID>
+      <accountDesc>Onkosten Zolder</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4740</accountID>
+      <accountDesc>Drukwerk, porti en vrachten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4750</accountID>
+      <accountDesc>Telefoon en internet</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4790</accountID>
+      <accountDesc>Overige kantoorKosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4810</accountID>
+      <accountDesc>Accountants- en administratiekosten</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4850</accountID>
+      <accountDesc>Cursussen/seminars</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4860</accountID>
+      <accountDesc>Vakliteratuur</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4900</accountID>
+      <accountDesc>Betalingsverschillen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>4950</accountID>
+      <accountDesc>Oninbare vorderingen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>7000</accountID>
+      <accountDesc>Boodschappen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8000</accountID>
+      <accountDesc>Zorgvergoeding Yoram de Wilde</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8001</accountID>
+      <accountDesc>Woonvergoeding Yoram</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8002</accountID>
+      <accountDesc>Woonvergoeding</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8003</accountID>
+      <accountDesc>Eten Yoram de Wilde</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8010</accountID>
+      <accountDesc>Zorgvergoeding Walendino Kieft</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8011</accountID>
+      <accountDesc>Woonvergoeding Walendino Kieft</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8012</accountID>
+      <accountDesc>Kindgebonden kosten Walendino Kieft</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8013</accountID>
+      <accountDesc>Eten Walendino Kieft</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8020</accountID>
+      <accountDesc>Zorgvergoeding Daan van Ojik</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8021</accountID>
+      <accountDesc>Woonvergoeding Daan van Ojik</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8022</accountID>
+      <accountDesc>Kindgebonden kosten Daan van Ojik</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8023</accountID>
+      <accountDesc>Eten Daan van Ojik</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8030</accountID>
+      <accountDesc>Zorgvergoeding Ang Ko Phyo Oo</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8031</accountID>
+      <accountDesc>Woonvergoeding Ang Ko Phyo Oo</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8032</accountID>
+      <accountDesc>Kindgebonden Kosten Aung Ko Phyo Oo</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8033</accountID>
+      <accountDesc>Eten Aung Ko Phyo Oo</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8040</accountID>
+      <accountDesc>Zorgvergoeding Kudus</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8041</accountID>
+      <accountDesc>Woonvergoeding Kudus</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8042</accountID>
+      <accountDesc>Kindgebondenkosten Kudus</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8050</accountID>
+      <accountDesc>Zorgvergoeding Ageeth Gerritsen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8051</accountID>
+      <accountDesc>Woonvergoeding Ageeth Gerritsen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8052</accountID>
+      <accountDesc>Kindgebondenkosten Ageeth Gerritsen</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8060</accountID>
+      <accountDesc>Zorgvergoeding Thomas</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8061</accountID>
+      <accountDesc>Woonvergoeding Thomas</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8062</accountID>
+      <accountDesc>Clientgebonden kosten Thomas</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8090</accountID>
+      <accountDesc>Boekresultaat verkoop- verlies</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>8100</accountID>
+      <accountDesc>Woonvergoeding Lege Kamer</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>9000</accountID>
+      <accountDesc>Overige opbrengst/bate</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>9998</accountID>
+      <accountDesc>Eindresultaat</accountDesc>
+      <accountType>VW</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+    <ledgerAccount>
+      <accountID>9999</accountID>
+      <accountDesc>Verrekeningen</accountDesc>
+      <accountType>BAL</accountType>
+      <leadCode></leadCode>
+      <leadDescription></leadDescription>
+    </ledgerAccount>
+  </generalLedger>
+  <customersSuppliers>
+    <customerSupplier>
+      <custSupID>ALBEROZO</custSupID>
+      <type>D</type>
+      <taxRegistrationNr></taxRegistrationNr>
+      <companyName>Albero Zorg B.V.</companyName>
+      <contact>Alex</contact>
+      <streetAddress>
+        <address>Lodderhoeksestraat 10c</address>
+        <city>Angeren</city>
+        <postalCode>6687LR</postalCode>
+        <region></region>
+        <country></country>
+      </streetAddress>
+      <postalAddress>
+        <address>Lodderhoeksestraat 10c</address>
+        <city>Angeren</city>
+        <postalCode>6687LR</postalCode>
+        <region></region>
+        <country></country>
+      </postalAddress>
+      <telephone></telephone>
+      <fax></fax>
+      <eMail>facturen@alberozorggroep.nl</eMail>
+      <website></website>
+    </customerSupplier>
+  </customersSuppliers>
+  <transactions>
+    <numberEntries>7</numberEntries>
+    <totalDebit>24767</totalDebit>
+    <totalCredit>24767</totalCredit>
+    <journal>
+      <journalID>1300</journalID>
+      <description>Debiteuren</description>
+      <type>DEB</type>
+      <transaction>
+        <transactionID>121</transactionID>
+        <description>Zorg 1/8/2107 t/m 31/8/2017</description>
+        <period>9</period>
+        <transactionDate>2017-09-14</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>121.1.1</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0018</documentID>
+          <effectiveDate>2017-09-14</effectiveDate>
+          <description>Zorg 1/8/2107 t/m 31/8/2017</description>
+          <debitAmount>1774.13</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>121.3.3</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0018</documentID>
+          <effectiveDate>2017-09-14</effectiveDate>
+          <description>Zorg 1/8/2107 t/m 31/8/2017</description>
+          <creditAmount>1774.13</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>123</transactionID>
+        <description>Zorg 30/6 t/m 31/7</description>
+        <period>9</period>
+        <transactionDate>2017-09-14</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>123.1.4</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0017</documentID>
+          <effectiveDate>2017-09-14</effectiveDate>
+          <description>Zorg 30/6 t/m 31/7</description>
+          <debitAmount>1831.36</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>123.3.6</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0017</documentID>
+          <effectiveDate>2017-09-14</effectiveDate>
+          <description>Zorg 30/6 t/m 31/7</description>
+          <creditAmount>1831.36</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>125</transactionID>
+        <description>Zorg 1/9 t/m 30/9</description>
+        <period>10</period>
+        <transactionDate>2017-10-31</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>125.1.7</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0020</documentID>
+          <effectiveDate>2017-10-31</effectiveDate>
+          <description>Zorg 1/9 t/m 30/9</description>
+          <debitAmount>1716.9</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>125.3.9</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0020</documentID>
+          <effectiveDate>2017-10-31</effectiveDate>
+          <description>Zorg 1/9 t/m 30/9</description>
+          <creditAmount>1716.9</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>127</transactionID>
+        <description>Zorg 1/10 t/m 31/10</description>
+        <period>10</period>
+        <transactionDate>2017-10-31</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>127.1.10</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0021</documentID>
+          <effectiveDate>2017-10-31</effectiveDate>
+          <description>Zorg 1/10 t/m 31/10</description>
+          <debitAmount>1774.13</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>127.3.12</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0021</documentID>
+          <effectiveDate>2017-10-31</effectiveDate>
+          <description>Zorg 1/10 t/m 31/10</description>
+          <creditAmount>1774.13</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>129</transactionID>
+        <description>Zorg 1/11 t/m 30/11</description>
+        <period>12</period>
+        <transactionDate>2017-12-04</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>129.1.13</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0024</documentID>
+          <effectiveDate>2017-12-04</effectiveDate>
+          <description>Zorg 1/11 t/m 30/11</description>
+          <debitAmount>1716.9</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>129.3.15</recordID>
+          <accountID>8000</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0024</documentID>
+          <effectiveDate>2017-12-04</effectiveDate>
+          <description>Zorg 1/11 t/m 30/11</description>
+          <creditAmount>1716.9</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+    </journal>
+    <journal>
+      <journalID>1700</journalID>
+      <description>Crediteuren</description>
+      <type>CRED</type>
+    </journal>
+    <journal>
+      <journalID>1000</journalID>
+      <description>Kas</description>
+      <type>FIN</type>
+    </journal>
+    <journal>
+      <journalID>1010</journalID>
+      <description>Bank</description>
+      <type>FIN</type>
+      <transaction>
+        <transactionID>90</transactionID>
+        <description>HR YT DE WILDE "HUUR SEPTEMBER"
+</description>
+        <period>9</period>
+        <transactionDate>2017-09-06</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>90.1.16</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-09-06</effectiveDate>
+          <description>HR YT DE WILDE "HUUR SEPTEMBER"
+</description>
+          <debitAmount>215</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>90.3.18</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-09-06</effectiveDate>
+          <description>HR YT DE WILDE "HUUR SEPTEMBER"
+</description>
+          <creditAmount>215</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>91</transactionID>
+        <description>HR YT DE WILDE "HUUR OKTOBER"
+</description>
+        <period>10</period>
+        <transactionDate>2017-10-03</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>91.1.19</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-10-03</effectiveDate>
+          <description>HR YT DE WILDE "HUUR OKTOBER"
+</description>
+          <debitAmount>215</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>91.3.21</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-10-03</effectiveDate>
+          <description>HR YT DE WILDE "HUUR OKTOBER"
+</description>
+          <creditAmount>215</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>92</transactionID>
+        <description>HR YT DE WILDE "HUUR NOVEMBER 2017"
+</description>
+        <period>11</period>
+        <transactionDate>2017-11-09</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>92.1.22</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-11-09</effectiveDate>
+          <description>HR YT DE WILDE "HUUR NOVEMBER 2017"
+</description>
+          <debitAmount>210</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>92.3.24</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-11-09</effectiveDate>
+          <description>HR YT DE WILDE "HUUR NOVEMBER 2017"
+</description>
+          <creditAmount>210</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>95</transactionID>
+        <description>HR YT DE WILDE "HUUR DECEMBER"
+</description>
+        <period>12</period>
+        <transactionDate>2017-12-04</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>95.1.25</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-12-04</effectiveDate>
+          <description>HR YT DE WILDE "HUUR DECEMBER"
+</description>
+          <debitAmount>215</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>95.3.27</recordID>
+          <accountID>8001</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-12-04</effectiveDate>
+          <description>HR YT DE WILDE "HUUR DECEMBER"
+</description>
+          <creditAmount>215</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>100</transactionID>
+        <description>HR YT DE WILDE "EET GELD MAAND AGUSTUS"
+</description>
+        <period>9</period>
+        <transactionDate>2017-09-06</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>100.1.28</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-09-06</effectiveDate>
+          <description>HR YT DE WILDE "EET GELD MAAND AGUSTUS"
+</description>
+          <debitAmount>114</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>100.3.30</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-09-06</effectiveDate>
+          <description>HR YT DE WILDE "EET GELD MAAND AGUSTUS"
+</description>
+          <creditAmount>114</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>101</transactionID>
+        <description>HR YT DE WILDE "EETGELD SEPTEMBER"
+</description>
+        <period>10</period>
+        <transactionDate>2017-10-03</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>101.1.31</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-10-03</effectiveDate>
+          <description>HR YT DE WILDE "EETGELD SEPTEMBER"
+</description>
+          <debitAmount>126</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>101.3.33</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-10-03</effectiveDate>
+          <description>HR YT DE WILDE "EETGELD SEPTEMBER"
+</description>
+          <creditAmount>126</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>102</transactionID>
+        <description>HR YT DE WILDE "ETEN OKTOBER"
+</description>
+        <period>11</period>
+        <transactionDate>2017-11-09</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>102.1.34</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-11-09</effectiveDate>
+          <description>HR YT DE WILDE "ETEN OKTOBER"
+</description>
+          <debitAmount>96</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>102.3.36</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-11-09</effectiveDate>
+          <description>HR YT DE WILDE "ETEN OKTOBER"
+</description>
+          <creditAmount>96</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>103</transactionID>
+        <description> "EETGELD YORAM AFGELOPEN 3 MAANDEN"
+</description>
+        <period>12</period>
+        <transactionDate>2017-12-31</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>103.1.37</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-12-31</effectiveDate>
+          <description> "EETGELD YORAM AFGELOPEN 3 MAANDEN"
+</description>
+          <debitAmount>-336</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>103.3.39</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-12-31</effectiveDate>
+          <description> "EETGELD YORAM AFGELOPEN 3 MAANDEN"
+</description>
+          <creditAmount>-336</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>104</transactionID>
+        <description>HR YT DE WILDE "ETEN NOVEMBER"
+</description>
+        <period>12</period>
+        <transactionDate>2017-12-04</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>104.1.40</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-12-04</effectiveDate>
+          <description>HR YT DE WILDE "ETEN NOVEMBER"
+</description>
+          <debitAmount>82.5</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>104.3.42</recordID>
+          <accountID>8003</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-12-04</effectiveDate>
+          <description>HR YT DE WILDE "ETEN NOVEMBER"
+</description>
+          <creditAmount>82.5</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>122</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "RF03 18"
+</description>
+        <period>9</period>
+        <transactionDate>2017-09-26</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>122.1.43</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0018</documentID>
+          <effectiveDate>2017-09-26</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF03 18"
+</description>
+          <debitAmount>1774.13</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>122.3.44</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0018</documentID>
+          <effectiveDate>2017-09-26</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF03 18"
+</description>
+          <creditAmount>1774.13</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>124</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "RF30 17"
+</description>
+        <period>9</period>
+        <transactionDate>2017-09-26</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>124.1.45</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0017</documentID>
+          <effectiveDate>2017-09-26</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF30 17"
+</description>
+          <debitAmount>1831.36</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>124.3.46</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0017</documentID>
+          <effectiveDate>2017-09-26</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "RF30 17"
+</description>
+          <creditAmount>1831.36</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>126</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "7/0020"
+</description>
+        <period>11</period>
+        <transactionDate>2017-11-15</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>126.1.47</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0020</documentID>
+          <effectiveDate>2017-11-15</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "7/0020"
+</description>
+          <debitAmount>1716.9</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>126.3.48</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0020</documentID>
+          <effectiveDate>2017-11-15</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "7/0020"
+</description>
+          <creditAmount>1716.9</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>130</transactionID>
+        <description>DE KROON ZORGINSTELLING BV "7/0024"
+</description>
+        <period>12</period>
+        <transactionDate>2017-12-12</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>130.1.49</recordID>
+          <accountID>1010</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0024</documentID>
+          <effectiveDate>2017-12-12</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "7/0024"
+</description>
+          <debitAmount>1716.9</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>130.3.50</recordID>
+          <accountID>1300</accountID>
+          <custSupID>ALBEROZO</custSupID>
+          <documentID>0024</documentID>
+          <effectiveDate>2017-12-12</effectiveDate>
+          <description>DE KROON ZORGINSTELLING BV "7/0024"
+</description>
+          <creditAmount>1716.9</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+      <transaction>
+        <transactionID>236</transactionID>
+        <description>MR.SHOE "MR.SHOE (ARNHEM, NL)" veters voor Yoram
+</description>
+        <period>9</period>
+        <transactionDate>2017-09-26</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>236.1.51</recordID>
+          <accountID>1010</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-09-26</effectiveDate>
+          <description>MR.SHOE "MR.SHOE (ARNHEM, NL)" veters voor Yoram
+</description>
+          <creditAmount>7.95</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>236.3.53</recordID>
+          <accountID>4013</accountID>
+          <documentID></documentID>
+          <effectiveDate>2017-09-26</effectiveDate>
+          <description>MR.SHOE "MR.SHOE (ARNHEM, NL)" veters voor Yoram
+</description>
+          <debitAmount>7.95</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+    </journal>
+    <journal>
+      <journalID>1011</journalID>
+      <description>Boodschappenpot</description>
+      <type>FIN</type>
+    </journal>
+    <journal>
+      <journalID>MEMO</journalID>
+      <description>Memoriaal</description>
+      <type>MEMO</type>
+      <transaction>
+        <transactionID>677</transactionID>
+        <description>Verwerking resultaat 2017</description>
+        <period>12</period>
+        <transactionDate>2017-12-31</transactionDate>
+        <sourceID></sourceID>
+        <line>
+          <recordID>677.1.54</recordID>
+          <accountID>9998</accountID>
+          <documentID>BAG</documentID>
+          <effectiveDate>2017-12-31</effectiveDate>
+          <description>Verwerking resultaat 2017</description>
+          <debitAmount>7968.84</debitAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+        <line>
+          <recordID>677.3.55</recordID>
+          <accountID>1410</accountID>
+          <documentID>BAG</documentID>
+          <effectiveDate>2017-12-31</effectiveDate>
+          <description>Verwerking resultaat 2017</description>
+          <creditAmount>7968.84</creditAmount>
+          <costDesc></costDesc>
+          <productDesc></productDesc>
+          <projectDesc></projectDesc>
+        </line>
+      </transaction>
+    </journal>
+    <journal>
+      <journalID>OPEN</journalID>
+      <description>Openingssaldi</description>
+      <type>OPEN</type>
+      <transaction>
+        <transactionID>10000056</transactionID>
+        <description>Openingssaldi</description>
+        <period>1</period>
+        <transactionDate>2017-01-01</transactionDate>
+        <sourceID></sourceID>
+      </transaction>
+    </journal>
+  </transactions>
+</auditfile>
