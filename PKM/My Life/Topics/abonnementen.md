@@ -6,7 +6,7 @@ tags:
   - abonnementen
   - tooling
   - administratie
-last_updated: 2026-06-16
+last_updated: 2026-07-03
 ---
 
 # Abonnementen – overzicht
@@ -45,7 +45,27 @@ Levend overzicht van alle terugkerende betalingen. Wordt automatisch bijgehouden
 
 | Dienst | Type | Bedrag | Periode | Volgende verlenging | Betaalwijze | Categorie |
 |--------|------|--------|---------|-------------------|-------------|-----------|
-| GoDaddy – RIVIERENLANDDARTSBOND.NL | Domein | €9,67 | Jaar | April 2027 | ? | Domein – zie [[rivierenland-darts-bond]] |
+| GoDaddy – RIVIERENLANDDARTSBOND.NL | Domein | €9,67 | Jaar | 4 mei 2027 | PayPal | Domein – zie [[rivierenland-darts-bond]] |
+| GoDaddy – MIJNRDB.NL | Domein | €9,67 | Jaar | 1 juli 2027 | PayPal | Domein – zie [[rivierenland-darts-bond]] |
+| GoDaddy – RDBDARTS.NL | Domein | €9,67 | Jaar | 1 oktober 2026 | PayPal | Domein – zie [[rivierenland-darts-bond]] |
+| GoDaddy – DEROTSPUTTEN.NL | Domein | €9,67 | Jaar | 1 maart 2027 | PayPal | Domein – zie [[de-rots-putten]] |
+| GoDaddy – PRAKTIJKVOLUITLEVEN.NL | Domein | €9,67 | Jaar | 2 juli 2027 | PayPal | Domein – zie [[heleen-van-den-berg]] / [[project_praktijkvoluitleven-migratie]] |
+| GoDaddy – PRAKTIJKGEWOONZIJN.NL | Domein | €9,67 | Jaar | 24 januari 2027 | PayPal | Domein – zie [[praktijk-gewoon-zijn]] |
+| GoDaddy – GEZINSHUISGEWOONTHUIS.NL | Domein | €9,67 | Jaar | 15 augustus 2026 | PayPal | Domein – zie [[gewoon-thuis]] |
+
+### Eigen domeinen (Gewoon Sander)
+
+| Dienst | Type | Bedrag | Periode | Volgende verlenging | Betaalwijze | Categorie |
+|--------|------|--------|---------|-------------------|-------------|-----------|
+| GoDaddy – GEWOONSANDER.NL | Domein | €9,67 | Jaar | 3 september 2026 | PayPal | Domein – [[gewoon-sander]] |
+| GoDaddy – VANOCKENBURGZWAAN.NL | Domein | €9,67 | Jaar | 11 maart 2027 | PayPal | Domein – [[gewoon-sander]] |
+| GoDaddy – DEVOORDELIGSTE.NL | Domein | €9,66 | Jaar | 11 maart 2027 | PayPal | Domein – [[gewoon-sander]] |
+| GoDaddy – LED-VOORDELIG.NL | Domein | €9,67 | Jaar | 11 maart 2027 | PayPal | Domein – [[gewoon-sander]] |
+| GoDaddy – dartsacademy013.nl | Domein | €6,04 (registratie) | Jaar | 9 januari 2027 | PayPal | Domein – [[gewoon-sander]] |
+| GoDaddy – DARTSCOACHING.EU | Domein | €13,30 | Jaar | 28 oktober 2026 | PayPal | Domein – [[darts-coaching]] |
+| GoDaddy – dartscoaching.online | Domein | €1,23 | Jaar | 28 oktober 2026 | PayPal | Domein – [[darts-coaching]] |
+
+Volledig overzicht + brondata: [[2026-07-02-godaddy-domeinverlengingen-overzicht]].
 
 ## Te opzeggen zodra actie compleet
 

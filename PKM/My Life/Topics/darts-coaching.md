@@ -60,3 +60,4 @@ Bronnen: [Bull's Darts productpagina](https://www.bulls.nl/products/scoreboards/
 - [[passie]]
 - [[CRM/People/joppe-bakens]]
 - Vertrouwensladder trainingsmethodiek — zie journal [[2026-06-21]]
+- [[2026-07-03-1-day-script-storyboard-template]] — sjabloon voor het scripten van korte verkoop-/instructievideo's, mogelijk bruikbaar voor toekomstige content

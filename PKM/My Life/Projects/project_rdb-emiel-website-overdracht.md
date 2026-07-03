@@ -30,6 +30,7 @@ Meest recent bovenaan.
 - [ ] Datum verifiëren: prijsuitreiking/bestuurspresentatie (Sanders genoemde "morgenavond") vs. officiële ALV-datum (4 juli in eerdere notitie) — welke is leidend voor de deadline?
 - [ ] Alle toegang en informatie voor Emiel regelen (WPMU Dev dashboard, Google Workspace, plugin-overzicht) — vergelijkbaar met de Heleen-aanpak maar breder, want bestuurslid-niveau
 - [ ] Checken of de eerder geplande actie "Sander stuurt inloggegevens 25 juni" daadwerkelijk is gebeurd, of dat dit alsnog moet gebeuren
+- [ ] **Bij het opzetten van RDB-facturatie (WPMU Dev Hub):** lering uit de Heleen-case — RDB had hetzelfde "geen creditcard"-probleem. Zet standaard een notitieveld op de factuur met de strekking "je kunt het bedrag ook gewoon overmaken als er geen creditcard beschikbaar is". Voorkomt een handmatig mailtje per keer en dat deze taak steeds opnieuw vergeten wordt.
 
 ## Next steps
 

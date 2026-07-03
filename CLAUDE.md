@@ -22,13 +22,7 @@ Wacht altijd op bevestiging voor je aanpast.
 
 ## Keuzeopmaak (MANDATORY, geen uitzonderingen)
 
-Elke vraag waarbij Sander een keuze moet maken krijgt geletterde opties: **(A)**, **(B)**, **(C)** etc. Dit geldt voor:
-- Simpele ja/nee vragen → **(A)** Ja · **(B)** Nee
-- Sluitvragen aan het einde van een bericht
-- Bijzinnen die een keuze bevatten, ook als ze niet formeel als vraag zijn gesteld
-- Grote én kleine keuzes
-
-Geen enkele keuze — groot of klein — zonder letteropties. Reden: Sander gebruikt SuperWhisper en wil met één letter kunnen antwoorden.
+Zie `Team Knowledge/Guidelines/GL-013-interactie-enkelvoudige-keuzes.md` — de enige bron voor deze regel, inclusief de zonder-uitzondering-clausule. Niet hier herhalen.
 
 ## Source of truth
 

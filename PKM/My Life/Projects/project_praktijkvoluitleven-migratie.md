@@ -20,6 +20,7 @@ Sander beheert de website en hosting van [[heleen-van-den-berg]] (Praktijk Volui
 
 Meest recent bovenaan.
 
+- **2026-07-03** — Heleen bevestigt dat ze de IMAP/SMTP-instellingen zelf kan zien in haar portal (haar wens was om Outlook te blijven gebruiken). WhatsApp-bericht gestuurd (persoonlijk, "ik"/"mij" — GewoonSander is een eenmanszaak zonder personeel): vraag of ze er zelf uitkomt met het instellen van Outlook, met het aanbod om te helpen als dat niet lukt. Sander zorgt daarnaast voor een handleiding/instructies die ze erbij krijgt.
 - **2026-07-02 (vervolg, later op de dag)** — Factuur en portaal afgerond:
   - Productafbeeldingen toegevoegd aan "Hostingpakket" (grijs "Host"-icoon) en "Gebruik Divi" (paars "Divi"-icoon) in WPMU Dev Hub Client Billing, in dezelfde stijl als de bestaande .nl- en RDB-icoontjes.
   - Ontdekt dat Heleens klantrol in de Hub niet "Access Billing Only" is (zoals eerder gepland), maar de aangepaste rol **"Klant - Mail en Facturering"** — deze heeft ook "Pro Email" ingeschakeld, wat haar in het klantportaal (gewoonsander.nl) toegang geeft tot het bekijken/configureren van haar eigen mailaccount, inclusief IMAP/SMTP-instellingen.
@@ -46,16 +47,18 @@ Meest recent bovenaan.
 
 - [ ] WPMU Dev klantportaal + ticket-e-mailintegratie afronden en testen (in uitvoering)
 - [x] Heleen bestaat al als klant in de Hub (Praktijk Voluit Leven, heleen_meems@hotmail.com, status Actief, rol "Klant - Mail en Facturering")
-- [x] **Factuur Heleen (2025+2026)** — verzonden, status "Payment Due", €328,96 incl. btw
-- [ ] Wachten op Heleens reactie: kan ze de IMAP/SMTP-instellingen zelf terugvinden in haar portal onder "Pro Email"? Zo niet → alsnog zelf doorsturen via het ticketsysteem
+- [x] **Factuur Heleen (2025+2026)** — betaald via overboeking (2026-07-03), €328,96 incl. btw. Niet via klantportal betaald — daar kan alleen met creditcard betaald worden
+- [x] Heleen bevestigt: kan de IMAP/SMTP-instellingen zelf terugvinden in haar portal onder "Pro Email" (2026-07-03)
+- [ ] Heleens reactie afwachten: komt ze zelf uit het instellen van Outlook, of heeft ze hulp nodig? Handleiding maakt Sander pas als Heleen daar zelf naar vraagt, niet standaard vooraf.
+- [x] Heleen heeft betaald naar een **oudere zakelijke rekening** van Sander (niet zijn huidige) — bevestigd: de oude rekening stond nog op de door WPMU Dev automatisch gegenereerde factuur (Heleen heeft dus niets fout gedaan)
+- [x] **Bankrekening op WPMU Dev-facturen bijgewerkt.** Sander heeft het bankrekeningveld dat op de factuur komt rechtstreeks aangepast in de WPMU Dev Hub zelf (geen Stripe-koppeling nodig, Athena's Stripe-hypothese klopte dus niet). Toekomstige facturen tonen automatisch de juiste rekening — geen apart appje naar Heleen nodig.
 - [ ] Resterend tegoed van Versio nog te ontvangen
 - [ ] Heleen informeren over de volledige overstap (nieuwe inloggegevens, mailinstellingen)
 - [ ] Klant-record e-mailadres van Heleen ooit terugzetten naar heleen@praktijkvoluitleven.nl zodra haar eigen mailbox-toegang stabiel is (nu bewust op heleen_meems@hotmail.com om Sanders SSO-toegang niet te breken)
 
 ## Next steps
 
-- Heleens reactie afwachten op de vraag over de Outlook/IMAP-instellingen in haar portal
-- Zodra ze betaalt: factuurstatus in de Hub controleren (nu "Payment Due")
+- Heleens reactie afwachten op de vraag over het instellen van Outlook
 - Testklant-flow (Stripe-credit-truc) doorlopen voor volledige eind-tot-eind-verificatie van het klantportaal (optioneel, portal werkt in de praktijk al)
 
 ## Cross-links
@@ -63,3 +66,6 @@ Meest recent bovenaan.
 - [[2026-06-27-00-00_Larry_praktijkvoluitleven-migratie-dns-ssl]] — migratiesessie DNS/SSL
 - [[2026-07-01-01-22_hermes_email-inbox-postnl-boekfactuur]] — mail-DNS/MX fix
 - [[2026-07-02-08-44_hermes_permissies-en-heleen-case]] — start van het klantportaal-traject
+- [[2024-02-05-gewoonsander-factuur-2159-praktijkvoluitleven]] — historische factuur uit het Versio-tijdperk (2024)
+- [[2026-07-02-gewoonsander-invoice-inv-0002]] — testfactuur portaalverificatie (bewijs van de IBAN-fix)
+- [[2026-07-03-gewoonsander-invoice-inv-0003-heleen-van-den-berg]] — definitieve, betaalde factuur 2025+2026 (€328,96)

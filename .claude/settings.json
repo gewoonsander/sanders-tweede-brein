@@ -105,6 +105,17 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/.claude/hooks/check-lettered-options.py\"",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   }
 }
