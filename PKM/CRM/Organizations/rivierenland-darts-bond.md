@@ -55,7 +55,7 @@ Regionale dartsbond voor Nijmegen en omstreken. Organiseert teamcompetitie en in
 
 ## Bestuurswisseling 2026
 
-**ALV:** 4 juli 2026 — officiële verkiezing nieuw bestuur.
+**ALV:** vandaag, 2026-07-03 — officiële verkiezing nieuw bestuur, direct aansluitend op de huldiging/prijsuitreiking (eerdere notitie noemde abusievelijk 4 juli 2026, gecorrigeerd).
 
 **Nieuw bestuur (elect):**
 - Voorzitter: **Danny** — wil verantwoordelijkheden actief spreiden (geen concentratie meer bij één persoon)
@@ -64,7 +64,7 @@ Regionale dartsbond voor Nijmegen en omstreken. Organiseert teamcompetitie en in
 - Toernooien: eigen verantwoordelijke (naam nog onbekend)
 
 **Oud-bestuur context:**
-- **Nick** had alles onder zich: website, communicatie, toernooien, Facebook — raakte overbelast (ook privé: schoonzus ziek). Website en contacten liepen daardoor vast. Canva-account: onduidelijk of persoonlijk of RDB → navragen bij Nick.
+- **[[nick-pol]]** (huidig/aftredend voorzitter) had alles onder zich: website, communicatie, toernooien, Facebook — raakte overbelast (ook privé: schoonzus ziek). Website en contacten liepen daardoor vast. Beheert het domein **rdbdarts.nl** op Google — relevant voor de vraag of Sander met `webmaster@rdbdarts.nl` kan inloggen (zie [[project_rdb-emiel-website-overdracht]]). Canva-account: onduidelijk of persoonlijk of RDB → navragen bij Nick.
 - **Serge Taber** had destijds gratis Google Workspace ingericht — legacy account met ~7-8 e-mailadressen.
 
 **Communicatieprobleem dat opgelost wordt:**
@@ -76,4 +76,4 @@ Regionale dartsbond voor Nijmegen en omstreken. Organiseert teamcompetitie en in
 - Hosting: WPMU Dev (dedicated) — beheerd door Sander
 - E-mail: Google Workspace legacy (gratis, ~7-8 accounts)
 - WordPress (huidige installatie) + nieuwe installatie naast elkaar (Emiel bouwt offline)
-- Doelstelling: website live ná ALV 4 juli met bestuursinformatie + nieuwsberichten seizoensstart
+- Doelstelling: website live ná de ALV van vandaag (2026-07-03) met bestuursinformatie + nieuwsberichten seizoensstart

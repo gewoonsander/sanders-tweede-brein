@@ -3,6 +3,7 @@ full_name: Emiel Theloosen
 first_name: Emiel
 last_name: Theloosen
 email: e.theloosen@calvi-insight.com
+phone: 0629263115
 relation: professional
 role: Bestuurslid (elect)
 company: RDB (Rivierenlanddartsbond)
@@ -40,7 +41,7 @@ Telecom billing specialist, opgericht 2001, gevestigd in Tilburg. 51-200 medewer
 
 ## RDB rol
 
-- Aankomend bestuurslid RDB — officiële verkiezing op ALV **4 juli 2026**
+- Aankomend bestuurslid RDB — officiële verkiezing op ALV, **vandaag 2026-07-03**, direct aansluitend op de huldiging/prijsuitreiking (gecorrigeerd — eerdere notitie noemde abusievelijk 4 juli)
 - Portefeuille: **communicatie** — website, socials, sponsoring, tone of voice
 - Door Danny aangewezen als enige verantwoordelijke voor communicatie (geen kruisbestuiving meer zoals onder Nick)
 - Via Nick in contact gekomen met Sander — vraag over hostinggegevens huidige website
@@ -73,7 +74,7 @@ Telecom billing specialist, opgericht 2001, gevestigd in Tilburg. 51-200 medewer
 
 - [ ] **Sander → Emiel** (woensdag 25 juni): inloggegevens WPMU Dev dashboard + Google Workspace sturen
 - [ ] **Sander**: Emiel link sturen naar WPMU Dev plugin-overzicht
-- [ ] **Emiel**: na ALV (4 juli) website live met nieuwe bestuursinformatie + communicatievisie
+- [ ] **Emiel**: na ALV (vandaag, 2026-07-03) website live met nieuwe bestuursinformatie + communicatievisie
 
 ## Open vragen
 
