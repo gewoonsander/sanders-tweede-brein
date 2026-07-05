@@ -302,7 +302,7 @@ Notes:
 ```yaml
 ---
 title: Apartment Lease 2026                # required
-doc_type: contract                         # contract | id | invoice | warranty | medical | tax | other
+doc_type: contract                         # contract | id | invoice | warranty | medical | tax | inventory | other
 physical_location: top drawer of the desk
 digital_location: Dropbox/Legal/2026-lease.pdf
 issued_on: 2026-01-15
@@ -321,7 +321,8 @@ Notes:
 - `title` is the field, not `name` - aligns with SOP-002's `documents.title` column.
 - `physical_location` and `digital_location` are independent. A document can have both, either, or neither.
 - `renewal_trigger` is the date you want to be reminded to act. The actual `expiry_date` may be later.
-- Body section conventions: `## Summary`, `## Key terms`, `## Notes`.
+- `doc_type: inventory` - a living reference list (owned hardware, active software/subscriptions, etc.) that gets appended to over time, as opposed to a static single-purpose document. Distinct from a My Life Key Element: an inventory is a registry of things you have, not a permanent domain of life. When something looks like it belongs in Key Elements but is really "a list of stuff" (devices, tools, accounts), it goes here instead.
+- Body section conventions: `## Summary`, `## Key terms`, `## Notes`. Inventory-type documents may use their own internal table/section structure instead (they are living lists, not single-fact records).
 
 ## Specialist-contract frontmatter
 

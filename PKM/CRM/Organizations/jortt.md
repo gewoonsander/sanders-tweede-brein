@@ -19,6 +19,9 @@ Boekhoudprogramma dat sinds medio 2026 e-Boekhouden.nl vervangt voor [[gewoon-sa
 
 - Boekhouder [[bart]] beheert de administratie in Jortt via VMB Advies.
 - **Dropbox-account:** `sander@gewoonsander.nl` heeft een gratis Dropbox-account dat gekoppeld is aan de Jortt-workflow (bestandsuitwisseling/opslag rond de boekhouding).
+- **Twee Jortt-accounts, beide plan "Jortt MKB"** (bevestigd via Bart, 2026-07-05):
+  - `sander@gewoonsander.nl` — Van Gewoon Sander
+  - `gewoonthuis@alberozorggroep.nl` — Gezinshuis Gewoon Thuis (zie [[gewoon-thuis]])
 
 ## Notes
 

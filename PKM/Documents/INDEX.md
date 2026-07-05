@@ -16,6 +16,8 @@ Markdown stubs that describe and point at the user's real documents (passports, 
 - [[2025-12-11-coaching-voorstel-marc-vleghert]] — Hybride coaching + sponsoringvoorstel voor Marc Vleghert, €40/mnd, 12 mnd traject.
 - [[2026-01-13-intake-marc-vleghert]] — Intake coachgesprek Marc Vleghert, achtergrond, tijdlijn, doelen, risico's.
 - [[2026-02-10-coachgesprek-marc-vleghert-sessie-2]] — Coachsessie 2 Marc Vleghert, Dutch Open bespreking, afspraken logboek + routine.
+- [[apparaten]] — levend overzicht van alle digitale hardware (specs, locatie, garantie). `doc_type: inventory`.
+- [[software-en-tools]] — levend overzicht van gebruikte software/tools en abonnementen. `doc_type: inventory`.
 
 ## What goes here
 

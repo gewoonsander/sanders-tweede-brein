@@ -30,3 +30,5 @@ Dit is ons eigen gezinshuis en bedrijf. Huismanstraat 34 is zowel privéwoning a
 - Capaciteit: 2 cliënten
 - Ageeth Gerritsen vertrekt per 1 juli 2026 → plek komt vrij voor nieuwe cliënt
 - Thomas van Suilichem is huidige cliënt
+- Boekhouding loopt via [[jortt]], account `gewoonthuis@alberozorggroep.nl` (plan Jortt MKB, bevestigd via [[bart]], 2026-07-05) — "Albero Zorggroep" is het e-maildomein/de koepel waaronder dit Jortt-account is aangemaakt
+- Bankieren via [[bunq]] — gedeelde rekening onder bunq Pro (bevestigd 2026-07-05)

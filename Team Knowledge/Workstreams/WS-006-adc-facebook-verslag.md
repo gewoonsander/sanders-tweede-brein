@@ -126,6 +126,7 @@ Sharing is caring — tag de deelnemers en deel dit bericht! 🔄
 5. Pas de sfeerwoorden aan op het specifieke toernooi — geen copy-paste van vorige verslagen.
 6. Lever het concept-bericht aan Larry.
 7. Larry legt het voor aan Sander met een checklist van wat automatisch ingevuld is en wat nog ontbreekt (foto, eventuele quote).
+8. **Vaste stap (sinds 06-07-2026):** zodra het concept compleet is (incl. links naar volgende toernooien, zie [[WS-004-facebook-toernooi-verslag]] Fase 4), slaat Larry het op in `Deliverables/YYYY-MM-DD-facebook-verslag-[locatie].md`, gedateerd op de toernooidatum.
 
 Sander publiceert zelf — Penn en Larry publiceren nooit rechtstreeks op Facebook.
 

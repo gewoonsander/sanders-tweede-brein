@@ -227,6 +227,10 @@ Penn levert het concept-bericht aan Larry. Larry presenteert het aan Sander met:
 
 Sander publiceert zelf — Larry/Penn publiceren nooit rechtstreeks op Facebook.
 
+## Fase 4 — Opslaan in Deliverables (vaste stap, sinds 06-07-2026)
+
+Zodra het concept-bericht (inclusief eventuele links naar volgende toernooien) klaar is, slaat Larry het op als `Deliverables/YYYY-MM-DD-facebook-verslag-[locatie].md` — de datum is de toernooidatum, niet de dag van opstellen. Dit gebeurt ongeacht of Sander het bericht al heeft gepubliceerd; het is het archief van wat is opgesteld, niet van wat live staat.
+
 ---
 
 ## Handmatige invoer (nooit automatiseerbaar)

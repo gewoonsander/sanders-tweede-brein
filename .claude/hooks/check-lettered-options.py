@@ -57,8 +57,9 @@ def main():
 
     ends_in_question = text.rstrip().endswith("?")
     has_lettered_options = bool(re.search(r"\*\*[A-D]\*\*", text))
+    is_marked_open = bool(re.search(r"\(open vraag\)", text, re.IGNORECASE))
 
-    if ends_in_question and not has_lettered_options:
+    if ends_in_question and not has_lettered_options and not is_marked_open:
         print(json.dumps({
             "decision": "block",
             "reason": (
