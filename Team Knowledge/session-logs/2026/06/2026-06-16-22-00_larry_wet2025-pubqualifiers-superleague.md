@@ -16,9 +16,9 @@ Vervolgsessie op [[2026-06-16-16-16_larry_adc-toernooi-crm-prijzengeld]]. Sander
 
 ## What we did
 
-- **Larry/Pax** — Western European Tour 2025 volledig gedocumenteerd. DartsAtlas-pagina's gefetcht voor eindstand en Grand Finals. Sander: #4 eindstand (56 pts, avg 75.24). → Nieuw document [[2025-wet-winmau-western-european-tour]] aangemaakt.
+- **Larry/Pax** — Western European Tour 2025 volledig gedocumenteerd. DartsAtlas-pagina's gefetcht voor eindstand en Grand Finals. Sander: #4 eindstand (56 pts, avg 75.24). → Nieuw document [[2025-11-15-wet-winmau-western-european-tour]] aangemaakt.
 - **Larry/Pax** — Grand Finals (9 november 2025, Leudelange, Luxemburg) vastgelegd: Group 4, 0-3, gem. 80.71 — niet door naar KO.
-- **Larry/Pax** — ADC Global Championship 2025/26 volledig opgezocht via websearch + DartsWorld Magazine. Group 2 (2 december 2025, MODUS Live Lounge Portsmouth), 5e plek (2W-4L, 4 pts) — net buiten top 4. Kwalificatieroute: Brian Raman haakte af → Sander als #4 doorgeschoven. Live op Pluto TV + YouTube. Vastgelegd in [[2025-wet-winmau-western-european-tour]] en [[adc]].
+- **Larry/Pax** — ADC Global Championship 2025/26 volledig opgezocht via websearch + DartsWorld Magazine. Group 2 (2 december 2025, MODUS Live Lounge Portsmouth), 5e plek (2W-4L, 4 pts) — net buiten top 4. Kwalificatieroute: Brian Raman haakte af → Sander als #4 doorgeschoven. Live op Pluto TV + YouTube. Vastgelegd in [[2025-11-15-wet-winmau-western-european-tour]] en [[adc]].
 - **Penn** — Overzicht pub qualifier data samengesteld voor Winmau Benelux Open 2026 (finale 3 oktober Berg en Dal):
   - Stef Onderstal / Dartclub de Rijnvogels, Driel: ma 13+27 jul / ma 10 aug / ma 7+14 sep ✅
   - Heidi / Dartcafe Dubbel 10, Arnhem: ma 6+20 jul / ma 3+17+24 aug ✅
@@ -73,4 +73,4 @@ Begin volgende sessie: check Dennis + Heidi reacties → data definitief vastleg
 ## Cross-links
 
 - [[2026-06-16-16-16_larry_adc-toernooi-crm-prijzengeld]] — directe voorsessie van vandaag
-- [[2025-wet-winmau-western-european-tour]] — nieuw document aangemaakt deze sessie
+- [[2025-11-15-wet-winmau-western-european-tour]] — nieuw document aangemaakt deze sessie

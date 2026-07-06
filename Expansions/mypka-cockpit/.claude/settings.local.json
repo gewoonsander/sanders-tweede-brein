@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/**)",
+      "Bash(ls AGENTS.md)",
+      "Bash(find . -iname \"*.env*\" -not -path \"*/node_modules/*\")",
+      "Bash(cat .gitignore)",
+      "Bash(grep -o '^[A-Z_]*=' \"Team Knowledge/.env\")",
+      "Bash(cat .mcp.json)",
+      "Bash(cat \"PKM/CRM/Organizations/canva.md\")",
+      "Bash(npm view *)"
+    ]
+  },
+  "disabledMcpjsonServers": [
+    "n8n-mcp"
+  ]
+}
