@@ -2,7 +2,7 @@
 title: Opslagstrategie-migratie — foto's naar Apple, documenten naar Google Drive
 date: 2026-07-06
 doc_type: plan
-status: wacht op akkoord
+status: uitgevoerd (Fase 1 overgeslagen op Sanders instructie, zie sessielog 2026-07-06-12-59)
 linked_guidelines: ["GL-001-file-naming-conventions"]
 ---
 

@@ -127,13 +127,14 @@ Voorbeelden:
   - `2019-09-19-daan-gezinshuis.mp4`
   - `2026-06-29-verbouwing-huismanstraat-keuken.jpg`
 
-### 13. Mappenstructuur op iCloud Drive
+### 13. Mappenstructuur voor documenten en media
 
-De topstructuur spiegelt de zes Key Elements uit [[GL-010-pka-modeling-principles]]. Zo gebruik je op iCloud dezelfde mentale indeling als in de PKM.
+Sinds de opslagstrategie-migratie van 2026-07-06 zijn documenten en media over twee verschillende clouddiensten verdeeld — dit is de omgekeerde indeling van de eerdere versie van deze paragraaf. Zie `Deliverables/2026-07-06-opslagstrategie-migratie-plan.md` en de sessielog `Team Knowledge/session-logs/2026/07/2026-07-06-09-47_hermes_opslagstrategie-foto-apple-documenten-google.md` voor de volledige afweging.
+
+**Documenten** (Key Elements-structuur, spiegelt [[GL-010-pka-modeling-principles]]) leven op Google Drive:
 
 ```
-iCloud Drive/
-├── 00-inbox/              ← alles wat nog gesorteerd moet worden
+Google Drive/Mijn Drive/documenten/
 ├── 01-geloof/             ← Geloof & Spiritualiteit
 ├── 02-gezondheid/         ← Gezondheid
 ├── 03-passie/             ← Darts, coaching, film/video
@@ -143,7 +144,11 @@ iCloud Drive/
 └── admin/                 ← Paspoort, verzekeringen, identiteit
 ```
 
-Submappen binnen elk Key Element volgen ook kebab-case en worden aangemaakt op het moment dat ze nodig zijn — niet preventief.
+**iCloud Drive** bevat alleen nog `00-inbox/` als tijdelijke landingsplek voor nog te sorteren bestanden. Vanuit daar routeer je door naar de juiste Key Element-map op Google Drive.
+
+**Foto's en video's** leven in Apple Foto's (iCloud Foto's) — een aparte iCloud-dienst, niet de iCloud Drive-mapstructuur. Verwerkte media krijgt bij import wel de naamgeving uit §12, maar de opslaglocatie is de Foto's-bibliotheek, geen Drive-map.
+
+Submappen binnen elk Key Element volgen kebab-case en worden aangemaakt op het moment dat ze nodig zijn — niet preventief. Binnen `03-passie` geldt aanvullend: onderneming/project-specifieke content krijgt een eigen submap (bijv. `dartscoaching/`, `adc/`, `rdb/`) in plaats van los in de root te staan. Er is bewust geen apart "werk"-Key Element — vanuit het Ikigai-principe overlappen werk en passie per definitie, dus werkprojecten blijven onder `03-passie`.
 
 ## Updates to this Guideline
 

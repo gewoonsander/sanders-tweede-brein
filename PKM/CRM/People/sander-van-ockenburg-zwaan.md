@@ -68,7 +68,7 @@ Speelt al sinds seizoen 2011-12 bij D.T. Irritant (Eredivisie). Daarvoor 2010-11
 - **170 Club** lid
 - Langste reeks singlewinst ooit: **20x** (2014)
 
-**Vaste koppelpartners D.T. Irritant (25-26):** Jaimy Melchels, Jos Wenders, Frank Hoelen, Terry Lenting.
+**Vaste selectie D.T. Irritant (25-26)** (bron: Teambeheer, geverifieerd 2026-07-06): [[jaimy-melchels|Jaimy Melchels]], [[jos-wenders|Jos Wenders]], [[frank-hoelen|Frank Hoelen]], [[terry-lenting|Terry Lenting]], [[marc-vleghert|Marc Vleghert]], [[niels-van-zanten|Niels van Zanten]], [[niels-haverdil|Niels Haverdil]], [[thommy-schuurink|Thommy Schuurink]]. Sanders eigen Teambeheer-spelerspagina (als "Sander Voz"): https://feeds.teambeheer.nl/web/speler?d=1&l=2100113&s=25-26
 
 **LaCo (Landelijke Competitie):** speelde 4 seizoenen voor het [[rivierenland-darts-bond|RDB]]-selectieteam (Open heren). LaCo-teams zijn bondsselecties; spelers moeten bij die bond zijn aangesloten. **Kampioen 2021-2022** — RDB won dat jaar de LaCo Open titel. Vaste koppelpartner: Niels van Zanten. Teambeheer LaCo-ID (d=20): 2100113.
 

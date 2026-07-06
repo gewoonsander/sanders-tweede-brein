@@ -36,3 +36,7 @@ Sharing is caring — deel 'm in de groep en tag wie er nog mee moet doen! 🔄
 ## Status
 
 - [ ] Door Sander gepubliceerd op Facebook / WhatsApp
+
+## Verloop op de avond zelf (2026-07-06)
+
+Aanvankelijk maar 6 aanmeldingen (minimum 8 nodig) — Sander overwoog afgelasten en had dit afgestemd met John (ADC-directeur), met deadline 18:00 uur. Uiteindelijk 7 man bevestigd, en Heidi zelf bereid mee te gooien als aanvulling. Toernooi ging **gewoon door**, John hoefde niets te doen.

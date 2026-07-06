@@ -19,7 +19,7 @@ Talentvolle amateurdarter met profambities (PDC binnen 3–5 jaar), teamgenoot b
 
 ## Darts
 
-Speelt bij **D.T. Irritant** in de RDB Eredivisie ([[rivierenland-darts-bond]]).
+Speelt bij **D.T. Irritant** in de RDB Eredivisie ([[rivierenland-darts-bond]]). Teambeheer-spelerspagina: https://feeds.teambeheer.nl/web/speler?d=1&l=2160230&s=25-26
 
 Speelt Superleague bij **SL Rijnvogels Duurzaam** (24-25 en 25-26; daarvoor SL Dubbel10 Arnhem). Vaste koppelpartner van [[sander-van-ockenburg-zwaan]]. Gaat seizoen **26-27 naar een ander Superleague team**.
 

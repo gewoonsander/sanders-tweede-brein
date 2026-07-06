@@ -26,7 +26,7 @@ Sander draagt vanavond, zodra Emiel officieel is gekozen, het webmasteraccount (
 - Portaal: `gewoonsander.nl/hub`
 
 **WordPress-inlog (de website zelf):**
-- URL: `https://rivierenlanddartsbond.nl/wp-admin/`
+- URL: `https://rivierenlanddartsbond.nl/ikwilerin` (let op: **niet** het standaard `/wp-admin/`-pad — dat is bewust afgeschermd uit veiligheidsoverweging)
 - Gebruikersnaam: `webmaster@rdbdarts.nl`
 - Wachtwoord: `bzn***************m` (het echte wachtwoord stuurt Sander via een apart kanaal, niet in dit document)
 

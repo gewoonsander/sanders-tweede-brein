@@ -19,6 +19,31 @@ Markdown stubs that describe and point at the user's real documents (passports, 
 - [[apparaten]] — levend overzicht van alle digitale hardware (specs, locatie, garantie). `doc_type: inventory`.
 - [[software-en-tools]] — levend overzicht van gebruikte software/tools en abonnementen. `doc_type: inventory`.
 
+### Geïmporteerd uit Apple Notities (6 juli 2026)
+
+- [[ideeenbus]] — ideeën voor content rond Dart Buddies-robotjes en quotes.
+- [[challenges-dartbuddies]] — brainstorm challenges om content te creëren voor Dart Buddies.
+- [[bedtijden-kinderen]] — bedtijdenschema van de kinderen.
+- [[inpaklijst-darten]] — paklijst voor dartstoernooien.
+- [[quotes]] — verzamelde quotes, met ingesloten afbeelding.
+- [[kort-verhaal-fragment-philip-toine]] — opgeslagen tekstfragment (Philip/Toine), oorsprong onduidelijk.
+- [[concept-brief-petra-schoolsanctie]] — conceptbrief aan Petra over een schoolsanctie.
+- [[dartbuddies-landingspagina-link]] — link naar de Dart Buddies-landingspagina.
+- [[afwasbeurten]] — afwasschema huishouden.
+- [[dieet]] — dieetnotities.
+- [[dubbel-10-drukwerk]] — link naar drukwerkbestanden Dubbel 10.
+- [[boek-kortingscode]] — kortingscode voor het darttactiek-boek.
+- [[dartresultaten-overzicht]] — overzicht dartresultaten/plaatsingen, met ingesloten afbeelding.
+- [[darts-checkout-140-notitie]] — checkout-notatie (T18 T18 D16 = 140).
+- [[keukentimer-pomodoro-product]] — opgeslagen productomschrijving keukentimer.
+- [[mantra-focus-energie-flow]] — persoonlijke mantra/quote.
+- [[zakgeld-xanne-lynn]] — zakgeldregistratie Xanne Lynn.
+- [[declaratie-145-euro]] — declaratienotitie €145.
+- [[ndb-rdb-lidnummers]] — NDB/RDB-lidnummers (ook Marc Vleghert).
+- [[maten-sander]] — kledingmaten Sander.
+- [[badkamer-boven-huismanstraat]] — maatvoering badkamer boven, Huismanstraat.
+- [[biljart-tafelmaten]] — maatvoering biljarttafel.
+
 ## What goes here
 
 - Identity documents (passport, ID card, driver's license).
