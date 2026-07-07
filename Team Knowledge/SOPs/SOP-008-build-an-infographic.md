@@ -4,7 +4,7 @@
 - **Default owner:** Charta
 - **Reusable by any agent.** This is a skill, not a 1:1 ownership. Pixel can invoke this SOP when stylizing on top of a structural draft. Penn can invoke it to lay out a captured idea. Any specialist who needs to turn information into a single-image, scannable layout follows this procedure.
 - **Triggered by:** "make me an infographic", "lay this out as one image", "I need a flowchart / decision tree / swimlane / timeline / hub-and-spoke / quadrant matrix", "make a one-pager", "create a cheat sheet", "draft the layout, then we'll polish it".
-- **References:** [[GL-003-design-system]], [[GL-001-file-naming-conventions]], [[Team/Charta - Infographic Designer/AGENTS]], [[SOP-009-generate-a-styled-image]] (for the stylization handoff).
+- **References:** [[GL-003-design-system]] (the multi-brand hub — confirm the brand and inheritance model here first), `Team Knowledge/Guidelines/GL-003-brands/<brand-slug>.md` (the actual token file, read once the brand is confirmed), [[GL-001-file-naming-conventions]], [[Team/Charta - Infographic Designer/AGENTS]], [[SOP-009-generate-a-styled-image]] (for the stylization handoff).
 
 ## Purpose
 
@@ -15,21 +15,26 @@ The procedure is structural. It does not invent content. The user (or Penn for c
 ## What this SOP does not do
 
 - Does not generate photographic, illustrated, or AI-rendered finishes. That is [[SOP-009-generate-a-styled-image]] (Pixel's skill). When a deliverable needs both layout and stylization, run this SOP first, then hand off to [[SOP-009-generate-a-styled-image]].
-- Does not author the design system itself. That is Iris's territory in [[SOP-006-author-a-design-system]].
+- Does not author the design system itself. That is Harmonia's territory in [[SOP-006-author-a-design-system]].
 - Does not write copy. The text is an input, never invented during layout.
 
 ## Inputs
 
 - **The brief:** what the infographic is *about*. One sentence is enough; three is better.
+- **Which brand/venture this is for** (e.g. ADC Regio Oost, DartsCoaching.nl, Dart Buddies, Van Gewoon Sander). Mandatory, non-optional briefing input — never infer it or default to "the last brand used." If not named, ask before reading any tokens.
 - **The content:** the actual rows / nodes / steps / cells. Plain text the layout will hold.
 - **The format:** single image, carousel, PDF. If unclear, ask.
 - **The aspect:** 16:9 landscape (slide / hero), 1:1 square (social), 1080x1350 (LinkedIn carousel), 1600x900 (X), letter / A4 (PDF). Default to the platform the user names.
 
 ## Step-by-step procedure
 
-### Step 1 — Read the design system
+### Step 1 — Confirm the brand, then read its design system
 
-Open [[GL-003-design-system]]. Confirm the sections this task needs are populated:
+Open [[GL-003-design-system]] first — the multi-brand hub. It carries no tokens itself; it confirms the brand-first rule, the inheritance model, and the current brand registry.
+
+Once the brand is confirmed, open `Team Knowledge/Guidelines/GL-003-brands/<brand-slug>.md` — never the hub, never a different brand's file. If that file declares `inherits from: <parent>.md`, open the parent too and apply its tokens with this brand's `## Overrides` layered on top.
+
+Confirm the sections this task needs are populated:
 
 - **Color palette** — for any colored block, border, accent.
 - **Typography** — for heading and body type roles.
@@ -38,8 +43,8 @@ Open [[GL-003-design-system]]. Confirm the sections this task needs are populate
 
 If a needed section is empty, **stop**. Two paths:
 
-1. Route to Iris first (run [[SOP-006-author-a-design-system]] for the missing section). Preferred for any non-trivial creative work.
-2. Proceed in flagged "no-style fallback" mode: neutral grayscale, system font stack, default 8px spacing. The deliverable explicitly notes "GL-003 §X not populated; revisit when populated."
+1. Route to Harmonia first (run [[SOP-006-author-a-design-system]], scoped to this brand, for the missing section). Preferred for any non-trivial creative work.
+2. Proceed in flagged "no-style fallback" mode: neutral grayscale, system font stack, default 8px spacing. The deliverable explicitly notes "`GL-003-brands/<brand-slug>.md` §X not populated; revisit when populated."
 
 ### Step 2 — Pick the layout shape
 
@@ -72,7 +77,7 @@ If the content exceeds the budget, propose a split before laying out. Two clean 
 
 Two-layer architecture for any diagram:
 
-- **Layer 1 (HTML/CSS):** Nodes positioned via CSS Grid, Flexbox, or absolute positioning. Card surfaces, text, icons. Read color/type/spacing from GL-003 tokens (literalize the values into CSS at author time, but pull them from GL-003 — never invent).
+- **Layer 1 (HTML/CSS):** Nodes positioned via CSS Grid, Flexbox, or absolute positioning. Card surfaces, text, icons. Read color/type/spacing from the confirmed brand's `GL-003-brands/<brand-slug>.md` tokens (literalize the values into CSS at author time, but pull them from that brand file — never invent).
 - **Layer 2 (SVG overlay):** `position: absolute`, same dimensions as Layer 1, `z-index: 5`. All connectors, arrows, curved paths. Reusable `<marker>` definitions in `<defs>`.
 
 Connector quick reference:
@@ -123,7 +128,7 @@ Before delivery, scan the rendered output against these checks:
 
 1. **Scannable in 10 seconds?** A reader who hasn't seen this content gets the point at a glance.
 2. **Hierarchy clear?** Three type-size levels max. The eye lands on the title first, then the section, then the body.
-3. **Brand consistent?** Every color, font, and spacing value traces to GL-003. No drift.
+3. **Brand consistent?** Every color, font, and spacing value traces to the confirmed brand's `GL-003-brands/<brand-slug>.md` file. No drift.
 4. **Connector geometry right?** Arrows point where they should. No overlaps. Elbow turns at right angles. Curves don't kink.
 5. **No pills.** Unless the avatar/cycle exception applies.
 6. **Text legible at delivery size?** If the deliverable is a thumbnail, type at 1× zoom on a phone.
@@ -144,17 +149,18 @@ If the deliverable was structurally complete but needs photographic, illustrated
 
 Write `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_<agent-id>_<topic-slug>.md` with type `end-of-session`. Capture:
 
+- Which brand this was built for
 - Brief and content shape
 - Layout chosen and why
-- Which GL-003 tokens consumed
+- Which brand-file tokens consumed (and from which file, if the brand inherits)
 - Any toolkit pattern worth reusing
 - Whether stylization handoff to Pixel happened
-- Any flag for stale GL-003 sections
+- Any flag for stale brand-file sections
 
 ## Common mistakes to avoid
 
-- Skipping the GL-003 read at Step 1. The infographic ends up off-brand.
-- Hardcoding values into the source HTML without tracing them to GL-003. The next render against an evolved palette stays stale.
+- Skipping the brand confirmation and brand-file read at Step 1, or reading the hub as if it carried tokens. The infographic ends up off-brand.
+- Hardcoding values into the source HTML without tracing them to the confirmed brand's `GL-003-brands/<brand-slug>.md` file. The next render against an evolved palette stays stale.
 - Cramming 12 blocks into a single image because "the user said one infographic". Two clean infographics always beat one cluttered one.
 - Pure CSS connectors for diagrams. SVG overlay always for connectors.
 - Inventing diamond shapes for decoration. Diamond is decision-only; its outgoing arrow carries the brass-moment.

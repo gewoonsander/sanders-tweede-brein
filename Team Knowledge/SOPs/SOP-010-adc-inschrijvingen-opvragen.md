@@ -36,8 +36,8 @@ Voer deze SOP uit wanneer Sander vraagt:
 
 **Winmau Benelux Open 2026 — planning:**
 - Pub Qualifiers: 29-06-2026 / 20-09-2026
-- Regional Amateur Finals 1 & 2: 26-09-2026 (locatie tbd)
-- Regional Elite Finals: 27-09-2026 (locatie tbd)
+- Regional Amateur Finals 1 & 2: zaterdag 26-09-2026, **Het Twentse Ros** (Hengelo) — locatie nog niet ingevoerd in Dart Atlas, alvast vastgelegd op basis van Sanders eigen planning
+- Regional Elite Finals: zondag 27-09-2026, **Dartcafe Dubbel 10** (Arnhem) — locatie nog niet ingevoerd in Dart Atlas, alvast vastgelegd op basis van Sanders eigen planning
 - Hoofdtoernooi: 03-10-2026, Fletcher Hotel De Holthurnsche Hof, Berg en Dal
 
 ## Procedure

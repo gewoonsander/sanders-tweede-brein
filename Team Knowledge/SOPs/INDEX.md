@@ -15,8 +15,8 @@ Filename pattern: `SOP-NNN-<title>.md`. See [[GL-001-file-naming-conventions]] f
 | SOP-005 | [[SOP-005-nemesis-quality-gate]] | Vera | Visuele + accessibility + responsive QA gate. Zes fases, screenshot-evidence, WCAG 2.2 AA, design-system enforcement. Niets shippet zonder PASS. |
 | SOP-010 | [[SOP-010-adc-inschrijvingen-opvragen]] | Larry (via Mack) | Live inschrijvingen ophalen van Dart Atlas voor ADC Regio Oost. Triggered by vragen als "hoeveel mensen doen mee" of "update ADC-toernooien". |
 
-| SOP-006 | [[SOP-006-author-a-design-system]] | Iris | Stap-voor-stap procedure om een visueel design system te schrijven en te onderhouden in GL-003. |
-| SOP-007 | [[SOP-007-audit-content-for-design-system-compliance]] | Iris | Audit bestaande content op naleving van het design system (GL-003). |
+| SOP-006 | [[SOP-006-author-a-design-system]] | Harmonia | Stap-voor-stap procedure om een visueel design system te schrijven en te onderhouden in GL-003. |
+| SOP-007 | [[SOP-007-audit-content-for-design-system-compliance]] | Harmonia | Audit bestaande content op naleving van het design system (GL-003). |
 | SOP-008 | [[SOP-008-build-an-infographic]] | Charta | Bouw een infographic op basis van het design system en een content-brief. |
 | SOP-009 | [[SOP-009-generate-a-styled-image]] | Pixel | Genereer een gestileerde afbeelding conform GL-003 via een externe image-generator. |
 

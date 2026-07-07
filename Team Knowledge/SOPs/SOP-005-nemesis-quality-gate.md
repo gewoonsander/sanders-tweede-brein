@@ -6,9 +6,9 @@ Nemesis's signature workflow for the visual + accessibility + responsive QA pass
 
 ## When this skill activates
 
-Trigger phrases — invoke this SOP when the user (via Larry) says any of:
+Trigger phrases — invoke this SOP when the user (via Hermes) says any of:
 
-- (Felix or another agent finishes UI work and Larry calls Nemesis before marking the task complete)
+- (Felix or another agent finishes UI work and Hermes calls Nemesis before marking the task complete)
 - "QA this [page / component / flow / dashboard]"
 - "is this ready to ship?"
 - "audit accessibility"
@@ -142,7 +142,7 @@ A quality gate pass is done when **all** of these are true:
 - [ ] Verdict is unambiguous: PASS, CONDITIONAL PASS, or FAIL.
 - [ ] Report is at `Deliverables/YYYY-MM-DD-<slug>-qa-report.md`.
 - [ ] Session-log entry written at `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_vera_<slug>.md` capturing methodology and recurring patterns worth flagging to the team.
-- [ ] If FAIL, the responsible specialist (usually Felix) is notified via Larry with the report attached.
+- [ ] If FAIL, the responsible specialist (usually Felix) is notified via Hermes with the report attached.
 - [ ] If a fix happens, Nemesis re-inspects. No second-hand confirmation.
 
 If the gate found CRITICAL issues that block shipping, the verdict line states that explicitly. Urgency does not get lost in the body of the report.

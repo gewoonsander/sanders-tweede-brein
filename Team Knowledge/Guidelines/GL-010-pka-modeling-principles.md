@@ -1,7 +1,7 @@
 ---
-id: GL-003
+id: GL-010
 title: PKA Modelleringsprincipes
-owner: Larry
+owner: Hermes
 created: 2026-06-12
 tags:
   - modeling
@@ -9,7 +9,7 @@ tags:
   - ikigai
 ---
 
-# GL-003 — PKA Modelleringsprincipes
+# GL-010 — PKA Modelleringsprincipes
 
 ## Doel
 

@@ -6,7 +6,7 @@ Bezalel's signature workflow for building a UI component end-to-end with design-
 
 ## When this skill activates
 
-Trigger phrases — invoke this SOP when the user (via Larry) says any of:
+Trigger phrases — invoke this SOP when the user (via Hermes) says any of:
 
 - "build me a [component / button / form / card / modal / widget / panel]"
 - "I need a [thing] in the UI"
@@ -39,7 +39,7 @@ Pick the narrowest scope that fits today's need. You can always promote later. P
 
 ### 3. Scaffold with semantic tokens
 
-Write the component using **only** semantic design-system tokens. No hardcoded colors. No hardcoded font sizes. No magic spacing values. If a token doesn't exist for what you need, stop, propose the new token to the user (or to Iris if she's on the team), and wait for approval before inventing one.
+Write the component using **only** semantic design-system tokens. No hardcoded colors. No hardcoded font sizes. No magic spacing values. If a token doesn't exist for what you need, stop, propose the new token to the user (or to Harmonia if she's on the team), and wait for approval before inventing one.
 
 Skeleton (adapt to your stack):
 
@@ -111,7 +111,7 @@ At `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_felix_<component-slug>.
 
 ### 10. Hand off to Nemesis
 
-The build isn't done until Nemesis signs off. Larry routes the deliverable to Nemesis; Nemesis runs [[SOP-005-nemesis-quality-gate]] and returns a pass/fail. If Nemesis flags issues, fix them, then resubmit. Don't argue the gate.
+The build isn't done until Nemesis signs off. Hermes routes the deliverable to Nemesis; Nemesis runs [[SOP-005-nemesis-quality-gate]] and returns a pass/fail. If Nemesis flags issues, fix them, then resubmit. Don't argue the gate.
 
 ## Output / definition of done
 

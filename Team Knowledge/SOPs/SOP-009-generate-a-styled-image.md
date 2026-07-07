@@ -4,7 +4,7 @@
 - **Default owner:** Pixel
 - **Reusable by any agent.** This is a skill, not a 1:1 ownership. Charta can invoke this SOP when a layout draft needs a stylized finish. Penn can invoke it to turn a captured idea into a hero image. Any specialist who needs to produce a styled visual (thumbnail, social image, hero illustration, quote card, multi-reference composite) follows this procedure.
 - **Triggered by:** "make me a thumbnail", "stylize this", "create a hero image", "design a quote card", "use these references and generate X", "make this look photographic / illustrated / painted", "the image-gen isn't available in my LLM, can we still do this".
-- **References:** [[GL-003-design-system]], [[GL-001-file-naming-conventions]], [[Team/Pixel - Visual Specialist/AGENTS]], [[Team/Daedalus - Automation Specialist/AGENTS]] (for the connection-half handoff), [[SOP-008-build-an-infographic]] (when stylizing on top of a Charta layout).
+- **References:** [[GL-003-design-system]] (the multi-brand hub — confirm the brand and inheritance model here first), `Team Knowledge/Guidelines/GL-003-brands/<brand-slug>.md` (the actual token file, read once the brand is confirmed), [[GL-001-file-naming-conventions]], [[Team/Pixel - Visual Specialist/AGENTS]], [[Team/Daedalus - Automation Specialist/AGENTS]] (for the connection-half handoff), [[SOP-008-build-an-infographic]] (when stylizing on top of a Charta layout).
 
 ## Purpose
 
@@ -25,6 +25,7 @@ The procedure is stylistic. It does not invent text content; the user provides a
 ## Inputs
 
 - **The brief:** what the image is *of* and *for*. Subject, intent, where it'll be used (YouTube thumbnail / LinkedIn hero / Instagram square / blog post / quote card).
+- **Which brand/venture this is for** (e.g. ADC Regio Oost, DartsCoaching.nl, Dart Buddies, Van Gewoon Sander). Mandatory, non-optional briefing input — never infer it or default to "the last brand used." If not named, ask before reading any tokens.
 - **Reference images (when applicable):** identity photos for any real person; visual anchors for palette, composition, mood, material.
 - **Aspect / format:** 16:9, 1:1, 9:16 (vertical), 1080x1350 (LinkedIn carousel), 1600x900 (X). Default to the platform.
 - **Text content (when applicable):** the caption, headline, or copy that goes into the image. Verbatim from the user.
@@ -32,9 +33,13 @@ The procedure is stylistic. It does not invent text content; the user provides a
 
 ## Step-by-step procedure
 
-### Step 1 — Read the design system
+### Step 1 — Confirm the brand, then read its design system
 
-Open [[GL-003-design-system]]. Confirm the sections this task needs are populated:
+Open [[GL-003-design-system]] first — the multi-brand hub. It carries no tokens itself; it confirms the brand-first rule, the inheritance model, and the current brand registry.
+
+Once the brand is confirmed, open `Team Knowledge/Guidelines/GL-003-brands/<brand-slug>.md` — never the hub, never a different brand's file. If that file declares `inherits from: <parent>.md`, open the parent too and apply its tokens with this brand's `## Overrides` layered on top.
+
+Confirm the sections this task needs are populated:
 
 - **Color palette** — for prompt phrasing ("warm walnut and brass on a deep charcoal canvas").
 - **Imagery style** — photography / illustration / icon direction. Drives prompt vocabulary directly.
@@ -43,8 +48,8 @@ Open [[GL-003-design-system]]. Confirm the sections this task needs are populate
 
 If a needed section is empty, **stop**. Two paths:
 
-1. Route to Harmonia first (run [[SOP-006-author-a-design-system]] for the missing section). Preferred for any non-trivial creative work.
-2. Proceed in flagged "neutral-style fallback" mode: editorial photography default, neutral palette, system font for any text. The deliverable explicitly notes "GL-003 §X not populated; revisit when populated."
+1. Route to Harmonia first (run [[SOP-006-author-a-design-system]], scoped to this brand, for the missing section). Preferred for any non-trivial creative work.
+2. Proceed in flagged "neutral-style fallback" mode: editorial photography default, neutral palette, system font for any text. The deliverable explicitly notes "`GL-003-brands/<brand-slug>.md` §X not populated; revisit when populated."
 
 ### Step 2 — Check image-gen capability
 
@@ -63,19 +68,19 @@ Every image-gen prompt has the same five parts in order:
 1. **Aspect / format.** State at the start, repeat in the requirements list at the end. "Generate a 16:9 landscape image..." Do not let the model default to square unless square is wanted.
 2. **Identity anchor (if any real person is in frame).** Reference photo(s) anchored as the first content element. "Using the reference photo of [person], ..."
 3. **Scene description.** What's happening, where, who's doing what. Concrete nouns. Save adjectives for step 5.
-4. **Material and lighting.** Textures, light source, time of day. This is where GL-003 imagery direction lands directly.
+4. **Material and lighting.** Textures, light source, time of day. This is where the confirmed brand's `GL-003-brands/<brand-slug>.md` §Imagery style direction lands directly.
 5. **Style modifiers and negatives.** "Editorial photography, shallow depth of field, no text overlay, no logos, no busy background." Negatives are explicit; the model does not infer.
 
-Example skeleton (adapt to GL-003 imagery direction):
+Example skeleton (adapt to the brand file's §Imagery style):
 
 ```
 Generate a 16:9 landscape image.
 Subject: <subject described in concrete nouns>.
 Setting: <location, time of day>.
 Lighting: <directional / soft / dramatic>, <warm / cool> color temperature.
-Materials: <walnut, brass, leather, paper — pulled from GL-003 §Imagery style>.
+Materials: <walnut, brass, leather, paper — pulled from GL-003-brands/<brand-slug>.md §Imagery style>.
 Composition: <focal point, depth, what's in/out of frame>.
-Style: <editorial photography / line illustration / flat illustration / painted — pulled from GL-003 §Imagery style>.
+Style: <editorial photography / line illustration / flat illustration / painted — pulled from GL-003-brands/<brand-slug>.md §Imagery style>.
 Aspect: 16:9 landscape, NOT square.
 Negatives: no text overlay, no logos, no <whatever should not appear>.
 ```
@@ -113,7 +118,7 @@ For each generated image, score against the visual-quality heuristics:
 |---|---|
 | Composition | Focal point unambiguous? Eye lands within 0.3 seconds? |
 | Clarity | Subject describable in one sentence? |
-| Brand fit | Palette, lighting, material match GL-003 §Imagery style? |
+| Brand fit | Palette, lighting, material match the confirmed brand's `GL-003-brands/<brand-slug>.md` §Imagery style? |
 | Contrast | Visual punch against the platform background it'll be viewed on? |
 | Specificity | Single concrete detail makes it not generic? |
 | Type legibility | If text overlay: readable at thumbnail size on a phone? |
@@ -133,7 +138,7 @@ Write a markdown brief at `Deliverables/YYYY-MM-DD-<topic-slug>/design-brief.md`
 - **Canonical prompt** — the five-part prompt from Step 3, ready to paste into Midjourney / DALL-E / Sora / Canva AI.
 - **References** — list paths or URLs of reference images the user should attach.
 - **Aspect & size** — final output spec.
-- **Style notes** — pulled from GL-003 §Imagery style.
+- **Style notes** — pulled from `GL-003-brands/<brand-slug>.md` §Imagery style.
 - **Iteration suggestions** — three prompt variations the user can try if the first pass misses.
 
 The brief is the deliverable. The user owns the rendering.
@@ -154,17 +159,18 @@ Filename per [[GL-001-file-naming-conventions]]: kebab-case, no spaces, with dat
 
 Write `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_<agent-id>_<topic-slug>.md` with type `end-of-session`. Capture:
 
+- Which brand this was generated for
 - Subject and intent
 - Which path (A/B/C) was used; if B, which generator Mack wired up
 - Canonical prompt and references
-- Which GL-003 tokens drove styling
+- Which brand-file tokens drove styling (and from which file, if the brand inherits)
 - What the user picked from the variants
 - Any prompt pattern worth reusing across future tasks
-- Any flag for stale GL-003 sections
+- Any flag for stale brand-file sections
 
 ## Common mistakes to avoid
 
-- Skipping the GL-003 read at Step 1. The output is off-brand.
+- Skipping the brand confirmation and brand-file read at Step 1, or reading the hub as if it carried tokens. The output ends up off-brand.
 - Letting the prompt default to square because the aspect wasn't pinned. State aspect at start AND in requirements list.
 - Describing reference images in prose instead of passing them through the model's reference parameter. Wastes prompt budget and produces drift.
 - Generating a synthetic likeness of a real person from a description. Always reference photos or no person.

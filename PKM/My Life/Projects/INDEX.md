@@ -8,6 +8,7 @@ Bounded efforts with a finish line — a set of deliverables you cross off when 
 - [[workshop-aanmelding-automatisering]] — Plug&Pay → Mailblue → Excel koppeling zodat Erin en Ray automatisch de deelnemerslijst ontvangen. Status: planning.
 - [[project_praktijkvoluitleven-migratie]] — hosting-migratie en doorlopend klantbeheer voor [[heleen-van-den-berg]] (Praktijk Voluit Leven).
 - [[project_rdb-emiel-website-overdracht]] — overdracht van website-toegang en informatie aan [[emiel-theloosen]] bij zijn aantreden in het RDB-bestuur.
+- [[project_modus-super-series]] — plaatsing voor de MODUS Super Series: logistiek + prestatievoorbereiding (nul-status, trainingsschema).
 - [[verbouwing-huismanstraat-34]] — grote verbouwing Huismanstraat 34, duurzaamheid, target 2027-12-31.
 - [[verbouwing-beneden]] — verbouwing beneden, deadline 2026-08-08.
 - [[verbouwing-badkamer-toilet]] — verbouwing badkamer en toilet boven.
