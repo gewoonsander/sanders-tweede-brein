@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pub Qualifier - Overzicht - A4</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', 'Helvetica', sans-serif;
+      background: #000000;
+      color: #FFFFFF;
+    }
+
+    .poster {
+      width: 2480px;
+      height: 3508px;
+      background: #000000;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .hero-section {
+      height: 1400px;
+      background: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      flex-shrink: 0;
+    }
+
+    .emblem-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .banner {
+      background: linear-gradient(180deg, #F26522 0%, #F26522 100%);
+      color: #000000;
+      padding: 40px 60px;
+      text-align: center;
+      flex-shrink: 0;
+      border-top: 3px solid #FFFFFF;
+      border-bottom: 3px solid #FFFFFF;
+    }
+
+    .banner-title {
+      font-size: 72px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      line-height: 1.1;
+    }
+
+    .banner-title .subtitle {
+      font-size: 48px;
+      margin-top: 12px;
+      opacity: 0.9;
+    }
+
+    .data-panel {
+      flex: 1;
+      background: #000000;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow-y: auto;
+    }
+
+    .section-title {
+      font-size: 40px;
+      font-weight: bold;
+      color: #F26522;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #F26522;
+      padding-bottom: 12px;
+    }
+
+    /* Kroegen grid */
+    .kroegen-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .kroeg-card {
+      border: 2px solid #F26522;
+      padding: 40px;
+      background: rgba(242, 101, 34, 0.05);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .kroeg-card-logo {
+      width: 180px;
+      height: auto;
+      margin: 0 auto 20px;
+      display: block;
+    }
+
+    .logo-badge {
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 20px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .logo-badge .kroeg-card-logo {
+      margin: 0;
+      width: 180px;
+      height: auto;
+    }
+
+    .kroeg-card-name {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #FFFFFF;
+    }
+
+    .kroeg-card-plaats {
+      font-size: 22px;
+      color: #F26522;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .kroeg-card-dates {
+      font-size: 18px;
+      color: #CCCCCC;
+      line-height: 1.6;
+    }
+
+    /* Finales & Hoofdtoernooi section */
+    .finales-section {
+      margin-top: 30px;
+      border-top: 2px solid #F26522;
+      padding-top: 30px;
+    }
+
+    .finales-title {
+      font-size: 40px;
+      font-weight: bold;
+      color: #F26522;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .finale-block {
+      background: rgba(242, 101, 34, 0.15);
+      border-left: 5px solid #F26522;
+      padding: 24px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+
+    .finale-block .type {
+      font-size: 28px;
+      font-weight: bold;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .finale-block .date-info {
+      font-size: 22px;
+      color: #CCCCCC;
+      margin-bottom: 8px;
+    }
+
+    .finale-block .location {
+      font-size: 22px;
+      color: #F26522;
+      font-weight: bold;
+    }
+
+    .main-tournament {
+      margin-top: 20px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px dashed #666;
+      border-radius: 4px;
+      font-size: 20px;
+      color: #CCCCCC;
+    }
+
+    .main-tournament .label {
+      font-weight: bold;
+      color: #F26522;
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="poster">
+    <!-- Hero embleem -->
+    <div class="hero-section">
+      <img src="assets/2026-07-08_adc_winmau-benelux-open-2026-full-poster_v01.png" alt="Winmau Benelux Open 2026" class="emblem-image">
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+      <div class="banner-title">
+        PUB QUALIFIER
+        <div class="subtitle">REGIO OOST</div>
+      </div>
+    </div>
+
+    <!-- Data panel -->
+    <div class="data-panel">
+      <!-- Kroegen grid -->
+      <div class="section-title">Qualifier-Locaties</div>
+      <div class="kroegen-grid">
+        <div class="kroeg-card">
+          <img src="assets/2026-07-07_adc_logo-het-twentse-ros-wit_v01.png" alt="Het Twentse Ros" class="kroeg-card-logo">
+          <div class="kroeg-card-name">Het Twentse Ros</div>
+          <div class="kroeg-card-plaats">Hengelo</div>
+          <div class="kroeg-card-dates">19 juli, 2 aug, 9 aug, 16 aug, 23 aug, 30 aug, 13 sep, 20 sep</div>
+        </div>
+
+        <div class="kroeg-card">
+          <div class="logo-badge">
+            <img src="assets/2026-07-07_adc_logo-cafe-kafe_v01.png" alt="Café Kafé" class="kroeg-card-logo">
+          </div>
+          <div class="kroeg-card-name">Café Kafé</div>
+          <div class="kroeg-card-plaats">Doetinchem</div>
+          <div class="kroeg-card-dates">20 juli, 2 aug, 16 aug, 30 aug</div>
+        </div>
+
+        <div class="kroeg-card">
+          <img src="assets/2026-07-07_adc_logo-dubbel10-transparant_v01.png" alt="Dartcafe Dubbel 10" class="kroeg-card-logo">
+          <div class="kroeg-card-name">Dartcafe Dubbel 10</div>
+          <div class="kroeg-card-plaats">Arnhem</div>
+          <div class="kroeg-card-dates">27 juli, 3 aug, 17 aug, 24 aug</div>
+        </div>
+
+        <div class="kroeg-card">
+          <div class="logo-badge">
+            <img src="assets/2026-07-07_adc_logo-de-rijnvogels_v01.png" alt="Dartclub de Rijnvogels" class="kroeg-card-logo">
+          </div>
+          <div class="kroeg-card-name">Dartclub de Rijnvogels</div>
+          <div class="kroeg-card-plaats">Driel</div>
+          <div class="kroeg-card-dates">19 juli, 10 aug, 7 sep, 14 sep</div>
+        </div>
+      </div>
+
+      <!-- Finales -->
+      <div class="finales-section">
+        <div class="finales-title">Regionale Finales</div>
+
+        <div class="finale-block">
+          <div class="type">Amateur Finale</div>
+          <div class="date-info">Zaterdag 26 september 2026</div>
+          <div class="location">Het Twentse Ros, Hengelo</div>
+        </div>
+
+        <div class="finale-block">
+          <div class="type">Elite Finale</div>
+          <div class="date-info">Zondag 27 september 2026</div>
+          <div class="location">Dartcafe Dubbel 10, Arnhem</div>
+        </div>
+
+        <div class="main-tournament">
+          <span class="label">Hoofdtoernooi:</span>
+          Zaterdag 3 oktober 2026 — Fletcher Hotel De Holthurnsche Hof, Berg en Dal
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

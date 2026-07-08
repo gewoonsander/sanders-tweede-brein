@@ -50,3 +50,7 @@ Bij close-session bevestigd: crème vandaag aangebracht ✓.
 ### 2026-07-07
 
 Bij close-session: nog niet aangebracht op het moment van afsluiten.
+
+### 2026-07-08
+
+Bij close-session: nog niet aangebracht op het moment van afsluiten.
