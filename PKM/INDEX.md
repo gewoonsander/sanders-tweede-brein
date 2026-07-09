@@ -26,6 +26,6 @@ See root [[AGENTS]] for the full SSOT Golden Rule. See [[GL-001-file-naming-conv
 ## How the team writes here
 
 - **Penn** writes Journal entries, image saves, and creates stubs in CRM and My Life as needed.
-- **Pax** flags new people, organizations, or topics surfaced during research, but does not write to PKM directly.
-- **Larry** does the Librarian pass at session close: broken links, orphan files, missing INDEX entries.
+- **Athena** flags new people, organizations, or topics surfaced during research, but does not write to PKM directly.
+- **Hermes** does the Librarian pass at session close: broken links, orphan files, missing INDEX entries.
 - **The user** owns final content. The team handles capture and connective tissue.

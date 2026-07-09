@@ -24,11 +24,11 @@ Actief als experiment. Nog niet intensief in gebruik, maar de intentie is om het
 - **dartscoaching.nl** — automatiseren van processen rond darts coaching (aanmeldingen, notificaties, follow-ups)
 - **Gewoon Sander** — algemene business-automatisering (facturen, klantcommunicatie, etc.)
 - Koppeling met tweede brein / PKM-workflows
-- **Telegram-bot** — Sander stuurt commando's via Telegram, n8n vangt ze op en voert acties uit op de achtergrond. Voorbeelden: taak toevoegen aan Todoist, notitie loggen in tweede brein, foto/voice memo naar Team Inbox sturen. Dit is een concreet toekomstproject voor Mack.
+- **Telegram-bot** — Sander stuurt commando's via Telegram, n8n vangt ze op en voert acties uit op de achtergrond. Voorbeelden: taak toevoegen aan Todoist, notitie loggen in tweede brein, foto/voice memo naar Team Inbox sturen. Dit is een concreet toekomstproject voor Daedalus.
 
 ## Eigenaar binnen het team
 
-Mack is de aangewezen specialist voor n8n-automatiseringen. Als er een concreet idee is, brief Larry → Mack pakt het op.
+Daedalus is de aangewezen specialist voor n8n-automatiseringen. Als er een concreet idee is, brief Hermes → Daedalus pakt het op.
 
 ## Links
 

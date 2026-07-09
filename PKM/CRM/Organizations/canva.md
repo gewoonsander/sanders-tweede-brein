@@ -18,9 +18,9 @@ Online design platform voor social media, presentaties, documenten en meer. Canv
 
 Actief Canva Pro-abonnement voor GewoonSander. Jaarlijkse facturering via sander@gewoonsander.nl.
 
-## Integratie met Larry (Cowork)
+## Integratie met Hermes (Cowork)
 
-Canva is gekoppeld als MCP-tool in Cowork. Larry kan via deze koppeling ontwerpen aanmaken, aanpassen, genereren en exporteren vanuit Canva. Vraag Larry gewoon wat je wil maken.
+Canva is gekoppeld als MCP-tool in Cowork. Hermes kan via deze koppeling ontwerpen aanmaken, aanpassen, genereren en exporteren vanuit Canva. Vraag Hermes gewoon wat je wil maken.
 
 ## Notes
 

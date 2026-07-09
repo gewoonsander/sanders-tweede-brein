@@ -84,7 +84,7 @@ De terugkerende klussen staan als taken in Todoist (inbox):
 - **Onkruid grind** → elke 2 weken
 - **Ramenwassen** → maandelijks (3e donderdag)
 
-Larry checkt elke donderdag in de ochtendbrief of er klussen op de agenda staan.
+Hermes checkt elke donderdag in de ochtendbrief of er klussen op de agenda staan.
 
 ---
 

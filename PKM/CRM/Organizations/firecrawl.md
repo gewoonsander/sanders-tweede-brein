@@ -19,9 +19,9 @@ API-dienst die websites omzet naar LLM-ready data (markdown, gestructureerde ext
 
 Actief abonnement met eigen API-sleutel. Sleutel staat in `Team Knowledge/.env` als `FIRECRAWL_API_KEY` (niet in git, alleen lokaal).
 
-## Integratie met Larry (Cowork)
+## Integratie met Hermes (Cowork)
 
-Firecrawl is gekoppeld als MCP-server (`firecrawl-mcp` in `.mcp.json`, niet in git). Larry kan hiermee direct websites crawlen/scrapen en omzetten naar LLM-ready markdown zonder losse API-calls.
+Firecrawl is gekoppeld als MCP-server (`firecrawl-mcp` in `.mcp.json`, niet in git). Hermes kan hiermee direct websites crawlen/scrapen en omzetten naar LLM-ready markdown zonder losse API-calls.
 
 ## Notes
 

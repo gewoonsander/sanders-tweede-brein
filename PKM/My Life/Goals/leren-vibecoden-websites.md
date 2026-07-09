@@ -33,4 +33,4 @@ Sander heeft minstens één keer zelfstandig een wijziging aan een eigen website
 
 ### 2026-06-17
 
-Intentie vastgelegd tijdens gesprek met Larry over het verschil tussen Chat, Cowork en Claude Code. Status: slapend — geen actieve planning, wel bewust bewaard als richting voor als er tijd is.
+Intentie vastgelegd tijdens gesprek met Hermes over het verschil tussen Chat, Cowork en Claude Code. Status: slapend — geen actieve planning, wel bewust bewaard als richting voor als er tijd is.

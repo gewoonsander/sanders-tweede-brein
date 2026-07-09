@@ -48,7 +48,7 @@ Darren gaat binnenkort trouwen.
 ## Coaching-geschiedenis (cliënt)
 
 - Eerste sparringsessie: 2026-06-17
-- Samenvatting van het gesprek opgenomen via Fireflies (transcriptie → Larry maakt samenvatting)
+- Samenvatting van het gesprek opgenomen via Fireflies (transcriptie → Hermes maakt samenvatting)
 - Samenvatting wordt gedeeld met [[rick]] en [[joppe-bakens]]
 
 ## Open vragen

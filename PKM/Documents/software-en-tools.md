@@ -23,7 +23,7 @@ Overzicht van software en digitale tools die Sander actief gebruikt — inclusie
 - **Type:** Canva Pro (betaald abonnement)
 - **Facturering:** jaarlijks via sander@gewoonsander.nl
 - **Gebruik:** social media, presentaties, snelle designs
-- **MCP-koppeling:** beschikbaar in Cowork (Larry kan direct ontwerpen maken/aanpassen)
+- **MCP-koppeling:** beschikbaar in Cowork (Hermes kan direct ontwerpen maken/aanpassen)
 - **Meer info:** [[PKM/CRM/Organizations/canva]]
 
 ## Data & AI
@@ -32,7 +32,7 @@ Overzicht van software en digitale tools die Sander actief gebruikt — inclusie
 - **Type:** Betaald abonnement + API-sleutel
 - **Gebruik:** websites omzetten naar LLM-ready data (markdown/extractie/crawling) voor AI-workflows
 - **API-sleutel:** staat in `Team Knowledge/.env` als `FIRECRAWL_API_KEY`
-- **MCP-koppeling:** beschikbaar in Cowork als `firecrawl-mcp` (Larry kan direct websites crawlen/scrapen)
+- **MCP-koppeling:** beschikbaar in Cowork als `firecrawl-mcp` (Hermes kan direct websites crawlen/scrapen)
 - **Meer info:** [[PKM/CRM/Organizations/firecrawl]]
 
 ## Hosting & Web

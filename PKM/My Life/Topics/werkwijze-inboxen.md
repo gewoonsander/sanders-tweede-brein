@@ -30,7 +30,7 @@ Vuistregel: als het er langer dan een week in zit zonder dat je het aanraakt, mo
 
 ## Het verwerkmoment — vrijdagochtend
 
-Elke vrijdagochtend, na het overleg met Marieke: **inboxen doornemen met Larry**.
+Elke vrijdagochtend, na het overleg met Marieke: **inboxen doornemen met Hermes**.
 
 Zeg gewoon: "laten we de inboxen doornemen" — dan pakken we samen:
 1. Mail — wat vraagt actie, wat kan weg, wat moet gearchiveerd?

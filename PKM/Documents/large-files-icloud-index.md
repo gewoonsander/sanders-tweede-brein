@@ -20,5 +20,5 @@ Bestanden groter dan 100 MB kunnen niet in de GitHub-repo. Ze staan op **iCloud 
 ## Protocol
 
 - Nieuwe bestanden >100 MB gaan hier naartoe, niet in het tweede brein zelf.
-- Larry signaleert grote bestanden bij sessiesluiting en vraagt of ze verplaatst moeten worden.
+- Hermes signaleert grote bestanden bij sessiesluiting en vraagt of ze verplaatst moeten worden.
 - Na verplaatsing wordt dit overzicht bijgewerkt.

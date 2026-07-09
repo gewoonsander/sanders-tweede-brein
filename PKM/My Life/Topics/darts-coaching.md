@@ -35,8 +35,8 @@ Valt hieronder: coachingscliënten, workshops, cursussen, [[dart-buddies]] commu
 ### Fireflies (gratis account)
 - Sander neemt coachingsgesprekken op via Fireflies
 - Fireflies maakt automatisch een transcriptie
-- **Workflow:** transcriptie → Larry maakt samenvatting → samenvatting gedeeld met Rick en Joppe
-- Dit is een herhalende taak die Larry elke keer oppakt zodra Sander de transcriptie aanlevert
+- **Workflow:** transcriptie → Hermes maakt samenvatting → samenvatting gedeeld met Rick en Joppe
+- Dit is een herhalende taak die Hermes elke keer oppakt zodra Sander de transcriptie aanlevert
 
 ## Idee: Mastercaller Double Game als contentformat
 

@@ -40,7 +40,7 @@ Workshops worden verzorgd door Erin van Weijerden en Ray de Vries (ZZP). Ticketv
 ## Next steps
 
 - [x] Plug&Pay linkjes per workshop aanleveren (Sander) — ontvangen 2026-06-12
-- [ ] Uitzoeken of Plug&Pay native Mailblue-koppeling heeft (Mack)
+- [ ] Uitzoeken of Plug&Pay native Mailblue-koppeling heeft (Daedalus)
 - [ ] Velden deelnemerslijst afstemmen met Erin
 - [ ] ⚠️ Plug&Pay pagina Katwijk controleren: title toont "Hengelo" en description noemt "Padel Station Harderwijk" — vermoedelijk copy-paste fout
 

@@ -11,7 +11,7 @@ last_updated: 2026-07-03
 
 # Abonnementen – overzicht
 
-Levend overzicht van alle terugkerende betalingen. Wordt automatisch bijgehouden door Larry wanneer een factuur via Team Inbox of Gmail binnenkomt.
+Levend overzicht van alle terugkerende betalingen. Wordt automatisch bijgehouden door Hermes wanneer een factuur via Team Inbox of Gmail binnenkomt.
 
 ## Actieve abonnementen
 
