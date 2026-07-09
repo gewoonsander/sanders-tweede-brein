@@ -21,11 +21,22 @@ DRY_RUN="${DRY_RUN:-0}"
 
 mkdir -p "$SCREENSHOTS" "$DOCUMENTS" "$STATE"
 
+# Eén run tegelijk: WatchPaths kan meerdere keren snel achter elkaar triggeren
+# (ook door onze eigen mv's). Zonder lock kunnen twee gelijktijdige runs dezelfde
+# doelnaam kiezen (race condition) of API-calls dubbel afvuren.
+LOCKDIR="$STATE/.lock"
+if ! mkdir "$LOCKDIR" 2>/dev/null; then
+    echo "Al een andere run bezig, sla deze trigger over."
+    exit 0
+fi
+trap 'rmdir "$LOCKDIR" 2>/dev/null' EXIT
+
 sha_of() { shasum -a 256 "$1" 2>/dev/null | awk '{print $1}'; }
 
 # Voldoet al aan Mediahub-conventie: YYYY-MM-DD_merk_omschrijving_vNN[_WxH][_PUBLISHED].ext
+# Merk-code mag hoofdletters bevatten (bestaande bestanden gebruiken bv. ADC/VGS/DC).
 matches_convention() {
-    [[ "$1" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}_[a-z0-9]{2,3}_[a-z0-9-]+_v[0-9]{2}(_[0-9]+x[0-9]+)?(_PUBLISHED)?\.[A-Za-z0-9]+$ ]]
+    [[ "$1" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}_[A-Za-z0-9]{2,3}_[a-z0-9-]+_v[0-9]{2}(_[0-9]+x[0-9]+)?(_PUBLISHED)?\.[A-Za-z0-9]+$ ]]
 }
 
 # Grofweg klaar met downloaden: grootte verandert niet binnen 2s.
@@ -120,10 +131,19 @@ rename_media_file() {
     local filename; filename=$(basename "$f")
     matches_convention "$filename" && return
 
-    local fhash marker
+    local fhash marker done_marker
     fhash=$(sha_of "$f")
     marker="$STATE/${fhash}.onbekend"
+    done_marker="$STATE/${fhash}.hernoemd"
     [ -n "$fhash" ] && [ -f "$marker" ] && return
+    # Harde achtervang: deze bestandsinhoud is al eerder hernoemd door dit script.
+    # Onafhankelijk van of de resulterende naam de conventie-regex nog herkent (bv.
+    # bij een toekomstige regex-wijziging) - voorkomt dat een mismatch ooit weer
+    # tot een hernoem-lus leidt.
+    if [ -n "$fhash" ] && [ -f "$done_marker" ]; then
+        echo "WAARSCHUWING: al eerder hernoemd maar naam matcht conventie niet, overgeslagen: $filename"
+        return
+    fi
 
     wait_for_icloud "$f" || { echo "Overgeslagen (iCloud timeout): $filename"; return; }
     is_stable "$f" || { echo "Overgeslagen (nog bezig met downloaden): $filename"; return; }
@@ -168,7 +188,7 @@ rename_media_file() {
     if [ "$DRY_RUN" = "1" ]; then
         echo "[DRY_RUN] zou hernoemen ($merk, conf=$conf): $filename -> $new_name"
     else
-        mv "$f" "$target" && echo "Hernoemd in Downloads ($merk, conf=$conf): $filename -> $new_name"
+        mv -n "$f" "$target" && { echo "Hernoemd in Downloads ($merk, conf=$conf): $filename -> $new_name"; [ -n "$fhash" ] && touch "$done_marker"; }
     fi
 }
 
