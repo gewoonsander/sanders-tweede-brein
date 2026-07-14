@@ -45,6 +45,7 @@ MODUS Online Limited (MOL) operates the MODUS Super Series — a live-streamed p
 - [[2024-11-01-modus-super-series-tournament-prizes]] — prize fund breakdown
 - [[2025-11-21-modus-integrity-training-certificaat]] — Sander's integrity cert (active)
 - [[modus-super-series-integrity-training-user-guide]] — onboarding guide
+- [[2026-07-05-modus-hotels-portsmouth]] — aanbevolen hotels rond de venue
 
 ## Notes
 

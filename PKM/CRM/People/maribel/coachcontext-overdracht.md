@@ -60,22 +60,25 @@ Daarna is de coachinglijn verschoven richting:
 
 ---
 
-## 4. Huidige opdracht: dromen
+## 4. Huidige opdracht: dromen naar plan
 
 De opdracht die nu centraal staat:
 
-> **Maribel moet gaan dromen over wat zij ooit met darten zou willen bereiken.**
+> **Maribel vertaalt haar drie dromen (plezier, prestatie, identiteit) naar een concreet SMART-plan.**
 
-Het is belangrijk om dit niet meteen praktisch of klein te maken. Eerst mag de droom onderzocht worden.
+De dartsdroom-opdracht stamt uit het coachgesprek van 29 mei 2026 (waar Sander het als huiswerk meegaf maar niet meer toe kon komen door de emotionele zwaarte van het gesprek). Op het coachgesprek van 10 juli 2026 is duidelijk geworden dat Maribel's droom zich laat splitsen in drie dimensies:
 
-Mogelijke onderzoeksvragen:
+1. **Plezierdroom:** plezier uit trainingsvrucht — zien dat wat thuis geoefend wordt, eruit komt in wedstrijden.
+2. **Prestatiedroom:** concreet doel voor komend LACO-seizoen: top 10 qua gemiddelde.
+3. **Identiteitsdroom:** wie wil je zijn aan het bord? Zelfverzekerd, rustig, trouw aan jezelf — vooral opgebouwd rond het sleutelmoment (halve finale 2-2, triple 10 bij vol vertrouwen).
 
-- Wat wil ze eigenlijk?
-- Waar mag ze van dromen?
-- Wat zou ze willen bereiken als ze zichzelf niet klein houdt?
-- Wat voelt spannend, aantrekkelijk of misschien zelfs onrealistisch?
-- Is haar droom echt een droom, of vooral een veilige fantasie?
-- Durft ze groot genoeg te dromen zonder direct weg te schieten in: “dat kan toch niet”?
+Maribel heeft al acht subdoelstellingen bedacht. Deze moet zij nu verder uitwerken naar:
+- SMART-criteria (specifiek, meetbaar, acceptabel, realistisch, tijdgebonden);
+- Korte-termijn-stappen (komend LACO-seizoen);
+- Middellange-termijn-richting (WDF-toernooien, voorkeur boven NDB);
+- Symbolische stappen (bijv. shirt-ontwerp voor singles-partijen, september/oktober 2026).
+
+Afspraak: Maribel stuurt het plan vóór 28 augustus in, zodat Sander zich kan voorbereiden.
 
 ---
 
@@ -184,34 +187,34 @@ Op basis van wat bekend is, lijkt Maribel bezig met doelen rond:
 
 ## 9. Korte overdracht voor nieuw gesprek
 
-**Maribel Wientjes is een darter die na 2,5 jaar stoppen weer ongeveer een jaar speelt. Ze zit in/rond het LACO-selectieteam en toernooien zoals Dutch Open en NDB Ranking zijn relevant. Haar grootste uitdaging lijkt spanning onder sociale druk: vooral wanneer er veel mensen achter haar staan, gaat ze twijfelen aan haar worp. Eerder is bewust gekozen om niet direct technisch aan haar worp te sleutelen, maar te werken aan mentale rust, zelfvertrouwen, sociale grenzen en procesgerichtheid. Ze heeft eerder opdrachten gehad rond anderen laten schrijven om haar schouder te ontlasten en beter voor zichzelf op te komen. Nu staat de opdracht centraal om te dromen over wat ze met darten wil bereiken. Belangrijk coachmodel: verleden vormt de bril, de bril kleurt de realiteit, realiteit begrenst of voedt de droom, de droom vraagt om een plan, het plan creëert nieuwe ervaringen, en nieuwe ervaringen veranderen de bril. In het volgende gesprek dus niet te snel naar SMART-doelen springen, maar eerst haar droom, zelfbeeld en huidige realiteit onderzoeken. Daarna pas vertalen naar kleine, realistische procesdoelen.**
+**Maribel Wientjes (darts, DartsCoaching.nl) speelt sinds ongeveer een jaar weer en zit in/rond het LACO-selectieteam. Haar centrale thema is: rustig bij zichzelf blijven onder sociale druk. Na coachgesprek van 10 juli 2026 is haar droom nu opgesplitst in drie dimensies: plezierdroom (trainingsvrucht voelen), prestatiedroom (top 10 LACO-gemiddelde komend seizoen, WDF-voorkeur boven NDB), en identiteitsdroom (zelfverzekerd aan het bord, "Maribel blijven", geverankerd rond het sleutelmoment in halve finale 2-2 triple 10). Ze heeft acht subdoelstellingen bedacht en werkt deze nu uit naar een SMART-plan (deadline: 28 augustus). Symbolische stap: shirt-ontwerp voor singles (september/oktober 2026). Belangrijk coachmodel: verleden vormt de bril, de bril kleurt de realiteit, realiteit begrenst of voedt de droom, de droom vraagt om plan, het plan creëert nieuwe ervaringen, nieuwe ervaringen veranderen de bril. Ze voelt het vrouwencircuit als toxisch maar formuleert dit als iets om doorheen te groeien. Training thuis: 88 gemiddelde, voortgang wordt gemonitord. Volgende gesprek 28 augustus.**
 
 ---
 
-## 10. Mogelijke focus voor het coachgesprek
+## 10. Mogelijke focus voor het volgende coachgesprek (28 augustus 2026)
 
 Een mogelijke gesprekslijn:
 
 1. **Check-in**  
-   Hoe zit ze erbij? Hoe gaat het met darten, spanning en vertrouwen?
+   Hoe zit ze erbij? Hoe gaat het met darten, span, training thuis (88+ gemiddelde)?
 
-2. **Terug naar de droomopdracht**  
-   Wat heeft ze opgeschreven? Wat viel haar op?
+2. **Plan review**  
+   Hoe heeft ze het SMART-plan uitgewerkt? Welke stappen voelen realistisch, welke spannend?
 
-3. **Droom serieus nemen**  
-   Niet meteen beoordelen of het haalbaar is. Eerst ruimte geven.
+3. **Drie-droom-praktijk**  
+   Hoe manifesteren plezierdroom, prestatiedroom en identiteitsdroom zich in haar LACO-wedstrijden?
 
-4. **Bril onderzoeken**  
-   Vanuit welk zelfbeeld kijkt ze naar die droom?
+4. **WDF-voorkeur concretiseren**  
+   Eerste stap richting WDF-toernooi: welke, wanneer, wat nodig?
 
-5. **Realiteit scherp maken**  
-   Waar staat ze nu echt? Niet kleiner, niet groter.
+5. **Vrouwencircuit doorgroeien**  
+   Wordt het vrouwencircuit steeds meer een plek waar zij zichzelf kan stellen?
 
-6. **Planrichting bepalen**  
-   Welke richting vraagt deze droom?
+6. **Sleutelmoment verbreiden**  
+   Het halve-finale-moment (triple 10 2-2): hoe wordt dit een patroon?
 
-7. **Eerste kleine stap kiezen**  
-   Eén concrete stap die nieuwe ervaring kan creëren.
+7. **Shirt-ontwerp**  
+   Is dit momentum gekregen, of “nice to have”? Symbolische stap naar identiteit.
 
-8. **Afsluiten met reflectieopdracht**  
-   Bijvoorbeeld: “Welke nieuwe ervaring wil ik mezelf deze maand geven?”
+8. **Afsluiten**  
+   Welke richting rolt nu automatisch verder voor komend LACO-seizoen en WDF-voorbereiding?

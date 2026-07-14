@@ -34,4 +34,5 @@ Maandelijks 1-op-1 gesprek tussen Sander en zijn zwager Ralf. Geen vaste agenda 
 
 | Datum | Kernthema's | Acties |
 |-------|-------------|--------|
-| — | (nog niet bijgehouden) | — |
+| [[2026-05-29-meetingverslag-ralf-gesprek-5]] | Rouw en verlies; ondernemen in de storm; buffer en bewuste keuzes; visie uitleven; calculatiemodel; marketing & zichtbaarheid; AI als hefboom; Huddle onboarding; gezinshuis & verbouwing | Huddle-video opnemen; Facebookpost volhouden; calculatiemodel afmaken; badkamer afwerken; buffer stabiliseren; fysieke rust plannen |
+| [[2026-06-26-meetingverslag-ralf-gesprek-6]] | Gebed & verbinding; weekend-terugblik (voetbal met kinderen); work-life-balance & waarde; "minimaal inspannende, grote impact"-groeipijler; sterkte-zwakte-balans; persoon vs. bedrijf; metastrategie | Groeipijler verder uitwerken; metastrategie-component in toekomstige overleggen; sterkte-zwakte-balans analyseren per bedrijf |

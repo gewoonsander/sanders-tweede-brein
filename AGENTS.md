@@ -78,6 +78,7 @@ All callable slash-command skills live in `.claude/commands/`. **Every agent mus
 | `/rename-images` | `rename-images.md` | Pixel / Daedalus | Hernoem afbeeldingen op basis van visuele analyse via Ollama vision |
 | `/sync-contact-to-google` | `sync-contact-to-google.md` | Daedalus | Synchroniseer een PKM-contactpersoon naar Google Contacts |
 | `/dagstart` | `dagstart.md` | Hermes | Ochtendroutine — agenda, open taken, inbox check, dagintentie |
+| `/transcribeer` | `~/.claude/skills/transcribeer/SKILL.md` | Daedalus | Haal de kennis van een YouTube-kanaal/playlist op als tekst (ondertitels eerst, lokale Whisper-terugval bij ontbrekende ondertitels); optioneel er een kennis-skill van bouwen. Kennis komt in `PKM/Documents/YouTube-Kennis/`. Let op: dit is een globale Skill (`~/.claude/skills/`), niet een `.claude/commands/`-bestand — staat hier voor discoverability. |
 
 **Regel voor agents:** Tref je een kennishiaat aan in jouw domein? Controleer eerst deze tabel. Staat er een skill voor? Roep die aan. Staat er geen skill voor en is het structureel herbruikbaar? Meld dat aan Hermes — dan bouwen we de skill.
 

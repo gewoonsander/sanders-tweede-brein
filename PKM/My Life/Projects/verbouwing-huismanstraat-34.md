@@ -260,7 +260,7 @@ Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing
 
 Aanrechtblad doorlopend 360 cm (zwart natuursteen, 2 secties: 1,30m + 2,33m). Siemens 5-pits inductieplaat ingebouwd in aanrechtblad boven kasten 1+2.
 
-Achterwand (spatwand): 2× dubbel stopcontact.
+Achterwand (spatwand): **3× dubbel stopcontact** (bijgewerkt 13-07-2026, was eerder 2× genoteerd) — 3 dubbele inbouwdozen nodig. Kleur: **zwart** — exact model/leverancier nog uit te zoeken door Sander.
 
 *Buitenmuur — bovenkasten (360 cm, van links naar rechts):*
 
@@ -319,14 +319,16 @@ Omhoog uit meterkast → onder vloer kantoor (20) → onder vloer slaapkamer S&M
 | YMVK 3×1.5mm² | 35 meter | €1,42/m | €49,70 |
 | **Totaal kabel** | | | **€862,94** |
 
-*Kabelindeling in bundels (NEN 1010 reductiefactoren):*
+*Kabelindeling in bundels (NEN 1010 reductiefactoren) — bijgewerkt 13-07-2026 naar werkelijke fysieke locaties:*
 
-| Bundel | Kabels | Reductiefactor | Effectieve stroom | OK? |
-|--------|--------|---------------|-------------------|-----|
-| 1 | 2× YMVK 3×4mm² (inductie) | 0,80 | ~20A | ✓ |
-| 2 | 3× YMVK 3×2.5mm² (oven + vaatwasser + quooker) | 0,70 | ~11A | ✓ |
-| 3 | 3× YMVK 3×2.5mm² (wasmachine + droger + koelkast) | 0,70 | ~11A | ✓ |
-| 4 | 2× YMVK 3×2.5mm² (magnetron + afzuigkap/licht/wcd) | 0,80 | ~13A | ✓ |
+| Bundel | Locatie | Kabels | Reductiefactor | Effectieve stroom | OK? |
+|--------|---------|--------|---------------|-------------------|-----|
+| 1 | — | 2× YMVK 3×4mm² (inductie) | 0,80 | ~20A | ✓ |
+| 2 | Bij aanrecht (buitenmuur) | 3× YMVK 3×2.5mm² (vaatwasser + quooker + afzuigkap/licht/wcd) | 0,70 | ⚠️ te herberekenen | ⚠️ |
+| 3 | Hoge kasten (binnenmuur, overkant) | 3× YMVK 3×2.5mm² (koelkast + oven + magnetron) | 0,70 | ⚠️ te herberekenen | ⚠️ |
+| 4 | Hoek (andere kant) | 2× YMVK 3×2.5mm² (wasmachine + droger) | 0,80 | ⚠️ te herberekenen | ⚠️ |
+
+**Correctie 13-07-2026:** oorspronkelijke indeling (oven bij vaatwasser/quooker, koelkast bij wasmachine/droger, magnetron los) klopte niet met de werkelijke fysieke locaties in de keuken. Nu ingedeeld naar waar de goot in de vloer daadwerkelijk heen loopt. **Effectieve stroom per bundel moet opnieuw worden doorgerekend door Ralf/de elektricien** — de reductiefactor-vorm (0,70 bij 3 kabels, 0,80 bij 2) blijft gelijk, maar de exacte waarden zijn nog niet herbevestigd voor deze nieuwe samenstelling.
 
 Bundels onderling op afstand houden. Inductiekabels (bundel 1) altijd apart van de rest.
 
@@ -499,10 +501,12 @@ Na bovenstaande: financiële balans opmaken → beslissen over pui en isolatie v
 - Gasverbruik vóór airco's: ~3.000m³/jaar | na airco's: 866m³ (2024/2025)
 - Gasverbruik 2023-2024: 1.356m³/jaar
 
-**LTV radiatoren (te bestellen)**
-- Slaapkamer A: 600x1600 T33 (~5.600W hybride)
-- Eetkamer: 600x1400 T33 (~4.900W hybride)
-- Keuken: 90x100 T33 (~4.974W hybride)
+**LTV radiatoren (te bestellen)** — links gevonden 13-07-2026 in "Huismanstraat ontwikkelplan" (Google Doc, sectie Verwarming)
+- Slaapkamer A: 600x1600 T33 (~5.600W hybride) — [radiatorkopen.nl](https://radiatorkopen.nl/600x1600-t33-5600-watt-hybride-eco-4-paneelradiator-met-ventilator) of [radiator-outlet.nl](https://www.radiator-outlet.nl/nl/60x160-cm-type-33-5855-watt-eca-hybride-8-vlakke-p.html) (5.855W)
+- Eetkamer: 600x1400 T33 (~4.900W hybride) — [radiatorkopen.nl](https://radiatorkopen.nl/600x1400-t33-4901-watt-hybride-eco-4-vlakke-radiator-met-ventilator) of [radiator-outlet.nl](https://www.radiator-outlet.nl/nl/60x140-cm-type-33-5123-watt-eca-hybride-8-vlakke-p.html) (5.123W)
+- Keuken: 90x100 T33 (~4.974W hybride) — [radiator-outlet.nl](https://www.radiator-outlet.nl/nl/90x100-cm-type-33-4974-watt-eca-hybride-8-vlakke-p.html)
+
+Bij de eerste twee staan twee winkelopties met net iets andere wattages — nog te kiezen welke.
 
 **Trap, badkamers, zolder** — gedetailleerde maatvoering staat in het brondocument (link hierboven).
 
@@ -574,7 +578,44 @@ Om de privékeuken (fase p) ook aan te kunnen pakken wordt De Deel (ruimte 1) ti
 
 ## Suggesties Marieke
 
-- ⬜ **Geluidsisolerend plafond cliëntenkamer** — optie toegevoegd door Marieke (29-06-2026). Nog niet besloten; afwegen op kosten (~40 uur volgens spreadsheet). **Beslissing vóór 20 juli** — zodat het eventueel meegenomen kan worden door het Marktplaatsmannetje in week 30. Sander + Marieke moeten dit uitdenken en kosten inschatten.
+- [x] **Geluidsisolerend plafond cliëntenkamer** — optie toegevoegd door Marieke (29-06-2026), oorspronkelijk ~40 uur volgens spreadsheet. **Besloten (13-07-2026)**: metal stud oplossing, zie uitwerking hieronder.
+
+### Geluidsisolerend plafond cliëntenkamer — uitwerking (13-07-2026)
+
+**Doel:** contactgeluid en praatgeluid dempen in ruimte 12 (nieuwe cliëntenkamer, 3,8m × 4,2m) via een ontkoppeld plafond onder het bestaande plafond.
+
+**Materiaalkeuze:** metal stud (niet hout) voor het hoofdframe — flexibeler in de verbinding dan hout (beter voor ontkoppeling), vochtstabiel, sneller te monteren.
+
+**Opbouw (van boven naar beneden):**
+1. Bestaande balklaag — blijft ongemoeid
+2. Luchtspouw: 5–10 cm tussen oud plafond en nieuw frame
+3. Tussen de bestaande balken: rotswol vol opvullen (akoestische/dichtere variant)
+4. Nieuw metal-stud-frame, ontkoppeld opgehangen (geen star contact met de oude balklaag/frame bij voorkeur op de wanden dragen, niet aan de balken)
+5. In de spouw van het nieuwe frame: nog een laag absorptiemateriaal (glas-/steenwol)
+6. Afwerking: dubbele laag zware gipsplaat (bijv. 2× 12,5mm, verschillende dikte per laag)
+7. Randen: nergens star contact tussen nieuw plafond en wanden — overal akoestische kit/rubberstrip (belangrijkste faalpunt bij dit soort plafonds)
+
+**Overspanning:** profielen lopen over de kortste zijde van de ruimte (3–3,8m), niet over de langste (3,2–4,2m). Met dubbele laag gipsplaat is de vrije overspanning van standaard metal-stud-profielen (~3,45m) net onvoldoende voor 4,2m — een tussensteun is nodig.
+
+**Tussensteun — besloten (13-07-2026):** een **houten balk** (i.p.v. metal stud UA-profiel) als tussenligger, omdat deze op de zijwanden rust en dus geen deel uitmaakt van de verbinding met de oude balklaag — hout is hier acoestisch geen probleem.
+
+**Bevestiging tussenbalk:** **raveeldrager** aan de muur — geen inmetselen nodig. Raveeldragers zijn zwaarder belastbaar dan gewone balkdragers (normaliter voor vloerbalken bedoeld), dus ruim voldoende voor deze lichte plafondlast. Aandachtspunten:
+- Muur moet massief/dragend metselwerk zijn (checken welk type muur dit exact is)
+- Ankertype afstemmen op muursoort: mechanisch (keilbouten) bij massief metselwerk/beton, chemisch (injectiemortel) bij poreuzer/hol metselwerk
+- Belastingcapaciteit van de gekozen raveeldrager ruim boven de werkelijke plafondlast kiezen
+
+**Rotswol — gekozen product (13-07-2026):** [ROCKWOOL Vario Next dakplaat, 1200×600×100mm, Rd 2,70](https://www.hornbach.nl/p/rockwool-steenwol-vario-next-dakplaat-1200-x-600-x-100-mm-rd-2-70/12740788/) — €10,55/plaat. Ondanks de naam "dakplaat" expliciet gelabeld voor toepassingsgebied Wand/Vloer/Plat dak/Spouwmuur/**Plafond**, en één van de twee akoestisch-gelabelde varianten in de Hornbach-reeks (naast de 80mm-versie, €8,70/plaat, Rd 2,10, als alternatief bij een krappere spouw).
+
+**Benodigde hoeveelheid rotswol:**
+- Plafondoppervlak cliëntenkamer (ruimte 12): 3,8m × 4,2m = 15,96 m²
+- Dekking per plaat: 1,2m × 0,6m = 0,72 m²
+- Minimaal: 15,96 / 0,72 = 22,2 → **23 platen** (kale dekking, geen marge)
+- **Aanbevolen bestelhoeveelheid: 25 platen** (~10% marge voor zaagverlies/pasvorm tussen balken) = €263,75
+
+**Nog open:**
+- Exacte profieldiepte/type metal stud en exacte balkmaat (houten balk) laten narekenen bij leverancier (Knauf/Gyproc/BPUA) op basis van het werkelijke gewicht van het plafondpakket (2 lagen plaat + rotswol + profielen per m²) — de hierboven gebruikte maten zijn een vuistregel, geen sluitende berekening
+- Type/dikte gipsplaat definitief kiezen en bestellen
+- Inplannen in de werkzaamhedenplanning (was oorspronkelijk ~40 uur geschat, nog te herzien op basis van deze uitwerking)
 
 ## Open threads
 
@@ -623,8 +664,10 @@ Subsidie zelf aanvragen via rvo.nl na installatie — meldcode KA28310
 
 ## Next steps
 
-- [ ] **Container bestellen bij Van Dalen Containers, Huissen** — Sander — voor afvoer bouw- en sloopafval tijdens werkzaamheden
-- [ ] Beslissen: offerte FH Team accorderen (vervaldatum 10-07-2026) — **Marieke volgt op** (mail gestuurd aan Ferry, nog geen reactie per 29-06-2026)
+- [x] **Keuken opgehaald** (Sander, 11 juli) — staat grotendeels al klaar in de nieuwe woonkeuken; definitieve plaatsing volgt na kabels trekken, doorvoer maken en rioolaansluiting (bijgewerkt 13-07-2026)
+- [x] **Installatiedatum warmtepomp bevestigd:** Ferry en het FH Team komen in **week 37** de warmtepomp + boilers installeren (bijgewerkt 13-07-2026)
+- [x] **Container bestellen bij Van Dalen Containers, Huissen** — besteld 13-07-2026 (bestelling #16536): bouwafval container 10 m³, €529, levering 20-07-2026 in de ochtend
+- [ ] Beslissen: offerte FH Team accorderen (vervaldatum 10-07-2026) — **Marieke volgt op** (mail gestuurd aan Ferry, nog geen reactie per 29-06-2026) — inmiddels lijkt dit impliciet akkoord, gezien de bevestigde installatiedatum week 37; nog te verifiëren of de formele accordering + aanbetaling ook echt geregeld is
 - [ ] Bij akkoord: 50% aanbetaling (±€12.254) overmaken
 - [ ] RVO-subsidie aanvragen na installatie via rvo.nl (meldcode KA28310)
 - [ ] Stalen balk: leverancier uitzoeken + monteur regelen

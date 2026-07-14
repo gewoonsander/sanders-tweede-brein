@@ -72,6 +72,11 @@ Sized to the role: 400 to 800 words. Lands in `Deliverables/YYYY-MM-DD-<role-slu
 - For every significant claim, find at least two independent sources that agree.
 - Flag contradictions. Do not silently pick a side.
 - Mark confidence: **High** (multiple independent primary sources), **Medium** (one primary plus secondary), **Low** (single source, anecdotal, or contested).
+- **Dual-independent-search escalation.** Two results from the same search call are not two independent sources — the default single-path search is fine for orientation, qualitative comparisons, and low-stakes context-gathering, but escalate to querying through two mechanically independent search paths whenever any of these apply. The second path is `python3 "Team Knowledge/scripts/perplexity_search.py" "<question>"` (Perplexity Sonar API, wired in and Argus-approved 2026-07-10 — see `Team Knowledge/scripts/README.md`) alongside the default WebSearch path:
+  1. The claim is a **specific number/statistic** that will be reported as fact — this is where hallucinated figures hide most often, so these always get two independent paths, no exceptions.
+  2. The default single-path search **already turned up contradictory information** — dig deeper regardless of source type; this is not a new rule, it's the existing "flag contradictions" principle made concrete.
+  3. The task is **explicitly high-stakes** — a hire-research brief, a decision with money or real consequences riding on it, or anything that will land in a report marked `confidence: High`.
+  Disagreement between the two independent paths is itself the signal — that's the flag to dig deeper before the claim goes in the report, not just a discrepancy to note and move past.
 
 ### Step 4 - Synthesize and report
 
@@ -100,6 +105,7 @@ Athena does not write into the user's PKM directly. He flags. Penn or the user o
 
 - Naming rules for deliverables: [[GL-001-file-naming-conventions]].
 - New specialist hires: Jethro briefs Athena for the research pass first, then Jethro drafts the contract. Both follow [[SOP-001-how-to-add-a-new-specialist]].
+- The dual-independent-search-path refinement in Step 3 was distilled from `PKM/Documents/YouTube-Kennis/ICOR with Tom AI Productivity/01 - Claude invents facts. My setup flags them before they cost me. [mKTg53LFrN4].md` (2026-07-10) — worth noting this channel is the original ICOR/myPKA scaffold's own creator, using the pre-rename names Pax/Larry for what is now Athena/Hermes in this myPKA.
 
 ## Communication style
 

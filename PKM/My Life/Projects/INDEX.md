@@ -13,6 +13,7 @@ Bounded efforts with a finish line — a set of deliverables you cross off when 
 - [[verbouwing-beneden]] — verbouwing beneden, deadline 2026-08-08.
 - [[verbouwing-badkamer-toilet]] — verbouwing badkamer en toilet boven.
 - [[bouwlog-badkamer-toilet]] — logboek van de badkamer/toilet-verbouwing (let op: geen YAML-frontmatter, wijkt af van GL-002 — mogelijk bewust als vrij logboek).
+- [[buitenkraan-vervangen]] — onderhoudstask: buiten kraan vervangen omdat deze druppelt.
 
 ## Naming
 

@@ -6,4 +6,6 @@ __MACOSX/
 PKM/My Life/Health Data/fitbit-google-health-export-2018-2026.zip
 .mcp.json
 Team Knowledge/.env
+Team Knowledge/.secrets/
+Team Knowledge/scripts/.venv/
 .claude/settings.local.json

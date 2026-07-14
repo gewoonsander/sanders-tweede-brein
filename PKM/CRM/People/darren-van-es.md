@@ -31,9 +31,18 @@ Freelancer en vrijwilliger voor [[dartscoaching-nl]] (marketing, cursusontwerp/v
 
 Darren helpt Sander met de volgende werkzaamheden:
 
-- **Expertise:** marketing
-- **Huidige focus:** opzetten en vermarkten van de cursus **"Herstel van Darteritus"**
-- **Platform-ontwikkeling:** draagt bij aan productontwikkeling en platform-architectuur voor DartsCoaching.nl
+- **Expertise:** marketing, SEO, video-productie
+- **Huidige focus:** 
+  - Opzetten en vermarkten van de cursus **"Herstel van Darteritus"**
+  - SEO-basis (Google Analytics, Google Search Console, Google My Business)
+  - Onboarding-instructie-video's opnemen (leren filmen, authenticiteit, voortgang)
+  - Reviews-strategie (voorzichtig: alleen tevreden klanten vragen)
+  - Google Drive-documentstructuur centraliseren (team-account i.p.v. persoonlijke)
+- **Voortgang (per 4 juni 2026):**
+  - SEO-basis staat
+  - Video-productie in volle gang (voelt zich onzeker op camera, maar persevereert)
+  - Authentieke content wint van perfectie
+  - Reviews-aanpak: selectief, geen massa-e-mail
 - **Status:** actieve samenwerking per 2026-07-08
 
 ### Dart Buddies — Huddle administrator
@@ -49,7 +58,7 @@ Darren gaat binnenkort trouwen.
 
 - Eerste sparringsessie: 2026-06-17
 - Samenvatting van het gesprek opgenomen via Fireflies (transcriptie → Hermes maakt samenvatting)
-- Samenvatting wordt gedeeld met [[rick]] en [[joppe-bakens]]
+- Samenvatting wordt gedeeld met [[rik]] en [[joppe-bakens]]
 
 ## Open vragen
 

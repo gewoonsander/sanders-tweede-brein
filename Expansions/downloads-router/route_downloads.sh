@@ -116,6 +116,31 @@ except Exception:
 " 2>/dev/null
 }
 
+classify_screenshot() {
+    local f="$1" filename="$2"
+    local media_type="image/png"
+    case "${filename##*.}" in
+        [Jj][Pp][Gg]|[Jj][Pp][Ee][Gg]) media_type="image/jpeg" ;;
+    esac
+    SEND_FILE="$f" MEDIA_TYPE="$media_type" MODEL="$MODEL" python3 -c "
+import json, urllib.request, os, base64
+p = os.environ['SEND_FILE']
+with open(p,'rb') as fh: b64 = base64.standard_b64encode(fh.read()).decode()
+prompt = ('Beschrijf in het Nederlands kort en bondig wat er op deze schermafbeelding te zien is, '
+          'als een korte naam met koppeltekens (geen hoofdletters, geen leestekens behalve koppeltekens). '
+          'Voorbeelden: \"inlogfoutmelding-app\", \"excel-draaitabel-omzet\", \"whatsapp-gesprek-jan\". '
+          'Geef UITSLUITEND JSON: {\"omschrijving\": \"korte-omschrijving-met-koppeltekens\", \"confidence\": 0.0-1.0}. '
+          'Gebruik een lage confidence (<0.3) als de screenshot te generiek of onduidelijk is om een zinnige naam te geven.')
+data = json.dumps({'model': os.environ['MODEL'],'max_tokens':128,'messages':[{'role':'user','content':[{'type':'image','source':{'type':'base64','media_type':os.environ['MEDIA_TYPE'],'data':b64}},{'type':'text','text':prompt}]}]}).encode()
+req = urllib.request.Request('https://api.anthropic.com/v1/messages', data=data, headers={'x-api-key':os.environ.get('ANTHROPIC_API_KEY',''),'anthropic-version':'2023-06-01','content-type':'application/json'})
+try:
+    resp = json.loads(urllib.request.urlopen(req).read())
+    print(resp['content'][0]['text'])
+except Exception:
+    print('{\"omschrijving\":\"\",\"confidence\":0}')
+" 2>/dev/null
+}
+
 json_field() {
     python3 -c "import json,sys,re
 raw=sys.stdin.read(); m=re.search(r'\{.*\}', raw, re.DOTALL)
@@ -192,6 +217,68 @@ rename_media_file() {
     fi
 }
 
+matches_screenshot_convention() {
+    [[ "$1" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}_[a-z0-9-]+\.[A-Za-z0-9]+$ ]]
+}
+
+rename_screenshot() {
+    local f="$1"
+    local filename; filename=$(basename "$f")
+
+    local fhash marker done_marker
+    fhash=$(sha_of "$f")
+    marker="$STATE/${fhash}.screenshot-onbekend"
+    done_marker="$STATE/${fhash}.screenshot-hernoemd"
+    if [ -n "$fhash" ] && { [ -f "$marker" ] || [ -f "$done_marker" ]; }; then
+        mv "$f" "$SCREENSHOTS/" 2>/dev/null && echo "Screenshot → Team Inbox/Screenshots (al eerder verwerkt, ongewijzigd): $filename"
+        return
+    fi
+
+    local ext_lc classify omschrijving conf
+    ext_lc=$(echo "${filename##*.}" | tr '[:upper:]' '[:lower:]')
+
+    case "$ext_lc" in
+        jpg|jpeg|png)
+            classify=$(classify_screenshot "$f" "$filename") ;;
+        *)
+            classify='{"omschrijving":"","confidence":0}' ;;
+    esac
+
+    omschrijving=$(echo "$classify" | json_field omschrijving "")
+    conf=$(echo "$classify" | json_field confidence 0)
+
+    local below
+    below=$(python3 -c "print(1 if '$omschrijving'=='' or float('${conf:-0}' or 0) < ${RENAME_CONF_DREMPEL} else 0)" 2>/dev/null)
+    if [ "$below" = "1" ]; then
+        [ -n "$fhash" ] && [ "$DRY_RUN" = "0" ] && touch "$marker"
+        [ "$DRY_RUN" = "1" ] && { echo "[DRY_RUN] niet herkend, zou ongewijzigd verplaatsen: $filename"; return; }
+        mv "$f" "$SCREENSHOTS/" && echo "Screenshot → Team Inbox/Screenshots (niet herkend, naam ongewijzigd): $filename"
+        return
+    fi
+
+    local date_str time_str new_base new_name target counter
+    date_str=$(stat -f "%Sm" -t "%Y-%m-%d" "$f")
+    time_str=$(stat -f "%Sm" -t "%H%M" "$f")
+    omschrijving=$(echo "$omschrijving" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')
+    [ -z "$omschrijving" ] && omschrijving="screenshot"
+
+    new_base="${date_str}_${time_str}_${omschrijving}"
+    counter=0
+    new_name="${new_base}.${ext_lc}"
+    target="$SCREENSHOTS/$new_name"
+    while [ -e "$target" ]; do
+        counter=$((counter + 1))
+        new_name=$(printf "%s-%02d.%s" "$new_base" "$counter" "$ext_lc")
+        target="$SCREENSHOTS/$new_name"
+    done
+
+    if [ "$DRY_RUN" = "1" ]; then
+        echo "[DRY_RUN] zou hernoemen naar Team Inbox/Screenshots (conf=$conf): $filename -> $new_name"
+    else
+        mv -n "$f" "$target" && { echo "Screenshot → Team Inbox/Screenshots (conf=$conf): $filename -> $new_name"; [ -n "$fhash" ] && touch "$done_marker"; }
+    fi
+}
+
 route_file() {
     local f="$1"
     local filename; filename=$(basename "$f")
@@ -203,7 +290,11 @@ route_file() {
         Scherm*afbeelding*.png|Screenshot*.png|Scherm*afbeelding*.jpg|Screen\ Shot*.png)
             local size; size=$(stat -f%z "$f" 2>/dev/null || echo 0)
             [ "$size" -gt "$MAX_SIZE" ] && return
-            mv "$f" "$SCREENSHOTS/" && echo "Screenshot → Team Inbox/Screenshots: $filename"
+            if matches_screenshot_convention "$filename"; then
+                mv "$f" "$SCREENSHOTS/" && echo "Screenshot → Team Inbox/Screenshots (al conventie): $filename"
+            else
+                rename_screenshot "$f"
+            fi
             return
             ;;
     esac

@@ -20,6 +20,7 @@ Sander beheert de website en hosting van [[heleen-van-den-berg]] (Praktijk Volui
 
 Meest recent bovenaan.
 
+- **2026-07-09** — Heleens ticket "E-mail instellen in Outlook" (4 juli) opgevolgd: DNS-check bevestigde dat MX en Autodiscover voor praktijkvoluitleven.nl schoon zijn (geen restant van Versio), dus het probleem zat lokaal in haar Outlook/Windows-profiel (oud .ost-bestand + gecachte credentials die het nieuwe account overschreven). Reactie met diagnose en stappenplan (data-bestand verwijderen, Referentiebeheer opschonen, handmatig opnieuw instellen met mail.mailconfig.net) door Sander zelf in het WPMU Dev-ticketsysteem geplaatst. Los daarvan bleek het ticket niet zichtbaar in Sanders eigen Hub-dashboard — vermoedelijk gerelateerd aan de nog niet afgeronde ticket-e-mailintegratie (zie open threads).
 - **2026-07-03** — Heleen bevestigt dat ze de IMAP/SMTP-instellingen zelf kan zien in haar portal (haar wens was om Outlook te blijven gebruiken). WhatsApp-bericht gestuurd (persoonlijk, "ik"/"mij" — GewoonSander is een eenmanszaak zonder personeel): vraag of ze er zelf uitkomt met het instellen van Outlook, met het aanbod om te helpen als dat niet lukt. Sander zorgt daarnaast voor een handleiding/instructies die ze erbij krijgt.
 - **2026-07-02 (vervolg, later op de dag)** — Factuur en portaal afgerond:
   - Productafbeeldingen toegevoegd aan "Hostingpakket" (grijs "Host"-icoon) en "Gebruik Divi" (paars "Divi"-icoon) in WPMU Dev Hub Client Billing, in dezelfde stijl als de bestaande .nl- en RDB-icoontjes.
@@ -49,7 +50,9 @@ Meest recent bovenaan.
 - [x] Heleen bestaat al als klant in de Hub (Praktijk Voluit Leven, heleen_meems@hotmail.com, status Actief, rol "Klant - Mail en Facturering")
 - [x] **Factuur Heleen (2025+2026)** — betaald via overboeking (2026-07-03), €328,96 incl. btw. Niet via klantportal betaald — daar kan alleen met creditcard betaald worden
 - [x] Heleen bevestigt: kan de IMAP/SMTP-instellingen zelf terugvinden in haar portal onder "Pro Email" (2026-07-03)
-- [ ] Heleens reactie afwachten: komt ze zelf uit het instellen van Outlook, of heeft ze hulp nodig? Handleiding maakt Sander pas als Heleen daar zelf naar vraagt, niet standaard vooraf.
+- [x] Heleens reactie kwam als ticket (4 juli): lukt niet zelf. Diagnose + stappenplan gegeven (2026-07-09).
+- [ ] Zichtbaarheid tickets in Sanders Hub-dashboard uitzoeken — ticket-e-mailintegratie stond al als "in uitvoering" genoteerd, mogelijk hier de oorzaak van.
+- [ ] Heleens reactie afwachten of het stappenplan haar Outlook-probleem oplost.
 - [x] Heleen heeft betaald naar een **oudere zakelijke rekening** van Sander (niet zijn huidige) — bevestigd: de oude rekening stond nog op de door WPMU Dev automatisch gegenereerde factuur (Heleen heeft dus niets fout gedaan)
 - [x] **Bankrekening op WPMU Dev-facturen bijgewerkt.** Sander heeft het bankrekeningveld dat op de factuur komt rechtstreeks aangepast in de WPMU Dev Hub zelf (geen Stripe-koppeling nodig, Athena's Stripe-hypothese klopte dus niet). Toekomstige facturen tonen automatisch de juiste rekening — geen apart appje naar Heleen nodig.
 - [ ] Resterend tegoed van Versio nog te ontvangen

@@ -48,13 +48,28 @@ Telecom billing specialist, opgericht 2001, gevestigd in Tilburg. 51-200 medewer
 
 ## Visie communicatie
 
+### Aanleiding & probleem
+
+Emiel was geschrokken over hoe dicht RDB bij opheffing zat door vrijwilligerstekort en bestuurscrisis. Concreet communicatieprobleem: alles liep via Facebook, maar leden zonder Facebook (principieel of gewoon niet actief) misten zelfs het nieuws over de bestuurscrisis zelf. Website was er (niet bijgewerkt), WhatsApp-kanaal was ingericht maar nooit gebruikt.
+
+### Communicatievisie
+
 - Simpele, openbare WordPress website — geen login walls, laagdrempelig
 - Alles wat op Facebook staat ook op website, en vice versa
 - Één stem/tone of voice naar buiten (niet meerdere schrijvers zichtbaar)
 - Canva brand kit aanmaken (logo, kleuren, stijlen)
 - Mogelijk later Instagram erbij
-- Wil sponsoring oppakken: ZZP'ers en kleine bedrijfjes onder leden aanspreken, sponsorboard op toernooien/website
-- Groeiambitie: bond naar 1200 leden
+
+### Sponsoring & groei
+
+- Geschrokken dat er nul sponsoring in begroting zit
+- Concreet voorstel: ZZP'ers en kleine bedrijfjes onder leden aanspreken (vergelijkbaar met sponsorborden bij voetbalclubs)
+- LACO-bijdrage deels laten sponsoren
+- Groeiambitie: RDB naar ~1200 leden
+
+### Spelersmarktplaats (achtergrond)
+
+Idee kwam oorspronkelijk van Nick (vorige voorzitter/beheerder). Emiel had hier destijds (drie jaar geleden) al onderzoek en voorwerk voor gedaan, omdat hij zelf ervaring had met een team dat spelers zocht. Budget was gereserveerd in de begroting, maar **Emiel heeft daar €0,00 voor gefactureerd** — vond het niet eerlijk omdat hij zelf nog in leerfase zat (AI was net op) en niet voldoende had opgeleverd. Dit budget is dus nooit aangesproken.
 
 ## Technische context (website)
 
@@ -66,9 +81,25 @@ Telecom billing specialist, opgericht 2001, gevestigd in Tilburg. 51-200 medewer
 
 ## Afspraken & contact
 
-- 2026-06-22 ~20:00 (maandagavond): kennismaking online — websitehosting RDB besproken ✓
-- 2026-06-25 (woensdag): Sander stuurt inloggegevens hosting + Google naar **e.theloosen@calvi-insight.com**
-- Wens: maandelijks sparren over website/communicatie
+### 2026-06-22 (kennismakingsgesprek, maandagavond ~20:00)
+
+Eerste online gesprek (Fireflies-opname). Besproken:
+- **Communicatieprobleem & aanleiding:** RDB-crisis, vrijwilligerstekort, bestuurscrisis (zie Visie communicatie hierboven)
+- **Website-strategie:** simpele open WordPress-site, geen login walls, alles op Facebook ook op site
+- **Sponsoring:** voorstel om ZZP'ers en kleine bedrijfjes onder leden aan te spreken; LACO-bijdrage deels te laten sponsoren; groeiambitie naar ~1200 leden
+- **Spelersmarktplaats:** achtergrond van het idee (Nick), Emiels eerdere onderzoek/voorwerk (3 jaar geleden), waarom het stil kwam te liggen (Nick overbelast door persoonlijke omstandigheden, communicatie Sander-Nick verwaterde, alles naar Facebook/WhatsApp)
+- **Technische setup:**
+  - Hosting: WPMU Dev dedicated, Sander blijft factureren aan RDB
+  - E-mail: legacy Google Workspace-account (~7-8 adressen), domeinnaam wijst naar hosting, mail loopt via Google
+  - **Canva-brandkit:** Nick heeft registratie, onduidelijk of RDB-licentie of Nick persoonlijk → Emiel moet dit zelf navragen bij Nick (open actie)
+  - Emiel wil **tweede WordPress-instantie** offline opzetten, live zetten rond ALV (4 juli)
+  - Sander stuurt woensdag 25 juni inloggegevens WPMU Dev + Google Workspace naar **e.theloosen@calvi-insight.com** (nog niet duidelijk welk officieel RDB-adres Emiel krijgt)
+- **Regelmatig contact:** maandelijks sparren afgesproken over website/communicatie
+
+### Vervolgafspraken
+
+- **2026-06-25 (woensdag):** Sander stuurt inloggegevens hosting + Google naar **e.theloosen@calvi-insight.com**
+- **Maandelijks:** sparren over website/communicatie
 
 ## Actiepunten
 
@@ -76,8 +107,10 @@ Telecom billing specialist, opgericht 2001, gevestigd in Tilburg. 51-200 medewer
 - [ ] **Sander**: Emiel link sturen naar WPMU Dev plugin-overzicht
 - [ ] **Emiel**: na ALV (vandaag, 2026-07-03) website live met nieuwe bestuursinformatie + communicatievisie
 
-## Open vragen
+## Open vragen & actiepunten
 
 - ~~In welk RDB-team gooit hij precies?~~ → VanAllesWa, 3e divisie B
 - ~~Wat heeft hij nodig?~~ → WPMU Dev + Google Workspace inloggegevens
 - ~~Scope website?~~ → Simpele WordPress, alles openbaar, nieuws + bestuur + reglementen, later eventueel spelersmarktplaats
+- **Canva-brandkit:** Is Nick's Canva-registratie een **RDB-licentie of Nick persoonlijk?** → Emiel moet dit zelf navragen bij Nick (actiepunt uit 22 juni-gesprek)
+- **Spelersmarktplaats-budget:** Nooit-gefactureerd bedrag (€0,00 door Emiel, ondanks gereserveerd in begroting) → relevant voor RDB-financiële administratie/begroting

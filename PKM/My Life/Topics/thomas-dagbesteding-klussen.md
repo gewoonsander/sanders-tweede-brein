@@ -74,6 +74,10 @@ _Voeg hier observaties toe over wat goed werkt voor Thomas._
 - Houdt van klussen én werken in de tuin — combineer beide op een dag als het kan
 - Bij zijn eigen dagbesteding werkt hij ook in de tuin → aanpak aansluiten helpt hem
 
+### 2026-07-09 — ad-hoc taken
+
+Via audio-memo (Team Inbox) drie losse taken voor vandaag aan Todoist toegevoegd (🏡 Gewoon Thuis): pastanjes opruimen in de tuin, iets opruimen bovenop De Deel, en de kamer leeghalen (met hulp van Sander). Transcriptie was op twee punten onduidelijk ("pastanjes", wat er precies bovenop De Deel ligt) — bij afronding navragen wat bedoeld was.
+
 ---
 
 ## Todoist-integratie
