@@ -51,10 +51,10 @@ This pattern is not specific to any one brand pair. Any future brand can declare
 |---|---|---|
 | ADC Regio Oost | [[GL-003-brands/adc-regio-oost]] | Own base — independent tokens. |
 | DartsCoaching.nl | [[GL-003-brands/dartscoaching]] | Own base — independent tokens. |
-| Dart Buddies | [[GL-003-brands/dartbuddies]] | Inherits from DartsCoaching.nl. Overrides currently scoped to Avatars only (see the file for the live override list). |
+| Dart Buddies | [[GL-003-brands/dartbuddies]] | Inherits from DartsCoaching.nl. Overrides now include the four mascot personas (Buddy/Dave/Diva/Doggy), DB-specific voice/logo, palette confirmations, and provisional additions (dark grey neutral, graphic motifs) pending Sander's sign-off — see the file for the live override list and open-questions section. |
 | Van Gewoon Sander | [[GL-003-brands/van-gewoon-sander]] | Own base — independent tokens. |
 
-Status: **DartsCoaching.nl** fully populated. **ADC Regio Oost** partially populated (colors/typography/imagery — approximated from existing materials pending exact hex/font confirmation; voice/audience still open). **Dart Buddies** and **Van Gewoon Sander** still empty/placeholder. Populate remaining sections with Harmonia via [[SOP-006-author-a-design-system]].
+Status: **DartsCoaching.nl** fully populated. **ADC Regio Oost** partially populated (colors/typography/imagery — approximated from existing materials pending exact hex/font confirmation; voice/audience still open). **Dart Buddies** populated as a draft (mascots, voice, logo, most palette confirmed) with one flagged hex discrepancy and two provisional additions awaiting Sander's confirmation — see the file. **Van Gewoon Sander** still empty/placeholder. Populate remaining sections with Harmonia via [[SOP-006-author-a-design-system]].
 
 **Adding a new brand.** When a new venture needs its own visual identity: Harmonia creates `GL-003-brands/<new-brand-slug>.md` (base, or `inherits from:` an existing brand if it's a sub-brand), adds a row to the table above, and — if the new brand is a sub-brand of an existing one — documents the override scope. No change to this hub's structure is needed; the registry table is the only thing that grows.
 

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dart Buddies Onboarding Video — Draaiboek</title>
+    <style>
+        /* Brand tokens from Dart Buddies (inherits from DartsCoaching.nl) */
+        :root {
+            /* Colors */
+            --color-primary: #F22E3E;           /* Red - action, energy */
+            --color-secondary: #35BF0F;         /* Green - growth, trust */
+            --color-accent: #7FD971;            /* Light green - freshness */
+            --color-db-neutral-dark: #1A1A1A;  /* Dark grey (Dart Buddies exclusive) */
+            --color-neutral-0: #FFFFFF;         /* White */
+            --color-neutral-1: #F2F2F2;         /* Light grey */
+            --color-neutral-5: #000000;         /* Black */
+
+            /* Typography */
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+
+            /* Spacing (8px base unit) */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 48px;
+            --space-xl: 64px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            background-color: var(--color-neutral-0);
+            color: var(--color-neutral-5);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+
+        /* Page setup for printing */
+        @page {
+            size: A4 portrait;
+            margin: 20mm;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: var(--color-neutral-0);
+            }
+
+            .page-break {
+                display: none;
+                page-break-after: never;
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+        }
+
+        /* Cover page */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: var(--space-lg);
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-neutral-1) 0%, var(--color-neutral-0) 100%);
+        }
+
+        .cover-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: var(--space-lg);
+            opacity: 0.9;
+        }
+
+        .cover h1 {
+            font-family: var(--font-heading);
+            font-size: 32pt;
+            font-weight: bold;
+            color: var(--color-db-neutral-dark);
+            margin-bottom: var(--space-md);
+            line-height: 1.3;
+        }
+
+        .cover .subtitle {
+            font-family: var(--font-body);
+            font-size: 14pt;
+            color: var(--color-secondary);
+            margin-bottom: var(--space-lg);
+            font-weight: 600;
+        }
+
+        .cover .tagline {
+            font-family: var(--font-body);
+            font-size: 12pt;
+            color: var(--color-neutral-5);
+            max-width: 500px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* Content sections */
+        .content {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: var(--space-md);
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 18pt;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 3px solid var(--color-accent);
+        }
+
+        /* Checklist styles */
+        .checklist {
+            background-color: var(--color-neutral-1);
+            padding: var(--space-md);
+            border-radius: 8px;
+            margin: var(--space-md) 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--space-sm);
+            font-size: 11pt;
+            font-family: var(--font-body);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: var(--space-sm);
+            margin-top: 2px;
+            flex-shrink: 0;
+            accent-color: var(--color-primary);
+        }
+
+        .checklist-item label {
+            flex: 1;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        /* Scene numbering and structure */
+        .scene {
+            margin: var(--space-lg) 0;
+            padding: var(--space-md);
+            background-color: var(--color-neutral-1);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 4px;
+            page-break-inside: avoid;
+        }
+
+        .scene-header {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+        }
+
+        .scene-number {
+            font-family: var(--font-heading);
+            font-size: 16pt;
+            font-weight: bold;
+            color: var(--color-primary);
+            min-width: 60px;
+        }
+
+        .scene-title {
+            font-family: var(--font-heading);
+            font-size: 14pt;
+            font-weight: 600;
+            color: var(--color-db-neutral-dark);
+        }
+
+        /* Spoken text (prominent) */
+        .spoken-text {
+            background-color: var(--color-neutral-0);
+            border-left: 3px solid var(--color-secondary);
+            padding: var(--space-sm) var(--space-md);
+            margin: var(--space-md) 0;
+            font-family: var(--font-body);
+            font-size: 11pt;
+            line-height: 1.7;
+            color: var(--color-neutral-5);
+            font-weight: 500;
+        }
+
+        /* Actions (secondary, smaller) */
+        .action {
+            background-color: #f9f9f9;
+            border-left: 2px solid var(--color-accent);
+            padding: var(--space-sm) var(--space-md);
+            margin: var(--space-md) 0;
+            font-family: var(--font-body);
+            font-size: 10pt;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .action-label {
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-right: var(--space-xs);
+        }
+
+        /* Scenario intro styles */
+        .scenario-intro {
+            background-color: #fafafa;
+            border-left: 4px solid var(--color-secondary);
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+            border-radius: 4px;
+        }
+
+        .scenario-intro h3 {
+            font-family: var(--font-heading);
+            font-size: 12pt;
+            font-weight: 600;
+            color: var(--color-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Callouts and badges should flow with content, not force page breaks */
+        .scenario-intro {
+            break-inside: avoid;
+        }
+
+        /* Small callout notes should stay with adjacent content */
+        p[style*="background-color: #fff9e6"],
+        p[style*="background-color: #e8f5e9"] {
+            break-inside: avoid;
+            break-after: avoid;
+        }
+
+        /* Section titles: prevent orphaning */
+        .section-title {
+            break-after: avoid;
+        }
+
+        /* Text content paragraphs */
+        p {
+            margin: var(--space-sm) 0;
+            font-size: 11pt;
+            line-height: 1.7;
+        }
+
+        /* Tables for demo text */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-md) 0;
+            font-size: 10pt;
+        }
+
+        th {
+            background-color: var(--color-primary);
+            color: var(--color-neutral-0);
+            padding: var(--space-sm);
+            text-align: left;
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        td {
+            padding: var(--space-sm);
+            border-bottom: 1px solid var(--color-neutral-1);
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--color-neutral-1);
+        }
+
+        /* Emphasis and notes */
+        strong {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        em {
+            font-style: italic;
+            color: #666;
+        }
+
+        /* Footer with page info */
+        .page-footer {
+            text-align: center;
+            font-size: 9pt;
+            color: #999;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--color-neutral-1);
+        }
+
+        /* Print-specific: hide interactive elements */
+        @media print {
+            input[type="checkbox"] {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <div class="cover">
+        <div style="margin-bottom: var(--space-lg);">
+            <svg width="100" height="100" viewBox="0 0 100 100" style="fill: var(--color-secondary); opacity: 0.95;">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="var(--color-primary)" stroke-width="2"/>
+                <circle cx="50" cy="50" r="35" fill="none" stroke="var(--color-accent)" stroke-width="1.5" opacity="0.6"/>
+                <path d="M 50 20 L 60 45 L 85 45 L 65 60 L 75 85 L 50 70 L 25 85 L 35 60 L 15 45 L 40 45 Z" fill="var(--color-primary)" opacity="0.9"/>
+            </svg>
+        </div>
+        <h1>Dart Buddies Onboarding Video</h1>
+        <div class="subtitle">Draaiboek</div>
+        <p class="tagline">Van aanmelden tot compleet profiel — live gefilmd, stap voor stap</p>
+    </div>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- Voorbereiding Section -->
+    <div class="content">
+        <h2 class="section-title">Voorbereiding (niet gefilmd)</h2>
+
+        <p style="margin-bottom: var(--space-md); color: #666; font-size: 11pt;">
+            Voor je met filmen begint, zorg je dat al deze onderdelen klaar zijn. Check alles af en je bent gereed.
+        </p>
+
+        <div class="checklist">
+            <div class="checklist-item">
+                <input type="checkbox" id="prep1">
+                <label for="prep1"><strong>Welkomstmail-tekst live in Huddle.</strong> Settings > Email > Welkomstmail — de definitieve tekst moet al actief zijn, anders zie je de oude mail in beeld tijdens het filmen.</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="prep2">
+                <label for="prep2"><strong>OBS met 3 scenes klaar:</strong> camera groot / scherm groot + camera klein / alleen scherm. Test even kort.</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="prep3">
+                <label for="prep3"><strong>Browser op 110–125% zoom.</strong> Notificaties uit, geen wachtwoorden of privé-mail in beeld.</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="prep4">
+                <label for="prep4"><strong>Profielfoto voor demobob klaar:</strong> Bob-persona-illustratie (`2026-07-14_DC_persona-bob-nobg_v01.png`), achtergrond al verwijderd.</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="prep5">
+                <label for="prep5"><strong>Demo-profieltekst klaar om te typen:</strong><br>
+                &nbsp;&nbsp; • <strong>Koptekst:</strong> "Gezelligheidsdarter met ambities"<br>
+                &nbsp;&nbsp; • <strong>Over mij:</strong> "Hoi, ik ben Bob! Speel sinds een paar maanden met mijn team in de lokale competitie — vooral voor de gezelligheid, maar stiekem wil ik ook wel wat beter worden. Vooral mijn dubbels mogen wat consistenter. Leuk om hier tips te kunnen uitwisselen met andere darters!"</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="prep6">
+                <label for="prep6"><strong>E-mailadres voor demobob klaar</strong> (bijv. `demobob@dartscoaching.nl` — hoeft niet vooraf aangemaakt, alleen het adres paraat hebben).</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="prep7">
+                <label for="prep7"><strong>Test-opname geluid (20 sec)</strong> — terugluisteren op ruis/echo.</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="prep8">
+                <label for="prep8"><strong>Logo's beschikbaar:</strong> Dart Buddies (`2026-06-12_db_logo-2026-white_v01.png`) en DartsCoaching.nl (`2026-07-14_DC_logo-nobg_v01.png`), voor mocht je ze nodig hebben.</label>
+            </div>
+        </div>
+
+        <p style="margin-top: var(--space-md); padding: var(--space-sm); background-color: #fff9e6; border-left: 3px solid #F4B600; font-size: 10pt; color: #666;">
+            <strong>⚠ Belangrijk:</strong> Na "Maak een account aan" kan er een korte laadtijd of echte robot-check zitten — knip je er in de montage uit, niet erg als het even duurt tijdens het filmen zelf.
+        </p>
+    </div>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- Scène 1 -->
+    <div class="content">
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">1</div>
+                <div class="scene-title">Opening</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>camera groot, vóórdat je iets aanklikt</em></p>
+
+            <div class="spoken-text">
+                "Welkom bij Dart Buddies. Superleuk dat je erbij bent. In deze video laat ik je écht van begin tot eind zien hoe je start: ik maak nu live een account aan, laat je de welkomstmail zien zodra die binnenkomt, en loop met je mee tot je profiel compleet en zichtbaar is."
+            </div>
+        </div>
+
+        <!-- Scenario Intro A -->
+        <div class="scenario-intro">
+            <h3>Scenario-intro A — Organisch (live account aanmaken)</h3>
+            <p style="font-size: 10pt; margin-bottom: var(--space-sm);">
+                <strong>Beeld:</strong> scherm, browser naar <strong>`https://dartbuddies.dartscoaching.nl/`</strong> (dit is tevens de login-URL).
+            </p>
+
+            <div class="spoken-text">
+                "Stel: demobob zoekt online naar tips om beter te darten, en komt zo uit bij DartsCoaching.nl. Daar ontdekt hij dat DartsCoaching ook een eigen community heeft: Dart Buddies. Hier op deze pagina kun je gratis een account aanmaken. Ik maak 'm nu gewoon live aan als demobob, zodat je precies ziet wat er gebeurt."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Ga naar `https://dartbuddies.dartscoaching.nl/` — dit toont direct het inlogscherm met bovenaan drie groene vinkjes. Klik onderaan op <strong>"Nog geen account? Maak een account aan"</strong>. Typ het demobob-e-mailadres in het veld "E-mail". Bevestig "Bevestig dat je geen robot bent". Klik de knop <strong>"Maak een account aan"</strong> — laat expliciet zien dat er geen betaalstap volgt.
+            </div>
+
+            <div class="spoken-text">
+                "Zo simpel is het — geen betaling, geen gedoe. Nu even naar mijn mailbox, want daar moet zo de welkomstmail binnenkomen."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Switch naar mailbox-tab, wacht (evt. in montage inkorten) tot de mail binnenkomt live in beeld. Onderwerp: <strong>"Welkom nieuwe dartbuddie bij DartsCoaching.nl"</strong>.
+            </div>
+
+            <div class="spoken-text">
+                "Daar is 'ie al. Laten we 'm samen openen."
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- Scene 2 -->
+    <div class="content">
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">2</div>
+                <div class="scene-title">Welkomstmail openen</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm: mailbox, mail is al live binnengekomen</em></p>
+
+            <div class="spoken-text">
+                "Daar is 'ie. Zie je 'm niet meteen? Check dan je spamfolder — soms gooit je mailbox een prima pijl in het verkeerde vakje."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Mail openen, kort door de 3 stappen scrollen in beeld (zonder ze nu al uit te voeren — dat komt in de volgende scènes).
+            </div>
+        </div>
+
+        <!-- Scene 3 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">3</div>
+                <div class="scene-title">Inloggen</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm</em></p>
+
+            <div class="spoken-text">
+                "Klik op de knop 'Ik wil naar binnen!' in de mail. Deze link is 15 minuten geldig — te laat? Dan vraag je gewoon een nieuwe aan via 'wachtwoord vergeten' op het inlogscherm. Je komt automatisch ingelogd op het platform terecht."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Klik de knop in de mail, wacht tot je automatisch bent ingelogd op `https://dartbuddies.dartscoaching.nl/`.
+            </div>
+        </div>
+
+        <!-- Scene 4 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">4</div>
+                <div class="scene-title">Eerste blik op het platform</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm: dashboard/homepage</em></p>
+
+            <div class="spoken-text">
+                "Dit is Dart Buddies. Je hoeft niet meteen alles te bekijken — de belangrijkste eerste stap is jezelf zichtbaar maken. Dat doen we via je profiel."
+            </div>
+        </div>
+
+        <!-- Scene 5 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">5</div>
+                <div class="scene-title">Profiel openen</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm</em></p>
+
+            <div class="spoken-text">
+                "Klik rechtsboven op je profielfoto — daar opent een menu. Klik op 'Profiel'. Dit brengt je naar je profielpagina, waar je alles kunt invullen."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Klik het profiel-icoon rechtsboven (naast het tandwiel-instellingenicoon) → klik "Profiel" in het dropdown-menu → landt op de profielbewerkingspagina.
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- Scene 6 -->
+    <div class="content">
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">6</div>
+                <div class="scene-title">Profielfoto</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm</em></p>
+
+            <div class="spoken-text">
+                "Bovenaan zie je je profielfoto. Klik op het potloodje erop en upload een duidelijke foto — geen fotoshoot nodig, gewoon herkenbaar."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Upload `2026-07-14_DC_persona-bob-nobg_v01.png` (Bob-persona-illustratie, achtergrond al verwijderd).
+            </div>
+        </div>
+
+        <!-- Scene 7 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">7</div>
+                <div class="scene-title">Naam, koptekst en "Over mij"</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm</em></p>
+
+            <div class="spoken-text">
+                "Daaronder vul je in: je voor- en achternaam — die staan als twee losse velden. Dan je koptekst, kort en krachtig. En bij 'Over mij' een paar zinnen: wie je bent, waar je speelt, wat je wilt leren. Onderaan kun je ook nog je socials koppelen, dat is optioneel."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Vul in, in exacte veldvolgorde:
+            </div>
+
+            <table>
+                <tr>
+                    <th>Veld</th>
+                    <th>In te typen tekst</th>
+                </tr>
+                <tr>
+                    <td><strong>Voornaam</strong></td>
+                    <td>Bob</td>
+                </tr>
+                <tr>
+                    <td><strong>Achternaam</strong></td>
+                    <td>(demo) — of leeg laten, jouw keuze</td>
+                </tr>
+                <tr>
+                    <td><strong>Koptekst</strong></td>
+                    <td>Gezelligheidsdarter met ambities</td>
+                </tr>
+                <tr>
+                    <td><strong>Over mij</strong></td>
+                    <td>Hoi, ik ben Bob! Speel sinds een paar maanden met mijn team in de lokale competitie — vooral voor de gezelligheid, maar stiekem wil ik ook wel wat beter worden. Vooral mijn dubbels mogen wat consistenter. Leuk om hier tips te kunnen uitwisselen met andere darters!</td>
+                </tr>
+                <tr>
+                    <td><strong>Socials</strong></td>
+                    <td>Optioneel, mag leeg blijven voor de demo</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Scene 8 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">8</div>
+                <div class="scene-title">Privacy op Openbaar zetten en opslaan</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm</em></p>
+
+            <div class="spoken-text">
+                "Scroll iets verder naar beneden en je ziet 'Privacy' met twee knoppen: Openbaar en Privé. Zet 'm op Openbaar — dat is nodig om vindbaar te zijn in de zoekopdrachten en voor andere leden om contact met je te maken. Klik daarna rechtsboven op 'Opslaan' — zonder opslaan telt het niet."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Scroll naar "Privacy"-sectie onderaan de pagina, klik de knop "Openbaar" (groen gemarkeerd als actief), klik "Opslaan" rechtsboven naast "Annuleren".
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- Scene 9 -->
+    <div class="content">
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">9</div>
+                <div class="scene-title">Profiel compleet</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>camera groot</em></p>
+
+            <div class="spoken-text">
+                "Dat is je profiel compleet en zichtbaar. Nog één ding voordat we de community induiken: notificaties instellen, zodat je niks mist."
+            </div>
+        </div>
+
+        <!-- Scene 10 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">10</div>
+                <div class="scene-title">Notificaties instellen</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm</em></p>
+
+            <div class="spoken-text">
+                "Klik weer rechtsboven op je profielfoto, en kies dit keer 'Notificaties'. Bovenaan zie je 'Alle notificaties' — de snelste route: zet die op 'Pushnotificatie & e-mail' en je mist niks. Wil je het preciezer instellen? Scroll dan naar beneden — per type melding, zoals nieuwe gesprekken of reacties, kun je apart kiezen: alleen push, alleen e-mail, of allebei. Dit is precies waarom het slim is om dit nu meteen te doen: straks stel je jezelf voor in de community, en zonder notificaties mis je het moment dat iemand daarop reageert."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Klik profielfoto rechtsboven → "Notificaties" in het dropdown-menu → landt op `/settings/notifications` → zet "Alle notificaties" op "Pushnotificatie & e-mail" (of loop kort de losse categorieën door: Nieuwe gesprekken, Reacties, Evenementen).
+            </div>
+        </div>
+
+        <p style="padding: var(--space-md); background-color: #e8f5e9; border-left: 3px solid var(--color-secondary); font-size: 10pt; margin-top: var(--space-lg);">
+            <strong style="color: var(--color-secondary);">✓ MVP-eindpunt bereikt</strong><br>
+            Profiel compleet + notificaties aan = helemaal klaar om mee te doen.
+        </p>
+    </div>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- Deel 2 Header -->
+    <div class="content">
+        <h2 class="section-title">Deel 2 — Community verkennen (vervolg)</h2>
+
+        <p style="font-size: 11pt; color: #666; margin-bottom: var(--space-md);">
+            Navigatie voor deze scènes gebeurt via het <strong>linkermenu</strong>, dat twee secties heeft: "Communityplein" (Dartbuddies, The victory wall, Updates, Coach Café) en "Boeken" (180 in je Mindset, Darttactiek van beginner...). "Tips & Tools" staat niet in dit menu maar onder <strong>E-Learning</strong> bovenaan, als cursuskaart.
+        </p>
+
+        <!-- Scene 11 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">11</div>
+                <div class="scene-title">Dartbuddies-kanaal</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm</em></p>
+
+            <div class="spoken-text">
+                "Ga in het linkermenu naar 'Communityplein' en klik op 'Dartbuddies'. Stel jezelf hier voor — en maak het gerust wat uitgebreider dan alleen je naam. Denk aan: wie ben je, waar speel je? Op welk niveau zit je ongeveer? Heb je wel eens een 180 gegooid, of misschien zelfs een 9-darter? En waarom ben je eigenlijk lid geworden van Dart Buddies — wat wil je leren of bereiken? Hoe meer je deelt, hoe makkelijker andere darters een klik met je vinden."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Linkermenu → Communityplein → <strong>Dartbuddies</strong>.
+            </div>
+        </div>
+
+        <!-- Scene 12 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">12</div>
+                <div class="scene-title">The victory wall</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm</em></p>
+
+            <div class="spoken-text">
+                "Onder Dartbuddies, in datzelfde menu, staat 'The victory wall'. Dit is de plek om elkaar te bemoedigen en successen te delen — en dat is niet om op te scheppen, maar omdat we darten nu eenmaal spelen om successen te ervaren. Niets is hier te gek: heb je nog nooit een 100-finish gegooid, en lukt het je eindelijk? Dan is dat het delen waard. Een mooie training, rustig gebleven onder druk, je eerste 9-darter, of gewoon een avond waarop alles lekker liep — het mag allemaal hier. Vieren is leven, en samen vieren is nog leuker."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Linkermenu → Communityplein → <strong>The victory wall</strong>.
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- Scene 13 -->
+    <div class="content">
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">13</div>
+                <div class="scene-title">180 in je Mindset</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm</em></p>
+
+            <div class="spoken-text">
+                "Scroll iets verder naar beneden naar 'Boeken' — daar vind je '180 in je Mindset'. Dit kanaal sluit aan bij het boek van Joppe Bakens, met dezelfde titel. Daarin gaat het over focus, presteren, trainen als een pro en omgaan met zenuwen — en dat vind je dus ook terug in dit kanaal: het mentale stuk van darten."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Linkermenu → Boeken → <strong>180 in je Mindset</strong>. <em>(Let op: dit staat in een ander menu-blok dan Dartbuddies en Victory wall.)</em>
+            </div>
+        </div>
+
+        <!-- Scene 14 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">14</div>
+                <div class="scene-title">Tips & Tools</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm</em></p>
+
+            <div class="spoken-text">
+                "Klik bovenaan op 'E-Learning'. Hier staan al je cursussen — en één daarvan is 'Tips & Tools', helemaal gratis voor je als Dartbuddie. Daarin vind je bijvoorbeeld de dartstoernooi-reflectietool: heb je een toernooi gegooid, dan kun je daarmee terugkijken wat er gebeurde. Ook zit er het reflectieboek bij '180 in je Mindset' bij — heb je het boek gekocht, dan hoef je niet in het boek zelf te schrijven, maar gebruik je dit ernaast. En er is een module 'De basis op orde', met tips voor een solide techniek. Begin met één onderdeel, gebruik 'm echt, en kijk dan verder."
+            </div>
+
+            <div class="action">
+                <span class="action-label">Actie:</span> Bovenmenu → <strong>E-Learning</strong> → cursuskaart <strong>"Tips & Tools"</strong> (heeft een groen vinkje, dus al toegankelijk). Bevat exact 3 modules: Dartstoernooi reflectietool, Reflectiebook 180 in je mindset, De basis op orde.
+            </div>
+        </div>
+
+        <!-- Scene 15 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">15</div>
+                <div class="scene-title">App</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>scherm/telefoon</em></p>
+
+            <div class="spoken-text">
+                "Dart Buddies werkt ook op je telefoon — handig om snel te reageren of iets terug te lezen."
+            </div>
+        </div>
+
+        <!-- Scene 16 -->
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-number">16</div>
+                <div class="scene-title">Slotwoord</div>
+            </div>
+            <p style="font-size: 10pt; color: #999; margin-bottom: var(--space-sm);"><em>camera groot</em></p>
+
+            <div class="spoken-text">
+                "Kort samengevat: vul je profiel in, zet 'm op openbaar, zet je notificaties aan, en stel jezelf voor in Dartbuddies. Daarna kun je rustig verder kijken. Tot snel in de community!"
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="page-footer">
+            <p style="margin: 0;">Dart Buddies Onboarding Video — Draaiboek</p>
+            <p style="margin: var(--space-xs) 0 0 0;">Geverifieerd 2026-07-14 | Klaar voor opname</p>
+        </div>
+    </div>
+</body>
+</html>

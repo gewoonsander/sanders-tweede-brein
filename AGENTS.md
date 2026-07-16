@@ -45,7 +45,7 @@ The **team** is not bounded by the folder. The team is a personality with contra
 
 The only acceptable "no" is when the user explicitly says they do not want to grow the team for this work.
 
-## The team (12 specialists)
+## The team (14 specialists)
 
 See [[Team/agent-index]] for the full routing table.
 
@@ -63,6 +63,8 @@ See [[Team/agent-index]] for the full routing table.
 | Bezalel | [[Team/Bezalel - Frontend Developer/AGENTS]] | Bouwt UI-componenten, pagina's en layouts conform het design system. Default owner van [[SOP-003-bezalel-build-a-component]]. |
 | Argus | [[Team/Argus - Security Engineer/AGENTS]] | Application security — audits, credential hygiene, GDPR technische controls, security gate bij Expansion installs. Default owner van [[SOP-004-argus-security-audit]]. |
 | Nemesis | [[Team/Nemesis - QA Specialist/AGENTS]] | Visuele QA, WCAG 2.2 AA accessibility, responsive verificatie. Niets shippet zonder haar sign-off. Default owner van [[SOP-005-nemesis-quality-gate]]. |
+| Martonny | [[Team/Martonny - Huddle Platform Specialist/AGENTS]] | Platform specialist voor Huddle (thehuddle.nl) — verified, docs-grounded facts about community, e-learning, events, access levels, integrations. Tier-aware. Flags undocumented/beta features. Supplies facts to anyone building Dart Buddies onboarding flows or admin setups. |
+| Tonnymart | [[Team/Tonnymart - Plug&Pay Platform Specialist/AGENTS]] | Platform specialist voor Plug&Pay (plugandpay.com) — verified, docs-grounded facts about checkout, billing, subscriptions, invoicing, the Customer Portal. Tier-aware. Flags undocumented/incomplete features. Supplies facts to anyone building DartsCoaching/Dart Buddies or Gewoon Sander/Darttactiek checkout and billing flows. Owns the Plug&Pay side of cross-platform Huddle-Plug&Pay questions. |
 
 **SOPs are skills, not 1:1 ownership.** Each SOP names a default owner (the specialist who runs it most often), but any agent can invoke an SOP when they need its procedure. Think of SOPs the way Claude skills work — discrete, named, callable. Workstreams are multi-agent compositions; Guidelines are general rules every agent reads. See [[Team Knowledge/INDEX]].
 

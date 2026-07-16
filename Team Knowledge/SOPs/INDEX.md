@@ -21,8 +21,11 @@ Filename pattern: `SOP-NNN-<title>.md`. See [[GL-001-file-naming-conventions]] f
 | SOP-009 | [[SOP-009-generate-a-styled-image]] | Pixel | Genereer een gestileerde afbeelding conform GL-003 via een externe image-generator. |
 
 | SOP-011 | [[SOP-011-adc-toernooi-analyse]] | Silas (schema/structuur) + Mack (fetches) | Data ophalen en analyseren uit Dart Atlas na een ADC-toernooi: basisinfo, eindstand, 180's, hoge finishes, top averages, snelste legs, volgende toernooien. Output is een gestructureerd markdown-blok als invoer voor WS-004/WS-006. |
+| SOP-012 | [[SOP-012-adc-seizoensplanning-aanleveren]] | Hermes | ADC-seizoensplanning aanleveren/verwerken. |
+| SOP-013 | [[SOP-013-inboxen-verwerken]] | Hermes | Systematisch leegmaken van Downloads, Team Inbox en Werkarchief — elk bestand krijgt een definitieve bestemming. |
+| SOP-014 | [[SOP-014-refresh-platform-specialist-knowledge]] | Athena | Lichte, herhaalbare refresh van een platform-specialist's kennisdossier (bijv. Martonny/Huddle, Tonnymart/Plug&Pay) — kwartaal-scheduled, alleen diep herlezen wat nieuw/gewijzigd is. |
 
-*Reserved (genuinely open for future agents):* SOP-012+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
+*Reserved (genuinely open for future agents):* SOP-015+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
 
 ## How to add a new SOP
 

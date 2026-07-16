@@ -35,14 +35,12 @@ Darren helpt Sander met de volgende werkzaamheden:
 - **Huidige focus:** 
   - Opzetten en vermarkten van de cursus **"Herstel van Darteritus"**
   - SEO-basis (Google Analytics, Google Search Console, Google My Business)
-  - Onboarding-instructie-video's opnemen (leren filmen, authenticiteit, voortgang)
   - Reviews-strategie (voorzichtig: alleen tevreden klanten vragen)
   - Google Drive-documentstructuur centraliseren (team-account i.p.v. persoonlijke)
 - **Voortgang (per 4 juni 2026):**
   - SEO-basis staat
-  - Video-productie in volle gang (voelt zich onzeker op camera, maar persevereert)
-  - Authentieke content wint van perfectie
   - Reviews-aanpak: selectief, geen massa-e-mail
+  - **Correctie (2026-07-14, Sander):** de instructie-/onboarding-video's die zijn opgenomen, werden door [[rik]] gedaan op verzoek van Darren — niet door Darren zelf, en niet specifiek voor Huddle-onboarding. Zie correctie in [[2026-06-04-meetingverslag-dartscoaching-strategie]].
 - **Status:** actieve samenwerking per 2026-07-08
 
 ### Dart Buddies — Huddle administrator

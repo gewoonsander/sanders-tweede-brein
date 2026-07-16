@@ -33,6 +33,7 @@ Mede-eigenaar van [[dartscoaching-nl]], financieel-strategisch denker, levert ma
 **4 juni 2026 (Gesprek 3):**
 - Stimuleert Sander om zichzelf te ontzien en tempo realistisch te houden
 - Huddle-metriek-tracking: hoeveel actieve gebruikers, engagement-rate
+- Neemt op verzoek van [[darren-van-es]] diverse instructie-/onboarding-filmpjes op (niet specifiek Huddle-onboarding — dat blijft Sanders eigen domein als "chef huddle"). Zie correctie in [[2026-06-04-meetingverslag-dartscoaching-strategie]].
 
 ## Open vragen
 

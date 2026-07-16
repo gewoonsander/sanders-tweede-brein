@@ -40,6 +40,8 @@ Darren is actief aan het werk voor DartsCoaching en neemt twee grote werkzaamhed
 **Kerninzicht:**  
 Authenticiteit wint van perfectie. Video's die "echt" overkomen zijn betrouwbaarder dan gepolijste productie.
 
+> **Correctie (2026-07-14, Sander):** het is [[rik]] die de filmpjes opneemt (op verzoek van Darren), niet Darren zelf. Dit gaat bovendien niet over Huddle-onboarding specifiek — de Huddle blijft volledig Sanders eigen verantwoordelijkheid ("chef huddle"). De oorspronkelijke Fireflies-samenvatting hierboven is op dit punt onjuist; deze correctie is leidend.
+
 ---
 
 ### 2.2 Reviews-strategie: voorzichtig en gericht
