@@ -24,8 +24,9 @@ Filename pattern: `SOP-NNN-<title>.md`. See [[GL-001-file-naming-conventions]] f
 | SOP-012 | [[SOP-012-adc-seizoensplanning-aanleveren]] | Hermes | ADC-seizoensplanning aanleveren/verwerken. |
 | SOP-013 | [[SOP-013-inboxen-verwerken]] | Hermes | Systematisch leegmaken van Downloads, Team Inbox en Werkarchief — elk bestand krijgt een definitieve bestemming. |
 | SOP-014 | [[SOP-014-refresh-platform-specialist-knowledge]] | Athena | Lichte, herhaalbare refresh van een platform-specialist's kennisdossier (bijv. Martonny/Huddle, Tonnymart/Plug&Pay) — kwartaal-scheduled, alleen diep herlezen wat nieuw/gewijzigd is. |
+| SOP-015 | [[SOP-015-adc-pub-qualifier-handleiding]] | Sander | Officiële ADC Europe/Darts Atlas-procedure voor toernooimanagers: inschrijvingen, check-in/checkout, format-regels, knockout, winnaarsfoto, financiële regelingen. |
 
-*Reserved (genuinely open for future agents):* SOP-015+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
+*Reserved (genuinely open for future agents):* SOP-016+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
 
 ## How to add a new SOP
 

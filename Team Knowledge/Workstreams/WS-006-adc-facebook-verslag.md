@@ -5,7 +5,7 @@ owners:
   - Penn (schrijven)
   - Larry (review en aanlevering aan Sander)
 tags: [ADC, darts, facebook, regio-oost, verslag, template, stijl]
-last_updated: 2026-06-28
+last_updated: 2026-08-03
 ---
 
 # WS-006 — ADC Facebook-bericht — stijlregels en invultemplate
@@ -27,11 +27,15 @@ Dit workstream is een **stijl- en template-laag bovenop [[WS-004-facebook-toerno
 - Persoonlijk maar professioneel: feliciteer de winnaar bij naam, benoem de prestatie concreet
 - Mobielleesbaar: korte alinea's, witregels tussen secties
 
-### Structuur
+### Structuur (bijgewerkt 03-08-2026 — Driel-stijl is de norm)
 
-- **Vetgedrukte sectiehoofdstukken met emoji** — elke sectie krijgt een emoji + vetgedrukte titel
+⚠️ **Stijlwijziging:** vanaf het Driel-verslag (27-07-2026) is de vorm verschoven van vaste emoji-secties naar een lopend verhaal per fase. Bevestigd als de norm door Sander op 03-08-2026 (Hengelo-verslag). De regels hieronder vervangen de oude emoji-sectiestructuur.
+
+- **Lopend verhaal, geen emoji-sectiehoofdstukken** — de tekst leest als een kort verslag: opening, groepsfase (per groep een alinea), knock-outfase (per ronde een alinea), finale, dan de statistiekblokken.
+- Statistiekblokken (180's, hoge finishes) blijven wél als vetgedrukte kop + bullets — dat is de enige plek met structuur-opmaak.
+- **"Winnaar in de spotlight"** als apart alineablok met 🏆, vlak voor de afsluiting.
 - Geen genummerde lijsten in de publieke post — bullet-punten of gewone regels
-- Hashtags altijd onderaan, na de oproep tot taggen
+- **Geen hashtags** — vervallen sinds de Driel-stijl. Alleen de oproep tot taggen/delen aan het einde, gevolgd door de seizoenstand-link.
 
 ### Statistieken
 
@@ -42,11 +46,11 @@ Dit workstream is een **stijl- en template-laag bovenop [[WS-004-facebook-toerno
 
 ### Vaste afsluiting
 
-Elk bericht eindigt altijd met:
+Elk bericht eindigt altijd met (geen hashtags, zie stijlwijziging hierboven):
 
-> Sharing is caring — tag de deelnemers en deel dit bericht! 🔄
+> Deel dit verslag gerust en tag de spelers erin — dat wordt gewaardeerd! 📲
 >
-> #AmateurdartsBenelux #DartsRegioOost
+> 📊 [Bekijk de actuele seizoenstand Regio Oost](https://www.dartsatlas.com/seasons/[SEIZOEN_ID]/player_standings)
 
 ### Wat altijd aanwezig is
 
@@ -70,49 +74,59 @@ Elk bericht eindigt altijd met:
 
 ---
 
-## Invultemplate
+## Invultemplate (Driel-stijl, bijgewerkt 03-08-2026)
 
-Kopieer dit template en vul alle `[PLACEHOLDERS]` in met de data uit [[SOP-011-adc-toernooi-analyse]].
+Kopieer dit template en vul alle `[PLACEHOLDERS]` in met de data uit [[SOP-011-adc-toernooi-analyse]]. Lopend verhaal, geen emoji-secties (zie stijlwijziging hierboven). Volledig uitgewerkt voorbeeld: [[ADC/Verslagen/facebook-verslag-hengelo-2026-08-02]].
 
 ---
 
 ```
-🎯 **[TOERNOOINAAM] — [DATUM] | [LOCATIE]**
+🎯 [WINNAAR] verovert de titel in [LOCATIE]
 
-Wat een geweldige dartsmiddag/-avond in [LOCATIE]! [KORT SFEERWOORD: bijv. "Scherpe pijlen, spannende legs en een volle zaal maakten er een onvergetelijk toernooi van."]
+[VENUE] in [LOCATIE] was [DAG] het decor van [TOERNOOI-CONTEXT, bv. "de Winmau Benelux Open pubqualifier"]. [AANTAL] spelers streden in [N] groepen om een plek in de knock-out, wat resulteerde in [KORTE SFEERZIN].
 
-🏆 **Winnaar**
-Gefeliciteerd aan **[NAAM WINNAAR]** met de overwinning! In een spannende finale versloeg [hij/zij] **[NAAM RUNNER-UP]** met [SCORE, bijv. 6–4], met respectieve gemiddelden van [GEM. WINNAAR] en [GEM. RUNNER-UP].
-[OPTIONEEL — Quote winnaar: "[QUOTE]"]
+**Groepsfase**
 
-[KWALIFICATIE-IMPLICATIE: bijv. "Met deze overwinning plaatst [NAAM] zich voor de provinciale finale van [SEIZOEN]."]
+[Per groep één alinea: wie werd 1e/2e/etc, met gemiddelde en W-L, highlight de groepswinnaar en eventuele gelijke stand.]
 
-🙏 **Dank aan [NAAM VENUE / ORGANISATOR]**
-Een dikke dank aan [NAAM VENUE] voor de geweldige organisatie en gastvrijdheid. Zonder jullie is dit niet mogelijk! 👏
+**Knock-outfase**
 
-📊 **Seizoenscontext**
-Dit toernooi maakt deel uit van de [SEIZOEN]-ranglijst van het Amateur Darts Circuit. [AANVULLENDE CONTEXT: bijv. "Het was alweer de [N]e stop in Regio Oost dit seizoen — nog [X] toernooien te gaan."] Bekijk de actuele stand hier: [LINK DART ATLAS SEIZOENSRANKING]
+[Per ronde (Last 16 / kwartfinale / halve finale) één alinea met alle uitslagen + gemiddeldes van de opvallendste wedstrijden.]
 
-🎯 **180's**
-Totaal in dit toernooi: [TOTAAL AANTAL]
-[NAAM] — [N]
-[NAAM] — [N]
-[NAAM] — [N] ← de meeste!
+**Finale**
 
-🏹 **Hoge finishes (100+)**
-[SCORE] — [NAAM]
-[SCORE] — [NAAM]
-[SCORE] — [NAAM] 🔥
-[EVENTUEEL: [170] — [NAAM] 🐟 The Big Fish!]
+In de finale, best of [X], trok [WINNAAR] met [GEM.] gemiddeld aan het langste eind: [SCORE] tegen [RUNNER-UP] ([GEM.] gemiddeld).
 
-📅 **Volgende toernooien Regio Oost**
-[LOCATIE] — [DATUM]: [LINK]
-[LOCATIE] — [DATUM]: [LINK]
-[LOCATIE] — [DATUM]: [LINK]
+**Statistieken — 180's**
 
-Sharing is caring — tag de deelnemers en deel dit bericht! 🔄
+- 1x 180: [NAMEN]
+- 2x 180: [NAMEN]
+- ...
+- [Nx] 180: [NAAM] ← meeste
 
-#AmateurdartsBenelux #DartsRegioOost
+Samen goed voor [TOTAAL] maximums, met [NAAM(EN)] als topscorer(s).
+
+**Statistieken — hoge finishes**
+
+- [SCORE]: [NAAM]
+- ...
+- [HOOGSTE SCORE]: [NAAM] — hoogste finish van de avond
+[EVENTUEEL: 170 = The Big Fish, apart vermelden]
+
+**Winnaar in de spotlight** 🏆
+
+[WINNAAR] pakte in [LOCATIE] de titel: [korte recap groepsfase + knock-out + finale-cijfers]. [KWALIFICATIE-IMPLICATIE, indien bekend]. Van harte gefeliciteerd, [NAAM]! ✅
+
+[OPTIONEEL — quote winnaar]
+
+**Volgende toernooien in Regio Oost**
+
+- [DAG DATUM] — [VENUE, LOCATIE], aanvang [TIJD] — [inschrijven via Dart Atlas]([LINK])
+- ...
+
+Deel dit verslag gerust en tag de spelers erin — dat wordt gewaardeerd! 📲
+
+📊 [Bekijk de actuele seizoenstand Regio Oost]([LINK SEIZOENSRANKING])
 ```
 
 ---
@@ -126,7 +140,7 @@ Sharing is caring — tag de deelnemers en deel dit bericht! 🔄
 5. Pas de sfeerwoorden aan op het specifieke toernooi — geen copy-paste van vorige verslagen.
 6. Lever het concept-bericht aan Larry.
 7. Larry legt het voor aan Sander met een checklist van wat automatisch ingevuld is en wat nog ontbreekt (foto, eventuele quote).
-8. **Vaste stap (sinds 06-07-2026):** zodra het concept compleet is (incl. links naar volgende toernooien, zie [[WS-004-facebook-toernooi-verslag]] Fase 4), slaat Larry het op in `Deliverables/YYYY-MM-DD-facebook-verslag-[locatie].md`, gedateerd op de toernooidatum.
+8. **Vaste stap (bijgewerkt 03-08-2026):** zodra het concept compleet is (incl. links naar volgende toernooien, zie [[WS-004-facebook-toernooi-verslag]] Fase 4), slaat Hermes het op in `ADC/Verslagen/facebook-verslag-[locatie]-YYYY-MM-DD.md`, gedateerd op de toernooidatum.
 
 Sander publiceert zelf — Penn en Larry publiceren nooit rechtstreeks op Facebook.
 

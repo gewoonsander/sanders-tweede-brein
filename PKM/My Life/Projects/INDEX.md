@@ -9,11 +9,7 @@ Bounded efforts with a finish line — a set of deliverables you cross off when 
 - [[project_praktijkvoluitleven-migratie]] — hosting-migratie en doorlopend klantbeheer voor [[heleen-van-den-berg]] (Praktijk Voluit Leven).
 - [[project_rdb-emiel-website-overdracht]] — overdracht van website-toegang en informatie aan [[emiel-theloosen]] bij zijn aantreden in het RDB-bestuur.
 - [[project_modus-super-series]] — plaatsing voor de MODUS Super Series: logistiek + prestatievoorbereiding (nul-status, trainingsschema).
-- [[verbouwing-huismanstraat-34]] — grote verbouwing Huismanstraat 34, duurzaamheid, target 2027-12-31.
-- [[verbouwing-beneden]] — verbouwing beneden, deadline 2026-08-08.
-- [[verbouwing-badkamer-toilet]] — verbouwing badkamer en toilet boven.
-- [[bouwlog-badkamer-toilet]] — logboek van de badkamer/toilet-verbouwing (let op: geen YAML-frontmatter, wijkt af van GL-002 — mogelijk bewust als vrij logboek).
-- [[buitenkraan-vervangen]] — onderhoudstask: buiten kraan vervangen omdat deze druppelt.
+- [[verbouwing-huismanstraat-34]] — grote verbouwing + onderhoud Huismanstraat 34, incl. beneden, badkamer/toilet boven en losse huisklussen (buitenkraan), duurzaamheid, target 2027-12-31. (Samengevoegd 03-08-2026 vanuit de losse bestanden verbouwing-beneden, verbouwing-badkamer-toilet, bouwlog-badkamer-toilet en buitenkraan-vervangen — inhoud overgenomen, bestanden opgeheven.)
 
 ## Naming
 

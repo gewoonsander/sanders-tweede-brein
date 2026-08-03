@@ -47,6 +47,7 @@ Inrichten nog te doen — zie open vragen.
 ## Procedures
 
 - [[SOP-010-adc-inschrijvingen-opvragen]] — live inschrijvingen ophalen van Dart Atlas
+- [[SOP-015-adc-pub-qualifier-handleiding]] — officiële Darts Atlas-procedure voor toernooimanagers (inschrijvingen, format-regels, knockout, financiële regelingen)
 
 ## Bronnen
 

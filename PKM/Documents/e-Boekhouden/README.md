@@ -23,7 +23,11 @@ Archief van e-Boekhouden-exports vóór opzegging van het abonnement, na oversta
 - Balans-overzichten per boekjaar (PDF + Excel)
 - Verstuurde btw-aangiftes per boekjaar (PDF)
 
-Zie ook de aparte taak "e-Boekhouden: digitaal archief downloaden (alle bonnen)" voor het bonnenarchief.
+**Bonnenarchief — gedownload en gearchiveerd 31-07-2026.** Bewust NIET in deze git-vault opgeslagen (~545MB aan PDF's, te zwaar voor de git-geschiedenis) — te vinden op:
+- **Lexar SSD:** `/Administratie/e-Boekhouden-bonnen-gewoonsander/` (850 bestanden, 2019–2026, ~74MB) en `/Administratie/e-Boekhouden-bonnen-gezinshuis/` (1554 bestanden, 2017–2026, ~475MB, aparte administratie Gezinshuis Gewoon Thuis)
+- **Google Drive:** zelfde twee mappen, als tweede kopie (3-2-1-principe voor de 7-jaar bewaarplicht)
+
+Twee losse e-Boekhouden-exports bleken nodig: één voor Gewoon Sander (zakelijke bonnen: hosting, abonnementen, etc.) en één voor Gezinshuis/Gewoon Thuis (huishoudelijke bonnen: boodschappen, Skillsource-facturen, etc.) — dit zijn aparte administraties bij e-Boekhouden.
 
 ## Context
 

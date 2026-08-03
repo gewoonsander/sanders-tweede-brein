@@ -23,6 +23,18 @@ Meest recent bovenaan.
 - **2026-07-07** — Brainstormsessie met Hermes over de prestatievoorbereiding. Sander wil op basis van bestaande data (DartConnect, Dart Atlas, eerdere toernooianalyses) een nul-status vaststellen en daarvandaan een trainingsschema bouwen, met methodieken die ook binnen DartsCoaching.nl gebruikt worden. Mogelijk later gedeeld als content binnen Dart Buddies. Container aangemaakt: [[Deliverables/2026-07-07-modus-voorbereiding]] (nog geen data verzameld, nog geen schema geschreven — bewust voor een latere sessie).
 - Eerder (begin juli 2026, zie session-logs): contract- en Integrity Training-administratie afgehandeld, Bank Form-vraag naar beth@modussports.com uitgezocht, conceptmail aan John Lokken klaargezet (nog niet verstuurd).
 
+## Hotels Portsmouth
+
+De MODUS Super Series-locatie is de MODUS Live Lounge, 19 London Road, Portsmouth. Opties dichtbij de venue:
+
+- Travelodge Portsmouth (Kingston Cres, North End) — vlak om de hoek van de venue
+- Premier Inn Portsmouth City Centre Hotel (1 Isambard Brunel Road) — city centre
+- Ibis Portsmouth Centre (Winston Churchill Ave, Southsea) — city centre
+- Holiday Inn Express Portsmouth Gunwharf Quays (The Plaza) — west van de city centre
+- Holiday Inn Portsmouth (Pembroke Road) — city centre
+
+**ADC Europe advies:** boek via booking.com op zoekterm "Portsmouth" voor de beste prijzen, in plaats van rechtstreeks via de hotelwebsite. Volledige lijst: [[2026-07-31-hotels-portsmouth-modus]].
+
 ## Open threads
 
 - [ ] Prestatievoorbereiding oppakken — zie openstaande punten in [[Deliverables/2026-07-07-modus-voorbereiding]].

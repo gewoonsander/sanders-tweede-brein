@@ -25,6 +25,10 @@ Sander bouwde eerder zijn eigen online community "DartBuddy's" op rond zijn dart
 
 Dart Buddies is de community-arm van de samenwerking met [[darts-coaching]]. Joppe Bakens ([[CRM/People/joppe-bakens]]) en Sander delen de visie op community als fundament voor digitale omzet.
 
+## Persona's (doelgroep)
+
+Vier doelgroep-persona's uitgewerkt voor content en 3D-karakterbeelden: **Nina** (nieuwsgierige starter), **Bob** (gezelligheidsdarter), **Weszley** (jonge gamer), **Willy/Willie** (fanatieke perfectionist) — samen een piramide van instroom (breed, Nina) tot top (smal, Willy). Volledige beschrijvingen + AI-beeldprompts: [[Deliverables/2026-07-31-dartscoaching-personas-briefing]].
+
 ## Open vragen
 
 - Hoe groeit Dart Buddies zonder dat het te veel tijd kost?

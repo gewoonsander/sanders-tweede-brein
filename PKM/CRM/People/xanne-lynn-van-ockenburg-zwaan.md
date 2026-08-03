@@ -16,4 +16,4 @@ Jongste dochter van [[sander-van-ockenburg-zwaan]] en [[marieke-van-ockenburg-zw
 
 ## School
 
-Guido de Brès, Arnhem.
+Guido de Brès, Arnhem. Klas a2c (2025-2026), vervolg volgend jaar: ah3. Zie [[2026-07-10-cijferkaart-xanne-lynn]] voor het eindrapport (gemiddelde 8,4, 0 tekorten).
