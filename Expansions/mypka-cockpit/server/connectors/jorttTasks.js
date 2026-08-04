@@ -5,8 +5,8 @@
 // fetched per call (no caching needed at cockpit polling cadence; Jortt rate
 // limit is 10 req/s). Pagination via _links.next, up to 3 pages (300 invoices).
 //
-// Keys: JORTT_GEWOON_SANDER_CLIENT_ID_API_KEY (client ID)
-//       JORTT_GEWOON_SANDER_CLIENT_SECRET_API_KEY (client secret)
+// Keys: JORTT_GEWOON_SANDER_CLIENT_ID (client ID)
+//       JORTT_GEWOON_SANDER_CLIENT_SECRET (client secret)
 // — both resolved in-process via readEnvKey(); values never emitted.
 
 import { weekWindow, dayInWeek, degraded, ok, DISPLAY_TZ } from './types.js';
@@ -128,8 +128,8 @@ export function makeJorttGewoonSanderConnector(opts = {}) {
       const todayDay = displayToday();
       const window = weekWindow(weekStart, DISPLAY_TZ);
 
-      const clientId     = readEnvKey('JORTT_GEWOON_SANDER_CLIENT_ID_API_KEY');
-      const clientSecret = readEnvKey('JORTT_GEWOON_SANDER_CLIENT_SECRET_API_KEY');
+      const clientId     = readEnvKey('JORTT_GEWOON_SANDER_CLIENT_ID');
+      const clientSecret = readEnvKey('JORTT_GEWOON_SANDER_CLIENT_SECRET');
       if (!clientId || !clientSecret) {
         return degraded(id, 'no-token', 'Jortt (Gewoon Sander) is not connected — client ID or secret missing.');
       }
