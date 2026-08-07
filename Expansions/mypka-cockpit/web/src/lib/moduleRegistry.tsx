@@ -110,9 +110,6 @@ export interface CockpitModule {
    *  Audiobooks accessible from the Library picker) rather than directly from
    *  the sidebar. */
   hideFromNav?: boolean;
-  /** Live badge count shown next to the nav label. Set externally (e.g. from
-   *  App.tsx after fetching /api/cockpit/folder-counts). */
-  count?: number;
 }
 
 // THE REGISTRY. One entry per drop-in module. See
@@ -169,9 +166,7 @@ export function moduleForSlug(slug: string): CockpitModule | undefined {
   return activeModules().find((m) => m.slug === slug);
 }
 
-/** Active modules attached to a given sidebar group, in registration order.
- *  Modules with hideFromNav:true are excluded — their route is live but they
- *  don't appear in the sidebar. */
+/** Active modules attached to a given sidebar group, in registration order. */
 export function modulesForSection(section: ModuleNavSection): readonly CockpitModule[] {
-  return activeModules().filter((m) => m.navSection === section && !m.hideFromNav);
+  return activeModules().filter((m) => m.navSection === section);
 }

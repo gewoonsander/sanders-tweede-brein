@@ -15,7 +15,7 @@ import {
 } from 'react';
 import { ChevronDown, ChevronUp, ScrollText } from 'lucide-react';
 import { verifyThenSignalAuthExpired } from '../../lib/auth';
-import { S } from '../../lib/strings';
+import { useT, intlLocale, translateNow } from '../../lib/i18n';
 import { WikiMarkdown } from '../../components/WikiMarkdown';
 
 interface SessionLogEntry {
@@ -42,7 +42,7 @@ function dayLabel(date: string | null): string {
   if (!date) return '';
   const head = date.slice(0, 10);
   try {
-    return new Date(`${head}T12:00:00`).toLocaleDateString('en-GB', {
+    return new Date(`${head}T12:00:00`).toLocaleDateString(intlLocale(), {
       weekday: 'short', day: 'numeric', month: 'short', year: 'numeric',
     });
   } catch {
@@ -56,15 +56,19 @@ async function fetchJson<T>(url: string): Promise<T> {
   const r = await fetch(url, { credentials: 'same-origin' });
   if (r.status === 401) {
     void verifyThenSignalAuthExpired();
-    throw new Error('Session check failed — please retry.');
+    // Thrown outside a component (a bare async helper), so the non-reactive
+    // translateNow() is the right door here — the message is captured into state
+    // and re-read on the next render anyway.
+    throw new Error(translateNow('fetch.sessionCheckFailed'));
   }
-  if (!r.ok) throw new Error(`Server responded ${r.status}`);
+  if (!r.ok) throw new Error(translateNow('fetch.serverResponded', { status: r.status }));
   return r.json() as Promise<T>;
 }
 
 const FEED_PAGE = 20;
 
 export function SessionLogFeed() {
+  const t = useT();
   const [entries, setEntries] = useState<SessionLogEntry[]>([]);
   const [available, setAvailable] = useState(true);
   const [nextBefore, setNextBefore] = useState<string | null>(null);
@@ -133,14 +137,14 @@ export function SessionLogFeed() {
         <span className="library-empty-mark" aria-hidden="true">
           <ScrollText size={26} strokeWidth={1.5} />
         </span>
-        <p className="library-empty-title">{S.roster.feedEmptyTitle}</p>
-        <p className="library-empty-sub">{S.roster.feedEmptySub}</p>
+        <p className="library-empty-title">{t('roster.feedEmptyTitle')}</p>
+        <p className="library-empty-sub">{t('roster.feedEmptySub')}</p>
       </div>
     );
   }
 
   if (!initialised && error) {
-    return <div role="alert" className="view-error">{S.roster.feedLoadError}: {error}</div>;
+    return <div role="alert" className="view-error">{t('roster.feedLoadError')}: {error}</div>;
   }
 
   return (
@@ -156,14 +160,14 @@ export function SessionLogFeed() {
         )}
         {initialised && error && !loading && (
           <p role="alert" className="jt-foot-error">
-            {S.roster.feedLoadError}: {error}{' '}
+            {t('roster.feedLoadError')}: {error}{' '}
             <button type="button" className="jt-retry" onClick={() => void loadPage(nextBefore)}>
-              Retry
+              {t('common.retry')}
             </button>
           </p>
         )}
         {!hasMore && entries.length > 0 && (
-          <p className="team-feed-origin">the beginning of your team’s log</p>
+          <p className="team-feed-origin">{t('team.feedOrigin')}</p>
         )}
         <div ref={sentinelRef} className="jt-sentinel" aria-hidden="true" />
       </li>
@@ -174,6 +178,7 @@ export function SessionLogFeed() {
 // One session-log entry: date + title + snippet, unfolds in place to the full
 // body (WikiMarkdown). Mirrors the Journal feed's TimelineEntry reading.
 function SessionLogCard({ entry }: { entry: SessionLogEntry }) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const bodyId = `team-log-${entry.slug}`;
   return (
@@ -203,8 +208,8 @@ function SessionLogCard({ entry }: { entry: SessionLogEntry }) {
           aria-controls={bodyId}
         >
           {open
-            ? <><ChevronUp size={14} strokeWidth={1.5} aria-hidden="true" /> Fold</>
-            : <><ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" /> Unfold</>}
+            ? <><ChevronUp size={14} strokeWidth={1.5} aria-hidden="true" /> {t('common.fold')}</>
+            : <><ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" /> {t('common.unfold')}</>}
         </button>
       )}
     </article>

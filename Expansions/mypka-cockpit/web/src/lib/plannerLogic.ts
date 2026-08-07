@@ -10,6 +10,7 @@
 // DISPLAY_TZ. We never trust the browser's local zone for bucketing.
 
 import type { NormalizedEvent, PlannerSettings, Weekday } from './plannerTypes';
+import { intlLocale, translateNow } from './i18n';
 
 export const DISPLAY_TZ = 'Europe/Berlin';
 
@@ -39,10 +40,25 @@ export function eventPosition(e: NormalizedEvent, tz: string = DISPLAY_TZ): numb
   return tzMinutesOfDay(new Date(e.start), tz);
 }
 
-export const WEEKDAY_LABELS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as const;
-export const WEEKDAY_FULL = [
-  'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday',
-] as const;
+// Weekday names are DERIVED, not a hardcoded English array: Intl gives us Monday
+// and maandag from the same call. 2024-01-01 is a Monday, so index 0..6 maps
+// straight onto the planner's Monday-start Weekday type. Noon-anchored + UTC so no
+// DST edge can shift the name.
+export const WEEKDAY_INDEXES: readonly Weekday[] = [0, 1, 2, 3, 4, 5, 6];
+
+function weekdayDate(wd: number): Date {
+  return new Date(Date.UTC(2024, 0, 1 + wd, 12));
+}
+
+/** 'Mon' / 'ma' — the short weekday label in the UI language. */
+export function weekdayShort(wd: number): string {
+  return new Intl.DateTimeFormat(intlLocale(), { timeZone: 'UTC', weekday: 'short' }).format(weekdayDate(wd));
+}
+
+/** 'Monday' / 'maandag' — the full weekday name in the UI language. */
+export function weekdayFull(wd: number): string {
+  return new Intl.DateTimeFormat(intlLocale(), { timeZone: 'UTC', weekday: 'long' }).format(weekdayDate(wd));
+}
 
 // ---- week math --------------------------------------------------------------
 
@@ -84,7 +100,7 @@ export function weekDaysLabelFor(weekStart: string, tz: string = DISPLAY_TZ): st
   const fmt = (day: string, withMonth: boolean) => {
     const [y, m, d] = day.split('-').map(Number);
     const dt = new Date(Date.UTC(y, m - 1, d, 12));
-    return new Intl.DateTimeFormat('en-GB', {
+    return new Intl.DateTimeFormat(intlLocale(), {
       timeZone: tz, day: 'numeric', ...(withMonth ? { month: 'short' } : {}),
     }).format(dt);
   };
@@ -98,7 +114,7 @@ export function weekDaysLabelFor(weekStart: string, tz: string = DISPLAY_TZ): st
 export function monthDayLabel(dayStr: string, tz: string = DISPLAY_TZ): string {
   const [y, m, d] = dayStr.split('-').map(Number);
   const dt = new Date(Date.UTC(y, m - 1, d, 12));
-  return new Intl.DateTimeFormat('en-US', {
+  return new Intl.DateTimeFormat(intlLocale(), {
     timeZone: tz, month: 'long', day: 'numeric',
   }).format(dt);
 }
@@ -291,9 +307,20 @@ export function timerState(
 // a finished half is not a failure, it's just behind us). `half` is optional so
 // existing call sites without it degrade to a bare "done".
 export function formatRemaining(minutes: number, state: TimerState, half?: 'AM' | 'PM'): string {
-  if (state === 'elapsed') return half ? `${half} done` : 'done';
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  const core = h > 0 ? `${h}h ${m}m` : `${m}m`;
-  return `${core} left`;
+  if (state === 'elapsed') {
+    return half ? translateNow('planner.halfDone', { half }) : translateNow('planner.done');
+  }
+  return translateNow('planner.remaining', { core: remainingCore(minutes) });
+}
+
+/** Just the digits — "2h 10m" / "2u 10m" / "45m". The countdown bar renders these in
+ *  its own mono span, so it needs them WITHOUT the surrounding sentence (which sits
+ *  before the digits in Dutch and after them in English — hence a slot, not a regex
+ *  strip of a trailing " left"). */
+export function remainingCore(minutes: number): string {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return hours > 0
+    ? translateNow('planner.hoursMinutes', { hours, minutes: mins })
+    : translateNow('planner.minutesOnly', { minutes: mins });
 }

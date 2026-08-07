@@ -69,8 +69,9 @@ Elk bericht eindigt altijd met (geen hashtags, zie stijlwijziging hierboven):
 
 ### Optionele elementen
 
-- Quote van de winnaar (indien aangeleverd door Sander)
 - Bijzondere prestatie uit de KO-fase (bijv. hoogste gem. van het toernooi)
+
+⚠️ **Geen quote van de winnaar (sinds 04-08-2026):** dit element is geschrapt uit het format. Er is in de praktijk nooit een quote aangeleverd — Sander verwijderde het placeholder-regeltje elke keer zelf uit het concept. Neem het niet meer op, ook niet als optioneel placeholder.
 
 ---
 
@@ -116,8 +117,6 @@ Samen goed voor [TOTAAL] maximums, met [NAAM(EN)] als topscorer(s).
 **Winnaar in de spotlight** 🏆
 
 [WINNAAR] pakte in [LOCATIE] de titel: [korte recap groepsfase + knock-out + finale-cijfers]. [KWALIFICATIE-IMPLICATIE, indien bekend]. Van harte gefeliciteerd, [NAAM]! ✅
-
-[OPTIONEEL — quote winnaar]
 
 **Volgende toernooien in Regio Oost**
 

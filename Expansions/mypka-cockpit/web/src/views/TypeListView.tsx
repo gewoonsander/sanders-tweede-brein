@@ -31,6 +31,7 @@ import { useFetch } from '../lib/useCockpit';
 import { navigate, type Route } from '../lib/router';
 import type { TypeListResponse, TypeListItem, EntityType, SocialLink } from '../lib/cockpitTypes';
 import { PageHeader } from '../components/PageHeader';
+import { useT, translateNow, intlLocale, type TranslationKey } from '../lib/i18n';
 
 // Entity-type → Lucide glyph (mirrors the sidebar TYPE_ICON map) so each list
 // page carries the same brass icon beside its title as its nav row.
@@ -50,20 +51,23 @@ const TYPE_ICON: Record<EntityType, LucideIcon> = {
 // Human header label for each server column alias (server sends aliases only;
 // the client owns the display text — strings.ts is chrome-only, but these are a
 // thin presentation layer over the data vocabulary, so they live beside the view).
-const COLUMN_LABEL: Record<string, string> = {
-  relation: 'Relationship',
-  org_type: 'Type',
-  key_element: 'Key element',
-  status: 'Status',
-  description: 'Description',
-  cadence: 'Cadence',
-  started_on: 'Started',
-  doc_type: 'Doc type',
-  category: 'Category',
+const COLUMN_LABEL_KEY: Record<string, TranslationKey> = {
+  relation: 'typeList.colRelation',
+  org_type: 'typeList.colOrgType',
+  key_element: 'typeList.colKeyElement',
+  status: 'typeList.colStatus',
+  description: 'typeList.colDescription',
+  cadence: 'typeList.colCadence',
+  started_on: 'typeList.colStartedOn',
+  doc_type: 'typeList.colDocType',
+  category: 'typeList.colCategory',
 };
 
+// An alias with no dictionary entry is a column the mirror invented — fall back to
+// the de-underscored alias verbatim rather than inventing a translation for data.
 function columnLabel(alias: string): string {
-  return COLUMN_LABEL[alias] ?? alias.replace(/_/g, ' ');
+  const key = COLUMN_LABEL_KEY[alias];
+  return key ? translateNow(key) : alias.replace(/_/g, ' ');
 }
 
 // Normalise a cell value to a display string ('' for empty/null).
@@ -140,7 +144,7 @@ function SocialChips({ links }: { links: SocialLink[] }) {
             rel="noopener noreferrer"
             // Stop the row/card open handler from firing when the chip is tapped.
             onClick={(e) => e.stopPropagation()}
-            title={`${lnk.label} — opens in a new tab`}
+            title={translateNow('typeList.newTab', { label: lnk.label })}
           >
             {fav ? (
               <img className="social-chip-favicon" src={fav} alt="" width={14} height={14} loading="lazy" />
@@ -156,6 +160,7 @@ function SocialChips({ links }: { links: SocialLink[] }) {
 }
 
 export function TypeListView({ route }: { route: Extract<Route, { name: 'type' }> }) {
+  const t = useT();
   const { data, loading, error } = useFetch<TypeListResponse>(
     `/api/cockpit/type/${encodeURIComponent(route.type)}?limit=300`
   );
@@ -231,7 +236,7 @@ export function TypeListView({ route }: { route: Extract<Route, { name: 'type' }
   // Ordered sort keys: Name first, then each detail column. (Social chips are not
   // sortable — they're a cluster of links, not an orderable scalar.)
   const sortKeys: { key: string; label: string }[] = [
-    { key: NAME_KEY, label: 'Name' },
+    { key: NAME_KEY, label: t('typeList.colName') },
     ...columns.map((alias) => ({ key: alias, label: columnLabel(alias) })),
   ];
 
@@ -243,9 +248,9 @@ export function TypeListView({ route }: { route: Extract<Route, { name: 'type' }
         icon={TYPE_ICON[data.type as EntityType]}
         subtitle={
           hasFilter
-            ? `${showing} of ${loaded} shown`
-            : `${total} ${total === 1 ? 'entry' : 'entries'}` +
-              (loaded < total ? ` · ${loaded} loaded` : '')
+            ? t('typeList.subFiltered', { showing, loaded })
+            : t(total === 1 ? 'typeList.subCountOne' : 'typeList.subCountOther', { count: total })
+              + (loaded < total ? ` · ${t('typeList.subLoaded', { count: loaded })}` : '')
         }
       />
 
@@ -258,8 +263,8 @@ export function TypeListView({ route }: { route: Extract<Route, { name: 'type' }
             <input
               type="search"
               className="filter-search-input"
-              placeholder={`Filter ${data.label.toLowerCase()}…`}
-              aria-label={`Filter ${data.label}`}
+              placeholder={t('typeList.filterPlaceholder', { label: data.label.toLowerCase() })}
+              aria-label={t('typeList.filterAria', { label: data.label })}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               autoComplete="off"
@@ -270,17 +275,18 @@ export function TypeListView({ route }: { route: Extract<Route, { name: 'type' }
       )}
 
       {loaded === 0 ? (
-        <div className="type-list-empty">Nothing here yet.</div>
+        <div className="type-list-empty">{t('typeList.empty')}</div>
       ) : showing === 0 ? (
         <div className="type-list-empty">
-          No {data.label.toLowerCase()} match “{query.trim()}”.
+          {/* data.label is the SERVER's type label (English-only for now). */}
+          {t('typeList.noMatch', { label: data.label.toLowerCase(), query: query.trim() })}
         </div>
       ) : (
         <>
           {/* MOBILE (≤640px): a compact sort-control bar. Hidden ≥641px where the
               real table headers take over. ≥24px touch targets per control. */}
-          <div className="type-table-sortbar" role="group" aria-label="Sort by">
-            <span className="type-table-sortbar-label">Sort</span>
+          <div className="type-table-sortbar" role="group" aria-label={t('typeList.sortByAria')}>
+            <span className="type-table-sortbar-label">{t('typeList.sort')}</span>
             {sortKeys.map(({ key, label }) => {
               const active = sort.key === key;
               return (
@@ -334,7 +340,7 @@ export function TypeListView({ route }: { route: Extract<Route, { name: 'type' }
                       />
                     </th>
                   ))}
-                  {hasSocial && <th scope="col" className="th-social">Links</th>}
+                  {hasSocial && <th scope="col" className="th-social">{t('typeList.colLinks')}</th>}
                 </tr>
               </thead>
               <tbody>
@@ -346,7 +352,7 @@ export function TypeListView({ route }: { route: Extract<Route, { name: 'type' }
                       className="type-row"
                       tabIndex={0}
                       role="link"
-                      aria-label={`Open ${it.title || it.slug}`}
+                      aria-label={t('typeList.openRow', { title: it.title || it.slug })}
                       onClick={() => navigate({ name: 'note', type: data.type as EntityType, slug: it.slug })}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
@@ -355,7 +361,9 @@ export function TypeListView({ route }: { route: Extract<Route, { name: 'type' }
                         }
                       }}
                     >
-                      <td className="td-name" data-label="Name">
+                      {/* data-label feeds the mobile stacked-table CSS
+                          (content: attr(data-label)) — it renders, so it translates. */}
+                      <td className="td-name" data-label={t('typeList.colName')}>
                         <span className="td-name-main">
                           <span className="row-title">{it.title || it.slug}</span>
                           {it.subtitle && <span className="row-sub">{it.subtitle}</span>}
@@ -372,7 +380,7 @@ export function TypeListView({ route }: { route: Extract<Route, { name: 'type' }
                         );
                       })}
                       {hasSocial && (
-                        <td className="td-social" data-label="Links">
+                        <td className="td-social" data-label={t('typeList.colLinks')}>
                           {links.length > 0 ? <SocialChips links={links} /> : <span className="td-empty" aria-hidden="true">—</span>}
                         </td>
                       )}
@@ -416,7 +424,7 @@ function SortHeaderButton({
 
 function formatDate(d: string): string {
   try {
-    return new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    return new Date(d).toLocaleDateString(intlLocale(), { day: '2-digit', month: 'short', year: 'numeric' });
   } catch {
     return d;
   }

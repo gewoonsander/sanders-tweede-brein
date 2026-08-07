@@ -11,6 +11,7 @@
 // a valid target. data-drop-active toggles Iris's faint brass valid-hover wash.
 
 import { useDroppable } from '@dnd-kit/core';
+import { useT } from '../../lib/i18n';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { Fragment, type ReactNode } from 'react';
 import type { Half, Weekday } from '../../lib/plannerTypes';
@@ -54,6 +55,7 @@ export function HalfLane({
   isDropTarget: boolean;    // true while a drag hovers this lane
   empty: ReactNode;         // calm empty/placeholder when there are no items
 }) {
+  const t = useT();
   const droppableId = laneDroppableId(weekday, half);
   const { setNodeRef } = useDroppable({ id: droppableId });
   const count = items.length;
@@ -69,7 +71,11 @@ export function HalfLane({
       className="planner-lane"
       data-drop-active={isDropTarget ? 'true' : undefined}
       role="group"
-      aria-label={`${day} ${half === 'AM' ? 'morning' : 'afternoon'}, ${count} ${count === 1 ? 'item' : 'items'}`}
+      aria-label={t(count === 1 ? 'planner.laneAriaOne' : 'planner.laneAriaOther', {
+        day,
+        half: t(half === 'AM' ? 'planner.morning' : 'planner.afternoon'),
+        count,
+      })}
     >
       <SortableContext items={sortIds} strategy={verticalListSortingStrategy}>
         {count > 0 ? items.map((it, i) => (

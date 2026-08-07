@@ -12,6 +12,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, Link2, CornerUpLeft, Info, Calendar, FileText, Maximize2, FileQuestion } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
 import { fileRouteSrc, hrefFor, navigate, type Route } from '../lib/router';
+import { useT, intlLocale } from '../lib/i18n';
+import { useTNodes } from '../lib/i18n/rich';
 import type { ResolveResponse, CockpitNote, Backlink, OutboundLink, NotePreview } from '../lib/cockpitTypes';
 import { WikiMarkdown } from '../components/WikiMarkdown';
 import { ImageLightbox } from '../components/ImageLightbox';
@@ -20,6 +22,7 @@ import { MiniGraph } from '../components/graph/MiniGraph';
 import { DiscussButton } from '../components/DiscussButton';
 
 export function NoteView({ route }: { route: Extract<Route, { name: 'resolve' | 'note' }> }) {
+  const t = useT();
   const url =
     route.name === 'resolve'
       ? `/api/cockpit/resolve/${encodeURIComponent(route.slug)}`
@@ -64,7 +67,7 @@ export function NoteView({ route }: { route: Extract<Route, { name: 'resolve' | 
   return (
     <article ref={topRef} className="note-view animate-fade-rise">
       <button type="button" className="back-button" onClick={() => window.history.back()}>
-        <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" /> Back
+        <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" /> {t('common.back')}
       </button>
 
       <header className="note-header">
@@ -78,7 +81,7 @@ export function NoteView({ route }: { route: Extract<Route, { name: 'resolve' | 
         {note.journal && <JournalHeaderMeta note={note} />}
         {secondary.length > 0 && (
           <p className="note-also">
-            also:{' '}
+            {t('note.also')}{' '}
             {secondary.map((s, i) => (
               <span key={`${s.type}-${s.slug}`}>
                 {i > 0 && ', '}
@@ -113,11 +116,11 @@ export function NoteView({ route }: { route: Extract<Route, { name: 'resolve' | 
           {note.body.trim() ? (
             <WikiMarkdown body={note.body} resolveTitle={resolveTitle} />
           ) : (
-            <p className="note-empty">This entry has no body text.</p>
+            <p className="note-empty">{t('note.noBody')}</p>
           )}
           {note.media && note.media.audioCount > 0 && (
             <p className="note-audio-note">
-              {note.media.audioCount} audio recording{note.media.audioCount > 1 ? 's' : ''} linked (not played).
+              {t(note.media.audioCount === 1 ? 'note.audioOne' : 'note.audioOther', { count: note.media.audioCount })}
             </p>
           )}
           {/* Mini-graph — Tom's call (option B): full-content-width, in the MAIN
@@ -148,6 +151,7 @@ export function NoteView({ route }: { route: Extract<Route, { name: 'resolve' | 
 // (docx/xlsx/external links) show a calm "not previewable" note with the path — we
 // never force a download or show a broken embed.
 function DocumentPreview({ preview, title }: { preview: NotePreview; title: string }) {
+  const t = useT();
   const [failed, setFailed] = useState(false);
   const src = `/api/cockpit/file?path=${encodeURIComponent(preview.path)}`;
   const fileName = preview.path.split('/').pop() || preview.path;
@@ -157,14 +161,14 @@ function DocumentPreview({ preview, title }: { preview: NotePreview; title: stri
       <section className="doc-preview doc-preview-unavailable">
         <div className="doc-preview-head">
           <FileQuestion size={16} strokeWidth={1.5} aria-hidden="true" />
-          <span>Document</span>
+          <span>{t('note.document')}</span>
         </div>
         <p className="doc-preview-note">
           {preview.kind === 'external'
-            ? 'External file — no inline preview.'
+            ? t('note.externalNoPreview')
             : failed
-              ? 'File not found on disk.'
-              : `No inline preview for ${preview.ext ? `.${preview.ext}` : 'this file type'}.`}
+              ? t('note.fileMissing')
+              : t('note.noPreviewFor', { ext: preview.ext ? `.${preview.ext}` : t('note.thisFileType') })}
         </p>
         <p className="doc-preview-path font-mono">{preview.path}</p>
       </section>
@@ -181,9 +185,9 @@ function DocumentPreview({ preview, title }: { preview: NotePreview; title: stri
         <a
           href={hrefFor({ name: 'file', src: fileRouteSrc('file', preview.path) })}
           className="doc-preview-open"
-          title="Open the large reading page"
+          title={t('note.openLarge')}
         >
-          <Maximize2 size={14} strokeWidth={1.5} aria-hidden="true" /> Large
+          <Maximize2 size={14} strokeWidth={1.5} aria-hidden="true" /> {t('note.large')}
         </a>
       </div>
       {preview.kind === 'image' ? (
@@ -200,7 +204,7 @@ function DocumentPreview({ preview, title }: { preview: NotePreview; title: stri
         <iframe
           className="doc-preview-frame"
           src={src}
-          title={`Preview: ${title}`}
+          title={t('note.previewOf', { title })}
           loading="lazy"
           onError={() => setFailed(true)}
         />
@@ -235,6 +239,7 @@ function ImageThumb({
   caption: string | null;
   onOpen: (path: string, alt: string) => void;
 }) {
+  const t = useT();
   // Lazy thumbnail via the read-only media route. A real <button> wraps the
   // image (cursor: zoom-in, Enter/Space for free) and opens the shared
   // lightbox. Degrades silently when the bytes are missing on disk — the
@@ -248,7 +253,7 @@ function ImageThumb({
         type="button"
         className="media-thumb-btn"
         onClick={() => onOpen(path, caption || name)}
-        aria-label={`View image ${caption || name}`}
+        aria-label={t('note.viewImage', { name: caption || name })}
       >
         <img
           src={`/api/cockpit/media?path=${encodeURIComponent(path)}`}
@@ -264,12 +269,15 @@ function ImageThumb({
 }
 
 function MetadataPanel({ metadata, filePath }: { metadata: Record<string, unknown>; filePath: string | null }) {
+  const t = useT();
   const entries = Object.entries(metadata).filter(([k]) => k !== 'body' && k !== 'content');
   return (
     <section className="side-panel">
-      <h2 className="side-panel-title"><Info size={15} strokeWidth={1.5} aria-hidden="true" /> Metadata</h2>
+      <h2 className="side-panel-title"><Info size={15} strokeWidth={1.5} aria-hidden="true" /> {t('common.metadata')}</h2>
+      {/* The KEYS come from the note's own YAML frontmatter — user data, not chrome:
+          they stay exactly as authored in the markdown. */}
       {entries.length === 0 ? (
-        <p className="side-empty">No frontmatter fields.</p>
+        <p className="side-empty">{t('note.noFrontmatter')}</p>
       ) : (
         <dl className="meta-list">
           {entries.map(([k, v]) => (
@@ -293,11 +301,12 @@ function renderValue(v: unknown): string {
 }
 
 function BacklinksPanel({ backlinks }: { backlinks: Backlink[] }) {
+  const t = useT();
   return (
     <section className="side-panel">
-      <h2 className="side-panel-title"><CornerUpLeft size={15} strokeWidth={1.5} aria-hidden="true" /> What links here</h2>
+      <h2 className="side-panel-title"><CornerUpLeft size={15} strokeWidth={1.5} aria-hidden="true" /> {t('note.whatLinksHere')}</h2>
       {backlinks.length === 0 ? (
-        <p className="side-empty">No backlinks yet.</p>
+        <p className="side-empty">{t('note.noBacklinks')}</p>
       ) : (
         <ul className="backlink-list">
           {backlinks.map((b) => (
@@ -308,7 +317,7 @@ function BacklinksPanel({ backlinks }: { backlinks: Backlink[] }) {
                   <span className="backlink-title">{b.title}</span>
                 </button>
               ) : (
-                <span className="backlink is-plain" title="Source is not a navigable entry">
+                <span className="backlink is-plain" title={t('note.sourceNotNavigable')}>
                   <span className="backlink-label">{b.label}</span>
                   <span className="backlink-title">{b.title}</span>
                 </span>
@@ -322,11 +331,12 @@ function BacklinksPanel({ backlinks }: { backlinks: Backlink[] }) {
 }
 
 function OutboundPanel({ outbound }: { outbound: OutboundLink[] }) {
+  const t = useT();
   if (outbound.length === 0) return null;
   // Plain (non-clickable) links are shown muted, never as broken links.
   return (
     <section className="side-panel">
-      <h2 className="side-panel-title"><Link2 size={15} strokeWidth={1.5} aria-hidden="true" /> Links to</h2>
+      <h2 className="side-panel-title"><Link2 size={15} strokeWidth={1.5} aria-hidden="true" /> {t('note.linksTo')}</h2>
       <ul className="outbound-list">
         {outbound.map((o, i) => (
           <li key={`${o.raw}-${i}`}>
@@ -335,7 +345,7 @@ function OutboundPanel({ outbound }: { outbound: OutboundLink[] }) {
                 {o.raw}
               </button>
             ) : (
-              <span className="outbound-plain" title="Target is not (yet) a navigable entry">{o.raw}</span>
+              <span className="outbound-plain" title={t('note.targetNotNavigable')}>{o.raw}</span>
             )}
           </li>
         ))}
@@ -346,7 +356,7 @@ function OutboundPanel({ outbound }: { outbound: OutboundLink[] }) {
 
 function formatDate(d: string): string {
   try {
-    return new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    return new Date(d).toLocaleDateString(intlLocale(), { day: '2-digit', month: 'short', year: 'numeric' });
   } catch {
     return d;
   }
@@ -363,17 +373,20 @@ function ViewSkeleton() {
 }
 
 function ViewError({ message }: { message: string }) {
-  return <div role="alert" className="view-error">Could not load the entry: {message}</div>;
+  const t = useT();
+  return <div role="alert" className="view-error">{t('note.loadError')}: {message}</div>;
 }
 
 function NotFound({ slug }: { slug: string }) {
+  const t = useT();
+  const tn = useTNodes();
   return (
     <div className="note-view">
       <button type="button" className="back-button" onClick={() => window.history.back()}>
-        <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" /> Back
+        <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" /> {t('common.back')}
       </button>
       <p className="note-empty">
-        No entry found for <span className="font-mono">{slug}</span>. This link points to something that does not (yet) exist as a note.
+        {tn('note.notFound', { slug: <span className="font-mono">{slug}</span> })}
       </p>
     </div>
   );

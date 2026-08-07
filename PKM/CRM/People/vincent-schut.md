@@ -26,3 +26,4 @@ Vincent is Sander's fysiotherapeut. Sander heeft hem een tijd begeleid met coach
 ## Notes
 
 - 2026-07-03: Sander wil weer eens langsgaan bij Vincent — relatie warm houden en de sponsoring-in-behandelingen bespreken (in te zetten voor dartstraining).
+- 2026-08-07: Vincent gaf Sander het boek "De hemel is ons thuis" van Johan het Hart (mogelijk Vincents vader of oom). Sander wil het tijdens de vakantie lezen en wil na de vakantie weer bij Vincent langs.

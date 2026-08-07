@@ -35,7 +35,7 @@ export function SectionHeader({
 }) {
   return (
     <div className="mb-md flex items-baseline gap-sm">
-      <span className="text-brass" aria-hidden="true">
+      <span className="text-marker-text" aria-hidden="true">
         {icon}
       </span>
       <h2 className="text-h2 font-[520] tracking-tight text-fg">{title}</h2>
@@ -74,7 +74,7 @@ export function Section({
         id={`section-${id}`}
         summary={
           <div className="flex flex-wrap items-baseline gap-x-sm gap-y-[2px]">
-            <span className="text-brass" aria-hidden="true">
+            <span className="text-marker-text" aria-hidden="true">
               {icon}
             </span>
             <h2 className="text-h2 font-[520] tracking-tight text-fg">{title}</h2>
@@ -93,21 +93,21 @@ export function Section({
 const TONE_CLASS: Record<Tone, string> = {
   good: 'text-success',
   watch: 'text-warning',
-  attn: 'text-brass',
+  attn: 'text-marker-text',
   neutral: 'text-fg-muted',
 };
 
 const TONE_DOT: Record<Tone, string> = {
   good: 'bg-[var(--status-success)]',
   watch: 'bg-[var(--status-warning)]',
-  attn: 'bg-[var(--accent-brass)]',
+  attn: 'bg-[var(--accent-marker)]',
   neutral: 'bg-[var(--fg-muted)]',
 };
 
 const TONE_CHIP_BG: Record<Tone, string> = {
   good: 'bg-[var(--status-success-soft)]',
   watch: 'bg-[var(--status-warning-soft)]',
-  attn: 'bg-[var(--accent-soft)]',
+  attn: 'bg-[var(--accent-marker-soft)]',
   neutral: 'bg-surface-2',
 };
 
@@ -185,13 +185,14 @@ export function DeltaArrow({ trend }: { trend: TrendView | null }) {
   if (!trend) return null;
   if (!trend.hasPrior) {
     return (
-      <span className="inline-flex items-center gap-xs text-caption text-fg-subtle">no prior value</span>
+      <span className="inline-flex items-center gap-xs text-caption text-fg-subtle">{translateNow('ui.noPriorValue')}</span>
     );
   }
   const Icon = trend.direction > 0 ? ArrowUpRight : trend.direction < 0 ? ArrowDownRight : Minus;
   const cls = SENSE_CLASS[trend.sense];
-  const a11y =
-    trend.direction > 0 ? 'up' : trend.direction < 0 ? 'down' : 'unchanged';
+  const a11y = translateNow(
+    trend.direction > 0 ? 'ui.trendUp' : trend.direction < 0 ? 'ui.trendDown' : 'ui.trendUnchanged',
+  );
   return (
     <span className={`inline-flex animate-delta-pop items-center gap-[3px] text-caption font-[500] ${cls}`}>
       <Icon size={13} strokeWidth={2} aria-hidden="true" />
@@ -208,6 +209,7 @@ export function DeltaArrow({ trend }: { trend: TrendView | null }) {
 // warning, strain→error, neutral→muted) so the whole dashboard speaks one colour
 // language. Kept soft — a struggle reads as "straining", never as an alarm block.
 import type { ValenceTone } from '../lib/valence';
+import { translateNow } from '../lib/i18n';
 
 const VAL_TEXT: Record<ValenceTone, string> = {
   good: 'text-success',

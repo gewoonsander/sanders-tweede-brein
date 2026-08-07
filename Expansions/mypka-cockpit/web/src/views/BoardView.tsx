@@ -88,6 +88,8 @@ import {
 } from 'lucide-react';
 import type { Route } from '../lib/router';
 import { hrefFor, navigate } from '../lib/router';
+import { useT } from '../lib/i18n';
+import { useTNodes } from '../lib/i18n/rich';
 import { WikilinkContextPanel } from '../components/workbench/ContextPanel';
 import { useFetch } from '../lib/useCockpit';
 import { createWorkbenchDoc } from '../lib/useCockpitWrite';
@@ -362,6 +364,7 @@ const sectionResizerProps = {
 // (nodrag/nowheel container, scrollable body); the Check affordance exits.
 // The arrow affordance still opens the note full-screen in the outliner view.
 const DocNode = memo(function DocNode({ id, data, selected }: NodeProps) {
+  const t = useT();
   const d = data as unknown as DocData;
   const ctx = useContext(BoardContext);
   const { updateNodeData } = useReactFlow();
@@ -434,8 +437,8 @@ const DocNode = memo(function DocNode({ id, data, selected }: NodeProps) {
           <button
             type="button"
             className="fnb-node-action fnb-doc-done nodrag"
-            aria-label={`Done editing: ${d.title}`}
-            title="Done (saves automatically)"
+            aria-label={t('board.doneEditing', { title: d.title })}
+            title={t('board.doneTitle')}
             onClick={ctx.endEdit}
           >
             <Check size={14} strokeWidth={1.5} aria-hidden="true" />
@@ -446,8 +449,8 @@ const DocNode = memo(function DocNode({ id, data, selected }: NodeProps) {
               <button
                 type="button"
                 className="fnb-node-action nodrag"
-                aria-label={`Edit note in place: ${d.title}`}
-                title="Edit in place"
+                aria-label={t('board.editInPlaceAria', { title: d.title })}
+                title={t('board.editInPlace')}
                 onClick={beginEdit}
               >
                 <Pencil size={13} strokeWidth={1.5} aria-hidden="true" />
@@ -456,8 +459,8 @@ const DocNode = memo(function DocNode({ id, data, selected }: NodeProps) {
             <button
               type="button"
               className="fnb-node-action fnb-node-action--open nodrag"
-              aria-label={`Open note: ${d.title}`}
-              title="Open note"
+              aria-label={t('board.openNoteAria', { title: d.title })}
+              title={t('board.openNote')}
               onClick={open}
             >
               <ArrowUpRight size={14} strokeWidth={1.5} aria-hidden="true" />
@@ -475,6 +478,7 @@ const DocNode = memo(function DocNode({ id, data, selected }: NodeProps) {
 // same debounced autosave hook WorkbenchDocView uses. Unmounting (Done /
 // switching cards / leaving the board) flushes any pending edit.
 function DocCardEditor({ slug, onLiveTitle }: { slug: string; onLiveTitle: (t: string) => void }) {
+  const t = useT();
   const { data, loading, error } = useFetch<WorkbenchDocResponse>(
     `/api/cockpit/notes/${encodeURIComponent(slug)}`,
   );
@@ -488,7 +492,7 @@ function DocCardEditor({ slug, onLiveTitle }: { slug: string; onLiveTitle: (t: s
   if (error || !data) {
     return (
       <div className="fnb-doc-editor nodrag nowheel">
-        <p className="fnb-doc-editor-err" role="alert">Could not load the note. {error ?? ''}</p>
+        <p className="fnb-doc-editor-err" role="alert">{t('board.noteLoadError')} {error ?? ''}</p>
       </div>
     );
   }
@@ -502,6 +506,7 @@ function DocCardEditorInner({
   doc: WorkbenchDocResponse;
   onLiveTitle: (t: string) => void;
 }) {
+  const t = useT();
   const { status, onChange, flush, overwrite } = useWorkbenchSave(doc.slug, doc.mtime);
 
   // 503 = the write path is dormant — flip the composer read-only, calmly.
@@ -530,10 +535,11 @@ function DocCardEditorInner({
   );
 
   const statusWord =
-    forcedReadOnly ? 'Read-only — saving is disabled'
-    : status.kind === 'saving' ? 'Saving…'
-    : status.kind === 'saved' ? 'Saved'
-    : status.kind === 'conflict' ? 'Changed on disk'
+    forcedReadOnly ? t('board.readOnlyStatus')
+    : status.kind === 'saving' ? t('common.saving')
+    : status.kind === 'saved' ? t('common.saved')
+    : status.kind === 'conflict' ? t('board.changedOnDisk')
+    // status.message is server-supplied (English-only for now) — passed through.
     : status.kind === 'error' ? status.message
     : '';
 
@@ -552,7 +558,7 @@ function DocCardEditorInner({
           {statusWord}
           {status.kind === 'conflict' && (
             <button type="button" className="fnb-btn" onClick={() => void overwrite()}>
-              Overwrite
+              {t('board.overwrite')}
             </button>
           )}
         </div>
@@ -567,6 +573,7 @@ function DocCardEditorInner({
 // A dangling boardSlug (target board deleted) renders as missing — kept on the
 // canvas so the reference is visible, never navigated.
 const BoardCardNode = memo(function BoardCardNode({ id, data, selected }: NodeProps) {
+  const t = useT();
   const d = data as unknown as BoardCardData;
   const ctx = useContext(BoardContext);
   const name = ctx.boardNames.get(d.boardSlug);
@@ -591,8 +598,8 @@ const BoardCardNode = memo(function BoardCardNode({ id, data, selected }: NodePr
           <button
             type="button"
             className="fnb-node-action fnb-node-action--open nodrag"
-            aria-label={`Open board: ${name}`}
-            title="Open board"
+            aria-label={t('board.openBoardAria', { name: name ?? d.boardSlug })}
+            title={t('board.openBoard')}
             onClick={open}
           >
             <ArrowUpRight size={14} strokeWidth={1.5} aria-hidden="true" />
@@ -600,7 +607,7 @@ const BoardCardNode = memo(function BoardCardNode({ id, data, selected }: NodePr
         )}
       </div>
       <span className="fnb-boardcard-hint">
-        {missing ? 'Missing board' : 'Board — drop cards here to move them'}
+        {missing ? t('board.missingBoard') : t('board.boardCardHint')}
       </span>
     </div>
   );
@@ -610,6 +617,7 @@ const BoardCardNode = memo(function BoardCardNode({ id, data, selected }: NodePr
 // and resizable; double-click the label to rename inline. Dragging the frame
 // moves every node fully inside it (manual group-drag — see the header note).
 const SectionNode = memo(function SectionNode({ id, data, selected }: NodeProps) {
+  const t = useT();
   const d = data as unknown as SectionData;
   const ctx = useContext(BoardContext);
   const { updateNodeData } = useReactFlow();
@@ -643,7 +651,7 @@ const SectionNode = memo(function SectionNode({ id, data, selected }: NodeProps)
           className="fnb-section-label-input nodrag"
           value={draft}
           maxLength={MAX_SECTION_LABEL}
-          aria-label="Section label"
+          aria-label={t('board.sectionLabelAria')}
           onChange={(e) => setDraft(e.target.value)}
           onBlur={commit}
           onKeyDown={(e) => {
@@ -662,9 +670,9 @@ const SectionNode = memo(function SectionNode({ id, data, selected }: NodeProps)
         <div
           className="fnb-section-label"
           onDoubleClick={begin}
-          title={ctx.readOnly ? undefined : 'Double-click to rename'}
+          title={ctx.readOnly ? undefined : t('board.doubleClickRename')}
         >
-          {d.label || <span className="fnb-section-label-empty">Section</span>}
+          {d.label || <span className="fnb-section-label-empty">{t('board.sectionPlaceholder')}</span>}
         </div>
       )}
     </div>
@@ -675,12 +683,13 @@ const SectionNode = memo(function SectionNode({ id, data, selected }: NodeProps)
 // not migrate (write path dormant); the text is preserved and passed through
 // on save so the migration completes the moment writes are enabled.
 const LegacyStickyNode = memo(function LegacyStickyNode({ data }: NodeProps) {
+  const t = useT();
   const d = data as unknown as LegacyStickyData;
   return (
     <div
       className="fnb-sticky"
       data-tint={d.color}
-      title="Legacy sticky — becomes a real note once saving is enabled"
+      title={t('board.legacySticky')}
     >
       <div className="fnb-sticky-text">{d.text}</div>
     </div>
@@ -699,6 +708,7 @@ const nodeTypes: NodeTypes = {
 // ---- the view -----------------------------------------------------------------
 
 export function BoardView({ route }: { route: Extract<Route, { name: 'board' }> }) {
+  const t = useT();
   const { data, loading, error } = useFetch<BoardResponse>(
     `/api/cockpit/boards/${encodeURIComponent(route.slug)}`,
   );
@@ -712,8 +722,8 @@ export function BoardView({ route }: { route: Extract<Route, { name: 'board' }> 
   if (error || !data?.board) {
     return (
       <div role="alert" className="view-error">
-        This whiteboard could not load. {error || ''}{' '}
-        <a href={hrefFor({ name: 'notes' })}>Back to Fleeting Notes</a>
+        {t('board.loadError')} {error || ''}{' '}
+        <a href={hrefFor({ name: 'notes' })}>{t('board.backToNotes')}</a>
       </div>
     );
   }
@@ -751,6 +761,8 @@ function BoardCanvas({
   docs: FleetingDoc[];
   boards: BoardSummary[];
 }) {
+  const t = useT();
+  const tn = useTNodes();
   const [initialNodes] = useState<FlowNode[]>(() => toFlowNodes(board.nodes));
   const [nodes, setNodes, onNodesChange] = useNodesState<FlowNode>(initialNodes);
   // Edges: the persisted BoardEdge[] is the single source of truth; the
@@ -1475,9 +1487,9 @@ function BoardCanvas({
   );
 
   const saveLabel =
-    saveState === 'saving' ? 'Saving…'
-    : saveState === 'saved' ? 'Saved'
-    : saveState === 'error' ? 'Couldn’t save — your next change retries'
+    saveState === 'saving' ? t('common.saving')
+    : saveState === 'saved' ? t('common.saved')
+    : saveState === 'error' ? t('board.saveRetry')
     : '';
 
   // Browser-native fullscreen on the whole board surface.
@@ -1494,16 +1506,16 @@ function BoardCanvas({
           type="button"
           className="fnb-back"
           onClick={toggleFullscreen}
-          aria-label="Toggle fullscreen"
-          title="Fullscreen"
+          aria-label={t('board.toggleFullscreen')}
+          title={t('board.fullscreen')}
         >
           <Maximize2 size={15} strokeWidth={1.5} aria-hidden="true" />
         </button>
         <a
           className="fnb-back"
           href={hrefFor({ name: 'notes' })}
-          aria-label="Back to Fleeting Notes"
-          title="Back to Fleeting Notes"
+          aria-label={t('board.backToNotes')}
+          title={t('board.backToNotes')}
         >
           <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" />
         </a>
@@ -1511,7 +1523,7 @@ function BoardCanvas({
           type="text"
           className="fnb-name"
           value={name}
-          aria-label="Board name"
+          aria-label={t('board.nameAria')}
           disabled={readOnly}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => {
@@ -1524,11 +1536,11 @@ function BoardCanvas({
         <span className="fnb-save" role="status" aria-live="polite" data-state={saveState}>
           {saveLabel}
           {saveState === 'saved' && matInfo && matInfo.updated > 0 && (
-            <> · {matInfo.updated} {matInfo.updated === 1 ? 'note' : 'notes'} linked</>
+            <> · {t(matInfo.updated === 1 ? 'board.notesLinkedOne' : 'board.notesLinkedOther', { count: matInfo.updated })}</>
           )}
           {saveState === 'saved' && matInfo && matInfo.failed > 0 && (
             <span className="fnb-save-warn">
-              {' '}· {matInfo.failed} {matInfo.failed === 1 ? 'note' : 'notes'} couldn’t update
+              {' '}· {t(matInfo.failed === 1 ? 'board.notesFailedOne' : 'board.notesFailedOther', { count: matInfo.failed })}
             </span>
           )}
         </span>
@@ -1539,11 +1551,11 @@ function BoardCanvas({
             className="fnb-btn"
             onClick={() => void addNewNote()}
             disabled={readOnly || atCapacity || creatingNote}
-            title={atCapacity ? 'This board is full (500 cards)' : 'Create a new note as a card'}
+            title={atCapacity ? t('board.full', { max: MAX_NODES }) : t('board.addNoteTitle')}
           >
             <Plus size={14} strokeWidth={1.5} aria-hidden="true" />
             <FileText size={14} strokeWidth={1.5} aria-hidden="true" />
-            {creatingNote ? 'Creating…' : 'Note'}
+            {creatingNote ? t('board.creating') : t('board.note')}
           </button>
 
           <div className="fnb-pickwrap" ref={pickerRef}>
@@ -1554,22 +1566,22 @@ function BoardCanvas({
               aria-haspopup="true"
               onClick={() => setPickerOpen((o) => !o)}
               disabled={readOnly || atCapacity}
-              title={atCapacity ? 'This board is full (500 cards)' : 'Add an existing fleeting note as a card'}
+              title={atCapacity ? t('board.full', { max: MAX_NODES }) : t('board.addExistingTitle')}
             >
               <Plus size={14} strokeWidth={1.5} aria-hidden="true" />
-              Existing note
+              {t('board.existingNote')}
             </button>
             {pickerOpen && (
               <div
                 className="fnb-picker"
                 role="menu"
-                aria-label="Add a fleeting note to the board"
+                aria-label={t('board.pickerAria')}
                 onKeyDown={(e) => {
                   if (e.key === 'Escape') setPickerOpen(false);
                 }}
               >
                 {availableDocs.length === 0 ? (
-                  <p className="fnb-picker-empty">Every fleeting note is already on this board.</p>
+                  <p className="fnb-picker-empty">{t('board.pickerEmpty')}</p>
                 ) : (
                   availableDocs.map((d) => (
                     <button
@@ -1595,20 +1607,20 @@ function BoardCanvas({
               aria-haspopup="true"
               onClick={() => setBoardPopOpen((o) => !o)}
               disabled={readOnly || atCapacity}
-              title={atCapacity ? 'This board is full (500 cards)' : 'Create a nested board as a card'}
+              title={atCapacity ? t('board.full', { max: MAX_NODES }) : t('board.addBoardTitle')}
             >
               <Plus size={14} strokeWidth={1.5} aria-hidden="true" />
               <LayoutDashboard size={14} strokeWidth={1.5} aria-hidden="true" />
-              Board
+              {t('board.board')}
             </button>
             {boardPopOpen && (
-              <div className="fnb-picker fnb-newboard" role="dialog" aria-label="Create a nested board">
+              <div className="fnb-picker fnb-newboard" role="dialog" aria-label={t('board.newBoardDialogAria')}>
                 <input
                   type="text"
                   className="fnb-newboard-input"
                   value={newBoardName}
-                  placeholder="Board name"
-                  aria-label="New board name"
+                  placeholder={t('board.boardNamePlaceholder')}
+                  aria-label={t('board.newBoardNameAria')}
                   maxLength={120}
                   // eslint-disable-next-line jsx-a11y/no-autofocus -- small transient popover
                   autoFocus
@@ -1628,20 +1640,20 @@ function BoardCanvas({
                   onClick={() => void doCreateBoard()}
                   disabled={!newBoardName.trim() || creatingBoard}
                 >
-                  {creatingBoard ? 'Creating…' : 'Create'}
+                  {creatingBoard ? t('board.creating') : t('board.create')}
                 </button>
               </div>
             )}
           </div>
 
-          <div className="fnb-swatches" role="group" aria-label="Color of the selected cards">
+          <div className="fnb-swatches" role="group" aria-label={t('board.swatchesAria')}>
             {STICKY_COLORS.map((c) => (
               <button
                 key={c}
                 type="button"
                 className="fnb-swatch"
                 data-tint={c}
-                aria-label={`Color selected cards ${c}`}
+                aria-label={t('board.colorSelected', { color: c })}
                 disabled={readOnly || selectedCount === 0}
                 onClick={() => applyColor(c)}
               />
@@ -1653,23 +1665,23 @@ function BoardCanvas({
             className="fnb-btn"
             onClick={deleteSelected}
             disabled={readOnly || deleteCount === 0}
-            aria-label={`Delete ${deleteCount} selected ${deleteCount === 1 ? 'item' : 'items'}`}
-            title="Delete selected (Del)"
+            aria-label={t(deleteCount === 1 ? 'board.deleteSelectedOne' : 'board.deleteSelectedOther', { count: deleteCount })}
+            title={t('board.deleteSelectedTitle')}
           >
             <X size={14} strokeWidth={1.5} aria-hidden="true" />
-            {deleteCount > 0 ? `Delete (${deleteCount})` : 'Delete'}
+            {deleteCount > 0 ? t('board.deleteCount', { count: deleteCount }) : t('common.delete')}
           </button>
 
           {confirmingDelete ? (
-            <span className="fnb-confirm" role="group" aria-label="Confirm board deletion">
-              <span className="fnb-confirm-q">Delete this board?</span>
+            <span className="fnb-confirm" role="group" aria-label={t('board.confirmDeleteAria')}>
+              <span className="fnb-confirm-q">{t('board.confirmDeleteQ')}</span>
               <button
                 type="button"
                 className="fnb-btn fnb-btn--danger"
                 onClick={() => void doDeleteBoard()}
                 disabled={deleting}
               >
-                {deleting ? 'Deleting…' : 'Delete'}
+                {deleting ? t('board.deleting') : t('common.delete')}
               </button>
               <button
                 type="button"
@@ -1677,15 +1689,15 @@ function BoardCanvas({
                 onClick={() => setConfirmingDelete(false)}
                 disabled={deleting}
               >
-                Cancel
+                {t('common.cancel')}
               </button>
             </span>
           ) : (
             <button
               type="button"
               className="fnb-btn"
-              aria-label="Delete this board"
-              title="Delete this board"
+              aria-label={t('board.deleteBoard')}
+              title={t('board.deleteBoard')}
               disabled={readOnly}
               onClick={() => setConfirmingDelete(true)}
             >
@@ -1696,16 +1708,14 @@ function BoardCanvas({
       </header>
 
       {readOnly && (
-        <p className="fnb-banner" role="status">
-          Read-only — saving is disabled right now. You can look around, but changes won't be stored.
-        </p>
+        <p className="fnb-banner" role="status">{t('board.readOnlyBanner')}</p>
       )}
 
       <div
         ref={wrapRef}
         className="fnb-canvas"
         role="application"
-        aria-label={`Whiteboard: ${name}`}
+        aria-label={t('board.canvasAria', { name })}
       >
         <BoardContext.Provider value={boardCtx}>
           <ReactFlow
@@ -1750,10 +1760,10 @@ function BoardCanvas({
           </ReactFlow>
         </BoardContext.Provider>
         {selCardCount >= 2 && !readOnly && (
-          <div className="fnb-seltoolbar" role="toolbar" aria-label="Selection actions">
+          <div className="fnb-seltoolbar" role="toolbar" aria-label={t('board.selectionActionsAria')}>
             <button type="button" className="fnb-btn" onClick={createSection}>
               <Frame size={14} strokeWidth={1.5} aria-hidden="true" />
-              Create section ({selCardCount})
+              {t('board.createSection', { count: selCardCount })}
             </button>
           </div>
         )}
@@ -1762,7 +1772,7 @@ function BoardCanvas({
             ref={edgeDialogRef}
             className="fnb-edgedialog"
             role="dialog"
-            aria-label="Connection between cards"
+            aria-label={t('board.edgeDialogAria')}
             style={{ left: edgeDialog.x, top: edgeDialog.y }}
             onKeyDown={(e) => {
               if (e.key === 'Escape') {
@@ -1773,13 +1783,13 @@ function BoardCanvas({
             }}
           >
             <div className="fnb-edgedialog-row">
-              <span className="fnb-edgedialog-title">Connection</span>
-              <div className="fnb-edgedialog-dir" role="group" aria-label="Connection direction">
+              <span className="fnb-edgedialog-title">{t('board.connection')}</span>
+              <div className="fnb-edgedialog-dir" role="group" aria-label={t('board.connectionDirAria')}>
                 <button
                   type="button"
                   className="fnb-btn fnb-btn--dir"
                   aria-pressed={dialogEdge.direction === 'one'}
-                  title="One-way (→)"
+                  title={t('board.oneWay')}
                   onClick={() => setEdgeDirection('one')}
                 >
                   <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
@@ -1788,7 +1798,7 @@ function BoardCanvas({
                   type="button"
                   className="fnb-btn fnb-btn--dir"
                   aria-pressed={dialogEdge.direction === 'both'}
-                  title="Both ways (↔)"
+                  title={t('board.bothWays')}
                   onClick={() => setEdgeDirection('both')}
                 >
                   <ArrowLeftRight size={14} strokeWidth={1.5} aria-hidden="true" />
@@ -1797,8 +1807,8 @@ function BoardCanvas({
               <button
                 type="button"
                 className="fnb-btn fnb-edgedialog-close"
-                aria-label="Close connection dialog"
-                title="Close"
+                aria-label={t('board.closeEdgeDialog')}
+                title={t('common.close')}
                 onClick={closeEdgeDialog}
               >
                 <X size={14} strokeWidth={1.5} aria-hidden="true" />
@@ -1809,8 +1819,8 @@ function BoardCanvas({
               value={edgeNoteDraft}
               maxLength={MAX_EDGE_NOTE}
               rows={3}
-              placeholder="Why are these connected?"
-              aria-label="Connection note"
+              placeholder={t('board.edgeNotePlaceholder')}
+              aria-label={t('board.edgeNoteAria')}
               // eslint-disable-next-line jsx-a11y/no-autofocus -- small transient popover
               autoFocus
               onChange={(e) => setEdgeNoteDraft(e.target.value)}
@@ -1830,18 +1840,22 @@ function BoardCanvas({
                 onClick={deleteDialogEdge}
               >
                 <Trash2 size={14} strokeWidth={1.5} aria-hidden="true" />
-                Delete connection
+                {t('board.deleteConnection')}
               </button>
             </div>
           </div>
         )}
         {nodes.length === 0 && (
           <div className="fnb-empty" aria-hidden="true">
-            <p className="fnb-empty-title">An empty canvas</p>
+            <p className="fnb-empty-title">{t('board.emptyTitle')}</p>
+            {/* One key, three slots: Dutch reorders the clause, so the sentence
+                must stay whole and the <strong> markup must travel with it. */}
             <p className="fnb-empty-sub">
-              Add a <strong>Note</strong> to capture a fresh thought, an{' '}
-              <strong>Existing note</strong> to arrange what you have, or a{' '}
-              <strong>Board</strong> to nest another canvas inside this one.
+              {tn('board.emptySub', {
+                note: <strong>{t('board.note')}</strong>,
+                existing: <strong>{t('board.existingNote')}</strong>,
+                board: <strong>{t('board.board')}</strong>,
+              })}
             </p>
           </div>
         )}

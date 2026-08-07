@@ -7,7 +7,9 @@ metadata:
   originSessionId: d03ff64d-d700-4dee-b16d-61872f1e4b3e
 ---
 
-De myPKA Cockpit draait lokaal op http://127.0.0.1:4317 (Node.js + React, SQLite).
+De myPKA Cockpit draait lokaal op http://127.0.0.1:4317 (Node.js + React, SQLite), als LaunchAgent (`~/Library/LaunchAgents/nl.gewoonsander.mypka-cockpit.plist`) — start automatisch mee bij inloggen, herstart bij crash.
+
+**Versie 1.5.2** (bijgewerkt 04-08-2026, was 1.2.1) — selectieve integratie vanuit myPKA-scaffold v5.4.0-download, zonder het team/AGENTS.md-laag aan te raken (die is te ver doorontwikkeld t.o.v. de vanilla-scaffold om een volledige update veilig te maken — zie sessielog 04-08-2026). Meegenomen: Graphite-thema, dagplanner drag-and-drop-fix, Team Analytics-pagina, **Weekly Reports** ("The Week in Ink" — vrijdag-recap samengesteld uit Journal/Images/Deliverables/session-logs, schema in [[GL-002-frontmatter-conventions]] v2.5, productiescripts in `Team Knowledge/scripts/weekly-report-*.py`). `mypka.db` heeft nu ook `session_logs` (79 rijen) en `weekly_reports` (0 — nog geen edities) tabellen.
 
 **Connections-tabblad** — beheert externe koppelingen. Sleutels worden opgeslagen in `Team Knowledge/.env` (0600, nooit geëchoed). Master-schakelaar: `CONNECTORS_ENABLED=1` (staat aan).
 

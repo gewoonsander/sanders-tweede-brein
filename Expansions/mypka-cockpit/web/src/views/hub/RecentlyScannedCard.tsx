@@ -18,6 +18,7 @@ import { useFetch } from '../../lib/useCockpit';
 import { navigate } from '../../lib/router';
 import type { DocumentRow, DocumentsResponse } from '../DocumentsView';
 import { HubSection } from './HubSection';
+import { useT } from '../../lib/i18n';
 
 // doc_type values that represent something that came off a scanner / camera /
 // inbox. Lowercased compare; tolerant of the scaffold's DE+EN mix.
@@ -36,6 +37,7 @@ function isScanLike(doc: DocumentRow): boolean {
 }
 
 export function RecentlyScannedCard() {
+  const t = useT();
   const { data } = useFetch<DocumentsResponse>('/api/cockpit/documents');
   if (!data) return null;
 
@@ -44,12 +46,12 @@ export function RecentlyScannedCard() {
   return (
     <HubSection
       icon={ScanLine}
-      title="Recently Scanned"
-      hint="Scans, receipts and invoices — freshest first"
-      action={{ label: 'All documents', onClick: () => navigate({ name: 'type', type: 'documents' }) }}
+      title={t('scanned.title')}
+      hint={t('scanned.hint')}
+      action={{ label: t('hub.allDocuments'), onClick: () => navigate({ name: 'type', type: 'documents' }) }}
     >
       {scans.length === 0 ? (
-        <p className="hub-empty">No scanned documents yet.</p>
+        <p className="hub-empty">{t('scanned.empty')}</p>
       ) : (
         <div className="hub-docs" role="list">
           {scans.map((d) => <ScanCard key={d.slug} doc={d} />)}
@@ -60,6 +62,7 @@ export function RecentlyScannedCard() {
 }
 
 function ScanCard({ doc }: { doc: DocumentRow }) {
+  const t = useT();
   return (
     <button
       type="button"
@@ -74,7 +77,7 @@ function ScanCard({ doc }: { doc: DocumentRow }) {
       <span className="hub-doc-meta">
         {doc.doc_type && <em className="hub-doc-chip">{doc.doc_type}</em>}
         {doc.date && <span className="hub-doc-date">{doc.date}</span>}
-        {!doc.pdfPath && <span className="hub-doc-nofile">no file</span>}
+        {!doc.pdfPath && <span className="hub-doc-nofile">{t('hub.noFile')}</span>}
       </span>
     </button>
   );

@@ -17,7 +17,8 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Settings } from 'lucide-react';
 import type { PlannerSettings } from '../../lib/plannerTypes';
-import { WEEKDAY_FULL, WEEKDAY_LABELS, DEFAULT_DAY_HOURS } from '../../lib/plannerLogic';
+import { WEEKDAY_INDEXES, weekdayFull, weekdayShort, DEFAULT_DAY_HOURS } from '../../lib/plannerLogic';
+import { useT } from '../../lib/i18n';
 
 const FOCUSABLE =
   'a[href],button:not([disabled]),textarea,input,select,[tabindex]:not([tabindex="-1"])';
@@ -43,6 +44,7 @@ export function SettingsSheet({
   onSave: (next: PlannerSettings) => void;
   writeDisabled: boolean;
 }) {
+  const t = useT();
   // Keep the panel mounted through its close animation, then unmount.
   const [mounted, setMounted] = useState(open);
   const [closing, setClosing] = useState(false);
@@ -56,8 +58,8 @@ export function SettingsSheet({
       setClosing(false);
     } else if (mounted) {
       setClosing(true);
-      const t = window.setTimeout(() => setMounted(false), 320); // ≥ sheet-out 300ms
-      return () => window.clearTimeout(t);
+      const timer = window.setTimeout(() => setMounted(false), 320); // ≥ sheet-out 300ms
+      return () => window.clearTimeout(timer);
     }
   }, [open, mounted]);
 
@@ -128,17 +130,17 @@ export function SettingsSheet({
         <div className="settings-panel h-full overflow-y-auto">
           <div className="flex items-start justify-between gap-md">
             <div className="flex items-center gap-sm">
-              <span className="text-brass" aria-hidden="true">
+              <span className="text-marker-text" aria-hidden="true">
                 <Settings size={18} strokeWidth={1.5} />
               </span>
               <h2 id={titleId} className="text-h3 font-[520] leading-snug text-fg">
-                Planning settings
+                {t('planner.settingsTitle')}
               </h2>
             </div>
             <button
               type="button"
               onClick={onClose}
-              aria-label="Close settings"
+              aria-label={t('planner.closeSettings')}
               className="-mr-xs -mt-xs shrink-0 rounded-card p-xs text-fg-muted transition-colors hover:bg-surface-3 hover:text-fg"
             >
               <X size={18} strokeWidth={1.5} aria-hidden="true" />
@@ -148,10 +150,7 @@ export function SettingsSheet({
           <SettingsForm settings={settings} onSave={onSave} />
 
           {writeDisabled && (
-            <p className="text-caption leading-relaxed text-fg-subtle">
-              Planning is read-only until enabled. Your settings are saved on this
-              device and will sync once the write path is turned on.
-            </p>
+            <p className="text-caption leading-relaxed text-fg-subtle">{t('planner.settingsReadOnly')}</p>
           )}
         </div>
       </div>
@@ -168,6 +167,7 @@ function SettingsForm({
   settings: PlannerSettings;
   onSave: (next: PlannerSettings) => void;
 }) {
+  const t = useT();
   // Edit a local draft; commit on each change so the board reflects it live.
   const commit = (next: PlannerSettings) => onSave(next);
 
@@ -224,19 +224,20 @@ function SettingsForm({
     <div className="flex flex-col gap-lg">
       {/* Workdays */}
       <fieldset className="flex flex-col gap-sm">
-        <legend className="text-meta font-[460] text-fg">Workdays</legend>
-        <div role="group" aria-label="Workdays" className="flex flex-wrap gap-xs">
-          {WEEKDAY_LABELS.map((label, wd) => {
+        <legend className="text-meta font-[460] text-fg">{t('planner.workdays')}</legend>
+        <div role="group" aria-label={t('planner.workdays')} className="flex flex-wrap gap-xs">
+          {WEEKDAY_INDEXES.map((wd) => {
+            const label = weekdayShort(wd);
             const active = settings.workdays.includes(wd);
             return (
               <button
-                key={label}
+                key={wd}
                 type="button"
                 aria-pressed={active}
                 onClick={() => toggleWorkday(wd)}
                 className={`inline-flex h-[34px] min-w-[44px] items-center justify-center rounded-card border px-sm text-meta font-[460] transition-colors ${
                   active
-                    ? 'border-transparent bg-brass-soft text-brass'
+                    ? 'border-transparent bg-marker-soft text-marker-text'
                     : 'border-border bg-surface-bg text-fg-subtle hover:bg-surface-2 hover:text-fg'
                 }`}
               >
@@ -250,18 +251,16 @@ function SettingsForm({
       {/* AM/PM split */}
       <div className="flex flex-col gap-sm">
         <label htmlFor="planner-split" className="text-meta font-[460] text-fg">
-          AM / PM split point
+          {t('planner.splitLabel')}
         </label>
         <input
           id="planner-split"
           type="time"
           value={settings.am_pm_split}
           onChange={(e) => setSplit(e.target.value)}
-          className="w-[140px] rounded-card border border-border bg-surface-bg px-sm py-xs text-meta tabular-nums text-fg outline-none focus-visible:border-brass"
+          className="w-[140px] rounded-card border border-border bg-surface-bg px-sm py-xs text-meta tabular-nums text-fg outline-none focus-visible:border-marker"
         />
-        <p className="text-caption text-fg-subtle">
-          Meetings before this time go to the morning lane; after, the afternoon.
-        </p>
+        <p className="text-caption text-fg-subtle">{t('planner.splitHint')}</p>
       </div>
 
       {/* Lunch break (Iris 14 §B) — a toggle + start/end times. When on, the board's
@@ -269,23 +268,23 @@ function SettingsForm({
           two times. Disabled by default; the times only matter when enabled. */}
       <fieldset className="flex flex-col gap-sm">
         <div className="flex items-center justify-between gap-md">
-          <legend className="text-meta font-[460] text-fg">Lunch break</legend>
+          <legend className="text-meta font-[460] text-fg">{t('planner.lunchBreak')}</legend>
           <button
             type="button"
             role="switch"
             aria-checked={lunch.enabled}
-            aria-label="Enable lunch break"
+            aria-label={t('planner.enableLunch')}
             onClick={toggleLunch}
             className={`relative inline-flex h-[22px] w-[38px] shrink-0 items-center rounded-full border transition-colors ${
               lunch.enabled
-                ? 'border-transparent bg-brass-soft'
+                ? 'border-transparent bg-marker-soft'
                 : 'border-border bg-surface-bg hover:bg-surface-2'
             }`}
           >
             <span
               aria-hidden="true"
               className={`inline-block h-[16px] w-[16px] rounded-full transition-transform ${
-                lunch.enabled ? 'translate-x-[18px] bg-brass' : 'translate-x-[3px] bg-fg-subtle'
+                lunch.enabled ? 'translate-x-[18px] bg-marker' : 'translate-x-[3px] bg-fg-subtle'
               }`}
             />
           </button>
@@ -294,25 +293,23 @@ function SettingsForm({
           <div className="flex items-center gap-sm">
             <input
               type="time"
-              aria-label="Lunch break start"
+              aria-label={t('planner.lunchStart')}
               value={lunch.start}
               onChange={(e) => setLunchStart(e.target.value)}
-              className="w-[110px] rounded-card border border-border bg-surface-bg px-sm py-xs text-meta tabular-nums text-fg outline-none focus-visible:border-brass"
+              className="w-[110px] rounded-card border border-border bg-surface-bg px-sm py-xs text-meta tabular-nums text-fg outline-none focus-visible:border-marker"
             />
             <span aria-hidden="true" className="text-fg-subtle">–</span>
             <input
               type="time"
-              aria-label="Lunch break end"
+              aria-label={t('planner.lunchEnd')}
               value={lunch.end}
               onChange={(e) => setLunchEnd(e.target.value)}
-              className="w-[110px] rounded-card border border-border bg-surface-bg px-sm py-xs text-meta tabular-nums text-fg outline-none focus-visible:border-brass"
+              className="w-[110px] rounded-card border border-border bg-surface-bg px-sm py-xs text-meta tabular-nums text-fg outline-none focus-visible:border-marker"
             />
           </div>
         )}
         <p className="text-caption text-fg-subtle">
-          {lunch.enabled
-            ? 'A blocked-time band marks lunch between the AM and PM lanes.'
-            : 'Off: a single line divides morning and afternoon.'}
+          {t(lunch.enabled ? 'planner.lunchOnHint' : 'planner.lunchOffHint')}
         </p>
       </fieldset>
 
@@ -323,28 +320,29 @@ function SettingsForm({
 
       {/* Per-workday hours */}
       <fieldset className="flex flex-col gap-sm">
-        <legend className="text-meta font-[460] text-fg">Work hours</legend>
+        <legend className="text-meta font-[460] text-fg">{t('planner.workHours')}</legend>
         <div className="flex flex-col gap-xs">
-          {WEEKDAY_LABELS.map((label, wd) => {
+          {WEEKDAY_INDEXES.map((wd) => {
             if (!settings.workdays.includes(wd)) return null;
+            const label = weekdayShort(wd);
             const hours = settings.work_hours[String(wd)] ?? DEFAULT_DAY_HOURS;
             return (
-              <div key={label} className="flex items-center gap-sm">
+              <div key={wd} className="flex items-center gap-sm">
                 <span className="w-[36px] text-meta text-fg-muted">{label}</span>
                 <input
                   type="time"
-                  aria-label={`${WEEKDAY_FULL[wd]} start`}
+                  aria-label={t('planner.dayStart', { day: weekdayFull(wd) })}
                   value={hours.start}
                   onChange={(e) => setHours(wd, 'start', e.target.value)}
-                  className="w-[110px] rounded-card border border-border bg-surface-bg px-sm py-xs text-meta tabular-nums text-fg outline-none focus-visible:border-brass"
+                  className="w-[110px] rounded-card border border-border bg-surface-bg px-sm py-xs text-meta tabular-nums text-fg outline-none focus-visible:border-marker"
                 />
                 <span aria-hidden="true" className="text-fg-subtle">–</span>
                 <input
                   type="time"
-                  aria-label={`${WEEKDAY_FULL[wd]} end`}
+                  aria-label={t('planner.dayEnd', { day: weekdayFull(wd) })}
                   value={hours.end}
                   onChange={(e) => setHours(wd, 'end', e.target.value)}
-                  className="w-[110px] rounded-card border border-border bg-surface-bg px-sm py-xs text-meta tabular-nums text-fg outline-none focus-visible:border-brass"
+                  className="w-[110px] rounded-card border border-border bg-surface-bg px-sm py-xs text-meta tabular-nums text-fg outline-none focus-visible:border-marker"
                 />
               </div>
             );

@@ -26,6 +26,7 @@ import { ChevronRight, GripVertical } from 'lucide-react';
 import { PlanCard } from './PlanCard';
 import type { PlanCardStatus } from '../../lib/plannerTypes';
 import { prefersReducedMotion } from '../../lib/plannerMotion';
+import { translateNow } from '../../lib/i18n';
 
 // Vivi §2.5 `easeFollow`: no-overshoot decelerate; neighbors lead the gap (280ms).
 const REFLOW_TRANSITION = 'transform 280ms cubic-bezier(0.22, 0.61, 0.36, 1)';
@@ -138,8 +139,8 @@ function DragHandle({
     <button
       {...attributes}
       type="button"
-      aria-label={`Reorder ${title}`}
-      className="planner-card-grip absolute left-[3px] top-[6px] inline-flex h-[20px] w-[14px] cursor-grab touch-none items-center justify-center text-fg-subtle opacity-0 transition-opacity hover:text-brass focus-visible:opacity-100 group-hover:opacity-100 active:cursor-grabbing"
+      aria-label={translateNow('planner.reorder', { title })}
+      className="planner-card-grip absolute left-[3px] top-[6px] inline-flex h-[20px] w-[14px] cursor-grab touch-none items-center justify-center text-fg-subtle opacity-0 transition-opacity hover:text-marker-text focus-visible:opacity-100 group-hover:opacity-100 active:cursor-grabbing"
       {...listeners}
     >
       <GripVertical size={14} strokeWidth={1.5} aria-hidden="true" />
@@ -194,7 +195,7 @@ function MoveNextDayButton({ label, onClick }: { label: string; onClick: () => v
       // Iris 20 §2: the promote Star now occupies the top-right corner (right:8px,
       // ~18px wide). Shift the shed button left of it (right:30px) so the two card
       // actions sit side by side instead of stacking. Both stay hover-revealed.
-      className="absolute right-[30px] top-[6px] inline-flex h-[20px] w-[20px] items-center justify-center rounded-card text-fg-subtle opacity-0 transition-opacity hover:bg-surface-3 hover:text-brass focus-visible:opacity-100 group-hover:opacity-100"
+      className="absolute right-[30px] top-[6px] inline-flex h-[20px] w-[20px] items-center justify-center rounded-card text-fg-subtle opacity-0 transition-opacity hover:bg-surface-3 hover:text-marker-text focus-visible:opacity-100 group-hover:opacity-100"
     >
       <ChevronRight size={14} strokeWidth={1.5} aria-hidden="true" />
     </button>

@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { StatusChip } from '../ui';
 import type { NormalizedTask, NormalizedEvent, PlanCardStatus } from '../../lib/plannerTypes';
+import { useT, translateNow, intlLocale, type TFunction, type TranslationKey } from '../../lib/i18n';
 
 // The detail payload — a discriminated union over the two card kinds. Scheduled task
 // cards carry the reconciliation extras (note + status); sidebar tasks pass them null.
@@ -57,20 +58,21 @@ function safeHref(url: string | null): string | null {
   }
 }
 
-const DUE_BUCKET_LABEL: Record<NonNullable<NormalizedTask['dueBucket']>, string> = {
-  overdue: 'Overdue',
-  today: 'Today',
-  upcoming: 'Upcoming',
-  none: 'No due date',
+// Translation KEYS, not strings: this map is module-level, the locale is not.
+const DUE_BUCKET_KEY: Record<NonNullable<NormalizedTask['dueBucket']>, TranslationKey> = {
+  overdue: 'planner.dueOverdue',
+  today: 'planner.dueToday2',
+  upcoming: 'planner.dueUpcoming',
+  none: 'planner.dueNone',
 };
 
-const PRIORITY_LABEL: Record<number, string> = {
-  1: 'P1 · important',
-  2: 'P2',
-  3: 'P3',
-  4: 'P4',
-  5: 'None',
-};
+// P2/P3/P4 are code-like rank labels, identical in both languages; only P1's
+// "· important" tail and the "None" rank are copy.
+function priorityLabel(rank: number, t: TFunction): string {
+  if (rank === 1) return t('planner.prio1');
+  if (rank === 5) return t('planner.prio5');
+  return rank >= 2 && rank <= 4 ? `P${rank}` : `P${rank}`;
+}
 
 export function CardDetailModal({
   open, detail, onClose,
@@ -183,14 +185,14 @@ function ModalHeader({
   return (
     <div className="flex items-start justify-between gap-md">
       <div className="flex items-start gap-sm">
-        <span className="mt-[2px] text-brass" aria-hidden="true">{glyph}</span>
+        <span className="mt-[2px] text-marker-text" aria-hidden="true">{glyph}</span>
         {/* Full, UNtruncated title — the whole point of the detail view. */}
         <h2 id={titleId} className="text-h3 font-[520] leading-snug text-fg">{title}</h2>
       </div>
       <button
         type="button"
         onClick={onClose}
-        aria-label="Close details"
+        aria-label={translateNow('planner.closeDetails')}
         className="-mr-xs -mt-xs shrink-0 rounded-card p-xs text-fg-muted transition-colors hover:bg-surface-3 hover:text-fg"
       >
         <X size={18} strokeWidth={1.5} aria-hidden="true" />
@@ -216,11 +218,12 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 // modal's own `.detail-modal` max-height + overflow-y scroll, so a wall of notes
 // never blows the modal up. Caption header mirrors the "Last known" section style.
 function DescriptionBlock({ description }: { description: string }) {
+  const t = useT();
   const body = description.trim();
   if (!body) return null;
   return (
     <div className="flex flex-col gap-xs">
-      <span className="text-caption text-fg-muted">Notes</span>
+      <span className="text-caption text-fg-muted">{t('planner.detailNotes')}</span>
       <p className="whitespace-pre-wrap break-words text-meta leading-relaxed text-fg-muted">
         {body}
       </p>
@@ -234,7 +237,7 @@ function SourceLink({ href, label }: { href: string; label: string }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-xs rounded-card border border-border bg-surface-bg px-sm py-xs text-meta font-[460] text-fg transition-colors hover:border-brass hover:text-brass focus-visible:border-brass"
+      className="inline-flex items-center gap-xs rounded-card border border-border bg-surface-bg px-sm py-xs text-meta font-[460] text-fg transition-colors hover:border-marker hover:text-marker-text focus-visible:border-marker"
     >
       {label}
       <ArrowUpRight size={14} strokeWidth={1.5} aria-hidden="true" />
@@ -251,10 +254,11 @@ function TaskDetail({
   titleId: string;
   onClose: () => void;
 }) {
+  const t = useT();
   const { task, lastKnownTitle, note, reconStatus, sourceLabel } = detail;
   const resolved = task?.title ?? (lastKnownTitle && lastKnownTitle.trim() ? lastKnownTitle.trim() : null);
   const isStale = !task && reconStatus !== 'live';
-  const title = resolved ?? `Task no longer in ${sourceLabel}`;
+  const title = resolved ?? t('planner.taskGone', { source: sourceLabel });
   const Glyph = sourceLabel === 'ClickUp' ? Briefcase : CheckSquare;
   const href = safeHref(task?.url ?? null);
 
@@ -270,34 +274,34 @@ function TaskDetail({
       {/* Calm stale note — never red; explains why the row reads as residue. */}
       {isStale && (
         <p className="text-caption leading-relaxed text-fg-subtle">
-          This card’s source task is no longer in {sourceLabel}
-          {reconStatus === 'done' ? ' — it looks completed or closed.' : ' right now.'}
-          {' '}It’s kept here as a quiet placeholder; nothing to fix.
+          {t(reconStatus === 'done' ? 'planner.staleNoteDone' : 'planner.staleNoteOther', { source: sourceLabel })}
         </p>
       )}
 
       <div className="flex flex-col gap-xs">
-        <Row label="Source">{sourceLabel}</Row>
+        {/* sourceLabel and task.status are connector data (proper nouns / upstream
+            vocabulary) — the ROW LABELS are chrome and translate; the values don't. */}
+        <Row label={t('planner.detailSource')}>{sourceLabel}</Row>
         {task && (
           <>
-            <Row label="Due">
+            <Row label={t('planner.detailDue')}>
               <span className="tabular-nums">
                 {task.due ? `${task.due} · ` : ''}
-                {DUE_BUCKET_LABEL[task.dueBucket]}
+                {t(DUE_BUCKET_KEY[task.dueBucket])}
               </span>
             </Row>
-            <Row label="Priority">{PRIORITY_LABEL[task.priorityRank] ?? `P${task.priorityRank}`}</Row>
-            {task.status && <Row label="Status">{task.status}</Row>}
+            <Row label={t('planner.detailPriority')}>{priorityLabel(task.priorityRank, t)}</Row>
+            {task.status && <Row label={t('planner.detailStatus')}>{task.status}</Row>}
           </>
         )}
         {reconStatus && (
-          <Row label="On board">
+          <Row label={t('planner.detailOnBoard')}>
             {reconStatus === 'live' ? (
-              <StatusChip tone="good">live</StatusChip>
+              <StatusChip tone="good">{t('planner.chipLive')}</StatusChip>
             ) : reconStatus === 'done' ? (
-              <StatusChip tone="neutral">done</StatusChip>
+              <StatusChip tone="neutral">{t('planner.chipDone')}</StatusChip>
             ) : (
-              <StatusChip tone="watch">check source</StatusChip>
+              <StatusChip tone="watch">{t('planner.chipCheckSource')}</StatusChip>
             )}
           </Row>
         )}
@@ -327,13 +331,13 @@ function TaskDetail({
       {/* Last-known note for a stale card (the server-carried snapshot). */}
       {!task && note && note.trim() && (
         <div className="flex flex-col gap-xs">
-          <span className="text-caption text-fg-muted">Last known</span>
+          <span className="text-caption text-fg-muted">{t('planner.detailLastKnown')}</span>
           <p className="text-meta leading-relaxed text-fg-subtle">{note.trim()}</p>
         </div>
       )}
 
       {/* The external-source link — now lives HERE, not on the card. */}
-      {href && <SourceLink href={href} label={`Open in ${sourceLabel}`} />}
+      {href && <SourceLink href={href} label={t('planner.openIn', { source: sourceLabel })} />}
     </>
   );
 }
@@ -348,7 +352,8 @@ function EventDetail({
   titleId: string;
   onClose: () => void;
 }) {
-  const dateFmt = new Intl.DateTimeFormat('en-GB', {
+  const t = useT();
+  const dateFmt = new Intl.DateTimeFormat(intlLocale(), {
     timeZone: tz, weekday: 'long', day: 'numeric', month: 'long',
   });
   const timeFmt = new Intl.DateTimeFormat('en-GB', {
@@ -356,7 +361,7 @@ function EventDetail({
   });
   const dateLabel = dateFmt.format(new Date(event.start));
   const timeLabel = event.allDay
-    ? 'All day'
+    ? t('planner.allDayCap')
     : `${timeFmt.format(new Date(event.start))}–${timeFmt.format(new Date(event.end))}`;
   const href = safeHref(event.url);
 
@@ -370,15 +375,15 @@ function EventDetail({
       />
 
       <div className="flex flex-col gap-xs">
-        <Row label="Date">{dateLabel}</Row>
-        <Row label="Time">
+        <Row label={t('planner.detailDate')}>{dateLabel}</Row>
+        <Row label={t('planner.detailTime')}>
           <span className="tabular-nums">{timeLabel}</span>
           {!event.allDay && event.half && (
             <span className="text-fg-muted"> · {event.half}</span>
           )}
         </Row>
         {event.location && (
-          <Row label="Location">
+          <Row label={t('planner.detailLocation')}>
             <span className="inline-flex items-center gap-xs">
               <span className="text-fg-muted" aria-hidden="true">
                 <MapPin size={13} strokeWidth={1.5} />
@@ -388,10 +393,10 @@ function EventDetail({
           </Row>
         )}
         {event.recurring && (
-          <Row label="Repeats">
+          <Row label={t('planner.detailRepeats')}>
             <span className="inline-flex items-center gap-xs text-fg-muted">
               <Repeat size={13} strokeWidth={1.5} aria-hidden="true" />
-              Recurring event
+              {t('planner.recurringEvent')}
             </span>
           </Row>
         )}
@@ -400,7 +405,7 @@ function EventDetail({
       {/* The event body/notes from the VEVENT — under the meta, omitted when empty. */}
       <DescriptionBlock description={event.description} />
 
-      {href && <SourceLink href={href} label="Open event" />}
+      {href && <SourceLink href={href} label={t('planner.openEvent')} />}
     </>
   );
 }

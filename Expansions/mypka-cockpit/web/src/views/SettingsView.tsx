@@ -19,7 +19,7 @@
 // button so a keyboard user can move the same item again without re-Tabbing.
 // An aria-live region announces the new position. No drag is required.
 import { useEffect, useRef, useState } from 'react';
-import { SlidersHorizontal, Check, ChevronUp, ChevronDown, Sun, Moon, Monitor } from 'lucide-react';
+import { SlidersHorizontal, Check, ChevronUp, ChevronDown, Sun, Moon, Monitor, Languages } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
 import {
   saveModulePrefs,
@@ -28,15 +28,22 @@ import {
   type ModuleCatalogueEntry,
 } from '../lib/cockpitExtras';
 import { useTheme, type ThemePref } from '../lib/theme';
+import { useT, useLocale, type Locale, type TranslationKey } from '../lib/i18n';
 import { PageHeader } from '../components/PageHeader';
 import './settings.css';
 
 export function SettingsView() {
+  const t = useT();
   const { data, loading, error } = useFetch<CockpitSettingsResponse>('/api/cockpit/settings');
   // Theme is a client-only presentation preference (localStorage; applied pre-paint
   // by the index.html bootstrap). The hook here drives the switch + keeps the live
   // System listener owned at the shell level (App.tsx) in sync.
   const { pref: themePref, resolved: themeResolved, setPref: setThemePref } = useTheme();
+  // Language is the SAME kind of preference as theme: client-only, localStorage,
+  // applied pre-paint by /theme-bootstrap.js. Deliberately NOT part of the
+  // /api/cockpit/settings round-trip — this page promises "saved on this machine
+  // only", and a fetch would resolve after first paint (flash of the wrong copy).
+  const { locale, setLocale } = useLocale();
 
   // Local working copies, seeded from the fetch and updated optimistically.
   const [modules, setModules] = useState<Record<string, boolean>>({});
@@ -79,22 +86,32 @@ export function SettingsView() {
     .map((key) => byKey.get(key))
     .filter((m): m is ModuleCatalogueEntry => m != null);
 
-  const themeOptions: { value: ThemePref; label: string; icon: typeof Sun }[] = [
-    { value: 'light', label: 'Light', icon: Sun },
-    { value: 'dark', label: 'Dark', icon: Moon },
-    { value: 'system', label: 'System', icon: Monitor },
+  const themeOptions: { value: ThemePref; labelKey: TranslationKey; icon: typeof Sun }[] = [
+    { value: 'light', labelKey: 'settings.themeLight', icon: Sun },
+    { value: 'dark', labelKey: 'settings.themeDark', icon: Moon },
+    { value: 'system', labelKey: 'settings.themeSystem', icon: Monitor },
+  ];
+
+  // Language labels are ENDONYMS on purpose — "Nederlands" reads "Nederlands" in
+  // the English UI too, the way every real language switcher does it. They live in
+  // the dictionary (identical in both locales) so they stay editable in one place.
+  const localeOptions: { value: Locale; labelKey: TranslationKey }[] = [
+    { value: 'en', labelKey: 'settings.languageEnglish' },
+    { value: 'nl', labelKey: 'settings.languageDutch' },
   ];
 
   function surfaceSaveError(kind: string, message?: string) {
     setSaveState('error');
     setSaveError(
       kind === 'disabled'
-        ? 'Saving settings is disabled on this server.'
+        ? t('settings.errDisabled')
         : kind === 'auth'
-          ? 'Your session expired — reload and try again.'
+          ? t('settings.errAuth')
+          // A server-supplied message is passed through verbatim: it comes from the
+          // Express layer, which is English-only for now (see the i18n scope note).
           : kind === 'error' && message
             ? message
-            : 'Could not save that change.',
+            : t('settings.errGeneric'),
     );
   }
 
@@ -127,7 +144,13 @@ export function SettingsView() {
     refocusDir.current = dir;
 
     const label = byKey.get(key)?.label ?? key;
-    setLiveMsg(`${label} moved ${dir} — now position ${j + 1} of ${next.length}.`);
+    setLiveMsg(
+      t(dir === 'up' ? 'settings.movedUp' : 'settings.movedDown', {
+        label,
+        position: j + 1,
+        total: next.length,
+      }),
+    );
     setSaveState('saving');
     setSaveError(null);
 
@@ -145,27 +168,35 @@ export function SettingsView() {
   return (
     <div className="settings">
       <PageHeader
-        title="Settings"
+        title={t('settings.title')}
         icon={SlidersHorizontal}
-        subtitle="Appearance and Hub layout — saved on this machine only. Changes apply instantly, no rebuild."
+        subtitle={t('settings.subtitle')}
       />
 
-      {/* ---- Appearance: Light / Dark / System theme ------------------------- */}
+      {/* ---- Appearance: theme + UI language --------------------------------
+          Two rows, one section, one visual language: both are segmented radiogroups
+          reusing .theme-segmented / .theme-option (no new tokens, no new CSS). Both
+          are client-only preferences persisted to localStorage and applied
+          pre-paint by /theme-bootstrap.js. */}
       <section className="settings-section" aria-labelledby="settings-appearance">
-        <h2 className="settings-section-title" id="settings-appearance">Appearance</h2>
+        <h2 className="settings-section-title" id="settings-appearance">{t('settings.appearance')}</h2>
         <div className="settings-row settings-row--theme">
           <div className="settings-row-text">
-            <span className="settings-row-label">Theme</span>
+            <span className="settings-row-label">{t('settings.theme')}</span>
             <span className="settings-row-hint">
               {themePref === 'system'
-                ? `Follows your system — currently ${themeResolved}.`
-                : `Always ${themePref}.`}
+                ? t('settings.themeHintSystem', {
+                    theme: t(themeResolved === 'light' ? 'settings.themeValueLight' : 'settings.themeValueDark'),
+                  })
+                : t('settings.themeHintFixed', {
+                    theme: t(themePref === 'light' ? 'settings.themeValueLight' : 'settings.themeValueDark'),
+                  })}
             </span>
           </div>
           <div
             className="theme-segmented"
             role="radiogroup"
-            aria-label="Theme"
+            aria-label={t('settings.themeAria')}
           >
             {themeOptions.map((opt) => {
               const Icon = opt.icon;
@@ -181,7 +212,40 @@ export function SettingsView() {
                   onClick={() => setThemePref(opt.value)}
                 >
                   <Icon size={15} strokeWidth={1.5} aria-hidden="true" />
-                  <span>{opt.label}</span>
+                  <span>{t(opt.labelKey)}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="settings-row settings-row--theme">
+          <div className="settings-row-text">
+            <span className="settings-row-label">{t('settings.language')}</span>
+            <span className="settings-row-hint">{t('settings.languageHint')}</span>
+          </div>
+          <div
+            className="theme-segmented"
+            role="radiogroup"
+            aria-label={t('settings.languageAria')}
+          >
+            {localeOptions.map((opt) => {
+              const active = locale === opt.value;
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  role="radio"
+                  aria-checked={active}
+                  className="theme-option"
+                  data-active={active}
+                  // lang on the option itself: a screen reader then pronounces
+                  // "Nederlands" with Dutch phonetics inside the English UI.
+                  lang={opt.value}
+                  onClick={() => setLocale(opt.value)}
+                >
+                  <Languages size={15} strokeWidth={1.5} aria-hidden="true" />
+                  <span>{t(opt.labelKey)}</span>
                 </button>
               );
             })}
@@ -193,12 +257,12 @@ export function SettingsView() {
         <div className="list-skeleton" aria-busy="true"><div className="skeleton-block" /></div>
       )}
       {(error || !data) && !loading && (
-        <p className="view-error">Hub settings could not load. {error || ''}</p>
+        <p className="view-error">{t('settings.hubLoadError')} {error || ''}</p>
       )}
 
       {data && (
       <section className="settings-section" aria-labelledby="settings-hub-modules">
-        <h2 className="settings-section-title" id="settings-hub-modules">Hub modules</h2>
+        <h2 className="settings-section-title" id="settings-hub-modules">{t('settings.hubModules')}</h2>
         <ol className="settings-list">
           {rows.map((m, idx) => {
             const enabled = modules[m.key] ?? true;
@@ -206,14 +270,16 @@ export function SettingsView() {
             const isLast = idx === rows.length - 1;
             return (
               <li className="settings-row" key={m.key}>
-                <div className="settings-reorder" role="group" aria-label={`Reorder ${m.label}`}>
+                {/* m.label / m.hint come from the SERVER module catalogue and are
+                    English-only for now — see the i18n scope note in lib/i18n/en.ts. */}
+                <div className="settings-reorder" role="group" aria-label={t('settings.reorderAria', { label: m.label })}>
                   <button
                     type="button"
                     className="settings-move"
                     ref={(el) => { moveBtnRefs.current[`${m.key}:up`] = el; }}
                     onClick={() => move(m.key, 'up')}
                     disabled={isFirst}
-                    aria-label={`Move ${m.label} up`}
+                    aria-label={t('settings.moveUp', { label: m.label })}
                   >
                     <ChevronUp size={16} strokeWidth={1.75} aria-hidden="true" />
                   </button>
@@ -223,7 +289,7 @@ export function SettingsView() {
                     ref={(el) => { moveBtnRefs.current[`${m.key}:down`] = el; }}
                     onClick={() => move(m.key, 'down')}
                     disabled={isLast}
-                    aria-label={`Move ${m.label} down`}
+                    aria-label={t('settings.moveDown', { label: m.label })}
                   >
                     <ChevronDown size={16} strokeWidth={1.75} aria-hidden="true" />
                   </button>
@@ -236,7 +302,7 @@ export function SettingsView() {
                   type="button"
                   role="switch"
                   aria-checked={enabled}
-                  aria-label={`${m.label}: ${enabled ? 'shown on the Hub' : 'hidden from the Hub'}`}
+                  aria-label={t(enabled ? 'settings.moduleShown' : 'settings.moduleHidden', { label: m.label })}
                   className="settings-switch"
                   data-on={enabled}
                   onClick={() => toggle(m.key)}
@@ -251,10 +317,10 @@ export function SettingsView() {
         </ol>
 
         <div className="settings-status" role="status" aria-live="polite">
-          {saveState === 'saving' && <span className="settings-status-saving">Saving…</span>}
+          {saveState === 'saving' && <span className="settings-status-saving">{t('settings.saving')}</span>}
           {saveState === 'saved' && (
             <span className="settings-status-saved">
-              <Check size={14} strokeWidth={2} aria-hidden="true" /> Saved
+              <Check size={14} strokeWidth={2} aria-hidden="true" /> {t('settings.saved')}
             </span>
           )}
           {saveState === 'error' && saveError && (

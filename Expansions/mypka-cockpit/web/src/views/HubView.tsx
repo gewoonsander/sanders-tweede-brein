@@ -12,6 +12,7 @@ import { ArrowRight, ArrowUpRight, CalendarDays, FileText, FolderKanban, Hash, K
 import type { LucideIcon } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
 import { navigate, hrefFor } from '../lib/router';
+import { useT, intlLocale, type TFunction, type TranslationKey } from '../lib/i18n';
 import type { HubData, FleetingDoc, BoardSummary } from '../lib/fleeting';
 import type { AgendaData } from '../lib/connectors';
 import type { DocumentRow, DocumentsResponse } from './DocumentsView';
@@ -26,30 +27,35 @@ import './hub.css';
 
 // The three hero buckets (mirrors the draft: My Projects / Key Elements / My
 // Topics) + the two compact ones. `concept` keys into the --concept-* tokens.
-const HERO_AREAS: { type: string; label: string; icon: LucideIcon; concept: string }[] = [
-  { type: 'projects', label: 'My Projects', icon: FolderKanban, concept: 'project' },
-  { type: 'key_elements', label: 'Key Elements', icon: KeyRound, concept: 'key-element' },
-  { type: 'topics', label: 'My Topics', icon: Hash, concept: 'topic' },
+// labelKey, not label: module-level tables hold translation KEYS so a locale flip
+// re-resolves them at render instead of freezing the string at import time.
+const HERO_AREAS: { type: string; labelKey: TranslationKey; icon: LucideIcon; concept: string }[] = [
+  { type: 'projects', labelKey: 'hub.areaProjects', icon: FolderKanban, concept: 'project' },
+  { type: 'key_elements', labelKey: 'hub.areaKeyElements', icon: KeyRound, concept: 'key-element' },
+  { type: 'topics', labelKey: 'hub.areaTopics', icon: Hash, concept: 'topic' },
 ];
-const SUB_AREAS: { type: string; label: string; icon: LucideIcon; concept: string }[] = [
-  { type: 'goals', label: 'My Goals', icon: Target, concept: 'goal' },
-  { type: 'habits', label: 'My Habits', icon: Repeat2, concept: 'habit' },
+const SUB_AREAS: { type: string; labelKey: TranslationKey; icon: LucideIcon; concept: string }[] = [
+  { type: 'goals', labelKey: 'hub.areaGoals', icon: Target, concept: 'goal' },
+  { type: 'habits', labelKey: 'hub.areaHabits', icon: Repeat2, concept: 'habit' },
 ];
 
 function countFor(data: HubData, type: string): number {
   return data.types.find((t) => t.type === type)?.count ?? 0;
 }
 
-function plural(n: number, one: string, many: string): string {
-  return `${n} ${n === 1 ? one : many}`;
+// One/other pair of dictionary keys picked by count — the same explicit plural
+// idiom the rest of the app uses (English and Dutch share the 1-vs-rest split).
+function plural(t: TFunction, count: number, one: TranslationKey, other: TranslationKey): string {
+  return t(count === 1 ? one : other, { count });
 }
 
 // Render the My Life bucket cards (the three hero tiles + two compact ones).
 function BucketsModule({ data }: { data: HubData }) {
+  const t = useT();
   return (
     <>
       <div className="hub-areas" role="list">
-        {HERO_AREAS.map(({ type, label, icon: Icon, concept }) => (
+        {HERO_AREAS.map(({ type, labelKey, icon: Icon, concept }) => (
           <a
             key={type}
             role="listitem"
@@ -58,18 +64,18 @@ function BucketsModule({ data }: { data: HubData }) {
             href={hrefFor({ name: 'type', type })}
           >
             <span className="hub-area-glyph"><Icon size={22} strokeWidth={1.5} aria-hidden="true" /></span>
-            <span className="hub-area-name">{label}</span>
+            <span className="hub-area-name">{t(labelKey)}</span>
             <span className="hub-area-meta">
-              {plural(countFor(data, type), 'note', 'notes')}
+              {plural(t, countFor(data, type), 'hub.countNoteOne', 'hub.countNoteOther')}
               {' · '}
-              {plural(data.boardsByArea[type] ?? 0, 'whiteboard', 'whiteboards')}
+              {plural(t, data.boardsByArea[type] ?? 0, 'hub.countWhiteboardOne', 'hub.countWhiteboardOther')}
             </span>
             <ArrowRight className="hub-area-arrow" size={16} strokeWidth={1.5} aria-hidden="true" />
           </a>
         ))}
       </div>
       <div className="hub-areas hub-areas--sub" role="list">
-        {SUB_AREAS.map(({ type, label, icon: Icon, concept }) => (
+        {SUB_AREAS.map(({ type, labelKey, icon: Icon, concept }) => (
           <a
             key={type}
             role="listitem"
@@ -78,11 +84,11 @@ function BucketsModule({ data }: { data: HubData }) {
             href={hrefFor({ name: 'type', type })}
           >
             <span className="hub-area-glyph"><Icon size={18} strokeWidth={1.5} aria-hidden="true" /></span>
-            <span className="hub-area-name">{label}</span>
+            <span className="hub-area-name">{t(labelKey)}</span>
             <span className="hub-area-meta">
-              {plural(countFor(data, type), 'note', 'notes')}
+              {plural(t, countFor(data, type), 'hub.countNoteOne', 'hub.countNoteOther')}
               {' · '}
-              {plural(data.boardsByArea[type] ?? 0, 'board', 'boards')}
+              {plural(t, data.boardsByArea[type] ?? 0, 'hub.countBoardOne', 'hub.countBoardOther')}
             </span>
           </a>
         ))}
@@ -94,19 +100,17 @@ function BucketsModule({ data }: { data: HubData }) {
 // Pinned WIP stickies + the "ready for the team" signal row (both gate on the
 // `pinned` module key, exactly as before).
 function PinnedModule({ data }: { data: HubData }) {
+  const t = useT();
   return (
     <>
       <HubSection
         icon={Pin}
-        title="Pinned"
-        hint="Work-in-progress notes you keep coming back to"
-        action={{ label: 'All fleeting notes', onClick: () => navigate({ name: 'notes' }) }}
+        title={t('hub.pinned')}
+        hint={t('hub.pinnedHint')}
+        action={{ label: t('hub.allFleetingNotes'), onClick: () => navigate({ name: 'notes' }) }}
       >
         {data.notes.pinned.length === 0 ? (
-          <p className="hub-empty">
-            Nothing pinned yet. Pin a fleeting note to keep it on the hub —
-            ideal for documents you expand a little every day.
-          </p>
+          <p className="hub-empty">{t('hub.pinnedEmpty')}</p>
         ) : (
           <div className="hub-stickies" role="list">
             {data.notes.pinned.map((n) => <StickyCard key={n.slug} note={n} />)}
@@ -117,8 +121,8 @@ function PinnedModule({ data }: { data: HubData }) {
       {data.notes.ready.length > 0 && (
         <HubSection
           icon={Send}
-          title="Ready for the team"
-          hint="Marked ready — your agents can pick these up and integrate them into the PKM"
+          title={t('hub.readyForTeam')}
+          hint={t('hub.readyHint')}
         >
           <div className="hub-stickies" role="list">
             {data.notes.ready.map((n) => <StickyCard key={n.slug} note={n} ready />)}
@@ -130,18 +134,16 @@ function PinnedModule({ data }: { data: HubData }) {
 }
 
 function WhiteboardsModule({ data }: { data: HubData }) {
+  const t = useT();
   return (
     <HubSection
       icon={MapIcon}
-      title="Whiteboards"
-      hint="Spatial canvases for deep thinking"
-      action={{ label: 'Manage', onClick: () => navigate({ name: 'notes' }) }}
+      title={t('hub.whiteboards')}
+      hint={t('hub.whiteboardsHint')}
+      action={{ label: t('hub.manage'), onClick: () => navigate({ name: 'notes' }) }}
     >
       {data.boards.length === 0 ? (
-        <p className="hub-empty">
-          No whiteboards yet. Create one from Fleeting Notes and arrange your
-          stickies on a canvas.
-        </p>
+        <p className="hub-empty">{t('hub.whiteboardsEmpty')}</p>
       ) : (
         <div className="hub-boards" role="list">
           {data.boards.map((b) => <BoardCard key={b.slug} board={b} />)}
@@ -152,14 +154,15 @@ function WhiteboardsModule({ data }: { data: HubData }) {
 }
 
 function LatestJournalModule({ data }: { data: HubData }) {
+  const t = useT();
   return (
     <HubSection
       icon={NotebookPen}
-      title="Latest journal"
-      action={{ label: 'Journal', onClick: () => navigate({ name: 'journal' }) }}
+      title={t('hub.latestJournal')}
+      action={{ label: t('hub.journalLink'), onClick: () => navigate({ name: 'journal' }) }}
     >
       {data.recentJournal.length === 0 ? (
-        <p className="hub-empty">No journal entries yet.</p>
+        <p className="hub-empty">{t('hub.journalEmpty')}</p>
       ) : (
         <ul className="hub-journal">
           {data.recentJournal.slice(0, 3).map((j) => (
@@ -193,6 +196,7 @@ const DEFAULT_MODULE_ORDER: string[] = [
 ];
 
 export function HubView() {
+  const t = useT();
   const { data, loading, error } = useFetch<HubData>('/api/cockpit/hub');
   // Runtime module toggles + saved order (Settings page). A missing response or
   // missing key defaults to ON / catalogue order — the Hub never hides or
@@ -209,10 +213,12 @@ export function HubView() {
     );
   }
   if (error || !data) {
-    return <p className="view-error">The hub could not load. {error || ''}</p>;
+    return <p className="view-error">{t('hub.loadError')} {error || ''}</p>;
   }
 
-  const today = new Date().toLocaleDateString(undefined, {
+  // intlLocale() (not `undefined` = the browser locale): the date line follows the
+  // cockpit's UI language, not whatever the OS happens to be set to.
+  const today = new Date().toLocaleDateString(intlLocale(), {
     weekday: 'long', day: 'numeric', month: 'long',
   });
 
@@ -244,7 +250,7 @@ export function HubView() {
     <div className="hub">
       <header className="hub-head">
         <p className="hub-date">{today}</p>
-        <h1 className="hub-title">My Life</h1>
+        <h1 className="hub-title">{t('hub.title')}</h1>
       </header>
 
       <TodaySection />
@@ -262,18 +268,19 @@ export function HubView() {
 // plain slice(0, 6) is the contract. Renders nothing while loading/failing —
 // the hub stays calm without it.
 function LatestDocumentsSection() {
+  const t = useT();
   const { data } = useFetch<DocumentsResponse>('/api/cockpit/documents');
   if (!data) return null;
 
   return (
     <HubSection
       icon={FileText}
-      title="Latest documents"
-      hint="Document notes with their PDFs, freshest first"
-      action={{ label: 'All documents', onClick: () => navigate({ name: 'type', type: 'documents' }) }}
+      title={t('hub.latestDocuments')}
+      hint={t('hub.documentsHint')}
+      action={{ label: t('hub.allDocuments'), onClick: () => navigate({ name: 'type', type: 'documents' }) }}
     >
       {data.items.length === 0 ? (
-        <p className="hub-empty">No documents in the mirror yet.</p>
+        <p className="hub-empty">{t('hub.documentsEmpty')}</p>
       ) : (
         <div className="hub-docs" role="list">
           {data.items.slice(0, 6).map((d) => <HubDocCard key={d.slug} doc={d} />)}
@@ -284,6 +291,7 @@ function LatestDocumentsSection() {
 }
 
 function HubDocCard({ doc }: { doc: DocumentRow }) {
+  const t = useT();
   return (
     <button
       type="button"
@@ -298,7 +306,7 @@ function HubDocCard({ doc }: { doc: DocumentRow }) {
       <span className="hub-doc-meta">
         {doc.doc_type && <em className="hub-doc-chip">{doc.doc_type}</em>}
         {doc.date && <span className="hub-doc-date">{doc.date}</span>}
-        {!doc.pdfPath && <span className="hub-doc-nofile">no file</span>}
+        {!doc.pdfPath && <span className="hub-doc-nofile">{t('hub.noFile')}</span>}
       </span>
     </button>
   );
@@ -306,6 +314,7 @@ function HubDocCard({ doc }: { doc: DocumentRow }) {
 
 // ---- Today: planned actions + calendar events (from the user's connectors) ----
 function TodaySection() {
+  const t = useT();
   const { data } = useFetch<AgendaData>('/api/cockpit/agenda');
   if (!data) return null;
 
@@ -314,27 +323,27 @@ function TodaySection() {
   const events = data.events ?? [];
 
   const fmtTime = (iso: string) =>
-    new Date(iso).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+    new Date(iso).toLocaleTimeString(intlLocale(), { hour: '2-digit', minute: '2-digit' });
 
   return (
     <section className="hub-today">
       <div className="hub-today-col">
         <h2 className="hub-section-title">
           <ListTodo size={15} strokeWidth={1.5} aria-hidden="true" />
-          Today's actions
+          {t('hub.todayActions')}
         </h2>
         {!anySource ? (
           <p className="hub-empty">
-            No tools connected yet.{' '}
+            {t('hub.noTools')}{' '}
             <a className="hub-today-link" href={hrefFor({ name: 'connections' })}>
-              Connect your task manager →
+              {t('hub.connectTasks')}
             </a>
           </p>
         ) : planned.length === 0 ? (
           <p className="hub-empty">
-            Nothing planned for today yet.{' '}
+            {t('hub.nothingPlanned')}{' '}
             <a className="hub-today-link" href={hrefFor({ name: 'module', slug: 'actions' })}>
-              Lay out your day in Actions &amp; Planning →
+              {t('hub.layOutDay')}
             </a>
           </p>
         ) : (
@@ -344,7 +353,7 @@ function TodaySection() {
                 <span className="hub-today-dot hub-today-dot--planned" aria-hidden="true" />
                 <span className="hub-today-text">{p.title ?? p.id}</span>
                 <span className="hub-today-source">{p.source}</span>
-                {p.url && <ExtLink url={p.url} label={`Open in ${p.source}`} />}
+                {p.url && <ExtLink url={p.url} label={t('hub.openIn', { source: p.source })} />}
               </li>
             ))}
           </ul>
@@ -353,27 +362,27 @@ function TodaySection() {
       <div className="hub-today-col">
         <h2 className="hub-section-title">
           <CalendarDays size={15} strokeWidth={1.5} aria-hidden="true" />
-          Today's calendar
+          {t('hub.todayCalendar')}
         </h2>
         {data.sources.calendar.length === 0 ? (
           <p className="hub-empty">
-            No calendar connected.{' '}
+            {t('hub.noCalendar')}{' '}
             <a className="hub-today-link" href={hrefFor({ name: 'connections' })}>
-              Connect one →
+              {t('hub.connectOne')}
             </a>
           </p>
         ) : events.length === 0 ? (
-          <p className="hub-empty">No events today.</p>
+          <p className="hub-empty">{t('hub.noEvents')}</p>
         ) : (
           <ul className="hub-today-list">
             {events.map((e) => (
               <li key={e.uid} className="hub-today-row">
                 <span className="hub-today-time">
-                  {e.allDay ? 'all day' : `${fmtTime(e.start)}–${fmtTime(e.end)}`}
+                  {e.allDay ? t('hub.allDay') : `${fmtTime(e.start)}–${fmtTime(e.end)}`}
                 </span>
                 <span className="hub-today-text">{e.title}</span>
                 {e.location && <span className="hub-today-source">{e.location}</span>}
-                {e.url && <ExtLink url={e.url} label="Open event" />}
+                {e.url && <ExtLink url={e.url} label={t('hub.openEvent')} />}
               </li>
             ))}
           </ul>
@@ -392,7 +401,8 @@ function ExtLink({ url, label }: { url: string; label: string }) {
 }
 
 function StickyCard({ note, ready }: { note: FleetingDoc; ready?: boolean }) {
-  const when = new Date(note.mtime).toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
+  const t = useT();
+  const when = new Date(note.mtime).toLocaleDateString(intlLocale(), { day: 'numeric', month: 'short' });
   return (
     <button
       type="button"
@@ -405,14 +415,15 @@ function StickyCard({ note, ready }: { note: FleetingDoc; ready?: boolean }) {
       <span className="hub-sticky-title">{note.title}</span>
       <span className="hub-sticky-meta">
         {when}
-        {ready ? <em className="hub-sticky-ready">ready</em>
-          : note.status === 'working' ? <em className="hub-sticky-working">working</em> : null}
+        {ready ? <em className="hub-sticky-ready">{t('hub.ready')}</em>
+          : note.status === 'working' ? <em className="hub-sticky-working">{t('hub.working')}</em> : null}
       </span>
     </button>
   );
 }
 
 function BoardCard({ board }: { board: BoardSummary }) {
+  const t = useT();
   const concept = board.area
     ? { projects: 'project', key_elements: 'key-element', topics: 'topic', goals: 'goal', habits: 'habit' }[board.area]
     : null;
@@ -424,7 +435,9 @@ function BoardCard({ board }: { board: BoardSummary }) {
       href={hrefFor({ name: 'board', slug: board.slug })}
     >
       <span className="hub-board-name">{board.name}</span>
-      <span className="hub-board-meta">{board.noteCount} {board.noteCount === 1 ? 'card' : 'cards'}</span>
+      <span className="hub-board-meta">
+        {plural(t, board.noteCount, 'hub.countCardOne', 'hub.countCardOther')}
+      </span>
     </a>
   );
 }

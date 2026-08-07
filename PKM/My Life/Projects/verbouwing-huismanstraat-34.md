@@ -117,7 +117,7 @@ Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing
 
 ### Prioriteiten komende periode (vastgelegd 05-08-2026)
 
-Sander en Marieke gaan zaterdag 08-08 op vakantie (Betteld, week 33-34). Donderdag 06-08 en vrijdag 07-08 zijn er 2 marktplaats-mannetjes beschikbaar. Klustijd gaat exclusief naar vier projecten, in deze volgorde:
+Sander en Marieke gaan zaterdag 08-08 op vakantie ([De Betteld, Zelhem](https://www.betteldzelhem.nl/), week 33-34) voor de "battles" (darts). Donderdag 06-08 en vrijdag 07-08 zijn er 2 marktplaats-mannetjes beschikbaar. Klustijd gaat exclusief naar vier projecten, in deze volgorde:
 
 1. **Cliëntenkamer**
 2. **Gezamenlijke keuken** (woonkeuken)
@@ -1218,3 +1218,15 @@ Subsidie zelf aanvragen via rvo.nl na installatie — meldcode KA28310
 - Lambrissering cliëntenkamer schuren
 - Lambrissering cliëntenkamer plamuren
 - Lambrissering cliëntenkamer gronden
+
+### Vandaag (2026-08-07) — automatisch verwerkte audio-opname
+
+**Samenvatting:** Sander geeft een statusupdate over de verbouwing van de privékeuken. Er moeten nog steenpukkeltjes worden verwijderd, plafond worden geschilderd (ongeveer 3 pomodoro's), de vloer worden geëgaliseerd en daarna elektra en nieuwe keuken worden geïnstalleerd.
+
+**Actiepunten:**
+- Steenpukkeltjes in privékeuken weghakken
+- Plafond in hoek schilderen (oude gele kleur): schoonmaken, scheuren, gronden (3 pomodoro's)
+- Met Marike afstemmen over vloeregaliseringsafspraak
+- Elektra monteren na het stukken
+- Nieuwe keuken installeren (al besteld)
+- Nieuwe lamp ophangen

@@ -8,6 +8,7 @@
 // module stays pure and the announcements always reflect current state.
 
 import type { Announcements, UniqueIdentifier } from '@dnd-kit/core';
+import { translateNow } from './i18n';
 
 // Context the announcer needs to turn ids into prose. Provided by PlannerView.
 export interface AnnounceContext {
@@ -26,24 +27,30 @@ export interface AnnounceContext {
 export function buildAnnouncements(ctx: AnnounceContext): Announcements {
   return {
     onDragStart({ active }) {
-      return `Picked up ${ctx.titleOf(active.id)}. Use the arrow keys to move it, space to drop, escape to cancel.`;
+      return translateNow('planner.annPickedUp', { title: ctx.titleOf(active.id) });
     },
     onDragOver({ active, over }) {
-      if (!over) return `${ctx.titleOf(active.id)} is not over a lane.`;
+      if (!over) return translateNow('planner.annNotOverLane', { title: ctx.titleOf(active.id) });
       if (ctx.isUnscheduleTarget(active.id, over.id)) {
-        return `${ctx.titleOf(active.id)} over the sidebar — drop to unschedule.`;
+        return translateNow('planner.annOverSidebar', { title: ctx.titleOf(active.id) });
       }
-      return `${ctx.titleOf(active.id)} ${ctx.positionPhrase(active.id, over.id)}.`;
+      return translateNow('planner.annOver', {
+        title: ctx.titleOf(active.id),
+        phrase: ctx.positionPhrase(active.id, over.id),
+      });
     },
     onDragEnd({ active, over }) {
-      if (!over) return `${ctx.titleOf(active.id)} was returned to its place.`;
+      if (!over) return translateNow('planner.annReturned', { title: ctx.titleOf(active.id) });
       if (ctx.isUnscheduleTarget(active.id, over.id)) {
-        return `Unscheduled ${ctx.titleOf(active.id)}.`;
+        return translateNow('planner.annUnscheduled', { title: ctx.titleOf(active.id) });
       }
-      return `Dropped ${ctx.titleOf(active.id)} ${ctx.positionPhrase(active.id, over.id)}.`;
+      return translateNow('planner.annDropped', {
+        title: ctx.titleOf(active.id),
+        phrase: ctx.positionPhrase(active.id, over.id),
+      });
     },
     onDragCancel({ active }) {
-      return `Cancelled. ${ctx.titleOf(active.id)} was returned to its place.`;
+      return translateNow('planner.annCancelled', { title: ctx.titleOf(active.id) });
     },
   };
 }

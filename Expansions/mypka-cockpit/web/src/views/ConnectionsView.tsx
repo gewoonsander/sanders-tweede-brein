@@ -15,6 +15,8 @@ import {
   ArrowRight, CalendarDays, Check, CircleDashed, Copy, KeyRound, ListTodo, Mail, Plug, Sparkles, Terminal, Trash2,
 } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
+import { useT, type TranslationKey } from '../lib/i18n';
+import { useTNodes } from '../lib/i18n/rich';
 import { cockpitWrite } from '../lib/useCockpitWrite';
 import {
   clearConnectorKey, saveConnectorKey,
@@ -23,6 +25,8 @@ import {
 import './connections.css';
 
 export function ConnectionsView() {
+  const t = useT();
+  const tn = useTNodes();
   const [refresh, setRefresh] = useState(0);
   const { data, loading, error } = useFetch<ConnectorsResponse>(`/api/cockpit/connectors?r=${refresh}`);
   const reload = useCallback(() => setRefresh((n) => n + 1), []);
@@ -32,7 +36,7 @@ export function ConnectionsView() {
       <div className="list-skeleton" aria-busy="true"><div className="skeleton-block" /></div>
     );
   }
-  if (error || !data) return <p className="view-error">Connections could not load. {error || ''}</p>;
+  if (error || !data) return <p className="view-error">{t('cnx.loadError')} {error || ''}</p>;
 
   const connected = data.connectors.filter((c) => c.configured);
   const customKeys = data.customKeys ?? [];
@@ -40,13 +44,12 @@ export function ConnectionsView() {
   return (
     <div className="cnx">
       <header className="cnx-head">
-        <h1 className="cnx-title"><Plug size={22} strokeWidth={1.5} aria-hidden="true" /> Connections</h1>
+        <h1 className="cnx-title"><Plug size={22} strokeWidth={1.5} aria-hidden="true" /> {t('cnx.title')}</h1>
         <p className="cnx-sub">
-          Connect any task, project-management, or calendar tool. Keys are stored
-          once in <span className="font-mono">{data.envPath}</span> on this machine —
-          they never leave it, are never shown again, and your AI assistants only
-          ever reference them by name. Everything pulled in is <strong>read-only</strong>,
-          with a link back to the tool for editing.
+          {tn('cnx.sub', {
+            path: <span className="font-mono">{data.envPath}</span>,
+            readOnly: <strong>{t('cnx.readOnly')}</strong>,
+          })}
         </p>
       </header>
 
@@ -54,7 +57,7 @@ export function ConnectionsView() {
 
       {(connected.length > 0 || customKeys.length > 0) && (
         <section className="cnx-section">
-          <h2 className="cnx-section-title">Connected</h2>
+          <h2 className="cnx-section-title">{t('cnx.connected')}</h2>
           <div className="cnx-connected">
             {connected.map((c) => (
               <ConnectedCard key={c.id} connector={c} onChanged={reload} />
@@ -71,7 +74,7 @@ export function ConnectionsView() {
       )}
 
       <section className="cnx-section">
-        <h2 className="cnx-section-title">Connect a tool</h2>
+        <h2 className="cnx-section-title">{t('cnx.connectATool')}</h2>
         <ConnectCard connectors={data.connectors} onChanged={reload} />
       </section>
     </div>
@@ -82,18 +85,19 @@ export function ConnectionsView() {
 // Per the owner's spec: call it out when at least one CALENDAR connection or at
 // least one TASK/PM tool is missing (email shown as the third, optional lane).
 function CoverageStrip({ connectors }: { connectors: ConnectorInfo[] }) {
+  const t = useT();
   const has = (cat: ConnectorInfo['category']) =>
     connectors.some((c) => c.category === cat && c.configured);
-  const lanes = [
-    { cat: 'tasks' as const, icon: ListTodo, label: 'Task / project tool', missing: 'no task tool connected — your planner and Today panel stay empty' },
-    { cat: 'calendar' as const, icon: CalendarDays, label: 'Calendar', missing: 'no calendar connected — today\u2019s events can\u2019t show on the Hub' },
-    { cat: 'email' as const, icon: Mail, label: 'Email (starred)', missing: 'optional — pull starred emails in as plannable cards' },
+  const lanes: { cat: ConnectorInfo['category']; icon: typeof ListTodo; labelKey: TranslationKey; missingKey: TranslationKey }[] = [
+    { cat: 'tasks', icon: ListTodo, labelKey: 'cnx.laneTasks', missingKey: 'cnx.laneTasksMissing' },
+    { cat: 'calendar', icon: CalendarDays, labelKey: 'cnx.laneCalendar', missingKey: 'cnx.laneCalendarMissing' },
+    { cat: 'email', icon: Mail, labelKey: 'cnx.laneEmail', missingKey: 'cnx.laneEmailMissing' },
   ];
   const anyMissing = lanes.some((l) => !has(l.cat));
   if (!anyMissing) return null;
   return (
     <div className="cnx-coverage" role="status">
-      {lanes.map(({ cat, icon: Icon, label, missing }) => {
+      {lanes.map(({ cat, icon: Icon, labelKey, missingKey }) => {
         const okHere = has(cat);
         return (
           <div key={cat} className={`cnx-coverage-lane ${okHere ? 'is-ok' : ''}`}>
@@ -101,8 +105,8 @@ function CoverageStrip({ connectors }: { connectors: ConnectorInfo[] }) {
               ? <Check size={14} strokeWidth={2} aria-hidden="true" />
               : <CircleDashed size={14} strokeWidth={1.5} aria-hidden="true" />}
             <Icon size={14} strokeWidth={1.5} aria-hidden="true" />
-            <span className="cnx-coverage-label">{label}</span>
-            {!okHere && <span className="cnx-coverage-note">{missing}</span>}
+            <span className="cnx-coverage-label">{t(labelKey)}</span>
+            {!okHere && <span className="cnx-coverage-note">{t(missingKey)}</span>}
           </div>
         );
       })}
@@ -113,6 +117,7 @@ function CoverageStrip({ connectors }: { connectors: ConnectorInfo[] }) {
 // ---- Connected state -------------------------------------------------------------
 
 function ConnectedCard({ connector, onChanged }: { connector: ConnectorInfo; onChanged: () => void }) {
+  const t = useT();
   const Icon = connector.kind === 'calendar' ? CalendarDays : ListTodo;
   const disconnect = useCallback(async () => {
     // Removing every stored key fully disconnects the tool.
@@ -128,11 +133,16 @@ function ConnectedCard({ connector, onChanged }: { connector: ConnectorInfo; onC
       <div className="cnx-conn-text">
         <span className="cnx-conn-name">{connector.label}</span>
         <span className="cnx-conn-meta">
-          {connector.kind === 'calendar' ? 'calendar' : 'tasks'} · read-only
+          {t('cnx.metaReadOnly', { kind: t(connector.kind === 'calendar' ? 'cnx.kindCalendar' : 'cnx.kindTasks') })}
         </span>
       </div>
-      <span className="cnx-badge"><Check size={12} strokeWidth={2} aria-hidden="true" /> live</span>
-      <button type="button" className="cnx-clear" onClick={disconnect} aria-label={`Disconnect ${connector.label}`}>
+      <span className="cnx-badge"><Check size={12} strokeWidth={2} aria-hidden="true" /> {t('cnx.live')}</span>
+      <button
+        type="button"
+        className="cnx-clear"
+        onClick={disconnect}
+        aria-label={t('cnx.disconnect', { label: connector.label })}
+      >
         <Trash2 size={13} strokeWidth={1.5} aria-hidden="true" />
       </button>
     </div>
@@ -142,6 +152,8 @@ function ConnectedCard({ connector, onChanged }: { connector: ConnectorInfo; onC
 // A key stored via the universal path, no connector module yet — the visible
 // "awaiting wiring" state so a half-connected tool never disappears.
 function StoredKeyCard({ envKey, onChanged }: { envKey: string; onChanged: () => void }) {
+  const t = useT();
+  const tn = useTNodes();
   const remove = useCallback(async () => {
     const res = await clearConnectorKey(envKey);
     if (res.kind === 'ok') onChanged();
@@ -153,11 +165,18 @@ function StoredKeyCard({ envKey, onChanged }: { envKey: string; onChanged: () =>
       <div className="cnx-conn-text">
         <span className="cnx-conn-name font-mono">{envKey}</span>
         <span className="cnx-conn-meta">
-          key stored — ask your AI assistant: <em>“wire up the connector for {envKey}”</em>
+          {/* The quoted sentence is the literal prompt the user pastes to an AI
+              assistant — it stays ENGLISH in both locales on purpose. */}
+          {tn('cnx.keyStoredAsk', { quote: <em>{t('cnx.keyStoredQuote', { key: envKey })}</em> })}
         </span>
       </div>
-      <span className="cnx-badge cnx-badge--pending">awaiting connector</span>
-      <button type="button" className="cnx-clear" onClick={remove} aria-label={`Remove ${envKey}`}>
+      <span className="cnx-badge cnx-badge--pending">{t('cnx.awaitingConnector')}</span>
+      <button
+        type="button"
+        className="cnx-clear"
+        onClick={remove}
+        aria-label={t('cnx.remove', { label: envKey })}
+      >
         <Trash2 size={13} strokeWidth={1.5} aria-hidden="true" />
       </button>
     </div>
@@ -179,6 +198,7 @@ interface WireAssistantResult {
 }
 
 function WireAssistantCard() {
+  const t = useT();
   const [state, setState] = useState<'idle' | 'working' | 'launched' | 'manual' | 'disabled' | 'error'>('idle');
   const [command, setCommand] = useState('');
   const [message, setMessage] = useState('');
@@ -198,7 +218,7 @@ function WireAssistantCard() {
     } else if (res.kind === 'disabled') {
       setState('disabled');
     } else {
-      setMessage(res.kind === 'error' ? res.message : 'Could not prepare the assistant hand-off.');
+      setMessage(res.kind === 'error' ? res.message : t('cnx.wireError'));
       setState('error');
     }
   }, []);
@@ -223,29 +243,24 @@ function WireAssistantCard() {
         disabled={state === 'working'}
       >
         <Terminal size={14} strokeWidth={1.5} aria-hidden="true" />
-        {state === 'working' ? 'Preparing…' : 'Let Claude wire this up'}
+        {t(state === 'working' ? 'cnx.preparing' : 'cnx.letClaudeWire')}
       </button>
-      <p className="cnx-hint cnx-wire-hint">
-        Opens your terminal with Claude pointed at a wiring brief — stored keys are
-        referenced by name only; their values never leave this machine.
-      </p>
+      <p className="cnx-hint cnx-wire-hint">{t('cnx.wireHint')}</p>
 
       {state === 'launched' && (
-        <p className="cnx-ok" role="status">
-          Terminal opened — Claude is reading the wiring instructions.
-        </p>
+        <p className="cnx-ok" role="status">{t('cnx.terminalOpened')}</p>
       )}
       {state === 'manual' && (
         <div className="cnx-wire-manual" role="status">
-          <p className="cnx-hint">Run this in your terminal:</p>
+          <p className="cnx-hint">{t('cnx.runThis')}</p>
           <div className="cnx-wire-cmdrow">
             <code className="cnx-wire-code">{command}</code>
             <button
               type="button"
               className="cnx-wire-copy"
               onClick={copy}
-              aria-label={copied ? 'Copied' : 'Copy command'}
-              title={copied ? 'Copied' : 'Copy command'}
+              aria-label={t(copied ? 'cnx.copied' : 'cnx.copyCommand')}
+              title={t(copied ? 'cnx.copied' : 'cnx.copyCommand')}
             >
               {copied
                 ? <Check size={13} strokeWidth={2} aria-hidden="true" />
@@ -255,10 +270,7 @@ function WireAssistantCard() {
         </div>
       )}
       {state === 'disabled' && (
-        <p className="cnx-hint" role="status">
-          This cockpit is read-only right now — the assistant hand-off is paused
-          until writes are enabled.
-        </p>
+        <p className="cnx-hint" role="status">{t('cnx.wireDisabled')}</p>
       )}
       {state === 'error' && <p className="cnx-error" role="alert">{message}</p>}
     </div>
@@ -268,6 +280,8 @@ function WireAssistantCard() {
 // ---- The one generic connect flow ---------------------------------------------------
 
 function ConnectCard({ connectors, onChanged }: { connectors: ConnectorInfo[]; onChanged: () => void }) {
+  const t = useT();
+  const tn = useTNodes();
   const [tool, setTool] = useState('');
   const [values, setValues] = useState<Record<string, string>>({});
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
@@ -292,7 +306,7 @@ function ConnectCard({ connectors, onChanged }: { connectors: ConnectorInfo[]; o
   const fields: { key: string; label: string; secret: boolean }[] = match
     ? match.keys.map((k) => ({ key: k.key, label: k.label, secret: k.secret }))
     : derivedKey
-      ? [{ key: derivedKey, label: 'API key / token / URL', secret: true }]
+      ? [{ key: derivedKey, label: t('cnx.genericFieldLabel'), secret: true }]
       : [];
 
   const ready = fields.length > 0 && fields.every((f) => (values[f.key] ?? '').trim());
@@ -305,8 +319,8 @@ function ConnectCard({ connectors, onChanged }: { connectors: ConnectorInfo[]; o
       if (res.kind !== 'ok') {
         setState('error');
         setMessage(res.kind === 'disabled'
-          ? 'Writes are disabled on this cockpit.'
-          : res.kind === 'error' ? res.message : 'Could not save the key.');
+          ? t('cnx.writesDisabled')
+          : res.kind === 'error' ? res.message : t('cnx.saveKeyError'));
         return;
       }
     }
@@ -320,7 +334,7 @@ function ConnectCard({ connectors, onChanged }: { connectors: ConnectorInfo[]; o
   return (
     <div className="cnx-card">
       <label className="cnx-keylabel" htmlFor="cnx-tool">
-        Which tool?
+        {t('cnx.whichTool')}
       </label>
       <div className="cnx-toolrow">
         <input
@@ -329,7 +343,7 @@ function ConnectCard({ connectors, onChanged }: { connectors: ConnectorInfo[]; o
           type="text"
           autoComplete="off"
           list="cnx-known-tools"
-          placeholder="Todoist, ClickUp, Google Calendar, Linear, Asana, Notion, Jira…"
+          placeholder={t('cnx.toolPlaceholder')}
           value={tool}
           onChange={(e) => { setTool(e.target.value); setState('idle'); }}
         />
@@ -341,16 +355,17 @@ function ConnectCard({ connectors, onChanged }: { connectors: ConnectorInfo[]; o
       {match && (
         <p className="cnx-hint cnx-hint--ready">
           <Sparkles size={13} strokeWidth={1.5} aria-hidden="true" />
-          Built-in connector — paste the {match.keys.length === 1 ? 'key' : 'keys'} and it goes live immediately. {match.help}
+          {/* match.help comes from the server connector registry — English-only for now. */}
+          {t(match.keys.length === 1 ? 'cnx.builtInOne' : 'cnx.builtInOther', { help: match.help })}
         </p>
       )}
       {!match && derivedKey && (
         <p className="cnx-hint">
-          No built-in connector for “{tool.trim()}” — no problem. Your key is
-          stored as <span className="font-mono">{derivedKey}</span>; afterwards ask
-          your AI assistant: <em>“add a {tool.trim()} connector to my cockpit — the
-          key is stored as {derivedKey}.”</em> It wires the tool up by reference
-          and never sees the key itself.
+          {tn('cnx.noBuiltIn', {
+            key: <span className="font-mono">{derivedKey}</span>,
+            // Literal assistant prompt — English in both locales by design.
+            quote: <em>{t('cnx.noBuiltInQuote', { tool: tool.trim(), key: derivedKey })}</em>,
+          }, { tool: tool.trim() })}
         </p>
       )}
 
@@ -365,7 +380,7 @@ function ConnectCard({ connectors, onChanged }: { connectors: ConnectorInfo[]; o
             className="cnx-input"
             type={f.secret ? 'password' : 'text'}
             autoComplete="off"
-            placeholder={f.secret ? 'Paste — stored locally, never shown again' : 'Value'}
+            placeholder={t(f.secret ? 'cnx.secretPlaceholder' : 'cnx.valuePlaceholder')}
             value={values[f.key] ?? ''}
             onChange={(e) => setValues((v) => ({ ...v, [f.key]: e.target.value }))}
             onKeyDown={(e) => { if (e.key === 'Enter') save(); }}
@@ -375,7 +390,7 @@ function ConnectCard({ connectors, onChanged }: { connectors: ConnectorInfo[]; o
 
       {fields.length > 0 && (
         <button type="button" className="cnx-save cnx-save--wide" onClick={save} disabled={!ready || state === 'saving'}>
-          {state === 'saving' ? 'Saving…' : match ? 'Connect' : 'Store key'}
+          {state === 'saving' ? t('common.saving') : t(match ? 'cnx.connect' : 'cnx.storeKey')}
           <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
         </button>
       )}
@@ -383,8 +398,8 @@ function ConnectCard({ connectors, onChanged }: { connectors: ConnectorInfo[]; o
       {state === 'saved' && (
         <p className="cnx-ok" role="status">
           {savedAs && /_API_KEY|_TOKEN|_URL/.test(savedAs)
-            ? <>Key stored as <span className="font-mono">{savedAs}</span> — now ask your AI assistant to wire the connector.</>
-            : <>{savedAs} connected. Tasks and events appear on the Hub and in Actions &amp; Planning.</>}
+            ? tn('cnx.keyStoredAs', { key: <span className="font-mono">{savedAs}</span> })
+            : t('cnx.connectedNotice', { label: savedAs })}
         </p>
       )}
       {state === 'error' && <p className="cnx-error" role="alert">{message}</p>}

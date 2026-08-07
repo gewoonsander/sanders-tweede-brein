@@ -15,6 +15,8 @@ import { useFetch } from '../../lib/useCockpit';
 import { navigate, hrefFor, fileRouteSrc } from '../../lib/router';
 import { ModuleEmptyState } from '../../components/ui';
 import type { RandomQuote, RandomQuoteResponse } from '../../lib/cockpitExtras';
+import { useT } from '../../lib/i18n';
+import { useTNodes } from '../../lib/i18n/rich';
 
 // A quote's PKM/Quotes/<slug>.md → the FileView route. The /api/cockpit/file jail
 // is PKM/-relative, so strip a leading "PKM/" from the root-relative file_path.
@@ -25,18 +27,21 @@ function fileRouteForQuote(q: RandomQuote): string | null {
 }
 
 function QuoteCardHeader() {
+  const t = useT();
   return (
     <header className="hub-section-head">
       <h2 className="hub-section-title">
         <QuoteIcon size={15} strokeWidth={1.5} aria-hidden="true" />
-        Random quote
+        {t('quote.title')}
       </h2>
-      <p className="hub-section-hint">A line from your Quotes library</p>
+      <p className="hub-section-hint">{t('quote.hint')}</p>
     </header>
   );
 }
 
 export function RandomQuoteCard() {
+  const t = useT();
+  const tn = useTNodes();
   const { data } = useFetch<RandomQuoteResponse>('/api/cockpit/quotes/random');
   // Still loading (or a settled error) — render nothing; the Hub stays calm and
   // the section appears once data settles (mirrors OpenInvoicesCard posture).
@@ -47,12 +52,14 @@ export function RandomQuoteCard() {
     return (
       <section className="hub-section">
         <QuoteCardHeader />
-        <ModuleEmptyState title="No quotes library yet" icon={QuoteIcon}>
-          Your mirror has no <span className="font-mono">quotes</span> table. Run the SQLite
-          upgrade with <span className="font-mono">--with-quotes</span> (see{' '}
-          <span className="font-mono">sqlite-extension/DATA-CONTRACT.md</span> §8), then add{' '}
-          <span className="font-mono">doc_type: quote</span> notes under{' '}
-          <span className="font-mono">PKM/Quotes/</span> and regenerate.
+        <ModuleEmptyState title={t('quote.noLibraryTitle')} icon={QuoteIcon}>
+          {tn('quote.noLibraryBody', {
+            table: <span className="font-mono">quotes</span>,
+            flag: <span className="font-mono">--with-quotes</span>,
+            doc: <span className="font-mono">sqlite-extension/DATA-CONTRACT.md</span>,
+            docType: <span className="font-mono">doc_type: quote</span>,
+            folder: <span className="font-mono">PKM/Quotes/</span>,
+          })}
         </ModuleEmptyState>
       </section>
     );
@@ -63,9 +70,11 @@ export function RandomQuoteCard() {
     return (
       <section className="hub-section">
         <QuoteCardHeader />
-        <ModuleEmptyState title="Your Quotes library is empty" icon={QuoteIcon}>
-          Add a quote as a <span className="font-mono">doc_type: quote</span> note under{' '}
-          <span className="font-mono">PKM/Quotes/</span> and regenerate the mirror to see it here.
+        <ModuleEmptyState title={t('quote.emptyTitle')} icon={QuoteIcon}>
+          {tn('quote.emptyBody', {
+            docType: <span className="font-mono">doc_type: quote</span>,
+            folder: <span className="font-mono">PKM/Quotes/</span>,
+          })}
         </ModuleEmptyState>
       </section>
     );

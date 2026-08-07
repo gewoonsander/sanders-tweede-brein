@@ -16,3 +16,5 @@
 - [ADC-verslag: standaard links](project_adc_verslag_template_links.md) — inschrijflink per toernooi + seizoenstand-link altijd toevoegen
 - [Dubbele tweede-brein map op Mac mini](project_dubbele_tweede_brein_map.md) — echte map is ~/Documents/sanders-tweede-brein, niet de "Mac mini van Sander"-duplicaat (2026-07-07: memory- en Team-bestanden samengevoegd, rest van duplicaat kan na bevestiging weg)
 - [Bureaublad altijd leeg](feedback_bureaublad_leeg.md) — nooit snelkoppelingen/bestanden op het Bureaublad zetten, gebruik Finder-zijbalk/Dock i.p.v.
+- [Bash-pipes blokkeren onbemande routines](feedback_bash_pipes_onbemande_routines.md) — geplande/scheduled routines mogen geen Bash-commando's met `|`/`&&`/`;` gebruiken voor triviale checks; Write maakt mappen zelf aan
+- [ADC-verslag: geen quote-placeholder](feedback_adc_verslag_geen_quote.md) — nooit een quote-van-de-winnaar element opnemen, Sander verwijdert het altijd zelf en er is nooit een quote

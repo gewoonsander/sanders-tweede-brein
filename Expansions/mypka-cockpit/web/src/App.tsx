@@ -15,6 +15,7 @@ import { HubView } from './views/HubView';
 import { JournalView } from './views/JournalView';
 import { RosterView } from './views/RosterView';
 import { SessionLogView } from './views/SessionLogView';
+import { TeamAnalyticsView } from './views/TeamAnalyticsView';
 import { TeamKnowledgeListView } from './views/TeamKnowledgeListView';
 import { ConnectionsView } from './views/ConnectionsView';
 import { SettingsView } from './views/SettingsView';
@@ -47,7 +48,6 @@ const OuterWorldView = lazy(() =>
 );
 
 interface NavResponse { types: NavType[] }
-interface FolderCountsResponse { inbox: number; deliverables: number }
 
 function useSidebarOpen() {
   // Default open on desktop, closed on mobile; remember the user's choice.
@@ -70,7 +70,6 @@ export default function App() {
   // this keeps it tracking. (The Settings switch reads/writes the same hook.)
   useTheme();
   const { data: nav } = useFetch<NavResponse>('/api/cockpit/nav');
-  const { data: folderCounts } = useFetch<FolderCountsResponse>('/api/cockpit/folder-counts');
   const [sidebarOpen, toggleSidebar, closeSidebar] = useSidebarOpen();
   const navTypes = nav?.types ?? [];
 
@@ -111,6 +110,7 @@ export default function App() {
   const teamFull =
     route.name === 'roster' ||
     route.name === 'session-log' ||
+    route.name === 'team-analytics' ||
     route.name === 'workstreams' ||
     route.name === 'sops' ||
     route.name === 'guidelines';
@@ -124,7 +124,6 @@ export default function App() {
         onToggle={toggleSidebar}
         onNavigate={onNavigate}
         onOpenSearch={() => setSearchOpen(true)}
-        folderCounts={folderCounts ?? undefined}
       />
 
       {searchOpen && <CommandPalette onClose={() => setSearchOpen(false)} />}
@@ -157,6 +156,7 @@ function ContentRouter({ route }: { route: ReturnType<typeof useRoute> }) {
     case 'journal': return <JournalView />;
     case 'roster': return <RosterView />;
     case 'session-log': return <SessionLogView />;
+    case 'team-analytics': return <TeamAnalyticsView />;
     case 'workstreams': return <TeamKnowledgeListView family="workstreams" />;
     case 'sops': return <TeamKnowledgeListView family="sops" />;
     case 'guidelines': return <TeamKnowledgeListView family="guidelines" />;

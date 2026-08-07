@@ -18,6 +18,7 @@ import { spawn } from 'node:child_process';
 import { DB_PATH, REPO_ROOT } from './db.js';
 import {
   getNavCounts, listByType, resolveNote, getNote, listAgents, searchNotes, globalSearch,
+  teamAnalytics
 } from './cockpit.js';
 import { getNeighborhood } from './graph.js';
 import {
@@ -35,7 +36,6 @@ import {
   createJournalEntry, listRawManualEntries, resolveJournalEntryPath,
 } from './journalEntries.js';
 import { describeRegistry, taskConnectors, labelForSource } from './connectors/registry.js';
-import { makeJorttCustomersConnector } from './connectors/jorttCustomers.js';
 import { setEnvKey, clearEnvKey, getAgenda, listStoredKeyNames } from './connectorAdmin.js';
 import { registerPlannerRoutes } from './plannerRoutes.js';
 import { registerWellnessRoutes } from './wellness.js';
@@ -263,19 +263,6 @@ app.get('/api/health', (req, res) => {
 // Sidebar nav counts: SELECT type, COUNT(*) FROM v_notes GROUP BY type.
 app.get('/api/cockpit/nav', safe(() => ({ types: getNavCounts() })));
 
-// Inbox + Deliverables file counts for sidebar badges.
-app.get('/api/cockpit/folder-counts', safe(() => {
-  const INBOX_DIR = path.resolve(REPO_ROOT, 'Team Inbox');
-  const DELIV_DIR = path.resolve(REPO_ROOT, 'Deliverables');
-  const countFiles = (dir) => {
-    try {
-      return fs.readdirSync(dir, { withFileTypes: true })
-        .filter((e) => e.isFile() && !e.name.startsWith('.') && e.name.toLowerCase() !== 'readme.md').length;
-    } catch { return 0; }
-  };
-  return { inbox: countFiles(INBOX_DIR), deliverables: countFiles(DELIV_DIR) };
-}));
-
 // Browse one entity type (paginated list of {slug,title,subtitle,date}).
 app.get('/api/cockpit/type/:type', safe((req) =>
   listByType(req.params.type, {
@@ -323,6 +310,10 @@ app.get('/api/cockpit/graph/neighborhood/:type/:slug', safe((req) => {
 // Team roster — read-only list of the active specialists (slug, "Name - Role",
 // bio, avatar_path, owner). The client renders avatars via /api/cockpit/avatar.
 app.get('/api/cockpit/agents', safe(() => listAgents()));
+
+// Team analytics — specialist session load across a selectable range (read-only).
+app.get('/api/cockpit/analytics/team', safe((req) =>
+  teamAnalytics({ from: req.query.from, to: req.query.to })));
 
 // ---- Read-only file containment ----------------------------------------------
 // path.relative() is the containment check (NOT a string prefix — a sibling dir
@@ -1131,16 +1122,6 @@ registerFileTreeRoutes(app, { safe, sessionOrLoopback, localWriteGuard });
 registerDocumentsRoutes(app, { safe });
 registerJournalFeed(app, { safe });
 registerInvoicesRoutes(app, { safe });
-
-// ---- Jortt klanten ----------------------------------------------------------
-// GET /api/cockpit/jortt/customers
-//   Haalt alle Jortt-klanten op via jorttCustomers.js. Calm degrade: retourneert
-//   altijd een JSON-object, ook bij credential-miss of netwerk-fout. Read-only.
-app.get('/api/cockpit/jortt/customers', safeAsync(async () => {
-  const connector = makeJorttCustomersConnector();
-  return connector.fetchCustomers();
-}));
-
 // Serendipity Hub modules: random quote + On This Day (both read-only over
 // mypka.db, both degrade to an honest empty state when their backing data is
 // absent — see serendipityApi.js).
@@ -1285,7 +1266,7 @@ const APP_CSP = [
   "connect-src 'self'",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
-  "img-src 'self' data: https://m.media-amazon.com",
+  "img-src 'self' data:",
   "media-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",

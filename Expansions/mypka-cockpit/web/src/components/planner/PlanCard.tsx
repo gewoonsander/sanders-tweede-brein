@@ -16,6 +16,7 @@ import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { CheckCircle2, Circle, Star } from 'lucide-react';
 import type { CardKind, GlyphSource, PlanCardStatus } from '../../lib/plannerTypes';
 import { SourceMark, sourceLabelFor } from './SourceMark';
+import { useT } from '../../lib/i18n';
 
 export interface PlanCardProps {
   kind: CardKind;
@@ -97,6 +98,7 @@ export const PlanCard = forwardRef<HTMLElement, PlanCardProps>(function PlanCard
   { kind, title, meta, glyphSource, dataSource, badge, onOpenDetail, dragging, dragHandle, dragActivator, style, className = '', faded, status, isHighlight, onToggleHighlight, onToggleComplete, completedLocal, sourceLabel },
   ref,
 ) {
+  const t = useT();
   const source = dataSource ?? railSource(kind);
   const openable = !!onOpenDetail;
   // Iris 20 §7: SOURCE-done (the source closed it upstream) is sticky + read-only — the
@@ -105,7 +107,10 @@ export const PlanCard = forwardRef<HTMLElement, PlanCardProps>(function PlanCard
   // strikethrough + mute) keys off the combined flag.
   const sourceDone = status === 'done';
   const isDone = sourceDone || !!completedLocal;
-  const ariaLabel = `${kind === 'meeting' ? 'Meeting' : 'Task'}: ${title}${meta ? `, ${meta}` : ''}`;
+  const kindWord = t(kind === 'meeting' ? 'planner.cardMeeting' : 'planner.cardTask');
+  const ariaLabel = meta
+    ? t('planner.cardAriaMeta', { kind: kindWord, title, meta })
+    : t('planner.cardAria', { kind: kindWord, title });
   // Only the card body is a pointer-drag activator (cursor:grab) when there's an
   // activator AND a keyboard grip — i.e. for draggable task cards. Meeting anchors
   // and the static overlay clone get neither, so they don't claim a grab cursor.
@@ -168,8 +173,8 @@ export const PlanCard = forwardRef<HTMLElement, PlanCardProps>(function PlanCard
           onClick={(e) => { e.stopPropagation(); onToggleHighlight(); }}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') e.stopPropagation(); }}
           aria-pressed={!!isHighlight}
-          aria-label={isHighlight ? 'Remove highlight' : 'Mark as highlight of the day'}
-          title={isHighlight ? 'Remove highlight' : 'Mark as highlight'}
+          aria-label={t(isHighlight ? 'planner.removeHighlight' : 'planner.markHighlightAria')}
+          title={t(isHighlight ? 'planner.removeHighlight' : 'planner.markHighlight')}
         >
           <Star size={14} strokeWidth={1.75} fill={isHighlight ? 'currentColor' : 'none'} aria-hidden="true" />
         </button>
@@ -213,17 +218,13 @@ export const PlanCard = forwardRef<HTMLElement, PlanCardProps>(function PlanCard
             aria-disabled={sourceDone || undefined}
             aria-label={
               sourceDone
-                ? `Completed at ${sourceLabel ?? 'source'} — reopen it there`
-                : isDone
-                  ? 'Mark as not complete'
-                  : 'Mark as complete'
+                ? t('planner.completedAtAria', { source: sourceLabel ?? t('planner.sourceFallback') })
+                : t(isDone ? 'planner.markNotComplete' : 'planner.markComplete')
             }
             title={
               sourceDone
-                ? `Completed at ${sourceLabel ?? 'source'}. Reopen it at ${sourceLabel ?? 'the source'}.`
-                : isDone
-                  ? 'Mark as not complete'
-                  : 'Mark as complete'
+                ? t('planner.completedAtTitle', { source: sourceLabel ?? t('planner.sourceFallback') })
+                : t(isDone ? 'planner.markNotComplete' : 'planner.markComplete')
             }
           >
             {isDone
@@ -254,9 +255,9 @@ export const PlanCard = forwardRef<HTMLElement, PlanCardProps>(function PlanCard
               onOpenDetail?.();
             }
           }}
-          className={`planner-card-title truncate-fade block min-w-0 flex-1 text-left transition-colors hover:text-brass focus-visible:text-brass ${isDone ? 'line-through' : ''}`}
+          className={`planner-card-title truncate-fade block min-w-0 flex-1 text-left transition-colors hover:text-marker-text focus-visible:text-marker-text ${isDone ? 'line-through' : ''}`}
           title={title}
-          aria-label={`Open details for ${title}`}
+          aria-label={t('planner.openDetails', { title })}
         >
           {title}
         </button>

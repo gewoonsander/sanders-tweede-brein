@@ -7,17 +7,18 @@
 // contract reproduced, not the package).
 import { useEffect, useId, useRef, useState } from 'react';
 import {
-  NotebookPen, Sparkles, Users, Hash, FolderKanban,
+  NotebookPen, Users, Hash, FolderKanban,
   KeyRound, Repeat2, Target, Building2, FileText, Package, PanelLeftClose,
   UsersRound, LayoutDashboard, StickyNote, Plug, SlidersHorizontal, Search,
-  ScrollText, ListChecks, BookText, ChevronRight,
+  ScrollText, ListChecks, BookText, ChevronRight, BarChart3
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { NavType, EntityType } from '../lib/cockpitTypes';
 import { type Route, hrefFor } from '../lib/router';
+import { InklineMark } from './InklineMark';
 import { modulesForSection, type ModuleNavSection } from '../lib/moduleRegistry';
 import { QuickTerminalButton } from './QuickTerminalButton';
-import { S } from '../lib/strings';
+import { useT, type TranslationKey } from '../lib/i18n';
 
 const TYPE_ICON: Record<EntityType, LucideIcon> = {
   journal: NotebookPen,
@@ -39,19 +40,15 @@ interface SidebarProps {
   onToggle: () => void;
   onNavigate: () => void; // close the mobile drawer after a click
   onOpenSearch: () => void; // open the ⌘K command palette
-  folderCounts?: { inbox: number; deliverables: number };
 }
 
 // Mac shows ⌘K; everyone else shows Ctrl+K. navigator.platform is deprecated but
 // still the most reliable client-side OS hint for this cosmetic shortcut badge.
 const IS_MAC = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform);
 
-// Set to false to hide Fleeting Notes from the sidebar (route stays active).
-const SHOW_FLEETING_NOTES = false;
-
 // The five routes the "My AI Team" fly-out leads to. The trigger row stays lit
 // while any of them is the active route.
-const TEAM_ROUTES = ['roster', 'session-log', 'workstreams', 'sops', 'guidelines'] as const;
+const TEAM_ROUTES = ['roster', 'session-log', 'team-analytics', 'workstreams', 'sops', 'guidelines'] as const;
 function isTeamRoute(route: Route): boolean {
   return (TEAM_ROUTES as readonly string[]).includes(route.name);
 }
@@ -72,12 +69,15 @@ function NavRow({
 }: {
   icon: LucideIcon; label: string; count?: number; href: string; active: boolean; onClick: () => void;
 }) {
+  const t = useT();
   return (
     <li className="menu-item">
       <a href={href} onClick={onClick} data-active={active} className="menu-button" aria-current={active ? 'page' : undefined}>
         <Icon size={18} strokeWidth={1.5} aria-hidden="true" className="menu-icon" />
         <span className="menu-label">{label}</span>
-        {count != null && <span className="menu-badge" aria-label={`${count} entries`}>{count}</span>}
+        {count != null && (
+          <span className="menu-badge" aria-label={t('sidebar.entriesBadge', { count })}>{count}</span>
+        )}
       </a>
     </li>
   );
@@ -87,42 +87,38 @@ function NavRow({
 // section. A module without its pack (gated off / not installed) contributes
 // nothing — the section simply doesn't show its row.
 function ModuleRows({
-  section, route, onNavigate, folderCounts,
+  section, route, onNavigate,
 }: {
   section: ModuleNavSection; route: Route; onNavigate: () => void;
-  folderCounts?: { inbox: number; deliverables: number };
 }) {
   return (
     <>
-      {modulesForSection(section).map((m) => {
-        const count =
-          m.slug === 'inbox' ? folderCounts?.inbox :
-          m.slug === 'deliverables' ? folderCounts?.deliverables :
-          undefined;
-        return (
-          <NavRow
-            key={m.slug}
-            icon={m.navIcon}
-            label={m.navLabel}
-            count={count != null && count > 0 ? count : undefined}
-            href={hrefFor({ name: 'module', slug: m.slug })}
-            active={isActive(route, { name: 'module', slug: m.slug })}
-            onClick={onNavigate}
-          />
-        );
-      })}
+      {modulesForSection(section).filter((m) => !m.hideFromNav).map((m) => (
+        <NavRow
+          key={m.slug}
+          icon={m.navIcon}
+          label={m.navLabel}
+          href={hrefFor({ name: 'module', slug: m.slug })}
+          active={isActive(route, { name: 'module', slug: m.slug })}
+          onClick={onNavigate}
+        />
+      ))}
     </>
   );
 }
 
 // The five fly-out destinations under "My AI Team", in display order. Each is a
 // core Route the App's ContentRouter renders as its own full page.
-const TEAM_FLYOUT_ITEMS: ReadonlyArray<{ route: Route; label: string; icon: LucideIcon }> = [
-  { route: { name: 'roster' }, label: S.team.flyout.roster, icon: UsersRound },
-  { route: { name: 'session-log' }, label: S.team.flyout.sessionLog, icon: ScrollText },
-  { route: { name: 'workstreams' }, label: S.team.flyout.workstreams, icon: Repeat2 },
-  { route: { name: 'sops' }, label: S.team.flyout.sops, icon: ListChecks },
-  { route: { name: 'guidelines' }, label: S.team.flyout.guidelines, icon: BookText },
+// The label is a TRANSLATION KEY, not a string: this list is module-level (built
+// once at import time) while the locale can change at runtime, so the key is
+// resolved with `t()` inside the render instead of baked in here.
+const TEAM_FLYOUT_ITEMS: ReadonlyArray<{ route: Route; labelKey: TranslationKey; icon: LucideIcon }> = [
+  { route: { name: 'roster' }, labelKey: 'team.flyoutRoster', icon: UsersRound },
+  { route: { name: 'session-log' }, labelKey: 'team.flyoutSessionLog', icon: ScrollText },
+  { route: { name: 'team-analytics' }, labelKey: 'team.flyoutAnalytics', icon: BarChart3 },
+  { route: { name: 'workstreams' }, labelKey: 'team.flyoutWorkstreams', icon: Repeat2 },
+  { route: { name: 'sops' }, labelKey: 'team.flyoutSops', icon: ListChecks },
+  { route: { name: 'guidelines' }, labelKey: 'team.flyoutGuidelines', icon: BookText },
 ];
 
 // "My AI Team" — a fly-out trigger. Clicking the row opens a submenu (a fly-out
@@ -132,6 +128,7 @@ const TEAM_FLYOUT_ITEMS: ReadonlyArray<{ route: Route; label: string; icon: Luci
 // Escape closes + returns focus, outside-click + route-change close, Up/Down/
 // Home/End arrow navigation within the menu, and first-item autofocus on open.
 function TeamFlyout({ route, onNavigate }: { route: Route; onNavigate: () => void }) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLLIElement | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -214,7 +211,7 @@ function TeamFlyout({ route, onNavigate }: { route: Route; onNavigate: () => voi
         onKeyDown={onTriggerKeyDown}
       >
         <UsersRound size={18} strokeWidth={1.5} aria-hidden="true" className="menu-icon" />
-        <span className="menu-label">{S.team.menuLabel}</span>
+        <span className="menu-label">{t('team.menuLabel')}</span>
         <ChevronRight
           size={15}
           strokeWidth={1.5}
@@ -228,7 +225,7 @@ function TeamFlyout({ route, onNavigate }: { route: Route; onNavigate: () => voi
           id={menuId}
           className="team-flyout-menu"
           role="menu"
-          aria-label={S.team.menuAria}
+          aria-label={t('team.menuAria')}
         >
           {TEAM_FLYOUT_ITEMS.map((item, i) => (
             <a
@@ -244,7 +241,7 @@ function TeamFlyout({ route, onNavigate }: { route: Route; onNavigate: () => voi
               onKeyDown={(e) => onItemKeyDown(e, i)}
             >
               <item.icon size={16} strokeWidth={1.5} aria-hidden="true" className="team-flyout-item-icon" />
-              <span className="team-flyout-item-label">{item.label}</span>
+              <span className="team-flyout-item-label">{t(item.labelKey)}</span>
             </a>
           ))}
         </div>
@@ -253,7 +250,8 @@ function TeamFlyout({ route, onNavigate }: { route: Route; onNavigate: () => voi
   );
 }
 
-export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSearch, folderCounts }: SidebarProps) {
+export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSearch }: SidebarProps) {
+  const t = useT();
   // The Library group hosts drop-in library modules (recipes, films, …); it
   // disappears entirely while no module is attached to it.
   const libraryModules = modulesForSection('library');
@@ -270,14 +268,14 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
         onClick={onToggle}
         aria-hidden="true"
       />
-      <nav className={`cockpit-sidebar ${open ? 'is-open' : ''}`} aria-label="Cockpit navigation">
+      <nav className={`cockpit-sidebar ${open ? 'is-open' : ''}`} aria-label={t('sidebar.navAria')}>
         <div className="sidebar-header">
           <span className="sidebar-brand-mark" aria-hidden="true">
-            <Sparkles size={18} strokeWidth={1.5} />
+            <InklineMark size={26} />
           </span>
           <div className="sidebar-brand-text">
-            <span className="sidebar-brand-title">Tweede Brein Cockpit</span>
-            <span className="sidebar-brand-sub">Sanders Tweede Brein</span>
+            <span className="sidebar-brand-title">myPKA Cockpit</span>
+            <span className="sidebar-brand-sub">{t('sidebar.brandSub')}</span>
           </div>
           {/* Collapse affordance lives IN the sidebar header (moved out of the top
               content bar). Collapses the rail on desktop; closes the drawer on mobile. */}
@@ -285,8 +283,8 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
             type="button"
             className="sidebar-collapse"
             onClick={onToggle}
-            aria-label="Collapse navigation"
-            title="Collapse sidebar"
+            aria-label={t('sidebar.collapseAria')}
+            title={t('sidebar.collapseTitle')}
           >
             <PanelLeftClose size={18} strokeWidth={1.5} aria-hidden="true" />
           </button>
@@ -300,11 +298,11 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
             type="button"
             className="sidebar-search-trigger"
             onClick={() => { onOpenSearch(); onNavigate(); }}
-            aria-label="Search your knowledge base"
+            aria-label={t('sidebar.searchAria')}
             aria-keyshortcuts={IS_MAC ? 'Meta+K' : 'Control+K'}
           >
             <Search size={16} strokeWidth={1.5} aria-hidden="true" className="sidebar-search-icon" />
-            <span className="sidebar-search-placeholder">Search…</span>
+            <span className="sidebar-search-placeholder">{t('sidebar.searchPlaceholder')}</span>
             <kbd className="sidebar-search-kbd" aria-hidden="true">{IS_MAC ? '⌘K' : 'Ctrl K'}</kbd>
           </button>
         </div>
@@ -316,35 +314,33 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
           {topModules.length > 0 && (
             <div className="sidebar-group">
               <ul className="menu">
-                <ModuleRows section="top" route={route} onNavigate={onNavigate} folderCounts={folderCounts} />
+                <ModuleRows section="top" route={route} onNavigate={onNavigate} />
               </ul>
             </div>
           )}
 
           <div className="sidebar-group">
-            <span className="sidebar-group-label">Overview</span>
+            <span className="sidebar-group-label">{t('sidebar.groupOverview')}</span>
             <ul className="menu">
               <NavRow
-                icon={LayoutDashboard} label="Hub" href={hrefFor({ name: 'hub' })}
+                icon={LayoutDashboard} label={t('nav.hub')} href={hrefFor({ name: 'hub' })}
                 active={isActive(route, { name: 'hub' })} onClick={onNavigate}
               />
               <NavRow
-                icon={NotebookPen} label="Journal" href={hrefFor({ name: 'journal' })}
+                icon={NotebookPen} label={t('nav.journal')} href={hrefFor({ name: 'journal' })}
                 active={isActive(route, { name: 'journal' })} onClick={onNavigate}
               />
-              {SHOW_FLEETING_NOTES && (
-                <NavRow
-                  icon={StickyNote} label="Fleeting Notes" href={hrefFor({ name: 'notes' })}
-                  active={isActive(route, { name: 'notes' })} onClick={onNavigate}
-                />
-              )}
+              <NavRow
+                icon={StickyNote} label={t('nav.fleetingNotes')} href={hrefFor({ name: 'notes' })}
+                active={isActive(route, { name: 'notes' })} onClick={onNavigate}
+              />
               {/* Drop-in extension modules attached to the Overview group. */}
               <ModuleRows section="overview" route={route} onNavigate={onNavigate} />
             </ul>
           </div>
 
           <div className="sidebar-group">
-            <span className="sidebar-group-label">Knowledge</span>
+            <span className="sidebar-group-label">{t('sidebar.groupKnowledge')}</span>
             <ul className="menu">
               {navTypes
                 .filter((t) => t.type !== 'journal' && t.type !== 'deliverables') // journal has its own dated view above
@@ -365,7 +361,7 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
 
           {libraryModules.length > 0 && (
             <div className="sidebar-group">
-              <span className="sidebar-group-label">{S.sidebar.groupLibrary}</span>
+              <span className="sidebar-group-label">{t('sidebar.groupLibrary')}</span>
               <ul className="menu">
                 <ModuleRows section="library" route={route} onNavigate={onNavigate} />
               </ul>
@@ -385,7 +381,7 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
               <QuickTerminalButton onAfterOpen={onNavigate} />
             </li>
             <NavRow
-              icon={Plug} label="Connections" href={hrefFor({ name: 'connections' })}
+              icon={Plug} label={t('nav.connections')} href={hrefFor({ name: 'connections' })}
               active={isActive(route, { name: 'connections' })} onClick={onNavigate}
             />
             {/* "My AI Team" — a fly-out trigger (not a plain link). Opens a submenu
@@ -393,7 +389,7 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
                 SOPs / Guidelines). */}
             <TeamFlyout route={route} onNavigate={onNavigate} />
             <NavRow
-              icon={SlidersHorizontal} label="Settings" href={hrefFor({ name: 'settings' })}
+              icon={SlidersHorizontal} label={t('nav.settings')} href={hrefFor({ name: 'settings' })}
               active={isActive(route, { name: 'settings' })} onClick={onNavigate}
             />
           </ul>
@@ -401,7 +397,7 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
 
         <div className="sidebar-footer">
           <p className="sidebar-footer-note">
-            Live from <span className="font-mono">mypka.db</span>. Read-only. Markdown is canonical.
+            {t('sidebar.footerLive')} <span className="font-mono">mypka.db</span>. {t('sidebar.footerTail')}
           </p>
         </div>
       </nav>

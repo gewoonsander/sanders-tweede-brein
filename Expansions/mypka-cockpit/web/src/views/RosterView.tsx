@@ -32,7 +32,7 @@ import {
   Info, Share2, Sparkles,
 } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
-import { S } from '../lib/strings';
+import { useT, intlLocale } from '../lib/i18n';
 import { navigate } from '../lib/router';
 import { PageHeader } from '../components/PageHeader';
 import { WikiMarkdown } from '../components/WikiMarkdown';
@@ -146,7 +146,9 @@ function dayLabel(date: string | null): string {
   if (!date) return '';
   const head = date.slice(0, 10);
   try {
-    return new Date(`${head}T12:00:00`).toLocaleDateString('en-GB', {
+    // intlLocale() follows the UI language: en -> en-GB, nl -> nl-NL. Callers
+    // re-render on a locale switch (they all consume useT()), so this stays live.
+    return new Date(`${head}T12:00:00`).toLocaleDateString(intlLocale(), {
       weekday: 'short', day: 'numeric', month: 'short', year: 'numeric',
     });
   } catch {
@@ -198,6 +200,7 @@ function Avatar({
 // button → opens the rich member detail (the large view). Its own scroll region.
 // ===========================================================================
 function RosterRow({ agent, onOpen }: { agent: Agent; onOpen: (a: Agent) => void }) {
+  const t = useT();
   const { name, role } = splitName(agent.name);
   return (
     <li className="roster-row-li">
@@ -205,7 +208,7 @@ function RosterRow({ agent, onOpen }: { agent: Agent; onOpen: (a: Agent) => void
         type="button"
         className="roster-row"
         onClick={() => onOpen(agent)}
-        aria-label={`Open ${name}${role ? `, ${role}` : ''}`}
+        aria-label={role ? t('roster.openMemberWithRole', { name, role }) : t('roster.openMember', { name })}
       >
         <Avatar name={agent.name} avatarPath={agent.avatar_path} size="row" />
         <span className="roster-row-body">
@@ -227,28 +230,31 @@ function RosterRow({ agent, onOpen }: { agent: Agent; onOpen: (a: Agent) => void
 
 // Metadata panel — reuses NoteView's .side-panel / .meta-list CSS verbatim.
 function AgentMetaPanel({ agent }: { agent: AgentDetail }) {
+  const t = useT();
   const { role } = splitName(agent.name);
-  const rows: Array<[string, string]> = [];
-  if (role) rows.push(['role', role]);
-  if (agent.agentStatus) rows.push(['status', agent.agentStatus]);
-  if (agent.owner) rows.push(['owner', agent.owner]);
+  // [key, translated label, value] — the label is chrome (translated), the value
+  // is data from the contract's frontmatter (never translated).
+  const rows: Array<[string, string, string]> = [];
+  if (role) rows.push(['role', t('common.role'), role]);
+  if (agent.agentStatus) rows.push(['status', t('common.status'), agent.agentStatus]);
+  if (agent.owner) rows.push(['owner', t('common.owner'), agent.owner]);
   // Surface a couple of high-signal contract-frontmatter fields when present
   // (version + compatibility), without dumping the whole YAML.
   const fm = agent.frontmatter;
   const version = typeof fm.agent_version === 'string' ? fm.agent_version : null;
   const compat = typeof fm.agent_compatibility === 'string' ? fm.agent_compatibility : null;
-  if (version) rows.push(['version', version]);
-  if (compat) rows.push(['compatibility', compat]);
-  rows.push(['slug', agent.slug]);
+  if (version) rows.push(['version', t('common.version'), version]);
+  if (compat) rows.push(['compatibility', t('common.compatibility'), compat]);
+  rows.push(['slug', t('common.slug'), agent.slug]);
   return (
     <section className="side-panel">
       <h2 className="side-panel-title">
-        <Info size={15} strokeWidth={1.5} aria-hidden="true" /> Metadata
+        <Info size={15} strokeWidth={1.5} aria-hidden="true" /> {t('common.metadata')}
       </h2>
       <dl className="meta-list">
-        {rows.map(([k, v]) => (
+        {rows.map(([k, label, v]) => (
           <div key={k} className="meta-row">
-            <dt>{k}</dt>
+            <dt>{label}</dt>
             <dd>{v}</dd>
           </div>
         ))}
@@ -264,6 +270,7 @@ function AgentMetaPanel({ agent }: { agent: AgentDetail }) {
 // (the same honest fallback the canvas uses for those nodes). The chip never
 // produces a dead link.
 function ConnChip({ c, dir }: { c: Connection; dir: 'out' | 'in' }) {
+  const t = useT();
   const key = `${dir}-${c.slug}-${c.linkType}`;
   const navTo = c.isAgent
     ? () => navigate({ name: 'roster' }) // sibling agents live on this page
@@ -278,10 +285,10 @@ function ConnChip({ c, dir }: { c: Connection; dir: 'out' | 'in' }) {
         key={key}
         className="team-conn-chip team-conn-chip--nav"
         onClick={navTo}
-        title={`Open ${c.label}`}
+        title={t('common.openLabel', { label: c.label })}
       >
         {c.typeLabel && <span className="team-conn-kind">{c.typeLabel}</span>}
-        {c.isAgent && !c.typeLabel && <span className="team-conn-kind">Specialist</span>}
+        {c.isAgent && !c.typeLabel && <span className="team-conn-kind">{t('roster.specialist')}</span>}
         <span className="team-conn-label">{c.label}</span>
         <ArrowUpRight size={12} strokeWidth={1.5} aria-hidden="true" />
       </button>
@@ -293,7 +300,7 @@ function ConnChip({ c, dir }: { c: Connection; dir: 'out' | 'in' }) {
     <span
       key={key}
       className="team-conn-chip"
-      title={`${c.label} — no in-cockpit view yet`}
+      title={t('roster.noCockpitView', { label: c.label })}
     >
       <span className="team-conn-label">{c.label}</span>
     </span>
@@ -319,12 +326,13 @@ function ConnChip({ c, dir }: { c: Connection; dir: 'out' | 'in' }) {
 // by AgentLargeView (it also feeds FIX 3's body-wikilink resolvability oracle) and
 // passed down here, so the detail view makes a single connections request.
 function AgentConnections({ slug, data }: { slug: string; data: ConnectionsResponse | null }) {
+  const t = useT();
   if (!data) return null;
   const { outbound, inbound } = data;
   if (outbound.length === 0 && inbound.length === 0) return null;
 
   return (
-    <section className="team-conn" aria-label="Connections">
+    <section className="team-conn" aria-label={t('roster.connectionsAria')}>
       {/* PRIMARY — the ReactFlow canvas (reuses MiniGraph; owns its own heading,
           fullscreen toggle + zoom controls). focusType='agents' routes the fetch
           to the agent-focus graph builder. */}
@@ -335,12 +343,12 @@ function AgentConnections({ slug, data }: { slug: string; data: ConnectionsRespo
       <details className="team-conn-list">
         <summary className="team-conn-list-summary">
           <Share2 size={14} strokeWidth={1.5} aria-hidden="true" />
-          Connections as a list
+          {t('roster.connectionsAsList')}
         </summary>
         <div className="team-conn-list-body">
           {outbound.length > 0 && (
             <div className="team-conn-group">
-              <p className="team-conn-grouplabel">Links to</p>
+              <p className="team-conn-grouplabel">{t('roster.linksTo')}</p>
               <div className="team-conn-chips">
                 {outbound.map((c) => <ConnChip key={`out-${c.slug}-${c.linkType}`} c={c} dir="out" />)}
               </div>
@@ -348,7 +356,7 @@ function AgentConnections({ slug, data }: { slug: string; data: ConnectionsRespo
           )}
           {inbound.length > 0 && (
             <div className="team-conn-group">
-              <p className="team-conn-grouplabel">Linked from</p>
+              <p className="team-conn-grouplabel">{t('roster.linkedFrom')}</p>
               <div className="team-conn-chips">
                 {inbound.map((c) => <ConnChip key={`in-${c.slug}-${c.linkType}`} c={c} dir="in" />)}
               </div>
@@ -364,6 +372,7 @@ function AgentConnections({ slug, data }: { slug: string; data: ConnectionsRespo
 // in place (date + title + snippet → full body via WikiMarkdown). Calm empty
 // state when the agent has no journal/ folder (or the table is absent).
 function AgentJournalFeed({ slug }: { slug: string }) {
+  const t = useT();
   const { data, loading, error } = useFetch<JournalResponse>(
     `/api/cockpit/agent/${encodeURIComponent(slug)}/journal`,
   );
@@ -372,11 +381,11 @@ function AgentJournalFeed({ slug }: { slug: string }) {
     return <div className="list-skeleton" aria-busy="true"><div className="skeleton-block" /></div>;
   }
   if (error) {
-    return <p role="alert" className="jt-foot-error">Could not load insights: {error}</p>;
+    return <p role="alert" className="jt-foot-error">{t('roster.insightsLoadError')}: {error}</p>;
   }
   // available:false (no table) and an empty feed read the same: a calm note.
   if (!data || !data.available || data.entries.length === 0) {
-    return <p className="team-journal-empty">No durable insights captured yet.</p>;
+    return <p className="team-journal-empty">{t('roster.insightsEmpty')}</p>;
   }
 
   return (
@@ -391,6 +400,7 @@ function AgentJournalFeed({ slug }: { slug: string }) {
 }
 
 function AgentJournalCard({ entry }: { entry: JournalEntry }) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const bodyId = `team-insight-${entry.slug}`;
   const date = entry.created || entry.updated;
@@ -423,8 +433,8 @@ function AgentJournalCard({ entry }: { entry: JournalEntry }) {
           aria-controls={bodyId}
         >
           {open
-            ? <><ChevronUp size={14} strokeWidth={1.5} aria-hidden="true" /> Fold</>
-            : <><ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" /> Unfold</>}
+            ? <><ChevronUp size={14} strokeWidth={1.5} aria-hidden="true" /> {t('common.fold')}</>
+            : <><ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" /> {t('common.unfold')}</>}
         </button>
       )}
     </article>
@@ -445,6 +455,7 @@ function AgentContractBody({
   body: string;
   isResolvable: (slug: string) => boolean;
 }) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const bodyId = useId();
   const preview = useMemo(() => {
@@ -452,7 +463,7 @@ function AgentContractBody({
     return lead.length > 320 ? `${lead.slice(0, 320).trimEnd()}…` : lead;
   }, [body]);
   return (
-    <section className="roster-contract" aria-label="Contract">
+    <section className="roster-contract" aria-label={t('roster.contractAria')}>
       {!open && preview && <p className="roster-contract-preview">{preview}</p>}
       <div className="collapse-rows" data-open={open} id={bodyId}>
         <div className="collapse-rows-inner">
@@ -469,8 +480,8 @@ function AgentContractBody({
         aria-controls={bodyId}
       >
         {open
-          ? <><ChevronUp size={14} strokeWidth={1.5} aria-hidden="true" /> Fold contract</>
-          : <><ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" /> Read full contract</>}
+          ? <><ChevronUp size={14} strokeWidth={1.5} aria-hidden="true" /> {t('roster.foldContract')}</>
+          : <><ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" /> {t('roster.readContract')}</>}
       </button>
     </section>
   );
@@ -478,6 +489,7 @@ function AgentContractBody({
 
 // The large member-detail view (a note page). Fetches the detail on slug change.
 function AgentLargeView({ agent, onBack }: { agent: Agent; onBack: () => void }) {
+  const t = useT();
   const { name, role } = splitName(agent.name);
   const topRef = useRef<HTMLDivElement | null>(null);
   const { data, loading, error } = useFetch<AgentResponse>(
@@ -531,12 +543,12 @@ function AgentLargeView({ agent, onBack }: { agent: Agent; onBack: () => void })
   return (
     <article ref={topRef} className="note-view roster-large animate-fade-rise">
       <button type="button" className="back-button" onClick={onBack}>
-        <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" /> Back to team
+        <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" /> {t('roster.backToTeam')}
       </button>
 
       <header className="note-header">
         <div className="note-header-row">
-          <span className="note-type-pill">{role || 'Specialist'}</span>
+          <span className="note-type-pill">{role || t('roster.specialist')}</span>
         </div>
         <div className="roster-large-titlerow">
           <Avatar name={detail.name} avatarPath={detail.avatarPath} size="detail" />
@@ -550,20 +562,20 @@ function AgentLargeView({ agent, onBack }: { agent: Agent; onBack: () => void })
           {loading && !data ? (
             <div className="list-skeleton" aria-busy="true"><div className="skeleton-block" /></div>
           ) : error ? (
-            <p role="alert" className="view-error">Could not load this member: {error}</p>
+            <p role="alert" className="view-error">{t('roster.memberLoadError')}: {error}</p>
           ) : detail.contractBody ? (
             <AgentContractBody body={detail.contractBody} isResolvable={isResolvable} />
           ) : (
-            <p className="note-empty">No contract on file for this member yet.</p>
+            <p className="note-empty">{t('roster.noContract')}</p>
           )}
 
           {/* Connections canvas — bottom of the reading column (§16). */}
           <AgentConnections slug={agent.slug} data={connData ?? null} />
 
           {/* The agent's internal journal / durable-insight feed (§16). */}
-          <section className="team-journal" aria-label="Durable insights">
+          <section className="team-journal" aria-label={t('roster.insightsAria')}>
             <h2 className="mg-title">
-              <Sparkles size={15} strokeWidth={1.5} aria-hidden="true" /> Durable insights
+              <Sparkles size={15} strokeWidth={1.5} aria-hidden="true" /> {t('roster.insightsTitle')}
             </h2>
             <AgentJournalFeed slug={agent.slug} />
           </section>
@@ -581,6 +593,7 @@ function AgentLargeView({ agent, onBack }: { agent: Agent; onBack: () => void })
 // THE PAGE.
 // ===========================================================================
 export function RosterView() {
+  const t = useT();
   const { data, loading, error } = useFetch<AgentsResponse>('/api/cockpit/agents');
   const topRef = useRef<HTMLDivElement | null>(null);
   const [large, setLarge] = useState<Agent | null>(null);
@@ -588,7 +601,7 @@ export function RosterView() {
   useEffect(() => { if (!large) topRef.current?.scrollIntoView({ block: 'start' }); }, [large]);
 
   if (loading) return <div className="list-skeleton" aria-busy="true"><div className="skeleton-block" /></div>;
-  if (error) return <div role="alert" className="view-error">{S.roster.loadError}: {error}</div>;
+  if (error) return <div role="alert" className="view-error">{t('roster.loadError')}: {error}</div>;
   if (!data) return null;
 
   const agents = data.agents;
@@ -602,15 +615,13 @@ export function RosterView() {
   if (agents.length === 0) {
     return (
       <section ref={topRef} className="roster-view animate-fade-rise">
-        <PageHeader title={S.roster.title} icon={UsersRound} />
+        <PageHeader title={t('roster.title')} icon={UsersRound} />
         <div className="library-empty">
           <span className="library-empty-mark" aria-hidden="true">
             <UsersRound size={28} strokeWidth={1.5} />
           </span>
-          <p className="library-empty-title">No team members yet</p>
-          <p className="library-empty-sub">
-            Your specialists appear here once your team is set up.
-          </p>
+          <p className="library-empty-title">{t('roster.emptyTitle')}</p>
+          <p className="library-empty-sub">{t('roster.emptySub')}</p>
         </div>
       </section>
     );
@@ -623,14 +634,18 @@ export function RosterView() {
 
   return (
     <section ref={topRef} className="roster-view team-page-view team-solo-view animate-fade-rise">
-      <PageHeader title={S.roster.title} icon={UsersRound} subtitle={S.roster.countSub(agents.length)} />
+      <PageHeader
+        title={t('roster.title')}
+        icon={UsersRound}
+        subtitle={t(agents.length === 1 ? 'roster.countOne' : 'roster.countOther', { count: agents.length })}
+      />
 
       {/* A single full-height column: the roster list scrolls inside its own
           contained region (.team-solo-scroll) so the page fills the viewport and
           the window itself never scrolls a short floating card — team.css. */}
       <section className="team-solo-col" aria-labelledby={rosterHeadingId}>
         <h2 id={rosterHeadingId} className="team-col-head">
-          <UsersRound size={16} strokeWidth={1.5} aria-hidden="true" /> {S.roster.rosterHeading}
+          <UsersRound size={16} strokeWidth={1.5} aria-hidden="true" /> {t('roster.rosterHeading')}
         </h2>
         <div className="team-solo-scroll">
           <ul className="roster-rows">

@@ -16,6 +16,7 @@ import { FileText, Link2, Maximize2, Search, X } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
 import { fileRouteSrc, navigate } from '../lib/router';
 import { PageHeader } from '../components/PageHeader';
+import { useT, intlLocale } from '../lib/i18n';
 import './documents.css';
 
 // ---- API shapes (server: server/documentsApi.js) ---------------------------
@@ -80,6 +81,7 @@ function useDebounced(value: string, ms: number): string {
 }
 
 export function DocumentsView() {
+  const t = useT();
   const [query, setQuery] = useState('');
   const debounced = useDebounced(query.trim(), 250);
   const searching = debounced.length > 0;
@@ -114,13 +116,13 @@ export function DocumentsView() {
   return (
     <section className="documents animate-fade-rise">
       <PageHeader
-        title="Documents"
+        title={t('docs.title')}
         icon={FileText}
         subtitle={
           data
-            ? `${data.total} ${data.total === 1 ? 'document' : 'documents'}${
-                searching ? ` matching “${debounced}”` : ''
-              }`
+            ? searching
+              ? t(data.total === 1 ? 'docs.countOneMatching' : 'docs.countOtherMatching', { count: data.total, query: debounced })
+              : t(data.total === 1 ? 'docs.countOne' : 'docs.countOther', { count: data.total })
             : undefined
         }
       />
@@ -130,8 +132,8 @@ export function DocumentsView() {
         <input
           type="search"
           className="doc-search-input"
-          placeholder="Search documents…"
-          aria-label="Search documents"
+          placeholder={t('docs.searchPlaceholder')}
+          aria-label={t('docs.searchAria')}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -140,7 +142,7 @@ export function DocumentsView() {
             type="button"
             className="doc-search-clear"
             onClick={() => setQuery('')}
-            aria-label="Clear search"
+            aria-label={t('docs.clearSearch')}
           >
             <X size={14} strokeWidth={1.5} aria-hidden="true" />
           </button>
@@ -148,23 +150,20 @@ export function DocumentsView() {
       </div>
 
       {searching && data?.mode === 'text' && (
-        <p className="doc-search-mode" role="note">
-          Text match over each note's title, type, body and metadata — this does
-          not read inside the PDF files and is not semantic search.
-        </p>
+        <p className="doc-search-mode" role="note">{t('docs.searchMode')}</p>
       )}
 
       {loading && (
         <div className="list-skeleton" aria-busy="true"><div className="skeleton-block" /></div>
       )}
-      {error && <p role="alert" className="view-error">Could not load documents: {error}</p>}
+      {error && <p role="alert" className="view-error">{t('docs.loadError')}: {error}</p>}
 
       {!loading && !error && (
         <div className={`docs-layout ${previewDoc ? 'docs-layout--split' : ''}`}>
           <div className="doc-grid" role="list">
             {items.length === 0 ? (
               <p className="doc-empty">
-                {searching ? 'No documents match.' : 'No documents in the mirror yet.'}
+                {t(searching ? 'docs.noMatch' : 'docs.empty')}
               </p>
             ) : (
               items.map((doc) => (
@@ -179,7 +178,7 @@ export function DocumentsView() {
           </div>
 
           {previewDoc && previewDoc.pdfPath && (
-            <aside className="doc-preview" aria-label={`Preview of ${previewDoc.title}`}>
+            <aside className="doc-preview" aria-label={t('docs.previewOf', { title: previewDoc.title })}>
               <header className="doc-preview-head">
                 <FileText size={15} strokeWidth={1.5} aria-hidden="true" />
                 <span className="doc-preview-title">{previewDoc.title}</span>
@@ -187,8 +186,8 @@ export function DocumentsView() {
                   type="button"
                   className="doc-preview-max"
                   onClick={() => navigate({ name: 'file', src: fileRouteSrc('file', previewDoc.pdfPath!) })}
-                  aria-label="Open the large reading page"
-                  title="Large"
+                  aria-label={t('docs.openLarge')}
+                  title={t('docs.large')}
                 >
                   <Maximize2 size={15} strokeWidth={1.5} aria-hidden="true" />
                 </button>
@@ -196,7 +195,7 @@ export function DocumentsView() {
                   type="button"
                   className="doc-preview-close"
                   onClick={() => setPreviewSlug(null)}
-                  aria-label="Close preview"
+                  aria-label={t('docs.closePreview')}
                 >
                   <X size={15} strokeWidth={1.5} aria-hidden="true" />
                 </button>
@@ -204,7 +203,7 @@ export function DocumentsView() {
               <iframe
                 className="doc-preview-frame"
                 src={fileUrlFor(previewDoc.pdfPath)}
-                title={`PDF: ${previewDoc.title}`}
+                title={t('docs.pdfOf', { title: previewDoc.title })}
               />
             </aside>
           )}
@@ -221,6 +220,8 @@ function DocumentCard({
   previewOpen: boolean;
   onPreview: () => void;
 }) {
+  const t = useT();
+  // Metadata KEYS come from the note's own frontmatter — user data, left as authored.
   const meta = keyMetadataRows(doc.metadata);
   return (
     <article className="doc-card" role="listitem">
@@ -250,7 +251,7 @@ function DocumentCard({
       )}
 
       {doc.connections.length > 0 && (
-        <div className="doc-connections" aria-label="Connected notes">
+        <div className="doc-connections" aria-label={t('docs.connectedNotes')}>
           <Link2 size={13} strokeWidth={1.5} aria-hidden="true" className="doc-connections-glyph" />
           {doc.connections.slice(0, 6).map((c) => (
             <button
@@ -258,7 +259,7 @@ function DocumentCard({
               type="button"
               className="doc-conn-chip"
               data-direction={c.direction}
-              title={c.direction === 'backlink' ? 'Links to this document' : 'Linked from this document'}
+              title={t(c.direction === 'backlink' ? 'docs.linksToThis' : 'docs.linkedFromThis')}
               onClick={() =>
                 c.clickable && c.type
                   ? navigate({ name: 'note', type: c.type, slug: c.slug })
@@ -282,10 +283,10 @@ function DocumentCard({
             aria-pressed={previewOpen}
             onClick={onPreview}
           >
-            {previewOpen ? 'Close preview' : 'Preview PDF'}
+            {t(previewOpen ? 'docs.closePreview' : 'docs.previewPdf')}
           </button>
         ) : (
-          <span className="doc-nofile">No file attached</span>
+          <span className="doc-nofile">{t('docs.noFile')}</span>
         )}
       </footer>
     </article>
@@ -294,7 +295,7 @@ function DocumentCard({
 
 function formatDate(d: string): string {
   try {
-    return new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    return new Date(d).toLocaleDateString(intlLocale(), { day: '2-digit', month: 'short', year: 'numeric' });
   } catch {
     return d;
   }

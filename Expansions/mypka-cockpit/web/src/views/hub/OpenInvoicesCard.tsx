@@ -13,23 +13,27 @@ import { useFetch } from '../../lib/useCockpit';
 import { navigate, hrefFor } from '../../lib/router';
 import { ModuleEmptyState } from '../../components/ui';
 import type { OpenInvoice, OpenInvoicesResponse } from '../../lib/cockpitExtras';
+import { useT, translateNow, intlLocale } from '../../lib/i18n';
+import { useTNodes } from '../../lib/i18n/rich';
 
 // "overdue by 17 days" / "due in 4 days" / "due today".
 function dueLabel(inv: OpenInvoice): string {
   const d = inv.daysUntilDue;
-  if (d == null) return inv.dueDate ? `due on ${inv.dueDate}` : 'due';
-  if (d < 0) {
-    const n = Math.abs(d);
-    return `overdue by ${n} ${n === 1 ? 'day' : 'days'}`;
+  if (d == null) {
+    return inv.dueDate ? translateNow('invoices.dueOn', { date: inv.dueDate }) : translateNow('invoices.due');
   }
-  if (d === 0) return 'due today';
-  return `due in ${d} ${d === 1 ? 'day' : 'days'}`;
+  if (d < 0) {
+    const count = Math.abs(d);
+    return translateNow(count === 1 ? 'invoices.overdueOne' : 'invoices.overdueOther', { count });
+  }
+  if (d === 0) return translateNow('invoices.dueToday');
+  return translateNow(d === 1 ? 'invoices.dueInOne' : 'invoices.dueInOther', { count: d });
 }
 
 function formatAmount(amount: number | null, currency: string): string {
   if (amount == null) return '—';
   try {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount);
+    return new Intl.NumberFormat(intlLocale(), { style: 'currency', currency }).format(amount);
   } catch {
     // Unknown currency code → bare number + raw code (never throws on the Hub).
     return `${amount.toFixed(2)} ${currency}`;
@@ -67,6 +71,8 @@ function InvoiceRow({ inv }: { inv: OpenInvoice }) {
 }
 
 export function OpenInvoicesCard() {
+  const t = useT();
+  const tn = useTNodes();
   const { data } = useFetch<OpenInvoicesResponse>('/api/cockpit/invoices/open');
   // Still loading (or a settled error) — render nothing; the Hub stays calm and the
   // section appears once data settles (mirrors the LatestDocumentsSection posture).
@@ -81,15 +87,17 @@ export function OpenInvoicesCard() {
         <header className="hub-section-head">
           <h2 className="hub-section-title">
             <ReceiptText size={15} strokeWidth={1.5} aria-hidden="true" />
-            Open Invoices
+            {t('invoices.title')}
           </h2>
-          <p className="hub-section-hint">Open invoices — overdue first</p>
+          <p className="hub-section-hint">{t('invoices.hint')}</p>
         </header>
-        <ModuleEmptyState title="Invoice tracking isn’t set up yet" icon={ReceiptText}>
-          Your mirror has no <span className="font-mono">v_open_invoices</span> view, so there’s no
-          invoice data to surface. Run the SQLite upgrade to populate it (see{' '}
-          <span className="font-mono">sqlite-extension/DATA-CONTRACT.md</span>), then tag a document
-          note with an amount and due date.
+        {/* The view name and the doc path are CODE — they stay verbatim in both
+            languages and ride the sentence as markup slots. */}
+        <ModuleEmptyState title={t('invoices.notSetUpTitle')} icon={ReceiptText}>
+          {tn('invoices.notSetUpBody', {
+            view: <span className="font-mono">v_open_invoices</span>,
+            doc: <span className="font-mono">sqlite-extension/DATA-CONTRACT.md</span>,
+          })}
         </ModuleEmptyState>
       </section>
     );
@@ -104,21 +112,21 @@ export function OpenInvoicesCard() {
       <header className="hub-section-head">
         <h2 className="hub-section-title">
           <ReceiptText size={15} strokeWidth={1.5} aria-hidden="true" />
-          Open Invoices
+          {t('invoices.title')}
         </h2>
-        <p className="hub-section-hint">Open invoices — overdue first</p>
+        <p className="hub-section-hint">{t('invoices.hint')}</p>
         <button
           type="button"
           className="hub-section-action"
           onClick={() => navigate({ name: 'type', type: 'documents' })}
         >
-          All documents
+          {t('hub.allDocuments')}
           <ArrowRight size={13} strokeWidth={1.5} aria-hidden="true" />
         </button>
       </header>
 
       {data.items.length === 0 ? (
-        <p className="hub-empty">No open invoices — all paid.</p>
+        <p className="hub-empty">{t('invoices.empty')}</p>
       ) : (
         <div className="hub-invoices" role="list">
           {overdue.map((inv) => <InvoiceRow key={inv.slug} inv={inv} />)}

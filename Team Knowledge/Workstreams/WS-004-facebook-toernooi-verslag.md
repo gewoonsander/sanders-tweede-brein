@@ -34,8 +34,7 @@ Larry vraagt Sander vóór uitvoering:
 
 1. **Toernooi-URL** — de Dart Atlas pagina van het specifieke toernooi (bv. `https://www.dartsatlas.com/tournaments/[ID]`). Larry kan deze ook zelf opzoeken via [[SOP-010-adc-inschrijvingen-opvragen]] als het seizoen bekend is.
 2. **Foto van de winnaar** — altijd handmatig aanleveren (Dart Atlas bevat geen foto's).
-3. **Eventuele quote van de winnaar** — optioneel maar welkom.
-4. **Facebook-groep URL** — voor de link naar de regiogroep (eenmalig instellen in [[adc]]).
+3. **Facebook-groep URL** — voor de link naar de regiogroep (eenmalig instellen in [[adc]]).
 
 ## Fase 1 — Mack: Dart Atlas data ophalen
 
@@ -174,7 +173,6 @@ Penn schrijft het bericht op basis van alle data uit Fase 1 plus de handmatige i
 
 ### Optionele elementen
 
-- Quote van de winnaar (indien aangeleverd door Sander)
 - Bijzondere statistieken (bv. hoogste gemiddelde, meeste breaks)
 
 ### Stijl
@@ -222,7 +220,7 @@ Sharing is caring — tag de deelnemers en deel dit bericht! 🔄
 
 Penn levert het concept-bericht aan Larry. Larry presenteert het aan Sander met:
 - Een checklist van wat automatisch is ingevuld
-- Wat ontbreekt (foto, eventuele quote)
+- Wat ontbreekt (foto)
 - De vraag om akkoord vóór publicatie
 
 Sander publiceert zelf — Larry/Penn publiceren nooit rechtstreeks op Facebook.
@@ -233,6 +231,8 @@ Zodra het concept-bericht (inclusief eventuele links naar volgende toernooien) k
 
 *(Vroeger — tot 27-07-2026 — ging dit naar `Deliverables/YYYY-MM-DD-facebook-verslag-[locatie].md`. De oudere Deliverables-bestanden blijven staan als archief; nieuwe verslagen gaan naar ADC/Verslagen.)*
 
+⚠️ **Geen Bash-controle vooraf (sinds 04-08-2026):** sla het bestand direct op met de Write-tool — controleer niet eerst via `ls`, `find` of een ander Bash-commando of `ADC/Verslagen/` bestaat. Write maakt ontbrekende mappen zelf aan. Deze routine draait dagelijks onbemand (`adc-oost-verslag-ochtend`); een pipe-commando zoals `ls ... | head` matcht geen enkele losse Bash-permissieregel en blokkeert de run op een toestemmingsprompt waar niemand is om te bevestigen. Zie [[project_adc_verslag_template_links]] voor de bredere les.
+
 ---
 
 ## Handmatige invoer (nooit automatiseerbaar)
@@ -240,7 +240,6 @@ Zodra het concept-bericht (inclusief eventuele links naar volgende toernooien) k
 | Element | Bron | Actie |
 |---|---|---|
 | Foto van winnaar | Sander / venue manager via WhatsApp | Sander levert aan |
-| Quote winnaar | Sander vraagt na afloop | Optioneel, aanleveren voor Penn |
 | Facebook-publicatie | Sander | Sander plaatst zelf |
 
 ---

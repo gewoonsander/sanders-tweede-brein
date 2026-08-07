@@ -21,9 +21,8 @@
 // of recognised display axes.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  Library as LibraryIcon, Search, ArrowLeft, ChevronRight, Info,
+  Library as LibraryIcon, Search, ArrowLeft, ChevronRight, Info, Headphones,
   ChefHat, Clapperboard, BookOpen, Wine, Dices, Gamepad2, Disc3, Map as MapIcon,
-  Headphones,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';

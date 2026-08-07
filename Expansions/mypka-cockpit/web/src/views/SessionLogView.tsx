@@ -9,26 +9,27 @@
 // token; no hardcoded colours or sizes; the `truncate` class is never used.
 import { useEffect, useId, useRef } from 'react';
 import { ScrollText } from 'lucide-react';
-import { S } from '../lib/strings';
+import { useT } from '../lib/i18n';
 import { PageHeader } from '../components/PageHeader';
 import { SessionLogFeed } from './team/SessionLogFeed';
 import './team.css';
 
 export function SessionLogView() {
+  const t = useT();
   const topRef = useRef<HTMLDivElement | null>(null);
   const headingId = useId();
   useEffect(() => { topRef.current?.scrollIntoView({ block: 'start' }); }, []);
 
   return (
     <section ref={topRef} className="roster-view team-page-view team-solo-view animate-fade-rise">
-      <PageHeader title={S.team.sessionLog.title} icon={ScrollText} subtitle={S.team.sessionLog.sub} />
+      <PageHeader title={t('team.sessionLogTitle')} icon={ScrollText} subtitle={t('team.sessionLogSub')} />
 
       {/* A single full-height column: heading + its own contained scroll region.
           .team-solo-scroll mirrors the old .team-feed-scroll (overflow-y:auto +
           overscroll-behavior:contain) but fills the page height — team.css. */}
       <section className="team-solo-col" aria-labelledby={headingId}>
         <h2 id={headingId} className="team-col-head">
-          <ScrollText size={16} strokeWidth={1.5} aria-hidden="true" /> {S.roster.feedTitle}
+          <ScrollText size={16} strokeWidth={1.5} aria-hidden="true" /> {t('roster.feedTitle')}
         </h2>
         <div className="team-solo-scroll">
           <SessionLogFeed />

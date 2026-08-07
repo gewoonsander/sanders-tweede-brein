@@ -53,12 +53,14 @@ import {
   type PlanItem,
 } from '../lib/plannerReducer';
 import {
-  mondayOf, todayInTz, weekDays, weekdayOf, weekDaysLabelFor, WEEKDAY_FULL, WEEKDAY_LABELS,
+  mondayOf, todayInTz, weekDays, weekdayOf, weekDaysLabelFor, weekdayFull, weekdayShort,
   isWorkday, addDays, currentHalf, monthDayLabel, dayRelation,
   hoursForWeekday, tzMinutesOfDay, hhmmToMinutes,
-  remainingWorkMinutes, timerState, formatRemaining,
+  remainingWorkMinutes, timerState, formatRemaining, remainingCore,
   eventPosition, EVENT_FLOOR,
 } from '../lib/plannerLogic';
+import { useT, getLocale, translateNow } from '../lib/i18n';
+import { useTNodes } from '../lib/i18n/rich';
 import { usePlannerSettings } from '../lib/usePlannerSettings';
 import { usePersistedBool, useGroupCollapsed, SIDEBAR_COLLAPSED_KEY, SIDEBAR_GROUPED_KEY, AM_COLLAPSED_KEY, FOCUS_MODE_KEY } from '../lib/useSidebarPrefs';
 import { assignPlacement, reorderPlacement, unassignPlacement, setWeeklyGoal, unsetWeeklyGoal, completePlacement, type WriteOutcome } from '../lib/plannerApi';
@@ -73,7 +75,9 @@ import { CardDetailModal, type CardDetail } from '../components/planner/CardDeta
 
 // A meeting's time chip, "10:00–11:00" in display tz, or "all day".
 function eventTimeLabel(e: NormalizedEvent, tz: string): string {
-  if (e.allDay) return 'all day';
+  // translateNow (not useT) because this is a bare helper — every component that
+  // renders its output sits under a useT() consumer, so a locale flip re-renders it.
+  if (e.allDay) return translateNow('planner.allDay');
   const fmt = (iso: string) =>
     new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date(iso));
   return `${fmt(e.start)}–${fmt(e.end)}`;
@@ -82,8 +86,8 @@ function eventTimeLabel(e: NormalizedEvent, tz: string): string {
 // A task's calm meta line: due bucket (never an alarm) — same tone as ActionsView.
 function taskMetaLabel(t: NormalizedTask): string | null {
   if (!t.due) return null;
-  if (t.dueBucket === 'overdue') return `overdue · ${t.due}`;
-  if (t.dueBucket === 'today') return 'due today';
+  if (t.dueBucket === 'overdue') return translateNow('planner.overdue', { due: t.due });
+  if (t.dueBucket === 'today') return translateNow('planner.dueToday');
   return t.due;
 }
 
@@ -104,6 +108,7 @@ const plannerCollision: CollisionDetection = (args) => {
 };
 
 export function PlannerView() {
+  const t = useT();
   const topRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => { topRef.current?.scrollIntoView({ block: 'start' }); }, []);
   // Iris 16 §8: the progress rail's height must MATCH THE BOARD CONTENT (not the viewport).
@@ -341,8 +346,8 @@ export function PlannerView() {
   // ---- announcements: speak SEMANTIC position, not raw indices --------------
   const titleOf = (id: UniqueIdentifier): string => {
     const key = String(id);
-    if (isEventKey(key)) return eventByKey.get(key)?.title ?? 'meeting';
-    return taskByKey.get(key)?.title ?? 'task';
+    if (isEventKey(key)) return eventByKey.get(key)?.title ?? t('planner.meeting');
+    return taskByKey.get(key)?.title ?? t('planner.task');
   };
 
   // ---- resolveDrop: THE single source of truth for "where will this land" ----
@@ -420,21 +425,22 @@ export function PlannerView() {
 
     return {
       lane, insertFull, position, beforeTitle, afterTitle,
-      dayName: WEEKDAY_FULL[weekday], halfWord: half === 'AM' ? 'morning' : 'afternoon',
+      dayName: weekdayFull(weekday),
+      halfWord: t(half === 'AM' ? 'planner.morning' : 'planner.afternoon'),
     };
   }
 
   // Phrase like "before Standup, 2nd in Tuesday morning" — derived from resolveDrop
   // so the spoken slot == the persisted slot.
   const positionPhrase = (activeKey: UniqueIdentifier, overId: UniqueIdentifier | null): string => {
-    if (!overId) return 'is not over a lane';
+    if (!overId) return t('planner.phraseNotOverLane');
     const r = resolveDrop(activeKey, overId);
-    if (!r) return 'is not over a lane';
-    if (!r.lane) return 'is over the sidebar to unschedule';
+    if (!r) return t('planner.phraseNotOverLane');
+    if (!r.lane) return t('planner.phraseSidebar');
     const ordinal = ordinalOf(r.insertFull + 1);
     return r.afterTitle
-      ? `before ${r.afterTitle}, ${ordinal} in ${r.dayName} ${r.halfWord}`
-      : `last in ${r.dayName} ${r.halfWord}`;
+      ? t('planner.phraseBefore', { after: r.afterTitle, ordinal, day: r.dayName, half: r.halfWord })
+      : t('planner.phraseLast', { day: r.dayName, half: r.halfWord });
   };
   // True when a drop over `overId` lands on no lane (the sidebar / unschedule
   // region) — the SAME `!r.lane` condition onDragEnd fires the DELETE on (H2), so
@@ -522,7 +528,7 @@ export function PlannerView() {
     // future/today target lane (handled below) or to the sidebar (handled above), so an
     // undone past task can always be rescheduled. Today + future lanes accept drops normally.
     if (dayRelation(r.lane.day, today) === 'past') {
-      setNotice('That day’s already past — drop into today or a future day instead.');
+      setNotice(t('planner.noticePast'));
       return;
     }
 
@@ -620,7 +626,7 @@ export function PlannerView() {
         if (findPlacement(plan, source, taskId)) {
           dispatch({ type: 'weeklyGoal', source, externalTaskId: taskId, value: wasGoal });
         }
-        setNotice('Couldn’t update that weekly goal just now — it’s back as it was. Try again.');
+        setNotice(t('planner.noticeGoal'));
       }
     })();
   }
@@ -646,7 +652,7 @@ export function PlannerView() {
         setWriteDormant(true); // keep optimistic state; the read-only hint already shows
       } else {
         dispatch({ type: 'complete', source: it.source, externalTaskId: it.externalTaskId, value: wasComplete });
-        setNotice('Couldn’t update that just now — it’s back as it was. Try again.');
+        setNotice(t('planner.noticeUpdate'));
       }
     })();
   }
@@ -697,7 +703,7 @@ export function PlannerView() {
     } else {
       // Genuine failure → revert + a calm inline notice (no alert/toast spam).
       revert();
-      setNotice('Couldn’t save that move just now. It’s back where it was — try again.');
+      setNotice(t('planner.noticeMove'));
     }
   }
 
@@ -789,7 +795,7 @@ export function PlannerView() {
         title={t.title}
         meta={taskMetaLabel(t)}
         glyphSource={t.source}
-        badge={t.priorityRank === 1 ? <StatusChip tone="attn">important</StatusChip> : undefined}
+        badge={t.priorityRank === 1 ? <StatusChip tone="attn">{translateNow('planner.important')}</StatusChip> : undefined}
         onOpenDetail={() => openDetail(taskDetail(t, labelForSource(t.source)))}
         // Iris 20 §2: a sidebar task can be promoted to a weekly goal (→ teal, moves into
         // the pinned section). An unplaced weekly goal IS NOT a highlight (it's not on a
@@ -872,10 +878,7 @@ export function PlannerView() {
         </p>
       )}
       {(writeDormant || settingsWriteDisabled) && (
-        <p className="text-caption text-fg-subtle" role="status">
-          Planning is read-only until enabled. Your layout is kept on this device and
-          will sync once the write path is turned on.
-        </p>
+        <p className="text-caption text-fg-subtle" role="status">{t('planner.readOnly')}</p>
       )}
 
       {/* Iris 13 req 3 + Iris 15 §4: the week switcher + gear live in a TOOLBAR ROW that is
@@ -891,14 +894,14 @@ export function PlannerView() {
             type="button"
             onClick={toggleAmCollapsed}
             aria-pressed={amCollapsed}
-            aria-label={amCollapsed ? 'Show the morning' : 'Collapse the morning to focus on the afternoon'}
-            title={amCollapsed ? 'Show morning' : 'Collapse morning'}
-            className="inline-flex h-[36px] items-center gap-xs rounded-panel px-sm text-meta text-fg-muted transition-colors hover:bg-surface-2 hover:text-brass focus-visible:bg-surface-2 focus-visible:text-brass"
+            aria-label={t(amCollapsed ? 'planner.showMorningAria' : 'planner.collapseMorningAria')}
+            title={t(amCollapsed ? 'planner.showMorningTitle' : 'planner.collapseMorningTitle')}
+            className="inline-flex h-[36px] items-center gap-xs rounded-panel px-sm text-meta text-fg-muted transition-colors hover:bg-surface-2 hover:text-marker-text focus-visible:bg-surface-2 focus-visible:text-marker-text"
           >
             {amCollapsed
               ? <ChevronDown size={16} strokeWidth={1.5} aria-hidden="true" />
               : <ChevronUp size={16} strokeWidth={1.5} aria-hidden="true" />}
-            <span>{amCollapsed ? 'Morning' : 'Hide morning'}</span>
+            <span>{t(amCollapsed ? 'planner.morningCap' : 'planner.hideMorning')}</span>
           </button>
         )}
         {/* Iris 20 §3: focus-mode toggle. Idle = muted Focus glyph (matches the gear);
@@ -909,8 +912,8 @@ export function PlannerView() {
           onClick={toggleFocusMode}
           data-active={focusMode ? 'true' : undefined}
           aria-pressed={focusMode}
-          aria-label={focusMode ? 'Exit focus mode (show all tasks)' : 'Focus mode: show only highlights and meetings'}
-          title={focusMode ? 'Exit focus' : 'Focus: highlights + meetings'}
+          aria-label={t(focusMode ? 'planner.exitFocusAria' : 'planner.focusAria')}
+          title={t(focusMode ? 'planner.exitFocusTitle' : 'planner.focusTitle')}
           className="planner-focus-toggle h-[36px] w-[36px]"
         >
           <Focus size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -918,8 +921,8 @@ export function PlannerView() {
         <button
           type="button"
           onClick={() => setSettingsOpen(true)}
-          aria-label="Planning settings"
-          className="inline-flex h-[36px] w-[36px] items-center justify-center rounded-panel text-fg-muted transition-colors hover:bg-surface-2 hover:text-brass focus-visible:bg-surface-2 focus-visible:text-brass"
+          aria-label={t('planner.settingsAria')}
+          className="inline-flex h-[36px] w-[36px] items-center justify-center rounded-panel text-fg-muted transition-colors hover:bg-surface-2 hover:text-marker-text focus-visible:bg-surface-2 focus-visible:text-marker-text"
         >
           <Settings size={18} strokeWidth={1.5} aria-hidden="true" />
         </button>
@@ -1081,7 +1084,7 @@ export function PlannerView() {
             placedGoals={placedGoals.map((g) => ({
               key: g.key,
               title: g.title,
-              dayAbbr: WEEKDAY_LABELS[g.weekday],
+              dayAbbr: weekdayShort(g.weekday),
               half: g.half,
             }))}
             sourceNotices={
@@ -1340,12 +1343,13 @@ function taskDetail(t: NormalizedTask, sourceLabel: string): CardDetail {
 
 // ---- week navigation --------------------------------------------------------
 function WeekNav({ weekStart, onChange }: { weekStart: string; onChange: (w: string) => void }) {
+  const t = useT();
   const isThisWeek = weekStart === mondayOf(todayInTz());
-  const label = isThisWeek ? 'This week' : weekDaysLabelFor(weekStart);
+  const label = isThisWeek ? t('planner.thisWeek') : weekDaysLabelFor(weekStart);
   return (
-    <div role="group" aria-label="Week navigation" className="inline-flex items-center gap-xs rounded-panel border border-border bg-surface-bg p-[2px]">
+    <div role="group" aria-label={t('planner.weekNavAria')} className="inline-flex items-center gap-xs rounded-panel border border-border bg-surface-bg p-[2px]">
       <button
-        type="button" aria-label="Previous week" onClick={() => onChange(addDays(weekStart, -7))}
+        type="button" aria-label={t('planner.prevWeek')} onClick={() => onChange(addDays(weekStart, -7))}
         className="inline-flex h-[30px] w-[30px] items-center justify-center rounded-card text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg focus-visible:bg-surface-2"
       >
         <ChevronLeft size={16} strokeWidth={1.5} aria-hidden="true" />
@@ -1357,7 +1361,7 @@ function WeekNav({ weekStart, onChange }: { weekStart: string; onChange: (w: str
         {label}
       </button>
       <button
-        type="button" aria-label="Next week" onClick={() => onChange(addDays(weekStart, 7))}
+        type="button" aria-label={t('planner.nextWeek')} onClick={() => onChange(addDays(weekStart, 7))}
         className="inline-flex h-[30px] w-[30px] items-center justify-center rounded-card text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg focus-visible:bg-surface-2"
       >
         <ChevronRight size={16} strokeWidth={1.5} aria-hidden="true" />
@@ -1392,6 +1396,7 @@ function PlannerDay({
   settings: PlannerSettings;
   renderLane: (half: Half) => React.ReactNode;
 }) {
+  const t = useT();
   return (
     // `display:contents` (Tailwind `contents`): the wrapper is transparent to layout, so
     // its THREE children — the day header, the AM box, the PM box — are placed by
@@ -1407,7 +1412,7 @@ function PlannerDay({
         data-today={isToday ? 'true' : undefined}
         data-temporal={temporal}
       >
-        <span className="planner-dayname">{WEEKDAY_FULL[weekday]}</span>
+        <span className="planner-dayname">{weekdayFull(weekday)}</span>
         <span className="planner-daydate">{monthDayLabel(day, tz)}</span>
       </header>
       <section
@@ -1416,7 +1421,7 @@ function PlannerDay({
         data-today={isToday ? 'true' : undefined}
         data-temporal={temporal}
         data-current-half={currentHalf === 'am' ? 'am' : undefined}
-        aria-label={`${WEEKDAY_FULL[weekday]} ${day}, morning`}
+        aria-label={t('planner.dayBoxAmAria', { dayName: weekdayFull(weekday), date: day })}
       >
         {renderLane('AM')}
         {/* Iris 16 §C: the full-width sticky countdown bar — ONLY on the active box
@@ -1431,7 +1436,7 @@ function PlannerDay({
         data-today={isToday ? 'true' : undefined}
         data-temporal={temporal}
         data-current-half={currentHalf === 'pm' ? 'pm' : undefined}
-        aria-label={`${WEEKDAY_FULL[weekday]} ${day}, afternoon`}
+        aria-label={t('planner.dayBoxPmAria', { dayName: weekdayFull(weekday), date: day })}
       >
         {renderLane('PM')}
         {currentHalf === 'pm' && (
@@ -1458,22 +1463,22 @@ function PlannerCountdownBar({
   now: Date;
   settings: PlannerSettings;
 }) {
+  const tn = useTNodes();
   const remaining = remainingWorkMinutes(half, day, now, settings);
   const state = timerState(half, day, now, settings);
-  // formatRemaining yields "Xh Ym left" (active) — split the digits from the trailing
-  // " left" so the mono digits get .planner-countdown-bar-digits per Iris's markup. For
-  // an elapsed active block ("AM done"/"PM done") show the calm done phrase whole.
+  // The digits ride their own mono span. We do NOT strip a trailing " left" off the
+  // formatted label any more: English puts the word after the digits and Dutch puts
+  // it before ("nog 2u 10m"), so the sentence is one key with a {core} SLOT and the
+  // span goes into the slot. formatRemaining uses the SAME key, so the aria-label
+  // and the visible text can never drift apart.
   const label = formatRemaining(remaining, state, half);
-  const digits = state === 'elapsed' ? null : label.replace(/\s*left$/, '');
   return (
     <div className="planner-countdown-bar" data-state={state} role="status" aria-label={label}>
-      {digits ? (
-        <>
-          <span className="planner-countdown-bar-digits">{digits}</span> left
-        </>
-      ) : (
-        label
-      )}
+      {state === 'elapsed'
+        ? label
+        : tn('planner.remaining', {
+            core: <span className="planner-countdown-bar-digits">{remainingCore(remaining)}</span>,
+          })}
     </div>
   );
 }
@@ -1608,6 +1613,7 @@ function LaneBody({
   // completion POST). Source-done cards disable the check inside PlanCard (read-only).
   onToggleComplete: (it: PlanItem) => void;
 }) {
+  const t = useT();
   // Build the render items in the UNIFIED order handed down (events + tasks interleaved
   // by position) — NOT meetings-first. Each row becomes a MeetingAnchor or a
   // SortableTaskCard; the sortId order matches `sortIds` exactly (both come from the
@@ -1629,7 +1635,7 @@ function LaneBody({
     }
     const it = row.task;
     const key = taskKey(it.source, it.externalTaskId);
-    const t = taskByKey.get(key);
+    const task = taskByKey.get(key);
     // Reconciled 'done'/'stale' cards read faded + calm (never red). Iris 20 §7: a
     // LOCALLY-completed card (status still 'live', completedLocal:true) gets the same
     // calm mute — the spec-18 done treatment now also covers local completion.
@@ -1641,17 +1647,17 @@ function LaneBody({
     // why the row is empty without an alarm. The card de-emphasises (faded) so a
     // dropped/orphaned row reads as residue, not a problem to fix right now.
     const sourceLabel = labelForSource(it.source);
-    const resolved = t?.title ?? (it.note && it.note.trim() ? it.note.trim() : null);
+    const resolved = task?.title ?? (it.note && it.note.trim() ? it.note.trim() : null);
     const unresolved = !resolved;
-    const title = resolved ?? `Task no longer in ${sourceLabel}`;
-    const meta = t
-      ? taskMetaLabel(t)
+    const title = resolved ?? t('planner.taskGone', { source: sourceLabel });
+    const meta = task
+      ? taskMetaLabel(task)
       : it.status === 'stale'
-        ? 'check source'
+        ? t('planner.checkSource')
         : it.status === 'done'
-          ? 'done'
+          ? t('planner.metaDone')
           : unresolved
-            ? 'removed at source'
+            ? t('planner.removedAtSource')
             : null;
     return {
       sortId: key,
@@ -1677,13 +1683,13 @@ function LaneBody({
           status={it.status}
           onOpenDetail={() => onOpenDetail({
             kind: 'task',
-            task: t ?? null,
+            task: task ?? null,
             lastKnownTitle: it.note && it.note.trim() ? it.note.trim() : null,
             note: it.note,
             reconStatus: it.status,
             sourceLabel,
           })}
-          moveNext={{ label: `Move ${title} to the next day`, onClick: () => onMoveNext(it) }}
+          moveNext={{ label: t('planner.moveNext', { title }), onClick: () => onMoveNext(it) }}
         />
       ),
     };
@@ -1700,7 +1706,7 @@ function LaneBody({
   const empty = tasks.length > 0
     ? null
     : calendarStatus === 'disconnected' && half === 'AM' && day
-      ? <p className="px-xs py-sm text-caption text-fg-subtle">No calendar connected.</p>
+      ? <p className="px-xs py-sm text-caption text-fg-subtle">{t('planner.noCalendar')}</p>
       : null;
 
   const isDropTarget = overLane === `lane:${weekday}:${half}`;
@@ -1730,30 +1736,40 @@ function SourceNotices({
   sources: SourceGroup[];
   calendarStatus: 'loading' | 'connected' | 'disconnected';
 }) {
+  const t = useT();
   const okLabels = sources.filter((g) => g.ok).map((g) => g.label);
   const degraded = sources.filter((g) => !g.ok);
-  const meetingsPhrase =
-    calendarStatus === 'connected' ? 'live from your calendar'
-      : calendarStatus === 'loading' ? 'syncing'
-        : 'not connected';
+  const meetings = t(
+    calendarStatus === 'connected' ? 'planner.calendarLive'
+      : calendarStatus === 'loading' ? 'planner.calendarSyncing'
+        : 'planner.calendarOffline',
+  );
   return (
     <div className="mt-auto flex flex-col gap-xs pt-md">
+      {/* g.label and g.reason come from the SERVER's /api/cockpit/sources payload —
+          connector names are proper nouns and the reason string is English-only for
+          now (see the i18n scope note); only the sentence around them is translated. */}
       {degraded.map((g) => (
         <p key={g.source} className="text-caption text-fg-subtle">
-          {g.label}: {g.reason ?? 'unavailable'} — its tasks will return when it reconnects.
+          {t('planner.sourceDegraded', { label: g.label, reason: g.reason ?? t('planner.sourceUnavailable') })}
         </p>
       ))}
       <p className="text-caption text-fg-subtle">
-        Tasks are live from {okLabels.join(' + ') || 'your sources'} ·
-        meetings {meetingsPhrase} · read-only.
-        Your plan layout is saved separately.
+        {t('planner.sourceFooter', {
+          sources: okLabels.join(' + ') || t('planner.yourSources'),
+          meetings,
+        })}
       </p>
     </div>
   );
 }
 
 // ---- tiny helpers -----------------------------------------------------------
+// English ordinals are irregular (1st/2nd/3rd/4th); Dutch is uniformly "{n}e".
+// Spoken by the drag announcer only, so a tiny locale switch beats an Intl.PluralRules
+// dependency here.
 function ordinalOf(n: number): string {
+  if (getLocale() === 'nl') return `${n}e`;
   const s = ['th', 'st', 'nd', 'rd'];
   const v = n % 100;
   return n + (s[(v - 20) % 10] ?? s[v] ?? s[0]);

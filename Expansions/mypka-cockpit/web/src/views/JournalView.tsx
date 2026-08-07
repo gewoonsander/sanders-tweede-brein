@@ -16,6 +16,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronDown, ChevronUp, NotebookPen, ArrowUpRight, Sparkles, X } from 'lucide-react';
 import { navigate } from '../lib/router';
+import { useT, intlLocale, translateNow } from '../lib/i18n';
 import { verifyThenSignalAuthExpired } from '../lib/auth';
 import type { CockpitNote } from '../lib/cockpitTypes';
 import { MoodChip, EnergyChip } from '../components/JournalChips';
@@ -89,13 +90,13 @@ function monthKey(date: string): string {
 function monthLabel(key: string): string {
   const [y, m] = key.split('-');
   return new Date(Number(y), Number(m) - 1, 1)
-    .toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+    .toLocaleDateString(intlLocale(), { month: 'long', year: 'numeric' });
 }
 
 function dayLabel(date: string): string {
   try {
     return new Date(`${date}T12:00:00`)
-      .toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+      .toLocaleDateString(intlLocale(), { weekday: 'long', day: 'numeric', month: 'long' });
   } catch {
     return date;
   }
@@ -118,9 +119,9 @@ async function fetchJson<T>(url: string): Promise<T> {
   const r = await fetch(url, { credentials: 'same-origin' });
   if (r.status === 401) {
     void verifyThenSignalAuthExpired();
-    throw new Error('Session check failed — please retry.');
+    throw new Error(translateNow('fetch.sessionCheckFailed'));
   }
-  if (!r.ok) throw new Error(`Server responded ${r.status}`);
+  if (!r.ok) throw new Error(translateNow('fetch.serverResponded', { status: r.status }));
   return r.json() as Promise<T>;
 }
 
@@ -128,6 +129,7 @@ async function fetchJson<T>(url: string): Promise<T> {
 // The view.
 // ---------------------------------------------------------------------------
 export function JournalView() {
+  const t = useT();
   const [entries, setEntries] = useState<FeedEntry[]>([]);
   // Raw (manually-added, un-mirrored) entries read off the file layer. Kept
   // separate from the mirror feed and merged at render so a freshly-saved entry
@@ -235,20 +237,20 @@ export function JournalView() {
     return <div className="list-skeleton" aria-busy="true"><div className="skeleton-block" /></div>;
   }
   if (!initialised && error) {
-    return <div role="alert" className="view-error">Could not load the journal: {error}</div>;
+    return <div role="alert" className="view-error">{t('journal.loadError')}: {error}</div>;
   }
 
   return (
     <section className="jt-view animate-fade-rise">
       <PageHeader
-        title="Journal"
+        title={t('journal.title')}
         icon={NotebookPen}
-        subtitle={`${merged.length} ${merged.length === 1 ? 'entry' : 'entries'} loaded · newest first`}
+        subtitle={t(merged.length === 1 ? 'journal.subOne' : 'journal.subOther', { count: merged.length })}
         action={<NewEntryAffordance onCreated={() => void reloadRaw()} />}
       />
 
       {merged.length === 0 ? (
-        <p className="jt-empty">No journal entries yet — your timeline begins with the first one.</p>
+        <p className="jt-empty">{t('journal.empty')}</p>
       ) : (
         <div className="jt-timeline">
           {groups.map((group) => {
@@ -296,14 +298,14 @@ export function JournalView() {
         )}
         {initialised && error && !loading && (
           <p role="alert" className="jt-foot-error">
-            Could not load older entries: {error}{' '}
+            {t('journal.olderError')}: {error}{' '}
             <button type="button" className="jt-retry" onClick={() => void loadPage(nextBefore)}>
-              Retry
+              {t('common.retry')}
             </button>
           </p>
         )}
         {!hasMore && merged.length > 0 && (
-          <p className="jt-origin">the beginning of your journal</p>
+          <p className="jt-origin">{t('journal.origin')}</p>
         )}
         <div ref={sentinelRef} className="jt-sentinel" aria-hidden="true" />
       </div>
@@ -328,6 +330,7 @@ function TimelineEntry({
   entry: FeedEntry;
   onImage: (path: string, alt: string) => void;
 }) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const [body, setBody] = useState<string | null>(null);
   const [bodyError, setBodyError] = useState<string | null>(null);
@@ -367,19 +370,15 @@ function TimelineEntry({
     const res = await integrateJournalEntry(entry.slug);
     setIntegrating(false);
     if (res.kind === 'ok') {
-      setIntegrateMsg(
-        res.data.launched
-          ? 'Opening a terminal with Penn’s integration prompt…'
-          : 'Copy the command from the terminal hand-off to integrate this entry.',
-      );
+      setIntegrateMsg(t(res.data.launched ? 'journal.integrateLaunched' : 'journal.integrateCopy'));
     } else if (res.kind === 'disabled') {
-      setIntegrateMsg('Integration is unavailable right now.');
+      setIntegrateMsg(t('journal.integrateDisabled'));
     } else if (res.kind === 'not-found') {
-      setIntegrateMsg('This entry could not be found on disk.');
+      setIntegrateMsg(t('journal.integrateNotFound'));
     } else if (res.kind === 'auth') {
-      setIntegrateMsg('Session expired — please sign in again.');
+      setIntegrateMsg(t('journal.integrateAuth'));
     } else {
-      setIntegrateMsg('Could not start the integration — please retry.');
+      setIntegrateMsg(t('journal.integrateFailed'));
     }
   };
 
@@ -398,7 +397,9 @@ function TimelineEntry({
 
         <h3 className="jt-title">
           {entry.title}
-          {isRaw && <span className="jt-raw-badge" title="Not yet integrated into your knowledge graph">raw</span>}
+          {isRaw && (
+            <span className="jt-raw-badge" title={t('journal.rawBadgeTitle')}>{t('journal.rawBadge')}</span>
+          )}
         </h3>
 
         {/* Collapsed: the excerpt. Unfolded: the full entry (WikiMarkdown). */}
@@ -406,9 +407,9 @@ function TimelineEntry({
         <div className="collapse-rows" data-open={open} id={bodyId}>
           <div className="collapse-rows-inner">
             <div className="jt-full">
-              {bodyLoading && <p className="jt-body-loading">Unfolding…</p>}
+              {bodyLoading && <p className="jt-body-loading">{t('journal.unfolding')}</p>}
               {bodyError && (
-                <p role="alert" className="jt-foot-error">Could not load the entry: {bodyError}</p>
+                <p role="alert" className="jt-foot-error">{t('journal.entryLoadError')}: {bodyError}</p>
               )}
               {body !== null && !bodyLoading && <WikiMarkdown body={body} />}
 
@@ -426,8 +427,8 @@ function TimelineEntry({
                     aria-controls={originalId}
                   >
                     {showOriginal
-                      ? <><ChevronUp size={13} strokeWidth={1.5} aria-hidden="true" /> Hide original</>
-                      : <><ChevronDown size={13} strokeWidth={1.5} aria-hidden="true" /> Unfold to show original</>}
+                      ? <><ChevronUp size={13} strokeWidth={1.5} aria-hidden="true" /> {t('journal.hideOriginal')}</>
+                      : <><ChevronDown size={13} strokeWidth={1.5} aria-hidden="true" /> {t('journal.showOriginal')}</>}
                   </button>
                   <div className="collapse-rows" data-open={showOriginal} id={originalId}>
                     <div className="collapse-rows-inner">
@@ -443,7 +444,11 @@ function TimelineEntry({
         </div>
 
         {entry.images.length > 0 && (
-          <div className="jt-thumbs" role="group" aria-label={`${entry.images.length} attached image${entry.images.length > 1 ? 's' : ''}`}>
+          <div
+            className="jt-thumbs"
+            role="group"
+            aria-label={t(entry.images.length === 1 ? 'journal.imagesAriaOne' : 'journal.imagesAriaOther', { count: entry.images.length })}
+          >
             {entry.images.map((path) => (
               <ThumbButton key={path} path={path} title={entry.title} onOpen={onImage} />
             ))}
@@ -459,15 +464,15 @@ function TimelineEntry({
             aria-controls={bodyId}
           >
             {open
-              ? <><ChevronUp size={14} strokeWidth={1.5} aria-hidden="true" /> Fold</>
-              : <><ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" /> Unfold</>}
+              ? <><ChevronUp size={14} strokeWidth={1.5} aria-hidden="true" /> {t('common.fold')}</>
+              : <><ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" /> {t('common.unfold')}</>}
           </button>
           <button
             type="button"
             className="jt-open-full"
             onClick={() => navigate({ name: 'note', type: 'journal', slug: entry.slug })}
           >
-            Open entry <ArrowUpRight size={14} strokeWidth={1.5} aria-hidden="true" />
+            {t('journal.openEntry')} <ArrowUpRight size={14} strokeWidth={1.5} aria-hidden="true" />
           </button>
           {/* Integrate — only for raw (not-yet-integrated) entries. Launches a
               terminal with Penn's prefilled integration prompt for THIS entry. */}
@@ -477,10 +482,10 @@ function TimelineEntry({
               className="jt-integrate"
               onClick={() => void onIntegrate()}
               disabled={integrating}
-              title="Weave this entry into your knowledge graph with Penn"
+              title={t('journal.integrateTitle')}
             >
               <Sparkles size={14} strokeWidth={1.5} aria-hidden="true" />
-              {integrating ? 'Launching…' : 'Integrate'}
+              {t(integrating ? 'journal.integrating' : 'journal.integrate')}
             </button>
           )}
         </div>
@@ -505,6 +510,7 @@ type ComposerPhase =
   | { kind: 'error'; message: string };
 
 function NewEntryAffordance({ onCreated }: { onCreated: () => void }) {
+  const t = useT();
   const [phase, setPhase] = useState<ComposerPhase>({ kind: 'closed' });
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -521,10 +527,10 @@ function NewEntryAffordance({ onCreated }: { onCreated: () => void }) {
   };
 
   const submit = async () => {
-    const t = title.trim();
-    if (!t) { titleRef.current?.focus(); return; }
+    const trimmed = title.trim();
+    if (!trimmed) { titleRef.current?.focus(); return; }
     setPhase({ kind: 'saving' });
-    const res = await createJournalEntry(t, body);
+    const res = await createJournalEntry(trimmed, body);
     switch (res.kind) {
       case 'ok':
         onCreated();
@@ -534,18 +540,19 @@ function NewEntryAffordance({ onCreated }: { onCreated: () => void }) {
         setPhase({ kind: 'disabled' });
         break;
       case 'too-large':
-        setPhase({ kind: 'error', message: 'That entry is too large to save.' });
+        setPhase({ kind: 'error', message: t('journal.errTooLarge') });
         break;
       case 'conflict':
-        setPhase({ kind: 'error', message: 'An entry with that title already exists today.' });
+        setPhase({ kind: 'error', message: t('journal.errConflict') });
         break;
       case 'auth':
-        setPhase({ kind: 'error', message: 'Session expired — please sign in again.' });
+        setPhase({ kind: 'error', message: t('journal.integrateAuth') });
         break;
       default:
+        // A server-supplied message passes through verbatim (English-only for now).
         setPhase({
           kind: 'error',
-          message: 'kind' in res && res.kind === 'error' ? res.message : 'Could not save the entry.',
+          message: 'kind' in res && res.kind === 'error' ? res.message : t('journal.errSave'),
         });
     }
   };
@@ -554,7 +561,7 @@ function NewEntryAffordance({ onCreated }: { onCreated: () => void }) {
     return (
       <button type="button" className="jt-new-btn" onClick={() => setPhase({ kind: 'open' })}>
         <NotebookPen size={15} strokeWidth={1.5} aria-hidden="true" />
-        New entry
+        {t('journal.newEntry')}
       </button>
     );
   }
@@ -562,14 +569,14 @@ function NewEntryAffordance({ onCreated }: { onCreated: () => void }) {
   const busy = phase.kind === 'saving';
 
   return (
-    <div className="jt-composer" role="group" aria-label="New journal entry">
+    <div className="jt-composer" role="group" aria-label={t('journal.composerAria')}>
       <div className="jt-composer-row">
         <input
           ref={titleRef}
           type="text"
           className="jt-composer-title"
-          placeholder="Title…"
-          aria-label="Entry title"
+          placeholder={t('journal.titlePlaceholder')}
+          aria-label={t('journal.titleAria')}
           value={title}
           disabled={busy}
           onChange={(e) => setTitle(e.target.value)}
@@ -580,7 +587,7 @@ function NewEntryAffordance({ onCreated }: { onCreated: () => void }) {
         <button
           type="button"
           className="jt-composer-cancel"
-          aria-label="Cancel new entry"
+          aria-label={t('journal.cancelEntry')}
           onClick={close}
           disabled={busy}
         >
@@ -589,8 +596,8 @@ function NewEntryAffordance({ onCreated }: { onCreated: () => void }) {
       </div>
       <textarea
         className="jt-composer-body"
-        placeholder="Write your entry… (markdown)"
-        aria-label="Entry body"
+        placeholder={t('journal.bodyPlaceholder')}
+        aria-label={t('journal.bodyAria')}
         rows={5}
         value={body}
         disabled={busy}
@@ -603,19 +610,19 @@ function NewEntryAffordance({ onCreated }: { onCreated: () => void }) {
       />
       <div className="jt-composer-foot">
         {phase.kind === 'disabled' && (
-          <p className="jt-composer-note" role="status">Saving is disabled right now (read-only cockpit).</p>
+          <p className="jt-composer-note" role="status">{t('journal.saveDisabled')}</p>
         )}
         {phase.kind === 'error' && (
           <p className="jt-composer-note jt-composer-note--error" role="alert">{phase.message}</p>
         )}
-        <span className="jt-composer-hint">⌘/Ctrl + Enter to save</span>
+        <span className="jt-composer-hint">{t('journal.saveHint')}</span>
         <button
           type="button"
           className="jt-composer-save"
           disabled={busy || !title.trim()}
           onClick={() => void submit()}
         >
-          {busy ? 'Saving…' : 'Save entry'}
+          {busy ? t('common.saving') : t('journal.saveEntry')}
         </button>
       </div>
     </div>
@@ -633,6 +640,7 @@ function ThumbButton({
   title: string;
   onOpen: (path: string, alt: string) => void;
 }) {
+  const t = useT();
   const [failed, setFailed] = useState(false);
   const name = path.split('/').pop() ?? path;
   if (failed) return null;
@@ -641,7 +649,7 @@ function ThumbButton({
       type="button"
       className="jt-thumb"
       onClick={() => onOpen(path, `${title} — ${name}`)}
-      aria-label={`View image ${name}`}
+      aria-label={t('journal.viewImage', { name })}
     >
       <img
         src={`/api/cockpit/media?path=${encodeURIComponent(path)}`}

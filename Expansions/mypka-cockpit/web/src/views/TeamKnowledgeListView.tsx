@@ -19,7 +19,7 @@ import { useEffect, useRef } from 'react';
 import { Repeat2, ListChecks, BookText, ArrowUpRight } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
-import { S } from '../lib/strings';
+import { useT, type TranslationKey } from '../lib/i18n';
 import { fileRouteSrc, hrefFor } from '../lib/router';
 import { PageHeader } from '../components/PageHeader';
 import './team.css';
@@ -35,6 +35,10 @@ interface TeamKnowledgeItem {
   summary: string | null;
   version: string | null;
   triggeredBy: string | null;
+  // domain is present on richer mirrors (e.g. a private regen) and absent on the
+  // sample mirror. Optional + nullable so both schemas type-check; rendered only
+  // when present (no broken chip when the column doesn't exist).
+  domain?: string | null;
   filePath: string | null;
 }
 interface TeamKnowledgeResponse {
@@ -43,37 +47,40 @@ interface TeamKnowledgeResponse {
   items: TeamKnowledgeItem[];
 }
 
+// Module-level, so the per-family copy is stored as TRANSLATION KEYS and resolved
+// with `t()` inside the component — a baked-in string would freeze at import time
+// and survive a locale switch.
 const FAMILY_META: Record<Family, {
   icon: LucideIcon;
-  title: string;
-  sub: string;
-  empty: string;
-  emptySub: string;
-  loadError: string;
+  titleKey: TranslationKey;
+  subKey: TranslationKey;
+  emptyKey: TranslationKey;
+  emptySubKey: TranslationKey;
+  loadErrorKey: TranslationKey;
 }> = {
   workstreams: {
     icon: Repeat2,
-    title: S.team.workstreams.title,
-    sub: S.team.workstreams.sub,
-    empty: S.team.workstreams.empty,
-    emptySub: S.team.workstreams.emptySub,
-    loadError: S.team.workstreams.loadError,
+    titleKey: 'team.workstreamsTitle',
+    subKey: 'team.workstreamsSub',
+    emptyKey: 'team.workstreamsEmpty',
+    emptySubKey: 'team.workstreamsEmptySub',
+    loadErrorKey: 'team.workstreamsLoadError',
   },
   sops: {
     icon: ListChecks,
-    title: S.team.sops.title,
-    sub: S.team.sops.sub,
-    empty: S.team.sops.empty,
-    emptySub: S.team.sops.emptySub,
-    loadError: S.team.sops.loadError,
+    titleKey: 'team.sopsTitle',
+    subKey: 'team.sopsSub',
+    emptyKey: 'team.sopsEmpty',
+    emptySubKey: 'team.sopsEmptySub',
+    loadErrorKey: 'team.sopsLoadError',
   },
   guidelines: {
     icon: BookText,
-    title: S.team.guidelines.title,
-    sub: S.team.guidelines.sub,
-    empty: S.team.guidelines.empty,
-    emptySub: S.team.guidelines.emptySub,
-    loadError: S.team.guidelines.loadError,
+    titleKey: 'team.guidelinesTitle',
+    subKey: 'team.guidelinesSub',
+    emptyKey: 'team.guidelinesEmpty',
+    emptySubKey: 'team.guidelinesEmptySub',
+    loadErrorKey: 'team.guidelinesLoadError',
   },
 };
 
@@ -90,16 +97,19 @@ function fileHrefFor(item: TeamKnowledgeItem): string | null {
 // from the displayed title so the badge + title don't repeat the id.
 function displayTitle(item: TeamKnowledgeItem): string {
   if (!item.docId) return item.title;
-  const re = new RegExp(`^${item.docId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*[-:–]\\s*`, 'i');
+  const re = new RegExp(`^${item.docId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*[:–-]\\s*`, 'i');
   const stripped = item.title.replace(re, '').trim();
   return stripped || item.title;
 }
 
 function MetaLine({ item }: { item: TeamKnowledgeItem }) {
+  // Values are mirror data (never translated); the class suffix keys the chip colour.
   const bits: Array<{ k: string; v: string }> = [];
   if (item.status) bits.push({ k: 'status', v: item.status });
   if (item.owner) bits.push({ k: 'owner', v: item.owner });
   if (item.version) bits.push({ k: 'version', v: item.version });
+  // domain rides as its own chip only on mirrors that carry it; empty/absent → no chip.
+  if (item.domain) bits.push({ k: 'domain', v: item.domain });
   if (bits.length === 0) return null;
   return (
     <span className="tk-row-meta">
@@ -111,6 +121,7 @@ function MetaLine({ item }: { item: TeamKnowledgeItem }) {
 }
 
 function TeamKnowledgeRow({ item }: { item: TeamKnowledgeItem }) {
+  const t = useT();
   const href = fileHrefFor(item);
   const inner = (
     <>
@@ -127,7 +138,13 @@ function TeamKnowledgeRow({ item }: { item: TeamKnowledgeItem }) {
   if (href) {
     return (
       <li className="tk-row-li">
-        <a href={href} className="tk-row tk-row--nav" aria-label={`Open ${item.docId ? `${item.docId} — ` : ''}${displayTitle(item)}`}>
+        <a
+          href={href}
+          className="tk-row tk-row--nav"
+          aria-label={t('common.openLabel', {
+            label: `${item.docId ? `${item.docId} — ` : ''}${displayTitle(item)}`,
+          })}
+        >
           {inner}
         </a>
       </li>
@@ -142,6 +159,7 @@ function TeamKnowledgeRow({ item }: { item: TeamKnowledgeItem }) {
 }
 
 export function TeamKnowledgeListView({ family }: { family: Family }) {
+  const t = useT();
   const meta = FAMILY_META[family];
   const { data, loading, error } = useFetch<TeamKnowledgeResponse>(
     `/api/cockpit/team-knowledge/${family}`,
@@ -149,13 +167,19 @@ export function TeamKnowledgeListView({ family }: { family: Family }) {
   const topRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => { topRef.current?.scrollIntoView({ block: 'start' }); }, [family]);
 
+  const sub = t(meta.subKey);
+  const count = data?.items.length ?? 0;
   const header = (
     <PageHeader
-      title={meta.title}
+      title={t(meta.titleKey)}
       icon={meta.icon}
-      subtitle={data?.available && data.items.length > 0
-        ? `${data.items.length} ${data.items.length === 1 ? 'entry' : 'entries'} · ${meta.sub}`
-        : meta.sub}
+      subtitle={data?.available && count > 0
+        ? t('team.knowledgeSubCount', {
+            count,
+            noun: t(count === 1 ? 'common.entryOne' : 'common.entryOther'),
+            sub,
+          })
+        : sub}
     />
   );
 
@@ -163,7 +187,7 @@ export function TeamKnowledgeListView({ family }: { family: Family }) {
   if (loading && !data) {
     body = <div className="list-skeleton" aria-busy="true"><div className="skeleton-block" /></div>;
   } else if (error) {
-    body = <div role="alert" className="view-error">{meta.loadError}: {error}</div>;
+    body = <div role="alert" className="view-error">{t(meta.loadErrorKey)}: {error}</div>;
   } else if (!data || !data.available || data.items.length === 0) {
     const Icon = meta.icon;
     body = (
@@ -171,8 +195,8 @@ export function TeamKnowledgeListView({ family }: { family: Family }) {
         <span className="library-empty-mark" aria-hidden="true">
           <Icon size={28} strokeWidth={1.5} />
         </span>
-        <p className="library-empty-title">{meta.empty}</p>
-        <p className="library-empty-sub">{meta.emptySub}</p>
+        <p className="library-empty-title">{t(meta.emptyKey)}</p>
+        <p className="library-empty-sub">{t(meta.emptySubKey)}</p>
       </div>
     );
   } else {

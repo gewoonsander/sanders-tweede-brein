@@ -12,29 +12,30 @@ import type { FormEvent } from 'react';
 import { Lock, LoaderCircle } from 'lucide-react';
 import { login, type LoginResult } from '../lib/auth';
 import { MIN_PIN_LENGTH } from '../lib/authConstants';
-import { S } from '../lib/strings';
+import { useT, type TFunction } from '../lib/i18n';
 
 interface Props {
   onAuthed: () => void;
 }
 
-function messageFor(result: Extract<LoginResult, { ok: false }>): string {
+function messageFor(result: Extract<LoginResult, { ok: false }>, t: TFunction): string {
   switch (result.kind) {
     case 'locked': {
-      const mins = Math.max(1, Math.ceil(result.retryAfterSeconds / 60));
-      return S.pin.errLocked(mins);
+      const minutes = Math.max(1, Math.ceil(result.retryAfterSeconds / 60));
+      return t('pin.errLocked', { minutes });
     }
     case 'no-pin':
-      return S.pin.errNoPin;
+      return t('pin.errNoPin');
     case 'network':
-      return S.pin.errNetwork;
+      return t('pin.errNetwork');
     case 'invalid':
     default:
-      return S.pin.errInvalid;
+      return t('pin.errInvalid');
   }
 }
 
 export function PinLogin({ onAuthed }: Props) {
+  const t = useT();
   const [pin, setPin] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -60,7 +61,7 @@ export function PinLogin({ onAuthed }: Props) {
     }
     setBusy(false);
     setPin('');
-    setError(messageFor(result));
+    setError(messageFor(result, t));
     if (result.kind === 'locked') setLocked(true);
     inputRef.current?.focus();
   }
@@ -71,10 +72,10 @@ export function PinLogin({ onAuthed }: Props) {
         <div className="pin-mark" aria-hidden="true">
           <Lock size={22} strokeWidth={1.5} />
         </div>
-        <h1 id="pin-title" className="pin-title">Tweede Brein Cockpit</h1>
-        <p className="pin-sub">{S.pin.subtitle}</p>
+        <h1 id="pin-title" className="pin-title">myPKA Cockpit</h1>
+        <p className="pin-sub">{t('pin.subtitle')}</p>
 
-        <label className="pin-field-label" htmlFor="pin-input">{S.pin.fieldLabel}</label>
+        <label className="pin-field-label" htmlFor="pin-input">{t('pin.fieldLabel')}</label>
         <input
           id="pin-input"
           ref={inputRef}
@@ -98,10 +99,10 @@ export function PinLogin({ onAuthed }: Props) {
           {busy ? (
             <>
               <LoaderCircle size={18} strokeWidth={2} className="pin-spin" aria-hidden="true" />
-              <span>{S.pin.checking}</span>
+              <span>{t('pin.checking')}</span>
             </>
           ) : (
-            <span>{S.pin.unlock}</span>
+            <span>{t('pin.unlock')}</span>
           )}
         </button>
 
@@ -112,7 +113,7 @@ export function PinLogin({ onAuthed }: Props) {
       </form>
 
       <p className="pin-foot">
-        {S.pin.footer}
+        {t('pin.footer')}
       </p>
     </div>
   );

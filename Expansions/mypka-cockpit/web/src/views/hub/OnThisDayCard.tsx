@@ -17,6 +17,7 @@ import { useFetch } from '../../lib/useCockpit';
 import { hrefFor } from '../../lib/router';
 import { MediaImage } from '../../components/MediaImage';
 import type { OnThisDayEntry, OnThisDayResponse } from '../../lib/cockpitExtras';
+import { useT } from '../../lib/i18n';
 
 // How many embedded images to show per entry before collapsing to "+N more".
 const MAX_IMAGES = 2;
@@ -39,6 +40,7 @@ function truncateBody(body: string): string {
 }
 
 function EntryRow({ entry }: { entry: OnThisDayEntry }) {
+  const t = useT();
   const href = hrefFor({ name: 'note', type: 'journal', slug: entry.slug });
   const images = entry.media.filter((m) => m.filePath && (m.mediaType == null || m.mediaType !== 'audio'));
   const shown = images.slice(0, MAX_IMAGES);
@@ -56,7 +58,7 @@ function EntryRow({ entry }: { entry: OnThisDayEntry }) {
           {shown.map((m, i) => (
             <MediaImage key={`${entry.slug}-${i}`} path={m.filePath as string} caption={m.caption} />
           ))}
-          {extra > 0 && <span className="hub-otd-images-more">+{extra} more</span>}
+          {extra > 0 && <span className="hub-otd-images-more">{t('otd.moreImages', { count: extra })}</span>}
         </div>
       )}
       {preview && <p className="hub-otd-entry-body">{preview}</p>}
@@ -65,6 +67,7 @@ function EntryRow({ entry }: { entry: OnThisDayEntry }) {
 }
 
 export function OnThisDayCard() {
+  const t = useT();
   const { data } = useFetch<OnThisDayResponse>('/api/cockpit/journal/on-this-day');
   // Still loading (or a settled error) — render nothing; the Hub stays calm.
   if (!data) return null;
@@ -80,13 +83,13 @@ export function OnThisDayCard() {
       <header className="hub-section-head">
         <h2 className="hub-section-title">
           <History size={15} strokeWidth={1.5} aria-hidden="true" />
-          On This Day
+          {t('otd.title')}
         </h2>
-        <p className="hub-section-hint">This calendar day in months and years past</p>
+        <p className="hub-section-hint">{t('otd.hint')}</p>
       </header>
 
       {!hasAny ? (
-        <p className="hub-empty">Nothing from this day in your history yet.</p>
+        <p className="hub-empty">{t('otd.empty')}</p>
       ) : (
         <div className="hub-otd">
           {data.buckets.map((bucket) => (

@@ -20,6 +20,7 @@ import { Inbox, CheckCircle2, Layers, PanelRightClose, PanelRightOpen, ChevronDo
 import { useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { SourceMark } from './SourceMark';
+import { useT } from '../../lib/i18n';
 
 export const SIDEBAR_DROPPABLE_ID = 'sidebar';
 
@@ -88,6 +89,7 @@ export interface PlacedGoal {
 // Plain static markup — no dnd-kit, draggable={false}, default cursor (the CSS sets it).
 // aria-label announces the scheduled state so it isn't conveyed by colour/glyph alone.
 function PlacedGoalRow({ goal }: { goal: PlacedGoal }) {
+  const t = useT();
   const badgeText = goal.half ? `${goal.dayAbbr} · ${goal.half}` : goal.dayAbbr;
   const ariaWhen = goal.half ? `${goal.dayAbbr} ${goal.half}` : goal.dayAbbr;
   return (
@@ -95,7 +97,7 @@ function PlacedGoalRow({ goal }: { goal: PlacedGoal }) {
       className="planner-goal-row"
       data-placed="true"
       draggable={false}
-      aria-label={`${goal.title} — scheduled ${ariaWhen}`}
+      aria-label={t('planner.goalScheduled', { title: goal.title, when: ariaWhen })}
     >
       <CalendarCheck
         className="planner-goal-glyph"
@@ -149,6 +151,7 @@ export function UnscheduledSidebar({
   isGroupCollapsed: (source: string) => boolean;
   onToggleGroup: (source: string) => void;
 }) {
+  const t = useT();
   const { setNodeRef } = useDroppable({ id: SIDEBAR_DROPPABLE_ID });
 
   return (
@@ -157,7 +160,7 @@ export function UnscheduledSidebar({
       className="planner-tasksidebar"
       data-collapsed={collapsed ? 'true' : undefined}
       data-drop-active={isDropTarget ? 'true' : undefined}
-      aria-label={`Unscheduled tasks, ${count} ${count === 1 ? 'task' : 'tasks'}`}
+      aria-label={t(count === 1 ? 'planner.unscheduledAriaOne' : 'planner.unscheduledAriaOther', { count })}
     >
       <div className="planner-tasksidebar-head">
         {/* Collapse / reopen chevron — leads the head; flips to the open icon when
@@ -166,16 +169,16 @@ export function UnscheduledSidebar({
           type="button"
           className="planner-tasksidebar-toggle"
           onClick={onToggleCollapsed}
-          aria-label={collapsed ? 'Expand unscheduled tasks' : 'Collapse unscheduled tasks'}
+          aria-label={t(collapsed ? 'planner.expandUnscheduled' : 'planner.collapseUnscheduled')}
           aria-expanded={!collapsed}
-          title={collapsed ? 'Expand' : 'Collapse'}
+          title={t(collapsed ? 'planner.expand' : 'planner.collapse')}
         >
           {collapsed
             ? <PanelRightOpen size={16} strokeWidth={1.5} aria-hidden="true" />
             : <PanelRightClose size={16} strokeWidth={1.5} aria-hidden="true" />}
         </button>
         <Inbox size={15} strokeWidth={1.5} aria-hidden="true" />
-        <span>Unscheduled</span>
+        <span>{t('planner.unscheduled')}</span>
         <span className="count ml-auto tabular-nums text-fg-subtle">{count}</span>
       </div>
 
@@ -205,10 +208,10 @@ export function UnscheduledSidebar({
             const total = unplaced + placed;
             if (total === 0) return null;
             return (
-              <section className="planner-pinned-goals" aria-label={`Weekly goals, ${total}`}>
+              <section className="planner-pinned-goals" aria-label={t('planner.weeklyGoalsAria', { count: total })}>
                 <div className="planner-pinned-goals-head">
                   <Star size={13} strokeWidth={1.75} fill="currentColor" aria-hidden="true" />
-                  <span>Weekly Goals</span>
+                  <span>{t('planner.weeklyGoals')}</span>
                   <span className="count ml-auto tabular-nums">{total}</span>
                 </div>
                 {/* Unscheduled pool: the existing draggable teal cards (sortable). */}
@@ -234,10 +237,10 @@ export function UnscheduledSidebar({
               data-state={grouped ? 'on' : undefined}
               onClick={onToggleGrouped}
               aria-pressed={grouped}
-              title={grouped ? 'Show as a flat list' : 'Group by source'}
+              title={t(grouped ? 'planner.showFlat' : 'planner.groupBySource')}
             >
               <Layers size={13} strokeWidth={1.5} aria-hidden="true" />
-              Group
+              {t('planner.group')}
             </button>
           )}
 
@@ -286,7 +289,7 @@ export function UnscheduledSidebar({
             // a lone pinned Weekly Goals pool above is content enough on its own.
             <div className="planner-tasksidebar-empty">
               <CheckCircle2 size={22} strokeWidth={1.25} aria-hidden="true" />
-              <p className="text-meta text-fg-muted">Everything&apos;s placed.</p>
+              <p className="text-meta text-fg-muted">{t('planner.allPlaced')}</p>
             </div>
           ) : null}
         </SortableContext>

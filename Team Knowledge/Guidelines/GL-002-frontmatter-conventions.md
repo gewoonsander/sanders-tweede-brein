@@ -324,6 +324,49 @@ Notes:
 - `doc_type: inventory` - a living reference list (owned hardware, active software/subscriptions, etc.) that gets appended to over time, as opposed to a static single-purpose document. Distinct from a My Life Key Element: an inventory is a registry of things you have, not a permanent domain of life. When something looks like it belongs in Key Elements but is really "a list of stuff" (devices, tools, accounts), it goes here instead.
 - Body section conventions: `## Summary`, `## Key terms`, `## Notes`. Inventory-type documents may use their own internal table/section structure instead (they are living lists, not single-fact records).
 
+### Weekly reports (`type: weekly-report`) - `PKM/Weekly Reports/YYYY/MM/<slug>/metadata.md`
+
+One edition van **The Week in Ink**, de wekelijkse vrijdag-recap. De map is de eenheid: `metadata.md` draagt dit schema plus een markdown-spiegel van de week, naast het gerenderde deck. Een editie wordt **samengesteld uit vastgelegde bronnen**, nooit uit het geheugen geschreven — de frontmatter is dus grotendeels een herkomst-record. Zie [[PKM/Weekly Reports/INDEX]] voor de productiescripts.
+
+```yaml
+---
+type: weekly-report                                 # required, altijd letterlijk 'weekly-report'
+report_date: 2026-07-10                             # required - ISO YYYY-MM-DD, het VRIJDAG-anker, natural key
+slug: 2026-07-10-week-in-ink-28                     # required - matcht de mapnaam
+edition: 28                                         # integer, oplopend editienummer
+week_start: 2026-07-04                              # eerste gedekte dag (inclusief)
+week_end: 2026-07-10                                # laatste gedekte dag (inclusief; gelijk aan report_date)
+iso_week: 2026-W28                                  # ISO-week van het ANKER - zie waarschuwing hieronder
+title: "It Has Two Souls"                           # de editiekop
+status: published                                   # draft | published | archived
+html_render: the-week-in-ink-2026-07-10.html        # kale bestandsnaam van het deck binnen de map
+podcast_path: ""                                    # map-relatief pad naar episode-audio, of "" indien geen
+podcast_duration: ""                                # mm:ss, of ""
+source_journal_entries: []                          # Journal-slugs waaruit de editie is samengesteld
+source_images: []                                   # PKM/Images-bestandsnamen achter eventuele renditions/
+pivotal_moments: []                                 # Journal-slugs van de kantelmomenten van de week
+search_expansion: []                                # offline-zoekvocabulaire (zie notes)
+specialists: []                                     # bijdragende specialist-slugs
+tags:
+  - weekly-report
+  - week-in-ink
+---
+```
+
+**Verplichte velden:** `type` (altijd letterlijk `weekly-report`), `report_date`, `slug`.
+
+**Notes:**
+
+- **`iso_week` beschrijft het anker, NIET de gedekte periode.** Een editie is verankerd op vrijdag maar opent de voorafgaande zaterdag, die in de vorige ISO-week kan vallen: editie 28 heet `2026-W28` maar dekt 2026-07-04, een zaterdag in ISO-week 27. Render en query altijd de expliciete `week_start`-tot-`week_end`-range. Het weeknummer alleen is dubbelzinnig voor een lezer en fout om te parsen.
+- `report_date` is het vrijdag-anker en de natural key (één editie per week). `week_end` is er gelijk aan per contract.
+- `edition` is oplopend en niet af te leiden uit de datum als de reeks ouder is dan de automatisering, dus wordt het opgeslagen.
+- `html_render` is een **kale bestandsnaam** binnen de editiemap. `podcast_path` is **map-relatief**, omdat originele media in zijn canonieke PKM-thuis leeft in plaats van in de editiemap (zie de media-regel hieronder).
+- **Media-plaatsing (SSOT).** Originele media geproduceerd voor een editie leeft in `PKM/Audio/YYYY/MM/` of `PKM/Videos/YYYY/MM/`, en terugkerende merkassets onder `Team Knowledge/Brand Assets/`. De editie verwijst ernaar via relatief pad. De enige uitzondering is een `renditions/`-map binnen de editie, met verkleinde of format-geconverteerde derivaten van `PKM/Images`-originelen, omdat browsers geen `.heic` kunnen renderen en full-resolutie originelen veel zwaarder zijn dan nodig. Renditions zijn regenereerbare derivaten, geen concurrerende bron van waarheid, en elk moet traceerbaar zijn via `source_images`.
+- `source_journal_entries`, `source_images` en `pivotal_moments` zijn de herkomstketen. Ze maken een editie reproduceerbaar en laten de mirror beantwoorden "welke week dekte deze entry".
+- `search_expansion` is het offline-zoekvocabulaire (onderwerpen, synoniemen, entiteiten, vragen die de editie beantwoordt), geschreven zodat een gewone trefwoordmatch semantisch gedraagt. Het voedt het in-page filter in de archieflade, die geen embedding-model kan bereiken vanaf een `file://`-pagina.
+- **Body-conventie:** de markdown-body is een echte prozaspiegel van de week, dag voor dag, geen beschrijving van het deck. Het is het doorzoekbare artefact; een body vol sectie-scaffolding maakt de editie onvindbaar.
+- **Indexering:** de regen loopt `PKM/Weekly Reports/**/metadata.md` door naar de `weekly_reports`-tabel, slaat elk padonderdeel over dat begint met `_` (zodat `_template/` en `_assets/` nooit als fantoom-edities landen) en elke `report_date` die geen echte `YYYY-MM-DD` is. Markdown is canoniek; de tabel is afgeleid.
+
 ## Specialist-contract frontmatter
 
 The schemas above govern PKM **entity notes**. Specialist **contracts** carry their own small set of frontmatter keys (`agent_version`, `agent_status`, `owner`, etc.). This section documents one optional contract-level field that is part of the v4 tool-agnostic core: `model`.
@@ -380,5 +423,6 @@ If the rules change, update this file. Do not duplicate the change into SOPs, Wo
 
 ### Version history
 
+- **v2.5** - Toegevoegd: entity schema **Weekly reports** (`type: weekly-report`, `PKM/Weekly Reports/YYYY/MM/<slug>/metadata.md`) voor The Week in Ink — de vrijdag-recap die de Cockpit samenstelt uit Journal/Images/Deliverables/session-logs. Overgenomen uit myPKA-scaffold v5.2.0 bij de selectieve Cockpit-integratie (04-08-2026, zie [[project_mypka_cockpit]]). Additief en backward-compatible.
 - **v2.4** - Added the **`model`** optional contract-level field (new section "Specialist-contract frontmatter"). `model` applies to specialist contracts (`Team/<Name> - <Role>/AGENTS.md`) and their `.claude/agents/<slug>.md` shims, not to PKM entity notes. Value is a portable tier alias (`reasoning` | `balanced` | `fast`); omit to inherit the session/harness default. The harness adapter resolves the alias to a concrete model (e.g. Claude Code maps `reasoning`/`balanced`/`fast` to Opus/Sonnet/Haiku in the shim); the contract stays provider-neutral. An explicit `provider/model-id` string is permitted but flagged by the agnosticism-audit as a coupling warning. OpenRouter documented as the supported BYO-key router (Anthropic-compatible endpoint via `ANTHROPIC_BASE_URL`), with alias-to-slug resolution living in the adapter. Added Lex's ToS INVARIANT: an Anthropic-resolved `model` called by our own code must use an API key / Bedrock / Vertex, never a subscription OAuth token, and never `~/.claude/.credentials.json` (co-enforced with Vex by the agnosticism-audit). Additive and backward-compatible - contracts without `model` stay valid and inherit the default.
 - **v2.3** - My Life model encoded as a first-class schema concept. Added the intro section "The My Life model - buckets, the Goal layer, and the filter test" (four buckets: Key Element = permanent, Project = bounded, Habit = cadenced, Topic = exploration; Goals as an operating layer, not a fifth bucket; a filter-test table for correct placement). **Goal** `key_element` is now REQUIRED and constrained to Key-Element slugs only (the anchor rule; rule-5 required-fields table updated to `name, key_element`); added the **carrier doctrine** (a Goal is carried by exactly one of two siblings - a Project via `linked_projects` OR a Habit via `linked_habits`, never both, never a Topic, no third shape) and `linked_topics` (context only). **Topic** gains `lifecycle` (exploring | promoted | dormant) + `promoted_to` (Key-Element slug) to encode Topic → Key Element graduation as first-class, and the prose now distinguishes graduation from the Open-Question → Project move. **Key Element** gains `promoted_from` (reverse of Topic `promoted_to`) and an `archived` status (the reverse transition - a domain leaving the life). **Habit** gains `linked_goals` (the Habit side of the carrier doctrine). **Project** schema formalized `linked_topics` and documented `linked_goals` as the Project side of the carrier doctrine. All changes additive and backward-compatible - notes without the new fields stay valid; the SQLite migration picks up new optional columns as NULL. Authored under §"Never invent ad-hoc fields" and §"How to extend" path 1. The four My Life templates (goal, topic, key-element, habit) were updated in the same change.
