@@ -74,6 +74,14 @@ _Voeg hier observaties toe over wat goed werkt voor Thomas._
 - Houdt van klussen én werken in de tuin — combineer beide op een dag als het kan
 - Bij zijn eigen dagbesteding werkt hij ook in de tuin → aanpak aansluiten helpt hem
 
+### 2026-08-06 (donderdag) — dagbesteding verslag
+
+Klussen gedaan: tuin gesproeid, kelder leeggehaald (spullen naar de container of naar de Deel gebracht), geleende gewichten van Sander opgeruimd, kratje hout bovenop de Deel naar de buitenhoutstapel gebracht, karton uit de Deel naar de geitenschuur gebracht, vlinderstruik opgebonden (puilde met zijn touwtje te ver uit).
+
+Wilde niet mee naar de Hornbach — vermoedelijk omdat hij liever bezig was met zaadjes verzamelen uit de moestuin voor volgend jaar (Sanders inschatting, niet bevestigd). Heeft zich verder vermaakt.
+
+**Open aandachtspunt:** kocht zelf zijn lunch, zoals de laatste tijd vaker. Sander wil dit gaan volgen — wat koopt hij en waarom (thuis eten niet aantrekkelijk genoeg, of gewoon zin in iets lekkers). Nog geen conclusie, alleen geconstateerd.
+
 ### 2026-07-09 — ad-hoc taken
 
 Via audio-memo (Team Inbox) drie losse taken voor vandaag aan Todoist toegevoegd (🏡 Gewoon Thuis): pastanjes opruimen in de tuin, iets opruimen bovenop De Deel, en de kamer leeghalen (met hulp van Sander). Transcriptie was op twee punten onduidelijk ("pastanjes", wat er precies bovenop De Deel ligt) — bij afronding navragen wat bedoeld was.

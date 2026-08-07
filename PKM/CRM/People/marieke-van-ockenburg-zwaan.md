@@ -23,6 +23,7 @@ Sander's vrouw. Getrouwd, drie dochters: [[sem-lizzy-van-ockenburg-zwaan]] (ouds
 
 ## Familie
 
+Moeder: [[francine-hansen]].
 Oudste broer: [[ralf-zwaan]] (eigenaar [[bouwbedrijf-zwaan]] en [[convenient-interior]]).
 
 ## Notes

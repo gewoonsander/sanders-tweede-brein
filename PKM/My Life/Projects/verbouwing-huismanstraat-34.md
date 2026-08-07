@@ -124,7 +124,34 @@ Sander en Marieke gaan zaterdag 08-08 op vakantie (Betteld, week 33-34). Donderd
 3. **Privékeuken**
 4. **Badkamer boven** (incl. WC boven)
 
-Alle overige klussen — o.a. beton uithakken achterhuis, het dierenluik in de Deel (materiaal is overigens al compleet: kalkzandstenen + metselmortel liggen er al), en de Deel-klusjes (kachel eruit, aanrecht/kastjes verplaatsen, keuken ophangen in schuur) — krijgen bewust lagere prioriteit en worden pas opgepakt zodra deze vier projecten klaar zijn.
+Alle overige klussen — o.a. beton uithakken achterhuis, het dierenluik in de Deel (materiaal is overigens al compleet: kalkzandstenen + metselmortel liggen er al), de Deel-klusjes (kachel eruit, aanrecht/kastjes verplaatsen, keuken ophangen in schuur), en de traphal (plafond isoleren + dichtmaken met gipsplaten, ruwe gipswanden glad afwerken, restant plankdelen woonkeuken als vloer leggen) — krijgen bewust lagere prioriteit en worden pas opgepakt zodra deze vier projecten klaar zijn. Geen concreet moment gepland, dus bewust geen Todoist-taken (zie [[GL-012-pkm-vs-todoist]]) — alleen hier genoteerd als backlog.
+
+**Terugkomdag 1: vrijdag 14-08-2026** — Sander en Marieke komen die dag terug voor de kippen en klussen. **Deadline cliëntenkamer:** in de tweede vakantieweek (rond 15-21 aug) komen [[francine-hansen]] (moeder van Marieke) en haar partner logeren in de cliëntenkamer — er moet dan minimaal een slaapbank staan.
+
+### Vandaag (07-08-2026) — walkthrough cliëntenkamer (voice-memo, verwerkt door Hermes)
+
+**Nog open in de cliëntenkamer:**
+- Muurplaten monteren (voorwaarde voor de wasbak)
+- Hoekstopkraantjes monteren (voorwaarde voor de wasbak)
+- UTP-kabel + aansluitdoosje afmonteren — ⏰ 2 pomodoro's
+- Wasbak ophangen + aansluiten (kan pas na muurplaten + hoekstopkraantjes)
+- Ophangbeugels installeren — kan pas na de vakantie
+- Losse vloertegel repareren — ⏰ 1 pomodoro
+- 3 stopcontacten monteren — ⏰ ~1 uur (2 pomodoro's)
+- Gaatjes vullen bij de dichtgemaakte deurkozijn-doorvoer, daarna schuren + voorstrijk
+- Muur verven + plint monteren
+
+**Terugkomdag 1 (vrijdag 14-08-2026, Sander + Marieke):**
+- Cliëntenkamer leeghalen
+- Steiger opruimen
+- Stukadoorsmateriaal weghalen
+- Fermacell-platen aan de kant zetten
+- Oude radiator afhalen, nieuwe radiator ophangen + stopcontact voor de ventilator regelen
+- **Slaapbank plaatsen** — deadline: vóór [[francine-hansen]] (moeder van Marieke) en haar partner komen logeren in de tweede vakantieweek
+
+**Na de vakantie:**
+- Plafond dichtmaken — marktplaatsmannetjes
+- Muur bij de kozijndoorvoer stucen — stucadoor
 
 ### Vandaag (05-08-2026) — walkthrough boven + beneden (audio-opnames, automatisch verwerkt)
 
