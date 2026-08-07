@@ -115,6 +115,33 @@ Sander en Marieke runnen Gewoon Thuis, een gezinshuis aan de Huismanstraat 34 in
 **Juni 2026 — Fase 0: voorbereiding + Fase 1 in uitvoering**
 Budget beschikbaar: ~€50.000. Ageeth vertrokken → ruimte is vrij. Verbouwing Fase 1 gepland voor 1 september 2026.
 
+### Prioriteiten komende periode (vastgelegd 05-08-2026)
+
+Sander en Marieke gaan zaterdag 08-08 op vakantie (Betteld, week 33-34). Donderdag 06-08 en vrijdag 07-08 zijn er 2 marktplaats-mannetjes beschikbaar. Klustijd gaat exclusief naar vier projecten, in deze volgorde:
+
+1. **Cliëntenkamer**
+2. **Gezamenlijke keuken** (woonkeuken)
+3. **Privékeuken**
+4. **Badkamer boven** (incl. WC boven)
+
+Alle overige klussen — o.a. beton uithakken achterhuis, het dierenluik in de Deel (materiaal is overigens al compleet: kalkzandstenen + metselmortel liggen er al), en de Deel-klusjes (kachel eruit, aanrecht/kastjes verplaatsen, keuken ophangen in schuur) — krijgen bewust lagere prioriteit en worden pas opgepakt zodra deze vier projecten klaar zijn.
+
+### Vandaag (05-08-2026) — walkthrough boven + beneden (audio-opnames, automatisch verwerkt)
+
+Twee voice-memo's ingesproken tijdens een ronde door het huis, automatisch getranscribeerd + samengevat door de audio-inbox-pipeline.
+
+**Boven (WC + badkamer):**
+- WC boven: betonsiree aanbrengen (12u drogen), dan **eerst schuren + afnemen (stofvrij maken), pas dáárna** 2 coatinglagen (correctie 05-08-2026), WC-pot/wasbakje/radiator installeren, houten bekleding eenwand (dakbeschotplanken), afdekraampje + lamp monteren
+- Badkamer: betonsiree, dan **eerst schuren + afnemen, pas dáárna** 2 coatinglagen (correctie 05-08-2026), wasmeubel ophangen, stopcontacten + lampen, bad + douche installeren, douchebak aanpassen voor afvoer, houten afwerking badkant (dakbeschotplanken)
+- Los: kapotte aansluitwartel douchecabine (plastic, afgebroken) nog bestellen
+
+**Beneden:**
+- Trappenhal: restvloerplanken (over van woonkeuken) in halletje leggen
+- WC-hal: plafond — gipsplaten (naden al gevuld) nog schuren + sausen
+- Cliëntenkamer: wasbak ophangen + afvoer/water aansluiten, stopcontacten/elektra, lambrisering verven, stuken, fermacellplaten plafond (let op ophangsysteem lamp/elektra erin verwerken), radiator vervangen incl. folie erachter
+- Woonkeuken: plinten aan wand, vloer schuren + aflakken/verven (Marieke beslist afwerking), radiator ophangen, stopcontact voor ventilators onder radiator, ombouw wasmachine/droger + apparaten plaatsen, kastjes schoonmaken van verfresten, 2 hanglampen (al gekocht) ophangen
+- **Privékeuken:** nieuwe stopcontacten afmaken (voorgeboord, elektrawerk nog nodig), **warmwaterleiding (flexibele koperbuis) én koudwater naar de gootsteen brengen**, stroomleiding naar de grond (onder kastjes/achter plint i.v.m. weinig ruimte achter IKEA-kasten), riolering/afwatering kelder aansluiten, afvoer cliëntenkamer-wasbak aansluiten, flexbuis wateraanvoer koppelen, stuken, keuken installeren zodra geleverd, kroonluchter ophangen, plafond bijschilderen (zichtbaar na afbraak oude keuken), nieuwe radiator (al gekocht) ophangen + aansluiten
+
 ### Vandaag (03-08-2026) — privékeuken leegmaken, voorbereiden stucadoor
 
 Checklist in Todoist ("🔧 Privékeuken leegmaken + voorbereiden stukadoor", Huismanstraat): radiator afkoppelen + opslaan in de deel, nieuwe radiator (cliëntenkamer/woonkeuken) naar tijdelijke ruimte verplaatsen, overleg met Marieke over positionering nieuwe keuken op de muur + stopcontacten markeren, kast naar de deel, Quooker afkoppelen, wasbak verwijderen.
@@ -127,7 +154,15 @@ Foto's nieuwe groepenkast en plafond cliëntenkamer (21-07-2026):
 
 **Privékeuken → cliëntenkamer:** deur naar de cliëntenkamer dichtgemetseld, steenstrips afgehakt, schoorsteen grotendeels afgebroken (nog gips inmaken voor de onderkant, i.v.m. stucwerk). Gat naar cliëntenkamer voor de afvoer is gemaakt. Cooker en wasbak blijven nog tijdelijk in gebruik. Nog open: warm-/koudwaterleiding door de muur, oude ventilatiegat dichten, rioolaansluiting afwerken, oude radiator vervangen door de nieuwe (al binnen) inclusief beugels.
 
-**Woonkeuken:** keuken geplaatst, alle elektra geplaatst, Ralf bezig met afwerking/details. Nog open: zijwand + achterwand (achterwand al geverfd), plinten en lambrisering herverven, vloer inleggen (ligt al klaar in de deel).
+**Woonkeuken:** keuken geplaatst, alle elektra geplaatst, Ralf bezig geweest met afwerking/details.
+
+**Correctie/detaillering 05-08-2026:**
+- **Vloer:** inmiddels gelegd (eerder stond hij nog klaar in de Deel) — nog schuren + verven/aflakken.
+- **Achterwand:** **niet** al geverfd zoals eerder genoteerd — moet nog geplamuurd, dan opnieuw geschuurd en geverfd, en tot slot afgelakt worden met een PU-coating.
+- **Zijwand:** nog te plaatsen.
+- **Lambrisering:** al geverfd, klaar.
+- **Plinten:** al geverfd, moeten alleen nog gemonteerd worden zodra de vloer klaar is.
+- **Ombouw wasmachine + wasdroger:** op termijn, heeft nu geen prioriteit.
 
 **Container:** [[albert-van-den-kerkhof]] (eigenaar loods Voetlaagse pad 1) ondervindt hinder van de geplaatste container — 2 weken de tijd gekregen (vanaf 28-07-2026) om deze te laten verplaatsen/ophalen zodra hij vol is.
 
@@ -238,12 +273,11 @@ Foto's nieuwe groepenkast en plafond cliëntenkamer (21-07-2026):
 - Deur (al gekocht) moet op maat worden gemaakt voor nieuw kozijn
 
 **Foto's keuken (Marktplaats advertentie, 11 juni 2026):**
-![[Images/2026/06/2026-06-11-keuken-marktplaats-01-overzicht-onderkast.jpg]]
-![[Images/2026/06/2026-06-11-keuken-marktplaats-02-overzicht-lengte.jpg]]
-![[Images/2026/06/2026-06-11-keuken-marktplaats-03-hoge-kastenwand-apparatuur.jpg]]
-![[Images/2026/06/2026-06-11-keuken-marktplaats-04-vanuit-eetkamer.jpg]]
-![[Images/2026/06/2026-06-11-keuken-marktplaats-05-detail-inductieplaat-spoelbak.jpg]]
-![[Images/2026/06/2026-06-11-keuken-marktplaats-06-overzicht-totaal.jpg]]
+![[Images/2026/06/2026-06-11-keuken-marktplaats-01-overzicht-inductieplaat.png]]
+![[Images/2026/06/2026-06-11-keuken-marktplaats-02-spoelbak-oven-toren.png]]
+![[Images/2026/06/2026-06-11-keuken-marktplaats-03-overzicht-torenkasten.png]]
+![[Images/2026/06/2026-06-11-keuken-marktplaats-04-vanuit-woonkamer.png]]
+![[Images/2026/06/2026-06-11-keuken-marktplaats-06-detail-inductieplaat-spoelbak.png]]
 
 **Beslissingen vastgelegd (18-06-2026, videobelafspraak Ralf):**
 - ✓ **Koof** gekozen (niet voorzetwand) voor leidingen elektra + water
@@ -364,7 +398,7 @@ Omhoog uit meterkast → onder vloer kantoor (20) → onder vloer slaapkamer S&M
 | 3 | Hoge kasten (binnenmuur, overkant) | 3× YMVK 3×2.5mm² (koelkast + oven + magnetron) | ~30-32m | 0,70 | ⚠️ te herberekenen | ⚠️ |
 | 4 | Hoek (andere kant) | 2× YMVK 3×2.5mm² (wasmachine + droger) | ~30-32m | 0,80 | ⚠️ te herberekenen | ⚠️ |
 
-**Correctie 13-07-2026:** oorspronkelijke indeling (oven bij vaatwasser/quooker, koelkast bij wasmachine/droger, magnetron los) klopte niet met de werkelijke fysieke locaties in de keuken. Nu ingedeeld naar waar de goot in de vloer daadwerkelijk heen loopt. **Effectieve stroom per bundel moet opnieuw worden doorgerekend door Ralf/de elektricien** — de reductiefactor-vorm (0,70 bij 3 kabels, 0,80 bij 2) blijft gelijk, maar de exacte waarden zijn nog niet herbevestigd voor deze nieuwe samenstelling.
+**Correctie 13-07-2026:** oorspronkelijke indeling (oven bij vaatwasser/quooker, koelkast bij wasmachine/droger, magnetron los) klopte niet met de werkelijke fysieke locaties in de keuken. Nu ingedeeld naar waar de goot in de vloer daadwerkelijk heen loopt. ~~Effectieve stroom per bundel moet opnieuw worden doorgerekend door Ralf/de elektricien~~ — **vervallen (07-08-2026):** kabels liggen er al en de woonkeuken is al geïnstalleerd, hier is niets meer aan te wijzigen.
 
 Bundels onderling op afstand houden. Inductiekabels (bundel 1) altijd apart van de rest.
 
@@ -556,10 +590,11 @@ Analyse 15-07-2026 (Hermes, ter voorbereiding — geen vervanging voor installat
   2. Aardlekklasse type A vs type B — grote 3-fase omvormers kunnen DC-lekstroom veroorzaken waarvoor type B vereist kan zijn, tenzij de Solis-omvormer ingebouwde DC-lekstroombewaking heeft (staat in de Solis-installatiehandleiding, nog te checken)
 
 **Openstaande acties:**
-- [ ] Solis-installatiehandleiding checken op vereiste aardlekklasse (type A/B) voor de S5-GR3P17K
-- [ ] Kortsluitvermogen (Icc) laten vaststellen door Ralf/installateur t.o.v. AFM426G's 6kA (aanname, te bevestigen)
+- [ ] Solis-installatiehandleiding checken op vereiste aardlekklasse (type A/B) voor de S5-GR3P17K — **status onduidelijk (07-08-2026):** oude groepenkast is al verwijderd/overgezet, navragen of Arman dit al heeft meegenomen of dat het nog moet.
+- [x] ~~Kortsluitvermogen (Icc) laten vaststellen door Ralf/installateur t.o.v. AFM426G's 6kA~~ — **vervallen (07-08-2026):** oude groepenkast is al verwijderd, geen aparte actie meer nodig.
 - [ ] Nieuwe groepen aanleggen vanuit de nieuwe ElectraMat-kast: 1× tuin + 2× Deel (apart schakelbaar, niet gecombineerd)
-- [ ] Oude groepenkast + bekabeling (behalve de te behouden 5G6 PV-kabel) verwijderen uit de Deel
+- [x] **Oude groepenkast + bekabeling verwijderd uit de Deel, overgezet naar nieuwe kast** — bevestigd 07-08-2026.
+- [ ] **Nieuwe groepenkast (Deel) netjes dichtmaken/afwerken** — Sander, ⏰ 1 pomodoro
 
 **Arman (elektricien) — nieuwe groepenkast aansluiten op de bestaande (bijgewerkt 19-07-2026):**
 - Sander heeft Arman gesproken; hij wil helpen om de nieuwe groepenkast op de bestaande aan te sluiten.
@@ -709,7 +744,8 @@ Definitieve keuze 15-07-2026: **alle drie besteld bij radiator-outlet.nl**
 ### Badkamer
 - Links vanaf de deur: badkamermeubel gepland, spiegelkast/meubelkast erboven — water en stroom al aanwezig in deze wand.
 - Tegenover de deur: groot kiepraam in het schuine dak.
-- Rechts voorin: douchecabine in de hoek — **Aurlane CAB248, 80×115cm**, aansluitingen zitten al in de lange zijwand.
+- Rechts voorin: douchecabine in de hoek — **correctie 05-08-2026 (rekening gevonden): Hornbach Urban 2, 90×115×215cm, ALU ZWART, art.nr. 10723437** (niet Aurlane CAB248 zoals eerder genoteerd), aansluitingen zitten al in de lange zijwand. Gekocht bij **Hornbach Duiven** (Nieuwgraaf 18, 026 702 2000, service-duiven@hornbach.com), afgehaald 04-03-2025, opdrachtnr. **54391368**, klantnr. 2013933182, rekeningnr. 55918196, €949,00. Rekening: [[2026-08-05-hornbach-rekening-douchecabine-urban2]]. Kunststof aansluitwartel afgebroken tijdens installatie — vervangend onderdeel wordt nabesteld bij Hornbach Duiven. **Mail verstuurd 05-08-2026** (met foto's als bijlage) naar service-duiven@hornbach.com — wacht op reactie over prijs/levertijd. Foto kapot onderdeel:
+  ![[Images/2026/08/2026-08-05-aansluitwartel-douchecabine-kapot.jpeg]]
 - Tegenover de douche: bad gepland, op dezelfde afvoerroute als de douche.
 - Mogelijk: vals muurtje met haakjes voor handdoeken (nog open keuze).
 - **Wanden:** grotendeels dicht met OSB. Bad-/douchezone moet waterdicht gemaakt worden — Qboard of vergelijkbare tegelbouw-/wedi-plaat als optie.
@@ -881,6 +917,36 @@ Marieke's gekozen ontwerp: "Aangepast Gekozen Mijn IKEA L keuken Huismanstraat",
 
 **Bron:** typeplaatje-foto (03-08-2026), gegevens overgenomen, foto zelf niet bewaard.
 
+### Stucwerk — privékeuken + cliëntenkamer (05-08-2026, cijfers gecontroleerd tegen officieel Knauf-datablad)
+
+**Stukmiddel op voorraad:** 10 zakken Knauf MP75, 25kg per zak = 250kg (bevestigd 05-08-2026).
+
+**Officiële Knauf MP75-specificaties** (technisch blad P113.nl, KS/T-MP75/01/T24805): verbruik **8,0 kg/m²**, opbrengst **ca. 3,0 m²/zak** (25kg) — beide bij de standaard laagdikte van 10mm. Max. laagdikte verticaal 40mm (in 2 lagen boven 25mm); plaatselijk 5mm toegestaan zolang het grootste deel op 10mm zit.
+
+**Voorstrijk:** Knauf schrijft per ondergrond een ander product voor — sterkzuigend (nieuw metselwerk/KZS) → Stuc-Primer/Grondeermiddel/Prime Quick; zwak-/niet-zuigend (bestaand pleisterwerk) → Betokontakt/Spraykontakt/Prime Quick. **Correctie 05-08-2026: Prime Quick niet bevestigd bij Hornbach** — daar wel de twee specifieke alternatieven verkrijgbaar: [Knauf Stucprimer](https://www.hornbach.nl/p/knauf-stucprimer-1-kg/5004473/) (sterkzuigend, 0,1kg/m² verdund 1:1, €8,50/1kg) en [Knauf Betokontakt](https://www.hornbach.nl/p/knauf-betokontakt-5-kg/4189794/) (zwak-/niet-zuigend, 0,35kg/m² gebruiksklaar, €22,95/5kg). De twee producten zijn functioneel verschillend (zuigingsregeling vs. hechtlaag) en niet onderling te vervangen zonder risico op loslatend/scheurend pleisterwerk — dus bewust niet vereenvoudigd tot 1 middel.
+
+**Gekozen hoeveelheid (05-08-2026):** 2× Stucprimer 1kg (~20m² dekking) + 1× Betokontakt 5kg (~14m² dekking), samen €38,20. Dekt een redelijk gemengd scenario voor de 44,16 m² — met een vuistproef (druppel water op de muur: trekt snel in = zuigend/Stucprimer, blijft staan = niet-zuigend/Betokontakt) op locatie bepalen welk product waar nodig is; bijkopen bij Hornbach indien een van de twee vaker nodig blijkt dan verwacht.
+
+**Muurmaten privékeuken (opgemeten 05-08-2026), alle vijf wanden:**
+
+| Wand | Breedte | Hoogte | Bruto m² | Aftrek (kozijn) | Netto m² |
+|---|---|---|---|---|---|
+| Muurtje bij de opkamer (hier komt de nieuwe radiator) | 1,50m | 1,60m | 2,40 | — | 2,40 |
+| Wand naast het trapje, richting buitenmuur | 1,90m | 3,55m | 6,745 | — | 6,745 |
+| Wand aan de deurkant | 3,35m | 3,55m | 11,8925 | deur+kozijn 1,03×2,16m = 2,2248 | 9,6677 |
+| Wand aan de kant van de cliëntenkamer | 4,25m | 3,55m | 15,0875 | — | 15,0875 |
+| Buitenmuur (met raam) | 3,35m | 3,55m | 11,8925 | raam+kozijn 1,33×2,15m = 2,8595 | 9,0330 |
+| **Subtotaal privékeuken** | | | | | **42,93 m²** |
+
+**Cliëntenkamer erbij (05-08-2026):** stuk van het dichtgemetselde KZS-kozijngat boven de lambrisering — de onderkant is volledig lambrisering en hoeft dus niet gestuukt. Afmeting **1m × 1,23m = 1,23 m²**.
+
+**Totaal te stuken: 42,93 + 1,23 = 44,16 m²**
+
+**Materiaalberekening (bij 10mm laag, officiële 8,0kg/m²):**
+- 44,16 m² × 8,0kg/m² ≈ **353kg nodig** → **15 zakken MP75 van 25kg** (352,5kg dekt het net niet, 15 zakken = 375kg geeft ~22kg/2,7m² marge)
+- Voorraad: 10 zakken (250kg) → **5 zakken (125kg) extra nodig** (gecorrigeerd 05-08-2026; eerdere berekening ging uit van een verkeerd verbruikscijfer van 10kg/m² i.p.v. de officiële 8,0kg/m²)
+- **Voorstrijk:** 1kg Stucprimer + 1kg Betokontakt (beide bij Hornbach, samen €15,75) is ruim genoeg voor 44,16 m² — welke waar, bepalen met de vuistproef op locatie
+
 ### Geluidsisolerend plafond cliëntenkamer — uitwerking (13-07-2026)
 
 **Doel:** contactgeluid en praatgeluid dempen in ruimte 12 (nieuwe cliëntenkamer, 3,8m × 4,2m) via een ontkoppeld plafond onder het bestaande plafond.
@@ -958,7 +1024,10 @@ Marieke's gekozen ontwerp: "Aangepast Gekozen Mijn IKEA L keuken Huismanstraat",
 
 **Status (25-07-2026):** wandrail, draagprofielen en isolatie tussen de bestaande balken zijn klaar. **Enige resterende stap:** de FERMACELL-gipsvezelplaten — die liggen al klaar in de cliëntenkamer — vastschroeven met de Fermacell snelbouwschroeven (inmiddels binnen) via een speciaal snelschroef-apparaat. Sander is nog op zoek naar iemand om dit te doen.
 
+**Correctie 05-08-2026 — lijm nog nodig:** naast schroeven moet de dubbele laag Fermacell-platen ook worden verlijmd (standaard bij Fermacell-montage, niet alleen mechanisch bevestigd). Product: **Fermacell Greenline lijm**, verkrijgbaar bij Hornbach — **4 kokers nog te bestellen/kopen**. Zonder deze lijm kan het plafond niet worden dichtgemaakt.
+
 **Nog open:**
+- 4 kokers Fermacell Greenline lijm kopen bij Hornbach (nog niet besteld)
 - Iemand vinden om de Fermacell-platen vast te schroeven (Sander regelt dit)
 
 ## Materialenlijst (sync vanuit Google Sheet, bijgewerkt 16-07-2026)
@@ -1001,7 +1070,7 @@ Volledige materialenlijst, 1-op-1 gesynchroniseerd met het Google Sheet-tabblad 
 | Diversen | Container 10 m³ | 1 | stuk | €529,00 | €529,00 | Van Dalen Containers, Huissen | Besteld (#16536) | Afvoer bouw- en sloopafval, levering 20-07-2026 ochtend |
 | woonkeuken | Daalderop boiler 5 L - optie |  |  |  |  |  |  |  |
 | Bouwmateriaal | Metselmortel met kalk 25kg | 2 | zak | €3,95 | €7,90 | Hornbach (art. 7195704) | ✅ Besteld (bijgewerkt 25-07-2026, bleek al besteld) | Bevestigd 16-07-2026. Voor beide waalformaat-lagen (strek + rollaag, 238 stuks totaal). Aantal verhoogd van 1 naar 2 zakken -- nu 2 lagen i.p.v. 1, dus ongeveer dubbel zoveel voegwerk. |
-| Bouwmateriaal | Metselmortel met kalk 25kg (extra) | nog te bepalen | zak | €3,95 |  | Hornbach (art. 7195704) | ⏳ Nog op te halen (25-07-2026) | Extra mortel voor het herstellen van het oude dierenluik in de Deel, met de overgebleven kalkzandstenen van het kozijngat. |
+| Bouwmateriaal | Metselmortel met kalk 25kg (extra) | nog te bepalen | zak | €3,95 |  | Hornbach (art. 7195704) | ✅ Aanwezig (gecorrigeerd 05-08-2026) | Extra mortel voor het herstellen van het oude dierenluik in de Deel, met de overgebleven kalkzandstenen van het kozijngat — beide liggen al klaar, niets meer op te halen. Klus zelf heeft lagere prioriteit, zie "Prioriteiten komende periode". |
 | Plafond cliëntenkamer | FISCHER Nylon plug DuoPower 6x50 | 1 | pak (100 st) | €12,95 | €12,95 | Hornbach (art. 10185470) | Afgeleverd 17-07-2026 (Hornbach, order DV9049176771, betaald iDEAL, PostNL-bevestigd) | Bevestiging wandrails plafond. Boorgatdiepte min 60mm, verankeringsdiepte min 50mm. Schroeflengte ~70mm nodig (5x70 of 6x70mm) i.p.v. eerder genoemde 5x50mm -- die is te kort. Hart-op-hart 50cm langs de rail. |
 | Plafond cliëntenkamer | DRESSELHAUS JD+ Universele schroef 4,0x70mm Torx T25 deeldraad verzinkt | 1 | pak (200 st) | €11,40 | €11,40 | Hornbach (art. 6531079) | Afgeleverd 17-07-2026 (Hornbach, order DV9049176771, betaald iDEAL, PostNL-bevestigd) | Schroef voor de Fischer DuoPower 6x50 plug (wandrail bevestiging). Lengte 70mm, diameter 4mm past goed bij 6mm plug. Torx T25 -- zorg dat het juiste bitje aanwezig is, zit niet bij de schroeven. |
 | Plafond cliëntenkamer | U27/30 Metalstud plafondprofiel 3m (wandrail) | 6 | stuks | €3,60 | €21,60 | Hornbach (art. 8396676) | Afgeleverd 17-07-2026 (Hornbach, order DV9049176771, betaald iDEAL, PostNL-bevestigd) | Perimeter wandrail, 2x(3,8+4,2m)=16m. Bevestigd tegen de muren -- NIET aan de oude balklaag gehangen (akoestische ontkoppeling). |
@@ -1010,6 +1079,7 @@ Volledige materialenlijst, 1-op-1 gesynchroniseerd met het Google Sheet-tabblad 
 | Plafond cliëntenkamer | Knauf afdichtband 30m x 30mm | 1 | rol | €6,75 | €6,75 | Hornbach (art. 7412507) | Afgeleverd 17-07-2026 (Hornbach, order DV9049176771, betaald iDEAL, PostNL-bevestigd) | Akoestische ontkoppeling tussen U27/30 wandrail en de muur (op het metalen profiel plakken, niet op het metselwerk). Perimeter 16m, 1 rol (30m) ruim voldoende. |
 | Plafond cliëntenkamer | GB Raveeldrager zwaar 380/71x154mm verzinkt | 2 | stuks | €2,65 | €5,30 | Hornbach (art. 4118484) | Afgeleverd 17-07-2026 (Hornbach, order DV9049176771, betaald iDEAL, PostNL-bevestigd) | Voor bevestiging van de KONSTA balk 69x219x4200mm aan de twee 3,8m-muren. Breedte 71mm past nauw om de 69mm brede balk (2mm speling). Geschikt voor montage aan metselwerk. 2 stuks nodig (1 per uiteinde). |
 | Plafond cliëntenkamer | Fermacell snelbouwschroeven 3,9x30mm (voor gipsvezelplaat) | 1 | pak (1000 st) | €17,95 | €17,95 | Hornbach (art. 275774) | ✅ Binnen (25-07-2026) | Nodig voor het bevestigen van de dubbele laag Fermacell-gipsvezelplaat aan de C60/27-profielen. Platen liggen al klaar in de cliëntenkamer; speciaal snelschroef-apparaat aanwezig. Wachten op iemand om dit te plaatsen (Sander regelt). |
+| Plafond cliëntenkamer | Fermacell Greenline lijm | 4 | koker |  |  | Hornbach | Nog te bestellen (gesignaleerd 05-08-2026) | Nodig naast de snelbouwschroeven om de dubbele laag Fermacell-platen te verlijmen — zonder deze lijm kan het plafond niet af. |
 | Elektra | FISCHER Nylon plug Duopower 8x40, 100 stuks | 1 | pak | €9,45 | €9,45 | Hornbach (art. 10185456) | Afgeleverd 17-07-2026 (Hornbach, order DV9049176771, betaald iDEAL, PostNL-bevestigd) | Voor bevestiging van montageband om elektraleidingen achter het schot vast te leggen. |
 | Elektra | WAGO Lasklem Compact 2273-204 (4-voudig), 20 stuks | 1 | pak | €5,95 | €5,95 | Hornbach (art. 10593123) | Afgeleverd 17-07-2026 (Hornbach, order DV9049176771, betaald iDEAL, PostNL-bevestigd) | Voorraad aanvullen. |
 | Keuken | VEPORIT Hoekstopkraan met apparaataansluiting 1/2x3/8 | 1 | stuk | €12,25 | €12,25 | Hornbach (art. 5952061) | Afgeleverd 17-07-2026 (Hornbach, order DV9049176771, betaald iDEAL, PostNL-bevestigd) | Voor de wasmachine-aansluiting in de nieuwe keuken. |
@@ -1029,13 +1099,15 @@ Volledige materialenlijst, 1-op-1 gesynchroniseerd met het Google Sheet-tabblad 
 
 ## Open threads
 
-- **Buitenkraan vervangen (samengevoegd 03-08-2026, gesignaleerd 13-07-2026):** buitenkraan druppelt en verspilt water. Nog te onderzoeken: eenvoudige reparatie of volledige vervanging, onderdeel beschikbaar, zelf doen of professional nodig.
-- ⚠️ **Inductiekookplaat werkt niet (25-07-2026):** keuken is geplaatst, maar de Siemens EH875FM27E doet het niet — vervanging of reparatie nodig, nog te bepalen (garantie/RMA checken of nieuw exemplaar bestellen).
-- **Dierenluik in de Deel herstellen (25-07-2026):** overgebleven kalkzandstenen van het kozijngat worden hiervoor hergebruikt. Nog metselmortel voor ophalen bij Hornbach.
+- **Buitenkraan vervangen (bijgewerkt 05-08-2026):** nieuwe buitenkraan gekocht — **installatie vandaag (05-08) door Sander**.
+- ✅ **Inductiekookplaat gerepareerd (07-08-2026):** het mannetje dat Marieke had laten komen voor de rammelende wasmachine, heeft er ook meteen naar gekeken en hem werkend gekregen.
+- **Hoofdaansluiting (3×25A) laten doorrekenen — bewust geen losse actie (07-08-2026):** Ferry/FH Team installeert sowieso de warmtepomp (week 37) en rekent dan de belasting door, inclusief zonnepanelen. Tot nu toe is de hoofdstroom in al die jaren nog nooit uitgevallen (op één keer een groep in de Deel na, bij gelijktijdig airfryer + oven) — geen aanleiding om dit apart te laten uitzoeken.
+- **Aansluitwartel douchecabine (05-08-2026):** kunststof wartel afgebroken tijdens installatie. Mail + foto's verstuurd naar Hornbach Duiven (service-duiven@hornbach.com) — **wacht op reactie** over vervangend onderdeel, prijs en levertijd.
+- **Dierenluik in de Deel herstellen (25-07-2026, lagere prioriteit):** overgebleven kalkzandstenen + metselmortel liggen al klaar, niets meer op te halen.
 - **Fermacell-platen plafond cliëntenkamer vastschroeven:** platen + schroeven + snelschroef-apparaat aanwezig, alleen nog iemand vinden om het te doen (Sander regelt).
 - **KONSTA-balk (69×219×4200mm) opslaan:** niet meer nodig voor het plafond, ligt nu in de woonkamer — geschikte opslagplek zoeken (mogelijk zolder).
 - Stalen balk: bij wie bestellen, wie plaatst?
-- Beton uithakken: welk bedrijf, welke kosten? Zelf doen?
+- Beton uithakken: welk bedrijf, welke kosten? Zelf doen? — lagere prioriteit (vastgelegd 05-08-2026), wacht tot cliëntenkamer/gezamenlijke keuken/privékeuken/badkamer boven klaar zijn
 - Pui plaatsen: timing en budget na fase 1
 - Isolatie voorzet-wanden: timing na fase 1
 - Home Wizzard aanschaffen voor energiemonitoring?
@@ -1083,8 +1155,8 @@ Subsidie zelf aanvragen via rvo.nl na installatie — meldcode KA28310
 - [x] **Keuken opgehaald** (Sander, 11 juli) — staat grotendeels al klaar in de nieuwe woonkeuken; definitieve plaatsing volgt na kabels trekken, doorvoer maken en rioolaansluiting (bijgewerkt 13-07-2026)
 - [x] **Installatiedatum warmtepomp bevestigd:** Ferry en het FH Team komen in **week 37** de warmtepomp + boilers installeren (bijgewerkt 13-07-2026)
 - [x] **Container bestellen bij Van Dalen Containers, Huissen** — besteld 13-07-2026 (bestelling #16536): bouwafval container 10 m³, €529, levering 20-07-2026 in de ochtend
-- [ ] Beslissen: offerte FH Team accorderen (vervaldatum 10-07-2026) — **Marieke volgt op** (mail gestuurd aan Ferry, nog geen reactie per 29-06-2026) — inmiddels lijkt dit impliciet akkoord, gezien de bevestigde installatiedatum week 37; nog te verifiëren of de formele accordering + aanbetaling ook echt geregeld is
-- [ ] Bij akkoord: 50% aanbetaling (±€12.254) overmaken
+- [x] **Offerte FH Team geaccordeerd** (bevestigd 05-08-2026)
+- [x] **50% aanbetaling (±€12.254) overgemaakt** (bevestigd 05-08-2026)
 - [ ] RVO-subsidie aanvragen na installatie via rvo.nl (meldcode KA28310)
 - [ ] Stalen balk: leverancier uitzoeken + monteur regelen
 - [ ] Keuze maken: beton uithakken zelf of uitbesteden
@@ -1092,7 +1164,7 @@ Subsidie zelf aanvragen via rvo.nl na installatie — meldcode KA28310
 - [x] LTV radiatoren bestellen bij radiator-outlet.nl (slaapkamer A, eetkamer, keuken) — besteld 15-07-2026, ordernummer RO2026-94288; factuur/verzendmail nog te checken
 - [x] **Verhuisbus Albero bevestigen** — Opel Movano, kenteken VPN83J, buitenmaten 600×205×252 cm (gesloten opbouw). Inschatting laadruimte ~3,7–4,1 m lang, ~1,38 m tussen wielkasten, ~1,9–2,1 m hoog. Keuken (langste los onderdeel: aanrechtblad 2,33 m) past naar verwachting in één rit; hoge kasten (200–220 cm) moeten waarschijnlijk liggend vervoerd worden i.v.m. laadhoogte.
 - [ ] **Gezamenlijke woonkeuken leegmaken** — voordat keuken op muur geschetst kan worden
-- [ ] **Keuken op muur schetsen** (voor Ralf) — exacte positie buitenmuur, binnenmuur, koofje
+- [x] ~~Keuken op muur schetsen (voor Ralf)~~ — vervallen (07-08-2026), keuken staat er al
 - [x] ~~3e elektrakast bijplaatsen~~ — **overwogen, verworpen 15-07-2026**: knieschotten moeten sowieso open/dicht, dus geen arbeidsbesparing; gekozen voor uitbreiding bestaande meterkast (alles centraal)
 - [ ] **Lengte elektrabuizen + waterleidingen berekenen** — route via kantoor → knieschot → koofje
 - [ ] **Aansluiting verzwaren naar 3×35A** — bewust uitgesteld 15-07-2026 tot noodzakelijk (bijv. herhaaldelijk uitvallende groepen); monitoren na ingebruikname nieuwe keuken
@@ -1103,10 +1175,19 @@ Subsidie zelf aanvragen via rvo.nl na installatie — meldcode KA28310
 - [ ] Met Marieke bevestigen: exacte locatie hoge kasten aan de overkant
 - [ ] Beslissen: water doortrekken onder vloer of langs buitenmuur?
 - [x] Beslissing koof vs. voorzetwand → **koof** gekozen (18-06-2026)
-- [ ] Quooker checken op model zonder inlaatcombinatie (zie link in installatieplan)
-- [ ] **Container laten ophalen/verplaatsen** — binnen 2 weken na 28-07-2026, ivm hinder bij [[albert-van-den-kerkhof]]
+- [x] ~~Quooker checken op model zonder inlaatcombinatie~~ → **vervallen (04-08-2026):** we hergebruiken de bestaande oude Quooker (bevestigd model COMBI+E, CPW532144 — zie privékeuken-elektra sectie), geen nieuw model te kiezen dus dit punt is niet meer van toepassing.
+- [x] **Container laten ophalen/verplaatsen** — Marieke heeft Van Dalen Containers gebeld (05-08-2026): container wordt in elk geval vóór zaterdag 08-08 verplaatst, ivm hinder bij [[albert-van-den-kerkhof]]
 - [ ] **WC-halletje afwerken** — gipsplaten plafond + isolatie terugzetten
-- [ ] **Privékeuken/schoorsteen afwerken** — gips inmaken schoorsteen, warm/koudwaterleiding, ventilatiegat dichten, rioolaansluiting, radiator vervangen
+- [ ] **Privékeuken/schoorsteen afwerken** — gips inmaken schoorsteen, warm- + koudwaterleiding naar de gootsteen (✅ **05-08-2026 bevestigd via voice-memo: warm water toevoer is wél nodig** — dit is voor de gootsteen-mengkraan, los van de Quooker; de Quooker zelf blijft koud-water-only, zie 04-08-correctie hierboven), ventilatiegat dichten, rioolaansluiting, radiator vervangen
 - [ ] **Woonkeuken afronden** — zijwand + achterwand plaatsen, plinten/lambrisering verven, vloer inleggen
 - [ ] **Perilex stopcontact + stekker kopen** voor het fornuis (genoteerd 20-07-2026)
 - [ ] **2 gipsplaten kopen** voor reparatie halletje bij de wc (genoteerd 25-07-2026)
+
+### Vandaag (2026-08-05) — automatisch verwerkte audio-opname
+
+**Samenvatting:** Voor de cliëntenkamer moeten nog drie werkzaamheden aan de lambrissering worden uitgevoerd: schuren, plamuren en gronden.
+
+**Actiepunten:**
+- Lambrissering cliëntenkamer schuren
+- Lambrissering cliëntenkamer plamuren
+- Lambrissering cliëntenkamer gronden
