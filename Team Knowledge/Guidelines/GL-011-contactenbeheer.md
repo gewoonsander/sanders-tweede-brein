@@ -1,10 +1,10 @@
 ---
-id: GL-004
+id: GL-011
 title: Contactenbeheer — Single Source of Truth
 created: 2026-06-19
 ---
 
-# GL-004 — Contactenbeheer
+# GL-011 — Contactenbeheer
 
 ## SSOT: Google Contacts
 
@@ -33,7 +33,7 @@ PKM-bestanden verwijzen via `[[wikilinks]]` naar elkaar. Google Contact ID kan o
 - Nieuwe contacten altijd opslaan in Google Contacts (iPhone doet dit automatisch via standaardaccount)
 - iCloud Contacts blijft uitgeschakeld op alle apparaten
 - WhatsApp-contacten zijn geen aparte bron — zij lezen automatisch van iPhone Contacten, die van Google synct
-- Als Larry in een sessie een nieuwe persoon tegenkomt: Penn maakt een stub aan in `PKM/CRM/People/` én Larry overweegt het contact toe te voegen aan Google Contacts via de MCP
+- Als Hermes in een sessie een nieuwe persoon tegenkomt: Penn maakt een stub aan in `PKM/CRM/People/` én Hermes overweegt het contact toe te voegen aan Google Contacts via de MCP
 
 ## Ingesteld op
 

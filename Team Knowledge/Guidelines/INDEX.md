@@ -14,7 +14,7 @@ Filename pattern: `GL-NNN-<title>.md`.
 | GL-004 | [[GL-004-task-resource-linking]] | Hoe taken gelinkt worden aan resources (SOPs, Workstreams, Guidelines, My Life, session logs, journal entries). |
 | GL-010 | [[GL-010-pka-modeling-principles]] | PKA-modelleringsprincipes (custom, hernummerd van GL-003). |
 | GL-011 | [[GL-011-contactenbeheer]] | Google Contacts als SSOT voor basiscontacten. PKM/CRM voor rijke context. Apparaatinstellingen vastgelegd. |
-| GL-012 | [[GL-012-pkm-vs-todoist]] | Wanneer gaat iets van Todoist naar PKM? Beslisregel: actie = Todoist, duurzame kennis = PKM. Larry vraagt altijd bevestiging. |
+| GL-012 | [[GL-012-pkm-vs-todoist]] | Wanneer gaat iets van Todoist naar PKM? Beslisregel: actie = Todoist, duurzame kennis = PKM. Hermes vraagt altijd bevestiging. |
 | GL-014 | [[GL-014-todoist-taakformat]] | Todoist-taakformat: `actie > titel ⏰ tijd`, prioriteit alleen native veld, bronmateriaal-link, projectroutering. |
 | GL-015 | [[GL-015-agent-model-tier-review]] | Modelkeuze per specialist (Opus/Sonnet/Haiku) en reviewcadans: kwartaal-vangnet + event-triggers (nieuw model, limieten, kwaliteit). |
 
