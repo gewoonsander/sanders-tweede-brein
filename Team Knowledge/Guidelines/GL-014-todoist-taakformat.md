@@ -1,6 +1,6 @@
 ---
 name: GL-014-todoist-taakformat
-title: Todoist — taakformat, prioriteit en bronmateriaal
+title: Todoist — taakformat, prioriteit, assignee en bronmateriaal
 type: guideline
 tags:
   - todoist
@@ -10,7 +10,7 @@ owner: Hermes
 created: 2026-07-01
 ---
 
-# GL-014 — Todoist: taakformat, prioriteit en bronmateriaal
+# GL-014 — Todoist: taakformat, prioriteit, assignee en bronmateriaal
 
 > **Elke agent die een Todoist-taak aanmaakt of bijwerkt leest dit.** Dit geldt voor taken die uit mailverwerking komen, maar ook voor taken die uit onderzoek, audio-transcripties of andere sessies ontstaan.
 
@@ -31,15 +31,35 @@ Sander werkte vroeger met een "actie-archief": een fysieke map met bronmateriaal
 - `{actie}` — los werkwoord, geen haken: `bekijken`, `beslissen`, `reageren`, `betalen`, `archiveren`, `verzenden`, etc.
 - `>` — vaste scheiding tussen actie en titel, spatie aan beide kanten.
 - `{titel}` — korte, concrete omschrijving.
-- `⏰ {tijdsinschatting}` — altijd aanwezig, ruwe schatting is voldoende (`10 min`, `1 uur`).
+- `⏰ {tijdsinschatting}` — altijd aanwezig. Twee notaties, afhankelijk van de duur:
+  - Korter dan ~20-25 min: ruwe schatting in minuten (`10 min`, `15 min`). Een pomodoro erop plakken voegt niets toe voor iets dat toch al binnen één blok past.
+  - 20-25 min of langer: uitdrukken in pomodoro's (`1 pomodoro`, `2 pomodoro's`). 1 pomodoro ≈ 30 min inclusief pauze — zie de sectie hieronder over waarom.
 
 Voorbeeld: `bekijken > Nieuwe inschrijving DartsCoaching.nl – Shane van Zanten ⏰ 10 min`
+Voorbeeld: `klussen > Privékeuken leegmaken ⏰ 2 pomodoro's`
 
 ### Prioriteit
 
 - **Uitsluitend** het native Todoist-prioriteitsveld (p1–p4).
 - **Nooit** als tekst-prefix in de titel — geen dubbeling meer.
 - **Altijd verplicht** ingevuld bij taakaanmaak. Geen taak zonder expliciete prioriteit.
+
+### Toegewezen persoon (label)
+
+- Elke taak krijgt bij aanmaak precies één persoons-label: `sander`, `marieke`, `thomas`, etc.
+- Geen persoon genoemd of onduidelijk wie het oppakt? Dan gaat het label `sander` erop — de verantwoordelijkheid ligt bij wie de taak aanmaakt totdat expliciet gedelegeerd wordt. Nooit een taak zonder persoons-label laten staan.
+- Dit hergebruikt het bestaande labelmechanisme (zie bijv. de `thomas`-taken voor gras en moestuin) — geen nieuw systeem, alleen consequent toegepast.
+
+### Verplichte einddatum
+
+- Elke taak krijgt bij aanmaak een specifieke dag (`dueDate`), ongeacht prioriteit.
+- Reden: alleen een taak met een datum kan tijdens `/dagstart` (stap 5, tijdsblokken voorstellen) als concreet tijdsblok op de agenda belanden. Een taak zonder datum verdwijnt in de ruis.
+- "Ooit-ideeën" zonder concreet moment horen niet als Todoist-taak thuis met een verzonnen datum — die horen in de PKM (zie [[GL-012-pkm-vs-todoist]]).
+
+### Pomodoro-registratie bij afronding
+
+- Bij taken van 1 pomodoro of meer: zet bij afronding een comment met het werkelijk aantal gebruikte pomodoro's.
+- Bewust minimaal gehouden — geen apart tijdregistratie-systeem, geen dashboard. Alleen als dit in de praktijk waardevol blijkt, bouwen we er iets bovenop.
 
 ### Bronmateriaal (description)
 
@@ -87,6 +107,7 @@ Een taak landt **nooit** in de kale `Inbox` als de context bekend is. Route naar
 - [[GL-012-pkm-vs-todoist]] — beslisregel wanneer iets een Todoist-taak wordt vs. PKM-kennis.
 - [[SOP-013-inboxen-verwerken]] — de pet-indeling die de projectroutering hierboven hergebruikt.
 - [[feedback_gmail_links]] — Gmail thread-link formaat.
+- `/dagstart` (stap 5) — gebruikt de tijdsinschatting en einddatum hieruit om tijdsblokken op de agenda voor te stellen.
 
 ## Updates to this Guideline
 
