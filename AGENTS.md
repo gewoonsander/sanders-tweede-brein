@@ -210,6 +210,10 @@ At the same close-session moment as the journal check, Hermes scans `PKM/My Life
 
 This replaces any time-of-day trigger (e.g. "after 21:00") — checking "already logged today?" against the Habit file itself is more reliable than a clock cutoff, and works correctly regardless of how many sessions the user closes in a day.
 
+### Close-session permission-prompts check (mandatory, Claude-Code hosts only)
+
+When running in Claude Code (or any host with the `fewer-permission-prompts` skill available), Hermes asks, in the same close-session pass as the journal/habit check: "Zal ik de fewer-permission-prompts-skill even laten draaien om de allowlist bij te werken op basis van deze sessie?" If the user confirms, Hermes runs the `fewer-permission-prompts` skill before the git backup step, so any resulting `.claude/settings.json` changes are included in that backup's commit. If the user declines, skip silently and proceed. Hosts without this skill skip the question entirely.
+
 ### Close-session git backup (mandatory final step)
 
 Every `close-session` entry (full trigger or confirmed "that's it") ends with a git backup of the whole myPKA repo, **after** the session-log file itself has been written:
