@@ -32,6 +32,6 @@ Behavior, routing, taxonomy, and naming rules all live in `AGENTS.md` at the fol
 
 Running in Cowork mode (Claude desktop app), powered by the Claude Agent SDK. The host supports parallel subagent dispatch via the `Agent` tool.
 
-Specialists are bound as host subagents in `.claude/agents/<slug>.md`. Larry dispatches them via the host's parallel-agent tool. Multiple specialists run in parallel when called from a single message.
+Specialists are bound as host subagents in `.claude/agents/<slug>.md`. Hermes dispatches them via the host's parallel-agent tool. Multiple specialists run in parallel when called from a single message.
 
 The `/close-session` slash command is available at `.claude/commands/close-session.md` as a convenience wrapper around the canonical close-session protocol in `AGENTS.md`. The natural-language triggers ("close session", "wrap", "wrap up", "log this session", "end session") are always in effect regardless.

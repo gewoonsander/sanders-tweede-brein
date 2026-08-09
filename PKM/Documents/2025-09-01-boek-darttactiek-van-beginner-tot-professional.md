@@ -30,6 +30,7 @@ Richt zich op de vraag: hoe weten professionals zo snel waar ze op moeten mikken
 - Gepubliceerd op [Dartfreakz.nl](https://www.dartfreakz.nl/specials/amateur-darter-sander-voz-lanceert-boek-darttactiek-van-beginner-tot-professional)
 - Te bestellen via [gewoonsander.plugandpay.com](https://gewoonsander.plugandpay.com/darttactiek-van-beginner-tot-professional-ai-jixh7)
 - Sander deelgenomen aan ADC Global Championship (dec 2025), regionale competities, Landelijke Competitie, Superleague en Q School
+- Lokale bronkopie van het definitieve manuscript (160 blz.): [[2025-09-01-boek-darttactiek-van-beginner-tot-professional.pdf]]
 
 ## Ontstaansgeschiedenis
 

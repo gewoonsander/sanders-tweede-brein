@@ -38,6 +38,7 @@ People and Organizations the user interacts with. Cross-linked into Journal entr
 - [[gewoon-thuis]] — gezinshuis VOF Sander + Marieke
 - [[bouwbedrijf-zwaan]] — aannemer Ralf Zwaan (zwager)
 - [[convenient-interior]] — muziekmeubels Ralf Zwaan
+- [[betteld-zelhem]] — vakantiepark in Zelhem
 - [[dr-schmidt-clinic]] — seeded course sample
 
 These two sample files plus the seeded Journal entry are the SSOT demo the course walks through — four files, one input, no duplication. Penn adds further entries here as people and organizations show up in the Journal.

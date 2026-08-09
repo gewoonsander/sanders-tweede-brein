@@ -153,6 +153,19 @@ Alle overige klussen — o.a. beton uithakken achterhuis, het dierenluik in de D
 - Plafond dichtmaken — marktplaatsmannetjes
 - Muur bij de kozijndoorvoer stucen — stucadoor
 
+### Vandaag (07-08-2026) — woonkeuken update (audio-opname, automatisch verwerkt)
+
+Opgenomen update over de gezamenlijke woonkeuken (ruimte 6) met Marieke. Status plinten, vloer, radiator, lampen:
+
+**Woonkeuken — taken voor completion:**
+- **Plinten:** op maat maken (Sander), daarna monteren — **afhankelijk van**: vloer moet eerst geschuurd zijn
+- **Vloer schuren:** Marieke doet dit (voorbereiding voor plinten + aflakken/verven)
+- **Radiator aansluiten:** moet gebeuren, stopcontact voor ventilator eronder regelen
+- **Twee lampen ophangen:** al aanwezig in ruimte, gekocht door Marieke in maart
+- **Stopcontact monteren:** voor ventilator onder radiator
+
+**Deadline context:** alles moet klaar zijn voordat Sander's schoonmoeder komt logeren (in terugkomweek na vakantie, rond 15-21 aug). Sander en Marieke gaan komende terugkomdag samen aan dit project werken.
+
 ### Vandaag (05-08-2026) — walkthrough boven + beneden (audio-opnames, automatisch verwerkt)
 
 Twee voice-memo's ingesproken tijdens een ronde door het huis, automatisch getranscribeerd + samengevat door de audio-inbox-pipeline.
