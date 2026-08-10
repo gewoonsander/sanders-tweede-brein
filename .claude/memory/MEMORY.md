@@ -18,3 +18,4 @@
 - [Bureaublad altijd leeg](feedback_bureaublad_leeg.md) — nooit snelkoppelingen/bestanden op het Bureaublad zetten, gebruik Finder-zijbalk/Dock i.p.v.
 - [Bash-pipes blokkeren onbemande routines](feedback_bash_pipes_onbemande_routines.md) — geplande/scheduled routines mogen geen Bash-commando's met `|`/`&&`/`;` gebruiken voor triviale checks; Write maakt mappen zelf aan
 - [ADC-verslag: geen quote-placeholder](feedback_adc_verslag_geen_quote.md) — nooit een quote-van-de-winnaar element opnemen, Sander verwijdert het altijd zelf en er is nooit een quote
+- [Todoist-taken: letter + link](feedback_todoist_taaklijst_format.md) — altijd (A)(B)(C) label + klikbare Todoist-link per taak in elk taakoverzicht

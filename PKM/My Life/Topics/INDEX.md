@@ -13,6 +13,7 @@ Interest areas you actively follow — AI tooling, sourdough, longevity research
 - [[mijn-ideale-dag]] — levensvisie, ideale dag en ideale dood als kompas.
 - [[personal-knowledge-systems]] — PKM en kennissystemen.
 - [[werkwijze-inboxen]] — inboxbeheer en werkwijze.
+- [[games-family]] — gezamelijk spelletjes doen, boardgames/video games.
 
 ## Naming
 
