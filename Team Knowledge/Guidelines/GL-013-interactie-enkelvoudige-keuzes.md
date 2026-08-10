@@ -28,3 +28,25 @@ Wanneer Hermes of een specialist de gebruiker een keuze voorlegt, biedt hij alti
 - **Zonder uitzondering:** elk bericht dat eindigt in een vraagteken, of een bijzin bevat die een keuze impliceert (ook terloopse sluitvragen als "wil je dat ik dit ook doe?"), krijgt geletterde opties. Geen beoordeling vooraf of het een "echte" keuze is of niet — alleen bij een pure open informatievraag zonder eindig antwoordbereik (bijv. "wat is je adres?") vervalt dit.
 - **Markering voor open vragen:** de Stop-hook (`.claude/hooks/check-lettered-options.py`) handhaaft deze regel mechanisch en kan het verschil niet zien tussen een vergeten keuze en een bewust open vraag. Voeg daarom `(open vraag)` toe direct na een bewust open vraag (bijv. de dagintentie-vraag uit `/dagstart`: "Wat wil je vandaag bereiken? (open vraag)") — dat is de enige uitzondering die de hook herkent. Zonder deze marker blokkeert de hook elk bericht dat eindigt in een vraagteken zonder geletterde opties, dus gebruik de marker alleen als het écht een open informatievraag is, niet als sluiproute.
 - Dit is de enige bron voor deze regel. Andere bestanden (CLAUDE.md, AGENTS.md) wikilinken hierheen in plaats van de regel te herhalen — voorkomt dat kopieën uit elkaar gaan lopen.
+
+## Meerdere vragen in één bericht
+
+Wanneer een bericht meerdere losse vragen tegelijk stelt (bijv. bij close-session: journaal + habit-check + permission-prompts), gebruik dan **genummerde vragen** met de antwoordopties **tussen haakjes direct achter de vraag** — niet het losse A/B/C-blok per vraag.
+
+### Formaat
+
+```
+1. <vraag 1>? (open vraag)
+2. <vraag 2>? (J/N)
+3. <vraag 3>? (A/B/C)
+```
+
+### Voorbeeld
+
+```
+1. Journaal — nog iets meegeven? (open vraag)
+2. Schimmelcrème vandaag aangebracht? (J/N)
+3. Fewer-permission-prompts-skill draaien? (J/N)
+```
+
+Correctie 2026-08-10: Sander gaf aan dat het losse A/B/C-blok per vraag te log wordt zodra er meerdere vragen achter elkaar staan — genummerd + haakjes is compacter en makkelijker in één keer te beantwoorden.
