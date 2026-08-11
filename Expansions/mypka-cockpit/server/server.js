@@ -37,6 +37,7 @@ import {
 } from './journalEntries.js';
 import { describeRegistry, taskConnectors, labelForSource } from './connectors/registry.js';
 import { setEnvKey, clearEnvKey, getAgenda, listStoredKeyNames } from './connectorAdmin.js';
+import { describeStack } from './stackInventory.js';
 import { registerPlannerRoutes } from './plannerRoutes.js';
 import { registerWellnessRoutes } from './wellness.js';
 import { registerFileTreeRoutes } from './filetree.js';
@@ -681,6 +682,16 @@ app.get('/api/cockpit/connectors', safe(() => {
     envPath: 'Team Knowledge/.env',
   };
 }));
+
+// ---- Software stack: the BROADER read-only inventory --------------------------
+// GET /api/cockpit/stack — every stored .env key NAME (planner-connector or not)
+// plus the MCP servers declared in the repo's own .mcp.json, with the ${VAR}
+// names they reference. Deliberately NOT the connector contract: this surface
+// answers "what software is my brain wired to?", which is wider than "what feeds
+// the planner". Secret-free by construction (names, booleans, sanitised paths);
+// see server/stackInventory.js. READ-ONLY — key management stays on the
+// Connections routes above, which already own the write/delete path.
+app.get('/api/cockpit/stack', safe(() => describeStack()));
 
 const keyJson = express.json({ limit: '8kb' });
 const KEY_WRITE_STACK = [sessionOrLoopback, localWriteGuard, keyJson];

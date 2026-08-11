@@ -1,0 +1,107 @@
+/* stack.css — the Software-stack page. Token-only, no literal colours or sizes.
+   Mirrors connections.css's idioms (head / section / row / badge) with its own
+   .stk- prefix, so the two pages read as siblings without sharing selectors —
+   a tweak to one can never silently restyle the other. Both themes come free:
+   every colour below is a token that [data-theme] already re-points. */
+
+.stk { display: flex; flex-direction: column; gap: var(--space-lg); }
+
+/* ---- Header ---------------------------------------------------------------- */
+.stk-head { margin-top: var(--space-xs); }
+.stk-title {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 var(--space-sm);
+  font-size: 1.5rem; font-weight: 560; letter-spacing: -0.015em; color: var(--fg);
+}
+.stk-title svg { color: var(--accent-marker-text); }
+.stk-sub { margin: 0; max-width: 64ch; font-size: 0.875rem; line-height: 1.55; color: var(--fg-muted); }
+
+.stk-link { color: var(--accent-marker-text); text-decoration: none; border-bottom: 1px solid transparent; }
+.stk-link:hover { border-bottom-color: currentColor; }
+.stk-link:focus-visible { outline: 2px solid var(--accent-marker); outline-offset: 2px; border-radius: 3px; }
+
+/* ---- Section --------------------------------------------------------------- */
+.stk-section { display: flex; flex-direction: column; gap: 12px; }
+.stk-section-head { display: flex; align-items: baseline; gap: var(--space-sm); }
+.stk-section-title {
+  margin: 0;
+  font-size: 0.8125rem; font-weight: 520;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--fg-muted);
+}
+.stk-count { font-size: 0.75rem; color: var(--fg-subtle); }
+
+.stk-note {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in oklch, var(--status-warning) 30%, var(--border-subtle));
+  background: var(--status-warning-soft);
+  font-size: 0.8125rem; line-height: 1.5; color: var(--fg-muted);
+}
+.stk-empty { margin: 0; font-size: 0.8125rem; color: var(--fg-subtle); }
+.stk-hint { margin: 0; max-width: 64ch; font-size: 0.75rem; line-height: 1.5; color: var(--fg-subtle); }
+
+/* ---- Rows ------------------------------------------------------------------ */
+.stk-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm); }
+
+.stk-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-1);
+}
+/* The left edge carries the classification, so the badge is confirmation rather
+   than the only signal (never colour alone — the badge text says it too). */
+.stk-row--connector { border-color: color-mix(in oklch, var(--status-success) 30%, var(--border-subtle)); }
+.stk-row--unlinked  { border-color: color-mix(in oklch, var(--status-warning) 30%, var(--border-subtle)); }
+.stk-row--system    { border-style: dashed; }
+
+.stk-row-icon { color: var(--fg-muted); flex: 0 0 auto; margin-top: 2px; }
+.stk-row-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1 1 auto; }
+.stk-row-name { font-size: 0.9375rem; color: var(--fg); overflow-wrap: anywhere; }
+.stk-row-meta { font-size: 0.75rem; line-height: 1.45; color: var(--fg-subtle); overflow-wrap: anywhere; }
+.stk-row-meta--quiet { opacity: 0.85; }
+
+/* ---- Badges ---------------------------------------------------------------- */
+.stk-badge {
+  display: inline-flex; align-items: center; gap: var(--space-xs);
+  flex: 0 0 auto;
+  padding: 2px 8px; border-radius: 999px;
+  font-size: 0.6875rem; white-space: nowrap;
+  color: var(--fg-muted); background: var(--status-success-soft);
+}
+.stk-badge--connector { color: var(--status-success); background: var(--status-success-soft); }
+.stk-badge--unlinked  { color: var(--fg-muted); background: var(--status-warning-soft); }
+.stk-badge--system    { color: var(--fg-subtle); background: var(--surface-2); }
+.stk-badge--mcp       { color: var(--accent-marker-text); background: var(--accent-marker-soft); }
+
+/* ---- MCP ${VAR} references -------------------------------------------------- */
+/* Chips, NOT status pills: the cockpit cannot verify whether these resolve, so
+   they must never look like a green/red state. Neutral surface, quiet dot. */
+.stk-row-refs {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  margin-top: var(--space-xs);
+  font-size: 0.6875rem; color: var(--fg-subtle);
+}
+.stk-row-refs-label { color: var(--fg-subtle); }
+.stk-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-2);
+  color: var(--fg-muted);
+  font-size: 0.6875rem;
+}
+.stk-chip svg { color: var(--fg-subtle); flex: 0 0 auto; }
+
+/* ---- Narrow viewports ------------------------------------------------------- */
+/* Under ~480px the badge would squeeze the key name to a couple of characters;
+   drop it below the text instead of truncating a name the user came to read. */
+@media (max-width: 480px) {
+  .stk-row { flex-wrap: wrap; }
+  .stk-row-text { flex: 1 1 100%; }
+  .stk-badge { margin-left: 26px; }
+}

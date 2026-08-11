@@ -96,6 +96,7 @@ export const en = {
   'nav.journal': 'Journal',
   'nav.fleetingNotes': 'Fleeting Notes',
   'nav.connections': 'Connections',
+  'nav.stack': 'Software stack',
   'nav.settings': 'Settings',
   'nav.recipes': 'Recipes',
   'nav.media': 'Movies & Series',
@@ -672,6 +673,42 @@ export const en = {
   'cnx.saveKeyError': 'Could not save the key.',
   'cnx.keyStoredAs': 'Key stored as {key} — now ask your AI assistant to wire the connector.',
   'cnx.connectedNotice': '{label} connected. Tasks and events appear on the Hub and in Actions & Planning.',
+
+  // ---- Software stack (#/stack) ---------------------------------------------
+  // The WIDER inventory: everything this myPKA is wired to, not just the tools
+  // that feed the planner. Read-only — management stays on Connections.
+  'stack.title': 'Software stack',
+  'stack.loadError': 'Could not load the software stack.',
+  'stack.sub': 'Everything this myPKA is wired to — wider than {connections}, which only covers the tools that feed your planner. Read-only: key names from {envPath} and the servers declared in {mcpPath}. A stored value is never shown here, or anywhere else.',
+  'stack.subConnections': 'Connections',
+
+  'stack.keysTitle': 'Stored keys',
+  'stack.keysEmpty': 'No keys stored yet.',
+  'stack.keysCountOne': '{count} key',
+  'stack.keysCountOther': '{count} keys',
+  'stack.roleConnector': 'used by {label}',
+  'stack.roleConnectorMulti': 'used by {labels}',
+  'stack.roleSystem': 'cockpit setting — not a tool',
+  'stack.roleUnlinked': 'not wired to the planner',
+  'stack.badgeConnector': 'connector',
+  'stack.badgeSystem': 'setting',
+  'stack.badgeUnlinked': 'no connector',
+  'stack.keyEmptyValue': 'stored without a value',
+  'stack.mcpNameMatch': 'the same name appears in {mcpPath} ({servers})',
+  'stack.gateOff': 'The connector gate is off (CONNECTORS_ENABLED), so no key can show its connector right now.',
+  'stack.manageHint': 'Adding, replacing or revoking a key happens on {connections}.',
+
+  'stack.mcpTitle': 'MCP servers',
+  'stack.mcpEmpty': 'No MCP servers found in {mcpPath}.',
+  'stack.mcpMissing': 'No {mcpPath} in this myPKA — nothing to show.',
+  'stack.mcpCountOne': '{count} server',
+  'stack.mcpCountOther': '{count} servers',
+  'stack.mcpTransportHttp': 'remote (HTTP)',
+  'stack.mcpTransportSse': 'remote (SSE)',
+  'stack.mcpTransportStdio': 'local process',
+  'stack.mcpRefs': 'refers to:',
+  'stack.mcpRefsNote': 'These names resolve outside this cockpit, in the environment that launches your assistant — so their status cannot be shown here.',
+  'stack.mcpOpen': 'Open {id} in a new tab',
 
   // ---- Documents -----------------------------------------------------------
   'docs.title': 'Documents',

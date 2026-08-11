@@ -27,8 +27,9 @@ Filename pattern: `SOP-NNN-<title>.md`. See [[GL-001-file-naming-conventions]] f
 | SOP-015 | [[SOP-015-adc-pub-qualifier-handleiding]] | Sander | Officiële ADC Europe/Darts Atlas-procedure voor toernooimanagers: inschrijvingen, check-in/checkout, format-regels, knockout, winnaarsfoto, financiële regelingen. |
 | SOP-016 | [[SOP-016-remote-toegang-mac-mini-op-vakantie]] | Sander | Vanaf een andere locatie via Terminal + Tailscale SSH'en naar de Mac mini en daar Claude Code starten op de tweede-brein-repo. |
 | SOP-017 | [[SOP-017-verwerk-voedingsregistratie]] | Penn + Daedalus | Foto, spraak of tekst normaliseren naar een categorie, nutrition-range en append-only dagelijks voedingslogboek. |
+| SOP-018 | [[SOP-018-registreer-mcp-service-bij-agent-runtime]] | Daedalus | Een geregistreerde MCP-service veilig, idempotent en zonder secretduplicatie aansluiten op een agentruntime. |
 
-*Reserved (genuinely open for future agents):* SOP-018+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
+*Reserved (genuinely open for future agents):* SOP-019+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
 
 ## How to add a new SOP
 

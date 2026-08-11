@@ -50,8 +50,17 @@ Bovenop niveau 2: reacties (die al automatisch in een Google Sheet landen, stand
 
 ## Next steps
 
-- [ ] Daedalus laat verifiëren of Google Forms via n8n programmatisch aan te maken is (niveau 2), of dat een directe Forms-API-koppeling nodig is
-- [ ] Maandag 10-08-2026: Sander bekijkt dit voorstel en kiest een niveau om mee verder te gaan
+- [x] Google Forms via de officiële Forms API vanuit n8n ontwerpen en lokaal bouwen voor seizoen 26-27
+- [x] Teambeheer-parameters bevestigd: RDB `d=1`, D.T. Irritant `t=394`, seizoen `s=26-27`
+- [x] Importbestanden en regressietests opgeleverd in `/Users/sandervanockenburg-zwaan/Documents/automation-projects/dt-irritant-n8n/`
+- [ ] Sander importeert beide JSON-workflows in n8n en koppelt de Google OAuth2-credentials volgens de README
+- [ ] Eerste generator-run uitvoeren met `createForm=false`; pas na controle van de 22 competitiewedstrijden een echt formulier maken
+
+## Implementatie 11-08-2026
+
+Gekozen is voor niveau 2 met een voorbereid overzicht voor niveau 3. Teambeheer blijft de SSOT. De handmatig gestarte n8n-workflow leest uitsluitend D.T. Irritant, seizoen 26-27, en sluit bekerregels uit van het formulier. De generator bouwt via de Google Forms API een mobiel formulier met maandsecties; de tweede workflow schrijft antwoorden, een overzicht per wedstrijd en ontbrekende spelers naar Google Sheets.
+
+Ontwerp: [[2026-08-11-dt-irritant-google-forms-n8n-design]]. Plan: [[2026-08-11-dt-irritant-google-forms-n8n-plan]].
 
 ## Bronnen
 

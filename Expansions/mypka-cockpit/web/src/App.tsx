@@ -18,6 +18,7 @@ import { SessionLogView } from './views/SessionLogView';
 import { TeamAnalyticsView } from './views/TeamAnalyticsView';
 import { TeamKnowledgeListView } from './views/TeamKnowledgeListView';
 import { ConnectionsView } from './views/ConnectionsView';
+import { StackView } from './views/StackView';
 import { SettingsView } from './views/SettingsView';
 import { TypeListView } from './views/TypeListView';
 import { NoteView } from './views/NoteView';
@@ -161,6 +162,7 @@ function ContentRouter({ route }: { route: ReturnType<typeof useRoute> }) {
     case 'sops': return <TeamKnowledgeListView family="sops" />;
     case 'guidelines': return <TeamKnowledgeListView family="guidelines" />;
     case 'connections': return <ConnectionsView />;
+    case 'stack': return <StackView />;
     case 'settings': return <SettingsView />;
     case 'notes':
       return (

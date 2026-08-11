@@ -39,9 +39,11 @@ Speelt Superleague bij **SL Rijnvogels Duurzaam** (24-25 en 25-26; daarvoor SL D
 - **RDB teamgenoot** — D.T. Irritant (Eredivisie)
 - **Superleague koppels** — vaste partner bij SL Rijnvogels Duurzaam (t/m 25-26)
 - **Coaching** — [[dartscoaching-nl]], gestart 2026; hybride traject €40/mnd (12 mnd)
-  - Zie: [[2025-12-11-coaching-voorstel-marc-vleghert]]
-  - Intake: [[2026-01-13-intake-marc-vleghert]]
-  - Sessie 2: [[2026-02-10-coachgesprek-marc-vleghert-sessie-2]]
+  - Voorstel: [[2025-12-11-coaching-voorstel-marc-vleghert]]
+  - Intake (13 jan): [[2026-01-13-intake-marc-vleghert]]
+  - Sessie 2 / Dutch Open evaluatie (10 feb): [[2026-02-10-coachgesprek-marc-vleghert-sessie-2]]
+  - Coachgesprek (22 apr): [[2026-04-22-coachgesprek-marc-vleghert]]
+  - Volledige coachdossier: [[marc-vleghert-coachdossier-v1]]
 
 ## Karakteristieken (uit intake)
 

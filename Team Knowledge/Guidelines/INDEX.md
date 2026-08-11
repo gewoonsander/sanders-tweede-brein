@@ -19,6 +19,7 @@ Filename pattern: `GL-NNN-<title>.md`.
 | GL-014 | [[GL-014-todoist-taakformat]] | Todoist-taakformat: `actie > titel ⏰ tijd`, prioriteit alleen native veld, bronmateriaal-link, projectroutering. |
 | GL-015 | [[GL-015-agent-model-tier-review]] | Modelkeuze per specialist (Opus/Sonnet/Haiku) en reviewcadans: kwartaal-vangnet + event-triggers (nieuw model, limieten, kwaliteit). |
 | GL-016 | [[GL-016-beslis-en-waarschuwingsblokken]] | Beslissingen/blokkades/gates altijd als apart 🔶/🔴/✅-blok met unieke 3-tekens-code, gestapeld aan het einde van het antwoord. |
+| GL-017 | [[GL-017-mcp-service-register]] | Portable SSOT voor MCP-services, endpoints, secretvariabelen, risicoklassen en adaptercontracten. |
 
 | GL-003 | [[GL-003-design-system]] | Multi-merk design-system hub (cold-start brand-rule + erf-model). Verwijst naar de losse merkbestanden in `GL-003-brands/` (ADC Regio Oost, DartsCoaching.nl, Dart Buddies, Van Gewoon Sander) — geen van deze bevat nog echte waarden. Geinstalleerd via het Designer Pack. |
 

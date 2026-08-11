@@ -16,7 +16,10 @@ import { taskConnectors, calendarConnectors } from './connectors/registry.js';
 // Key names: SCREAMING_SNAKE, 3..64 chars, must not collide with the cockpit's
 // own operational variables (those are configured at launch, not via the UI).
 const KEY_RE = /^[A-Z][A-Z0-9_]{2,63}$/;
-const PROTECTED_KEYS = new Set([
+// Exported (read-only) as the SSOT for "this is a cockpit-operational variable,
+// not a tool credential" — stackInventory.js classifies stored keys with it
+// instead of keeping a second, drift-prone copy of the list.
+export const PROTECTED_KEYS = new Set([
   'COCKPIT_PIN_HASH', 'COCKPIT_BIND_LAN', 'COCKPIT_USE_TLS',
   'COCKPIT_TLS_CERT', 'COCKPIT_TLS_KEY', 'WORKBENCH_WRITE_ENABLED',
   'PLAN_WRITE_ENABLED', 'SOURCE_WRITE_ENABLED', 'PORT',

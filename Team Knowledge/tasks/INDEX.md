@@ -2,22 +2,25 @@
 
 _Auto-generated. Do not edit by hand. Run `SOP-rebuild-task-index` to regenerate._
 
-_Last rebuilt: 2026-07-09T07:26:26Z_
+_Last rebuilt: 2026-08-11T18:45:00Z_
 
 ## Summary
-- Open: 0
-- In progress: 0 (0 blocked)
-- Done (this month): 1
+- Open: 1
+- In progress: 1 (0 blocked)
+- Done (this month): 0
 - Cancelled (this month): 0
 
-## Open (0)
-_(none)_
+## Open (1)
 
-## In progress (0)
-_(none)_
+### Priority 4 — low
+- [[tsk-2026-08-08-001-scaffold-oude-teamnamen-opruimen]] — Vanilla-scaffold-laag opschonen van oude teamnamen (Larry/Nolan/Pax/Mack/Silas/Iris) — assignee: Hermes — created 2026-08-08
+
+## In progress (1)
+- [[tsk-2026-08-11-001-mypka-cockpit-software-stack-tabblad]] — assignee: bezalel — claimed 2026-08-11
 
 ## By assignee
-- Hermes: 0 open, 0 in-progress (0 blocked)
+- bezalel: 0 open, 1 in-progress
+- Hermes: 1 open, 0 in-progress
 
 ## Recently closed (last 7 days)
-- 2026-07-09 [[tsk-2026-07-02-001-pkm-oude-teamnamen-opruimen]] — done — Hermes
+_none_

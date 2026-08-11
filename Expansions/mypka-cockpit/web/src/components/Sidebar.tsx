@@ -10,7 +10,7 @@ import {
   NotebookPen, Users, Hash, FolderKanban,
   KeyRound, Repeat2, Target, Building2, FileText, Package, PanelLeftClose,
   UsersRound, LayoutDashboard, StickyNote, Plug, SlidersHorizontal, Search,
-  ScrollText, ListChecks, BookText, ChevronRight, BarChart3
+  ScrollText, ListChecks, BookText, ChevronRight, BarChart3, Layers
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { NavType, EntityType } from '../lib/cockpitTypes';
@@ -383,6 +383,13 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
             <NavRow
               icon={Plug} label={t('nav.connections')} href={hrefFor({ name: 'connections' })}
               active={isActive(route, { name: 'connections' })} onClick={onNavigate}
+            />
+            {/* The wider read-only inventory (stored key names + MCP servers).
+                Layers, deliberately NOT the Plug icon above: the two pages sit
+                next to each other and must not read as the same thing. */}
+            <NavRow
+              icon={Layers} label={t('nav.stack')} href={hrefFor({ name: 'stack' })}
+              active={isActive(route, { name: 'stack' })} onClick={onNavigate}
             />
             {/* "My AI Team" — a fly-out trigger (not a plain link). Opens a submenu
                 of the five team destinations (Roster / Session Log / Workstreams /
