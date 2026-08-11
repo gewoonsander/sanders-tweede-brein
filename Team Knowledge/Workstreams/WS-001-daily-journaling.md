@@ -4,7 +4,7 @@
 - **Owners:** Penn (capture and writing), Hermes (routing and Librarian pass)
 - **References:** [[SOP-001-how-to-add-a-new-specialist]], [[GL-001-file-naming-conventions]], [[Team/Penn - Journal Writer/AGENTS]], [[Team/Hermes - Orchestrator/AGENTS]]
 - **Trigger:** any user input that contains a thought, observation, encounter, screenshot, photo, or voice note.
-- **Version:** 1.1.0 (2026-06-03) — Step 4 routing now enforces the My Life doctrine: every Goal anchors to exactly one Key Element, names a single carrier (Project OR Habit), passes the filter test, and Topics graduate into Key Elements rather than deepening forever. See the dated note at the foot of this file.
+- **Version:** 1.1.1 (2026-08-11) — Step 1 now names the two automation-fed Team Inbox subfolders (`Screenshots/`, `Documents/`) Penn must also scan. See the dated note at the foot of this file.
 
 ## Purpose
 
@@ -21,6 +21,10 @@ Turn raw daily inputs into structured PKM entries. The Journal is the inbox. Peo
 ### Step 1 - Hermes receives the input
 
 Hermes checks the routing cheatsheet in his AGENTS.md. Daily journaling triggers route to Penn.
+
+**Team Inbox has two automation-fed subfolders in addition to its flat root:** `Team Inbox/Screenshots/` and `Team Inbox/Documents/`, populated by the `nl.gewoonsander.downloads-router` launchd agent from files that land in `~/Downloads`. See [[Team Inbox/README]] for how they're fed. When processing the inbox, Penn checks both subfolders, not just the root — items don't stop being inbox items just because the router filed them one level deeper.
+
+Voedingsfoto's, gesproken eetregistraties en tekst over eten volgen de gespecialiseerde route [[WS-007-voeding-vastleggen-en-controleren]] en [[SOP-017-verwerk-voedingsregistratie]]. Het dagelijkse voedingslogboek is canoniek; deze Workstream dupliceert dat contract niet.
 
 ### Step 2 - Penn writes the Journal entry
 
@@ -105,5 +109,6 @@ All naming questions resolve to [[GL-001-file-naming-conventions]]. If you need 
 
 ## Changelog
 
+- **1.1.1 (2026-08-11)** — Step 1 now names `Team Inbox/Screenshots/` and `Team Inbox/Documents/` as automation-fed subfolders Penn must also check, not just the flat root. Discovered when auditing why `Team Inbox/Screenshots/` always looked empty — the feeding launchd agent (`nl.gewoonsander.downloads-router`) was silently failing (TCC permission block), and even once fixed, nothing in WS-001 told Penn to look there.
 - **1.1.0 (2026-06-03)** — Step 4 routing rewritten to enforce the My Life doctrine. My Life is now framed as four buckets (Topics, Habits, Projects, Key Elements) plus Goals as the operating layer on top. Added Step 4b: the filter test, the anchoring law (every Goal → exactly one Key Element, never a Project/Topic), the single-carrier rule (Project OR Habit, siblings, never both), and Topic→Key-Element promotion with reverse archive. Routing-table notes for the five My Life types updated to match. Canonical examples woven in: the weight Goal ("lose 20 kg" → Key Element Health, carried by an 8-week Project or a 3-workouts-a-week Habit) and the French Topic (graduates into a Key Element once it becomes "reach B2 fluency").
 - **1.0.0** — Initial day-1 daily-journaling flow.

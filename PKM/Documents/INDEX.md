@@ -5,6 +5,7 @@ Markdown stubs that describe and point at the user's real documents (passports, 
 ## Active files
 
 - [[passport]] — seeded course sample. Shows the canonical shape of a document stub.
+- [[2026-03-30-adc-eu-toernooi-invoice-2026-008]] — ADC EU Toernooi invoice maart 2026, €600, factuurnr. 2026-008.
 - [[2026-05-02-plugandpay-lite-factuur]] — Plug&Pay Lite jaarabonnement mei 2026, €217,80, factuurnr. 202617346.
 - [[2026-05-22-canva-pro-factuur]] — Canva Pro factuur mei 2026, €110,00, factuurnr. 04889-45250792.
 - [[2026-05-29-meetingverslag-ralf-gesprek-5]] — Meetingverslag Ralf, gesprek 5, 29 mei 2026.

@@ -20,6 +20,8 @@
     "darts:watch": "node tools/dartsatlas/import-exports.mjs --watch",
     "darts:status": "node tools/dartsatlas/import-exports.mjs --status",
     "darts:test": "node --test tools/dartsatlas/extract.test.mjs"
+    ,"food:test": "python3 -m unittest discover -s scripts/tests -p 'test_food_*.py' && node --test server/tracking.food.test.mjs"
+    ,"food:capture-status": "bash -lc 'launchctl list 2>/dev/null | grep nl.gewoonsander.food-capture || echo food-capture-not-loaded'"
   },
   "dependencies": {
     "better-sqlite3": "^12.10.0",

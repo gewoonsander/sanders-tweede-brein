@@ -16,3 +16,12 @@
 .workout-map-wrap .leaflet-container {
   background: var(--surface-1);
 }
+.food-day-summary { display:flex; flex-direction:column; gap:var(--space-md); padding:var(--space-lg); border:1px solid var(--border); border-radius:var(--radius-panel); background:var(--surface-1); }
+.food-day-summary-head { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--space-md); }
+.food-day-summary-head h4 { color:var(--fg); font-size:var(--text-title); }
+.food-day-summary-head p,.food-midpoint,.food-confidence { color:var(--fg-subtle); font-size:var(--text-caption); }
+.food-complete { display:inline-flex; align-items:center; gap:var(--space-xs); color:var(--fg-muted); }
+.food-day-nutrition,.food-card-nutrition { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-sm); }
+.food-nutrition-range { display:flex; flex-direction:column; gap:2px; color:var(--fg-subtle); font-size:var(--text-caption); }
+.food-nutrition-range strong { color:var(--fg); font-weight:520; }
+@media (max-width: 640px) { .food-day-nutrition,.food-card-nutrition { grid-template-columns:repeat(2,minmax(0,1fr)); } .food-day-summary-head { flex-direction:column; } }

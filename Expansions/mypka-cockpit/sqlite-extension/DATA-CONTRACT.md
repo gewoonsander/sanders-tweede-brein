@@ -1330,3 +1330,13 @@ Indexes: `idx_<table>_doc_id` on `(doc_id)` each.
 > contract. Field names are the agreed names — change them only by editing the
 > regen + this contract together (append-only; never rename a shipped column
 > silently).
+# Voedingslogboek (lokale uitbreiding 2026-08-11)
+
+Markdown is canoniek in `PKM/Journal/YYYY/MM/YYYY-MM-DD-voedingslogboek.md`.
+Machineleesbare `FOOD_ENTRY`- en `FOOD_AUDIT`-JSON-comments worden door
+`scripts/regen-mypka-db.py` afgeleid naar `food_logs`, `food_log_days` en
+`v_food_day_totals`. Iedere actieve maaltijd heeft exact één `meal_type`:
+`breakfast`, `lunch`, `dinner` of `snack`. Nutritionele waarden zijn altijd
+min/max-ranges; `kcal_mid` is uitsluitend een afgeleide presentatiewaarde.
+Correcties gebruiken `supersedes_entry_id`; de vervangen rij blijft behouden
+met `is_active = 0`. De browser-API is read-only.

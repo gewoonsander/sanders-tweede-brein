@@ -89,54 +89,61 @@ export function getHabitTracking() {
 
 // ---- FOOD (photo nutrition) -----------------------------------------------
 
-// kontext + linked_habits are JSON arrays in the mirror. Resolve them per-row
-// with json_each() rather than parsing JSON in JS (Silas's note). We read from the
-// base food_logs table because it carries the `id` column that v_food_log_calendar
-// omits (used only as a stable React key); every other column is identical to the
-// view, and the read is equally read-only. GROUP_CONCAT folds the json_each rows
-// back to one cell, joined by an ASCII unit-separator (char(31)) that can never
-// appear inside a tag value, so the client splits it back losslessly. The
-// json_valid() guard means a NULL / malformed array yields NULL (→ empty list).
 const foodStmt = optionalStmt(`
   SELECT f.id,
          f.log_date,
-         f.mahlzeit_typ,
-         f.eiweiss_sichtbar,
+         f.logged_at,
+         f.meal_type,
+         f.description,
+         f.source_type,
+         f.kcal_min, f.kcal_max,
+         f.protein_g_min, f.protein_g_max,
+         f.carbs_g_min, f.carbs_g_max,
+         f.fat_g_min, f.fat_g_max,
+         f.confidence,
          f.photo_path,
-         f.photo_count,
-         f.note,
-         f.key_element,
          f.journal_slug,
-         (SELECT GROUP_CONCAT(k.value, char(31))
-            FROM json_each(f.kontext) k
-            WHERE json_valid(f.kontext)) AS kontext_csv,
-         (SELECT GROUP_CONCAT(h.value, char(31))
-            FROM json_each(f.linked_habits) h
-            WHERE json_valid(f.linked_habits)) AS linked_csv
+         f.supersedes_entry_id
   FROM food_logs f
-  ORDER BY f.log_date DESC, f.mahlzeit_typ, f.id
+  WHERE f.is_active = 1
+  ORDER BY f.log_date DESC, f.logged_at, f.id
 `);
 
-const SEP = String.fromCharCode(31);
-const splitArr = (csv) => (csv ? csv.split(SEP).filter(Boolean) : []);
+const foodDaysStmt = optionalStmt(`
+  SELECT log_date, kcal_min, kcal_max, kcal_mid,
+         protein_g_min, protein_g_max, carbs_g_min, carbs_g_max,
+         fat_g_min, fat_g_max, day_complete, confirmed_at
+  FROM v_food_day_totals ORDER BY log_date DESC
+`);
 
 export function getFoodTracking() {
   const rows = foodStmt.all();
   return rows.map((r) => ({
     id: r.id,
     date: r.log_date || null,
-    mealType: r.mahlzeit_typ || null,
-    // context tags are neutral-descriptive: planned | random | stress | social |
-    // late. The client never colours them good/bad.
-    context: splitArr(r.kontext_csv),
-    // visible-protein is a quiet boolean flag, not a score. null = unknown.
-    proteinVisible: r.eiweiss_sichtbar === null ? null : Number(r.eiweiss_sichtbar) === 1,
+    loggedAt: r.logged_at || null,
+    mealType: r.meal_type || null,
+    description: r.description || null,
+    sourceType: r.source_type || null,
+    kcal: [r.kcal_min, r.kcal_max],
+    proteinG: [r.protein_g_min, r.protein_g_max],
+    carbsG: [r.carbs_g_min, r.carbs_g_max],
+    fatG: [r.fat_g_min, r.fat_g_max],
+    confidence: r.confidence || null,
     photoPath: r.photo_path || null,
-    photoCount: r.photo_count == null ? 0 : Number(r.photo_count),
-    note: r.note || null,
-    keyElement: r.key_element || null,
-    linkedHabits: splitArr(r.linked_csv),
     journalSlug: r.journal_slug || null,
+    supersedesEntryId: r.supersedes_entry_id || null,
+  }));
+}
+
+export function getFoodDays() {
+  return foodDaysStmt.all().map((r) => ({
+    date: r.log_date,
+    kcal: [r.kcal_min, r.kcal_max], kcalMid: r.kcal_mid,
+    proteinG: [r.protein_g_min, r.protein_g_max],
+    carbsG: [r.carbs_g_min, r.carbs_g_max], fatG: [r.fat_g_min, r.fat_g_max],
+    complete: r.day_complete == null ? null : Number(r.day_complete) === 1,
+    confirmedAt: r.confirmed_at || null,
   }));
 }
 
@@ -144,5 +151,6 @@ export function getTracking() {
   return {
     habits: getHabitTracking(),
     food: getFoodTracking(),
+    foodDays: getFoodDays(),
   };
 }

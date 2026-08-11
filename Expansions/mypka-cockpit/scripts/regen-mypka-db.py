@@ -82,6 +82,7 @@ OWNED_TABLES = [
     "key_elements", "habits", "documents", "deliverables",
     "journal", "journal_media", "agents", "agent_journal", "session_logs",
     "weekly_reports", "links", "meta",
+    "food_logs", "food_log_days",
     "transactions", "quotes", "outer_world",
     # Governance docs (item: cockpit Team-Knowledge browser). One table per family,
     # indexed from Team Knowledge/Workstreams|SOPs|Guidelines. Their metadata lives
@@ -105,6 +106,8 @@ OWNED_TABLES = [
 # any OTHER view in the file (a different mirror, an analytics layer) is preserved.
 OWNED_VIEWS = [
     "v_open_invoices", "v_reimbursement_pending", "v_invoice_payment_trail",
+    "v_food_day_totals",
+    "v_food_log_calendar",
 ]
 
 # Entity folders -> (table, title column). Missing folders are skipped quietly
@@ -408,6 +411,17 @@ CREATE TABLE guidelines (
   version TEXT, triggered_by TEXT, tags TEXT,
   body TEXT, file_path TEXT, raw_frontmatter TEXT);
 CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE food_logs (
+  id INTEGER PRIMARY KEY, entry_id TEXT NOT NULL UNIQUE, source_id TEXT NOT NULL,
+  journal_slug TEXT NOT NULL, log_date TEXT NOT NULL, logged_at TEXT NOT NULL,
+  meal_type TEXT NOT NULL CHECK(meal_type IN ('breakfast','lunch','dinner','snack')),
+  description TEXT NOT NULL, source_type TEXT NOT NULL,
+  kcal_min REAL, kcal_max REAL, protein_g_min REAL, protein_g_max REAL,
+  carbs_g_min REAL, carbs_g_max REAL, fat_g_min REAL, fat_g_max REAL,
+  confidence TEXT, photo_path TEXT, supersedes_entry_id TEXT, is_active INTEGER NOT NULL DEFAULT 1,
+  source_path TEXT NOT NULL);
+CREATE TABLE food_log_days (
+  log_date TEXT PRIMARY KEY, day_complete INTEGER, confirmed_at TEXT, source_path TEXT NOT NULL);
 
 -- ── Global full-text search (FTS5, item-8) ─────────────────────────────────────
 -- notes_fts is the single searchable corpus across EVERY entity + library + journal
@@ -446,6 +460,22 @@ CREATE INDEX idx_outer_world_source_type ON outer_world (source_type);
 CREATE INDEX idx_workstreams_doc_id ON workstreams (doc_id);
 CREATE INDEX idx_sops_doc_id ON sops (doc_id);
 CREATE INDEX idx_guidelines_doc_id ON guidelines (doc_id);
+CREATE INDEX idx_food_logs_date ON food_logs (log_date, meal_type, logged_at);
+
+CREATE VIEW v_food_day_totals AS
+SELECT f.log_date,
+       SUM(f.kcal_min) AS kcal_min, SUM(f.kcal_max) AS kcal_max,
+       (SUM(f.kcal_min) + SUM(f.kcal_max)) / 2.0 AS kcal_mid,
+       SUM(f.protein_g_min) AS protein_g_min, SUM(f.protein_g_max) AS protein_g_max,
+       SUM(f.carbs_g_min) AS carbs_g_min, SUM(f.carbs_g_max) AS carbs_g_max,
+       SUM(f.fat_g_min) AS fat_g_min, SUM(f.fat_g_max) AS fat_g_max,
+       d.day_complete, d.confirmed_at
+FROM food_logs f LEFT JOIN food_log_days d ON d.log_date = f.log_date
+WHERE f.is_active = 1 GROUP BY f.log_date;
+CREATE VIEW v_food_log_calendar AS
+SELECT log_date, meal_type, description, kcal_min, kcal_max, protein_g_min, protein_g_max,
+       carbs_g_min, carbs_g_max, fat_g_min, fat_g_max, confidence, photo_path, journal_slug
+FROM food_logs WHERE is_active = 1 ORDER BY log_date DESC, logged_at;
 
 -- ── Invoice views (Silas-owned; OWNED_VIEWS) ───────────────────────────────────
 -- Open invoices with DERIVED due-state. Overdue / due-soon are computed here from
@@ -1005,6 +1035,41 @@ def main():
             link_rows.append(("journal", slug, raw, tslug, ltype))
         rows += 1
     stats["journal"] = rows
+
+    # ---- food logs (canonical JSON anchors inside daily journal markdown) -----
+    food_rows = 0
+    for path in md_files(ROOT / "PKM/Journal", recursive=True):
+        if not path.name.endswith("-voedingslogboek.md"):
+            continue
+        text = path.read_text(encoding="utf-8")
+        rel = str(path.relative_to(ROOT))
+        entries = []
+        for match in re.finditer(r"<!-- FOOD_ENTRY (\{.*?\}) -->", text):
+            try: entries.append(json.loads(match.group(1)))
+            except (json.JSONDecodeError, TypeError): continue
+        superseded = {e.get("supersedes_entry_id") for e in entries if e.get("supersedes_entry_id")}
+        for e in entries:
+            cur.execute(
+                "INSERT INTO food_logs (entry_id,source_id,journal_slug,log_date,logged_at,meal_type,description,source_type,"
+                "kcal_min,kcal_max,protein_g_min,protein_g_max,carbs_g_min,carbs_g_max,fat_g_min,fat_g_max,"
+                "confidence,photo_path,supersedes_entry_id,is_active,source_path) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                (e.get("entry_id"), e.get("source_id"), path.stem, e.get("log_date"), e.get("logged_at"),
+                 e.get("meal_type"), e.get("description"), e.get("source_type"),
+                 *(e.get("kcal") or [None,None]), *(e.get("protein_g") or [None,None]),
+                 *(e.get("carbs_g") or [None,None]), *(e.get("fat_g") or [None,None]),
+                 e.get("confidence"), e.get("photo_path"), e.get("supersedes_entry_id"),
+                 0 if e.get("entry_id") in superseded else 1, rel))
+            food_rows += 1
+        audits = []
+        for match in re.finditer(r"<!-- FOOD_AUDIT (\{.*?\}) -->", text):
+            try: audits.append(json.loads(match.group(1)))
+            except (json.JSONDecodeError, TypeError): continue
+        if audits:
+            audit = audits[-1]
+            log_date = path.name[:10]
+            cur.execute("INSERT INTO food_log_days (log_date,day_complete,confirmed_at,source_path) VALUES (?,?,?,?)",
+                        (log_date, 1 if audit.get("complete") else 0, audit.get("confirmed_at"), rel))
+    stats["food_logs"] = food_rows
 
     # ---- deliverables ----------------------------------------------------------
     rows = 0

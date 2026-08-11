@@ -217,6 +217,15 @@ At the same close-session moment as the journal check, Hermes scans `PKM/My Life
 
 This replaces any time-of-day trigger (e.g. "after 21:00") — checking "already logged today?" against the Habit file itself is more reliable than a clock cutoff, and works correctly regardless of how many sessions the user closes in a day.
 
+### Close-session food-log check (mandatory, folded into the same check)
+
+Hermes asks in the same combined close-session message: **"Heb je vandaag alles wat je hebt gegeten gelogd?"** using GL-013 `J/N` choices and a GL-016 decision block.
+
+- **J:** Penn appends a `complete: yes` audit to today's `PKM/Journal/YYYY/MM/YYYY-MM-DD-voedingslogboek.md` via [[SOP-017-verwerk-voedingsregistratie]]. No content follow-up.
+- **N:** Penn asks one open recall question: "Wat kun je je nog herinneren van wat je vandaag hebt gegeten of gedronken?" Penn processes the answer via SOP-017, then asks `J/N` again whether the day is now complete.
+- The newest completion audit is authoritative. This check happens at every true close-session because food may have been eaten after an earlier same-day confirmation.
+- The git backup remains the final step, after food capture and its mirror regeneration.
+
 ### Close-session permission-prompts check (mandatory, Claude-Code hosts only)
 
 When running in Claude Code (or any host with the `fewer-permission-prompts` skill available), Hermes asks, in the same close-session pass as the journal/habit check: "Zal ik de fewer-permission-prompts-skill even laten draaien om de allowlist bij te werken op basis van deze sessie?" If the user confirms, Hermes runs the `fewer-permission-prompts` skill before the git backup step, so any resulting `.claude/settings.json` changes are included in that backup's commit. If the user declines, skip silently and proceed. Hosts without this skill skip the question entirely.

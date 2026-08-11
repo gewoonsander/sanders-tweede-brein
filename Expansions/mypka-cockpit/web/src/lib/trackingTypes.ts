@@ -25,24 +25,36 @@ export interface HabitTracking {
   cells: HabitCell[];
 }
 
-// A food log row. ANXIETY-FREE: no numbers, no calories, no scores anywhere.
-// context tags are neutral-descriptive (planned/random/stress/social/late) and the
-// UI never colours them good/bad. proteinVisible is a quiet flag, not a badge.
+export type NutritionRange = [number | null, number | null];
 export interface FoodLog {
   id: number;
   date: string | null;
-  mealType: string | null; // breakfast | lunch | dinner | snack | other | null
-  context: string[];
-  proteinVisible: boolean | null;
+  loggedAt: string | null;
+  mealType: 'breakfast' | 'lunch' | 'dinner' | 'snack' | null;
+  description: string | null;
+  sourceType: 'photo' | 'audio' | 'text' | null;
+  kcal: NutritionRange;
+  proteinG: NutritionRange;
+  carbsG: NutritionRange;
+  fatG: NutritionRange;
+  confidence: 'low' | 'medium' | 'high' | null;
   photoPath: string | null;
-  photoCount: number;
-  note: string | null;
-  keyElement: string | null;
-  linkedHabits: string[];
   journalSlug: string | null;
+  supersedesEntryId: string | null;
+}
+export interface FoodDay {
+  date: string;
+  kcal: NutritionRange;
+  kcalMid: number | null;
+  proteinG: NutritionRange;
+  carbsG: NutritionRange;
+  fatG: NutritionRange;
+  complete: boolean | null;
+  confirmedAt: string | null;
 }
 
 export interface TrackingData {
   habits: HabitTracking[];
   food: FoodLog[];
+  foodDays: FoodDay[];
 }

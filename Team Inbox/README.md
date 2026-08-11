@@ -21,3 +21,14 @@ Anything you throw in here gets filed. Screenshots, voice memos, business cards,
 - A quick `.md` braindump at end of day for **Penn** to file across PKM
 
 If you know exactly where a note belongs, write it directly in PKM. Team Inbox is for *"I have something, not sure where, just take it."*
+
+## Subfolders (automation-fed, not manual drop zones)
+
+Two subfolders exist alongside the flat root and are populated by the `nl.gewoonsander.downloads-router` launchd agent (`Expansions/downloads-router/route_downloads.sh`), which watches `~/Downloads` and moves matching files here automatically:
+
+- `Team Inbox/Screenshots/` - screenshot-shaped files that land in Downloads (e.g. dragged out of Slack, saved from a browser, shared from another device), renamed to `YYYY-MM-DD_HHMM_omschrijving.ext`.
+- `Team Inbox/Documents/` - PDFs/docs/spreadsheets that land in Downloads, moved here unchanged.
+
+This is separate from a direct screen capture (Cmd+Shift+3/4/5), which macOS saves straight into the `Team Inbox/` root per the `com.apple.screencapture` default location - it never touches `Screenshots/`.
+
+Whoever processes the inbox (see [[Team Knowledge/Workstreams/WS-001-daily-journaling]]) must check both subfolders, not just the root.

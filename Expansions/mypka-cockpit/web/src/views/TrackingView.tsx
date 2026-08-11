@@ -9,6 +9,7 @@ import { ModuleEmptyState } from '../components/ui';
 import { Tracking } from '../sections/Tracking';
 import { PageHeader } from '../components/PageHeader';
 import type { TrackingData } from '../lib/trackingTypes';
+import { FoodDaySummary } from '../components/FoodDaySummary';
 
 export function TrackingView() {
   const { data, loading, error } = useFetch<TrackingData>('/api/tracking');
@@ -21,7 +22,7 @@ export function TrackingView() {
       <PageHeader
         title="Tracking"
         icon={LineChart}
-        subtitle="Habits and meals — a gentle record, never a verdict."
+        subtitle="Gewoontes en maaltijden — gemeten als hulpmiddel, nooit als oordeel."
       />
 
       {loading && <LoadingState />}
@@ -49,6 +50,7 @@ export function TrackingView() {
             foodOpen={foodOpen}
             onToggleFood={toggleFood}
           />
+          {data.foodDays[0] && <FoodDaySummary day={data.foodDays[0]} />}
 
           <footer className="dashboard-footer">
             <p className="dashboard-footer-note">

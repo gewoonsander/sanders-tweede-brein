@@ -227,7 +227,58 @@ the package.
 
 ---
 
-## 6. The honest boundary (what you own vs. what we provide)
+## 6. Iconography contract
+
+The cockpit uses **Lucide** as its single UI icon family. Icons are imported
+from `lucide-react` and are not redrawn or recreated locally. When adding a
+module, action, status, entity type, or navigation item, first choose the
+closest semantic Lucide icon; do not introduce another general-purpose icon
+library for a missing glyph.
+
+### Visual rules
+
+- Use outline icons, monochrome, with `currentColor`; colour comes from the
+  surrounding design token rather than from the SVG itself.
+- Use `strokeWidth={1.5}` by default. A denser small control may use `1.75` or
+  `1.9` when the existing component pattern already does so.
+- Follow the established size ladder: **14–16px** for metadata and compact
+  controls, **18–20px** for regular controls, and **22–24px** for section or
+  page-title icons. Empty-state illustrations may use **28px**.
+- Give every concept one stable glyph. Reuse that mapping everywhere instead
+  of choosing a new icon per screen. Entity mappings live in
+  `web/src/components/graph/nodeIcon.ts`; module navigation mappings live in
+  `web/src/lib/moduleRegistry.tsx`.
+- An icon communicates category or action through its **shape**, not through a
+  unique category colour. Reserve semantic colours for state (success,
+  warning, error) and use the existing design tokens.
+
+### Accessibility
+
+- Decorative icons alongside visible text use `aria-hidden="true"`.
+- An icon-only button must have a concise accessible name via `aria-label`.
+- A meaningful standalone mark uses `role="img"` plus an accessible label.
+- The icon does not replace essential text when its meaning may be ambiguous.
+
+### Only allowed exception: platform marks
+
+Recognizable third-party platform logos may use their official monochrome
+glyph from **Simple Icons** when a Lucide metaphor would be misleading. Keep
+these marks `currentColor` and visually aligned with the Lucide size ladder;
+do not introduce their stock brand colours into the cockpit chrome.
+
+The Todoist, ClickUp, and Google Calendar paths in
+`web/src/components/planner/SourceMark.tsx` are the reference implementation.
+They are inlined from Simple Icons to avoid adding a full dependency. Unknown
+sources fall back to a generic Lucide glyph. This platform-mark exception does
+not permit mixing icon families elsewhere in the interface.
+
+Licensing: Lucide is released under the ISC License; Simple Icons is a CC0
+project. Check a platform owner's trademark guidelines separately when using
+its logo.
+
+---
+
+## 7. The honest boundary (what you own vs. what we provide)
 
 | You provide / own | We provide |
 |---|---|

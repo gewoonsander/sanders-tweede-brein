@@ -42,6 +42,18 @@ Overzicht van software en digitale tools die Sander actief gebruikt — inclusie
 - **Gebruik:** hosting voor RDB-website (rivierenlanddartsbond.nl) en andere WordPress-projecten
 - **Dashboard:** bevat DNS-koppeling, statistieken, spamfilters, plugin-beheer
 
+## Marketing, formulieren & intake
+
+### Formflow
+- **Type:** Legacy lifetime-deal
+- **Account:** workspace `gewoonsander`
+- **Gebruik:** interactieve formulieren en leadfunnels met conditionele paden,
+  kwalificatie, scoring/berekeningen, analytics en webhooks
+- **Aanbevolen inzet:** DartsCoaching-intake, Dart Buddies-onboarding,
+  workshopaanvragen en Darttactiek-quizzes
+- **Meer info:** [[PKM/CRM/Organizations/formflow|Formflow]] en
+  [[2026-08-11-formflow-onderzoek]]
+
 ## Notities
 
 - Canva heeft ook een eigen org-entry in CRM — die kan op termijn worden samengevoegd met dit bestand

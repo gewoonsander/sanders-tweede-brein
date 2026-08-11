@@ -130,14 +130,14 @@ export function Tracking({
         id="food"
         icon={<Camera size={22} strokeWidth={1.5} />}
         title="Meals"
-        hint="a photo record · nothing measured"
+        hint="foto, spraak en tekst · geschatte bandbreedtes"
         summary={foodSummary}
         open={foodOpen}
         onToggle={onToggleFood}
       >
         <FoodGallery logs={food} />
         <p className="mt-md text-caption leading-relaxed text-fg-subtle">
-          No calories, no scores, no judgement. Just what was on the plate, and the context around it.
+          Calorieën en macro's zijn schattingen met bandbreedtes. Het overzicht registreert zonder oordeel.
         </p>
       </Section>
     </>

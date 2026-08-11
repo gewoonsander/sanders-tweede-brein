@@ -1,0 +1,55 @@
+Cafenummer;Naam;Adres;Postcode;Plaats;PostadresAdres;PostadresPostcode;PostadresPlaats;Telefoon;Website;Emailadres
+C280;"Q-Billiards Tiel";"Walstraatje 5";"4001 AZ";Tiel;"Walstraatje 5";"4001 AZ";Tiel;;;
+C275;"Café Boemerang";"Plein 8";"4001 LJ";Tiel;"Plein 8";"4001 LJ";Tiel;"0344 625025";;
+C276;"Minicamping tussen de Dijken Tiel";"Inundatiedijk Zuid 3";"4006 PD";Tiel;"Inundatiedijk Zuid 3";"4006 PD";Tiel;0648312486;;
+C222;"Eetcafé De Tol";"Moleneind 11";"4013 NE";Kapel-Avezaath;"Moleneind 11";"4013 NE";Kapel-Avezaath;0344-662016;;
+C267;"Voetbalvereniging ISC";"Verhuizensestraat 8";"4031 KS";Ingen;"Verhuizensestraat 8";"4031 KS";Ingen;0344-601853;;
+C200;Cornerhouse;"Ommestraat 2";"4041 AP";Kesteren;"Ommestraat 2";"4041 AP";Kesteren;0488-481942;;
+C118;"Gerrit van Riemsdijk Huis";"J.R. Zeemanstraat 12 A";"4053 JN";IJzendoorn;"J.R. Zeemanstraat 12 A";"4053 JN";IJzendoorn;0344-643311;;
+C265;"Café - Bar de Coehoorn";"Maasstraat 14";"5361 GG";Grave;"Maasstraat 14";"5361 GG";Grave;"0486 471 028";;
+C147;"Café Spinners";"Grotestraat 54";"5431 DR";Cuijk;"Grotestraat 54";"5431 DR";Cuijk;06-46063985;;
+C240;"Pub Esser";"Steenstraat 37";"5831 JA";Boxmeer;"Steenstraat 37";"5831 JA";Boxmeer;06-55385020;;
+C168;"Café-zaal ?t Centrum";"Steenstraat 56";"5831 JG";Boxmeer;"Steenstraat 56";"5831 JG";Boxmeer;0485-324187;;
+C224;"de Gouden Leeuw";"Grotestraat 54";"5836 AG";Sambeek;"Grotestraat 54";"5836 AG";Sambeek;0485-572264;;
+C270;"Café de Pruuver";"Langstraat 4";"5851 BE";Afferden;"Langstraat 4";"5851 BE";Afferden;0638291058;;
+C144;"Café-Zaal De Heidebloem";"Gochsedijk 4";"5853 AC";Siebengewald;"Gochsedijk 4";"5853 AC";Siebengewald;0485-441513;;
+C229;"Café De Beurs";"Lange Hezelstraat 94";"6511 CN";Nijmegen;"Lange Hezelstraat 94";"6511 CN";Nijmegen;024-3225150;;
+C136;"Feestcafé de Gezelligheid";"Bloemerstraat 46";"6511 EK";Nijmegen;"Bloemerstraat 46";"6511 EK";Nijmegen;0611287241;;welkom@feestcafedegezelligheid.nl
+C179;"Café Jo Jo";"van Welderenstraat 87";"6511 ME";Nijmegen;"van Welderenstraat 87";"6511 ME";Nijmegen;024-8489840;;
+C047;"Café Pool";"Van Welderenstraat 99";"6511 MG";Nijmegen;"Van Welderenstraat 99";"6511 MG";Nijmegen;024-3604355;;
+C282;"House of Billiards";"Graafseweg 39";6512BR;Nijmegen;"Graafseweg 39";6512BR;Nijmegen;0243605710;;
+C255;"Café Piet Huisman";"St. Jacobslaan 30";"6533 BT";Nijmegen;"St. Jacobslaan 30";"6533 BT";Nijmegen;024-3552286;;
+C051;"S.V. Hatert";"Winkelsteegseweg 208";"6534 AR";Nijmegen;"Winkelsteegseweg 208";"6534 AR";Nijmegen;024-3552835;;
+C210;"Café De Driesprong";"Koninginnelaan 28";"6542 ZT";Nijmegen;"Koninginnelaan 28";"6542 ZT";Nijmegen;06-46848182;;
+C243;"West End";"Molenweg 145";"6543 VB";Nijmegen;"Molenweg 145";"6543 VB";Nijmegen;024-3771312;;
+C281;"Tennisvereniging Lindenholt";"De Wellenkamp 11-50";"6545 NC";Nijmegen;"De Wellenkamp 11-50";"6545 NC";Nijmegen;"024 3783783";;
+C056;"Sporthal De Kloosterhof";"Kapittelweg 2a";"6551 EB";Weurt;"Kapittelweg 2a";"6551 EB";Weurt;024-6772018;;
+C008;"Café Bar De Comm";"Dorpstraat 12";"6562 AB";Groesbeek;"Dorpstraat 12";"6562 AB";Groesbeek;024-3975043;;
+C042;"Ut Huu-ske";"Kloosterstraat 8";"6562 AW";Groesbeek;"Kloosterstraat 8";"6562 AW";Groesbeek;06-11875791;;
+C266;"Café Zaal Hopmans";"Hoge Horst 56";6562LE;Groesbeek;"Hoge Horst 56";6562LE;Groesbeek;024-3971766;;
+C038;"Janssen & Janssen";"Heerbaan 55";"6566 ED";"Millingen a/d Rijn";"Heerbaan 55";"6566 ED";"Millingen a/d Rijn";0650276924;;
+C263;"Dorpshuis de Sprong";"Prins Bernardstraat 3";"6576 BB";Ooij;"Prins Bernardstraat 3";"6576 BB";Ooij;0246631932;;
+C233;"Heumens Bos";"Vosseneindseweg 46";"6582 BR ";Heumen;"Vosseneindseweg 46";"6582 BR ";Heumen;06-83708822;;
+C023;"De Typhoon";"Markt 8";"6591 BZ";Gennep;"Markt 8";"6591 BZ";Gennep;0485-512626;;
+C149;"Het Centrum Milsbeek";"Kerkstraat 21";"6596 AK";Milsbeek;"Kerkstraat 21";"6596 AK";Milsbeek;0485-516324;;
+C256;"Café De Klok";"Kleefseweg 26";"6599 AC";Ven-Zelderheide;"Kleefseweg 26";"6599 AC";Ven-Zelderheide;0485-212721;;
+C273;"Café ZUS";"Spoorstraat 4";"6602 AZ";Wijchen;"Spoorstraat 4";"6602 AZ";Wijchen;0621268905;;
+C244;"V.V. Alverna";"Bospad 5";"6603 AR";Wijchen;"Bospad 5";"6603 AR";Wijchen;024-6413010;;
+C021;"Café De Teersdijk";"Graafseweg 985";"6603 CH";Wijchen;"Graafseweg 985";"6603 CH";Wijchen;024-6412529;;
+C132;"De Zon";"Hoogstraat 56";"6611 BZ";Overasselt;"Hoogstraat 56";"6611 BZ";Overasselt;024-6221584;;
+C185;"Dorpshuis De Hucht";"Schoolstraat 4";"6626 AC";Alphen;"Schoolstraat 4";"6626 AC";Alphen;0487-561714;;
+C279;"De Horst";"Rijdt 38";"6631 AT";Horssen;"Rijdt 38";"6631 AT";Horssen;0487541607;;
+C106;"Sportcafé De Vrijboom";"van Heemstraweg 66b";"6641 AG";Beuningen;"van Heemstraweg 66b";"6641 AG";Beuningen;06-51283944;;jcmc.megens@chello.nl
+C009;"De Doorkijk";"Langstuk 2";"6651 HZ";Druten;"Langstuk 2";"6651 HZ";Druten;0487-516363;;
+C198;"VTC Wamel";"Clarissenstraat 2";"6659 BN";Wamel;"Clarissenstraat 2";"6659 BN";Wamel;"06 242 806 26 ";0;0
+C170;"DC De Rijnvogels";"Drielse Rijndijk 61a";"6667 LP";Driel;"Drielse Rijndijk 61a";"6667 LP";Driel;06-53334614;;
+C213;"Café De Posthoorn";"Tielsestraat 215";"6673 AC";Andelst;"Tielsestraat 215";"6673 AC";Andelst;0488-451404;;
+C201;"De Viersprong";"Reethsestraat 1";"6675 CE";Valburg;"Reethsestraat 1";"6675 CE";Valburg;0488-431234;;
+C209;"S.V. Op De Korrel";"Sportlaan 1E";"6681 CD";Bemmel;"Sportlaan 1E";"6681 CD";Bemmel;0481-464753;;
+C028;"Dorpshuis De Tichel";"Kolkweg 5 A";"6685 BC";Haalderen;"Kolkweg 5 A";"6685 BC";Haalderen;0481-464409;;
+C014;"De Klok";"Markt 1";"6691 BK";Gendt;"Markt 1";"6691 BK";Gendt;0481-421551;;
+C216;"Café de Keijzer";"Edeseweg 73";"6721 JR";Bennekom;"Edeseweg 73";"6721 JR";Bennekom;0318-415802;;
+C261;Dubbel10;"Varkensstraat 41";"6811 GN";Arnhem;"Varkensstraat 41";"6811 GN";Arnhem;"026 2130501";https://dubbel10.nl/;" info@dubbel10.nl"
+C259;"Camping De Lindenhof";"Wolfhezerweg 111";"6874 AD";Wolfheze;"Wolfhezerweg 111";"6874 AD";Wolfheze;"06 53981908";;
+C271;"Café van Dorth";"Rijksweg 19";"6921 AB";Duiven;"Rijksweg 19";"6921 AB";Duiven;0316-261283;;
+C193;"Partycentrum Ons Huis";"Mr. B. van Leeuwenplein 7";"6991 EW";Rheden;"Mr. B. van Leeuwenplein 7";"6991 EW";Rheden;026-4952019;;

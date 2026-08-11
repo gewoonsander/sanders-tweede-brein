@@ -44,6 +44,7 @@ Dit is geen extreem doel — sep 2025 laat zien dat 84-85 kg al bereikbaar was.
 - **Night Balance (SPT) positietrainer** gestart — apneu zit primair in rugligging (AHI rug 30 vs zij 2)
 - Afvallen is de meest effectieve lange-termijn interventie voor OSAS: –10% gewicht = –26% AHI
 - Concrete verdere stappen na afspraak 17 juni 2026 (herevaluatie Rijnstate Elst 13:00)
+- Dagelijkse voedingsregistratie via [[WS-007-voeding-vastleggen-en-controleren]], met geschatte calorieën en macro's als bandbreedtes in de Cockpit.
 
 Zie [[slaapapneu]] voor medisch traject.
 
