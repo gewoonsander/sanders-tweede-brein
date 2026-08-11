@@ -1,0 +1,67 @@
+{
+  "leagues": {
+    "0SGleWxG03FM": {
+      "capturedAt": "2026-08-10T16:27:49.685Z",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "regionRanks": [
+        {
+          "rank": 39,
+          "regionId": "YwY1bb8DLNqP",
+          "regionName": "Netherlands"
+        }
+      ],
+      "sourceUrl": "https://www.dartsatlas.com/players/n6oeItIbK1vl/rankings",
+      "stats": {
+        "average": 72.99,
+        "finals": 2,
+        "first9": 79.82,
+        "matchLosses": 37,
+        "matchWins": 113,
+        "points": 270,
+        "rank": 62,
+        "semiFinals": 4,
+        "titles": 3
+      },
+      "status": [],
+      "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+    }
+  },
+  "schema": 1,
+  "seasons": {
+    "uoGtg6XqtbQH": {
+      "capturedAt": "2026-08-10T16:27:49.685Z",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leagueUrl": "https://www.dartsatlas.com/o/0SGleWxG03FM",
+      "period": {
+        "end": null,
+        "raw": "29-Jun, 2026 -",
+        "start": "2026-06-29"
+      },
+      "regionRanks": [],
+      "seasonId": "uoGtg6XqtbQH",
+      "seasonName": "Winmau Benelux Open 2026 - East Netherlands",
+      "sourceUrl": "https://www.dartsatlas.com/players/n6oeItIbK1vl/rankings",
+      "stats": {
+        "average": 72.78,
+        "finals": 0,
+        "first9": 85.09,
+        "losses": 7,
+        "points": 10,
+        "rank": 4,
+        "scores100Plus": 123,
+        "scores140Plus": 39,
+        "scores180": 8,
+        "semiFinals": 2,
+        "titles": 0,
+        "wins": 15
+      },
+      "status": [
+        "in-progress"
+      ],
+      "url": "https://www.dartsatlas.com/seasons/uoGtg6XqtbQH"
+    }
+  },
+  "updatedAt": "2026-08-10T18:04:06.285Z"
+}

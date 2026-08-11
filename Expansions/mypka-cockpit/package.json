@@ -14,7 +14,12 @@
     "dev:web": "npm --prefix web run dev",
     "serve": "npm run build && node server/server.js",
     "serve:lan": "npm run build && COCKPIT_BIND_LAN=1 node server/server.js",
-    "set-pin": "node server/set-pin.js"
+    "set-pin": "node server/set-pin.js",
+    "darts:bookmarklet": "node tools/dartsatlas/build-bookmarklet.mjs",
+    "darts:import": "node tools/dartsatlas/import-exports.mjs",
+    "darts:watch": "node tools/dartsatlas/import-exports.mjs --watch",
+    "darts:status": "node tools/dartsatlas/import-exports.mjs --status",
+    "darts:test": "node --test tools/dartsatlas/extract.test.mjs"
   },
   "dependencies": {
     "better-sqlite3": "^12.10.0",

@@ -1,0 +1,36 @@
+{
+  "captures": {
+    "rankings:active:1": {
+      "capturedAt": "2026-08-10T16:27:49.685Z",
+      "recordCount": 2,
+      "sourceUrl": "https://www.dartsatlas.com/players/n6oeItIbK1vl/rankings",
+      "totalPages": 1
+    },
+    "tournament_stats:-:1": {
+      "capturedAt": "2026-08-10T16:27:49.861Z",
+      "recordCount": 1,
+      "sourceUrl": "https://www.dartsatlas.com/tournaments/n6hmb8AwUu9C/player_stats/n6oeItIbK1vl",
+      "totalPages": 1
+    },
+    "tournaments:-:1": {
+      "capturedAt": "2026-08-10T16:27:49.830Z",
+      "recordCount": 20,
+      "sourceUrl": "https://www.dartsatlas.com/players/n6oeItIbK1vl/tournaments",
+      "totalPages": 4
+    }
+  },
+  "counts": {
+    "historySnapshots": 2,
+    "leagues": 1,
+    "seasons": 1,
+    "tournamentStats": 1,
+    "tournaments": 20
+  },
+  "lastChangedAt": "2026-08-10T18:04:06.285Z",
+  "player": {
+    "id": "n6oeItIbK1vl",
+    "name": "Sander van Ockenburg - Zwaan"
+  },
+  "schema": 1,
+  "updatedAt": "2026-08-10T18:04:06.285Z"
+}

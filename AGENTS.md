@@ -176,6 +176,12 @@ Full spec: [[GL-013-interactie-enkelvoudige-keuzes]]
 
 Cue rules route personal inputs to Penn. Business workstreams are handled by future specialists hired through Jethro, captured as Workstreams in Team Knowledge.
 
+### 10. Decision and warning blocks (mandatory)
+
+Any reply that carries something the user must decide, approve, or act on renders it as a visually unmissable block — never buried in prose. Stack all blocks at the end of the reply, after the normal status text. Each 🔶/🔴 block carries a short unique 3-character code right behind the emoji so the user can reply with just the code.
+
+Full spec: [[GL-016-beslis-en-waarschuwingsblokken]]
+
 ## Session-Log Triggers (LLM-agnostic)
 
 Any LLM working in this myPKA MUST honor these natural-language triggers and write a corresponding entry to `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_<agent>_<topic-slug>.md` following the `_template.md` schema.

@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "snapshots": [
+    {
+      "date": "2026-08-10",
+      "key": "league:0SGleWxG03FM",
+      "kind": "league-standing",
+      "name": "ADC Benelux",
+      "regionRanks": [
+        {
+          "rank": 39,
+          "regionId": "YwY1bb8DLNqP",
+          "regionName": "Netherlands"
+        }
+      ],
+      "stats": {
+        "average": 72.99,
+        "finals": 2,
+        "first9": 79.82,
+        "matchLosses": 37,
+        "matchWins": 113,
+        "points": 270,
+        "rank": 62,
+        "semiFinals": 4,
+        "titles": 3
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "key": "season:uoGtg6XqtbQH",
+      "kind": "season-standing",
+      "name": "Winmau Benelux Open 2026 - East Netherlands",
+      "regionRanks": [],
+      "stats": {
+        "average": 72.78,
+        "finals": 0,
+        "first9": 85.09,
+        "losses": 7,
+        "points": 10,
+        "rank": 4,
+        "scores100Plus": 123,
+        "scores140Plus": 39,
+        "scores180": 8,
+        "semiFinals": 2,
+        "titles": 0,
+        "wins": 15
+      }
+    }
+  ],
+  "updatedAt": "2026-08-10T18:04:06.285Z"
+}

@@ -24,6 +24,10 @@ Wacht altijd op bevestiging voor je aanpast.
 
 Zie `Team Knowledge/Guidelines/GL-013-interactie-enkelvoudige-keuzes.md` — de enige bron voor deze regel, inclusief de zonder-uitzondering-clausule. Niet hier herhalen.
 
+## Beslis- en waarschuwingsblokken (MANDATORY)
+
+Zie `Team Knowledge/Guidelines/GL-016-beslis-en-waarschuwingsblokken.md` — de enige bron voor deze regel. Niet hier herhalen.
+
 ## Source of truth
 
 Behavior, routing, taxonomy, and naming rules all live in `AGENTS.md` at the folder root. Read it first, every session. This file is a pointer, not a copy.

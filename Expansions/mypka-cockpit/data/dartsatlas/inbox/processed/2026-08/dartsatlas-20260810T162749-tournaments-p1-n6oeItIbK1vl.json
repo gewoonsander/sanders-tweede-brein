@@ -1,0 +1,452 @@
+{
+  "source": "dartsatlas",
+  "schema": 1,
+  "extractVersion": "1.0.0",
+  "capturedAt": "2026-08-10T16:27:49.830Z",
+  "sourceUrl": "https://www.dartsatlas.com/players/n6oeItIbK1vl/tournaments",
+  "origin": "https://www.dartsatlas.com",
+  "pageType": "tournaments",
+  "view": {
+    "status": null,
+    "page": 1
+  },
+  "player": {
+    "id": "n6oeItIbK1vl",
+    "name": "Sander van Ockenburg - Zwaan"
+  },
+  "tournamentId": null,
+  "pagination": {
+    "current": 1,
+    "totalPages": 4,
+    "pages": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "nextUrl": "https://www.dartsatlas.com/players/n6oeItIbK1vl/tournaments?page=2"
+  },
+  "recordCount": 20,
+  "records": [
+    {
+      "kind": "tournament",
+      "key": "tournament:n6hmb8AwUu9C",
+      "tournamentId": "n6hmb8AwUu9C",
+      "name": "Winmau Benelux Open 2026 - East Netherlands - Arnhem",
+      "tournamentPath": "/tournaments/n6hmb8AwUu9C",
+      "date": "2026-08-03",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Quarter-Final",
+      "points": null,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 68.57,
+        "first9": 83.74
+      },
+      "statsPath": "/tournaments/n6hmb8AwUu9C/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:ynLDDaa2oyde",
+      "tournamentId": "ynLDDaa2oyde",
+      "name": "Winmau Benelux Open 2026 - East Netherlands - Driel",
+      "tournamentPath": "/tournaments/ynLDDaa2oyde",
+      "date": "2026-07-27",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Quarter-Final",
+      "points": 4,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 77.64,
+        "first9": 86.13
+      },
+      "statsPath": "/tournaments/ynLDDaa2oyde/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:gej7mX0VpiaP",
+      "tournamentId": "gej7mX0VpiaP",
+      "name": "Winmau Benelux Open 2026 - East Netherlands - Driel",
+      "tournamentPath": "/tournaments/gej7mX0VpiaP",
+      "date": "2026-07-13",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Semi-Final",
+      "points": null,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 75.04,
+        "first9": 88.4
+      },
+      "statsPath": "/tournaments/gej7mX0VpiaP/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:OhTxoW44EXXR",
+      "tournamentId": "OhTxoW44EXXR",
+      "name": "Winmau Benelux Open 2026 - East Netherlands - Arnhem",
+      "tournamentPath": "/tournaments/OhTxoW44EXXR",
+      "date": "2026-07-06",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Semi-Final",
+      "points": null,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 70.6,
+        "first9": 80.91
+      },
+      "statsPath": "/tournaments/OhTxoW44EXXR/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:iLCE6ub3lYyO",
+      "tournamentId": "iLCE6ub3lYyO",
+      "name": "𝙒𝙞𝙣𝙢𝙖𝙪 𝘽𝙚𝙣𝙚𝙡𝙪𝙭 𝙏𝙧𝙤𝙥𝙝𝙮 - 𝙈𝙖𝙞𝙣 𝙏𝙤𝙪𝙧𝙣𝙖𝙢𝙚𝙣𝙩",
+      "tournamentPath": "/tournaments/iLCE6ub3lYyO",
+      "date": "2026-06-27",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Last 64",
+      "points": 2,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 71.23,
+        "first9": 71.53
+      },
+      "statsPath": "/tournaments/iLCE6ub3lYyO/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:FV6oabWqn6Fe",
+      "tournamentId": "FV6oabWqn6Fe",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Regional Elite Finals (Top 32)",
+      "tournamentPath": "/tournaments/FV6oabWqn6Fe",
+      "date": "2026-06-21",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Semi-Final",
+      "points": 8,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 73.63,
+        "first9": 77.46
+      },
+      "statsPath": "/tournaments/FV6oabWqn6Fe/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:d4HI0WQSLE95",
+      "tournamentId": "d4HI0WQSLE95",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Driel",
+      "tournamentPath": "/tournaments/d4HI0WQSLE95",
+      "date": "2026-05-18",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Last 16",
+      "points": 2,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 70.08,
+        "first9": 77.7
+      },
+      "statsPath": "/tournaments/d4HI0WQSLE95/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:aJrAv3jaCUx1",
+      "tournamentId": "aJrAv3jaCUx1",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Arnhem",
+      "tournamentPath": "/tournaments/aJrAv3jaCUx1",
+      "date": "2026-05-07",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Quarter-Final",
+      "points": 4,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 76.94,
+        "first9": 82.75
+      },
+      "statsPath": "/tournaments/aJrAv3jaCUx1/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:DsObFjkUMC8H",
+      "tournamentId": "DsObFjkUMC8H",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Hengelo (OV)",
+      "tournamentPath": "/tournaments/DsObFjkUMC8H",
+      "date": "2026-05-03",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Runner-Up",
+      "points": null,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 74.37,
+        "first9": 82.12
+      },
+      "statsPath": "/tournaments/DsObFjkUMC8H/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:dPG9IWrjMAnM",
+      "tournamentId": "dPG9IWrjMAnM",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Beesd",
+      "tournamentPath": "/tournaments/dPG9IWrjMAnM",
+      "date": "2026-04-26",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Semi-Final",
+      "points": 8,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 75.57,
+        "first9": 83.14
+      },
+      "statsPath": "/tournaments/dPG9IWrjMAnM/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:8hSv2D1XLvB6",
+      "tournamentId": "8hSv2D1XLvB6",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Driel",
+      "tournamentPath": "/tournaments/8hSv2D1XLvB6",
+      "date": "2026-04-13",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Champion",
+      "points": 32,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 75.31,
+        "first9": 84.75
+      },
+      "statsPath": "/tournaments/8hSv2D1XLvB6/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:d7GR31WxbbTv",
+      "tournamentId": "d7GR31WxbbTv",
+      "name": "𝐋𝐨𝐰𝐥𝐚𝐧𝐝𝐬 𝐂𝐮𝐩 𝟐𝟎𝟐𝟔 - 𝐢𝐧𝐯𝐢𝐭𝐚𝐭𝐢𝐨𝐧𝐚𝐥 - 𝐬𝐩𝐨𝐧𝐬𝐨𝐫𝐞𝐝 𝐛𝐲 𝐖𝐢𝐧𝐦𝐚𝐮",
+      "tournamentPath": "/tournaments/d7GR31WxbbTv",
+      "date": "2026-04-11",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Last 16",
+      "points": 8,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 74.98,
+        "first9": 87.55
+      },
+      "statsPath": "/tournaments/d7GR31WxbbTv/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:Yxh2COdYAotD",
+      "tournamentId": "Yxh2COdYAotD",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Doetinchem (2e Paasdag)",
+      "tournamentPath": "/tournaments/Yxh2COdYAotD",
+      "date": "2026-04-06",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Quarter-Final",
+      "points": 4,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 81.8,
+        "first9": 92.9
+      },
+      "statsPath": "/tournaments/Yxh2COdYAotD/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:LNUUxLBJQ9Gy",
+      "tournamentId": "LNUUxLBJQ9Gy",
+      "name": "Lowlands Cup 2026 - East NL - Regional Elite Finals (Top 32)",
+      "tournamentPath": "/tournaments/LNUUxLBJQ9Gy",
+      "date": "2026-04-04",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Champion",
+      "points": 32,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 78.64,
+        "first9": 85.28
+      },
+      "statsPath": "/tournaments/LNUUxLBJQ9Gy/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:0YZMAvdZfLb1",
+      "tournamentId": "0YZMAvdZfLb1",
+      "name": "Lowlands Cup 2026 - East NL - Arnhem",
+      "tournamentPath": "/tournaments/0YZMAvdZfLb1",
+      "date": "2026-02-26",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Semi-Final",
+      "points": null,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 69.96,
+        "first9": 75.71
+      },
+      "statsPath": "/tournaments/0YZMAvdZfLb1/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:WFtgCO15n739",
+      "tournamentId": "WFtgCO15n739",
+      "name": "Lowlands Cup 2026 - East NL - Arnhem",
+      "tournamentPath": "/tournaments/WFtgCO15n739",
+      "date": "2026-02-19",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Quarter-Final",
+      "points": 4,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 71.81,
+        "first9": 84.65
+      },
+      "statsPath": "/tournaments/WFtgCO15n739/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:1KMbQD6ANl35",
+      "tournamentId": "1KMbQD6ANl35",
+      "name": "Lowlands Cup 2026 - East NL - Arnhem",
+      "tournamentPath": "/tournaments/1KMbQD6ANl35",
+      "date": "2026-01-29",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Semi-Final",
+      "points": 4,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 74.24,
+        "first9": 81.06
+      },
+      "statsPath": "/tournaments/1KMbQD6ANl35/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:bJTgw8bB6W6l",
+      "tournamentId": "bJTgw8bB6W6l",
+      "name": "Lowlands Cup 2026 - East NL - Arnhem",
+      "tournamentPath": "/tournaments/bJTgw8bB6W6l",
+      "date": "2026-01-15",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Semi-Final",
+      "points": 4,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 75.85,
+        "first9": 89.19
+      },
+      "statsPath": "/tournaments/bJTgw8bB6W6l/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:4wka1RyeYQF8",
+      "tournamentId": "4wka1RyeYQF8",
+      "name": "Lowlands Cup 2026 - East NL - Arnhem",
+      "tournamentPath": "/tournaments/4wka1RyeYQF8",
+      "date": "2026-01-08",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Champion",
+      "points": 32,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 69.78,
+        "first9": 74.81
+      },
+      "statsPath": "/tournaments/4wka1RyeYQF8/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "kind": "tournament",
+      "key": "tournament:p2mnq9y4nsyf",
+      "tournamentId": "p2mnq9y4nsyf",
+      "name": "Western European Grand Finals 2025 - Main Tournament **Invitational**",
+      "tournamentPath": "/tournaments/p2mnq9y4nsyf",
+      "date": "2025-11-09",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "result": "Group Stage",
+      "points": 1,
+      "status": [
+        "concluded"
+      ],
+      "stats": {
+        "average": 80.71,
+        "first9": 82.13
+      },
+      "statsPath": "/tournaments/p2mnq9y4nsyf/player_stats/n6oeItIbK1vl"
+    }
+  ]
+}

@@ -42,3 +42,10 @@ workbench-audit/
 
 # --- Release packages produced locally — never commit ------------------------
 dist-release/
+
+# --- Darts Atlas tool: build scratch only --------------------------------------
+# NOTE: data/dartsatlas/ is deliberately NOT ignored. Those JSON files are the
+# only local copy of Sander's darts results (re-fetching them automatically is
+# off the table — see tools/dartsatlas/README.md), so they belong in the backup.
+tools/dartsatlas/.bookmarklet-broken.js
+data/dartsatlas/**/*.tmp

@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "stats": {
+    "n6hmb8AwUu9C": {
+      "capturedAt": "2026-08-10T16:27:49.861Z",
+      "matches": [
+        {
+          "format": "Best of 7",
+          "matchId": "d0tpihVu8cZ3",
+          "matchPath": "/matches/d0tpihVu8cZ3",
+          "opponentAverage": 53.24,
+          "opponentName": "Ben THIELKING",
+          "opponentScore": 0,
+          "playerAverage": 66.8,
+          "playerName": "Sander van Ockenburg - Zwaan",
+          "playerScore": 4,
+          "round": "Round 1",
+          "url": "https://www.dartsatlas.com/matches/d0tpihVu8cZ3",
+          "won": true
+        },
+        {
+          "format": "Best of 7",
+          "matchId": "OUSkWtbIYGsX",
+          "matchPath": "/matches/OUSkWtbIYGsX",
+          "opponentAverage": 74.86,
+          "opponentName": "Raoul Hendriks",
+          "opponentScore": 4,
+          "playerAverage": 70.62,
+          "playerName": "Sander van Ockenburg - Zwaan",
+          "playerScore": 2,
+          "round": "Round 2",
+          "url": "https://www.dartsatlas.com/matches/OUSkWtbIYGsX",
+          "won": false
+        },
+        {
+          "format": "Best of 7",
+          "matchId": "fKgokfVmQahi",
+          "matchPath": "/matches/fKgokfVmQahi",
+          "opponentAverage": 87.21,
+          "opponentName": "Eirikur Kristinsson",
+          "opponentScore": 4,
+          "playerAverage": 83.91,
+          "playerName": "Sander van Ockenburg - Zwaan",
+          "playerScore": 2,
+          "round": "Round 3",
+          "url": "https://www.dartsatlas.com/matches/fKgokfVmQahi",
+          "won": false
+        },
+        {
+          "format": "Best of 7",
+          "matchId": "HCEcIiIj4pAl",
+          "matchPath": "/matches/HCEcIiIj4pAl",
+          "opponentAverage": 62.18,
+          "opponentName": "Wessel Vis",
+          "opponentScore": 4,
+          "playerAverage": 57.82,
+          "playerName": "Sander van Ockenburg - Zwaan",
+          "playerScore": 2,
+          "round": "Quarter-Final",
+          "url": "https://www.dartsatlas.com/matches/HCEcIiIj4pAl",
+          "won": false
+        }
+      ],
+      "name": "Winmau Benelux Open 2026 - East Netherlands - Arnhem",
+      "sourceUrl": "https://www.dartsatlas.com/tournaments/n6hmb8AwUu9C/player_stats/n6oeItIbK1vl",
+      "stats": {
+        "average": 68.57,
+        "breaks": 3,
+        "first9": 83.74,
+        "legsLost": 12,
+        "legsWon": 10,
+        "scores100Plus": 29,
+        "scores140Plus": 9,
+        "scores180": 2
+      },
+      "tournamentId": "n6hmb8AwUu9C",
+      "url": "https://www.dartsatlas.com/tournaments/n6hmb8AwUu9C"
+    }
+  },
+  "updatedAt": "2026-08-10T18:04:06.285Z"
+}

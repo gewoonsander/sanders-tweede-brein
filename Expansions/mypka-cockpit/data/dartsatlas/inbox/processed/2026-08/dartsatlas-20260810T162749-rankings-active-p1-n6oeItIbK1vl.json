@@ -1,0 +1,88 @@
+{
+  "source": "dartsatlas",
+  "schema": 1,
+  "extractVersion": "1.0.0",
+  "capturedAt": "2026-08-10T16:27:49.685Z",
+  "sourceUrl": "https://www.dartsatlas.com/players/n6oeItIbK1vl/rankings",
+  "origin": "https://www.dartsatlas.com",
+  "pageType": "rankings",
+  "view": {
+    "status": "active",
+    "page": 1
+  },
+  "player": {
+    "id": "n6oeItIbK1vl",
+    "name": "Sander van Ockenburg - Zwaan"
+  },
+  "tournamentId": null,
+  "pagination": {
+    "current": 1,
+    "totalPages": 1,
+    "pages": [
+      1
+    ],
+    "nextUrl": null
+  },
+  "recordCount": 2,
+  "records": [
+    {
+      "kind": "league-standing",
+      "key": "league:0SGleWxG03FM",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "status": [],
+      "stats": {
+        "rank": 62,
+        "points": 270,
+        "average": 72.99,
+        "first9": 79.82,
+        "matchWins": 113,
+        "matchLosses": 37,
+        "titles": 3,
+        "finals": 2,
+        "semiFinals": 4
+      },
+      "regionRanks": [
+        {
+          "regionId": "YwY1bb8DLNqP",
+          "regionName": "Netherlands",
+          "rank": 39
+        }
+      ]
+    },
+    {
+      "kind": "season-standing",
+      "key": "season:uoGtg6XqtbQH",
+      "seasonId": "uoGtg6XqtbQH",
+      "seasonName": "Winmau Benelux Open 2026 - East Netherlands",
+      "seasonPath": "/seasons/uoGtg6XqtbQH",
+      "leagueId": "0SGleWxG03FM",
+      "leagueName": "ADC Benelux",
+      "leaguePath": "/o/0SGleWxG03FM",
+      "period": {
+        "raw": "29-Jun, 2026 -",
+        "start": "2026-06-29",
+        "end": null
+      },
+      "status": [
+        "in-progress"
+      ],
+      "stats": {
+        "rank": 4,
+        "points": 10,
+        "average": 72.78,
+        "first9": 85.09,
+        "scores100Plus": 123,
+        "scores140Plus": 39,
+        "scores180": 8,
+        "wins": 15,
+        "losses": 7,
+        "titles": 0,
+        "finals": 0,
+        "semiFinals": 2
+      },
+      "regionRanks": []
+    }
+  ]
+}

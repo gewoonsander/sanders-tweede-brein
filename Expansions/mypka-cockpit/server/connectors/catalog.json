@@ -53,6 +53,19 @@
       "help": "Shows open (SENT + OVERDUE) invoices as plannable cards with a deep link into Jortt. Read-only. OAuth 2.0 Client Credentials — no browser redirect needed."
     },
     {
+      "id": "n8n:workflows",
+      "label": "n8n workflows",
+      "kind": "task",
+      "category": "automation",
+      "module": "n8nWorkflows.js",
+      "factory": "makeN8nWorkflowsConnector",
+      "keys": [
+        { "key": "N8N_API_KEY", "label": "Public API key (n8n → Settings → n8n API → Create an API key) — NOT the Settings → MCP bearer token", "secret": true },
+        { "key": "N8N_BASE_URL", "label": "Instance URL, e.g. https://yourname.app.n8n.cloud", "secret": false }
+      ],
+      "help": "Shows every n8n workflow as a status card: active/inactive, when it last ran, and whether that run succeeded. A failed last run gets a due date so it surfaces as overdue. Read-only — the card deep-links into the n8n editor."
+    },
+    {
       "id": "email:starred",
       "label": "Email — starred (IMAP)",
       "kind": "task",

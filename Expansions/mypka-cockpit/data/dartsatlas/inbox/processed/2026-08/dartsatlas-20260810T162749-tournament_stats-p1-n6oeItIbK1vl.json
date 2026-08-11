@@ -1,0 +1,100 @@
+{
+  "source": "dartsatlas",
+  "schema": 1,
+  "extractVersion": "1.0.0",
+  "capturedAt": "2026-08-10T16:27:49.861Z",
+  "sourceUrl": "https://www.dartsatlas.com/tournaments/n6hmb8AwUu9C/player_stats/n6oeItIbK1vl",
+  "origin": "https://www.dartsatlas.com",
+  "pageType": "tournament_stats",
+  "view": {
+    "status": null,
+    "page": 1
+  },
+  "player": {
+    "id": "n6oeItIbK1vl",
+    "name": "Sander van Ockenburg - Zwaan"
+  },
+  "tournamentId": "n6hmb8AwUu9C",
+  "pagination": {
+    "current": 1,
+    "totalPages": 1,
+    "pages": [
+      1
+    ],
+    "nextUrl": null
+  },
+  "recordCount": 1,
+  "records": [
+    {
+      "kind": "tournament-stats",
+      "key": "tournament:n6hmb8AwUu9C",
+      "tournamentId": "n6hmb8AwUu9C",
+      "name": "Winmau Benelux Open 2026 - East Netherlands - Arnhem",
+      "tournamentPath": "/tournaments/n6hmb8AwUu9C",
+      "stats": {
+        "average": 68.57,
+        "first9": 83.74,
+        "scores100Plus": 29,
+        "scores140Plus": 9,
+        "scores180": 2,
+        "legsWon": 10,
+        "legsLost": 12,
+        "breaks": 3
+      },
+      "matches": [
+        {
+          "matchId": "d0tpihVu8cZ3",
+          "matchPath": "/matches/d0tpihVu8cZ3",
+          "round": "Round 1",
+          "format": "Best of 7",
+          "playerName": "Sander van Ockenburg - Zwaan",
+          "playerScore": 4,
+          "playerAverage": 66.8,
+          "opponentName": "Ben THIELKING",
+          "opponentScore": 0,
+          "opponentAverage": 53.24,
+          "won": true
+        },
+        {
+          "matchId": "OUSkWtbIYGsX",
+          "matchPath": "/matches/OUSkWtbIYGsX",
+          "round": "Round 2",
+          "format": "Best of 7",
+          "playerName": "Sander van Ockenburg - Zwaan",
+          "playerScore": 2,
+          "playerAverage": 70.62,
+          "opponentName": "Raoul Hendriks",
+          "opponentScore": 4,
+          "opponentAverage": 74.86,
+          "won": false
+        },
+        {
+          "matchId": "fKgokfVmQahi",
+          "matchPath": "/matches/fKgokfVmQahi",
+          "round": "Round 3",
+          "format": "Best of 7",
+          "playerName": "Sander van Ockenburg - Zwaan",
+          "playerScore": 2,
+          "playerAverage": 83.91,
+          "opponentName": "Eirikur Kristinsson",
+          "opponentScore": 4,
+          "opponentAverage": 87.21,
+          "won": false
+        },
+        {
+          "matchId": "HCEcIiIj4pAl",
+          "matchPath": "/matches/HCEcIiIj4pAl",
+          "round": "Quarter-Final",
+          "format": "Best of 7",
+          "playerName": "Sander van Ockenburg - Zwaan",
+          "playerScore": 2,
+          "playerAverage": 57.82,
+          "opponentName": "Wessel Vis",
+          "opponentScore": 4,
+          "opponentAverage": 62.18,
+          "won": false
+        }
+      ]
+    }
+  ]
+}
