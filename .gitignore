@@ -9,3 +9,5 @@ Team Knowledge/.env
 Team Knowledge/.secrets/
 Team Knowledge/scripts/.venv/
 .claude/settings.local.json
+__pycache__/
+*.pyc
