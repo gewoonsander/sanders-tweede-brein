@@ -4,7 +4,7 @@ type: food-log
 key_element: gezondheid
 goal: gewicht-aanpakken
 day_complete: true
-confirmed_at: 2026-08-11T18:35:30+02:00
+confirmed_at: 2026-08-12T00:10:08+02:00
 tags: [voeding, tracking]
 ---
 
@@ -65,6 +65,16 @@ tags: [voeding, tracking]
 - Foto: ![[Images/2026/08/2026-08-11-025dd880a3.jpeg]]
 <!-- FOOD_ENTRY {"log_date":"2026-08-11","logged_at":"2026-08-11T19:10:49+02:00","meal_type":"lunch","description":"Tortilla wrap met gefrituurde vis of kip, verse groenten (sla, tomaat, komkommer, rode paprika), en witte saus (mogelijk knoflooksaus of mayonaise)","source_type":"photo","source_id":"2bdaa0430b9ba92df9fc","kcal":[400.0,550.0],"protein_g":[15.0,25.0],"carbs_g":[45.0,60.0],"fat_g":[15.0,25.0],"confidence":"medium","photo_path":"Images/2026/08/2026-08-11-025dd880a3.jpeg","supersedes_entry_id":null,"entry_id":"e8c8e93415dfca174a13"} -->
 
+
+### 19:00 — Avondeten
+- 3 wraps (foto's kwijtgeraakt, herinnering achteraf, vulling onbekend)
+- Energie: 600–1200 kcal
+- Eiwit: 30–70 g
+- Koolhydraten: 70–140 g
+- Vet: 20–50 g
+- Betrouwbaarheid: low
+<!-- FOOD_ENTRY {"log_date":"2026-08-11","logged_at":"2026-08-11T19:00:00+02:00","meal_type":"dinner","description":"3 wraps (foto's kwijtgeraakt, herinnering achteraf, vulling onbekend)","source_type":"text","source_id":"recall-2026-08-11-avondeten-wraps","kcal":[600.0,1200.0],"protein_g":[30.0,70.0],"carbs_g":[70.0,140.0],"fat_g":[20.0,50.0],"confidence":"low","photo_path":null,"supersedes_entry_id":null,"entry_id":"4f5036478c480f40e86b"} -->
+
 <!-- FOOD_ENTRIES -->
 
 ## Completion audit
@@ -74,5 +84,8 @@ tags: [voeding, tracking]
 
 - 2026-08-11T23:44:55+02:00 — complete: yes — source: close-session
 <!-- FOOD_AUDIT {"confirmed_at":"2026-08-11T23:44:55+02:00","complete":true,"source":"close-session"} -->
+
+- 2026-08-12T00:10:08+02:00 — complete: yes — source: close-session
+<!-- FOOD_AUDIT {"confirmed_at":"2026-08-12T00:10:08+02:00","complete":true,"source":"close-session"} -->
 
 <!-- FOOD_AUDITS -->

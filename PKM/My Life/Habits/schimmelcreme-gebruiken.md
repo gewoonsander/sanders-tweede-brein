@@ -84,3 +84,7 @@ Bij close-session bevestigd: crème vandaag aangebracht ✓.
 ### 2026-08-11
 
 Bij close-session bevestigd: crème vandaag aangebracht ✓.
+
+### 2026-08-12
+
+Bij close-session: vandaag niet aangebracht.
