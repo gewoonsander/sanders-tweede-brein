@@ -46,6 +46,7 @@ import { registerInvoicesRoutes } from './invoicesApi.js';
 import { registerSerendipityRoutes } from './serendipityApi.js';
 import { registerLibraryRoutes } from './libraryApi.js';
 import { registerAudiobooksRoutes } from './audiobooksApi.js';
+import { registerDartsatlasRoutes } from './dartsatlasApi.js';
 import { registerOuterWorldRoutes } from './outerWorldApi.js';
 import { registerAgentRoutes } from './agentApi.js';
 import { registerSessionLogsRoutes } from './sessionLogsApi.js';
@@ -1135,6 +1136,12 @@ registerLibraryRoutes(app, { safe });
 // (which uses asin as PK and doesn't participate in library_registry). Degrades
 // to { available:false } when the table is absent. Queries in audiobooksApi.js.
 registerAudiobooksRoutes(app, { safe });
+// Darts module — read-only, and deliberately NOT a mypka.db reader: the Darts
+// Atlas payload lives as plain JSON on disk (data/dartsatlas/<player>/latest.json,
+// written by scripts/dartsatlas-fetch.mjs on a weekly LaunchAgent). Degrades to a
+// calm { available:false, reason } envelope when nothing has been scraped yet.
+// File reads live in dartsatlasApi.js.
+registerDartsatlasRoutes(app, { safe });
 // Outer World module (DATA-CONTRACT §14): the mymind-style saved-content card
 // grid (enumerate, body-less) + one-item-by-slug (card → detail-large). Read-only
 // over mypka.db; embed_image/_favicon are LOCAL paths served via the existing

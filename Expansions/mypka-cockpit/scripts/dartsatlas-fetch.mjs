@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // dartsatlas-fetch.mjs — live fetcher for a Darts Atlas player's rankings and
-// tournament history. Standalone CLI: no cron, no cockpit route, no UI. Nothing
-// in server/ or web/ imports this yet.
+// tournament history. Standalone CLI, also invoked weekly by the
+// nl.gewoonsander.dartsatlas-fetch LaunchAgent on each Mac (Monday 08:00 local).
+// No cockpit route, no UI yet. Nothing in server/ or web/ imports this yet.
 //
 // USAGE
 //   node scripts/dartsatlas-fetch.mjs                     # default player, write snapshot
@@ -25,11 +26,13 @@
 //     snapshot when nothing changed. Safe to run repeatedly.
 //   - Structured JSON log lines to stderr; the payload goes to stdout/disk.
 //
-// LEGAL NOTE (read before scheduling this)
-//   dartsatlas.com's Terms of Use restrict automated access. Sander is running
-//   this against his OWN player profile and has a permission request pending
-//   with Darts Atlas support. Do not widen this beyond his own player id, and
-//   do not schedule it, without that permission in hand.
+// LEGAL NOTE
+//   dartsatlas.com's Terms of Use restrict automated access ("monitoring").
+//   Sander knowingly decided (2026-08-10/11, confirmed explicitly more than
+//   once) to run and schedule this against his OWN player profile regardless,
+//   while a permission request is pending with Darts Atlas support. Do not
+//   widen this beyond his own player id. If Darts Atlas ever replies, update
+//   this note with the outcome.
 
 import fs from 'node:fs';
 import path from 'node:path';

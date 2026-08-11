@@ -1,7 +1,7 @@
 ---
-full_name: Merel Jasmijn van Ockenburg-Zwaan
+full_name: Merel Jasmijn van Ockenburg
 first_name: Merel Jasmijn
-last_name: van Ockenburg-Zwaan
+last_name: van Ockenburg
 relation: family
 role: Dochter
 birth_date: 2010-11-13
@@ -14,7 +14,7 @@ tags:
   - gezin
 ---
 
-# Merel Jasmijn van Ockenburg-Zwaan
+# Merel Jasmijn van Ockenburg
 
 Middelste dochter van [[sander-van-ockenburg-zwaan]] en [[marieke-van-ockenburg-zwaan]]. Geboren 13 november 2010.
 

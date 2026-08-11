@@ -1,7 +1,7 @@
 ---
-full_name: Sem Lizzy van Ockenburg-Zwaan
+full_name: Sem Lizzy van Ockenburg
 first_name: Sem Lizzy
-last_name: van Ockenburg-Zwaan
+last_name: van Ockenburg
 relation: family
 role: Dochter
 birth_date: 2009-06-17
@@ -12,6 +12,6 @@ tags:
   - gezin
 ---
 
-# Sem Lizzy van Ockenburg-Zwaan
+# Sem Lizzy van Ockenburg
 
 Oudste dochter van [[sander-van-ockenburg-zwaan]] en [[marieke-van-ockenburg-zwaan]]. Geboren 17 juni 2009. Op 17 juni 2026 werd ze 17 jaar.

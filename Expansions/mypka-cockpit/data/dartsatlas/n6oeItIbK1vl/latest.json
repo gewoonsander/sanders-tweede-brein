@@ -1,0 +1,1356 @@
+{
+  "source": "dartsatlas",
+  "schemaVersion": 1,
+  "fetchedAt": "2026-08-11T07:54:16.079Z",
+  "player": {
+    "id": "n6oeItIbK1vl",
+    "name": "Sander van Ockenburg - Zwaan",
+    "url": "https://www.dartsatlas.com/players/n6oeItIbK1vl"
+  },
+  "standings": [
+    {
+      "type": "league",
+      "status": "active",
+      "title": "ADC Benelux",
+      "seasonId": null,
+      "url": "https://www.dartsatlas.com/o/0SGleWxG03FM",
+      "league": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "region": {
+        "name": "Netherlands",
+        "rank": 39,
+        "url": "https://www.dartsatlas.com/regions/YwY1bb8DLNqP"
+      },
+      "periodStart": null,
+      "periodEnd": null,
+      "rank": 62,
+      "points": 270,
+      "average": 72.99,
+      "first9": 79.82,
+      "wins": 113,
+      "losses": 37,
+      "titles": 3,
+      "finals": 2,
+      "semiFinals": 4,
+      "scores100plus": null,
+      "scores140plus": null,
+      "scores180": null,
+      "scope": "active"
+    },
+    {
+      "type": "season",
+      "status": "in-progress",
+      "title": "Winmau Benelux Open 2026 - East Netherlands",
+      "seasonId": "uoGtg6XqtbQH",
+      "url": "https://www.dartsatlas.com/seasons/uoGtg6XqtbQH",
+      "league": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "region": null,
+      "periodStart": "2026-06-29",
+      "periodEnd": null,
+      "rank": 6,
+      "points": 10,
+      "average": 72.78,
+      "first9": 85.09,
+      "wins": 15,
+      "losses": 7,
+      "titles": 0,
+      "finals": 0,
+      "semiFinals": 2,
+      "scores100plus": 123,
+      "scores140plus": 39,
+      "scores180": 8,
+      "scope": "active"
+    },
+    {
+      "type": "season",
+      "status": "concluded",
+      "title": "Winmau Benelux Trophy 2026 - East Netherlands",
+      "seasonId": "ijkvdm44k7eC",
+      "url": "https://www.dartsatlas.com/seasons/ijkvdm44k7eC",
+      "league": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "region": null,
+      "periodStart": "2026-03-27",
+      "periodEnd": "2026-06-22",
+      "rank": 4,
+      "points": 26,
+      "average": 75.16,
+      "first9": 82.99,
+      "wins": 33,
+      "losses": 10,
+      "titles": 1,
+      "finals": 1,
+      "semiFinals": 2,
+      "scores100plus": 228,
+      "scores140plus": 82,
+      "scores180": 13,
+      "scope": "history"
+    },
+    {
+      "type": "season",
+      "status": "concluded",
+      "title": "Lowlands Cup 2026 - East NL",
+      "seasonId": "kItdqOGkDkkM",
+      "url": "https://www.dartsatlas.com/seasons/kItdqOGkDkkM",
+      "league": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "region": null,
+      "periodStart": "2026-01-01",
+      "periodEnd": "2026-04-05",
+      "rank": 1,
+      "points": 24,
+      "average": 73,
+      "first9": 81.22,
+      "wins": 31,
+      "losses": 6,
+      "titles": 2,
+      "finals": 0,
+      "semiFinals": 3,
+      "scores100plus": 175,
+      "scores140plus": 66,
+      "scores180": 16,
+      "scope": "history"
+    },
+    {
+      "type": "season",
+      "status": "concluded",
+      "title": "Winmau Western European Tour 2025",
+      "seasonId": "t3MtqCSF6Hu9",
+      "url": "https://www.dartsatlas.com/seasons/t3MtqCSF6Hu9",
+      "league": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "region": null,
+      "periodStart": "2025-01-31",
+      "periodEnd": "2025-11-15",
+      "rank": 4,
+      "points": 56,
+      "average": 75.24,
+      "first9": 83.55,
+      "wins": 54,
+      "losses": 32,
+      "titles": 0,
+      "finals": 1,
+      "semiFinals": 0,
+      "scores100plus": 493,
+      "scores140plus": 199,
+      "scores180": 47,
+      "scope": "history"
+    },
+    {
+      "type": "season",
+      "status": "concluded",
+      "title": "Lowlands Spring Series 2025",
+      "seasonId": "orgKaMoPz853",
+      "url": "https://www.dartsatlas.com/seasons/orgKaMoPz853",
+      "league": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "region": null,
+      "periodStart": "2025-01-11",
+      "periodEnd": "2025-04-14",
+      "rank": 106,
+      "points": 13,
+      "average": 74.94,
+      "first9": 86.22,
+      "wins": 18,
+      "losses": 5,
+      "titles": 1,
+      "finals": 1,
+      "semiFinals": 0,
+      "scores100plus": 89,
+      "scores140plus": 44,
+      "scores180": 11,
+      "scope": "history"
+    },
+    {
+      "type": "season",
+      "status": "concluded",
+      "title": "Dutch Darts Tour 2024",
+      "seasonId": "srS8VFNt3Va1",
+      "url": "https://www.dartsatlas.com/seasons/srS8VFNt3Va1",
+      "league": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "region": null,
+      "periodStart": "2024-01-31",
+      "periodEnd": "2024-10-28",
+      "rank": 21,
+      "points": 11,
+      "average": 72.65,
+      "first9": 75.94,
+      "wins": 4,
+      "losses": 9,
+      "titles": null,
+      "finals": null,
+      "semiFinals": null,
+      "scores100plus": 93,
+      "scores140plus": 26,
+      "scores180": 10,
+      "scope": "history"
+    },
+    {
+      "type": "season",
+      "status": "concluded",
+      "title": "ADC Benelux Open 2024",
+      "seasonId": "71qYJNE6m855",
+      "url": "https://www.dartsatlas.com/seasons/71qYJNE6m855",
+      "league": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "region": null,
+      "periodStart": "2024-06-14",
+      "periodEnd": "2024-10-06",
+      "rank": 44,
+      "points": 17,
+      "average": 72.79,
+      "first9": 80.73,
+      "wins": 19,
+      "losses": 14,
+      "titles": 0,
+      "finals": 0,
+      "semiFinals": 1,
+      "scores100plus": 215,
+      "scores140plus": 84,
+      "scores180": 18,
+      "scope": "history"
+    },
+    {
+      "type": "season",
+      "status": "concluded",
+      "title": "European Qualifier Tour 2023",
+      "seasonId": "nguALkCx26KN",
+      "url": "https://www.dartsatlas.com/seasons/nguALkCx26KN",
+      "league": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "region": null,
+      "periodStart": "2023-10-08",
+      "periodEnd": "2024-01-15",
+      "rank": 95,
+      "points": 4,
+      "average": 70.46,
+      "first9": 85.7,
+      "wins": 2,
+      "losses": 2,
+      "titles": null,
+      "finals": null,
+      "semiFinals": null,
+      "scores100plus": 25,
+      "scores140plus": 9,
+      "scores180": 4,
+      "scope": "history"
+    }
+  ],
+  "tournaments": [
+    {
+      "id": "n6hmb8AwUu9C",
+      "date": "2026-08-03",
+      "status": "concluded",
+      "name": "Winmau Benelux Open 2026 - East Netherlands - Arnhem",
+      "url": "https://www.dartsatlas.com/tournaments/n6hmb8AwUu9C",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": null,
+      "average": 68.57,
+      "first9": 83.74,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/n6hmb8AwUu9C/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "ynLDDaa2oyde",
+      "date": "2026-07-27",
+      "status": "concluded",
+      "name": "Winmau Benelux Open 2026 - East Netherlands - Driel",
+      "url": "https://www.dartsatlas.com/tournaments/ynLDDaa2oyde",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 4,
+      "average": 77.64,
+      "first9": 86.13,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/ynLDDaa2oyde/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "gej7mX0VpiaP",
+      "date": "2026-07-13",
+      "status": "concluded",
+      "name": "Winmau Benelux Open 2026 - East Netherlands - Driel",
+      "url": "https://www.dartsatlas.com/tournaments/gej7mX0VpiaP",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Semi-Final",
+      "points": null,
+      "average": 75.04,
+      "first9": 88.4,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/gej7mX0VpiaP/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "OhTxoW44EXXR",
+      "date": "2026-07-06",
+      "status": "concluded",
+      "name": "Winmau Benelux Open 2026 - East Netherlands - Arnhem",
+      "url": "https://www.dartsatlas.com/tournaments/OhTxoW44EXXR",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Semi-Final",
+      "points": null,
+      "average": 70.6,
+      "first9": 80.91,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/OhTxoW44EXXR/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "iLCE6ub3lYyO",
+      "date": "2026-06-27",
+      "status": "concluded",
+      "name": "𝙒𝙞𝙣𝙢𝙖𝙪 𝘽𝙚𝙣𝙚𝙡𝙪𝙭 𝙏𝙧𝙤𝙥𝙝𝙮 - 𝙈𝙖𝙞𝙣 𝙏𝙤𝙪𝙧𝙣𝙖𝙢𝙚𝙣𝙩",
+      "url": "https://www.dartsatlas.com/tournaments/iLCE6ub3lYyO",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 64",
+      "points": 2,
+      "average": 71.23,
+      "first9": 71.53,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/iLCE6ub3lYyO/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "FV6oabWqn6Fe",
+      "date": "2026-06-21",
+      "status": "concluded",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Regional Elite Finals (Top 32)",
+      "url": "https://www.dartsatlas.com/tournaments/FV6oabWqn6Fe",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Semi-Final",
+      "points": 8,
+      "average": 73.63,
+      "first9": 77.46,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/FV6oabWqn6Fe/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "d4HI0WQSLE95",
+      "date": "2026-05-18",
+      "status": "concluded",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Driel",
+      "url": "https://www.dartsatlas.com/tournaments/d4HI0WQSLE95",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 2,
+      "average": 70.08,
+      "first9": 77.7,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/d4HI0WQSLE95/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "aJrAv3jaCUx1",
+      "date": "2026-05-07",
+      "status": "concluded",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Arnhem",
+      "url": "https://www.dartsatlas.com/tournaments/aJrAv3jaCUx1",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 4,
+      "average": 76.94,
+      "first9": 82.75,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/aJrAv3jaCUx1/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "DsObFjkUMC8H",
+      "date": "2026-05-03",
+      "status": "concluded",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Hengelo (OV)",
+      "url": "https://www.dartsatlas.com/tournaments/DsObFjkUMC8H",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Runner-Up",
+      "points": null,
+      "average": 74.37,
+      "first9": 82.12,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/DsObFjkUMC8H/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "dPG9IWrjMAnM",
+      "date": "2026-04-26",
+      "status": "concluded",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Beesd",
+      "url": "https://www.dartsatlas.com/tournaments/dPG9IWrjMAnM",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Semi-Final",
+      "points": 8,
+      "average": 75.57,
+      "first9": 83.14,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/dPG9IWrjMAnM/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "8hSv2D1XLvB6",
+      "date": "2026-04-13",
+      "status": "concluded",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Driel",
+      "url": "https://www.dartsatlas.com/tournaments/8hSv2D1XLvB6",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Champion",
+      "points": 32,
+      "average": 75.31,
+      "first9": 84.75,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/8hSv2D1XLvB6/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "d7GR31WxbbTv",
+      "date": "2026-04-11",
+      "status": "concluded",
+      "name": "𝐋𝐨𝐰𝐥𝐚𝐧𝐝𝐬 𝐂𝐮𝐩 𝟐𝟎𝟐𝟔 - 𝐢𝐧𝐯𝐢𝐭𝐚𝐭𝐢𝐨𝐧𝐚𝐥 - 𝐬𝐩𝐨𝐧𝐬𝐨𝐫𝐞𝐝 𝐛𝐲 𝐖𝐢𝐧𝐦𝐚𝐮",
+      "url": "https://www.dartsatlas.com/tournaments/d7GR31WxbbTv",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 8,
+      "average": 74.98,
+      "first9": 87.55,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/d7GR31WxbbTv/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "Yxh2COdYAotD",
+      "date": "2026-04-06",
+      "status": "concluded",
+      "name": "Winmau Benelux Trophy 2026 - East Netherlands - Doetinchem (2e Paasdag)",
+      "url": "https://www.dartsatlas.com/tournaments/Yxh2COdYAotD",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 4,
+      "average": 81.8,
+      "first9": 92.9,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/Yxh2COdYAotD/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "LNUUxLBJQ9Gy",
+      "date": "2026-04-04",
+      "status": "concluded",
+      "name": "Lowlands Cup 2026 - East NL - Regional Elite Finals (Top 32)",
+      "url": "https://www.dartsatlas.com/tournaments/LNUUxLBJQ9Gy",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Champion",
+      "points": 32,
+      "average": 78.64,
+      "first9": 85.28,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/LNUUxLBJQ9Gy/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "0YZMAvdZfLb1",
+      "date": "2026-02-26",
+      "status": "concluded",
+      "name": "Lowlands Cup 2026 - East NL - Arnhem",
+      "url": "https://www.dartsatlas.com/tournaments/0YZMAvdZfLb1",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Semi-Final",
+      "points": null,
+      "average": 69.96,
+      "first9": 75.71,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/0YZMAvdZfLb1/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "WFtgCO15n739",
+      "date": "2026-02-19",
+      "status": "concluded",
+      "name": "Lowlands Cup 2026 - East NL - Arnhem",
+      "url": "https://www.dartsatlas.com/tournaments/WFtgCO15n739",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 4,
+      "average": 71.81,
+      "first9": 84.65,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/WFtgCO15n739/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "1KMbQD6ANl35",
+      "date": "2026-01-29",
+      "status": "concluded",
+      "name": "Lowlands Cup 2026 - East NL - Arnhem",
+      "url": "https://www.dartsatlas.com/tournaments/1KMbQD6ANl35",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Semi-Final",
+      "points": 4,
+      "average": 74.24,
+      "first9": 81.06,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/1KMbQD6ANl35/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "bJTgw8bB6W6l",
+      "date": "2026-01-15",
+      "status": "concluded",
+      "name": "Lowlands Cup 2026 - East NL - Arnhem",
+      "url": "https://www.dartsatlas.com/tournaments/bJTgw8bB6W6l",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Semi-Final",
+      "points": 4,
+      "average": 75.85,
+      "first9": 89.19,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/bJTgw8bB6W6l/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "4wka1RyeYQF8",
+      "date": "2026-01-08",
+      "status": "concluded",
+      "name": "Lowlands Cup 2026 - East NL - Arnhem",
+      "url": "https://www.dartsatlas.com/tournaments/4wka1RyeYQF8",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Champion",
+      "points": 32,
+      "average": 69.78,
+      "first9": 74.81,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/4wka1RyeYQF8/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "p2mnq9y4nsyf",
+      "date": "2025-11-09",
+      "status": "concluded",
+      "name": "Western European Grand Finals 2025 - Main Tournament **Invitational**",
+      "url": "https://www.dartsatlas.com/tournaments/p2mnq9y4nsyf",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Group Stage",
+      "points": 1,
+      "average": 80.71,
+      "first9": 82.13,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/p2mnq9y4nsyf/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "sNftLsmomFOq",
+      "date": "2025-11-08",
+      "status": "concluded",
+      "name": "NSK Bearings Cup 2025 (600 euro total prize money; 250 euro for the winner!!)",
+      "url": "https://www.dartsatlas.com/tournaments/sNftLsmomFOq",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 8,
+      "average": 75,
+      "first9": 82.22,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/sNftLsmomFOq/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "yDrDLBBWVyMB",
+      "date": "2025-11-08",
+      "status": "concluded",
+      "name": "Leudelange Bull Shoot Out 2025 (160 euro total prize money)",
+      "url": "https://www.dartsatlas.com/tournaments/yDrDLBBWVyMB",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Runner-Up",
+      "points": 32,
+      "average": 49.08,
+      "first9": 53.6,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/yDrDLBBWVyMB/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "mv3zWeJ9i3BP",
+      "date": "2025-11-07",
+      "status": "concluded",
+      "name": "2nd Edition - Luxembourg Challenge 2025 - Leudelange, Luxembourg (150 euro first prize!!)",
+      "url": "https://www.dartsatlas.com/tournaments/mv3zWeJ9i3BP",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Runner-Up",
+      "points": 16,
+      "average": 60.7,
+      "first9": 63.14,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/mv3zWeJ9i3BP/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "hxCJothSEpgS",
+      "date": "2025-10-19",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #14 - Kortrijk, BE",
+      "url": "https://www.dartsatlas.com/tournaments/hxCJothSEpgS",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 8,
+      "average": 74.83,
+      "first9": 82.17,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/hxCJothSEpgS/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "Qqgq56RW4ugR",
+      "date": "2025-10-19",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #13 - Kortrijk, BE",
+      "url": "https://www.dartsatlas.com/tournaments/Qqgq56RW4ugR",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 8,
+      "average": 72.83,
+      "first9": 79.94,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/Qqgq56RW4ugR/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "zFEfJhBDcXzW",
+      "date": "2025-10-18",
+      "status": "concluded",
+      "name": "Dimitri van den Bergh Classic 2025 - Men - De Mambo, Kortrijk, Belgium - 1.200 euro total prize fund",
+      "url": "https://www.dartsatlas.com/tournaments/zFEfJhBDcXzW",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 8,
+      "average": 73.81,
+      "first9": 81.55,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/zFEfJhBDcXzW/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "QQz2dN2gfcYp",
+      "date": "2025-10-18",
+      "status": "concluded",
+      "name": "Dimitri van den Bergh Classic 2025 - Seniors (45+) - De Mambo, Kortrijk, Belgium",
+      "url": "https://www.dartsatlas.com/tournaments/QQz2dN2gfcYp",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Group Stage",
+      "points": 1,
+      "average": 74.32,
+      "first9": 77.71,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/QQz2dN2gfcYp/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "rMLZoKQ1WIqQ",
+      "date": "2025-10-05",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #12 - Maasdijk, NL",
+      "url": "https://www.dartsatlas.com/tournaments/rMLZoKQ1WIqQ",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 32",
+      "points": 4,
+      "average": 73.38,
+      "first9": 83.57,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/rMLZoKQ1WIqQ/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "DrpGYbAX8Yjp",
+      "date": "2025-10-05",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #11 - Maasdijk, NL",
+      "url": "https://www.dartsatlas.com/tournaments/DrpGYbAX8Yjp",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 16,
+      "average": 74.47,
+      "first9": 79.11,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/DrpGYbAX8Yjp/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "r1dD0fk1fOu0",
+      "date": "2025-09-14",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #10 - Ooltgensplaat, NL",
+      "url": "https://www.dartsatlas.com/tournaments/r1dD0fk1fOu0",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 16,
+      "average": 77.56,
+      "first9": 89.38,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/r1dD0fk1fOu0/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "DpzqoRm9Y96u",
+      "date": "2025-09-13",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #9 - Ooltgensplaat, NL",
+      "url": "https://www.dartsatlas.com/tournaments/DpzqoRm9Y96u",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 4,
+      "average": 71.23,
+      "first9": 84.79,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/DpzqoRm9Y96u/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "JSVllEsnld0R",
+      "date": "2025-07-13",
+      "status": "concluded",
+      "name": "Winmau Benelux Trophy 2025 (Men Invitational)",
+      "url": "https://www.dartsatlas.com/tournaments/JSVllEsnld0R",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Group Stage",
+      "points": 1,
+      "average": 75.82,
+      "first9": 80.15,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/JSVllEsnld0R/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "l3kwLoNUQKip",
+      "date": "2025-07-12",
+      "status": "concluded",
+      "name": "Belgium Classic 2025 - Powered by Biljart & Dartscenter De Mambo, Kortrijk, Belgium",
+      "url": "https://www.dartsatlas.com/tournaments/l3kwLoNUQKip",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 32",
+      "points": 2,
+      "average": 72.39,
+      "first9": 81.54,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/l3kwLoNUQKip/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "BLHvKMbKyZQR",
+      "date": "2025-06-22",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #8 - Kortrijk, BE",
+      "url": "https://www.dartsatlas.com/tournaments/BLHvKMbKyZQR",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 8,
+      "average": 75.44,
+      "first9": 83.28,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/BLHvKMbKyZQR/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "km1Y3MxxhshD",
+      "date": "2025-06-21",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #7 - Kortrijk, BE",
+      "url": "https://www.dartsatlas.com/tournaments/km1Y3MxxhshD",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 16,
+      "average": 70.79,
+      "first9": 79.08,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/km1Y3MxxhshD/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "YVTFJZWOPtSl",
+      "date": "2025-05-18",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #6 - Berg en Dal, NL",
+      "url": "https://www.dartsatlas.com/tournaments/YVTFJZWOPtSl",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Group Stage",
+      "points": 1,
+      "average": 73.72,
+      "first9": 77.76,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/YVTFJZWOPtSl/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "E4L8WURdx4s0",
+      "date": "2025-05-17",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #5 - Berg en Dal, NL",
+      "url": "https://www.dartsatlas.com/tournaments/E4L8WURdx4s0",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 8,
+      "average": 78.75,
+      "first9": 88.89,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/E4L8WURdx4s0/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "rXtchfo3dSk8",
+      "date": "2025-04-13",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #4 - Ooltgensplaat, NL",
+      "url": "https://www.dartsatlas.com/tournaments/rXtchfo3dSk8",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 8,
+      "average": 79.31,
+      "first9": 84.69,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/rXtchfo3dSk8/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "qqdtTtqY52Dz",
+      "date": "2025-04-13",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #3 - Ooltgensplaat, NL",
+      "url": "https://www.dartsatlas.com/tournaments/qqdtTtqY52Dz",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 8,
+      "average": 72.22,
+      "first9": 84.17,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/qqdtTtqY52Dz/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "nuDejZAPlZwi",
+      "date": "2025-04-12",
+      "status": "concluded",
+      "name": "Winmau Lowlands Spring Series Finals - Main Tournament - 12.04.2025 - Ooltgensplaat, NL",
+      "url": "https://www.dartsatlas.com/tournaments/nuDejZAPlZwi",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Group Stage",
+      "points": 1,
+      "average": 74.42,
+      "first9": 80.13,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/nuDejZAPlZwi/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "RAEo12Vi2AVH",
+      "date": "2025-03-27",
+      "status": "concluded",
+      "name": "Lowlands Pub Qualifier 66 - Dartcafé Dubbel 10, Arnhem, NL",
+      "url": "https://www.dartsatlas.com/tournaments/RAEo12Vi2AVH",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 2,
+      "average": 73.55,
+      "first9": 84.42,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/RAEo12Vi2AVH/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "6VQJEkfOZ9pC",
+      "date": "2025-02-16",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #2 - Kortrijk, BE",
+      "url": "https://www.dartsatlas.com/tournaments/6VQJEkfOZ9pC",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Runner-Up",
+      "points": 64,
+      "average": 76.66,
+      "first9": 83.54,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/6VQJEkfOZ9pC/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "hHYqeq87pRJK",
+      "date": "2025-02-16",
+      "status": "concluded",
+      "name": "Winmau Kortrijk Knockout 2025 @De Mambo, Kortrijk",
+      "url": "https://www.dartsatlas.com/tournaments/hHYqeq87pRJK",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 32",
+      "points": 2,
+      "average": 56.62,
+      "first9": 56.87,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/hHYqeq87pRJK/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "sZN8bAzyhqNB",
+      "date": "2025-02-15",
+      "status": "concluded",
+      "name": "Winmau Western European Tour 2025 - #1 - Kortrijk, BE",
+      "url": "https://www.dartsatlas.com/tournaments/sZN8bAzyhqNB",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 64",
+      "points": 2,
+      "average": 77.55,
+      "first9": 87.93,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/sZN8bAzyhqNB/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "pld7VIt4cSIR",
+      "date": "2025-02-13",
+      "status": "concluded",
+      "name": "Lowlands Pub Qualifier 23 - Dartcafé Dubbel 10, Arnhem, NL",
+      "url": "https://www.dartsatlas.com/tournaments/pld7VIt4cSIR",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Runner-Up",
+      "points": 16,
+      "average": 74.06,
+      "first9": 84.39,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/pld7VIt4cSIR/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "amfFuPmIVIYx",
+      "date": "2025-01-30",
+      "status": "concluded",
+      "name": "Lowlands Pub Qualifier 9 - Dartcafé Dubbel 10, Arnhem, NL",
+      "url": "https://www.dartsatlas.com/tournaments/amfFuPmIVIYx",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Champion",
+      "points": null,
+      "average": 77.87,
+      "first9": 92.24,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/amfFuPmIVIYx/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "ciTBoqoVl91V",
+      "date": "2024-12-14",
+      "status": "concluded",
+      "name": "Flakkee Open 2024 @Tamara's Horeca, Ooltgensplaat, NL - € 1.000,- Grand Prize",
+      "url": "https://www.dartsatlas.com/tournaments/ciTBoqoVl91V",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 16,
+      "average": 73.3,
+      "first9": 79.69,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/ciTBoqoVl91V/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "kvWEfRTXNvmz",
+      "date": "2024-10-26",
+      "status": "concluded",
+      "name": "NL Tour 10 @De Lantearne, Surhuisterveen, NL",
+      "url": "https://www.dartsatlas.com/tournaments/kvWEfRTXNvmz",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Group Stage",
+      "points": 1,
+      "average": 74.57,
+      "first9": 71.22,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/kvWEfRTXNvmz/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "mr9HccKGVzHC",
+      "date": "2024-10-26",
+      "status": "concluded",
+      "name": "NL Tour 9 @De Lantearne, Surhuisterveen, NL",
+      "url": "https://www.dartsatlas.com/tournaments/mr9HccKGVzHC",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Group Stage",
+      "points": 1,
+      "average": 72.53,
+      "first9": 71.23,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/mr9HccKGVzHC/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "q7aJgRsJoEVy",
+      "date": "2024-10-05",
+      "status": "concluded",
+      "name": "ADC Benelux Open 2024 - Main Tournament",
+      "url": "https://www.dartsatlas.com/tournaments/q7aJgRsJoEVy",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 4,
+      "average": 72.84,
+      "first9": 80.25,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/q7aJgRsJoEVy/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "Oj5M6j2DYicS",
+      "date": "2024-09-19",
+      "status": "concluded",
+      "name": "Benelux Open - Pub Qualifier 43 - @Dubbel 10",
+      "url": "https://www.dartsatlas.com/tournaments/Oj5M6j2DYicS",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Semi-Final",
+      "points": 4,
+      "average": 76.51,
+      "first9": 89.12,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/Oj5M6j2DYicS/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "Jw6RCG4CuFVR",
+      "date": "2024-08-22",
+      "status": "concluded",
+      "name": "Benelux Open - Pub Qualifier 30 - @Dubbel 10",
+      "url": "https://www.dartsatlas.com/tournaments/Jw6RCG4CuFVR",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Group Stage",
+      "points": 1,
+      "average": 71.3,
+      "first9": 79.87,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/Jw6RCG4CuFVR/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "XdlJT4WPN6uz",
+      "date": "2024-08-15",
+      "status": "concluded",
+      "name": "Benelux Open - Pub Qualifier 25 - @Dubbel 10",
+      "url": "https://www.dartsatlas.com/tournaments/XdlJT4WPN6uz",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 2,
+      "average": 78.71,
+      "first9": 82.28,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/XdlJT4WPN6uz/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "q54TE6pRCHu0",
+      "date": "2024-08-08",
+      "status": "concluded",
+      "name": "Benelux Open - Pub Qualifier 23 - @Dubbel 10",
+      "url": "https://www.dartsatlas.com/tournaments/q54TE6pRCHu0",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 4,
+      "average": 68.66,
+      "first9": 77.29,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/q54TE6pRCHu0/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "3D8VVckFOHbE",
+      "date": "2024-07-25",
+      "status": "concluded",
+      "name": "Benelux Open - Pub Qualifier 17 - @Dubbel 10",
+      "url": "https://www.dartsatlas.com/tournaments/3D8VVckFOHbE",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": 4,
+      "average": 72.09,
+      "first9": 78.74,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/3D8VVckFOHbE/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "6jZ1U5iX1HVx",
+      "date": "2024-07-04",
+      "status": "concluded",
+      "name": "Benelux Open - Pub Qualifier 3 - @Dubbel 10",
+      "url": "https://www.dartsatlas.com/tournaments/6jZ1U5iX1HVx",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Quarter-Final",
+      "points": null,
+      "average": 70.19,
+      "first9": 78.61,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/6jZ1U5iX1HVx/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "89NArXFlaYjq",
+      "date": "2024-05-12",
+      "status": "concluded",
+      "name": "NL Tour 5 @Brikke Oave, Brunssum, NL",
+      "url": "https://www.dartsatlas.com/tournaments/89NArXFlaYjq",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 64",
+      "points": 1,
+      "average": 70.34,
+      "first9": 80.97,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/89NArXFlaYjq/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "ltazpKy3y8mc",
+      "date": "2024-05-12",
+      "status": "concluded",
+      "name": "NL Tour 4 @Brikke Oave, Brunssum, NL",
+      "url": "https://www.dartsatlas.com/tournaments/ltazpKy3y8mc",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 32",
+      "points": 2,
+      "average": 68.87,
+      "first9": 68.17,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/ltazpKy3y8mc/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "0ZqV6acSNgi7",
+      "date": "2024-02-18",
+      "status": "concluded",
+      "name": "NL Tour 3 @MFC 't Centrum, Ooltgensplaat, NL",
+      "url": "https://www.dartsatlas.com/tournaments/0ZqV6acSNgi7",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 32",
+      "points": 2,
+      "average": 84.06,
+      "first9": 89.24,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/0ZqV6acSNgi7/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "UoVcOVo7CAGP",
+      "date": "2024-02-17",
+      "status": "concluded",
+      "name": "NL Tour 2 @MFC 't Centrum, Ooltgensplaat, NL",
+      "url": "https://www.dartsatlas.com/tournaments/UoVcOVo7CAGP",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 16",
+      "points": 4,
+      "average": 71.78,
+      "first9": 80.1,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/UoVcOVo7CAGP/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "daOwvoixf02r",
+      "date": "2024-02-17",
+      "status": "concluded",
+      "name": "NL Tour 1 @MFC 't Centrum, Ooltgensplaat, NL",
+      "url": "https://www.dartsatlas.com/tournaments/daOwvoixf02r",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 64",
+      "points": 1,
+      "average": 68.41,
+      "first9": 78.56,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/daOwvoixf02r/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "SfARYlJYfgSn",
+      "date": "2023-10-15",
+      "status": "concluded",
+      "name": "EQT 4 - 2023",
+      "url": "https://www.dartsatlas.com/tournaments/SfARYlJYfgSn",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 32",
+      "points": null,
+      "average": 68.82,
+      "first9": 89.69,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/SfARYlJYfgSn/player_stats/n6oeItIbK1vl"
+    },
+    {
+      "id": "ucYBJyMq4asy",
+      "date": "2023-10-15",
+      "status": "concluded",
+      "name": "EQT 3 - 2023",
+      "url": "https://www.dartsatlas.com/tournaments/ucYBJyMq4asy",
+      "circuit": {
+        "id": "0SGleWxG03FM",
+        "name": "ADC Benelux",
+        "url": "https://www.dartsatlas.com/o/0SGleWxG03FM"
+      },
+      "result": "Last 128",
+      "points": null,
+      "average": 76.74,
+      "first9": 73.73,
+      "statsUrl": "https://www.dartsatlas.com/tournaments/ucYBJyMq4asy/player_stats/n6oeItIbK1vl"
+    }
+  ],
+  "meta": {
+    "rankingsUrl": "https://www.dartsatlas.com/players/n6oeItIbK1vl/rankings",
+    "tournamentsUrl": "https://www.dartsatlas.com/players/n6oeItIbK1vl/tournaments",
+    "pagesFetched": [
+      "https://www.dartsatlas.com/players/n6oeItIbK1vl/rankings",
+      "https://www.dartsatlas.com/players/n6oeItIbK1vl/rankings?status=history",
+      "https://www.dartsatlas.com/players/n6oeItIbK1vl/tournaments",
+      "https://www.dartsatlas.com/players/n6oeItIbK1vl/tournaments?page=2",
+      "https://www.dartsatlas.com/players/n6oeItIbK1vl/tournaments?page=3",
+      "https://www.dartsatlas.com/players/n6oeItIbK1vl/tournaments?page=4"
+    ],
+    "tournamentPages": 4,
+    "standingsCount": 9,
+    "tournamentsCount": 63
+  }
+}

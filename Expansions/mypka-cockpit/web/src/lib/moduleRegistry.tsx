@@ -36,7 +36,7 @@
 import type { ComponentType } from 'react';
 import { lazy } from 'react';
 import type { LucideIcon } from 'lucide-react';
-import { Globe, Headphones, HeartPulse, Inbox, Library as LibraryIcon, LineChart, ListTodo, Map as MapIcon, Package } from 'lucide-react';
+import { Globe, Headphones, HeartPulse, Inbox, Library as LibraryIcon, LineChart, ListTodo, Map as MapIcon, Package, Target } from 'lucide-react';
 
 // Heavy module views go behind a lazy boundary (same idiom as the Workbench /
 // Board views in App.tsx) so they never enter the eager bundle. A React.lazy
@@ -76,6 +76,11 @@ const OuterWorldView = lazy(() =>
 const AudiobooksView = lazy(() =>
   import('../views/AudiobooksView').then((m) => ({ default: m.AudiobooksView })),
 );
+// Darts module — Sander's Darts Atlas profile (rankings + tournament history).
+// The ONE module that does not read mypka.db: its data is scraped to plain JSON
+// on disk (data/dartsatlas/<player>/latest.json) by scripts/dartsatlas-fetch.mjs
+// and served read-only by GET /api/cockpit/darts (server/dartsatlasApi.js).
+const DartsView = lazy(() => import('../views/DartsView').then((m) => ({ default: m.DartsView })));
 
 // The sidebar groups an extension module can attach to. These mirror the
 // existing <div className="sidebar-group"> sections in Sidebar.tsx.
@@ -136,6 +141,9 @@ export const COCKPIT_MODULES: readonly CockpitModule[] = [
   { slug: 'health', navLabel: 'Health & Life', navIcon: HeartPulse, navSection: 'overview', View: DashboardView },
   { slug: 'tracking', navLabel: 'Tracking', navIcon: LineChart, navSection: 'overview', View: TrackingView },
   { slug: 'workouts', navLabel: 'Workouts', navIcon: MapIcon, navSection: 'overview', View: WorkoutsView },
+  // Darts — Darts Atlas rankings + tournament history, read from the scraped JSON
+  // on disk (not mypka.db). Sits beside the other personal-record surfaces.
+  { slug: 'darts', navLabel: 'Darts', navIcon: Target, navSection: 'overview', View: DartsView },
   // Library surface — the data-driven collection browser (recipes, movies, books,
   // …). Lands in the sidebar 'library' group. Always present so the surface (with
   // its first-class empty state) is one click away even on a bare scaffold; the
