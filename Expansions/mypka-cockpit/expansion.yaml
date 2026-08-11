@@ -1,12 +1,13 @@
-name: myPKA Cockpit
+name: myPKA Cockpit — SanderCo local adaptation
 slug: mypka-cockpit
-version: 1.5.2
+version: 1.5.3
 description: A navigable, wikilink-aware viewer over your whole myPKA — reads mypka.db read-only and renders the My Life hub, journal, note viewer with backlinks, team roster, Fleeting Notes with an outliner editor and whiteboards, finance/invoice modules, a read-only day planner, and optional health/workout packs. Runs entirely on your machine; nothing leaves it.
 category: productivity
 expansion_type: runtime
-requires_agents: [Larry, Mack, Silas]
+requires_scaffold_version: ">=2.1.2 <3.0.0"
+requires_agents: [Hermes, Daedalus, Atlas]
 license: LicenseRef-myICOR-Cockpit-Personal-Use-1.0
-author: myICOR
+author: SanderCo local adaptation (based on myICOR myPKA Cockpit 1.5.2)
 homepage: https://myicor.com/library/mypka-cockpit
 
 adds_agents: []

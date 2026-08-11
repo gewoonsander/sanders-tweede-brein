@@ -31,6 +31,7 @@ import type {
 import './stack.css';
 
 const CONNECTIONS_HREF = hrefFor({ name: 'connections' });
+const INTEGRATIONS_HREF = hrefFor({ name: 'integrations' });
 
 export function StackView() {
   const t = useT();
@@ -56,6 +57,7 @@ export function StackView() {
         <p className="stk-sub">
           {tn('stack.sub', {
             connections: <a className="stk-link" href={CONNECTIONS_HREF}>{t('stack.subConnections')}</a>,
+            register: <a className="stk-link" href={INTEGRATIONS_HREF}>{t('stack.subRegister')}</a>,
             envPath: <span className="font-mono">{data.envPath}</span>,
             mcpPath: <span className="font-mono">{data.mcpPath}</span>,
           })}

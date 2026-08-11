@@ -48,6 +48,7 @@ export type Route =
   // route, not a tab inside 'connections': different data source, different
   // question, read-only. See views/StackView.tsx.
   | { name: 'stack' }
+  | { name: 'integrations' }
   | { name: 'settings' }
   | { name: 'notes' }
   | { name: 'notes-doc'; slug: string }
@@ -105,6 +106,7 @@ export function parseHash(hash: string): Route {
   if (parts[0] === 'guidelines') return { name: 'guidelines' };
   if (parts[0] === 'connections') return { name: 'connections' };
   if (parts[0] === 'stack') return { name: 'stack' };
+  if (parts[0] === 'integrations') return { name: 'integrations' };
   if (parts[0] === 'settings') return { name: 'settings' };
   // Fleeting Notes + boards MUST be matched BEFORE the module-registry check,
   // so a drop-in module slug can never shadow a core route.
@@ -151,6 +153,7 @@ export function hrefFor(route: Route): string {
     case 'guidelines': return '#/guidelines';
     case 'connections': return '#/connections';
     case 'stack': return '#/stack';
+    case 'integrations': return '#/integrations';
     case 'settings': return '#/settings';
     case 'notes': return '#/notes';
     case 'notes-doc': return `#/notes/${encodeURIComponent(route.slug)}`;

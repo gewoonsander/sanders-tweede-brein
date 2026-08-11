@@ -72,4 +72,7 @@ tags: [voeding, tracking]
 - 2026-08-11T18:35:30+02:00 — complete: yes — source: close-session
 <!-- FOOD_AUDIT {"confirmed_at":"2026-08-11T18:35:30+02:00","complete":true,"source":"close-session"} -->
 
+- 2026-08-11T23:44:55+02:00 — complete: yes — source: close-session
+<!-- FOOD_AUDIT {"confirmed_at":"2026-08-11T23:44:55+02:00","complete":true,"source":"close-session"} -->
+
 <!-- FOOD_AUDITS -->

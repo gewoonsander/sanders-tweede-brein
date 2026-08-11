@@ -1,7 +1,7 @@
 {
   "name": "mypka-cockpit",
   "private": true,
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "myPKA Cockpit — a navigable, wikilink-aware viewer over your myPKA. Reads mypka.db read-only; Fleeting Notes is the only write surface (PKM/Fleeting Notes/).",
   "type": "module",
   "scripts": {
@@ -20,6 +20,7 @@
     "darts:watch": "node tools/dartsatlas/import-exports.mjs --watch",
     "darts:status": "node tools/dartsatlas/import-exports.mjs --status",
     "darts:test": "node --test tools/dartsatlas/extract.test.mjs"
+    ,"test:integrations": "node --test server/integrationRegistry.test.mjs server/integrationChecks.test.mjs server/integrationsApi.test.mjs"
     ,"food:test": "python3 -m unittest discover -s scripts/tests -p 'test_food_*.py' && node --test server/tracking.food.test.mjs"
     ,"food:capture-status": "bash -lc 'launchctl list 2>/dev/null | grep nl.gewoonsander.food-capture || echo food-capture-not-loaded'"
   },

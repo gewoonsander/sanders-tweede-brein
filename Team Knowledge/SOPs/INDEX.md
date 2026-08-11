@@ -28,8 +28,9 @@ Filename pattern: `SOP-NNN-<title>.md`. See [[GL-001-file-naming-conventions]] f
 | SOP-016 | [[SOP-016-remote-toegang-mac-mini-op-vakantie]] | Sander | Vanaf een andere locatie via Terminal + Tailscale SSH'en naar de Mac mini en daar Claude Code starten op de tweede-brein-repo. |
 | SOP-017 | [[SOP-017-verwerk-voedingsregistratie]] | Penn + Daedalus | Foto, spraak of tekst normaliseren naar een categorie, nutrition-range en append-only dagelijks voedingslogboek. |
 | SOP-018 | [[SOP-018-registreer-mcp-service-bij-agent-runtime]] | Daedalus | Een geregistreerde MCP-service veilig, idempotent en zonder secretduplicatie aansluiten op een agentruntime. |
+| SOP-019 | [[SOP-019-controleer-integraties-en-software]] | Daedalus | Verwachte integraties vergelijken met secretvrije lokale of handmatige observaties en iedere afwijking een concrete vervolgactie geven. |
 
-*Reserved (genuinely open for future agents):* SOP-019+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
+*Reserved (genuinely open for future agents):* SOP-020+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
 
 ## How to add a new SOP
 

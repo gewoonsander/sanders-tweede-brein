@@ -38,6 +38,7 @@ import {
 import { describeRegistry, taskConnectors, labelForSource } from './connectors/registry.js';
 import { setEnvKey, clearEnvKey, getAgenda, listStoredKeyNames } from './connectorAdmin.js';
 import { describeStack } from './stackInventory.js';
+import { getIntegrations, getIntegrationHistory, runIntegrationChecks } from './integrationsApi.js';
 import { registerPlannerRoutes } from './plannerRoutes.js';
 import { registerWellnessRoutes } from './wellness.js';
 import { registerFileTreeRoutes } from './filetree.js';
@@ -692,6 +693,37 @@ app.get('/api/cockpit/connectors', safe(() => {
 // see server/stackInventory.js. READ-ONLY — key management stays on the
 // Connections routes above, which already own the write/delete path.
 app.get('/api/cockpit/stack', safe(() => describeStack()));
+
+// ---- Integrations: canonical register + machine-local observations ----------
+// GETs expose names and bounded status evidence only. POST runs a closed set of
+// passive probes selected by known IDs; the browser can never supply a command,
+// URL, header or credential.
+app.get('/api/cockpit/integrations', safe(() => getIntegrations()));
+
+app.get('/api/cockpit/integrations/:id/history', (req, res) => {
+  try {
+    return res.json(getIntegrationHistory(req.params.id, req.query.limit));
+  } catch (err) {
+    const status = err.message === 'unknown-integration' ? 404 : 400;
+    return res.status(status).json({ error: err.message });
+  }
+});
+
+const integrationCheckJson = express.json({ limit: '4kb' });
+app.post(
+  '/api/cockpit/integrations/check',
+  sessionOrLoopback,
+  localWriteGuard,
+  integrationCheckJson,
+  (req, res) => {
+    try {
+      return res.json(runIntegrationChecks(req.body));
+    } catch (err) {
+      const status = String(err.message).startsWith('unknown-integration:') ? 404 : 400;
+      return res.status(status).json({ error: err.message });
+    }
+  },
+);
 
 const keyJson = express.json({ limit: '8kb' });
 const KEY_WRITE_STACK = [sessionOrLoopback, localWriteGuard, keyJson];

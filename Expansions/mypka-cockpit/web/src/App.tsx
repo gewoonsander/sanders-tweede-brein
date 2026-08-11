@@ -19,6 +19,7 @@ import { TeamAnalyticsView } from './views/TeamAnalyticsView';
 import { TeamKnowledgeListView } from './views/TeamKnowledgeListView';
 import { ConnectionsView } from './views/ConnectionsView';
 import { StackView } from './views/StackView';
+import { IntegrationsView } from './views/IntegrationsView';
 import { SettingsView } from './views/SettingsView';
 import { TypeListView } from './views/TypeListView';
 import { NoteView } from './views/NoteView';
@@ -163,6 +164,7 @@ function ContentRouter({ route }: { route: ReturnType<typeof useRoute> }) {
     case 'guidelines': return <TeamKnowledgeListView family="guidelines" />;
     case 'connections': return <ConnectionsView />;
     case 'stack': return <StackView />;
+    case 'integrations': return <IntegrationsView />;
     case 'settings': return <SettingsView />;
     case 'notes':
       return (

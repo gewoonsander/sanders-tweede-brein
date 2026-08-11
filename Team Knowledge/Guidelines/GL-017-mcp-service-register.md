@@ -43,14 +43,34 @@ Dit is de single source of truth voor externe MCP-diensten die agentruntimes bij
 | Healthcheck | server registreren, toolinventaris ophalen, een read-only workflowlijst uitvoeren; nooit tokenwaarde loggen |
 | Laatst geverifieerd | 2026-08-11 |
 
+### firecrawl-mcp
+
+| Veld | Waarde |
+|---|---|
+| `service_id` | `firecrawl-mcp` |
+| Doel | Webinhoud read-only ophalen wanneer directe webtoegang onvoldoende is |
+| Eigenaar | Daedalus |
+| Status | active |
+| Transport | `stdio` via de runtime-adapter |
+| Endpoint | Door de officiële adapter beheerd; niet dupliceren in de portable kern |
+| Authenticatie | API-key uit runtimeomgeving |
+| Secretvariabele | `FIRECRAWL_API_KEY` |
+| Secret store | Lokale OS-secretstore per apparaat |
+| Versleutelde back-up | LastPass; uitsluitend voor herstel en installatie op een apparaat |
+| Risicoklasse | midden — externe webinhoud verlaat de gevraagde bron en wordt door een derde dienst verwerkt |
+| Schrijfbeleid | geen publicatie- of mutatierechten; alleen ophalen binnen de gevraagde scope |
+| Verwachte capabilities | webpagina ophalen en machineleesbare inhoud retourneren |
+| Healthcheck | registratie en secret-aanwezigheid controleren; daarna één openbare pagina read-only ophalen |
+| Laatst geverifieerd | 2026-08-11 |
+
 ## Adaptercontract
 
 Elke runtime-adapter controleert minimaal:
 
 - exact dezelfde `service_id`;
-- exact hetzelfde endpoint;
-- transport compatibel met `streamable-http`;
-- authenticatie uitsluitend via `N8N_MCP_TOKEN`;
+- exact het endpoint- of pakketcontract uit de betreffende servicetabel;
+- transport compatibel met het transport uit die servicetabel;
+- authenticatie uitsluitend via de genoemde secretvariabele;
 - geen literal Authorization-waarde;
 - status enabled pas nadat de healthcheck slaagt;
 - herstart- of reloadstap indien de runtime configuratie alleen bij start laadt.

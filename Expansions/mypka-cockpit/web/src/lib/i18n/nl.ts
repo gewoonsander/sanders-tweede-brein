@@ -95,6 +95,7 @@ export const nl: Record<TranslationKey, string> = {
   'nav.fleetingNotes': 'Losse notities',
   'nav.connections': 'Koppelingen',
   'nav.stack': 'Software-stack',
+  'nav.integrations': 'Koppelingen & software',
   'nav.settings': 'Instellingen',
   'nav.recipes': 'Recepten',
   'nav.media': 'Films & series',
@@ -673,8 +674,9 @@ export const nl: Record<TranslationKey, string> = {
   // ---- Software-stack (#/stack) ---------------------------------------------
   'stack.title': 'Software-stack',
   'stack.loadError': 'De software-stack kon niet laden.',
-  'stack.sub': 'Alles waar dit myPKA aan vastzit — breder dan {connections}, dat alleen de tools toont die je planbord voeden. Alleen-lezen: sleutelnamen uit {envPath} en de servers uit {mcpPath}. Een opgeslagen waarde zie je hier nooit, en nergens anders.',
+  'stack.sub': 'Dit is alleen lokaal uitvoeringsbewijs: sleutelnamen uit {envPath} en serverregistraties uit {mcpPath}. {register} uit GL-018 blijft de enige software- en integratie-inventaris; {connections} beheert uitsluitend planbordconnectors. Secretwaarden worden nooit getoond.',
   'stack.subConnections': 'Koppelingen',
+  'stack.subRegister': 'Koppelingen & software',
 
   'stack.keysTitle': 'Opgeslagen sleutels',
   'stack.keysEmpty': 'Nog geen sleutels opgeslagen.',

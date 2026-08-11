@@ -1,0 +1,20 @@
+{
+  "name": "myPKA Cockpit — SanderCo local adaptation",
+  "slug": "mypka-cockpit",
+  "version": "1.5.3",
+  "expansion_type": "runtime",
+  "requires_scaffold_version": ">=2.1.2 <3.0.0",
+  "requires_agents": ["Hermes", "Daedalus", "Atlas"],
+  "license": "LicenseRef-myICOR-Cockpit-Personal-Use-1.0",
+  "author": "SanderCo local adaptation (based on myICOR myPKA Cockpit 1.5.2)",
+  "installed_at": "2026-08-11T22:58:50+02:00",
+  "installed_by": "Hermes",
+  "security_verdict": "YELLOW — explicitly accepted by Sander",
+  "manifest_sha256": "830c4ed0e7f409bc07f6da7bff6d557680a7c546a94c7836f56145c09662c2e7",
+  "runtime_path": "Expansions/mypka-cockpit",
+  "runtime_folder_retained": true,
+  "launcher": "Expansions/mypka-cockpit/start-cockpit.command",
+  "mcp_servers": [],
+  "required_env_vars": [],
+  "sensitive_env_var_names": ["COCKPIT_PIN_HASH", "COCKPIT_TLS_KEY"]
+}

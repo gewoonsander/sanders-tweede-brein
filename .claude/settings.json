@@ -137,6 +137,17 @@
     ]
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/.claude/hooks/check-todoist-taakformat.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [

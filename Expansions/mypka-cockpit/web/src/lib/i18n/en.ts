@@ -97,6 +97,7 @@ export const en = {
   'nav.fleetingNotes': 'Fleeting Notes',
   'nav.connections': 'Connections',
   'nav.stack': 'Software stack',
+  'nav.integrations': 'Connections & software',
   'nav.settings': 'Settings',
   'nav.recipes': 'Recipes',
   'nav.media': 'Movies & Series',
@@ -679,8 +680,9 @@ export const en = {
   // that feed the planner. Read-only — management stays on Connections.
   'stack.title': 'Software stack',
   'stack.loadError': 'Could not load the software stack.',
-  'stack.sub': 'Everything this myPKA is wired to — wider than {connections}, which only covers the tools that feed your planner. Read-only: key names from {envPath} and the servers declared in {mcpPath}. A stored value is never shown here, or anywhere else.',
+  'stack.sub': 'This is local runtime evidence only: key names from {envPath} and server registrations from {mcpPath}. {register}, sourced from GL-018, remains the only software and integration inventory; {connections} manages planner connectors only. Secret values are never shown.',
   'stack.subConnections': 'Connections',
+  'stack.subRegister': 'Connections & software',
 
   'stack.keysTitle': 'Stored keys',
   'stack.keysEmpty': 'No keys stored yet.',
