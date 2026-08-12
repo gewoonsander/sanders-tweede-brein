@@ -39,6 +39,23 @@ def load_env_key(name: str) -> str | None:
     return None
 
 
+def report_to_cockpit(ok: bool) -> None:
+    """Best-effort: tell the running Cockpit (if any) that a real Perplexity call
+    just succeeded/failed, so its 'perplexity-api' dashboard tile reflects actual
+    use instead of sitting on permanent 'action needed'. Never raises — a Cockpit
+    that isn't running, or any network hiccup, must not affect this script's own
+    exit code or output."""
+    try:
+        req = urllib.request.Request(
+            "http://127.0.0.1:4317/api/cockpit/integrations/manual-probe",
+            data=json.dumps({"integrationId": "perplexity-api", "ok": ok}).encode(),
+            headers={"Content-Type": "application/json", "X-Cockpit": "1"},
+        )
+        urllib.request.urlopen(req, timeout=3).read()
+    except Exception:
+        pass
+
+
 def ask_perplexity(query: str, model: str, api_key: str) -> dict:
     data = json.dumps(
         {
@@ -74,13 +91,17 @@ def main() -> int:
         resp = ask_perplexity(args.query, args.model, api_key)
     except Exception as e:
         print(f"[FOUT] Perplexity-aanroep mislukt: {type(e).__name__}: {e}", file=sys.stderr)
+        report_to_cockpit(ok=False)
         return 1
 
     try:
         answer = resp["choices"][0]["message"]["content"]
     except (KeyError, IndexError):
         print(f"[FOUT] Onverwacht antwoordformaat: {json.dumps(resp)[:500]}", file=sys.stderr)
+        report_to_cockpit(ok=False)
         return 1
+
+    report_to_cockpit(ok=True)
 
     citations = resp.get("citations", [])
 

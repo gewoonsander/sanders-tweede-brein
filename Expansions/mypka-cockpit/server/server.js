@@ -38,7 +38,7 @@ import {
 import { describeRegistry, taskConnectors, labelForSource } from './connectors/registry.js';
 import { setEnvKey, clearEnvKey, getAgenda, listStoredKeyNames } from './connectorAdmin.js';
 import { describeStack } from './stackInventory.js';
-import { getIntegrations, getIntegrationHistory, runIntegrationChecks } from './integrationsApi.js';
+import { getIntegrations, getIntegrationHistory, runIntegrationChecks, recordManualProbe } from './integrationsApi.js';
 import { registerPlannerRoutes } from './plannerRoutes.js';
 import { registerWellnessRoutes } from './wellness.js';
 import { registerFileTreeRoutes } from './filetree.js';
@@ -720,6 +720,25 @@ app.post(
       return res.json(runIntegrationChecks(req.body));
     } catch (err) {
       const status = String(err.message).startsWith('unknown-integration:') ? 404 : 400;
+      return res.status(status).json({ error: err.message });
+    }
+  },
+);
+
+// POST /api/cockpit/integrations/manual-probe   body { integrationId, ok: boolean }
+// For a script OUTSIDE the cockpit process (perplexity_search.py) to report that
+// its own live call just succeeded/failed. Scoped to integrations whose register
+// entry declares the `manual` probe — see recordManualProbe's doc comment.
+app.post(
+  '/api/cockpit/integrations/manual-probe',
+  sessionOrLoopback,
+  localWriteGuard,
+  integrationCheckJson,
+  (req, res) => {
+    try {
+      return res.json(recordManualProbe(req.body));
+    } catch (err) {
+      const status = err.message === 'unknown-integration' ? 404 : 400;
       return res.status(status).json({ error: err.message });
     }
   },

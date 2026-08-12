@@ -45,6 +45,35 @@ export function getIntegrationHistory(id, limit) {
   return { machine, integrationId: id, observations: integrationStatusStore.history(id, machine.machineId, limit) };
 }
 
+/**
+ * Record the outcome of a real, external "manual" verification — e.g. a script
+ * outside the cockpit process (perplexity_search.py) reporting that its own live
+ * call just succeeded or failed. Scoped tightly: only integrations that declare
+ * `manual` in their verification_profile accept this, so the endpoint can never
+ * be used to fake a `secret-present`/`connector-readonly` result for something
+ * it didn't actually check.
+ */
+export function recordManualProbe(body) {
+  const integrationId = body?.integrationId;
+  if (!ID_RE.test(integrationId || '')) throw new Error('invalid-integration-id');
+  if (typeof body?.ok !== 'boolean') throw new Error('invalid-ok');
+  const registry = loadIntegrationRegistry();
+  const integration = registry.integrations.find((x) => x.integrationId === integrationId);
+  if (!integration) throw new Error('unknown-integration');
+  if (!integration.verificationProfile.includes('manual')) throw new Error('probe-not-allowed');
+
+  integrationStatusStore.record({
+    integrationId,
+    machine: localMachine(),
+    probeId: 'manual',
+    status: body.ok ? 'pass' : 'fail',
+    evidenceCode: body.ok ? 'manual-verification-ok' : 'manual-verification-failed',
+    errorCategory: body.ok ? null : 'unknown',
+    profileVersion: 1,
+  });
+  return getIntegrations();
+}
+
 export function runIntegrationChecks(body) {
   const integrationIds = body?.integrationIds;
   const probeIds = body?.probeIds;
