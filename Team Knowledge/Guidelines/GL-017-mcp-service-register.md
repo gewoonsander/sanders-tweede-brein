@@ -63,6 +63,25 @@ Dit is de single source of truth voor externe MCP-diensten die agentruntimes bij
 | Healthcheck | registratie en secret-aanwezigheid controleren; daarna één openbare pagina read-only ophalen |
 | Laatst geverifieerd | 2026-08-11 |
 
+### dropbox-mcp
+
+| Veld | Waarde |
+|---|---|
+| `service_id` | `dropbox-mcp` |
+| Doel | Alle Dropbox-bestanden cloud-native lezen en uitsluitend via goedgekeurde batches wijzigen |
+| Eigenaar | Daedalus |
+| Status | built-awaiting-oauth |
+| Transport | `stdio` naar één lokale portable server |
+| Authenticatie | OAuth 2.0 met PKCE en offline refresh token |
+| Content access | `Full Dropbox` |
+| Secret store | macOS Keychain; gescheiden app-key, refresh-token en batchsigneringssleutel |
+| Risicoklasse | zeer hoog |
+| Schrijfbeleid | preview plus eenmalige menselijke goedkeuring buiten MCP; geen root-delete of permanent wissen |
+| Verwachte capabilities | search/list/metadata/download; preview mutation batch; execute externally approved batch once |
+| Verboden capabilities | vrije API-passthrough, permanent wissen, autonome goedkeuring, replay en standaard publieke links |
+| Healthcheck | toolinventaris, accountmetadata, rootlisting en testbatch in tijdelijke map |
+| Laatst geverifieerd | lokaal contract 2026-08-12; OAuth nog open |
+
 ## Adaptercontract
 
 Elke runtime-adapter controleert minimaal:

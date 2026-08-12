@@ -3,6 +3,7 @@ full_name: Terry Lenting
 first_name: Terry
 last_name: Lenting
 relation: darts
+email: terrylenting@hotmail.com
 phone: "+31653214194"
 tags:
   - darts

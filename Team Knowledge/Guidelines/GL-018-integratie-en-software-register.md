@@ -340,7 +340,7 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
       "name": "D.T. Irritant Forms-automatisering",
       "kind": "webhook",
       "purpose": "Wedstrijden uit Teambeheer omzetten naar beschikbaarheidsformulieren en overzichten.",
-      "lifecycle": "planned",
+      "lifecycle": "configured",
       "owner": "daedalus",
       "expected_devices": [],
       "expected_runtimes": [
@@ -356,7 +356,7 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
         "teambeheer-source"
       ],
       "canonical_reference": "project_dt-irritant-beschikbaarheid-automatisering",
-      "next_action": "Importeer de geteste workflows en koppel Google OAuth na preview van 22 wedstrijden.",
+      "next_action": "Koppel Google OAuth2-credential aan de Forms/Drive-nodes en maak het antwoorden-Sheet aan, dan createForm=true.",
       "data_role": "processor",
       "sync_direction": "export",
       "canonical_records": [],

@@ -3,6 +3,7 @@ full_name: Jaimy Melchels
 first_name: Jaimy
 last_name: Melchels
 relation: darts
+email: jaimymelchels_02@hotmail.com
 phone: "+31627239052"
 tags:
   - darts

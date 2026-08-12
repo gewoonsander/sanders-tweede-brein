@@ -136,7 +136,7 @@
 .cnx-coverage-note { color: var(--fg-subtle); }
 
 /* ---- Wire-assistant hand-off (Felix, 2026-06-11 — appended) ----------------------- */
-/* The "Let Claude wire this up" affordance under the Connected section. Reuses the
+/* The neutral "Complete connection" affordance under the Connected section. Reuses the
    cnx-save / cnx-hint / cnx-ok / cnx-error idioms; only the command block is new. */
 .cnx-wire { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
 .cnx-wire .cnx-save--wide { gap: 8px; }

@@ -3,6 +3,7 @@ full_name: Niels van Zanten
 first_name: Niels
 last_name: van Zanten
 relation: darts
+email: Niels0017@hotmail.com
 phone: "+31621596563"
 tags:
   - darts

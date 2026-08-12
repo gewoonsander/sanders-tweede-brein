@@ -7,4 +7,5 @@
   <key>StandardOutPath</key><string>/tmp/gewoonsander-food-capture.log</string>
   <key>StandardErrorPath</key><string>/tmp/gewoonsander-food-capture.err</string>
   <key>RunAtLoad</key><false/>
+  <key>StartInterval</key><integer>60</integer>
 </dict></plist>

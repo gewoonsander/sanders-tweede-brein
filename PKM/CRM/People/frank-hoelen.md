@@ -3,6 +3,7 @@ full_name: Frank Hoelen
 first_name: Frank
 last_name: Hoelen
 relation: darts
+email: fhoelen@hotmail.com
 tags:
   - darts
   - dt-irritant

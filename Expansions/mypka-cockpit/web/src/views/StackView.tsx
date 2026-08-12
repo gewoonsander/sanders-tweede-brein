@@ -33,7 +33,7 @@ import './stack.css';
 const CONNECTIONS_HREF = hrefFor({ name: 'connections' });
 const INTEGRATIONS_HREF = hrefFor({ name: 'integrations' });
 
-export function StackView() {
+export function StackView({ embedded = false }: { embedded?: boolean }) {
   const t = useT();
   const tn = useTNodes();
   const { data, loading, error } = useFetch<StackResponse>('/api/cockpit/stack');
@@ -49,8 +49,8 @@ export function StackView() {
   const gateOff = !data.connectorsEnabled && envKeys.length > 0;
 
   return (
-    <div className="stk">
-      <header className="stk-head">
+    <div className={`stk ${embedded ? 'stk--embedded' : ''}`}>
+      {!embedded && <header className="stk-head">
         <h1 className="stk-title">
           <Layers size={22} strokeWidth={1.5} aria-hidden="true" /> {t('stack.title')}
         </h1>
@@ -62,7 +62,7 @@ export function StackView() {
             mcpPath: <span className="font-mono">{data.mcpPath}</span>,
           })}
         </p>
-      </header>
+      </header>}
 
       <section className="stk-section" aria-labelledby="stk-keys-title">
         <div className="stk-section-head">

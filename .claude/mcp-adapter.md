@@ -30,3 +30,13 @@ jq '.mcpServers["n8n-mcp"] | {type, url, header_names: (.headers|keys)}' .mcp.js
 De output mag de headernaam tonen, nooit de opgeloste tokenwaarde.
 
 Canonieke procedure: [[SOP-018-registreer-mcp-service-bij-agent-runtime]].
+
+## dropbox-mcp
+
+Registreer pas na OAuth-setup:
+
+```bash
+claude mcp add dropbox-mcp --scope project -- node /Users/sandervanockenburg-zwaan/Documents/sander-projects/dropbox-mcp/src/server.mjs
+```
+
+Verifieer eerst alleen rootmetadata. Mutatiegoedkeuring gebeurt buiten MCP.

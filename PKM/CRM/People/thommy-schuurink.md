@@ -3,6 +3,7 @@ full_name: Thommy Schuurink
 first_name: Thommy
 last_name: Schuurink
 relation: darts
+email: T.schuurink@hotmail.com
 phone: "+31657992698"
 tags:
   - darts

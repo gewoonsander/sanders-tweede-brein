@@ -17,8 +17,6 @@ import { RosterView } from './views/RosterView';
 import { SessionLogView } from './views/SessionLogView';
 import { TeamAnalyticsView } from './views/TeamAnalyticsView';
 import { TeamKnowledgeListView } from './views/TeamKnowledgeListView';
-import { ConnectionsView } from './views/ConnectionsView';
-import { StackView } from './views/StackView';
 import { IntegrationsView } from './views/IntegrationsView';
 import { SettingsView } from './views/SettingsView';
 import { TypeListView } from './views/TypeListView';
@@ -162,8 +160,8 @@ function ContentRouter({ route }: { route: ReturnType<typeof useRoute> }) {
     case 'workstreams': return <TeamKnowledgeListView family="workstreams" />;
     case 'sops': return <TeamKnowledgeListView family="sops" />;
     case 'guidelines': return <TeamKnowledgeListView family="guidelines" />;
-    case 'connections': return <ConnectionsView />;
-    case 'stack': return <StackView />;
+    case 'connections': return <IntegrationsView />;
+    case 'stack': return <IntegrationsView />;
     case 'integrations': return <IntegrationsView />;
     case 'settings': return <SettingsView />;
     case 'notes':

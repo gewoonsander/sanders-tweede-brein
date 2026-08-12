@@ -3,6 +3,7 @@ full_name: Jos Wenders
 first_name: Jos
 last_name: Wenders
 relation: darts
+email: joswenders@gmail.com
 phone: "0610631953"
 tags:
   - darts

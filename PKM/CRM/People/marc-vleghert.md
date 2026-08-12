@@ -4,6 +4,7 @@ first_name: Marc
 last_name: Vleghert
 facebook_username: marc.vleghert.5
 relation: darts / coachee
+email: marcvleghertdarts@gmail.com
 tags:
   - darts
   - superleague
@@ -62,6 +63,7 @@ Zelfomschrijving: "luie darter" die stimulatie nodig heeft. Sociale kring 80% da
 | Voorjaar 2026 | Opnamesessie DartsCoaching | Testimonial opnemen, praktijkcase ontwikkelen, promotioneel materiaal |
 | 16 jun 2026 | Wandelgesprek + dartstraining (~2 uur) | Druk & zelfvertrouwen (intern vs extern), achtergrond NDB/Nations, ontwikkellijn besproken (Marc eens), 25-routine geïntroduceerd als huiswerk, lichamelijke gezondheid aangestipt, NDB-selectiebewuste keuze besproken. Zie [[2026-06-16-19-30_larry_coaching-marc-vleghert-sessie-7]] |
 | 20 jun 2026 | Six Nations Cup — groepsfase (Devon, ENG) | Met Nederlands herenteam: verlies vs Noord-Ierland (10-13), winst vs Engeland (13-9) → groepswinnaar, door naar halve finale. Marc: 9 legs, 2 gewonnen, gem. ~76 (onder zijn ondergrens-doel van 80). Zie [[2026-06-21-six-nations-cup-marc-vleghert]] |
+| 12 aug 2026 | Trainingsfeedback via Joppe | Aandacht voor tempo, reset tussen beurten, frustratieregulatie, neutrale lichaamstaal, procesdoelen en voeding. Volledige bronnotitie in [[marc-vleghert-coachdossier-v1]]. |
 
 ## Ontwikkellijn
 

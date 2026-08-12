@@ -182,6 +182,12 @@ Any reply that carries something the user must decide, approve, or act on render
 
 Full spec: [[GL-016-beslis-en-waarschuwingsblokken]]
 
+### 11. Multi-session awareness (mandatory)
+
+Before starting work that could overlap with other active work on the same machine or repo (e.g. touching shared config, the Cockpit, or anything another session might also be mid-edit on), check `ListAgents` for other running peer sessions. This exists to prevent the collision pattern from 2026-08-11: multiple uncoordinated sessions duplicating work in the same dashboard and corrupting shared git state through concurrent writes.
+
+Not required for routine, self-contained work (a single file edit, a research question) — only when the task's blast radius could plausibly touch something another live session is also working on.
+
 ## Session-Log Triggers (LLM-agnostic)
 
 Any LLM working in this myPKA MUST honor these natural-language triggers and write a corresponding entry to `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_<agent>_<topic-slug>.md` following the `_template.md` schema.

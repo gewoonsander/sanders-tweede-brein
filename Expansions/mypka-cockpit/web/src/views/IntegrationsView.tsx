@@ -1,8 +1,10 @@
-import { useMemo, useState } from 'react';
-import { Activity, CheckCircle2, CircleAlert, CircleDashed, RefreshCw, ShieldAlert } from 'lucide-react';
+import { useMemo, useRef, useState } from 'react';
+import { Activity, CheckCircle2, CircleAlert, CircleDashed, Plug, RefreshCw, ShieldAlert, Wrench } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
 import { cockpitWrite } from '../lib/useCockpitWrite';
 import type { IntegrationItem, IntegrationsResponse, OverallStatus } from '../lib/integrations';
+import { ConnectionsView } from './ConnectionsView';
+import { StackView } from './StackView';
 import './integrations.css';
 
 const STATUS: Record<OverallStatus, { label: string; icon: typeof Activity }> = {
@@ -33,7 +35,10 @@ export function IntegrationsView() {
   const [kind, setKind] = useState('all');
   const [status, setStatus] = useState('all');
   const [checking, setChecking] = useState(false);
+  const [checkingId, setCheckingId] = useState<string | null>(null);
   const [checkError, setCheckError] = useState('');
+  const connectPanel = useRef<HTMLDetailsElement>(null);
+  const technicalPanel = useRef<HTMLDetailsElement>(null);
 
   const items = useMemo(() => (data?.integrations ?? []).filter((item) =>
     (kind === 'all' || item.kind === kind) && (status === 'all' || item.overallStatus === status),
@@ -43,12 +48,21 @@ export function IntegrationsView() {
   const total = data?.integrations.length ?? 0;
   const progress = total ? Math.round((checked / total) * 100) : 0;
 
-  const runChecks = async () => {
+  const runChecks = async (integrationId?: string) => {
     setChecking(true); setCheckError('');
-    const result = await cockpitWrite<IntegrationsResponse>('/api/cockpit/integrations/check', 'POST', {});
+    setCheckingId(integrationId ?? null);
+    const body = integrationId ? { integrationIds: [integrationId] } : {};
+    const result = await cockpitWrite<IntegrationsResponse>('/api/cockpit/integrations/check', 'POST', body);
     if (result.kind === 'ok') setRevision((x) => x + 1);
     else setCheckError(result.kind === 'auth' ? 'Je sessie is verlopen.' : 'De veilige controle kon niet worden voltooid.');
-    setChecking(false);
+    setChecking(false); setCheckingId(null);
+  };
+
+  const reveal = (panel: React.RefObject<HTMLDetailsElement>) => {
+    if (!panel.current) return;
+    panel.current.open = true;
+    panel.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    panel.current.querySelector<HTMLElement>('summary')?.focus({ preventScroll: true });
   };
 
   if (loading) return <div className="list-skeleton" aria-busy="true"><div className="skeleton-block" /></div>;
@@ -61,7 +75,7 @@ export function IntegrationsView() {
           <h1><Activity size={23} aria-hidden="true" /> Koppelingen &amp; software</h1>
           <p>Verwachting uit GL-018, gecombineerd met secretvrij bewijs op <strong>{data.machine.label}</strong>.</p>
         </div>
-        <button className="intg-check" type="button" onClick={runChecks} disabled={checking}>
+        <button className="intg-check" type="button" onClick={() => runChecks()} disabled={checking}>
           <RefreshCw size={16} className={checking ? 'is-spinning' : ''} aria-hidden="true" />
           {checking ? 'Controleren…' : 'Nu veilig controleren'}
         </button>
@@ -90,14 +104,37 @@ export function IntegrationsView() {
       </div>
 
       <div className="intg-grid">
-        {items.map((item) => <IntegrationCard key={item.integrationId} item={item} />)}
+        {items.map((item) => <IntegrationCard
+          key={item.integrationId}
+          item={item}
+          checking={checkingId === item.integrationId}
+          onCheck={() => runChecks(item.integrationId)}
+          onConnect={() => reveal(connectPanel)}
+          onDetails={() => reveal(technicalPanel)}
+        />)}
       </div>
       {!items.length && <p className="intg-empty">Geen koppelingen passen bij deze filters.</p>}
+
+      <details className="intg-panel" ref={connectPanel}>
+        <summary><Plug size={18} aria-hidden="true" /> Software koppelen of herstellen</summary>
+        <div className="intg-panel-body"><ConnectionsView embedded /></div>
+      </details>
+
+      <details className="intg-panel" ref={technicalPanel}>
+        <summary><Wrench size={18} aria-hidden="true" /> Technische details: sleutels en MCP-servers</summary>
+        <div className="intg-panel-body"><StackView embedded /></div>
+      </details>
     </div>
   );
 }
 
-function IntegrationCard({ item }: { item: IntegrationItem }) {
+function IntegrationCard({ item, checking, onCheck, onConnect, onDetails }: {
+  item: IntegrationItem;
+  checking: boolean;
+  onCheck: () => void;
+  onConnect: () => void;
+  onDetails: () => void;
+}) {
   const meta = STATUS[item.overallStatus];
   const Icon = meta.icon;
   const latest = item.observations.reduce<string | null>((value, row) => !value || row.checked_at > value ? row.checked_at : value, null);
@@ -124,6 +161,20 @@ function IntegrationCard({ item }: { item: IntegrationItem }) {
         </details>
       )}
       <div className="intg-next"><strong>Volgende actie</strong><span>{item.nextAction}</span></div>
+      {item.overallStatus === 'not_checked' ? (
+        <button className="intg-action" type="button" onClick={onCheck} disabled={checking}>
+          <RefreshCw size={16} className={checking ? 'is-spinning' : ''} aria-hidden="true" />
+          {checking ? 'Controleren…' : 'Nu controleren'}
+        </button>
+      ) : item.overallStatus === 'planned' ? (
+        <button className="intg-action" type="button" onClick={onConnect}><Plug size={16} aria-hidden="true" />Koppelen</button>
+      ) : item.overallStatus === 'action_needed' ? (
+        <button className="intg-action" type="button" onClick={onConnect}><Wrench size={16} aria-hidden="true" />Aansluiting voltooien</button>
+      ) : item.overallStatus === 'broken' ? (
+        <button className="intg-action intg-action--urgent" type="button" onClick={onConnect}><Wrench size={16} aria-hidden="true" />Probleem oplossen</button>
+      ) : (
+        <button className="intg-action intg-action--secondary" type="button" onClick={onDetails}>Details bekijken</button>
+      )}
     </article>
   );
 }

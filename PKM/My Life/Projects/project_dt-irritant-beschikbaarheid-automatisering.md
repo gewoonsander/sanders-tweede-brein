@@ -53,8 +53,11 @@ Bovenop niveau 2: reacties (die al automatisch in een Google Sheet landen, stand
 - [x] Google Forms via de officiële Forms API vanuit n8n ontwerpen en lokaal bouwen voor seizoen 26-27
 - [x] Teambeheer-parameters bevestigd: RDB `d=1`, D.T. Irritant `t=394`, seizoen `s=26-27`
 - [x] Importbestanden en regressietests opgeleverd in `/Users/sandervanockenburg-zwaan/Documents/automation-projects/dt-irritant-n8n/`
-- [ ] Sander importeert beide JSON-workflows in n8n en koppelt de Google OAuth2-credentials volgens de README
-- [ ] Eerste generator-run uitvoeren met `createForm=false`; pas na controle van de 22 competitiewedstrijden een echt formulier maken
+- [x] Beide workflows geïmporteerd in n8n (12-08-2026, via n8n-mcp, 1:1 herbouwd uit de geteste JSON-bestanden, bedrading geverifieerd identiek): [Genereer beschikbaarheidsformulier](https://gewoonsander.app.n8n.cloud/workflow/vtk9BRb8poxr3GjQ), [Synchroniseer formulierantwoorden](https://gewoonsander.app.n8n.cloud/workflow/RGG1yuaETmEsHtPL)
+- [x] Eerste generator-run uitgevoerd met `createForm=false` (12-08-2026) — preview klopt tegen de live Teambeheer-feed: 22 competitiewedstrijden seizoen 26-27, eerste ronde 07-09-2026, laatste 10-05-2027, 3 bekerwedstrijden (b1/b2/b3) correct uitgesloten
+- [x] Google OAuth2-credential gekoppeld (12-08-2026) — de 3 bestaande "Google account"-credentials bleken kapot (`Unable to sign without access token`). Nieuwe dedicated OAuth-client "D.T. Irritant n8n" aangemaakt in Google Cloud-project `tweede-brein-integraties` (Forms/Drive/Sheets API's stonden al aan, consent screen op Internal), n8n-credential **"D.T. Irritant Google OAuth2"** met de 4 juiste scopes, live getest tegen Google Drive: werkt. Gekoppeld aan alle 5 relevante nodes in beide workflows. Google Sheets-credential was al automatisch gekoppeld ("Google Sheets account 2")
+- [x] Antwoorden-Sheet aangemaakt (12-08-2026, via een eenmalig n8n-workflowtje met de Google Sheets API — browserinteractie liep vast op een coördinatenprobleem in de Claude Browser-pane): [D.T. Irritant 26-27 — Beschikbaarheid antwoorden](https://docs.google.com/spreadsheets/d/1sfVX6lu-DikmGu1PGK3HiDNB7n6ecvdDsLAdjR-xpuo/edit), 3 tabs met alle headers (Antwoorden: Naam speler/responseId/submittedAt/22 exacte wedstrijdtitels/Opmerkingen; Per wedstrijd; Ontbrekend). `outputSpreadsheetId` ingevuld in workflow 2. `formId` blijft placeholder tot het echte formulier bestaat.
+- [ ] Pas na credential-koppeling `createForm` op `true` zetten en opnieuw draaien om het echte formulier te maken
 
 ## Implementatie 11-08-2026
 

@@ -3,6 +3,7 @@ full_name: Niels Haverdil
 first_name: Niels
 last_name: Haverdil
 relation: darts
+email: nielshaverdil@gmail.com
 phone: "+31622175412"
 tags:
   - darts

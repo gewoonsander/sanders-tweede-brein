@@ -35,3 +35,13 @@ codex mcp list
 ```
 
 Canonieke procedure: [[SOP-018-registreer-mcp-service-bij-agent-runtime]].
+
+## dropbox-mcp
+
+Registreer pas na OAuth-setup:
+
+```bash
+codex mcp add dropbox-mcp -- node /Users/sandervanockenburg-zwaan/Documents/sander-projects/dropbox-mcp/src/server.mjs
+```
+
+Verifieer eerst alleen rootmetadata. Dezelfde server en externe batchgoedkeuring gelden voor iedere runtime.

@@ -24,7 +24,7 @@ import {
 } from '../lib/connectors';
 import './connections.css';
 
-export function ConnectionsView() {
+export function ConnectionsView({ embedded = false }: { embedded?: boolean }) {
   const t = useT();
   const tn = useTNodes();
   const [refresh, setRefresh] = useState(0);
@@ -42,8 +42,8 @@ export function ConnectionsView() {
   const customKeys = data.customKeys ?? [];
 
   return (
-    <div className="cnx">
-      <header className="cnx-head">
+    <div className={`cnx ${embedded ? 'cnx--embedded' : ''}`}>
+      {!embedded && <header className="cnx-head">
         <h1 className="cnx-title"><Plug size={22} strokeWidth={1.5} aria-hidden="true" /> {t('cnx.title')}</h1>
         <p className="cnx-sub">
           {tn('cnx.sub', {
@@ -51,7 +51,7 @@ export function ConnectionsView() {
             readOnly: <strong>{t('cnx.readOnly')}</strong>,
           })}
         </p>
-      </header>
+      </header>}
 
       <CoverageStrip connectors={data.connectors} />
 
@@ -243,7 +243,7 @@ function WireAssistantCard() {
         disabled={state === 'working'}
       >
         <Terminal size={14} strokeWidth={1.5} aria-hidden="true" />
-        {t(state === 'working' ? 'cnx.preparing' : 'cnx.letClaudeWire')}
+        {t(state === 'working' ? 'cnx.preparing' : 'cnx.completeConnection')}
       </button>
       <p className="cnx-hint cnx-wire-hint">{t('cnx.wireHint')}</p>
 
