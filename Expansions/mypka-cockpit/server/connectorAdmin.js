@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ENV_PATH, hasEnv } from './connectors/env.js';
 import { taskConnectors, calendarConnectors } from './connectors/registry.js';
+import { recordConnectorProbe } from './integrationChecks.js';
 
 // Key names: SCREAMING_SNAKE, 3..64 chars, must not collide with the cockpit's
 // own operational variables (those are configured at launch, not via the UI).
@@ -143,11 +144,12 @@ export async function getAgenda() {
   const weekStart = mondayOf(today);
 
   const taskResults = await Promise.all(
-    taskConnectors().map((c) => c.fetchWeek(weekStart).catch(() => ({ ok: false, items: [] })))
+    taskConnectors().map((c) => c.fetchWeek(weekStart).catch(() => ({ ok: false, source: c.id, items: [] })))
   );
   const eventResults = await Promise.all(
-    calendarConnectors().map((c) => c.fetchWeek(weekStart).catch(() => ({ ok: false, items: [] })))
+    calendarConnectors().map((c) => c.fetchWeek(weekStart).catch(() => ({ ok: false, source: c.id, items: [] })))
   );
+  for (const r of [...taskResults, ...eventResults]) recordConnectorProbe(r.source, !!r.ok);
 
   const tasks = [];
   for (const r of taskResults) {

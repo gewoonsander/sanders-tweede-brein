@@ -23,7 +23,11 @@ export function getIntegrations() {
     byId.get(row.integration_id).push(row);
   }
   const integrations = registry.integrations.map((item) => {
-    const observations = byId.get(item.integrationId) || [];
+    // Stale rows for a probe no longer in this integration's current
+    // verification_profile (e.g. removed after a register edit) must not keep
+    // dragging overallStatus down — only judge against probes still in effect.
+    const allowedProbes = new Set(item.verificationProfile);
+    const observations = (byId.get(item.integrationId) || []).filter((row) => allowedProbes.has(row.probe_id));
     return { ...item, overallStatus: overall(item, observations), observations };
   });
   const summary = integrations.reduce((out, item) => {

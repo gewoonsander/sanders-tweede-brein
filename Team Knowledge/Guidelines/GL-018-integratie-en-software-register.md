@@ -128,7 +128,7 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
       "name": "n8n Public API",
       "kind": "api",
       "purpose": "Read-only workflow- en uitvoeringsstatus aan de Cockpit leveren.",
-      "lifecycle": "planned",
+      "lifecycle": "configured",
       "owner": "daedalus",
       "expected_devices": [
         "primary-desktop"
@@ -142,7 +142,6 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
       ],
       "cost_model": "included",
       "verification_profile": [
-        "config-present",
         "secret-present",
         "connector-readonly"
       ],
@@ -150,7 +149,7 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
         "mypka-cockpit"
       ],
       "canonical_reference": "GL-017-mcp-service-register",
-      "next_action": "Beslis afzonderlijk of de read-only Public API-key wordt aangemaakt.",
+      "next_action": "Verifieer periodiek een read-only workflowlijst via de Cockpit.",
       "data_role": "source",
       "sync_direction": "import",
       "canonical_records": [

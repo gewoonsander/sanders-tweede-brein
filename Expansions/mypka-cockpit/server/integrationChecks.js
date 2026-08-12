@@ -50,6 +50,43 @@ export function runPassiveProbe(integration, probeId) {
   }
 }
 
+// A connector's `source` id (registry.js / catalog.json) → the GL-018 register's
+// integration_id, for the connectors that have BOTH. A real, successful fetch
+// through the connector is the "geldige probe" GL-018 requires to turn a
+// `configured` integration `active` — it is read-only by the connector's own
+// contract (types.js), so recording it here adds no new network behaviour, it
+// just reports what already happened.
+const CONNECTOR_INTEGRATION_MAP = {
+  'todoist': 'todoist-api',
+  'jortt:gewoon-sander': 'jortt-api',
+  'n8n:workflows': 'n8n-public-api',
+  'ical:primary': 'calendar-ical',
+};
+
+/**
+ * Record a live connector fetch outcome as its integration's `connector-readonly`
+ * observation, iff that connector id is mapped to a GL-018 integration. No-op for
+ * every other source (custom keys, unmapped connectors) — never throws.
+ */
+export function recordConnectorProbe(sourceId, ok) {
+  const integrationId = CONNECTOR_INTEGRATION_MAP[sourceId];
+  if (!integrationId) return;
+  try {
+    integrationStatusStore.record({
+      integrationId,
+      machine: localMachine(),
+      probeId: 'connector-readonly',
+      status: ok ? 'pass' : 'fail',
+      evidenceCode: ok ? 'live-fetch-ok' : 'live-fetch-failed',
+      errorCategory: ok ? null : 'connectivity',
+      profileVersion: 1,
+    });
+  } catch {
+    // best-effort bookkeeping — a malformed/unknown row must never break the
+    // agenda/sources read it is piggybacking on.
+  }
+}
+
 export function checkIntegrations({ integrationIds = null, probeIds = null } = {}) {
   const { integrations } = loadIntegrationRegistry();
   const requested = integrationIds ? new Set(integrationIds) : null;
