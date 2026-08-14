@@ -1,4 +1,5 @@
 ---
+key_element: bijdrage
 title: "Onderzoek — RDB Teambeheer scraper en levende dartdatabase"
 date: 2026-08-12
 status: completed

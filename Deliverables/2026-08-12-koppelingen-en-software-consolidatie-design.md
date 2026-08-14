@@ -1,3 +1,7 @@
+---
+key_element: groei
+---
+
 # Koppelingen & software — consolidatieontwerp
 
 ## Status

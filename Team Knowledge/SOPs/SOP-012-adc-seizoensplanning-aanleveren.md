@@ -1,7 +1,7 @@
 ---
 sop_id: SOP-012
 title: ADC seizoensplanning aanleveren aan John
-owner: Sander (input) + Silas (Excel-bestand)
+owner: Sander (input) + Atlas (Excel-bestand)
 status: active
 tags:
   - ADC

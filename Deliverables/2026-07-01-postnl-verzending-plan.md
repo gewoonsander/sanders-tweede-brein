@@ -1,3 +1,7 @@
+---
+key_element: financien
+---
+
 # Plan: PostNL Verzending Automatisering – Fase 1
 
 **Datum:** 2026-07-01

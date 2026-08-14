@@ -1,8 +1,8 @@
 # WS-002 - External Knowledge Import
 
 - **Status:** Active (since v1.4.0)
-- **Type:** Workstream — a multi-agent composition. The agents below collaborate to deliver the outcome. New Workstreams emerge when patterns repeat across session-logs; this one ships pre-canonicalized because the import flow needs the connection-half (Mack) and the content-shape (Silas) split working out of the box.
-- **Owners:** **Silas (pre-hired)** is the primary executor — runs §2 onward (clarifying questions, inventory, plan, entity creation, wikilink normalization, session-log entry). **Mack (pre-hired)** runs the §1 connection layer when the source is reachable only via OAuth/API/MCP — fetches the bytes, lands them at a path, hands off to Silas. **Pax** for unfamiliar source formats that need research before the import plan is drafted.
+- **Type:** Workstream — a multi-agent composition. The agents below collaborate to deliver the outcome. New Workstreams emerge when patterns repeat across session-logs; this one ships pre-canonicalized because the import flow needs the connection-half (Daedalus) and the content-shape (Atlas) split working out of the box.
+- **Owners:** **Atlas (pre-hired)** is the primary executor — runs §2 onward (clarifying questions, inventory, plan, entity creation, wikilink normalization, session-log entry). **Daedalus (pre-hired)** runs the §1 connection layer when the source is reachable only via OAuth/API/MCP — fetches the bytes, lands them at a path, hands off to Atlas. **Athena** for unfamiliar source formats that need research before the import plan is drafted.
 - **References:** [[GL-001-file-naming-conventions]], [[GL-002-frontmatter-conventions]], [[SOP-002-convert-mypka-to-sqlite]], [[WS-001-daily-journaling]], [[Team Knowledge/Templates/INDEX]]
 - **Triggered by:** any user phrasing that signals "bring my old notes from another tool into this myPKA." Trigger phrase contract is defined in the root `AGENTS.md` under **External Knowledge Import Triggers (LLM-agnostic)**. This Workstream is the canonical procedure those triggers run.
 
@@ -195,7 +195,7 @@ Default if the user is unsure: **B**. Markdown stays accessible. SOP-002 can alw
 - **Circular wikilinks.** A → B → A is fine and stays. The Step-6 normalization is graph-aware enough to not re-rewrite already-normalized links.
 - **Tool says it has tags but they're stored as folders.** Some tools (early Bear, some Obsidian setups) encode tags as folder structure. The LLM detects this in Step 1 (folder names that look like `#projects/active`) and asks in Step 2: "These look like folder-based tags — should I lift them into the `tags:` array, or keep folder structure as Topic notes?"
 - **Block references.** Roam, Logseq, and Tana have block-level addressing. The LLM imports the parent page as one note and flattens block refs to inline quotes with a "(was a block ref in source)" footnote. The session-log captures the block-id mapping for the user's audit.
-- **Per-tool format drift.** Source export formats change between tool versions. If signature sniffing in Step 1 returns "Notion-like but not exactly v3 format," the LLM flags it and runs Pax (or the user's research specialist) to disambiguate before proceeding. Better a 5-minute pause than a wrong import.
+- **Per-tool format drift.** Source export formats change between tool versions. If signature sniffing in Step 1 returns "Notion-like but not exactly v3 format," the LLM flags it and runs Athena (or the user's research specialist) to disambiguate before proceeding. Better a 5-minute pause than a wrong import.
 
 ## Definition of done
 
@@ -207,7 +207,7 @@ The Workstream is complete when **all** of these are true:
 4. Wikilink rewrite pass produced zero broken links **except** the explicitly-logged orphans list. Orphans are surfaced to the user, not silently created as stubs.
 5. Every relevant `INDEX.md` lists the new entries.
 6. The import session-log exists at `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_<agent>_external-knowledge-import.md` and contains all eight sections from Step 7.
-7. Larry's Librarian pass at session close (per [[WS-001-daily-journaling]] §5) finds no new SSOT violations.
+7. Hermes's Librarian pass at session close (per [[WS-001-daily-journaling]] §5) finds no new SSOT violations.
 
 ## Trigger phrases
 

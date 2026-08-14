@@ -1,4 +1,5 @@
 ---
+key_element: gezondheid
 title: Onderzoek voedingsdatabronnen voor Nederlands voedingslogboek
 date: 2026-08-11
 status: final

@@ -1,3 +1,7 @@
+---
+key_element: bijdrage
+---
+
 
 # Startdossier: Teambeheer — competitiebeheersysteem Nederlandse dartsbonden
 

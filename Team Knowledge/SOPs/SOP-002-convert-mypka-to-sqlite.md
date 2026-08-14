@@ -1,6 +1,6 @@
 # SOP-002 - Convert Markdown Vault to SQLite
 
-- **Default owner:** Silas (the user runs the procedure with any code-capable LLM as the executor; Silas owns the pre-flight audit and the migration report)
+- **Default owner:** Atlas (the user runs the procedure with any code-capable LLM as the executor; Atlas owns the pre-flight audit and the migration report)
 - **Reusable by any agent.** This is a skill, not a 1:1 ownership. SOPs are procedures any agent can invoke when they need them.
 - **Triggered by:** the user decides their markdown myPKA has outgrown plain files and wants a SQLite mirror for structured queries, analytics, or LLM-side performance.
 - **References:** [[GL-001-file-naming-conventions]], [[Team Knowledge/INDEX]]

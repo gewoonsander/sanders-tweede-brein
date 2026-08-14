@@ -119,9 +119,9 @@ Cross-refs: <count of populated linked_* arrays> populated.
 
 ## Worked example
 
-User to Larry: "Mack, the mux-webhook is throwing 401s — please look into MUX_WEBHOOK_SECRET drift."
+User to Hermes: "Mack, the mux-webhook is throwing 401s — please look into MUX_WEBHOOK_SECRET drift."
 
-Larry's call:
+Hermes's call:
 
 ```bash
 TODAY=2026-05-09
@@ -131,7 +131,7 @@ SLUG=mux-webhook-401
 FILENAME=tsk-2026-05-09-001-mux-webhook-401.md
 ```
 
-Step 4 — Larry walks the cross-references:
+Step 4 — Hermes walks the cross-references:
 
 - `linked_sops` — `[SOP-claim-task]` (Mack will follow this when picking up).
 - `linked_workstreams` — `[]` (no active workstream covers this; it's a one-off fire).
@@ -154,8 +154,8 @@ blocked_by: null
 created: 2026-05-09T22:37:11Z
 updated: 2026-05-09T22:37:11Z
 due: null
-created_by: larry
-source: larry-session-2026-05-09
+created_by: hermes
+source: hermes-session-2026-05-09
 parent: null
 linked_sops: [SOP-claim-task]
 linked_workstreams: []
@@ -181,7 +181,7 @@ The mux-webhook endpoint started returning 401 mid-launch. Suspected MUX_WEBHOOK
 - Root cause noted
 
 ## Updates
-- 2026-05-09 22:37 (larry) — created
+- 2026-05-09 22:37 (hermes) — created
 
 ## Outcome
 _(filled when status flips to done)_

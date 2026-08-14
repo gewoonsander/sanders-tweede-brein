@@ -1,4 +1,5 @@
 ---
+key_element: financien
 title: Plug&Pay Platform Research + "Plug&Pay-specialist" Hire Brief
 date: 2026-07-14
 author: Athena

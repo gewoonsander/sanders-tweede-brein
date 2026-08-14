@@ -1,3 +1,7 @@
+---
+key_element: financien
+---
+
 # Jortt API — Research Brief
 
 **Date:** 2026-06-28

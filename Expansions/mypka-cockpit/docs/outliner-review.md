@@ -1,6 +1,6 @@
 # Workbench Outliner — Best-Practice Review
 
-**Date:** 2026-06-11 · **Reviewer:** Felix (Frontend) · **Benchmark set:** Workflowy, Logseq, Tana, Obsidian outline plugins
+**Date:** 2026-06-11 · **Reviewer:** Bezalel (Frontend) · **Benchmark set:** Workflowy, Logseq, Tana, Obsidian outline plugins
 **Scope:** `web/src/lib/outlinerSchema.ts`, `outlinerEdit.ts`, `outlinerCollapse.ts`, `outlinerZoom.ts`, `outlinerReorder.ts`, `outlinerAria.ts`, `workbenchMarkdown.ts`, `components/workbench/OutlinerEditor.tsx`, the outliner sections of `cockpit.css`.
 
 ---
@@ -8,7 +8,7 @@
 ## 1. What's already strong (at or above benchmark)
 
 - **Schema-enforced constraint.** `Document(content:'bulletList')` makes a non-bullet top-level line structurally impossible — no guard code to drift. Tana/Workflowy-grade discipline; most TipTap outliners get this wrong with paste guards.
-- **Canonical Enter/Backspace/Delete semantics** from a researched decision table (Pax 2026-06-09), each op in ONE transaction (atomic undo), with the Logseq #9128 subtree-deletion failure mode explicitly guarded — merges always re-parent children, never drop them. This is better than Logseq itself was at that bug's vintage.
+- **Canonical Enter/Backspace/Delete semantics** from a researched decision table (Athena 2026-06-09), each op in ONE transaction (atomic undo), with the Logseq #9128 subtree-deletion failure mode explicitly guarded — merges always re-parent children, never drop them. This is better than Logseq itself was at that bug's vintage.
 - **Collapse architecture.** View-only `collapsed` attr + decoration + CSS Grid `0fr→1fr` reveal (compositor-friendly, interruptible, one tween per toggle), `content-visibility:auto` perf skip with the collapsed-branch exception, localStorage persistence keyed by content-path that degrades safely on outside hand-edits.
 - **Zoom / focus mode** with editable in-place title, breadcrumb trail as real buttons outside the contentEditable, zoom-boundary outdent guard, Enter-at-root-creates-child. Matches Workflowy's gold-standard zoom model.
 - **Keyboard model.** Tab/Shift-Tab (sink/lift), **Alt+↑/↓ AND Mod+Shift+↑/↓ subtree reorder already present** (WCAG 2.1.1 drag alternative — checked `outlinerReorder.ts`, single-transaction, caret-preserving), Mod+. / Mod+Enter fold, Mod+↑/↓ zoom, Esc zoom-out, caret-skip over collapsed content (vertical AND horizontal, deferring to native motion when no hidden range is crossed — column memory preserved).
@@ -61,7 +61,7 @@ Battery (all passing, 15/15): `parse(serialize(X)) === X` for 10 outline trees �
 
 Manual editor-level checks (the adapter layer is a direct structural map; covered by the build's strict TS + these steps):
 1. Type `## Title` in a bullet → converts on the space; check the `- ## Title` line in the saved file.
-2. Backspace at the heading's start → demotes to paragraph; again → merges per Pax rows 6a/6b.
+2. Backspace at the heading's start → demotes to paragraph; again → merges per Athena rows 6a/6b.
 3. Enter at heading end → plain bullet below; mid-heading Enter → register stays on the first half.
 4. Collapse a heading bullet with children → brass dot + halo on the heading row; fold/zoom/reorder/caret-skip all behave as on paragraph rows.
 5. Paste a multi-line markdown snippet from a plain-text source → nested bullets with headings/marks materialized; single Cmd-Z removes the whole paste.

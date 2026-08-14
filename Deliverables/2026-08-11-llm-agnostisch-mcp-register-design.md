@@ -1,3 +1,7 @@
+---
+key_element: groei
+---
+
 # LLM-agnostisch MCP-register — ontwerp
 
 ## Status

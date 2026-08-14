@@ -1,4 +1,5 @@
 ---
+key_element: financien
 title: "Jortt API voor een geldstatus-overzicht in myPKA Cockpit — onderzoek"
 date: 2026-08-09
 author: Athena

@@ -1,4 +1,5 @@
 ---
+key_element: financien
 id: 2026-07-05-bunq-saldo-cockpit-design
 title: Design — bunq-saldo op de myPKA Cockpit Hub
 owner: daedalus

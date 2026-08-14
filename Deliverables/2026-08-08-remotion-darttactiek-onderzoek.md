@@ -1,4 +1,5 @@
 ---
+key_element: passie
 id: 2026-08-08-remotion-darttactiek-onderzoek
 title: Remotion voor Darttactiek-content — verkenning
 status: onderzoek

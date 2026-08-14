@@ -1,3 +1,8 @@
+---
+key_element: passie
+project: project_dt-irritant-beschikbaarheid-automatisering
+---
+
 # Implementatieplan — D.T. Irritant Google Forms via n8n
 
 ## Doel

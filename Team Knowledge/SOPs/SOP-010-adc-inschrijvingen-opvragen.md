@@ -1,7 +1,7 @@
 ---
 sop_id: SOP-003
 title: ADC inschrijvingen opvragen
-owner: Larry (via Mack)
+owner: Hermes (via Daedalus)
 tags:
   - ADC
   - darts

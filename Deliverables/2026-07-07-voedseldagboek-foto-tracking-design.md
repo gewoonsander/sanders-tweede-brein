@@ -1,4 +1,5 @@
 ---
+key_element: gezondheid
 date: 2026-07-07
 author: Mack (Automation Specialist)
 type: design-doc

@@ -1,3 +1,7 @@
+---
+key_element: groei
+---
+
 # Dropbox-cloudkoppeling voor Claude én Codex — ontwerp v2
 
 ## Status

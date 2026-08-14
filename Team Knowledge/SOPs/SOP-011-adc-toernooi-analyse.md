@@ -1,7 +1,7 @@
 ---
 sop_id: SOP-011
 title: ADC toernooi-analyse — data ophalen en verwerken uit Dart Atlas
-default_owner: Silas (schema/structuur) + Mack (fetches)
+default_owner: Atlas (schema/structuur) + Daedalus (fetches)
 status: active
 triggers:
   - "Analyseer het toernooi van [locatie/datum]"
@@ -21,7 +21,7 @@ last_updated: 2026-06-28
 
 Gestructureerde procedure voor het ophalen en berekenen van alle statistieken die nodig zijn voor het ADC-toernooiverslag (Facebook-bericht via [[WS-006-adc-facebook-verslag]] of [[WS-004-facebook-toernooi-verslag]]). Output is een gestructureerd markdown-blok dat direct als invoer dient voor de verslagfase.
 
-Reusable by any agent — Mack voert de fetches uit, Silas definieert de schema's, Penn verwerkt de output in het bericht.
+Reusable by any agent — Daedalus voert de fetches uit, Atlas definieert de schema's, Penn verwerkt de output in het bericht.
 
 ---
 

@@ -4,7 +4,7 @@ id: tsk-2026-05-10-001
 title: "Welcome — read this and then close me"
 
 # Ownership & priority
-assignee: larry
+assignee: hermes
 priority: 4
 
 # Status

@@ -1,4 +1,5 @@
 ---
+key_element: groei
 date: 2026-06-30
 author: Daedalus
 status: approved

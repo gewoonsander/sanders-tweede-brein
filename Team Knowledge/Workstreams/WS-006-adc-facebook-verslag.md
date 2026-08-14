@@ -3,7 +3,7 @@ ws_id: WS-006
 title: ADC Facebook-bericht — stijlregels en invultemplate
 owners:
   - Penn (schrijven)
-  - Larry (review en aanlevering aan Sander)
+  - Hermes (review en aanlevering aan Sander)
 tags: [ADC, darts, facebook, regio-oost, verslag, template, stijl]
 last_updated: 2026-08-03
 ---
@@ -12,9 +12,9 @@ last_updated: 2026-08-03
 
 ## Doel
 
-Dit workstream codificeert Sander's schrijfstijl voor ADC-toernooiverslagen en biedt een volledig invulbaar template. Invoer komt uit [[SOP-011-adc-toernooi-analyse]]. Penn vult het template in; Larry legt het ter review voor aan Sander.
+Dit workstream codificeert Sander's schrijfstijl voor ADC-toernooiverslagen en biedt een volledig invulbaar template. Invoer komt uit [[SOP-011-adc-toernooi-analyse]]. Penn vult het template in; Hermes legt het ter review voor aan Sander.
 
-Dit workstream is een **stijl- en template-laag bovenop [[WS-004-facebook-toernooi-verslag]]** — WS-004 beschrijft de volledige datafetch- en publicatieprocedure (Mack + Penn + review). WS-006 voegt de expliciete stijlregels en het template toe dat Penn gebruikt bij stap Fase 2 van WS-004.
+Dit workstream is een **stijl- en template-laag bovenop [[WS-004-facebook-toernooi-verslag]]** — WS-004 beschrijft de volledige datafetch- en publicatieprocedure (Daedalus + Penn + review). WS-006 voegt de expliciete stijlregels en het template toe dat Penn gebruikt bij stap Fase 2 van WS-004.
 
 ---
 
@@ -132,16 +132,16 @@ Deel dit verslag gerust en tag de spelers erin — dat wordt gewaardeerd! 📲
 
 ## Werkinstructie voor Penn
 
-1. Ontvang de gestructureerde toernooidata van Mack/Larry (output van [[SOP-011-adc-toernooi-analyse]]).
+1. Ontvang de gestructureerde toernooidata van Daedalus/Hermes (output van [[SOP-011-adc-toernooi-analyse]]).
 2. Kopieer het template hierboven.
 3. Vul alle `[PLACEHOLDERS]` in met de echte data. Verwijder placeholders die niet van toepassing zijn (bijv. The Big Fish als er geen 170 was).
 4. Controleer de sortering: 180's oplopend, hoge finishes oplopend.
 5. Pas de sfeerwoorden aan op het specifieke toernooi — geen copy-paste van vorige verslagen.
-6. Lever het concept-bericht aan Larry.
-7. Larry legt het voor aan Sander met een checklist van wat automatisch ingevuld is en wat nog ontbreekt (foto, eventuele quote).
+6. Lever het concept-bericht aan Hermes.
+7. Hermes legt het voor aan Sander met een checklist van wat automatisch ingevuld is en wat nog ontbreekt (foto, eventuele quote).
 8. **Vaste stap (bijgewerkt 03-08-2026):** zodra het concept compleet is (incl. links naar volgende toernooien, zie [[WS-004-facebook-toernooi-verslag]] Fase 4), slaat Hermes het op in `ADC/Verslagen/facebook-verslag-[locatie]-YYYY-MM-DD.md`, gedateerd op de toernooidatum.
 
-Sander publiceert zelf — Penn en Larry publiceren nooit rechtstreeks op Facebook.
+Sander publiceert zelf — Penn en Hermes publiceren nooit rechtstreeks op Facebook.
 
 ---
 

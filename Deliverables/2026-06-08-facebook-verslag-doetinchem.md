@@ -1,4 +1,5 @@
 ---
+key_element: bijdrage
 type: verslag-concept
 toernooi: Winmau Benelux Trophy 2026 - East Netherlands - Doetinchem
 datum: 2026-06-08

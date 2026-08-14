@@ -1,3 +1,7 @@
+---
+key_element: gezondheid
+---
+
 # AI-ondersteund Voedingslogboek — Architectuur/Haalbaarheidsonderzoek
 
 **Date:** 2026-07-05

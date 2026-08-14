@@ -2,8 +2,8 @@
 ws_id: WS-004
 title: Facebook-verslag na ADC-toernooi
 owners:
-  - Larry (orchestrator)
-  - Mack (Dart Atlas datafetch)
+  - Hermes (orchestrator)
+  - Daedalus (Dart Atlas datafetch)
   - Penn (schrijven Facebook-bericht)
 tags: [ADC, darts, facebook, dart-atlas, regio-oost, verslag]
 last_updated: 2026-06-20
@@ -13,11 +13,11 @@ last_updated: 2026-06-20
 
 ## Doel
 
-Na afloop van een ADC-toernooi in Regio Oost genereert dit workstream een kant-en-klaar Facebook-bericht voor de regiogroep. Mack haalt de data op uit Dart Atlas; Penn schrijft het bericht op basis van die data plus eventuele handmatige aanvullingen van Sander.
+Na afloop van een ADC-toernooi in Regio Oost genereert dit workstream een kant-en-klaar Facebook-bericht voor de regiogroep. Daedalus haalt de data op uit Dart Atlas; Penn schrijft het bericht op basis van die data plus eventuele handmatige aanvullingen van Sander.
 
 ## Triggers
 
-⚠️ **Staande regel (sinds 21-06-2026):** elk ADC-toernooi in Regio Oost krijgt standaard een verslag — dit is geen opt-in meer, Sander hoeft er niet apart om te vragen. Zodra een toernooi is afgelopen (zichtbaar via `/seasons/[ID]/tournaments/results` of omdat Sander meldt dat een toernooi gespeeld is), start Larry dit workstream proactief.
+⚠️ **Staande regel (sinds 21-06-2026):** elk ADC-toernooi in Regio Oost krijgt standaard een verslag — dit is geen opt-in meer, Sander hoeft er niet apart om te vragen. Zodra een toernooi is afgelopen (zichtbaar via `/seasons/[ID]/tournaments/results` of omdat Sander meldt dat een toernooi gespeeld is), start Hermes dit workstream proactief.
 
 Expliciete triggers (blijven ook werken, voor het geval Sander toch zelf vraagt):
 
@@ -26,17 +26,17 @@ Expliciete triggers (blijven ook werken, voor het geval Sander toch zelf vraagt)
 - "Schrijf het Facebook-bericht voor het toernooi van [datum/locatie]"
 - Of een andere variant die vraagt om een toernooi-bericht na afloop
 
-**Proactieve detectie:** bij een dagstart of inboxensessie checkt Larry of er die dag een ADC-toernooi in Regio Oost gepland stond/heeft gespeeld (agenda + `/seasons/[ID]/tournaments/results`). Zo ja → verslag opstellen zonder dat Sander het vraagt, en aan Sander voorleggen zodra het concept klaar is (inclusief de vraag om een winnaarsfoto, zoals altijd).
+**Proactieve detectie:** bij een dagstart of inboxensessie checkt Hermes of er die dag een ADC-toernooi in Regio Oost gepland stond/heeft gespeeld (agenda + `/seasons/[ID]/tournaments/results`). Zo ja → verslag opstellen zonder dat Sander het vraagt, en aan Sander voorleggen zodra het concept klaar is (inclusief de vraag om een winnaarsfoto, zoals altijd).
 
 ## Benodigde input van Sander (voor je begint)
 
-Larry vraagt Sander vóór uitvoering:
+Hermes vraagt Sander vóór uitvoering:
 
-1. **Toernooi-URL** — de Dart Atlas pagina van het specifieke toernooi (bv. `https://www.dartsatlas.com/tournaments/[ID]`). Larry kan deze ook zelf opzoeken via [[SOP-010-adc-inschrijvingen-opvragen]] als het seizoen bekend is.
+1. **Toernooi-URL** — de Dart Atlas pagina van het specifieke toernooi (bv. `https://www.dartsatlas.com/tournaments/[ID]`). Hermes kan deze ook zelf opzoeken via [[SOP-010-adc-inschrijvingen-opvragen]] als het seizoen bekend is.
 2. **Foto van de winnaar** — altijd handmatig aanleveren (Dart Atlas bevat geen foto's).
 3. **Facebook-groep URL** — voor de link naar de regiogroep (eenmalig instellen in [[adc]]).
 
-## Fase 1 — Mack: Dart Atlas data ophalen
+## Fase 1 — Daedalus: Dart Atlas data ophalen
 
 ### Stap 1.1 — Toernooi-basispagina
 
@@ -218,12 +218,12 @@ Sharing is caring — tag de deelnemers en deel dit bericht! 🔄
 
 ## Fase 3 — Review door Sander
 
-Penn levert het concept-bericht aan Larry. Larry presenteert het aan Sander met:
+Penn levert het concept-bericht aan Hermes. Hermes presenteert het aan Sander met:
 - Een checklist van wat automatisch is ingevuld
 - Wat ontbreekt (foto)
 - De vraag om akkoord vóór publicatie
 
-Sander publiceert zelf — Larry/Penn publiceren nooit rechtstreeks op Facebook.
+Sander publiceert zelf — Hermes/Penn publiceren nooit rechtstreeks op Facebook.
 
 ## Fase 4 — Opslaan in ADC/Verslagen (bijgewerkt 03-08-2026)
 

@@ -8,7 +8,7 @@ Nemesis's signature workflow for the visual + accessibility + responsive QA pass
 
 Trigger phrases — invoke this SOP when the user (via Hermes) says any of:
 
-- (Felix or another agent finishes UI work and Hermes calls Nemesis before marking the task complete)
+- (Bezalel or another agent finishes UI work and Hermes calls Nemesis before marking the task complete)
 - "QA this [page / component / flow / dashboard]"
 - "is this ready to ship?"
 - "audit accessibility"
@@ -25,7 +25,7 @@ The gate runs in six phases. Don't skip phases — accessibility issues hide beh
 ### Phase 1 — Preparation
 
 1. **Read the design system.** If your team has one at `Team Knowledge/Guidelines/GL-003-design-system.md`, read it now, every time. It may have changed since the last gate. Note the relevant tokens, components, and rules you'll be checking against. If GL-003 doesn't exist, the first finding is its absence — recommend the team document the design system as a prerequisite for any future quality gate that hopes to be objective.
-2. **Read the spec.** What was the deliverable supposed to do? What did Felix (or whoever built it) hand off? If the spec is unclear, ask before inspecting.
+2. **Read the spec.** What was the deliverable supposed to do? What did Bezalel (or whoever built it) hand off? If the spec is unclear, ask before inspecting.
 3. **Open the deliverable.** Browser, dev server, deployed preview — wherever it lives.
 
 ### Phase 2 — Screenshot capture
@@ -142,7 +142,7 @@ A quality gate pass is done when **all** of these are true:
 - [ ] Verdict is unambiguous: PASS, CONDITIONAL PASS, or FAIL.
 - [ ] Report is at `Deliverables/YYYY-MM-DD-<slug>-qa-report.md`.
 - [ ] Session-log entry written at `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_vera_<slug>.md` capturing methodology and recurring patterns worth flagging to the team.
-- [ ] If FAIL, the responsible specialist (usually Felix) is notified via Hermes with the report attached.
+- [ ] If FAIL, the responsible specialist (usually Bezalel) is notified via Hermes with the report attached.
 - [ ] If a fix happens, Nemesis re-inspects. No second-hand confirmation.
 
 If the gate found CRITICAL issues that block shipping, the verdict line states that explicitly. Urgency does not get lost in the body of the report.

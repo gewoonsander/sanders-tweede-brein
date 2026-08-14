@@ -1,3 +1,7 @@
+---
+key_element: groei
+---
+
 # Implementatieplan — integratiecontrole in de myPKA Cockpit
 
 ## Doel

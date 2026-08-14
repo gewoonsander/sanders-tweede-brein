@@ -151,7 +151,7 @@ scaffold without it just gets an empty table). Columns: `id`,
 (`confident` \| `ambiguous` \| `none`), `raw_data` (JSON blob of the original
 record). Indexed on `linked_invoice_slug`.
 
-### Views (Silas-owned; dropped + rebuilt on every regen so they never go stale)
+### Views (Atlas-owned; dropped + rebuilt on every regen so they never go stale)
 
 **`v_open_invoices`** — every `doc_type: invoice` with `payment_status='open'`,
 with derived due-state. Columns:

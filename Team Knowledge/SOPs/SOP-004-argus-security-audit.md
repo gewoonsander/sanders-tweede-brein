@@ -6,7 +6,7 @@ Argus's signature workflow for auditing the application surface — credentials,
 
 ## When this skill activates
 
-Trigger phrases — invoke this SOP when the user (via Larry) says any of:
+Trigger phrases — invoke this SOP when the user (via Hermes) says any of:
 
 - "audit my [app / database / API / integration / vault] for security issues"
 - "is this safe to ship?"

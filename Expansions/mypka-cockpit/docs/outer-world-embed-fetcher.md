@@ -1,7 +1,7 @@
 # Outer World — capture-time embed fetcher
 
 Item 10 ("Outer World"): when Tom saves external content into his myPKA, the
-embed metadata is fetched **at capture time** (by the LLM/Larry, who has network
+embed metadata is fetched **at capture time** (by the LLM/Hermes, who has network
 access at save time) and stored in the note's **flat `embed_*` frontmatter**. The
 cockpit later renders a **static rich card OFFLINE** from that frontmatter — it
 never touches the network at view time.
@@ -50,7 +50,7 @@ fetcher now removes both the need to authenticate and the temptation to browse.
 
 ---
 
-## How the capture flow (Larry, at save time) invokes it
+## How the capture flow (Hermes, at save time) invokes it
 
 This is the step the LLM performs when Tom saves a link as an Outer World note:
 
@@ -61,7 +61,7 @@ This is the step the LLM performs when Tom saves a link as an Outer World note:
    ```
 
 2. **Take the emitted `embed_*` block** and splice it into the new note's YAML
-   frontmatter (alongside whatever other frontmatter Silas's Outer World note
+   frontmatter (alongside whatever other frontmatter Atlas's Outer World note
    template defines — `title`, `tags`, etc.).
 
 3. **The localized image** already sits under `PKM/Images/YYYY/MM/`. The cockpit
@@ -78,7 +78,7 @@ CLI only runs when the file is invoked directly, not on import).
 
 ---
 
-## Output frontmatter shape (matches Silas's flat field names)
+## Output frontmatter shape (matches Atlas's flat field names)
 
 ```yaml
 embed_kind: "video"          # article | post | video | image | link
@@ -171,9 +171,9 @@ Ordering matters and mirrors myICOR: video → social/post → direct-image → 
 
 ---
 
-## Notes for the Vex image/CSP gate
+## Notes for the Argus image/CSP gate
 
-When Silas wires the offline card renderer in `web/`, the card needs to display
+When Atlas wires the offline card renderer in `web/`, the card needs to display
 **two** image sources:
 
 1. **Localized images** — served from the existing read-only
@@ -185,7 +185,7 @@ When Silas wires the offline card renderer in `web/`, the card needs to display
    **https-only** by construction (the fetcher refuses non-https), so the card's
    `img-src` would need `https:` to display them. **Recommendation:** prefer
    localization (the default) so the card stays same-origin; treat the remote
-   fallback as a degraded state, and if Vex wants a strict same-origin `img-src
+   fallback as a degraded state, and if Argus wants a strict same-origin `img-src
    'self'` CSP, have the renderer **skip** rendering remote-URL `embed_image`
    values (fall back to favicon/text) rather than loosen the CSP. The fetcher
    already guarantees no `data:`/`blob:` URIs in `embed_image` or `embed_favicon`.
@@ -204,7 +204,7 @@ in the block.
   `getMeta` precedence, `extractBestImage` ladder, `isValidImageUrl` filter,
   title/description caps, multi-UA retry, YouTube/Loom oEmbed handling.
 
-> **Divergence from myICOR (2026-06-18, Mack):** myICOR resolves X/Twitter and
+> **Divergence from myICOR (2026-06-18, Daedalus):** myICOR resolves X/Twitter and
 > TikTok/LinkedIn/Instagram via server-side OG scraping. This standalone fetcher
 > **does not** — a plain fetch of an X tweet page is auth-walled (402). X and
 > TikTok now go through their official no-auth **oEmbed** endpoints; LinkedIn and

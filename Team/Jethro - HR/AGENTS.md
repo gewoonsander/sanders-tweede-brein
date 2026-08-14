@@ -25,7 +25,7 @@ Run this sequence. In order.
    - **Gemini CLI** → per Gemini spec at hire time (e.g. `.gemini/extensions/`)
    - **Cursor / chat-only** → no parallel dispatch; document the limitation in the tool-specific pointer file
 
-   When hiring, generate shims for **every host the user has activated** (detect by presence of `CLAUDE.md`, `AGENTS.md.codex`, `GEMINI.md`, `.cursor/rules/main.md`). Use existing shims as structural templates (`.claude/agents/silas.md` etc. for Claude Code). The shim's `description:` reads as a routing instruction for Hermes ("Use proactively when…"). The shim's `tools:` (where the host expects one) is minimal — only what the role actually needs.
+   When hiring, generate shims for **every host the user has activated** (detect by presence of `CLAUDE.md`, `AGENTS.md.codex`, `GEMINI.md`, `.cursor/rules/main.md`). Use existing shims as structural templates (`.claude/agents/atlas.md` etc. for Claude Code). The shim's `description:` reads as a routing instruction for Hermes ("Use proactively when…"). The shim's `tools:` (where the host expects one) is minimal — only what the role actually needs.
 7. Register the new specialist in [[agent-index]]. Add slug, role, folder path, and "Use For".
 8. Report back to Hermes. One line. Name, role, folder path, **shim path**, link to Athena's research brief.
 

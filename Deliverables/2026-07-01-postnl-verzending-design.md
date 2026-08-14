@@ -1,3 +1,7 @@
+---
+key_element: financien
+---
+
 # Design: PostNL Verzending Automatisering
 
 **Datum:** 2026-07-01

@@ -1,4 +1,5 @@
 ---
+key_element: bijdrage
 title: "Implementatieplan — RDB Teambeheer scraper en Google Sheets-prototype"
 date: 2026-08-12
 status: implemented

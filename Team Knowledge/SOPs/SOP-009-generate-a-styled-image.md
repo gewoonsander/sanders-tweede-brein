@@ -11,7 +11,7 @@
 Take a brief — a topic, a mood, an intent, optionally a structural draft from Charta — and produce a finished stylized image. The procedure handles three capability scenarios:
 
 1. **Local image-gen available.** The user's LLM can generate images natively. Drive directly.
-2. **Local image-gen unavailable.** Mack wires up an external API/MCP (Gemini, OpenAI Images, Flux via Replicate, etc.); Pixel drives the prompt once online.
+2. **Local image-gen unavailable.** Daedalus wires up an external API/MCP (Gemini, OpenAI Images, Flux via Replicate, etc.); Pixel drives the prompt once online.
 3. **No image-gen at all (user opts out).** Fallback to "design brief for human" mode: a detailed brief the user can paste into any external tool (Midjourney, DALL-E, Sora, Stable Diffusion, Canva AI, a designer).
 
 The procedure is stylistic. It does not invent text content; the user provides any caption / headline / copy.
@@ -56,9 +56,9 @@ If a needed section is empty, **stop**. Two paths:
 Before drafting the prompt, confirm the path:
 
 - **Path A — Local image-gen available.** The LLM has native image generation, OR an image-gen MCP is already running, OR an API client (`generate-image.py` or equivalent) is already configured with a working API key. Proceed to Step 3.
-- **Path B — Local image-gen unavailable, but the user wants to wire something up.** Hand the connection half to Mack:
-  > *"To generate this image, we need an image-gen path. I can either drive Gemini's image API, OpenAI Images, Flux via Replicate, or any image-capable MCP server. Mack can wire up whichever you prefer — credentials in `.env`, idempotent retries, the works. Which option do you want, or should Mack pick a sensible default?"*
-  Once Mack confirms the connection is online, return to Step 3.
+- **Path B — Local image-gen unavailable, but the user wants to wire something up.** Hand the connection half to Daedalus:
+  > *"To generate this image, we need an image-gen path. I can either drive Gemini's image API, OpenAI Images, Flux via Replicate, or any image-capable MCP server. Daedalus can wire up whichever you prefer — credentials in `.env`, idempotent retries, the works. Which option do you want, or should Daedalus pick a sensible default?"*
+  Once Daedalus confirms the connection is online, return to Step 3.
 - **Path C — No image-gen, fallback mode.** The user explicitly does not want to wire anything up. Skip to Step 7 (write the design brief).
 
 ### Step 3 — Construct the prompt
@@ -161,7 +161,7 @@ Write `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_<agent-id>_<topic-sl
 
 - Which brand this was generated for
 - Subject and intent
-- Which path (A/B/C) was used; if B, which generator Mack wired up
+- Which path (A/B/C) was used; if B, which generator Daedalus wired up
 - Canonical prompt and references
 - Which brand-file tokens drove styling (and from which file, if the brand inherits)
 - What the user picked from the variants
@@ -176,5 +176,5 @@ Write `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_<agent-id>_<topic-sl
 - Generating a synthetic likeness of a real person from a description. Always reference photos or no person.
 - Skipping the variant generation. A single output is hard to score; three give the user real choice.
 - Writing straight to the final Deliverables path without inline review.
-- Silently downgrading from local image-gen → fallback brief without naming the Mack-wires-it-up middle option.
+- Silently downgrading from local image-gen → fallback brief without naming the Daedalus-wires-it-up middle option.
 - Forgetting the session-log entry. Future runs of this SOP lose the breadcrumbs.

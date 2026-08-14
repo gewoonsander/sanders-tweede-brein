@@ -1,4 +1,5 @@
 ---
+key_element: bijdrage
 datum: 2026-06-27
 toernooi: Winmau Benelux Trophy 2026 — Main Tournament
 locatie: Fletcher Hotel De Korenbeurs, Made

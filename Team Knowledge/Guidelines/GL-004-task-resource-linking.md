@@ -159,7 +159,9 @@ Cancellation is terminal abandonment, but the working artifacts are still histor
 
 If a deliverable was created without a task wrapping it — e.g., the user drops a research brief directly into `Deliverables/` as shared input across multiple potential tasks — that deliverable is **never owned** by a task and therefore **never archived** by a close. It sits in active `Deliverables/` indefinitely.
 
-This is correct behavior. The deliverable is shared input; archiving it on the first task close would be wrong. If `Deliverables/` ever needs a stale-orphan triage policy, that is a separate procedure outside GL-004's scope.
+This is correct behavior. The deliverable is shared input; archiving it on the first task close would be wrong.
+
+**Update 2026-08-13:** the stale-orphan triage policy this section used to flag as out-of-scope now exists. Every Deliverable (orphan or task-owned) carries a required `key_element` and optional `project` field per [[GL-002-frontmatter-conventions]]. For orphan Deliverables specifically — the ones this rule leaves sitting in active `Deliverables/` forever — [[SOP-020-losstaand-deliverable-archiveren]] defines when one is archiveable (its value has landed elsewhere, been implemented, been superseded, expired, or been explicitly dropped) versus merely stale-and-unfollowed (flagged via `/dagstart` after 30 days, never silently archived). [[WS-008-deliverables-en-projecten-audit]] runs the periodic, human-gated pass that actually proposes and executes the archiving.
 
 ## When this Guideline gets read
 

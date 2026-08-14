@@ -1,4 +1,5 @@
 ---
+key_element: groei
 title: Eén SSOT voor software en koppelingen
 date: 2026-08-11
 status: proposed

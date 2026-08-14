@@ -1,6 +1,6 @@
 # SOP — Close a Task (Done or Cancelled)
 
-- **Owner:** the agent finishing the task (for done) or the user/Larry (for cancel)
+- **Owner:** the agent finishing the task (for done) or the user/Hermes (for cancel)
 - **Triggered by:** task work shipping or being abandoned
 - **Output:** task file archived in `done/<YYYY>/<MM>/` or `cancelled/<YYYY>/<MM>/`
 - **References:** [[SOP-rebuild-task-index]], [[SOP-write-journal-entry]]
@@ -150,7 +150,7 @@ Final update line:
 - 2026-05-10 17:42 (mack) — done: rotated secret + verified webhook 200
 ```
 
-Rebuild index. Report to Larry: `Closed [[tsk-2026-05-09-001-mux-webhook-401]]. One follow-up: [[tsk-2026-05-10-001-document-secret-rotation-runbook]]. Journal: [[2026-05-10-secret-rotation-discipline]].`
+Rebuild index. Report to Hermes: `Closed [[tsk-2026-05-09-001-mux-webhook-401]]. One follow-up: [[tsk-2026-05-10-001-document-secret-rotation-runbook]]. Journal: [[2026-05-10-secret-rotation-discipline]].`
 
 ## Common mistakes
 

@@ -1,4 +1,5 @@
 ---
+key_element: groei
 title: Opslagstrategie-migratie — foto's naar Apple, documenten naar Google Drive
 date: 2026-07-06
 doc_type: plan

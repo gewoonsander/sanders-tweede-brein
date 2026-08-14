@@ -53,7 +53,7 @@ No file in the portable core pins a specific model id, model family, or provider
 
 ## How this is enforced
 
-The `agnosticism-audit` section of `validation-script.sh` is the mechanical gate (Silas owns the script). It scans the portable core and **hard-fails** on Claude-coupling: a harness brand name, a host-specific tool name, a slash command presented as a sole trigger, or a hardcoded model id found anywhere in `PKM/`, `Team Knowledge/`, or the body of a `Team/*/AGENTS.md`. A failing audit blocks the release. The adapter directories (`.claude/`, `.codex/`, `.cursor/`) are exempt by design - that is exactly where the coupling is supposed to live.
+The `agnosticism-audit` section of `validation-script.sh` is the mechanical gate (Atlas owns the script). It scans the portable core and **hard-fails** on Claude-coupling: a harness brand name, a host-specific tool name, a slash command presented as a sole trigger, or a hardcoded model id found anywhere in `PKM/`, `Team Knowledge/`, or the body of a `Team/*/AGENTS.md`. A failing audit blocks the release. The adapter directories (`.claude/`, `.codex/`, `.cursor/`) are exempt by design - that is exactly where the coupling is supposed to live.
 
 Run it from the folder root after any edit that may have leaked a harness reference into the portable core:
 

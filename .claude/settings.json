@@ -139,6 +139,7 @@
   "hooks": {
     "PreToolUse": [
       {
+        "matcher": "mcp__claude_ai_Todoist__add-tasks|mcp__038b67df-1277-4cd5-b6e4-150bccb71b78__add-tasks",
         "hooks": [
           {
             "type": "command",

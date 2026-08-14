@@ -99,8 +99,8 @@ At session close, Hermes scans the new Journal entry, the new image (if any), an
 
 ## What this Workstream does not do
 
-- Does not write business workflows. Those are handled by future specialists hired through Nolan via [[SOP-001-how-to-add-a-new-specialist]].
-- Does not produce research reports. Pax handles that.
+- Does not write business workflows. Those are handled by future specialists hired through Jethro via [[SOP-001-how-to-add-a-new-specialist]].
+- Does not produce research reports. Athena handles that.
 - Does not edit the user's existing CRM entries. Penn appends, never overwrites, unless the user asks.
 
 ## Naming and image rules

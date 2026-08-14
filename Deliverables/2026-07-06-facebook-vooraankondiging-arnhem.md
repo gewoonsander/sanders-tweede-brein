@@ -1,4 +1,5 @@
 ---
+key_element: bijdrage
 title: Facebook-vooraankondiging — Toernooi Arnhem 6 juli
 date: 2026-07-06
 status: concept

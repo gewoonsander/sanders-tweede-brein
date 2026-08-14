@@ -76,6 +76,10 @@ Geef de voorkeur aan links boven mappen. Nuttige verbindingen:
 - Doel ↔ Project
 - Project ↔ Key Element
 - Topic ↔ Topic
+- Deliverable ↔ Key Element (verplicht — elk Deliverable hoort ergens bij, zie [[GL-002-frontmatter-conventions]])
+- Deliverable ↔ Project (optioneel — alleen als het Deliverable voor een specifiek, tijdelijk initiatief is gemaakt)
+
+Deze twee laatste zijn op 13-08-2026 toegevoegd nadat bleek dat Deliverables de enige laag in de PKA was die nog niet aan deze ketting hing — zichtbaar geworden doordat een cursussen/abonnementen-inventarisatie als los bestand werd neergezet in plaats van gekoppeld aan de al bestaande `abonnementen.md` (Topic) en `cursussen-afmaken.md` (Goal). Zie [[SOP-020-losstaand-deliverable-archiveren]] voor wat er gebeurt als een Deliverable's waarde eenmaal elders is geland.
 
 ## Centrale domeinen
 

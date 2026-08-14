@@ -181,7 +181,7 @@ command to run first. The happy path under `Expansions/mypka-cockpit/` is fully
 automatic.)
 
 Then re-run `detect-gaps.py` to confirm. **Wait for the user's yes before
-running it.** Silas owns this installer and its schema
+running it.** Atlas owns this installer and its schema
 ([`sqlite-extension/`](./sqlite-extension/)); this step only triggers it and
 explains the consequence.
 

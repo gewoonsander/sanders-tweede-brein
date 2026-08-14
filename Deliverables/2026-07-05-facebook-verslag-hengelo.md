@@ -1,4 +1,5 @@
 ---
+key_element: bijdrage
 title: Facebook-verslag — Winmau Benelux Open 2026 Hengelo
 date: 2026-07-05
 status: concept

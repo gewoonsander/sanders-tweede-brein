@@ -1,3 +1,7 @@
+---
+key_element: financien
+---
+
 # Pocket AI hardware vs. Mac mini for the Albero SOAP workflow
 
 ## Executive summary (definitieve conclusie na vier onderzoeksrondes)

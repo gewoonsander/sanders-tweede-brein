@@ -1,3 +1,7 @@
+---
+key_element: groei
+---
+
 # Integratiecontrole in de myPKA Cockpit — ontwerp
 
 ## Status

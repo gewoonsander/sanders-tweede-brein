@@ -2,7 +2,7 @@
 
 - **Status:** Active (since v4.0.0)
 - **Type:** Workstream - a multi-agent composition. The team learns from its own run history and proposes improvements to itself. **Pre-canonicalized exception**, alongside [[WS-001-daily-journaling]], [[WS-002-import-external-knowledge-base]], and [[WS-003-install-an-expansion]] - it ships wired out of the box because the self-improvement loop must be governed from day one, never bolted on later.
-- **Owners:** **Larry** (orchestrator - runs the Tier 2 retro, folds the Tier 1 check into close-session, routes every approved proposal to its implementer). **Every specialist** (Tier 0 and Tier 1 - each captures its own learnings and emits its own proposals). The **named implementer** per approved proposal (writes the actual change). **Silas** (mypka.db regen after any landed change). **The user** (the gate - approves the WHAT on every Tier 1 and Tier 2 change).
+- **Owners:** **Hermes** (orchestrator - runs the Tier 2 retro, folds the Tier 1 check into close-session, routes every approved proposal to its implementer). **Every specialist** (Tier 0 and Tier 1 - each captures its own learnings and emits its own proposals). The **named implementer** per approved proposal (writes the actual change). **Atlas** (mypka.db regen after any landed change). **The user** (the gate - approves the WHAT on every Tier 1 and Tier 2 change).
 - **References:** [[GL-005-llm-agnostic-portable-core]] (proposals must keep the portable core clean), [[GL-001-file-naming-conventions]], [[GL-002-frontmatter-conventions]], [[SOP-create-task]], [[SOP-close-task]], [[SOP-write-journal-entry]], [[SOP-read-own-journal]], [[SOP-001-how-to-add-a-new-specialist]], [[SOP-002-convert-mypka-to-sqlite]], [[Team/agent-index]].
 - **Triggered by:** natural-language phrasing that signals "the team should learn from itself" or "run the retro." See **Trigger contract** below. The close-session routine also runs the Tier 1 check every session and MAY nudge the Tier 2 retro on a roughly monthly cadence as an option (never automatically).
 
@@ -34,7 +34,7 @@ The only autonomous tier is Tier 0, and Tier 0 by construction cannot touch the 
 | (a specialist notices a learning that would help the WHOLE team, or a recurring friction) | **Tier 1** - emit a proposal in-conversation and write it as a task to `Team Knowledge/tasks/open/` |
 | "run the team retro" / "let's do a retro" / "what has the team learned" / "where can the team improve" / "mine the journals" | **Tier 2** - run the full retro from §Tier 2 |
 | (close-session routine, every session) | Run the **Tier 1 graduate-to-SOP check** (see §Tier 1) |
-| (close-session routine, ~monthly, optional) | Larry MAY nudge: "It has been a while since the last team retro - want me to run one?" On-demand remains the default trigger; the nudge is only an offer |
+| (close-session routine, ~monthly, optional) | Hermes MAY nudge: "It has been a while since the last team retro - want me to run one?" On-demand remains the default trigger; the nudge is only an offer |
 
 ---
 
@@ -55,15 +55,15 @@ When a learning is **reusable across the team** - it would improve a shared SOP,
 
 ### Step 1 - The specialist emits the proposal
 
-The specialist (or Larry, noticing the pattern) states the proposal in-conversation: what was learned, what shared artifact it should change, and the specific proposed change.
+The specialist (or Hermes, noticing the pattern) states the proposal in-conversation: what was learned, what shared artifact it should change, and the specific proposed change.
 
 ### Step 2 - Write the proposal as a task
 
 The specialist writes the proposal as a task to `Team Knowledge/tasks/open/` per [[SOP-create-task]], populating the `linked_*` arrays (the SOP/WS/GL it would touch, the journal entry that prompted it, the session log). The task is the durable, reviewable record of the proposal. **The task is the proposal - it is not the change.**
 
-### Step 3 - Larry routes; the user approves the WHAT
+### Step 3 - Hermes routes; the user approves the WHAT
 
-Larry surfaces the proposal to the user and routes it to the right implementer (e.g. a Guideline change goes to its owner; a new specialist goes to Nolan per [[SOP-001-how-to-add-a-new-specialist]]). **The user approves the WHAT** before anything is written.
+Hermes surfaces the proposal to the user and routes it to the right implementer (e.g. a Guideline change goes to its owner; a new specialist goes to Jethro per [[SOP-001-how-to-add-a-new-specialist]]). **The user approves the WHAT** before anything is written.
 
 ### Step 4 - The named implementer writes it
 
@@ -83,25 +83,25 @@ If yes, raise it as a Tier 1 proposal here (Steps 1 to 2) before the session clo
 
 The Team Retro is the heavy, batch pass. It runs **on-demand** ("run the team retro") by the user's decision. Close-session MAY nudge it roughly monthly as an option, but on-demand is the default trigger - the retro never fires on its own.
 
-### Step 1 - Larry: mine the inputs
+### Step 1 - Hermes: mine the inputs
 
-Larry reads the full run history:
+Hermes reads the full run history:
 
 - Every `Team/*/journal/` entry across all specialists.
 - The `session-logs/` record.
 - The open and recently-closed tasks (for Tier 1 proposals already raised but not yet acted on).
 
-### Step 2 - Larry: cluster the patterns
+### Step 2 - Hermes: cluster the patterns
 
-Larry clusters what it finds into recurring patterns. At minimum:
+Hermes clusters what it finds into recurring patterns. At minimum:
 
 - **Repeated anti-patterns** - the same friction, mistake, or dead-end showing up across multiple sessions or specialists. Candidates for a new guardrail in a contract or Guideline.
 - **Recipes that cleared the bar** - approaches that worked repeatedly and deserve to graduate into a shared SOP, Guideline, or Workstream.
 - **Dead or unfollowed SOPs** - procedures that the run record shows nobody actually uses, or that get routinely worked around. Candidates for archive or rewrite.
 
-### Step 3 - Larry: emit a RANKED proposal document
+### Step 3 - Hermes: emit a RANKED proposal document
 
-Larry writes a single ranked proposal document to `Deliverables/` (`Deliverables/YYYY-MM-DD-team-retro-proposals.md`). Each proposal carries: the pattern and its evidence (which journals / session-logs / how many times), the proposed change, the artifact it touches, the named implementer, and a rank. The document **proposes**; it changes nothing.
+Hermes writes a single ranked proposal document to `Deliverables/` (`Deliverables/YYYY-MM-DD-team-retro-proposals.md`). Each proposal carries: the pattern and its evidence (which journals / session-logs / how many times), the proposed change, the artifact it touches, the named implementer, and a rank. The document **proposes**; it changes nothing.
 
 ### Step 4 - The user approves a subset
 
@@ -111,13 +111,13 @@ The user reviews the ranked list and approves a subset. Nothing is approved by d
 
 Each approved proposal goes to its named implementer, who makes the change (claiming/closing a task per [[SOP-close-task]] where one was raised). Portable-core changes keep the core clean per [[GL-005-llm-agnostic-portable-core]]. Archiving a dead SOP follows the no-renumber rule in [[GL-001-file-naming-conventions]] - the gap is acceptable.
 
-### Step 6 - Silas: mypka.db regen
+### Step 6 - Atlas: mypka.db regen
 
-After the approved subset has landed, Silas regenerates the SQLite mirror per [[SOP-002-convert-mypka-to-sqlite]] so the derived index reflects the new framework state. Markdown is canonical; the DB is downstream.
+After the approved subset has landed, Atlas regenerates the SQLite mirror per [[SOP-002-convert-mypka-to-sqlite]] so the derived index reflects the new framework state. Markdown is canonical; the DB is downstream.
 
-### Step 7 - Larry: session-log the retro
+### Step 7 - Hermes: session-log the retro
 
-Larry writes a session-log entry capturing: when the retro ran, how many patterns were clustered, which proposals were approved vs deferred, who implemented what, and the regen result.
+Hermes writes a session-log entry capturing: when the retro ran, how many patterns were clustered, which proposals were approved vs deferred, who implemented what, and the regen result.
 
 ---
 
@@ -127,7 +127,7 @@ Larry writes a session-log entry capturing: when the retro ran, how many pattern
 |---|---|
 | A specialist wants to change a shared artifact directly mid-task | Not allowed. It becomes a Tier 1 proposal. The hard invariant holds. |
 | A Tier 2 proposal would couple the portable core to a harness | Implementer routes the mechanism into the adapter layer per [[GL-005-llm-agnostic-portable-core]]; the portable change stays clean. |
-| The retro surfaces a gap no current specialist covers | The proposal is "hire a specialist" - routed to Nolan per [[SOP-001-how-to-add-a-new-specialist]] after the user approves. |
+| The retro surfaces a gap no current specialist covers | The proposal is "hire a specialist" - routed to Jethro per [[SOP-001-how-to-add-a-new-specialist]] after the user approves. |
 | User approves nothing in the retro doc | Fine. The document stays as backlog; nothing changes. The retro never forces a change. |
 | Same proposal recurs across multiple retros, never approved | It stays in the backlog. Recurrence is signal for the user, not grounds for autonomous action. |
 
@@ -135,4 +135,4 @@ Larry writes a session-log entry capturing: when the retro ran, how many pattern
 
 ## Owner agency
 
-Each tier's owner owns their part. Specialists own Tier 0 capture and Tier 1 proposal emission for their own domain. Larry owns the orchestration shell - the Tier 1 close-session check, the Tier 2 retro run, and routing every approved proposal to its implementer. The named implementer owns the actual write. Silas owns the regen. **The user owns the gate, always.** No owner may collapse a tier's gate.
+Each tier's owner owns their part. Specialists own Tier 0 capture and Tier 1 proposal emission for their own domain. Hermes owns the orchestration shell - the Tier 1 close-session check, the Tier 2 retro run, and routing every approved proposal to its implementer. The named implementer owns the actual write. Atlas owns the regen. **The user owns the gate, always.** No owner may collapse a tier's gate.

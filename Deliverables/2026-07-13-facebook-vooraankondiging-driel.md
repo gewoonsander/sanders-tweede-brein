@@ -1,4 +1,5 @@
 ---
+key_element: bijdrage
 title: Facebook-vooraankondiging — Toernooi Driel 13 juli
 date: 2026-07-13
 status: concept

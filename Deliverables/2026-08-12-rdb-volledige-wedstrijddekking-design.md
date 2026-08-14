@@ -1,4 +1,5 @@
 ---
+key_element: bijdrage
 title: RDB volledige wedstrijddekking
 date: 2026-08-12
 status: implemented

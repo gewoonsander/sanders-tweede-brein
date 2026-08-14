@@ -1,6 +1,6 @@
 # SOP — List Open Tasks
 
-- **Owner:** any agent (Larry runs this at every session boot)
+- **Owner:** any agent (Hermes runs this at every session boot)
 - **Triggered by:** session start, status check, "where did we leave off?"
 - **Output:** a printable summary of open and in-progress tasks (with blocked tasks called out)
 - **References:** [[SOP-rebuild-task-index]]
@@ -78,9 +78,9 @@ SESSION=2026-05-09-22-30_larry_video-launch-coordination
 grep -rlE "^linked_session_logs:.*${SESSION}" "Team Knowledge/tasks"
 ```
 
-## Larry's session-boot routine
+## Hermes's session-boot routine
 
-At the start of every session, Larry runs:
+At the start of every session, Hermes runs:
 
 1. `cat "Team Knowledge/tasks/INDEX.md"` — get the lay of the land.
 2. Filter mentally to "Open priority 1" and "In-progress with assignee likely active" — surface those to Tom first.

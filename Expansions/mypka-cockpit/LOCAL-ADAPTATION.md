@@ -17,7 +17,7 @@ cryptographically verified myICOR release.
 ## Compatibility changes
 
 - Declares scaffold compatibility `>=2.1.2 <3.0.0` after local validation.
-- Maps legacy role requirements Larry/Mack/Silas to Hermes/Daedalus/Atlas.
+- Maps legacy role requirements Hermes/Daedalus/Atlas to Hermes/Daedalus/Atlas.
 - Keeps runtime files at the stable `Expansions/mypka-cockpit/` path after
   installation; only the install-manifest snapshot is archived.
 - Adds Sander-specific Cockpit modules and integrations under the repository's

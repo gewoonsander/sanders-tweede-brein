@@ -1,4 +1,5 @@
 ---
+key_element: financien
 title: Huddle Platform Research + Huddle-Specialist Hire Brief
 date: 2026-07-14
 author: Athena

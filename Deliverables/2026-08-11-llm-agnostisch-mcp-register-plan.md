@@ -1,3 +1,7 @@
+---
+key_element: groei
+---
+
 # Implementatieplan — LLM-agnostisch MCP-register
 
 ## Doel en constraints

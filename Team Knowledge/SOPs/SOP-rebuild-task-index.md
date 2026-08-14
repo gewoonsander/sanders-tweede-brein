@@ -9,7 +9,7 @@
 
 `INDEX.md` is the resumption-summary view of the task folder. It exists so an agent or Tom can read one file at session boot and know what's open, in-progress, blocked, and recently closed without walking the tree.
 
-This SOP keeps that view fresh. Every task-touching SOP calls it as the last step. Larry also calls it at session boot if the index mtime is older than the newest task file's mtime.
+This SOP keeps that view fresh. Every task-touching SOP calls it as the last step. Hermes also calls it at session boot if the index mtime is older than the newest task file's mtime.
 
 ## Performance budget
 

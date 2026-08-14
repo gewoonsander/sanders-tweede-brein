@@ -1,4 +1,5 @@
 ---
+key_element: passie
 title: Dart Buddies persona's + AI-beeldgenerator prompts
 tags:
   - dart-buddies

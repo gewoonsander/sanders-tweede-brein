@@ -1,3 +1,7 @@
+---
+key_element: bijdrage
+---
+
 # Bonnetjesproces Gezinshuis — Architectuur/Haalbaarheidsonderzoek
 
 **Date:** 2026-07-05

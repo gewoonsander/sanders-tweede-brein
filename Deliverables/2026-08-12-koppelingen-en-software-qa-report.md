@@ -1,3 +1,7 @@
+---
+key_element: groei
+---
+
 # QA-rapport — Koppelingen & software
 
 ## Verdict

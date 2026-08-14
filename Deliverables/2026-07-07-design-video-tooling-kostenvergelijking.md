@@ -1,4 +1,5 @@
 ---
+key_element: financien
 id: 2026-07-07-design-video-tooling-kostenvergelijking
 title: Design & video-tooling — kostenefficiënte flow per taaktype
 status: brief

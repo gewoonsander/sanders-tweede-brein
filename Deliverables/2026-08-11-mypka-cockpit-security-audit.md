@@ -1,4 +1,5 @@
 ---
+key_element: groei
 title: "Argus securityaudit — myPKA Cockpit lokale adaptatie"
 date: 2026-08-11
 status: yellow

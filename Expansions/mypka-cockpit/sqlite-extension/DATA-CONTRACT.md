@@ -57,7 +57,7 @@ ignored; **fewer** columns break the query.
 > (`modules/planner/`) keeps its own **cockpit-local SQLite store** with its own
 > migrations (`001-plan-state.sql` …) and pulls live tasks from Todoist /
 > ClickUp / iCal connectors. It does **not** read or write `mypka.db`, so there
-> is nothing here for the regen or this installer to provide. Mack owns that
+> is nothing here for the regen or this installer to provide. Daedalus owns that
 > store and its connectors.
 
 ---
@@ -174,7 +174,7 @@ stored rows, so drop+recreate is always lossless).
   `integration_status` columns → "unfold original" can't render (the entry just
   shows as-is). `install-extensions.py` adds them by default.
 
-> **For Felix:** the empty-state UI must match this list. Every "degrades
+> **For Bezalel:** the empty-state UI must match this list. Every "degrades
 > gracefully" module needs a designed empty state (icon + one honest line, e.g.
 > *"No invoices tracked yet — add `doc_type: invoice` notes and regenerate."*).
 > The hard-dependency core tables never reach the UI empty-handed because the
@@ -216,7 +216,7 @@ as follows:
 
 ~~Probing the live demo `mypka.db` confirmed the base regen produces `habits`
 **without** `started_on`/`status`…~~ **`habits.started_on`/`status` is now FIXED
-in the base regen (2026-06-18, Silas)** — the columns are emitted natively and
+in the base regen (2026-06-18, Atlas)** — the columns are emitted natively and
 backfilled from frontmatter; the demo regen confirms `SELECT slug, started_on,
 status FROM habits` returns real values. The `health_mood` table gap is separate
 and still bridged by `install-extensions.py --with-health` (an external Apple-
@@ -287,7 +287,7 @@ The impediment to action advances action. What stands in the way becomes the way
 | `file_path` | TEXT | root-relative (`PKM/Quotes/<slug>.md`) |
 | `raw_frontmatter` | TEXT | frontmatter as a JSON object string |
 
-**Column contract for Felix — the random-quote Hub query.** Returns one random
+**Column contract for Bezalel — the random-quote Hub query.** Returns one random
 quote with all fields. Parse `tags` server-side (JSON-array TEXT → array), return
 NULL scalars as null (UI renders blank, never `0`/`unknown`):
 
@@ -402,7 +402,7 @@ The integrated / rewritten body lives here.
 > `original_body` is read with a NON-wikilink-stripping getter in the regen, so
 > `#`, `[[`, and multi-line block scalars in the original survive byte-for-byte.
 
-**Column contract for Felix — raw vs integrated, and the unfold:**
+**Column contract for Bezalel — raw vs integrated, and the unfold:**
 
 ```sql
 SELECT slug, title, entry_date, content,
@@ -509,7 +509,7 @@ surfaces in that note's backlinks. Markdown is canonical; these tables are deriv
 mirrors rebuilt on every regen. Only notes whose `doc_type` matches the library's
 discriminator are mirrored (a stray note is skipped with a warning, never guessed).
 
-### 11.4 Column contract for Felix — the library UI module
+### 11.4 Column contract for Bezalel — the library UI module
 
 **(a) Enumerate the libraries (build the Library nav group):**
 
@@ -583,7 +583,7 @@ content; `raw_frontmatter` is available if the view wants a field the typed colu
 don't carry. Covers/photos referenced by a note are served through the existing
 jailed `/api/cockpit/media` route (paths relative to `PKM/`) — no new file route.
 
-> **Server wiring (for whoever mounts the endpoints — Mack/Felix on the server
+> **Server wiring (for whoever mounts the endpoints — Daedalus/Bezalel on the server
 > side):** add one prepared-`SELECT` list function per library behind the existing
 > read-only `safe()` wrapper, plus the `library_registry` enumerate query. Pattern
 > is identical to `listRecipes()` / `listMedia()` in
@@ -741,7 +741,7 @@ WHERE name IS NULL OR trim(name) = '';
 The recommendation is **advisory**: the cockpit renders correctly regardless
 (orphans show as plain text, titleless targets show the slug — honest, not broken).
 The check tells the user which markdown edits would upgrade raw-slug links to proper
-titles. It is **read-only** — it never rewrites a note (Silas's Mode-A rule: audit,
+titles. It is **read-only** — it never rewrites a note (Atlas's Mode-A rule: audit,
 report, recommend; the user or Penn applies fixes).
 
 ---
@@ -800,9 +800,9 @@ CREATE VIRTUAL TABLE notes_fts USING fts5(
   body) are in `FTS_SOURCES`, so a search routes to `#/<type>/<slug>` for them (e.g.
   `#/sops/SOP-002-convert-mypka-to-sqlite`). See §17.
 
-### 13.2 The query for Felix's `searchNotes()` — BM25 + snippet (exact shape)
+### 13.2 The query for Bezalel's `searchNotes()` — BM25 + snippet (exact shape)
 
-This is the SQL `searchNotes()` (server lane, Felix) should run. It returns
+This is the SQL `searchNotes()` (server lane, Bezalel) should run. It returns
 BM25-ranked hits, each carrying the `(type, slug)` needed to route, plus a
 highlighted snippet of the matching body text.
 
@@ -943,22 +943,22 @@ every regen):
    Inner-World layer the user lays on top. The source stays Outer World; the
    annotation layers on.
 
-### 14.2 The FLAT `embed_*` contract (Axon's embed spec + Mack's fetcher output)
+### 14.2 The FLAT `embed_*` contract (Axon's embed spec + Daedalus's fetcher output)
 
 The embed metadata is stored as **FLAT, top-level frontmatter keys — NOT a nested
 `embed:` block.** Flat keeps the note Obsidian-safe (each shows as its own
 Properties field) and gives each its own sortable/filterable SQLite column. The
-fetcher (Mack) writes **exactly** these keys; the regen reads them 1:1. **The names
+fetcher (Daedalus) writes **exactly** these keys; the regen reads them 1:1. **The names
 are coordinated with Axon's embed spec and locked:**
 
 `embed_kind`, `embed_title`, `embed_description`, `embed_image`, `embed_site_name`,
 `embed_domain`, `embed_favicon`, `embed_author`, `embed_captured_at`.
 
-> **Image / CSP posture (flag for Vex + Felix).** `embed_image` and `embed_favicon`
+> **Image / CSP posture (flag for Argus + Bezalel).** `embed_image` and `embed_favicon`
 > are **LOCAL relative paths** — the image is **localized at capture time** (the
 > fetcher downloads it into the scaffold), never a hotlinked remote URL. So the card
 > renders **offline**, there is **no third-party image fetch at render**, and the
-> cockpit's CSP need not allow remote `img-src`. Felix serves these paths through the
+> cockpit's CSP need not allow remote `img-src`. Bezalel serves these paths through the
 > existing **jailed `/api/cockpit/media`** route (paths are relative to the note /
 > `PKM/`, same as `journal_media`). A NULL `embed_image` is honest — the card falls
 > back to `embed_favicon` + `embed_title`, and never shows a broken image.
@@ -976,7 +976,7 @@ source_url: https://…           # REQUIRED — no URL, no Outer World entry
 source_type: video              # article | post | video | book | idea | news (open vocab)
 source_author: Build & Learn    # optional
 source_published: 2026-05-28    # optional ISO date the SOURCE was published
-# ── EMBED card (FLAT embed_* — Axon/Mack contract; images are LOCAL paths) ──
+# ── EMBED card (FLAT embed_* — Axon/Daedalus contract; images are LOCAL paths) ──
 embed_kind: video
 embed_title: "…"
 embed_description: "…"
@@ -1012,7 +1012,7 @@ linked_organizations: []
   **non-wikilink-stripping** getter so `#`, `[[`, and multi-line block scalars in
   the fetched/authored text survive byte-for-byte.
 
-### 14.4 Column contract for Felix — the Outer World UI module
+### 14.4 Column contract for Bezalel — the Outer World UI module
 
 `outer_world` columns the cockpit reads:
 
@@ -1184,7 +1184,7 @@ is kept verbatim; a bare **host** (`example.org`, `sub.host/path`) is prefixed w
 `https://`; anything else (a bare `@handle`, a username with no host) is kept
 verbatim so the chip stays honest — the regen never invents a host from a handle.
 
-**Render contract for Felix:** `JSON.parse(row.social_links || '[]')` → render each
+**Render contract for Bezalel:** `JSON.parse(row.social_links || '[]')` → render each
 `{label, url}` as a chip whose visible text is `label` and whose `href` is `url`
 (open in a new tab, `rel="noopener noreferrer"`). `social_links` is `NULL`/absent on
 notes without any → render no chip row (degrades gracefully). Worked synthetic
@@ -1196,7 +1196,7 @@ examples live in `examples/social-links/`.
 > flat `website` field is **already in use** on Organization notes in the shipped
 > scaffold; this contract simply formalizes it and generalizes it to the other
 > networks. Adding the field to GL-002 + the Person/Organization templates is a
-> scaffold change for Larry to route — not applied here.
+> scaffold change for Hermes to route — not applied here.
 
 ---
 
@@ -1226,7 +1226,7 @@ is the resolved entity table when the target is one of the mirrored tables, else
 `NULL` (SOP/WS/GL slugs aren't entity tables — render them as labeled chips keyed by
 `target_slug` / `target_raw`).
 
-### 16.1 Query contract for Felix
+### 16.1 Query contract for Bezalel
 
 ```sql
 -- (a) the contract body + meta for the member-detail header/body
@@ -1259,7 +1259,7 @@ ORDER BY source_table, source_slug;
 contract with no frontmatter yields `contract_frontmatter='{}'`. All three queries
 degrade to empty results on a leaner mirror.
 
-> **Coordination:** Felix builds the member-detail UI (contract render, journal feed,
+> **Coordination:** Bezalel builds the member-detail UI (contract render, journal feed,
 > connections canvas) against this query contract next wave. Field names
 > (`contract_body`, `contract_frontmatter`, `agent_journal.*`, `social_links`,
 > `habits.started_on`/`status`) are the agreed names — change them only by editing
@@ -1326,7 +1326,7 @@ Indexes: `idx_<table>_doc_id` on `(doc_id)` each.
   GLs have no Status or Version line. Render them as optional fields; never
   fabricate a default.
 
-> **Coordination:** Felix builds the Team Knowledge browser UI against this
+> **Coordination:** Bezalel builds the Team Knowledge browser UI against this
 > contract. Field names are the agreed names — change them only by editing the
 > regen + this contract together (append-only; never rename a shipped column
 > silently).

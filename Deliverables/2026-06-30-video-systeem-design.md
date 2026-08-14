@@ -1,4 +1,5 @@
 ---
+key_element: groei
 id: 2026-06-30-video-systeem-design
 title: Video Systeem — Design Doc
 status: concept

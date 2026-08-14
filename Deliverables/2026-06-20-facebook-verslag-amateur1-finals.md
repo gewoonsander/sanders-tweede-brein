@@ -1,4 +1,5 @@
 ---
+key_element: bijdrage
 type: verslag-concept
 toernooi: Winmau Benelux Trophy 2026 - East Netherlands - Regional Amateur I Finals (60-70 avg)
 datum: 2026-06-20

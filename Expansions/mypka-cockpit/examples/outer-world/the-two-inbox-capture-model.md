@@ -8,7 +8,7 @@ source_url: https://example.com/blog/two-inbox-capture-model
 source_type: article                    # article | post | video | book | idea | news (+ open vocab)
 source_author: Dana Whitfield
 source_published: 2026-06-10
-# ── EMBED card (FLAT embed_* — Axon/Mack fetcher contract; image is LOCAL) ──
+# ── EMBED card (FLAT embed_* — Axon/Daedalus fetcher contract; image is LOCAL) ──
 embed_kind: article
 embed_title: "A Two-Inbox Model for Personal Knowledge Capture"
 embed_description: "Separate what you create from what you save, and the filtering problem solves itself."

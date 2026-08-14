@@ -1,9 +1,9 @@
 # WS-003 - Install an Expansion
 
 - **Status:** Active (since v1.7.0)
-- **Type:** Workstream — a multi-agent composition. The agents below collaborate to deliver the outcome. New Workstreams emerge when patterns repeat across session-logs; this one ships pre-canonicalized because Expansions are a day-1 install/uninstall flow that needs the multi-agent choreography (Larry → Vex → Nolan → Mack → Silas → Larry) wired correctly out of the box. **Pre-canonicalized exception**, alongside [[WS-001-daily-journaling]] and [[WS-002-import-external-knowledge-base]].
-- **Owners:** **Hermes** (orchestrator, pre-flight, post-install validation, archive, announcement). **Vex** (security review — gate). **Nolan** (team merge — copies agents, SOPs, guidelines, templates into your myPKA). **Mack** (connector wiring — env vars, MCP servers, runtime announcement). **Silas** (post-merge integrity check).
-- **References:** `Expansions/docs/expansion-spec.md` (locked manifest schema), [[GL-001-file-naming-conventions]], [[GL-002-frontmatter-conventions]], [[SOP-001-how-to-add-a-new-specialist]] (Nolan's hire procedure — adapted here for pack-shaped hires), [[Team/agent-index]].
+- **Type:** Workstream — a multi-agent composition. The agents below collaborate to deliver the outcome. New Workstreams emerge when patterns repeat across session-logs; this one ships pre-canonicalized because Expansions are a day-1 install/uninstall flow that needs the multi-agent choreography (Hermes → Argus → Jethro → Daedalus → Atlas → Hermes) wired correctly out of the box. **Pre-canonicalized exception**, alongside [[WS-001-daily-journaling]] and [[WS-002-import-external-knowledge-base]].
+- **Owners:** **Hermes** (orchestrator, pre-flight, post-install validation, archive, announcement). **Argus** (security review — gate). **Jethro** (team merge — copies agents, SOPs, guidelines, templates into your myPKA). **Daedalus** (connector wiring — env vars, MCP servers, runtime announcement). **Atlas** (post-merge integrity check).
+- **References:** `Expansions/docs/expansion-spec.md` (locked manifest schema), [[GL-001-file-naming-conventions]], [[GL-002-frontmatter-conventions]], [[SOP-001-how-to-add-a-new-specialist]] (Jethro's hire procedure — adapted here for pack-shaped hires), [[Team/agent-index]].
 - **Triggered by:** any user phrasing that signals "install or uninstall an Expansion." See **Trigger contract** below. Also: Hermes detects new folders in `Expansions/` on session boot and offers to run this workstream.
 
 ## Purpose
@@ -13,9 +13,9 @@ Take a folder dropped into `Expansions/`, validate it, security-review it, merge
 ## What this Workstream does not do
 
 - Does not author Expansion manifests. That's the Expansion author's job (per `Expansions/docs/expansion-spec.md`).
-- Does not bypass Vex's security review. Tier-2 (myICOR-issued) Expansions are hash-pinned in `Expansions/.trusted-sources` only after Vex clears them. Tier-3 (community) Expansions get an interactive trust prompt. Either way, Vex is the gate.
+- Does not bypass Argus's security review. Tier-2 (myICOR-issued) Expansions are hash-pinned in `Expansions/.trusted-sources` only after Argus clears them. Tier-3 (community) Expansions get an interactive trust prompt. Either way, Argus is the gate.
 - Does not silently overwrite existing files in the your myPKA. If a merge target already exists, the workstream stops and asks.
-- Does not auto-launch runtime Expansions. That rule is hard. Mack announces; the user launches.
+- Does not auto-launch runtime Expansions. That rule is hard. Daedalus announces; the user launches.
 
 ## Trigger contract
 
@@ -63,34 +63,34 @@ Manifest hash: <sha256 first 12 chars>
 Proceed? [y/n/inspect]
 ```
 
-User answers `y` → §2. `n` → stop, write a session-log entry capturing the abort. `inspect` → Larry opens the folder for the user to read, then re-prompts.
+User answers `y` → §2. `n` → stop, write a session-log entry capturing the abort. `inspect` → Hermes opens the folder for the user to read, then re-prompts.
 
 ---
 
-## Step 2 — Vex: security review (the gate)
+## Step 2 — Argus: security review (the gate)
 
-Vex audits the Expansion folder before any merge happens. This is a hard gate — Hermes does not advance to §3 until Vex returns green or the user explicitly accepts a yellow flag.
+Argus audits the Expansion folder before any merge happens. This is a hard gate — Hermes does not advance to §3 until Argus returns green or the user explicitly accepts a yellow flag.
 
-Vex's checks:
+Argus's checks:
 
-1. **Trust tier check.** If `author: myICOR`, compute sha256 of `expansion.yaml` and look it up in `Expansions/.trusted-sources`. Match → green (auto-trust). Mismatch → red (refuse). Missing entry → yellow (Vex hasn't audited this version yet — proceed only with explicit user override).
+1. **Trust tier check.** If `author: myICOR`, compute sha256 of `expansion.yaml` and look it up in `Expansions/.trusted-sources`. Match → green (auto-trust). Mismatch → red (refuse). Missing entry → yellow (Argus hasn't audited this version yet — proceed only with explicit user override).
 2. **Token handling sweep.** Grep the Expansion folder for any committed token-shaped string (`xoxb-`, `xapp-`, `sk-`, `ghp_`, etc.). Hit → red (block install — author shipped a credential).
 3. **`.env.example` review.** Confirm `.env.example` lists only env-var keys, no values, no real tokens.
 4. **Permission surface review.** For `connector` and `runtime` types: confirm the manifest's `env_vars`, `mcp_servers`, and runtime block match what the Expansion code actually does (no smuggled-in network calls, no unannounced spawns).
 5. **Outbound network defaults.** Slack-shaped Expansions: confirm `unfurl_links: false` and `unfurl_media: false`. Webhook receivers: confirm signature verification is wired.
 6. **Scripts review.** `install.sh`, `uninstall.sh`, `start.command`/`.sh`/`.bat` — read for shell injection risks, hard-coded paths outside the Expansion folder, or overly permissive `chmod`.
 
-Vex returns one of:
+Argus returns one of:
 
 - **GREEN** → §3 (proceed).
-- **YELLOW** → Hermes surfaces the flag to the user with Vex's reasoning. User overrides → §3. User declines → stop.
+- **YELLOW** → Hermes surfaces the flag to the user with Argus's reasoning. User overrides → §3. User declines → stop.
 - **RED** → install blocked. Hermes tells the user why. No override path.
 
 ---
 
-## Step 3 — Nolan: merge agents, SOPs, guidelines, templates, workstreams
+## Step 3 — Jethro: merge agents, SOPs, guidelines, templates, workstreams
 
-Nolan executes the file-level merge. Read-and-confirm each operation before writing.
+Jethro executes the file-level merge. Read-and-confirm each operation before writing.
 
 ### 3.1 Agents (`adds_agents`)
 
@@ -110,7 +110,7 @@ For each `{ default_owner, file }` entry:
 1. Read the next free `SOP-NNN` slot by scanning `Team Knowledge/SOPs/` (zero-padded, no skips per [[GL-001-file-naming-conventions]]).
 2. Copy `Expansions/<slug>/sops/<file>` (or wherever the manifest points) to `Team Knowledge/SOPs/SOP-NNN-<derived-slug>.md`. Slug derived from the source filename minus the descriptive `SOP-` prefix the author used (e.g. `SOP-slack-post-message.md` → slug `slack-post-message` → `SOP-NNN-slack-post-message.md`).
 3. Update `Team Knowledge/SOPs/INDEX.md` with a new row: number, title, default owner, one-line description.
-4. If the SOP body references its own filename (back-pointers, internal links), Nolan rewrites those references to the new auto-numbered name. **All internal `[[wikilinks]]` are checked.**
+4. If the SOP body references its own filename (back-pointers, internal links), Jethro rewrites those references to the new auto-numbered name. **All internal `[[wikilinks]]` are checked.**
 
 ### 3.3 Guidelines (`adds_guidelines`)
 
@@ -126,28 +126,28 @@ Copy each path under `Team Knowledge/Templates/`. If a template with the same na
 
 ### 3.6 Failure rollback
 
-If any step in §3 fails after writes have started, Nolan rolls back: undo every file copy, restore every modified `INDEX.md` and root file from git (or from the pre-merge snapshot Nolan took at the start of §3). Vault returns to pre-install state.
+If any step in §3 fails after writes have started, Jethro rolls back: undo every file copy, restore every modified `INDEX.md` and root file from git (or from the pre-merge snapshot Jethro took at the start of §3). Vault returns to pre-install state.
 
 ---
 
-## Step 4 — Silas: post-merge integrity check
+## Step 4 — Atlas: post-merge integrity check
 
-Silas validates your myPKA state after Nolan's merge:
+Atlas validates your myPKA state after Jethro's merge:
 
 1. **Frontmatter compliance.** Any new template added under `Team Knowledge/Templates/` must validate against [[GL-002-frontmatter-conventions]]. Any new agent's AGENTS.md gets a structural sanity check (has Identity, Role, etc. sections).
 2. **`agent-index.md` consistency.** Every folder under `Team/` is listed in the index, and every index row points to an existing folder.
 3. **Wikilink resolution.** Every `[[wikilink]]` in the new files resolves to an existing target. Broken links → flag to Hermes, do not auto-fix.
 4. **INDEX.md consistency.** SOPs, Workstreams, Guidelines, Templates indexes match the actual folder contents.
-5. **No SSOT violations introduced.** New SOPs/Guidelines/Workstreams don't duplicate existing rules. Soft warning if Silas detects overlap.
+5. **No SSOT violations introduced.** New SOPs/Guidelines/Workstreams don't duplicate existing rules. Soft warning if Atlas detects overlap.
 
-Silas returns one of:
+Atlas returns one of:
 
 - **PASS** → §5.
-- **FAIL** → Larry surfaces the failure list. Two paths: (a) Nolan rolls back; (b) user accepts a known issue and proceeds (rare; logged in session-log).
+- **FAIL** → Hermes surfaces the failure list. Two paths: (a) Jethro rolls back; (b) user accepts a known issue and proceeds (rare; logged in session-log).
 
 ---
 
-## Step 5 — Mack: connector wiring (only if `connector` / `runtime` / `hybrid`)
+## Step 5 — Daedalus: connector wiring (only if `connector` / `runtime` / `hybrid`)
 
 Skip this step for pure `agent_pack` Expansions.
 
@@ -157,7 +157,7 @@ For each `env_vars` entry:
 
 1. If `required: true` and not already set in `Expansions/<slug>/.env`, prompt the user. Echo `sensitive: true` values masked.
 2. Write to `Expansions/<slug>/.env`. `chmod 600` the file.
-3. Confirm `Expansions/<slug>/.env` is gitignored (the Expansion's own `.gitignore` should cover this; if not, Mack adds the entry to your myPKA root `.gitignore`).
+3. Confirm `Expansions/<slug>/.env` is gitignored (the Expansion's own `.gitignore` should cover this; if not, Daedalus adds the entry to your myPKA root `.gitignore`).
 
 ### 5.2 MCP servers
 
@@ -193,7 +193,7 @@ Failures → Hermes surfaces them to the user. Two paths: (a) re-run the failing
 
 ## Step 7 — Hermes: archive + announce
 
-1. **Write session-log entry.** `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_larry_install-<slug>-v<version>.md`. Capture: which Expansion, version, agents added, SOPs added (with their new SOP-NNN numbers), Vex's verdict, env vars set (keys only, never values), runtime announced (yes/no), validation results, anomalies.
+1. **Write session-log entry.** `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_larry_install-<slug>-v<version>.md`. Capture: which Expansion, version, agents added, SOPs added (with their new SOP-NNN numbers), Argus's verdict, env vars set (keys only, never values), runtime announced (yes/no), validation results, anomalies.
 2. **Archive the install manifest.** Write `Expansions/_installed/<slug>-<version>/.manifest.json` as a snapshot of `expansion.yaml` plus install metadata (timestamp, installer and sha256). For `agent_pack` and connector-only Expansions whose files have been merged elsewhere, archive or remove the source folder as declared by the pack. For `runtime` and runtime-bearing `hybrid` Expansions, **leave the executable `Expansions/<slug>/` folder in place**: launchers, modules and residual paths may depend on that stable path. The `_installed` manifest is the install marker Hermes reads on future session boots; the continued presence of a registered runtimefolder must not trigger a duplicate-install offer.
 3. **Update `Expansions/INDEX.md`.** Add a row for the newly installed Expansion.
 4. **Announce the new specialists / capabilities** to the user. For agent packs: introduce each new agent by name and role. For connectors: tell the user which triggers now route to the connector and the SOP they own. For runtimes: confirm how to launch.
@@ -228,11 +228,11 @@ Will keep (per residual_paths):
 Proceed? [y/n]
 ```
 
-### U2 — Mack: stop runtime + tear down connector
+### U2 — Daedalus: stop runtime + tear down connector
 
 For runtime Expansions: `launchctl unload` the plist (macOS); kill the foreground process (Linux/Windows). Remove the plist from `~/Library/LaunchAgents/`. Deregister MCP servers from the user's LLM config. Clear `Expansions/<slug>/.env`.
 
-### U3 — Nolan: reverse the merge
+### U3 — Jethro: reverse the merge
 
 For each `adds_agents` entry: remove `Team/<folder>/`, remove the row from `Team/agent-index.md`, remove the row from root `AGENTS.md` team table. Decrement the team count.
 
@@ -240,11 +240,11 @@ For each `adds_sops` entry: identify the installed `SOP-NNN-<slug>.md` (via the 
 
 For each `adds_guidelines`, `adds_workstreams`, `adds_templates`: same shape.
 
-### U4 — Silas: post-uninstall integrity check
+### U4 — Atlas: post-uninstall integrity check
 
 Same as install §4, but checking that removed files left no dangling wikilinks, INDEX rows, or `agent-index` rows. Flag any orphans for Hermes to clean up.
 
-### U5 — Larry: archive + session-log
+### U5 — Hermes: archive + session-log
 
 Move `Expansions/_installed/<slug>-<version>/` to `Expansions/_uninstalled/<slug>-<version>/` (preserves the install record). If the Expansion folder itself is still present in `Expansions/` (the user dropped it back in to trigger uninstall, or it was never archived), `rm -rf` it. Anything in the manifest's `uninstall.residual_paths` that the user said `keep` to is left alone; everything else is removed.
 
@@ -256,12 +256,12 @@ Write the uninstall session-log entry. Update `Expansions/INDEX.md` to remove th
 
 | Situation | Behaviour |
 |---|---|
-| Vex flags YELLOW, user overrides | Logged in the session-log with explicit user-consent line. Vex re-audits if the Expansion is later updated. |
-| Vex flags RED | Install blocked. No override. Hermes tells the user the specific concern. |
+| Argus flags YELLOW, user overrides | Logged in the session-log with explicit user-consent line. Argus re-audits if the Expansion is later updated. |
+| Argus flags RED | Install blocked. No override. Hermes tells the user the specific concern. |
 | `requires_agents` missing | Install blocked. Hermes tells the user "install <X> Expansion first" or "run SOP-001 to hire <X>". |
-| Collision: `Team/<folder>/` already exists | Nolan stops at §3. User chooses: rename (suffix `-from-<slug>`), skip that agent, or abort install. |
-| Collision: SOP slug already taken | Nolan auto-resolves by appending `-<slug>` to the SOP slug (e.g., `SOP-NNN-post-message-slack.md`). |
-| Mid-install failure | Nolan rolls back §3 writes. Mack rolls back §5 if reached. Vault returns to pre-install state. Failure logged. |
+| Collision: `Team/<folder>/` already exists | Jethro stops at §3. User chooses: rename (suffix `-from-<slug>`), skip that agent, or abort install. |
+| Collision: SOP slug already taken | Jethro auto-resolves by appending `-<slug>` to the SOP slug (e.g., `SOP-NNN-post-message-slack.md`). |
+| Mid-install failure | Jethro rolls back §3 writes. Daedalus rolls back §5 if reached. Vault returns to pre-install state. Failure logged. |
 | Post-install validation fails | Hermes surfaces; user chooses re-run or accept. |
 | User uninstalls then reinstalls a different version | The `_installed` archive shows the old version's footprint. New install proceeds normally; auto-numbering picks new SOP slots. |
 
@@ -269,6 +269,6 @@ Write the uninstall session-log entry. Update `Expansions/INDEX.md` to remove th
 
 ## Owner agency
 
-Each agent in this workstream owns their step. If Vex's audit logic improves, Vex updates §2 directly (and tells Hermes). If Nolan finds a better merge sequence, Nolan updates §3. Hermes owns the orchestration shell (§1, §6, §7) and the trigger contract.
+Each agent in this workstream owns their step. If Argus's audit logic improves, Argus updates §2 directly (and tells Hermes). If Jethro finds a better merge sequence, Jethro updates §3. Hermes owns the orchestration shell (§1, §6, §7) and the trigger contract.
 
 The Expansion author owns their `expansion.yaml`, their bundled files, and the `post_install_validation` rules. They do not own this workstream — the scaffold owns the install procedure, every Expansion plugs into the same one.
