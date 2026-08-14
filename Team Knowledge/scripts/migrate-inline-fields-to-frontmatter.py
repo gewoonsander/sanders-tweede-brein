@@ -461,7 +461,7 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help=(
             "Limit migration to a single entity folder, e.g. 'PKM/CRM/People'. "
-            "Default: scan all 8 entity folders."
+            "Default: scan all 8 legacy entity folders. Personal tasks are born frontmatter-native."
         ),
     )
     parser.add_argument(

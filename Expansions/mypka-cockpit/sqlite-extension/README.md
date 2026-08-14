@@ -20,7 +20,7 @@ Everything here is additive and idempotent. Nothing here destroys data.
 | `schema/05-module-quotes.sql` | The md-first `quotes` table (random-quote Hub; `PKM/Quotes/`, `doc_type: quote`). |
 | `schema/06-journal-additions.sql` | The manual-entry preservation columns on `journal` (`original_body`, `integration_status`, `manually_added`). |
 | `schema/07-library-foundation.sql` | The **library foundation**: `library_registry` + the two worked libraries `recipes` + `movies` (the reusable collection pattern; `DATA-CONTRACT.md §11`). |
-| `detect-gaps.py` | **Step 3 — read-only probe.** Reports which modules have no backing data and what the user will see. Never writes. |
+| `detect-gaps.py` | **Step 3 — read-only probe.** Reports which modules have no backing data, what the user will see, and whether active `Team/` contracts exactly match active Cockpit `agents` rows. Never writes. |
 | `install-extensions.py` | **Step 4 — additive installer.** Upgrades an existing `mypka.db` to the contract. Idempotent; never drops a table/column or modifies a row. |
 
 ## Flow

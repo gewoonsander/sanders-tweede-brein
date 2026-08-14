@@ -22,10 +22,11 @@ last_updated: 2026-06-28
 
 Bij elke inboxronde worden drie inboxen systematisch leeggemaakt. Niets blijft hangen. Elk bestand krijgt een definitieve bestemming.
 
-De drie inboxen:
+De vier inboxen:
 1. **Downloads** (`~/Downloads`) — bestanden via browser of WhatsApp
 2. **Team Inbox** (`sanders-tweede-brein/Team Inbox/`) — drops voor het team
 3. **Werkarchief** (`~/Documents/Werkarchief`) — actieve docs, tijdelijk
+4. **Vault-root** (`sanders-tweede-brein/` zelf, los naast de vaste scaffold-bestanden) — bestanden die per ongeluk direct in de repo-root belanden in plaats van via Team Inbox. Toegevoegd 2026-08-14 na een concrete vondst (een lege `.md`, een lege `.canvas`, losse foto's/xlsx/een script). Herken dit aan: het bestand hoort niet bij de vaste scaffold-lijst (README/LICENSE/NOTICE/CHANGELOG*/CONTRIBUTING/ADAPTER-PROMPT/WAY-FORWARD/AGENTS.md/CLAUDE.md/VERSION/.scaffold-version/mypka.db/validation-script.sh) en niet bij een van de vaste topfolders (ADC/Deliverables/Expansions/PKM/Team/Team Inbox/Team Knowledge/scripts/github). Route zoals Team Inbox: zelfde beslisboom, zelfde bestemmingen.
 
 ---
 
@@ -65,8 +66,20 @@ ADC Regio Oost    → 03_ADC_Regio_Oost
 Van Gewoon Sander → 04_Van_Gewoon_Sander
 Gezinshuis        → 05_Gezinshuis_Gewoon_Thuis
 Persoonlijk       → 06_Persoonlijk
+Financieel        → 07_Financieel (zie hieronder, geen "pet" maar een aparte categorie)
 Twijfel           → 99_Inbox_Nog_Uitzoeken
 ```
+
+**07_Financieel is geen pet maar een dwarsdoorsnede-categorie** — facturen, bonnetjes, belastingaangiftes en digitale-archief-exports gaan hier ongeacht welke pet ze verder zouden raken, met eigen submappen:
+
+```
+Bonnetjes/aankoopbevestigingen           → 07_Financieel/01_Bonnetjes
+Belastingaangiftes/-berichten            → 07_Financieel/02_Belastingen
+Overig (facturenarchieven, onbekende zip-exports met facturen/bonnetjes) → 07_Financieel/03_Overige_Financiele_Documenten
+Onduidelijk of het financieel is         → 07_Financieel/99_Inbox_Nog_Uitzoeken
+```
+
+Vastgesteld 2026-08-14 — deze categorie bestond al op de Mediahub maar stond nog niet in deze SOP. De onbewaakte wekelijkse run ([[SOP-013-inboxen-verwerken]] → automatische laag) laat financiële/gevoelige inhoud bewust in de wachtrij staan, ook al is er nu een duidelijke bestemming — dat blijft zo, financiële documenten verdienen een interactieve blik voor ze verplaatst worden.
 
 ### Vraag C (alleen bij Mediahub): Project of asset?
 
@@ -126,8 +139,8 @@ Rapporteer: "Downloads leeg ✓ / Team Inbox leeg ✓"
 
 ## Wanneer uitvoeren
 
-- **Vrijdagochtend** — na het overleg met Marieke (vaste routine)
-- **Op verzoek** — zodra Sander "inboxen doornemen" of vergelijkbare trigger zegt
+- **Automatisch, wekelijks (vrijdagochtend, 08:00)** — sinds 2026-08-14 draait `scripts/inbox-verwerken.mjs` via de `nl.gewoonsander.inbox-verwerken` LaunchAgent onbewaakt. Deze automatische run is **strenger** dan de interactieve procedure hierboven: hij verplaatst alleen ondubbelzinnige, niet-gevoelige media automatisch; alles met twijfel, financiële/gevoelige inhoud, mogelijke duplicaten of tekst-voor-Penn gaat in een wachtrij (`Team Inbox/_wekelijkse-inboxronde-laatste-run.md`) die `/dagstart` stap 4 meldt. Nooit automatisch verwijderen, ook geen evidente duplicaten. Zie `scripts/inbox-verwerken.prompt.md` voor de exacte grens.
+- **Op verzoek** — zodra Sander "inboxen doornemen" of vergelijkbare trigger zegt. Dit is de volledige, interactieve procedure hierboven — inclusief de gevallen die de automatische run bewust liet liggen.
 - **Proactief** — als Hermes bij een andere taak bestanden in Downloads of Team Inbox signaleert
 
 ---

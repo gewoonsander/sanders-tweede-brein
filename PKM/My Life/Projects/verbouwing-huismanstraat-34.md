@@ -1243,3 +1243,11 @@ Subsidie zelf aanvragen via rvo.nl na installatie — meldcode KA28310
 - Elektra monteren na het stukken
 - Nieuwe keuken installeren (al besteld)
 - Nieuwe lamp ophangen
+
+### Vandaag (2026-08-14) — automatisch verwerkte audio-opname
+
+**Samenvatting:** Sander bespreekt dat er een lampenhouder/beugel nodig is voor ronde lampjes. Hij zal een foto in de inbox plaatsen zodat duidelijk wordt welke lamp het betreft en deze kan worden gecombineerd.
+
+**Actiepunten:**
+- Foto van de lamp in inbox plaatsen
+- Lampenhouder/beugel uitzoeken die bij de ronde lampjes past

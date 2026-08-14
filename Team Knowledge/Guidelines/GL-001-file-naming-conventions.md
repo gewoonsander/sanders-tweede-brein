@@ -28,6 +28,7 @@ Applies to:
 - Images: `PKM/Images/YYYY/MM/YYYY-MM-DD-<slug>.<ext>`
 - Session logs: `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-<slug>.md`
 - Deliverables when they are time-bound: `Deliverables/YYYY-MM-DD-<slug>.md`
+- Personal tasks: `PKM/Tasks/<status>/tsk-YYYY-MM-DD-NNN-<actie-slug>.md`
 
 Examples:
 - `2026-05-04-first-day.md`
@@ -84,6 +85,16 @@ If two files would end up with the same filename, append a short qualifier:
 - No slashes (used for path).
 - No colons, semicolons, question marks, or asterisks.
 - No emoji.
+
+### 9a. Personal task identity
+
+Personal task filenames use `tsk-YYYY-MM-DD-NNN-<actie-slug>.md`.
+
+- The date is the creation date and never changes.
+- `NNN` is the next unused three-digit sequence for that date.
+- The slug starts with an action verb where practical and follows rules 1 and 3.
+- A status change moves the file between `inbox/`, `next/`, `waiting/`, `scheduled/`, `someday/`, `done/YYYY/MM/`, or `cancelled/YYYY/MM/`; it never changes the filename or `task_id`.
+- Due, scheduled, start, and follow-up dates belong in frontmatter, never in the filename.
 
 ## Wiki link conventions
 

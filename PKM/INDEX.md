@@ -9,6 +9,7 @@ This is the user's personal knowledge. The team's operations side lives in [[Tea
 - **[[PKM/CRM/INDEX|CRM]]** - People and Organizations. Cross-linked into Journal entries via `[[wikilinks]]`.
 - **[[PKM/Images/INDEX|Images]]** - single shared image bucket. Nested by `YYYY/MM/`. Images live here, never duplicated elsewhere; entries embed via `![[Images/YYYY/MM/...]]`.
 - **[[PKM/Journal/INDEX|Journal]]** - daily entries, one file per day, nested by `YYYY/MM/`. The inbox of your myPKA.
+- **[[PKM/Tasks/INDEX|Tasks]]** - canonieke persoonlijke taken, verbonden met Key Elements, Projects, bronnen en optionele Todoist-projecties.
 - **[[PKM/Weekly Reports/INDEX|Weekly Reports]]** - The Week in Ink, de vrijdag-recap die de Cockpit samenstelt uit Journal, Images, Deliverables en session logs. Nested by `YYYY/MM/<slug>/`, elke editie een map met `metadata.md` + gerenderd deck. Nooit uit het geheugen geschreven, altijd samengesteld uit vastgelegde bronnen. Schema: [[GL-002-frontmatter-conventions]].
 
 ## How the wiki connects
@@ -16,7 +17,7 @@ This is the user's personal knowledge. The team's operations side lives in [[Tea
 - The Journal is where new information lands first.
 - Penn (Journal Writer) cross-links Journal entries to People, Organizations, Topics, Projects, and Goals via `[[wikilinks]]`.
 - Concept folders (Topics, Habits, Goals, Projects, Key Elements, People, Organizations, Documents) stay flat. One file per concept.
-- Date-driven folders (Journal, Images) nest by `YYYY/MM/`.
+- Date-driven folders (Journal, Images) nest by `YYYY/MM/`. Tasks use stable creation-date IDs and status folders; terminal tasks nest by close year/month.
 
 ## SSOT applies inside PKM
 

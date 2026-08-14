@@ -7,6 +7,27 @@ of her normal research protocol, not a one-time migration.
 
 ---
 
+## `audit-pkm-graph.py`
+
+**Status:** actief en herhaalbaar. Hoort bij [[SOP-021-audit-pkm-graafhygiene]].
+
+Voert een standaard alleen-lezen controle uit op geïsoleerde notities,
+gebroken en dubbelzinnige links, ontbrekende bijlagen en notities die alleen
+via een INDEX/README bereikbaar zijn. Het script gebruikt alleen Python-stdlib,
+negeert codevoorbeelden en sluit technische kopieën zoals `.claude/worktrees`
+en `Expansions/` uit.
+
+```bash
+python3 "Team Knowledge/scripts/audit-pkm-graph.py" . --scope PKM --format markdown
+python3 "Team Knowledge/scripts/audit-pkm-graph.py" . --scope PKM --format json
+```
+
+Zonder `--output` verandert het script geen bestanden en schrijft het alleen
+naar stdout. Gebruik de audit nooit als automatische verwijderlijst; volg de
+classificatie- en goedkeuringsstappen uit SOP-021.
+
+---
+
 ## `migrate-inline-fields-to-frontmatter.py`
 
 **Status:** ships in v1.3.0. Optional. Safe to delete after you've migrated.

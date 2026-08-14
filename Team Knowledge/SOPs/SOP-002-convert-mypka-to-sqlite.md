@@ -64,6 +64,7 @@ PKM/
 │   ├── Goals/<slug>.md                         -> goals table
 │   └── Habits/<slug>.md                        -> habits table
 ├── Documents/<slug>.md                         -> documents table (metadata)
+├── Tasks/<status>/**/*.md                      -> personal_tasks table
 └── Images/YYYY/MM/...                          -> referenced via ![[…]] embeds, not inserted directly
 ```
 
@@ -74,7 +75,7 @@ INDEX.md files in each folder are navigation hubs. Skip them. Do not insert.
 ### 1. Set up
 
 - Create a fresh empty SQLite file: `mypka.db`.
-- Define the schema with these tables (and only these): `people`, `organizations`, `topics`, `projects`, `key_elements`, `goals`, `habits`, `journal`, `documents`, `journal_media`, `content_index`. Do not invent columns the markdown has no source for.
+- Define the schema with these tables (and only these): `people`, `organizations`, `topics`, `projects`, `key_elements`, `goals`, `habits`, `journal`, `documents`, `personal_tasks`, `journal_media`, `content_index`. Do not invent columns the markdown has no source for.
 - Open one DB connection. Use a single transaction per table for atomicity.
 
 ### 2. Build a slug to id resolver
@@ -83,7 +84,7 @@ For tables with FK references (`journal.key_element_id`, `journal.project_id`, e
 
 1. **First pass insert:** people, organizations, topics, key_elements, projects, goals, habits. These have no FKs to journal or documents.
 2. **Build in-memory dicts:** `people_by_slug = {slug: id}`, etc.
-3. **Second pass insert:** journal, documents. Resolve FKs via the dicts.
+3. **Second pass insert:** journal, documents, personal_tasks. Resolve FKs via the dicts.
 4. **Third pass insert:** junction rows (`journal_media`, `content_index` for wikilink-derived relations).
 
 ### 3. Frontmatter to column mapping
@@ -151,6 +152,10 @@ For each `![[Images/YYYY/MM/<file>]]` line, insert one row:
 | `expiry_date`, `renewal_trigger` | same |
 | `notes` | body text |
 
+**`personal_tasks`** (sources: `PKM/Tasks/<status>/**/*.md`)
+
+Use the canonical fields from [[GL-002-frontmatter-conventions]] without renaming. `task_id` is the natural unique key; `key_element`, `project`, `goal`, `habit`, linked document/person/organization arrays, and `parent_task` are resolved or indexed as relationships. Store all four date meanings separately. Preserve `source_url`, Todoist projection metadata, and the body as task context/history. Folder status and frontmatter `status` must agree; report mismatches instead of guessing.
+
 ### 4. Wikilink to relation extraction
 
 After all base tables are populated, do a third pass:
@@ -172,6 +177,7 @@ UNION ALL SELECT 'key_elements', COUNT(*) FROM key_elements
 UNION ALL SELECT 'goals', COUNT(*) FROM goals
 UNION ALL SELECT 'habits', COUNT(*) FROM habits
 UNION ALL SELECT 'documents', COUNT(*) FROM documents
+UNION ALL SELECT 'personal_tasks', COUNT(*) FROM personal_tasks
 UNION ALL SELECT 'journal_media', COUNT(*) FROM journal_media
 UNION ALL SELECT 'content_index', COUNT(*) FROM content_index;
 ```

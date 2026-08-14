@@ -128,7 +128,18 @@ If the new specialist takes part in a recurring orchestration, edit the matching
 
 Show the user the draft AGENTS.md, the draft `.claude/agents/<slug>.md` shim, and the updated agent-index, with a one-line summary of what Athena's research surfaced. Make changes only after they approve.
 
-### 9. Log the hire (Hermes)
+### 9. Refresh and verify the Cockpit roster (Atlas)
+
+After the user approves and the contract is set to `agent_status: active`:
+
+1. Regenerate the derived Cockpit mirror with `python3 "Expansions/mypka-cockpit/scripts/regen-mypka-db.py"` when the Cockpit Expansion is installed.
+2. Run `python3 "Expansions/mypka-cockpit/sqlite-extension/detect-gaps.py" "mypka.db"`.
+3. The hire is not complete until the roster parity check reports that every active `Team/<Name - Role>/AGENTS.md` contract exists exactly once in the Cockpit `agents` table and no stale active database row remains.
+4. If regeneration is unavailable, report the hire as active in markdown but Cockpit-sync as blocked; never imply the dashboard is current.
+
+Markdown contracts remain canonical. `mypka.db` is only a regenerated projection.
+
+### 10. Log the hire (Hermes)
 
 Hermes writes a line in the next session log: "Hired <Name> as <Role> after research from Athena. Brief at `[[<research-deliverable-slug>]]`. Contract at `[[Team/<Name> - <Role>/AGENTS]]`. Shim at `.claude/agents/<slug>.md`." This becomes part of the team's persistent memory.
 
@@ -143,4 +154,5 @@ Hermes writes a line in the next session log: "Hired <Name> as <Role> after rese
 - Duplicating naming rules inside the new AGENTS.md. Link to [[GL-001-file-naming-conventions]] instead.
 - Naming the folder with a different separator than other specialists. Always: space, hyphen, space.
 - Forgetting to add the row to [[Team/agent-index]]. Hermes's routing will skip an unlisted specialist.
+- Forgetting to regenerate and parity-check the Cockpit roster. A specialist can be active in markdown while remaining invisible in a stale `mypka.db`.
 - Writing the AGENTS.md in the user's voice instead of as a contract. The file is for the LLM, not the reader.

@@ -46,7 +46,7 @@ The **team** is not bounded by the folder. The team is a personality with contra
 
 The only acceptable "no" is when the user explicitly says they do not want to grow the team for this work.
 
-## The team (14 specialists)
+## The team (15 specialists)
 
 See [[Team/agent-index]] for the full routing table.
 
@@ -66,6 +66,7 @@ See [[Team/agent-index]] for the full routing table.
 | Nemesis | [[Team/Nemesis - QA Specialist/AGENTS]] | Visuele QA, WCAG 2.2 AA accessibility, responsive verificatie. Niets shippet zonder haar sign-off. Default owner van [[SOP-005-nemesis-quality-gate]]. |
 | Martonny | [[Team/Martonny - Huddle Platform Specialist/AGENTS]] | Platform specialist voor Huddle (thehuddle.nl) — verified, docs-grounded facts about community, e-learning, events, access levels, integrations. Tier-aware. Flags undocumented/beta features. Supplies facts to anyone building Dart Buddies onboarding flows or admin setups. |
 | Tonnymart | [[Team/Tonnymart - Plug&Pay Platform Specialist/AGENTS]] | Platform specialist voor Plug&Pay (plugandpay.com) — verified, docs-grounded facts about checkout, billing, subscriptions, invoicing, the Customer Portal. Tier-aware. Flags undocumented/incomplete features. Supplies facts to anyone building DartsCoaching/Dart Buddies or Gewoon Sander/Darttactiek checkout and billing flows. Owns the Plug&Pay side of cross-platform Huddle-Plug&Pay questions. |
+| Pieter Post | [[Team/Pieter Post - Emailregisseur/AGENTS]] | Persoonlijke e-mailregisseur en interne casuseigenaar van Gmail-triage, antwoordconcepten, mailtaken, wachten-op en factuurrouting. Schrijft acties eerst canoniek naar myPKA; Hermes blijft Sanders enige aanspreekpunt. |
 
 **SOPs are skills, not 1:1 ownership.** Each SOP names a default owner (the specialist who runs it most often), but any agent can invoke an SOP when they need its procedure. Think of SOPs the way Claude skills work — discrete, named, callable. Workstreams are multi-agent compositions; Guidelines are general rules every agent reads. See [[Team Knowledge/INDEX]].
 
@@ -299,7 +300,7 @@ Set-in-stone install patterns discovered during real installs graduate from sess
 
 ## Frontmatter discipline
 
-When you (or any specialist you delegate to) create a new note in any of these eight entity folders:
+When you (or any specialist you delegate to) create a new note in any of these nine entity folders:
 
 - `PKM/CRM/People/`
 - `PKM/CRM/Organizations/`
@@ -309,6 +310,7 @@ When you (or any specialist you delegate to) create a new note in any of these e
 - `PKM/My Life/Topics/`
 - `PKM/My Life/Key Elements/`
 - `PKM/Documents/`
+- `PKM/Tasks/`
 
 You MUST start from the corresponding template in `Team Knowledge/Templates/`. Free-form-text-fields-in-body — the old `**Field:** value` shape — is no longer acceptable. Structured data lives in YAML frontmatter; narrative lives in the body.
 

@@ -1,6 +1,6 @@
 ---
 title: Secrets-beveiliging audit — launchd-agents, .env, git-geschiedenis
-status: onderzoek afgerond, actie nog niet uitgevoerd
+status: gedeeltelijk opgelost
 created: 2026-08-03
 tags:
   - beveiliging
@@ -48,6 +48,8 @@ De twee **oudere** scripts doen dit nog niet en zijn dus de enige twee die achte
 - **Zichtbaarheid van de repo (publiek/privé) is niet gecontroleerd** — geen `gh`-CLI beschikbaar op deze Mac om dat te checken. Los van publiek/privé: de Todoist-key moet als gecompromitteerd behandeld worden.
 - **Goed nieuws:** het bestand is sindsdien gegroeid (nu 7 variabelen, zie §4), maar alleen die allereerste 2 (`CONNECTORS_ENABLED`, `TODOIST_API_KEY`) hebben ooit in een commit gezeten. De 5 die later zijn toegevoegd (Calendar iCal URL, Jortt client-id/secret, Firecrawl, Perplexity) zijn **nooit** gecommit — die zijn niet blootgesteld via git.
 
+**Opgelost en geverifieerd op 2026-08-14:** de huidige token heeft een andere SHA-256-hash dan de historische token. Een live controle gaf `401` voor de historische token en `200` voor de huidige token. De token is dus geroteerd en de oude credential is waardeloos. Geen tokenwaarde is tijdens de verificatie getoond of opgeslagen. Zie [[2026-08-14-pieter-post-security-audit]].
+
 ### 4. Het huidige `Team Knowledge/.env` bevat 7 geheimen — allemaal on-topic voor de mypka-cockpit Expansion
 
 ```
@@ -75,7 +77,7 @@ Dit bestand wordt gebruikt door de `Expansions/mypka-cockpit/`-tooling. Er besta
 ## Aanbevolen acties, geprioriteerd
 
 ### Moet (compromittering, ongeacht andere keuzes)
-1. **Todoist API-key roteren** in Todoist (Instellingen → Integraties → API-token) — dit ondervangt de git-geschiedenis-blootstelling. Alléén hiermee is de blootstelling zelf niet meer te "ontdoen", maar de key wordt wel waardeloos voor wie 'm al heeft.
+1. ~~**Todoist API-key roteren**~~ — afgerond en technisch geverifieerd op 2026-08-14; historische token geeft `401`, huidige token `200`.
 2. **Anthropic API-key roteren** bij Anthropic (console.anthropic.com) — staat nu in twee wereld-leesbare plists.
 
 ### Zou moeten (opruimen, kan wachten tot er tijd is)

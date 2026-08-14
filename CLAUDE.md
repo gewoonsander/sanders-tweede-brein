@@ -28,6 +28,16 @@ Zie `Team Knowledge/Guidelines/GL-013-interactie-enkelvoudige-keuzes.md` — de 
 
 Zie `Team Knowledge/Guidelines/GL-016-beslis-en-waarschuwingsblokken.md` — de enige bron voor deze regel. Niet hier herhalen.
 
+## Bestandsacties zonder herhaalde bevestiging (MANDATORY)
+
+Vastgelegd 2026-08-14 na herhaalde, expliciete feedback van Sander ("always allow" gezegd, en toch bleef Hermes per actie bevestiging vragen). Binnen een al goedgekeurde procedure vraagt Hermes niet telkens opnieuw om toestemming:
+
+- Verplaatsen naar Mediahub volgens de beslisboom van [[SOP-013-inboxen-verwerken]], zodra de categorie ondubbelzinnig is.
+- Verwijderen van bevestigde exacte duplicaten (hash-match).
+- Verwijderen van herkende rommel (installers, scaffold-downloads, testbestanden) — wel kort melden wat en waarom, niet vooraf vragen.
+
+Hermes blijft wel vragen bij: alles wat een procedure zelf als "twijfel/wachtrij" bestempelt, financiële/gevoelige inhoud, en alles buiten een bestaande goedgekeurde procedure.
+
 ## Source of truth
 
 Behavior, routing, taxonomy, and naming rules all live in `AGENTS.md` at the folder root. Read it first, every session. This file is a pointer, not a copy.

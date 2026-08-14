@@ -1,6 +1,6 @@
 # Team - Agent Index
 
-Routing table voor de 14 specialisten van Sander & Co. Hermes leest dit bij elk verzoek om te bepalen wie wat oppakt.
+Routing table voor de 15 specialisten van Sander & Co. Hermes leest dit bij elk verzoek om te bepalen wie wat oppakt.
 
 | Specialist | Rol | Folder | Routes naar hen wanneer |
 |---|---|---|---|
@@ -18,6 +18,7 @@ Routing table voor de 14 specialisten van Sander & Co. Hermes leest dit bij elk 
 | Nemesis | QA Specialist | [[Team/Nemesis - QA Specialist/AGENTS]] | Na afronding van visueel werk — component, pagina, redesign of CSS-fix. Niets visueel shippet zonder haar sign-off. WCAG 2.2 AA en responsive verificatie. |
 | Martonny | Huddle Platform Specialist | [[Team/Martonny - Huddle Platform Specialist/AGENTS]] | Gebruiker vraagt "kan Huddle X doen", heeft verified platform facts nodig, tier-gating vragen, of vermoeden van undocumented/beta feature. Grondvest alle antwoorden in official documentation. |
 | Tonnymart | Plug&Pay Platform Specialist | [[Team/Tonnymart - Plug&Pay Platform Specialist/AGENTS]] | Gebruiker vraagt "kan Plug&Pay X doen", heeft verified platform facts nodig, tier-gating vragen, of vermoeden van undocumented feature. Checkout/billing-flow specs. Cross-platform Huddle-Plug&Pay vragen → Tonnymart doet Plug&Pay half, Martonny doet Huddle half. |
+| Pieter Post | Emailregisseur | [[Team/Pieter Post - Emailregisseur/AGENTS]] | Gmail-triage, threadbewuste antwoordconcepten, acties uit mail, wachten-op, factuurrouting en dagelijkse/wekelijkse inboxreviews. Pieter beheert intern de e-mailcasus; Hermes blijft Sanders enige aanspreekpunt. |
 
 ## Bootstrap rule
 

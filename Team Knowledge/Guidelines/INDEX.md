@@ -9,18 +9,19 @@ Filename pattern: `GL-NNN-<title>.md`.
 | GL | Title | Description |
 |---|---|---|
 | GL-001 | [[GL-001-file-naming-conventions]] | Kebab-case rules, ISO date prefix on date-driven files, slug rules, image filename pattern. |
-| GL-002 | [[GL-002-frontmatter-conventions]] | YAML frontmatter field schemas for all 8 entity types, typing rules, foreign-key convention. Aligns with [[SOP-002-convert-mypka-to-sqlite]]. |
+| GL-002 | [[GL-002-frontmatter-conventions]] | YAML frontmatter field schemas, including personal tasks, typing rules, and foreign-key convention. Aligns with [[SOP-002-convert-mypka-to-sqlite]]. |
 
 | GL-004 | [[GL-004-task-resource-linking]] | Hoe taken gelinkt worden aan resources (SOPs, Workstreams, Guidelines, My Life, session logs, journal entries). |
 | GL-010 | [[GL-010-pka-modeling-principles]] | PKA-modelleringsprincipes (custom, hernummerd van GL-003). |
 | GL-011 | [[GL-011-contactenbeheer]] | Google Contacts als SSOT voor basiscontacten. PKM/CRM voor rijke context. Apparaatinstellingen vastgelegd. |
-| GL-012 | [[GL-012-pkm-vs-todoist]] | Wanneer gaat iets van Todoist naar PKM? Beslisregel: actie = Todoist, duurzame kennis = PKM. Hermes vraagt altijd bevestiging. |
+| GL-012 | [[GL-012-pkm-vs-todoist]] | myPKA is taak-SSOT; Todoist is een optionele afgeleide uitvoeringsprojectie. |
 | GL-013 | [[GL-013-interactie-enkelvoudige-keuzes]] | Keuzes altijd als A/B/C met vetgedrukte letter, zonder uitzondering. |
 | GL-014 | [[GL-014-todoist-taakformat]] | Todoist-taakformat: `actie > titel ⏰ tijd`, prioriteit alleen native veld, bronmateriaal-link, projectroutering. |
 | GL-015 | [[GL-015-agent-model-tier-review]] | Modelkeuze per specialist (Opus/Sonnet/Haiku) en reviewcadans: kwartaal-vangnet + event-triggers (nieuw model, limieten, kwaliteit). |
 | GL-016 | [[GL-016-beslis-en-waarschuwingsblokken]] | Beslissingen/blokkades/gates altijd als apart 🔶/🔴/✅-blok met unieke 3-tekens-code, gestapeld aan het einde van het antwoord. |
 | GL-017 | [[GL-017-mcp-service-register]] | Portable SSOT voor MCP-services, endpoints, secretvariabelen, risicoklassen en adaptercontracten. |
 | GL-018 | [[GL-018-integratie-en-software-register]] | Portable inventaris van MCP's, API's, webhooks, databronnen en software met gewenste status, kosten en veilige verificatieprofielen. |
+| GL-019 | [[GL-019-persoonlijke-taakarchitectuur]] | GTD-statussen, Eisenhower, datumsemantiek, hiërarchie en wachten-op voor persoonlijke taken. |
 
 | GL-003 | [[GL-003-design-system]] | Multi-merk design-system hub (cold-start brand-rule + erf-model). Verwijst naar de losse merkbestanden in `GL-003-brands/` (ADC Regio Oost, DartsCoaching.nl, Dart Buddies, Van Gewoon Sander) — geen van deze bevat nog echte waarden. Geinstalleerd via het Designer Pack. |
 

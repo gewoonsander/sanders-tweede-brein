@@ -1,7 +1,7 @@
 ---
 run: 2026-08-14T10:30:00+02:00
 auto_verplaatst: 47
-wacht_op_sander: 391
+wacht_op_sander: 83
 ---
 
 # Wekelijkse inboxronde — 2026-08-14
@@ -60,55 +60,36 @@ Alle uit `~/Downloads`, incl. 4 bestanden uit de submap `19 juli • 2 augustus 
 - 2026-07-08_ADC_winmau-benelux-open-2026-rijnvogels-poster_v01.png → 03_ADC_Regio_Oost/07_Beeldbank/ (hernoemd, was "...Rijnvogels.png")
 - 2026-07-08_ADC_winmau-benelux-open-2026-twentse-ros-poster_v01.png → 03_ADC_Regio_Oost/07_Beeldbank/ (hernoemd, was "...Twentse Ros.png")
 
-## Wacht op jouw beoordeling (391)
+## Wacht op jouw beoordeling (83+overige kleine restjes)
 
-### Downloads — resterend (45)
+*Interactieve ronde op 2026-08-14: 12 bestanden herkend en verplaatst (D.T. Irritant-content, verbouwing-foto's, persoonlijke items) naar `06_Persoonlijk/07_Beeldbank`; 2 bevestigde duplicaten en 3 rommelbestanden verwijderd na bevestiging. Resterende lijst hieronder is bijgewerkt.*
 
-- 2026-07-09_DC_darts-coaching-scorecard-met-spelerstatistieken_v01.jpeg — reden: twijfel-categorie, mogelijk gevulde spelerstatistieken (persoonlijk)
+*Aanvulling 2026-08-14: 6 financiële documenten (belastingaangiftes, Hornbach/IKEA-bonnen, 2 DigitaalArchief-exports) op verzoek verplaatst naar de nieuw-gedocumenteerde `07_Financieel`-map op de Mediahub.*
+
+
+### Downloads — resterend (21)
+
+- 2026-07-09_DC_darts-coaching-scorecard-met-spelerstatistieken_v01.jpeg — reden: twijfel, mogelijk gevulde spelerstatistieken (persoonlijk)
 - 2026-07-10_DC_afsluiting-huiswerk-dartstraining_v01.png — reden: twijfel, coachingformulier mogelijk met persoonlijke input
 - 2026-07-10_DC_check-in-formulier-voor-dartstraining_v01.png — reden: twijfel, formulier mogelijk met persoonlijke input
 - 2026-07-10_DC_terugblik-coachingvragenlijst-vorige-keer_v01.png — reden: twijfel, vragenlijst mogelijk met persoonlijke input
 - 2026-07-10_DC_thema-van-vandaag-verkennen-zonder-beperkingen_v01.png — reden: twijfel, coachingformulier mogelijk met persoonlijke input
-- 2026-07-13_90_puzzel-uit-boek-boerenslimheid_v01.jpg — reden: twijfel-categorie, code "90" niet in vaste lijst DC/DB/ADC/VGS/GGT/PRV
-- 2026-07-14_90_iphone-frame-template_v01.png — reden: twijfel-categorie, code "90"
-- 2026-07-14_90_iphone-mockup-template-algemeen_v01.png — reden: twijfel-categorie, code "90"
-- 2026-07-15_90_elektrische-installatie-paneel-technisch_v01.heic — reden: twijfel-categorie, code "90" (mogelijk GGT/PRV verbouwing)
-- 2026-07-15_90_elektrische-schakelkast-installatie_v01.heic — reden: twijfel-categorie, code "90"
-- 2026-07-15_90_solis-zonnepaneel-inverter-specificaties_v01.heic — reden: twijfel-categorie, code "90"
+- 2026-07-14_90_iphone-frame-template_v01.png — reden: twijfel, code "90", generiek design-template — onduidelijk of merk-specifiek
+- 2026-07-14_90_iphone-mockup-template-algemeen_v01.png — reden: twijfel, code "90", generiek design-template
 - 2026-07-17_DC_dartcoach-met-scorebord-en-statistieken_v01.jpeg — reden: twijfel, bevat "statistieken", mogelijk persoonlijke spelerdata
-- 2026-07-25_90_opbergrek-met-metalen-profielen-en-gaten_v01.jpeg — reden: twijfel-categorie, code "90"
 - 2026-07-25_PRV_gevonden-betaalpas-met-persoonsgegevens_v01.jpeg — reden: financieel/gevoelig, gevonden betaalpas met persoonsgegevens
 - 2026-07-25_VGS_gewoon-sander-beveiligingsprobleem-foutmelding_v01.jpeg — reden: gevoelig, mogelijk beveiligingsgerelateerde technische inhoud
-- 2026-07-31_90_belastingdienst-aangifte-2025_v01.jpeg — reden: financieel/gevoelig, belastingaangifte
-- 2026-07-31_90_belastingdienst-aangiftebericht-2025_v01.jpeg — reden: financieel/gevoelig, belastingaangifte
 - 2026-08-03_PRV_whatsapp-video_v01.mp4 — reden: twijfel, geen inhoudsbeschrijving in bestandsnaam
-- 2026-08-05_90_hornbach-bouwmarkt-rekening-douchecabine_v01.jpeg — reden: financieel/gevoelig, aankoopbon
 - 2026-08-05_PRV_whatsapp-video_v01.mp4 — reden: twijfel, geen inhoudsbeschrijving
-- 2026-08-06_90_sportcompetitie-beker-poule-stand_v01.jpeg — reden: twijfel-categorie, code "90"
 - 2026-08-07_PRV_whatsapp-video-opname_v01.mp4 — reden: twijfel, geen inhoudsbeschrijving
-- 2026-08-08_90_dartstoernooi-promotie-koppel-darttoernooi_v01.jpeg — reden: twijfel-categorie, code "90"
-- 2026-08-08_90_ikea-bestelling-bevestiging_v01.jpeg — reden: financieel/gevoelig, bestelbevestiging
 - 2026-08-08_DC_dartcoaching-prestatie-analyse_v01.jpeg — reden: twijfel, "prestatie-analyse" mogelijk persoonlijke data
-- ChatGPT.dmg — reden: geen media-bestand (installer, 600MB), mogelijk overbodig
-- DigitaalArchief-1208564 (1).zip — reden: financieel/gevoelig, onbekende archiefinhoud + mogelijk duplicaat van DigitaalArchief-1208564.zip
-- DigitaalArchief-1208564.zip — reden: financieel/gevoelig, onbekende archiefinhoud
-- DigitaalArchief-1259545.zip — reden: financieel/gevoelig, onbekende archiefinhoud
-- Jaimy Melchels.jpeg — reden: twijfel-categorie, geen pet af te leiden uit bestandsnaam
-- Marc Vleghert.jpeg — reden: twijfel-categorie, geen pet af te leiden
-- Niels Haverdil.jpeg — reden: twijfel-categorie, geen pet af te leiden
-- Niels van Zanten.jpeg — reden: twijfel-categorie, geen pet af te leiden
-- Ontwerp zonder titel.zip — reden: twijfel-categorie, onbekende inhoud
-- Terry Lenting.jpg — reden: twijfel-categorie, geen pet af te leiden
-- WhatsApp Audio 2026-07-07 at 18.28.50.opus — reden: twijfel-categorie, geen pet/inhoud af te leiden
-- WhatsApp Image 2026-07-24 at 13.20.37.jpeg — reden: twijfel-categorie, geen pet af te leiden
-- WhatsApp Image 2026-08-03 at 09.17.33.jpeg — reden: twijfel-categorie, geen pet af te leiden
-- WhatsApp Image 2026-08-06 at 18.12.25 (1).jpeg — reden: twijfel-categorie + mogelijk duplicaat van gelijknamig bestand zonder "(1)"
-- WhatsApp Image 2026-08-06 at 18.12.25.jpeg — reden: twijfel-categorie, geen pet af te leiden
-- WhatsApp Image 2026-08-06 at 21.45.04 (1).jpeg — reden: twijfel-categorie + mogelijk duplicaat van gelijknamig bestand zonder "(1)"
-- WhatsApp Image 2026-08-06 at 21.45.04.jpeg — reden: twijfel-categorie, geen pet af te leiden
-- WhatsApp Video 2026-08-07 at 18.19.37.mp4 — reden: twijfel-categorie, geen pet/inhoud af te leiden
-- mypka-scaffold-latest.zip — reden: geen media-bestand (code scaffold)
-- test-rename.jpeg — reden: mogelijk testbestand/rommel, ter bevestiging
+- Ontwerp zonder titel.zip — reden: twijfel, onbekende inhoud
+- WhatsApp Audio 2026-07-07 at 18.28.50.opus — reden: twijfel, geen pet/inhoud af te leiden
+- WhatsApp Image 2026-07-24 at 13.20.37.jpeg — reden: twijfel, geen pet af te leiden
+- WhatsApp Image 2026-08-03 at 09.17.33.jpeg — reden: twijfel, geen pet af te leiden
+- WhatsApp Image 2026-08-06 at 18.12.25.jpeg — reden: twijfel, geen pet af te leiden (duplicaat al opgeruimd)
+- WhatsApp Image 2026-08-06 at 21.45.04.jpeg — reden: twijfel, geen pet af te leiden (duplicaat al opgeruimd)
+- WhatsApp Video 2026-08-07 at 18.19.37.mp4 — reden: twijfel, geen pet/inhoud af te leiden
 
 ### Team Inbox (root) (3)
 
@@ -122,15 +103,17 @@ Alle uit `~/Downloads`, incl. 4 bestanden uit de submap `19 juli • 2 augustus 
 - 9146F465-3724-4AD9-98A5-2A0ED9F7965D 2026-08-11 om 19.10.49.food.md — reden: tekst/braindump voor Penn (voedingslogboek-item)
 - A54B9F9C-2DB0-4F19-9BD7-CCE7F1CEED3C 2026-08-11 om 19.02.12.food.md — reden: tekst/braindump voor Penn (voedingslogboek-item)
 
-### Team Inbox/Documents (340)
+### Team Inbox/Documents (83)
 
-Dit is een grote, al langer bestaande archiefmap (facturen, belastingaangiftes, contracten, coachingdossiers, spelersdata, medische/adviesrapporten, presentaties, templates) — géén verse weekdrop. Vrijwel niets hierin is "duidelijk foto/video/audio/design-bestand zonder gevoelige inhoud", dus de hele map valt buiten de automatische grens van deze onbewaakte run. Volledige bestandslijst is niet 1-op-1 uitgeschreven hier (340 items) — zie `ls "Team Inbox/Documents"` voor de exacte lijst. Grove indeling op basis van bestandsnaam:
+Interactieve SOP-013-sessie op 2026-08-14: 257 bestanden herkend en verplaatst (financieel → 07_Financieel, ADC/RDB-teambeheer → 03_ADC_Regio_Oost, DartsCoaching-materiaal → 01_Dartscoaching, DartBuddies/Gezinshuis/huis-gerelateerd/persoonlijke fitness-ebooks → hun respectievelijke mappen). Resterend (83) valt in deze groepen:
 
-- ~75 bestanden: financieel/gevoelig (facturen, KPN, Amazon, Versio, Adobe, WPMU-DEV, GoDaddy, Temu, AliExpress, G Suite, MailBlue, eBoekhouden, hollandsnieuwe, belastingaangiftes)
-- ~24 bestanden: spelers-/teambeheerdata (CSV/xlsx/numbers-exports met persoonsgegevens van dartsspelers)
-- ~7 bestanden: losse foto's met hash-bestandsnaam (geen categorie of context af te leiden)
-- ~6 bestanden: contracten/juridisch (VOF-contract, overeenkomsten)
-- ~2 bestanden: medisch/persoonlijk gevoelig (adviesrapport, patiëntbericht, interessetest)
-- Resterende ~226 bestanden: zakelijke werkdocumenten en cursusmateriaal (DartsCoaching/DartBuddies/ADC presentaties, templates, offertes, reflectietools, e-books) — geen van allen media in de zin van deze automatische run; horen bij een interactieve SOP-013-sessie of Werkarchief-triage, niet bij deze headless ronde.
-
-Reden voor de hele map: financieel/gevoelig | twijfel-categorie | tekst/document (geen media) — vereist interactieve beoordeling met Sander (en voor sommige stukken mogelijk Penn/Atlas).
+- **Contracten** (2): Contract KVK.pdf, 20260113 VOF contract Dartscoaching.nl Sander Rik en Joppe getekend.pdf
+- **Wachtwoorden** (1): Wachtwoorden DartsCoaching.xlsx — hoort niet op Mediahub, eerder in een wachtwoordmanager
+- **Medisch/persoonlijk gevoelig** (4): adviesrapport Mevr. M. van Ockenburg-Zwaan.pdf, patiëntbericht ZD201854219.pdf, MS-11276-20021009-Mark.pdf, Ockenburg S L van - Interessetest SK123.pdf
+- **Coaching-cliëntdossiers (Marc Vleghert)** (5): Intake, Coachgesprek x2, Marc_Vleghert_Coachdossier_v1.md, 20251211 voorstel coaching M Vleghert (2 bestanden)
+- **Gewoon Thuis / Albero — cliëntgerelateerd** (4): Doorstroom Ageeth Gerritsen (2 bestanden), Albero_Ondersteuningsplan_Presentatie.pptx, Kwaliteitsdocument Albero Zorggroep Intranet.pdf
+- **12x MD-gecodeerde PDF's + 1x UMD** — onbekende herkomst, niet te classificeren zonder inhoud te lezen
+- **8 hash-genaamde foto's** (UUID-stijl bestandsnamen) — waarvan 3 al eerder verwerkt in het voedingslogboek (bronbestand nooit opgeruimd)
+- **5x Label_1(.pdf/(1-4).pdf) + Verzendlabels + retouretiket** — verzendlabels, vermoedelijk wegwerpbaar maar niet zomaar verwijderd
+- **2x Naamloos(.pdf/document.pdf) + getDocument.pdf + servlet.pdf + blz 7.pdf + test.pdf** — nietszeggende bestandsnamen, inhoud onbekend
+- **Overig, elk apart onduidelijk**: 0240515 care cooling 2165.pdf, 1106-26119580.pdf, 2167_5_20240622.pdf, 240508 De Rots Putten 2164.pdf, 9664708206934897-16/17/18.pdf, ACFrOgCjq4qw...==.pdf (Gmail-bijlage-stijl naam), 77362e3330ae9511a58eb09cae86cfdc.csv, 20251222_export_Adresboek.csv (adresboek-export — mogelijk veel persoonsgegevens), 20260309 kopers boek darttactiek.csv, ERD met gekleurde entiteiten.pdf, Funnelstructuur.docx, H5 1500-1600 Tijd van ontdekkers en hervormers.pdf, Huiswerk XL 'dit vindt mijn familie van mij'.pdf, Kopie van 1DS StoryBoard Template.pdf, Learn-How-To-Start-Your-Own-High-Profit-Marketplace.pdf, Mega-WordPress-Cheat-EN.pdf, Routebeschrijving.pdf, Scherm­afbeelding 2025-01-03.pdf, Verzendlijst Plug&Pay - bestellingen.csv, Videoreeks_backup_V02.pdf, Werkmap1.csv, dick_van_dijk_artikel.txt, divi-machine-linked-posts.pdf, ne-fr-step-by-step-manual-import-shipments.pdf, tekst-2725CDDF5AE1-1.txt, De_droom_die_veranderde_filmscript.docx, Dartpraat transcript.txt, BORD module.pdf

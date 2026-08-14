@@ -13,7 +13,7 @@ tags:
 
 ## What they do
 
-Boekhoudprogramma dat sinds medio 2026 e-Boekhouden.nl vervangt voor [[gewoon-sander]] (inbegrepen bij [[bart]] / VMB Advies). Zie [[Deliverables/2026-06-28-jortt-api-research]] voor de API-verkenning (OAuth 2.0, read-only connector haalbaar).
+Boekhoudprogramma dat sinds medio 2026 e-Boekhouden.nl vervangt voor [[gewoon-sander]] (inbegrepen bij [[bart]] / VMB Advies). Zie [[Deliverables/2026-06-28-jortt-api-research]] voor de API-verkenning en [[2026-08-14-jortt-mcp-toegangscheck]] voor de officiële MCP-route.
 
 ## How we work together
 
@@ -26,3 +26,5 @@ Boekhoudprogramma dat sinds medio 2026 e-Boekhouden.nl vervangt voor [[gewoon-sa
 ## Notes
 
 Zie [[abonnementen]] voor de kostenregel (inbegrepen bij VMB Advies, geen los abonnement).
+
+Jortt biedt een officiële read-only MCP-server op `https://mcp.jortt.nl/mcp`. Beide administraties hebben het vereiste MKB-plan. De nog te verifiëren blokkade is Sanders gebruikersrol per administratie: alleen een Beheerder kan externe applicaties en API-sleutels beheren; gewone inhoudelijke rechten zijn afzonderlijk begrensd.

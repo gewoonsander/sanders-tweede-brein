@@ -24,6 +24,11 @@ Genoeg financiële ruimte om te doen wat er toe doet zonder voortdurend over gel
 
 Financiën als scorekaart of statussymbool. Winstoptimalisatie ten koste van bijdrage of relaties. Bij twijfel: bijdrage gaat vóór financiën.
 
+## Giften en donaties
+
+- [[world-vision-nederland]]
+- [[muziekvereniging-de-volharding-huissen]]
+
 ---
 
 ## Digitale accounts & assets

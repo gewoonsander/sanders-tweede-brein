@@ -30,8 +30,11 @@ Filename pattern: `SOP-NNN-<title>.md`. See [[GL-001-file-naming-conventions]] f
 | SOP-018 | [[SOP-018-registreer-mcp-service-bij-agent-runtime]] | Daedalus | Een geregistreerde MCP-service veilig, idempotent en zonder secretduplicatie aansluiten op een agentruntime. |
 | SOP-019 | [[SOP-019-controleer-integraties-en-software]] | Daedalus | Verwachte integraties vergelijken met secretvrije lokale of handmatige observaties en iedere afwijking een concrete vervolgactie geven. |
 | SOP-020 | [[SOP-020-losstaand-deliverable-archiveren]] | Hermes (beoordeelt) + Sander (keurt goed) | Vijf archiveercriteria voor losstaande Deliverables (geen eigenaartaak) en het 30-dagen-signaal voor "nooit opgevolgd". Uitgevoerd binnen [[WS-008-deliverables-en-projecten-audit]]. |
+| SOP-021 | [[SOP-021-audit-pkm-graafhygiene]] | Atlas (analyse) + Hermes (opvolging) + Sander (goedkeuring) | Alleen-lezen audit van geïsoleerde notities, gebroken/dubbelzinnige links, ontbrekende bijlagen en zwakke INDEX-verbindingen; nooit automatisch opschonen. |
+| SOP-022 | [[SOP-022-verwerk-persoonlijke-taak]] | Hermes | Persoonlijke taak capturen, verduidelijken, koppelen, plannen/delegeren, reviewen en sluiten. |
+| SOP-023 | [[SOP-023-synchroniseer-persoonlijke-taak-naar-todoist]] | Daedalus | Canonieke myPKA-taak idempotent naar Todoist projecteren en gebeurtenissen gecontroleerd terugverwerken. |
 
-*Reserved (genuinely open for future agents):* SOP-020+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
+*Reserved (genuinely open for future agents):* SOP-024+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
 
 ## How to add a new SOP
 

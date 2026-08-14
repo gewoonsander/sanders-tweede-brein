@@ -113,7 +113,7 @@ Each approved proposal goes to its named implementer, who makes the change (clai
 
 ### Step 6 - Atlas: mypka.db regen
 
-After the approved subset has landed, Atlas regenerates the SQLite mirror per [[SOP-002-convert-mypka-to-sqlite]] so the derived index reflects the new framework state. Markdown is canonical; the DB is downstream.
+After the approved subset has landed, Atlas regenerates the SQLite mirror per [[SOP-002-convert-mypka-to-sqlite]] so the derived index reflects the new framework state. Markdown is canonical; the DB is downstream. Atlas then runs the Cockpit `detect-gaps.py` probe. Its roster parity check must confirm that active specialist contracts and active `agents` rows match exactly. This monthly/on-demand retro check is the periodic backstop; every individual hire already runs the same check immediately via [[SOP-001-how-to-add-a-new-specialist]] §9.
 
 ### Step 7 - Hermes: session-log the retro
 

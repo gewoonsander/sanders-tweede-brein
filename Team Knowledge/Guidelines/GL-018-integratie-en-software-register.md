@@ -448,7 +448,7 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
       ],
       "dependencies": [],
       "canonical_reference": "GL-017-mcp-service-register",
-      "next_action": "Bevestig periodiek dat de actuele herstelkopieën aanwezig zijn.",
+      "next_action": "Behouden; bevestig periodiek dat de actuele herstelkopieën aanwezig zijn. Verlengbesluit bevestigd door Sander op 2026-08-14.",
       "data_role": "vault",
       "sync_direction": "none",
       "canonical_records": [],

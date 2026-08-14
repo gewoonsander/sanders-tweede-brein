@@ -22,11 +22,12 @@ Haal vandaag's verjaardagen op via Google Calendar (`eventType: BIRTHDAY`). Voor
 - Nooit zelf iets versturen — alleen voorstellen, Sander verstuurt zelf.
 - Geen verjaardagen vandaag: sla deze stap stilzwijgend over, geen melding nodig.
 
-### Stap 3 — Open taken vandaag
-Haal taken op via Todoist die vandaag vervallen of als prioriteit zijn gemarkeerd. Groepeer per project indien meer dan 5 taken. Als er niets staat: meld dat expliciet.
+### Stap 3 — Open persoonlijke taken vandaag
+Lees de canonieke taken uit `PKM/Tasks/` conform [[GL-019-persoonlijke-taakarchitectuur]]. Toon: `scheduled` voor vandaag, echte `due_date` vandaag of verlopen, beschikbare belangrijke `next`-acties en `waiting`-taken waarvan `follow_up_date` vandaag of verlopen is. Gebruik Eisenhower voor rangschikking en groepeer per Project of Key Element bij meer dan 5 taken. Todoist is alleen een afgeleide controleweergave; een verschil wordt gemeld en niet stilzwijgend als waarheid overgenomen. Als er niets staat: meld dat expliciet.
 
 ### Stap 4 — Team Inbox check
-Controleer of er bestanden of notities in `Team Inbox/` staan die nog niet verwerkt zijn. Meld wat er ligt en bied aan het te routeren naar de juiste specialist.
+Bestaat `Team Inbox/_wekelijkse-inboxronde-laatste-run.md` (geschreven door de wekelijkse `inbox-verwerken`-automatisering, zie [[SOP-013-inboxen-verwerken]])? Meld dan compact de wachtrij daaruit: hoeveel automatisch verplaatst, hoeveel wachten op beoordeling en waarom (financieel/gevoelig, twijfel, mogelijk duplicaat, tekst voor Penn). Bied aan de wachtrij nu samen door te nemen.
+Bestaat dat bestand niet (nog geen automatische run geweest): val terug op een live check van `Team Inbox/` en meld wat er ligt.
 
 ### Stap 5 — ADC-verslagen klaar voor review
 Controleer `ADC/Verslagen/` op bestanden met status `CONCEPT — ter review door Sander` (gegenereerd door de scheduled routine `adc-oost-verslag-ochtend` of handmatig door Hermes). Voor elk gevonden concept: meld toernooi, locatie, datum en winnaar in één regel. Geen concepten gevonden: sla deze stap stilzwijgend over, geen melding nodig.
@@ -38,7 +39,7 @@ Controleer losstaande Deliverables (geen eigenaartaak, zie [[GL-004-task-resourc
 Vraag: "Wat wil je vandaag bereiken?" — één open vraag. Als Sander antwoordt, geeft Penn het door als journal-notitie voor vandaag. Als Sander zegt "overslaan" of niets invult, ga verder.
 
 ### Stap 8 — Tijdsblokken voorstellen (optioneel)
-Als taken uit stap 3 een tijdsinschatting (⏰, zie [[GL-014-todoist-taakformat]]) en een datum van vandaag hebben, stel concrete tijdsblokken voor om ze in de agenda te zetten. Nooit automatisch aanmaken — altijd eerst voorleggen en op akkoord wachten voor je iets in Google Calendar zet. Zijn er geen taken om te blokken: sla deze stap stilzwijgend over, geen melding nodig.
+Als taken uit stap 3 `estimated_minutes` en een `scheduled_date` van vandaag hebben, stel concrete tijdsblokken voor om ze in de agenda te zetten. Nooit automatisch aanmaken — altijd eerst voorleggen en op akkoord wachten voor je iets in Google Calendar zet. Zijn er geen taken om te blokken: sla deze stap stilzwijgend over, geen melding nodig.
 
 ## Regels
 

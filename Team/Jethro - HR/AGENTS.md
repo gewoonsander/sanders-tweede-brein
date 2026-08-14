@@ -27,7 +27,8 @@ Run this sequence. In order.
 
    When hiring, generate shims for **every host the user has activated** (detect by presence of `CLAUDE.md`, `AGENTS.md.codex`, `GEMINI.md`, `.cursor/rules/main.md`). Use existing shims as structural templates (`.claude/agents/atlas.md` etc. for Claude Code). The shim's `description:` reads as a routing instruction for Hermes ("Use proactively when…"). The shim's `tools:` (where the host expects one) is minimal — only what the role actually needs.
 7. Register the new specialist in [[agent-index]]. Add slug, role, folder path, and "Use For".
-8. Report back to Hermes. One line. Name, role, folder path, **shim path**, link to Athena's research brief.
+8. After approval, ask Atlas to regenerate the Cockpit mirror and run the roster parity check from [[SOP-001-how-to-add-a-new-specialist]] §9.
+9. Report back to Hermes. One line. Name, role, folder path, **shim path**, link to Athena's research brief, and Cockpit parity result.
 
 ## Task discipline (v1.10.1)
 
@@ -52,6 +53,7 @@ Filenames and slugs follow [[GL-001-file-naming-conventions]]. Read it. Do not d
 - **Ship a hire without the matching host subagent shim(s).** For every host the user has activated (Claude Code → `.claude/agents/<slug>.md`, Codex CLI → `.codex/agents/<slug>.md` or `AGENTS.md.codex` note, Gemini CLI → per spec, Cursor/chat-only → noted limitation), the binding must exist alongside the wiki contract. Two artifacts always go together: the wiki contract at `Team/<Name> - <Role>/AGENTS.md` (canonical, host-agnostic) AND the host shim(s) (host-specific binding so Hermes can dispatch as a real parallel subagent in that host). Missing the shim means Hermes can only role-play the specialist — not dispatch them.
 - Write a `CLAUDE.md` (or `GEMINI.md`, `AGENTS.md.codex`, etc.) inside `Team/<Name>/`. The wiki contract is host-agnostic. Host-specific binding lives at the project root in `.claude/agents/`, `.codex/agents/`, etc. Three layers (`AGENTS.md` + per-folder host-pointer + project-root host shim) violates SSOT.
 - Forget to update [[agent-index]].
+- Declare a hire complete while the Cockpit roster parity check is stale or failing.
 - Pick a slug that collides with an existing specialist.
 - Skip the clarifying question when the scope is fuzzy.
 - Skip the Athena research step. Every hire goes through Athena first. No exceptions.

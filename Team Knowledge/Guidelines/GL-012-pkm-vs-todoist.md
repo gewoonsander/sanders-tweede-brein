@@ -1,47 +1,38 @@
 ---
 id: GL-012
-title: PKM vs Todoist — beslisregel
+title: myPKA en Todoist — bron en projectie
 owner: Hermes
 created: 2026-06-19
-tags:
-  - todoist
-  - pkm
-  - workflow
+updated: 2026-08-14
+tags: [todoist, pkm, workflow]
 ---
 
-# GL-012 — PKM vs Todoist: wanneer gaat iets van actie naar kennis?
+# GL-012 — myPKA en Todoist: bron en projectie
 
-## De vuistregel
+## De regel
 
-| Als het een **actie** is | → Todoist |
-|---|---|
-| Als het **kennis of context** wordt | → PKM |
+myPKA is de SSOT voor persoonlijke taken, duurzame kennis, broncontext, status en geschiedenis. Todoist is een optionele, vervangbare uitvoerings- en herinneringsprojectie.
 
-## De trigger
+Een persoonlijke actie ontstaat eerst als canonieke taak in `PKM/Tasks/` volgens [[GL-019-persoonlijke-taakarchitectuur]]. Alleen daarna mag zij via [[SOP-023-synchroniseer-persoonlijke-taak-naar-todoist]] worden geprojecteerd. Verwijdering, uitval of beëindiging van Todoist mag geen canonieke informatie wissen.
 
-Het moment dat Hermes iets duurzaams produceert — onderzoek, een document, een leesschema, aantekeningen, geüploade tekst — gaat dat naar de PKM. De Todoist-taak blijft bestaan, maar verwijst via de description naar het PKM-bestand.
+## Bronplicht bij e-mail
 
-## Werkwijze
+Iedere myPKA-taak, kennisnotitie of documentregistratie die uit e-mail ontstaat bevat een klikbare Markdown-link naar de oorspronkelijke Gmail-thread.
 
-Hermes beslist **niet zelf** wanneer iets naar de PKM gaat. Hij legt het voor op het moment dat er iets substantieels ontstaat:
+- Gebruik de exacte connector-URL wanneer beschikbaar; reconstrueer hem niet handmatig.
+- Link naar de volledige thread en houd de link bruikbaar na archivering.
+- Het dashboard rendert de link als zichtbare bronactie.
+- Gmail blijft SSOT voor correspondentie; een zelfstandig document zoals een factuur-PDF krijgt een eigen canonieke archieflocatie.
+- Zonder betrouwbare thread-URL blijft verwerking geblokkeerd en wordt dit aan Sander gemeld.
 
-> "Ik heb de achtergrondinfo gevonden. Wil je dat ik dit opsla in je tweede brein?"
+Leesbaar format: `Bron: [Open de oorspronkelijke e-mail in Gmail](<thread-URL>)`.
 
-Sander kiest ja of nee. Bij ja: Hermes schrijft het bestand naar het juiste PKM-pad en voegt een link toe aan de Todoist-taak.
+## Routing
 
-## Voorbeelden
+- actie → canonieke `PKM/Tasks/`-taak;
+- duurzame kennis → passende PKM-entiteit;
+- zelfstandig document → `PKM/Documents/`-record plus canonieke bestandslocatie;
+- teamprocedure → `Team Knowledge/`;
+- Todoist → uitsluitend afgeleide projectie wanneer nuttig.
 
-| Situatie | Todoist | PKM |
-|----------|---------|-----|
-| "Bekijk boek Tommy de Krimpe" | ✅ p4 taak | ❌ |
-| Athena zoekt achtergrondinfo over het boek | ✅ taak blijft | ✅ research-note in `PKM/My Life/Topics/` |
-| Sander uploadt de tekst + wil leesschema | ✅ taak verwijst naar PKM | ✅ leesschema-document |
-| Sander denkt: "ooit wil ik X leren" | ✅ p4 taak | ❌ (tenzij actief onderzocht) |
-| Hermes maakt een richtlijn of SOP | ❌ | ✅ direct naar `Team Knowledge/` |
-
-## Pad-suggesties
-
-- Research → `PKM/My Life/Topics/<onderwerp>.md`
-- Boeken/leesschema's → `PKM/My Life/Topics/boeken/<titel>.md`
-- Projectdocumenten → `PKM/Documents/<project>/`
-- Team-kennis → `Team Knowledge/` (SOPs, Guidelines, Workstreams)
+Een taak wijst naar kennis en bronnen volgens [[GL-004-task-resource-linking]]. Bronnen krijgen geen terugwijzende taakvelden.

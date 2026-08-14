@@ -6,6 +6,8 @@
 
 **Tasks hold pointers to all resources needed to do the work. Resources never carry a back-pointer to a task. One-way: Task → Resource.**
 
+This applies both to internal team tasks under `Team Knowledge/tasks/` and personal tasks under `PKM/Tasks/`. Personal tasks use the typed fields defined in [[GL-002-frontmatter-conventions]] plus human-readable `[[wikilinks]]` under `## Context een klik verder`. A Project, Goal, Habit, Document, Person, Organization, Journal entry, or Deliverable never receives a `linked_tasks` back-pointer merely because a personal task references it.
+
 Resources, for the purpose of this Guideline:
 
 - **Deliverables** under `Deliverables/<YYYY-MM-DD-slug>/` (active) and `Deliverables/_archive/YYYY/MM/<original-folder>/` (archived).

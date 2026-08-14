@@ -28,6 +28,8 @@ from __future__ import annotations
 
 import sqlite3
 import sys
+import re
+import unicodedata
 from pathlib import Path
 
 # A module is described by the structures it needs and the consequence of each
@@ -229,6 +231,45 @@ def row_count(con, table):
         return None
 
 
+def slug_of(value):
+    """Mirror regen-mypka-db.py's stable specialist slug derivation."""
+    value = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+
+
+def active_contract_slugs(team_dir):
+    """Read only enough frontmatter to identify active Team contracts."""
+    slugs = set()
+    if not team_dir.is_dir():
+        return slugs
+    for folder in sorted(p for p in team_dir.iterdir() if p.is_dir()):
+        contract = folder / "AGENTS.md"
+        if not contract.is_file():
+            continue
+        text = contract.read_text(encoding="utf-8", errors="replace")
+        fm = text.split("---", 2)[1] if text.startswith("---") and text.count("---") >= 2 else ""
+        status_match = re.search(r"^(?:agent_status|status):\s*([^#\n]+)", fm,
+                                 flags=re.MULTILINE)
+        status = status_match.group(1).strip().strip("'\"") if status_match else "active"
+        if status == "active":
+            slugs.add(slug_of(folder.name.split(" - ", 1)[0]))
+    return slugs
+
+
+def active_db_agent_slugs(con):
+    try:
+        return {row[0] for row in con.execute(
+            "SELECT slug FROM agents WHERE agent_status = 'active'")}
+    except sqlite3.Error:
+        return set()
+
+
+def roster_parity(con, db_path):
+    expected = active_contract_slugs(db_path.resolve().parent / "Team")
+    actual = active_db_agent_slugs(con)
+    return sorted(expected - actual), sorted(actual - expected), len(expected), len(actual)
+
+
 def assess(con, mod, tables, views):
     """-> (status, [missing structure descriptions])."""
     missing = []
@@ -272,7 +313,7 @@ def main():
     print(f"  Database: {db_path}  (opened READ-ONLY)\n")
 
     symbols = {"OK": "[ OK     ]", "EMPTY": "[ EMPTY  ]", "MISSING": "[ MISSING]"}
-    n_missing = n_empty = 0
+    n_missing = n_empty = n_drift = 0
     for mod in MODULES:
         status, missing = assess(con, mod, tables, views)
         print(f"  {symbols[status]} {mod['name']}")
@@ -289,11 +330,27 @@ def main():
                   f"empty state. Populate via your ingest/regen.")
         print()
 
+    missing_agents, stale_agents, contract_count, db_count = roster_parity(con, db_path)
+    print("  Team roster parity")
+    if missing_agents or stale_agents:
+        n_drift += 1
+        print("  [ DRIFT  ] Active Team contracts and Cockpit agents do not match")
+        print(f"             active contracts: {contract_count}; active DB rows: {db_count}")
+        if missing_agents:
+            print(f"             missing from Cockpit: {', '.join(missing_agents)}")
+        if stale_agents:
+            print(f"             stale in Cockpit: {', '.join(stale_agents)}")
+        print("             fix: run scripts/regen-mypka-db.py, then this probe again.")
+    else:
+        print(f"  [ OK     ] {contract_count} active contract(s) match {db_count} active DB row(s)")
+    print()
+
     con.close()
 
     print("  Summary:")
     print(f"    {n_missing} module(s) MISSING backing structure")
     print(f"    {n_empty} module(s) present but EMPTY (will render empty state)")
+    print(f"    {n_drift} roster parity issue(s)")
     if n_missing:
         print("\n  To add the missing structures additively (no data loss):")
         print("    python3 install-extensions.py "

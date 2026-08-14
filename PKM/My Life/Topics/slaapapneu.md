@@ -6,7 +6,7 @@ tags:
   - slaapapneu
   - osas
   - rijnstate
-last_updated: 2026-06-16
+last_updated: 2026-08-14
 ---
 
 # Slaapapneu (OSAS)
@@ -54,6 +54,10 @@ Na de proefperiode: herevaluatie. Mogelijk retour KNO.
 | 17-04-2026 | Polikliniek KNO | [[helder]] | Verdenking OSA, polygrafie aangevraagd |
 | 10-06-2026 | Video consult LON | [[zaikova]] | Diagnose OSAS, Night Balance gestart |
 | 17-06-2026 | Polikliniek LON/Mediq | [[zaikova]] | Herevaluatie Night Balance (Rijnstate Elst, 13:00) |
+| 02-09-2026 | Polikliniek Longgeneeskunde (09:10) | [[rijnstate]] | Geplande eerste afspraak voor evaluatie slaapapneu/positietrainer |
+| 02-09-2026 | Consult longarts (10:00) | [[zaikova]] | Gepland vervolgconsult in Rijnstate Elst |
+
+De twee afspraken van 2 september staan als privéafspraken in Google Agenda. Alleen de starttijden waren in Mijn Rijnstate zichtbaar; in de agenda is daarom voorlopig 30 minuten per afspraak gereserveerd. De afspraak van 09:10 overlapt met het bestaande doelengesprek van 09:00–10:00.
 
 ## Verband met gewicht
 

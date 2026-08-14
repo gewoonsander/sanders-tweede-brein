@@ -89,6 +89,7 @@ Per entity, the required field is the one that names the thing:
 | Topic | `name` |
 | Key Element | `name` |
 | Document | `title` |
+| Personal task | `type`, `task_id`, `title`, `status`, `created`, `updated`, `key_element`, `owner`, `gtd_context`, `eisenhower`, `estimated_minutes` |
 
 Everything else is optional. A note with three frontmatter fields is fine. A note with twenty is also fine. The shape stays consistent.
 
@@ -323,6 +324,48 @@ Notes:
 - `renewal_trigger` is the date you want to be reminded to act. The actual `expiry_date` may be later.
 - `doc_type: inventory` - a living reference list (owned hardware, active software/subscriptions, etc.) that gets appended to over time, as opposed to a static single-purpose document. Distinct from a My Life Key Element: an inventory is a registry of things you have, not a permanent domain of life. When something looks like it belongs in Key Elements but is really "a list of stuff" (devices, tools, accounts), it goes here instead.
 - Body section conventions: `## Summary`, `## Key terms`, `## Notes`. Inventory-type documents may use their own internal table/section structure instead (they are living lists, not single-fact records).
+
+### Personal tasks - `PKM/Tasks/<status>/tsk-YYYY-MM-DD-NNN-<actie-slug>.md`
+
+```yaml
+---
+type: personal-task                       # required, literal value
+task_id: tsk-2026-08-14-001               # required, stable and globally unique
+title: Factuur leverancier betalen        # required, concrete action
+status: next                              # required: inbox | next | waiting | scheduled | someday | done | cancelled
+created: 2026-08-14                       # required
+updated: 2026-08-14                       # required
+key_element: financien                    # required, Key Element slug
+project:                                  # optional Project slug
+goal:                                     # optional Goal slug; must agree with carrier doctrine
+habit:                                    # optional Habit slug
+parent_task:                              # optional personal task_id
+owner: sander                             # required person/role slug
+delegated_to:                             # optional person/organization slug or stable label
+gtd_context: administratie                # required stable context slug
+eisenhower: important-urgent              # required: important-urgent | important-not-urgent | not-important-urgent | not-important-not-urgent
+estimated_minutes: 10                     # required positive integer
+start_date:                               # optional ISO date
+scheduled_date:                           # optional ISO date
+due_date:                                 # optional, only a real external deadline
+follow_up_date:                           # optional; required when status: waiting
+waiting_since:                            # optional; required when status: waiting
+source_type: gmail                        # optional: gmail | document | journal | conversation | other
+source_url:                               # optional URL; required for Gmail-derived tasks
+linked_documents: []                      # Document slugs
+linked_people: []                         # Person slugs
+linked_organizations: []                  # Organization slugs
+todoist_id:                               # optional derived-system identifier
+todoist_sync_status: not-synced           # not-synced | pending | synced | error | disabled
+---
+```
+
+Notes:
+- [[GL-019-persoonlijke-taakarchitectuur]] defines lifecycle, GTD, Eisenhower, date semantics, hierarchy, and waiting rules.
+- `key_element` is always required. `project`, `goal`, and `habit` are only populated when the relationship exists; never create a synthetic Project merely to house a task.
+- Foreign keys store stable slugs. `parent_task` stores the stable `task_id` because task files can move between status folders.
+- `source_url` must be a working Gmail thread URL for every Gmail-derived task.
+- Body sections: `## Gewenste uitkomst`, `## Eerstvolgende actie`, `## Context een klik verder`, optional `## Wachten op`, and append-only `## Geschiedenis`.
 
 ### Weekly reports (`type: weekly-report`) - `PKM/Weekly Reports/YYYY/MM/<slug>/metadata.md`
 

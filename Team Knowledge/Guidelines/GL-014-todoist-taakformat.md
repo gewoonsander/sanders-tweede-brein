@@ -12,7 +12,7 @@ created: 2026-07-01
 
 # GL-014 — Todoist: taakformat, prioriteit, assignee en bronmateriaal
 
-> **Elke agent die een Todoist-taak aanmaakt of bijwerkt leest dit.** Dit geldt voor taken die uit mailverwerking komen, maar ook voor taken die uit onderzoek, audio-transcripties of andere sessies ontstaan.
+> **Elke agent die een Todoist-projectie aanmaakt of bijwerkt leest dit.** De canonieke persoonlijke taak staat altijd eerst in myPKA; zie [[GL-012-pkm-vs-todoist]].
 
 ## Aanleiding
 
@@ -50,11 +50,15 @@ Voorbeeld: `klussen > Privékeuken leegmaken ⏰ 2 pomodoro's`
 - Geen persoon genoemd of onduidelijk wie het oppakt? Dan gaat het label `sander` erop — de verantwoordelijkheid ligt bij wie de taak aanmaakt totdat expliciet gedelegeerd wordt. Nooit een taak zonder persoons-label laten staan.
 - Dit hergebruikt het bestaande labelmechanisme (zie bijv. de `thomas`-taken voor gras en moestuin) — geen nieuw systeem, alleen consequent toegepast.
 
-### Verplichte einddatum
+### Datumprojectie
 
-- Elke taak krijgt bij aanmaak een specifieke dag (`dueDate`), ongeacht prioriteit.
-- Reden: alleen een taak met een datum kan tijdens `/dagstart` (stap 5, tijdsblokken voorstellen) als concreet tijdsblok op de agenda belanden. Een taak zonder datum verdwijnt in de ruis.
-- "Ooit-ideeën" zonder concreet moment horen niet als Todoist-taak thuis met een verzonnen datum — die horen in de PKM (zie [[GL-012-pkm-vs-todoist]]).
+Todoist ontvangt nooit een verzonnen deadline. Kies de zichtbare datum uit de canonieke taak:
+
+1. `scheduled_date` voor bewust geplande uitvoering;
+2. `follow_up_date` voor een wachtcontrolepunt;
+3. `due_date` wanneer alleen de echte externe deadline beschikbaar is.
+
+`start_date` bepaalt zichtbaarheid in myPKA en wordt niet automatisch als Todoist-deadline misbruikt. `someday` wordt standaard niet geprojecteerd.
 
 ### Pomodoro-registratie bij afronding
 
@@ -63,7 +67,7 @@ Voorbeeld: `klussen > Privékeuken leegmaken ⏰ 2 pomodoro's`
 
 ### Bronmateriaal (description)
 
-Elke taak die uit een concrete bron voortkomt, linkt naar die bron in de description:
+Elke projectie linkt in de description eerst naar de canonieke myPKA-taak en daarnaast naar concrete bronnen:
 
 | Bron | Format |
 |---|---|
@@ -74,16 +78,16 @@ Geen bron beschikbaar (bijv. een idee, een reminder)? Dan blijft de description 
 
 ### Afronding — het "actie-archief"-principe
 
-Zodra de taak wordt afgerond:
+Zodra de canonieke taak wordt afgerond:
 
-- Bronmateriaal dat niet langer nodig is: verwijderen.
-- Bronmateriaal dat bewaard moet blijven: verplaatsen naar het definitieve archief (`PKM/Documents/` of Mediahub, afhankelijk van het type — zie [[SOP-013-inboxen-verwerken]]).
+- Todoist wordt als afgeleide projectie gesloten.
+- Bronmateriaal dat bewaard moet blijven blijft of verhuist naar zijn definitieve canonieke archief (`PKM/Documents/` of Mediahub, afhankelijk van het type — zie [[SOP-013-inboxen-verwerken]]).
 
 Dit is de digitale versie van "papier weg of in de kast" en sluit aan bij het eenrichtings-principe uit [[GL-004-task-resource-linking]]: de taak wijst naar de bron, nooit andersom.
 
 ## Projectroutering
 
-Een taak landt **nooit** in de kale `Inbox` als de context bekend is. Route naar het juiste Todoist-project volgens dezelfde pet-indeling als [[SOP-013-inboxen-verwerken]]:
+Een projectie landt **nooit** in de kale `Inbox` als de context bekend is. Route op basis van de canonieke `key_element`- en `project`-koppeling; onderstaande tabel is alleen de huidige Todoist-weergave:
 
 | Context | Todoist-project |
 |---|---|
@@ -98,13 +102,15 @@ Een taak landt **nooit** in de kale `Inbox` als de context bekend is. Route naar
 
 ## Wanneer deze Guideline gelezen wordt
 
-- Elke keer dat een agent (Hermes, of een specialist die tijdens een sessie een Todoist-taak aanmaakt) een taak schrijft, bijwerkt of afsluit.
+- Elke keer dat Daedalus of een andere bevoegde specialist een canonieke myPKA-taak naar Todoist projecteert, bijwerkt of sluit.
 - Bij mailverwerking (SOP-013 en toekomstige mail-triage procedures).
 
 ## Cross-references
 
 - [[GL-004-task-resource-linking]] — eenrichtings-principe taak → resource, waar het archiveer-bij-afronding idee op voortbouwt.
 - [[GL-012-pkm-vs-todoist]] — beslisregel wanneer iets een Todoist-taak wordt vs. PKM-kennis.
+- [[GL-019-persoonlijke-taakarchitectuur]] — canonieke status, datums en prioriteit.
+- [[SOP-023-synchroniseer-persoonlijke-taak-naar-todoist]] — idempotente synchronisatie en conflictbeleid.
 - [[SOP-013-inboxen-verwerken]] — de pet-indeling die de projectroutering hierboven hergebruikt.
 - [[feedback_gmail_links]] — Gmail thread-link formaat.
 - `/dagstart` (stap 5) — gebruikt de tijdsinschatting en einddatum hieruit om tijdsblokken op de agenda voor te stellen.
