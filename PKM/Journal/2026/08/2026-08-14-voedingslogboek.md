@@ -4,7 +4,7 @@ type: food-log
 key_element: gezondheid
 goal: gewicht-aanpakken
 day_complete: true
-confirmed_at: 2026-08-14T20:21:56+02:00
+confirmed_at: 2026-08-14T20:25:03+02:00
 tags: [voeding, tracking]
 ---
 
@@ -51,5 +51,8 @@ tags: [voeding, tracking]
 
 - 2026-08-14T20:21:56+02:00 — complete: yes — source: close-session
 <!-- FOOD_AUDIT {"confirmed_at":"2026-08-14T20:21:56+02:00","complete":true,"source":"close-session"} -->
+
+- 2026-08-14T20:25:03+02:00 — complete: yes — source: close-session
+<!-- FOOD_AUDIT {"confirmed_at":"2026-08-14T20:25:03+02:00","complete":true,"source":"close-session"} -->
 
 <!-- FOOD_AUDITS -->
