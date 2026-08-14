@@ -1,3 +1,7 @@
+---
+key_element: groei
+---
+
 # PKM-graafhygiëne — nulmeting
 
 - Datum: 2026-08-14
