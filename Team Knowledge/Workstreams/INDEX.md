@@ -20,6 +20,7 @@ Filename pattern: `WS-NNN-<title>.md`. See [[GL-001-file-naming-conventions]] fo
 | WS-006 | [[WS-006-adc-facebook-verslag]] | Penn (schrijven) + Hermes (review) | Stijlregels en volledig invulbaar template voor het ADC Facebook-toernooiverslag in Sander's stijl. Stijllaag bovenop WS-004 — invoer via [[SOP-011-adc-toernooi-analyse]]. |
 | WS-007 | [[WS-007-voeding-vastleggen-en-controleren]] | Hermes + Penn + Daedalus + Atlas + Bezalel | Foto, spraak en tekst naar een compleet dagelijks voedingslogboek, mirror, dashboard en close-sessioncontrole. |
 | WS-008 | [[WS-008-deliverables-en-projecten-audit]] | Hermes + genoemde uitvoerder | Kwartaal-audit van `Deliverables/` en `PKM/My Life/Projects/`: Key Element-balans, gestrande projects, dubbel werk, en voorgestelde archivering van losstaande Deliverables via [[SOP-020-losstaand-deliverable-archiveren]]. Zusje van [[WS-005-team-retro-and-self-improvement-loop]], andere focus (output i.p.v. proces). |
+| WS-009 | [[WS-009-adc-facebook-vooraankondiging]] | Hermes (Dart Atlas datafetch) + Penn (schrijven) | Vóór een ADC-toernooi: aankondigingsbericht met oproep tot aanmelden en haakje naar de actuele koploper. Spiegelbeeld van WS-004 (verslag ná afloop). Automatische trigger via dezelfde 07:00-ochtendroutine. |
 
 ## When to write a new Workstream
 

@@ -32,8 +32,12 @@ Laat Pieter Post eerst Gmail doorzoeken op nieuwe bestelbevestigingen en logisti
 Bestaat `Team Inbox/_wekelijkse-inboxronde-laatste-run.md` (geschreven door de wekelijkse `inbox-verwerken`-automatisering, zie [[SOP-013-inboxen-verwerken]])? Meld dan compact de wachtrij daaruit: hoeveel automatisch verplaatst, hoeveel wachten op beoordeling en waarom (financieel/gevoelig, twijfel, mogelijk duplicaat, tekst voor Penn). Bied aan de wachtrij nu samen door te nemen.
 Bestaat dat bestand niet (nog geen automatische run geweest): val terug op een live check van `Team Inbox/` en meld wat er ligt.
 
-### Stap 6 — ADC-verslagen klaar voor review
-Controleer `ADC/Verslagen/` op bestanden met status `CONCEPT — ter review door Sander` (gegenereerd door de scheduled routine `adc-oost-verslag-ochtend` of handmatig door Hermes). Voor elk gevonden concept: meld toernooi, locatie, datum en winnaar in één regel. Geen concepten gevonden: sla deze stap stilzwijgend over, geen melding nodig.
+### Stap 6 — ADC-verslagen en vooraankondigingen klaar voor review
+Controleer `ADC/Verslagen/` op bestanden met status `CONCEPT — ter review door Sander` (gegenereerd door de lokale LaunchAgent `nl.gewoonsander.adc-verslag-ochtend` — dagelijks 07:00 op de Mac mini, niet zichtbaar in cloud-scheduled-tasks — of handmatig door Hermes). Twee types, beide relevant:
+- **Verslagen** (`facebook-verslag-[locatie]-YYYY-MM-DD.md`, zie [[WS-004-facebook-toernooi-verslag]]) — terugkijkend, gegenereerd de ochtend ná een gespeeld toernooi. Meld toernooi, locatie, datum en winnaar in één regel.
+- **Vooraankondigingen** (`facebook-vooraankondiging-[locatie]-YYYY-MM-DD.md`, zie [[WS-009-adc-facebook-vooraankondiging]]) — vooruitkijkend, gegenereerd dezelfde ochtend als een gepland toernooi. Meld locatie, aanvangstijd en datum in één regel — dit is met opzet urgent (toernooi is vaak diezelfde avond), dus dagstart is het moment om het direct voor te leggen.
+
+Geen concepten van geen van beide types gevonden: sla deze stap stilzwijgend over, geen melding nodig.
 
 ### Stap 7 — Deliverables die aandacht nodig hebben
 Controleer losstaande Deliverables (geen eigenaartaak, zie [[GL-004-task-resource-linking]]) ouder dan 30 dagen die niet aan één van de archiveercriteria uit [[SOP-020-losstaand-deliverable-archiveren]] voldoen. Meld ze in één regel per stuk (bestandsnaam + leeftijd). Dit is een melding, geen archivering — verplaats niets. Geen kandidaten: sla deze stap stilzwijgend over, geen melding nodig.

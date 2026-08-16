@@ -1,6 +1,6 @@
 **Datum toernooi:** 19 juli 2026
 **Venue:** Café Kafé, Doetinchem
-**Status: CONCEPT — ter review door Sander**
+**Status: GEPUBLICEERD — op Facebook geplaatst door Sander**
 
 ---
 

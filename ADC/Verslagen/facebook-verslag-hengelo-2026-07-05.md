@@ -1,6 +1,6 @@
 **Datum toernooi:** 5 juli 2026
 **Venue:** Het Twentse Ros, Hengelo
-**Status: CONCEPT — ter review door Sander**
+**Status: GEPUBLICEERD — op Facebook geplaatst door Sander**
 
 > Let op bij review: Dart Atlas toont voor deze speeldag geen data over hoge finishes (≥100 checkout) of snelste legs — deze informatie was niet beschikbaar/uitleesbaar in de bron. De 180's-statistiek is wel compleet en betrouwbaar. Pas het verslag aan als je deze cijfers uit een andere bron (bijv. de toernooileiding zelf) kan aanvullen.
 

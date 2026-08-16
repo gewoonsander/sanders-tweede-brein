@@ -1,6 +1,6 @@
 **Datum toernooi:** 27 juli 2026
 **Venue:** Dartclub de Rijnvogels, Driel
-**Status: CONCEPT — ter review door Sander**
+**Status: GEPUBLICEERD — op Facebook geplaatst door Sander**
 
 ---
 

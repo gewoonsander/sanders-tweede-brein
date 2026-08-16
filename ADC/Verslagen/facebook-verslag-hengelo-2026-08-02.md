@@ -1,6 +1,6 @@
 **Datum toernooi:** 2 augustus 2026
 **Venue:** Het Twentse Ros, Hengelo (toernoeimanager: Dennis Geerdink)
-**Status: CONCEPT — ter review door Sander**
+**Status: GEPUBLICEERD — op Facebook geplaatst door Sander**
 
 ---
 

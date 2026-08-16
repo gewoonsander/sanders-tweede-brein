@@ -16,6 +16,7 @@ Pieter Post houdt hier de actuele status van lopende bestellingen bij. Iedere re
 
 | Leverancier | Ordernummer | Bestelling of pakket | Besteld | Laatste status | Statusdatum | Verwachte bezorging | Vervoerder | Gemeld bij dagstart | Bronthread |
 |---|---|---|---|---|---|---|---|---|---|
+| Dartshopper | 05222950394809 (DPD-pakketnummer, geen apart ordernummer in de mail) | Pakket van Dartshopper | onbekend (niet in deze mail) | Pakket ontvangen door DPD | 2026-08-14 | volgende werkdag (indicatief ~17-08-2026) | DPD | 2026-08-16 | [1a0024f2c4f227da](https://mail.google.com/mail/#all/1a0024f2c4f227da) |
 
 ## Afgesloten
 
