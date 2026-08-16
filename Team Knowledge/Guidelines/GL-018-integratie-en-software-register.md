@@ -3,7 +3,7 @@ id: GL-018
 title: Integratie- en softwareregister
 status: active
 owner: daedalus
-last_verified: 2026-08-11
+last_verified: 2026-08-16
 ---
 
 # GL-018 — Integratie- en softwareregister
@@ -627,6 +627,23 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
 }
 ```
 <!-- integration-register:end -->
+
+## Lokale LaunchAgents die Team Inbox bewaken
+
+Ontstaan op 2026-08-16 nadat een sessie op het punt stond een derde, onbewuste
+automatisering op `Team Inbox/Audio Captures/` te bouwen terwijl er al twee
+bestonden. **Check deze tabel altijd voordat je een nieuwe watcher op een Team
+Inbox-(sub)map bouwt of een bestaande aanpast.** Dit is géén complete
+LaunchAgent-inventaris (er draaien meer `nl.gewoonsander.*` agents dan
+hieronder staan) — alleen de agents die `Team Inbox/` bewaken zijn hier
+geverifieerd.
+
+| LaunchAgent | Script | Bewaakt | Doet | Status |
+|---|---|---|---|---|
+| `nl.gewoonsander.downloads-router` | `Expansions/downloads-router/route_downloads.sh` | `~/Downloads` | Routeert screenshot-shaped bestanden naar `Team Inbox/Screenshots/`, documenten naar `Team Inbox/Documents/` | active |
+| `nl.gewoonsander.audio-transcribe` | `Expansions/audio-transcribe/transcribe_inbox.sh` | `Team Inbox/Audio Captures/` (audiobestanden: m4a/wav/mp3/aiff) | Whisper-transcriptie, Larry/Haiku-classificatie naar Journal/CRM/Project/MyLife (Deliverables als audit trail), schrijft transcript ook als `.txt` terug in dezelfde map voor `food-capture`, archiveert bronaudio naar Mediahub | active |
+| `nl.gewoonsander.food-capture` | `Expansions/mypka-cockpit/scripts/watch-food-inbox.py` → `process-food-capture.py` → `food_log.py` | `Team Inbox/Documents/` (foto's) en `Team Inbox/Audio Captures/` (`.txt`/`.md`) | Claude-classificatie eten/niet-eten, filet direct in het canonieke voedingslogboek (`PKM/Journal/.../*-voedingslogboek.md`), ruimt verwerkte `.txt`-transcripten op | active — canonieke voedingspijplijn |
+| `nl.gewoonsander.food-photo-classify` | `~/classify_food_inbox.sh` | `Team Inbox/Documents/` (foto's) | "Aanpak A"-prototype: Claude Vision-classificatie, schreef naar `Team Inbox/Voeding/*.food.md` | **retired (2026-08-16)** — plist verplaatst naar `.plist.disabled` + `launchctl bootout`. Op 2026-08-11 was al besloten dit uit te zetten en gebeurde dat met een kale `launchctl unload`, maar zonder de plist te verwijderen/hernoemen laadt macOS 'm bij de eerstvolgende her-login/herstart gewoon weer — en dat is ook gebeurd: het script verwerkte nog een foto op 2026-08-13 en liet weer een verweesd `.food.md`-bestand achter. **Les:** `launchctl unload`/`bootout` alleen is nooit persistent; een LaunchAgent écht retiren vereist het plist-bestand uit `~/Library/LaunchAgents/` te verplaatsen of te verwijderen. |
 
 ## Secretbeleid
 

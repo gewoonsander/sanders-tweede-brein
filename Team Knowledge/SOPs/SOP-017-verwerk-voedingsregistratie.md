@@ -9,7 +9,7 @@ references: [GL-001-file-naming-conventions, WS-001-daily-journaling, gewicht-aa
 
 # SOP-017 — Verwerk een voedingsregistratie
 
-**Default owner:** Penn, met Daedalus voor capture en Atlas voor de mirror. **Reusable by any agent.**
+**Default owner:** Penn, met Daedalus voor capture. De mirror-regeneratie loopt automatisch mee in `food_log.py`, geen aparte eigenaar meer nodig. **Reusable by any agent.**
 
 ## Doel
 
@@ -27,10 +27,11 @@ Zet een foto, gesproken invoer of tekst om in één append-only maaltijdregistra
 4. Leg omschrijving, tijd, bronsoort en optionele foto vast.
 5. Schat kcal, eiwit, koolhydraten en vet als `min–max`, plus `confidence` (`low`, `medium`, `high`). Nooit één exact AI-getal opslaan.
 6. Calorische dranken tellen mee. Water, zwarte koffie en ongezoete thee zijn optioneel.
-7. Append de entry via `Expansions/mypka-cockpit/scripts/food_log.py`. Een bestaande `source_id` wordt niet opnieuw toegevoegd.
+7. Append de entry via `Expansions/mypka-cockpit/scripts/food_log.py` (`append_meal`/CLI `append-meal`, zonder expliciete `vault`). Een bestaande `source_id` wordt niet opnieuw toegevoegd.
 8. Correctie nodig? Append een nieuwe entry met `supersedes_entry_id`; verwijder of herschrijf de oude entry niet.
 9. Lage confidence blokkeert vastlegging niet. Bewaar een ruime range en stel maximaal één concrete vervolgvraag.
-10. Regenereer de mirror zodat de Cockpit de registratie toont.
+
+De mirror-regeneratie is sinds 2026-08-16 geen handmatige stap meer — `food_log.py` roept `regen-mypka-db.py` automatisch aan na elke `append_meal`/`append_audit` (alleen wanneer geen expliciete `vault` is meegegeven, dus nooit tijdens tests). Ontdekt doordat een handmatig via deze SOP gelogd ontbijt niet in de Cockpit verscheen: de markdown klopte, maar niemand had de mirror ververst. Zie [[Team Knowledge/Guidelines/GL-018-integratie-en-software-register]] voor de achtergrond.
 
 ## Close-session
 

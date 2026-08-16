@@ -29,6 +29,9 @@ function streakLine(h: HabitTracking): string {
 function HabitStreakCard({ habit }: { habit: HabitTracking }) {
   const s = habit.streak;
   const hasCells = habit.cells.length > 0;
+  const latestAmount = s?.lastAmount == null
+    ? null
+    : `${Number.isInteger(s.lastAmount) ? s.lastAmount : s.lastAmount.toFixed(1)}${s.lastUnit ? ` ${s.lastUnit}` : ''}`;
   return (
     <Card as="article" className="flex flex-col gap-sm">
       <div className="flex items-baseline justify-between gap-sm">
@@ -60,6 +63,7 @@ function HabitStreakCard({ habit }: { habit: HabitTracking }) {
       {s && (
         <div className="flex flex-wrap items-center gap-md text-caption text-fg-subtle">
           <span>{s.totalDone} done</span>
+          {latestAmount && <span className="font-[520] text-fg-muted">latest · {latestAmount}</span>}
           {s.lastDate && <span className="font-mono">last · {s.lastDate}</span>}
         </div>
       )}

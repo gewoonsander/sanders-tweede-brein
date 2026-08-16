@@ -10,12 +10,11 @@ import {
   NotebookPen, Users, Hash, FolderKanban,
   KeyRound, Repeat2, Target, Building2, FileText, Package, PanelLeftClose,
   UsersRound, LayoutDashboard, StickyNote, SlidersHorizontal, Search,
-  ScrollText, ListChecks, BookText, ChevronRight, BarChart3, Activity
+  ScrollText, ListChecks, BookText, ChevronRight, BarChart3, Activity, Brain
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { NavType, EntityType } from '../lib/cockpitTypes';
 import { type Route, hrefFor } from '../lib/router';
-import { InklineMark } from './InklineMark';
 import { modulesForSection, type ModuleNavSection } from '../lib/moduleRegistry';
 import { QuickTerminalButton } from './QuickTerminalButton';
 import { useT, type TranslationKey } from '../lib/i18n';
@@ -271,10 +270,10 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
       <nav className={`cockpit-sidebar ${open ? 'is-open' : ''}`} aria-label={t('sidebar.navAria')}>
         <div className="sidebar-header">
           <span className="sidebar-brand-mark" aria-hidden="true">
-            <InklineMark size={26} />
+            <Brain size={26} strokeWidth={1.5} />
           </span>
           <div className="sidebar-brand-text">
-            <span className="sidebar-brand-title">myPKA Cockpit</span>
+            <span className="sidebar-brand-title">Second Brain</span>
             <span className="sidebar-brand-sub">{t('sidebar.brandSub')}</span>
           </div>
           {/* Collapse affordance lives IN the sidebar header (moved out of the top

@@ -254,6 +254,17 @@ Notes:
 - `linked_goals` is the **Habit side of the carrier doctrine**: a Habit is one of the two sibling carriers that can move a Goal forward (the other is a Project). When a Goal is reached through sustained repetition - the canonical example "lose 20 kg" pursued via a daily routine - the Goal lists this Habit in its `linked_habits`, and the Habit lists the Goal here. Stores slugs per rule 4. A Habit may be the carrier for more than one Goal, but each Goal is carried by only one carrier.
 - Streak tracking is a body-level concern (or an extension), not a frontmatter field. Frontmatter holds the definition, not the daily log.
 - Body section conventions: `## Why this habit`, `## What it looks like`, `## Reflection`.
+- Daily check-ins under `## Reflection` use a dated H3 and readable field bullets. `done` is required; `amount`, `unit`, `trigger`, and `note` are optional. This is the canonical source for the derived cockpit `habit_logs` mirror:
+  ```markdown
+  ### 2026-08-16
+
+  - done: true
+  - amount: 25
+  - unit: herhalingen
+  - trigger: close-session
+  - note: verdeeld over twee sets
+  ```
+- A later check-in for the same date replaces the earlier meaning. Update the existing dated block instead of creating two competing daily truths.
 
 ### Topics - `PKM/My Life/Topics/<slug>.md`
 

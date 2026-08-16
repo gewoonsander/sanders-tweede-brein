@@ -22,6 +22,7 @@
     "darts:test": "node --test tools/dartsatlas/extract.test.mjs"
     ,"test:integrations": "node --test server/integrationRegistry.test.mjs server/integrationChecks.test.mjs server/integrationsApi.test.mjs"
     ,"food:test": "python3 -m unittest discover -s scripts/tests -p 'test_food_*.py' && node --test server/tracking.food.test.mjs"
+    ,"habit:test": "python3 -m unittest discover -s scripts/tests -p 'test_habit_*.py' && node --test server/tracking.habits.test.mjs"
     ,"food:capture-status": "bash -lc 'launchctl list 2>/dev/null | grep nl.gewoonsander.food-capture || echo food-capture-not-loaded'"
   },
   "dependencies": {

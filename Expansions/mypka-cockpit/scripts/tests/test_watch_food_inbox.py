@@ -25,4 +25,29 @@ class WatchFoodInboxTests(unittest.TestCase):
         with patch.object(mod, "digest", side_effect=OSError(errno.EAGAIN, "Resource deadlock avoided")):
             mod.run(Path("pending.jpeg"), "photo")
 
+    def test_run_deletes_audio_transcript_after_successful_file(self):
+        # audio-transcribe drops the transcript back into Team Inbox/Audio Captures/
+        # for food-capture to consume; once filed it must not linger there forever.
+        with tempfile.TemporaryDirectory() as tmp:
+            txt = Path(tmp) / "note.txt"; txt.write_text("ontbijt: ei")
+            with patch.object(mod, "digest", return_value="abc123"), \
+                 patch.object(mod, "done", return_value=False), \
+                 patch.object(mod, "mark") as mark, \
+                 patch.object(mod.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, "", "")):
+                mod.run(txt, "audio", "ontbijt: ei")
+            mark.assert_called_once_with("abc123", "done")
+            self.assertFalse(txt.exists())
+
+    def test_run_deletes_audio_transcript_when_marked_nonfood(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            txt = Path(tmp) / "note.txt"; txt.write_text("dit gaat niet over eten")
+            with patch.object(mod, "digest", return_value="abc123"), \
+                 patch.object(mod, "done", return_value=False), \
+                 patch.object(mod, "mark") as mark, \
+                 patch.object(mod.subprocess, "run", return_value=subprocess.CompletedProcess(
+                     [], 1, "", "capture is geen voedingsregistratie")):
+                mod.run(txt, "audio", "dit gaat niet over eten")
+            mark.assert_called_once_with("abc123", "nonfood")
+            self.assertFalse(txt.exists())
+
 if __name__ == "__main__": unittest.main()

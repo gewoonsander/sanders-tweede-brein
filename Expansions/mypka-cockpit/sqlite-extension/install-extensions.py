@@ -234,6 +234,11 @@ HABITS_EXTRA_COLUMNS = [
     ("status", "TEXT"),
 ]
 
+HABIT_LOG_EXTRA_COLUMNS = [
+    ("amount", "REAL"),
+    ("unit", "TEXT"),
+]
+
 # Journal additions for two Hub features (see schema/06-journal-additions.sql):
 #   original_body / integration_status / manually_added  → manual-entry preservation
 #     + "unfold original" after Penn integrates a raw entry.
@@ -482,7 +487,7 @@ HABIT_LOG_TABLE = {
 CREATE TABLE habit_logs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   habit_slug TEXT NOT NULL, log_date TEXT NOT NULL,
-  done INTEGER, trigger TEXT, note TEXT, log_schema TEXT,
+  done INTEGER, amount REAL, unit TEXT, trigger TEXT, note TEXT, log_schema TEXT,
   source_path TEXT NOT NULL DEFAULT '',
   UNIQUE(habit_slug, log_date))
 """,
@@ -490,14 +495,15 @@ CREATE TABLE habit_logs (
 HABIT_LOG_VIEWS = {
     "v_habit_heatmap": """
 CREATE VIEW v_habit_heatmap AS
-SELECT hl.habit_slug, h.name AS habit_name, hl.log_date, hl.done, hl.log_schema
+SELECT hl.habit_slug, h.name AS habit_name, hl.log_date, hl.done,
+       hl.amount, hl.unit, hl.note, hl.log_schema
 FROM habit_logs hl LEFT JOIN habits h ON h.slug = hl.habit_slug
 ORDER BY hl.habit_slug, hl.log_date
 """,
     "v_habit_streaks": """
 CREATE VIEW v_habit_streaks AS
 WITH committed AS (
-  SELECT habit_slug, log_date, done,
+  SELECT habit_slug, log_date, done, amount, unit,
          ROW_NUMBER() OVER (PARTITION BY habit_slug ORDER BY log_date DESC) AS rn
   FROM habit_logs WHERE done IS NOT NULL),
 first_miss AS (
@@ -506,17 +512,20 @@ first_miss AS (
 agg AS (
   SELECT c.habit_slug, MAX(c.log_date) AS last_committed_date,
          (SELECT done FROM committed c2 WHERE c2.habit_slug = c.habit_slug AND c2.rn = 1) AS most_recent_done,
+         (SELECT amount FROM committed c2 WHERE c2.habit_slug = c.habit_slug AND c2.rn = 1) AS last_amount,
+         (SELECT unit FROM committed c2 WHERE c2.habit_slug = c.habit_slug AND c2.rn = 1) AS last_unit,
          COUNT(*) AS committed_logs,
          SUM(CASE WHEN c.done = 1 THEN 1 ELSE 0 END) AS total_done,
          (SELECT miss_rn FROM first_miss fm WHERE fm.habit_slug = c.habit_slug) AS first_miss_rn
   FROM committed c GROUP BY c.habit_slug)
-SELECT a.habit_slug, h.name AS habit_name, a.last_committed_date,
+SELECT h.slug AS habit_slug, h.name AS habit_name, a.last_committed_date,
        CASE WHEN a.most_recent_done = 0 THEN 0
             WHEN a.first_miss_rn IS NULL THEN a.committed_logs
             ELSE a.first_miss_rn - 1 END AS current_streak,
-       a.total_done, a.committed_logs,
+       a.total_done, a.committed_logs, a.last_amount, a.last_unit,
        CAST(julianday('now') - julianday(a.last_committed_date) AS INTEGER) AS days_since_last_log
-FROM agg a LEFT JOIN habits h ON h.slug = a.habit_slug
+FROM habits h LEFT JOIN agg a ON a.habit_slug = h.slug
+WHERE h.status = 'active' AND h.cadence = 'daily'
 """,
 }
 
@@ -792,6 +801,7 @@ def main():
     if with_habits:
         for name, ddl in HABIT_LOG_TABLE.items():
             ensure_table(cur, name, ddl, tables_now, plan, args.dry_run)
+        ensure_columns(cur, "habit_logs", HABIT_LOG_EXTRA_COLUMNS, plan, args.dry_run)
         ensure_views(cur, HABIT_LOG_VIEWS, plan, args.dry_run)
     if with_food:
         for name, ddl in FOOD_LOG_TABLE.items():

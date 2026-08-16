@@ -25,7 +25,7 @@ import { optionalStmt } from './wellnessDb.js';
 // activity first so the most-alive habit reads at the top.
 const streaksStmt = optionalStmt(`
   SELECT habit_slug, habit_name, last_committed_date, current_streak,
-         total_done, committed_logs, days_since_last_log
+         total_done, committed_logs, last_amount, last_unit, days_since_last_log
   FROM v_habit_streaks
   ORDER BY (last_committed_date IS NULL), last_committed_date DESC, habit_name COLLATE NOCASE
 `);
@@ -33,7 +33,7 @@ const streaksStmt = optionalStmt(`
 // Every heatmap cell (done = 1 hit / 0 miss / NULL pending) for every habit.
 // The client buckets these into a per-habit calendar grid.
 const heatmapStmt = optionalStmt(`
-  SELECT habit_slug, habit_name, log_date, done, log_schema
+  SELECT habit_slug, habit_name, log_date, done, amount, unit, note, log_schema
   FROM v_habit_heatmap
   ORDER BY habit_slug, log_date
 `);
@@ -62,16 +62,21 @@ export function getHabitTracking() {
       // done is 1 | 0 | null in the mirror — keep that tri-state verbatim so the
       // client can render hit / soft-miss / pending distinctly.
       done: r.done === null ? null : Number(r.done),
+      amount: r.amount == null ? null : Number(r.amount),
+      unit: r.unit || null,
+      note: r.note || null,
       schema: r.log_schema || null,
     });
   }
 
   for (const s of streaks) {
     const h = ensure(s.habit_slug, s.habit_name);
-    h.streak = {
+    h.streak = s.last_committed_date == null ? null : {
       current: s.current_streak ?? 0,
       totalDone: s.total_done ?? 0,
       committedLogs: s.committed_logs ?? 0,
+      lastAmount: s.last_amount == null ? null : Number(s.last_amount),
+      lastUnit: s.last_unit || null,
       lastDate: s.last_committed_date || null,
       daysSinceLast: s.days_since_last_log == null ? null : Number(s.days_since_last_log),
     };

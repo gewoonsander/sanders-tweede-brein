@@ -22,7 +22,7 @@ Ondersteund door: Winmau, Red Dragon, MODUS Super Series.
 
 **KVK:** 92783767 | **BTW:** NL 866 171 289 B01
 **Adres:** Voorstraat 139, 4702 EP Roosendaal
-**Hoofdcontact:** John Lokken (info@amateurdarts.eu)
+**Hoofdcontact:** [[john-lokken]]
 
 ## How we work together
 

@@ -83,7 +83,7 @@ All callable slash-command skills live in `.claude/commands/`. **Every agent mus
 | `/sync-contact-to-google` | `sync-contact-to-google.md` | Daedalus | Synchroniseer een PKM-contactpersoon naar Google Contacts |
 | `/dagstart` | `dagstart.md` | Hermes | Ochtendroutine — agenda, open taken, inbox check, dagintentie |
 | `/council` | `council.md` | Hermes | Meerdere perspectiefstemmen (persoonlijk 5 / zakelijk 7) wegen een open, nog-niet-overtuigde beslissing en smeden een eindverdict met verplicht minderheidsstandpunt — tegenmaatregel tegen AI-sycofantie. Zie [[Deliverables/2026-08-14-claude-council-research]] |
-| `/transcribeer` | `~/.claude/skills/transcribeer/SKILL.md` | Daedalus | Haal de kennis van een YouTube-kanaal/playlist op als tekst (ondertitels eerst, lokale Whisper-terugval bij ontbrekende ondertitels); optioneel er een kennis-skill van bouwen. Kennis komt in `PKM/Documents/YouTube-Kennis/`. Let op: dit is een globale Skill (`~/.claude/skills/`), niet een `.claude/commands/`-bestand — staat hier voor discoverability. |
+| `/transcribeer` | `~/.claude/skills/transcribeer/SKILL.md` | Daedalus | Haal de kennis van een YouTube-kanaal/playlist op als tekst (ondertitels eerst, Whisper-terugval bij ontbrekende ondertitels — lokaal als `whisper`/`ffmpeg` aanwezig zijn, anders via SSH gedelegeerd naar `whisper_host` in `config.json`, default de Mac Mini); optioneel er een kennis-skill van bouwen. Kennis komt in `PKM/Documents/YouTube-Kennis/`. Let op: dit is een globale Skill (`~/.claude/skills/`), dus per machine apart geïnstalleerd (niet automatisch gesynchroniseerd) — niet een `.claude/commands/`-bestand — staat hier voor discoverability. |
 
 **Regel voor agents:** Tref je een kennishiaat aan in jouw domein? Controleer eerst deze tabel. Staat er een skill voor? Roep die aan. Staat er geen skill voor en is het structureel herbruikbaar? Meld dat aan Hermes — dan bouwen we de skill.
 
@@ -180,7 +180,7 @@ Cue rules route personal inputs to Penn. Business workstreams are handled by fut
 
 ### 10. Decision and warning blocks (mandatory)
 
-Any reply that carries something the user must decide, approve, or act on renders it as a visually unmissable block — never buried in prose. Stack all blocks at the end of the reply, after the normal status text. Each 🔶/🔴 block carries a short unique 3-character code right behind the emoji so the user can reply with just the code.
+Any reply that carries something the user must decide, approve, or act on renders it as a visually unmissable block — never buried in prose. Stack all blocks at the end of the reply, after the normal status text. Each 🔶/🔴 block begins with a session-wide action number, followed by the emoji and a recognizable three-letter context code, for example `1 · 🔶 CLS`. Answer choices include the action number (`1J`, `2N`, `3B`) so replies remain unambiguous. Numbering continues across different procedures within the same session.
 
 Full spec: [[GL-016-beslis-en-waarschuwingsblokken]]
 
@@ -222,6 +222,18 @@ At the same close-session moment as the journal check, Hermes scans `PKM/My Life
 
 - **Already logged today** — skip silently, no question asked.
 - **Not yet logged today** — ask the user in the same breath as the journal question (one combined message, not two separate prompts), e.g. "Wil je nog iets meegeven aan je journaal van vandaag? En heb je vandaag de [habit] al gedaan?" The user's answer gets appended as a dated entry under that Habit's `## Reflection` section.
+
+Daily Habit check-ins use the canonical body schema from [[GL-002-frontmatter-conventions]] so the cockpit mirror can ingest them:
+
+```markdown
+### YYYY-MM-DD
+
+- done: true
+- trigger: close-session
+- note: optional context
+```
+
+For quantified Habits, also capture the actual `amount` and `unit`. For [[dagelijks-opdrukken]], always ask how many repetitions Sander completed and write `amount: <number>` plus `unit: herhalingen`. Update an existing same-day block instead of creating a duplicate; the newest answer is authoritative.
 
 This replaces any time-of-day trigger (e.g. "after 21:00") — checking "already logged today?" against the Habit file itself is more reliable than a clock cutoff, and works correctly regardless of how many sessions the user closes in a day.
 

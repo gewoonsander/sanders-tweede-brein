@@ -82,7 +82,7 @@ OWNED_TABLES = [
     "key_elements", "habits", "documents", "deliverables",
     "journal", "journal_media", "agents", "agent_journal", "session_logs",
     "weekly_reports", "links", "meta",
-    "food_logs", "food_log_days",
+    "habit_logs", "food_logs", "food_log_days",
     "transactions", "quotes", "outer_world",
     # Governance docs (item: cockpit Team-Knowledge browser). One table per family,
     # indexed from Team Knowledge/Workstreams|SOPs|Guidelines. Their metadata lives
@@ -106,7 +106,7 @@ OWNED_TABLES = [
 # any OTHER view in the file (a different mirror, an analytics layer) is preserved.
 OWNED_VIEWS = [
     "v_open_invoices", "v_reimbursement_pending", "v_invoice_payment_trail",
-    "v_food_day_totals",
+    "v_habit_heatmap", "v_habit_streaks", "v_food_day_totals",
     "v_food_log_calendar",
 ]
 
@@ -411,6 +411,11 @@ CREATE TABLE guidelines (
   version TEXT, triggered_by TEXT, tags TEXT,
   body TEXT, file_path TEXT, raw_frontmatter TEXT);
 CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE habit_logs (
+  id INTEGER PRIMARY KEY, habit_slug TEXT NOT NULL, log_date TEXT NOT NULL,
+  done INTEGER, amount REAL, unit TEXT, trigger TEXT, note TEXT, log_schema TEXT,
+  source_path TEXT NOT NULL,
+  UNIQUE(habit_slug, log_date));
 CREATE TABLE food_logs (
   id INTEGER PRIMARY KEY, entry_id TEXT NOT NULL UNIQUE, source_id TEXT NOT NULL,
   journal_slug TEXT NOT NULL, log_date TEXT NOT NULL, logged_at TEXT NOT NULL,
@@ -460,7 +465,39 @@ CREATE INDEX idx_outer_world_source_type ON outer_world (source_type);
 CREATE INDEX idx_workstreams_doc_id ON workstreams (doc_id);
 CREATE INDEX idx_sops_doc_id ON sops (doc_id);
 CREATE INDEX idx_guidelines_doc_id ON guidelines (doc_id);
+CREATE INDEX idx_habit_logs_slug_date ON habit_logs (habit_slug, log_date);
 CREATE INDEX idx_food_logs_date ON food_logs (log_date, meal_type, logged_at);
+
+CREATE VIEW v_habit_heatmap AS
+SELECT hl.habit_slug, h.name AS habit_name, hl.log_date, hl.done,
+       hl.amount, hl.unit, hl.note, hl.log_schema
+FROM habit_logs hl LEFT JOIN habits h ON h.slug = hl.habit_slug
+ORDER BY hl.habit_slug, hl.log_date;
+CREATE VIEW v_habit_streaks AS
+WITH committed AS (
+  SELECT habit_slug, log_date, done, amount, unit,
+         ROW_NUMBER() OVER (PARTITION BY habit_slug ORDER BY log_date DESC) AS rn
+  FROM habit_logs WHERE done IS NOT NULL),
+first_miss AS (
+  SELECT habit_slug, MIN(rn) AS miss_rn FROM committed
+  WHERE done = 0 GROUP BY habit_slug),
+agg AS (
+  SELECT c.habit_slug, MAX(c.log_date) AS last_committed_date,
+         (SELECT done FROM committed c2 WHERE c2.habit_slug = c.habit_slug AND c2.rn = 1) AS most_recent_done,
+         (SELECT amount FROM committed c2 WHERE c2.habit_slug = c.habit_slug AND c2.rn = 1) AS last_amount,
+         (SELECT unit FROM committed c2 WHERE c2.habit_slug = c.habit_slug AND c2.rn = 1) AS last_unit,
+         COUNT(*) AS committed_logs,
+         SUM(CASE WHEN c.done = 1 THEN 1 ELSE 0 END) AS total_done,
+         (SELECT miss_rn FROM first_miss fm WHERE fm.habit_slug = c.habit_slug) AS first_miss_rn
+  FROM committed c GROUP BY c.habit_slug)
+SELECT h.slug AS habit_slug, h.name AS habit_name, a.last_committed_date,
+       CASE WHEN a.most_recent_done = 0 THEN 0
+            WHEN a.first_miss_rn IS NULL THEN a.committed_logs
+            ELSE a.first_miss_rn - 1 END AS current_streak,
+       a.total_done, a.committed_logs, a.last_amount, a.last_unit,
+       CAST(julianday('now') - julianday(a.last_committed_date) AS INTEGER) AS days_since_last_log
+FROM habits h LEFT JOIN agg a ON a.habit_slug = h.slug
+WHERE h.status = 'active' AND h.cadence = 'daily';
 
 CREATE VIEW v_food_day_totals AS
 SELECT f.log_date,
@@ -788,6 +825,86 @@ def extract_links(body: str):
     return out
 
 
+HABIT_DATE_HEADING_RE = re.compile(r"^###\s+(\d{4}-\d{2}-\d{2})\s*$", re.MULTILINE)
+HABIT_FIELD_RE = re.compile(
+    r"^\s*-\s*(done|amount|unit|trigger|note)\s*:\s*(.*?)\s*$",
+    re.MULTILINE | re.IGNORECASE,
+)
+
+
+def parse_habit_reflections(body: str):
+    """Return one authoritative check-in per dated Reflection block.
+
+    New entries use human-readable ``- field: value`` bullets. Older prose is
+    recognized conservatively: only explicit completion marks/phrases or an
+    explicit not-done phrase commit a value. Later statements in the same dated
+    block win, which preserves corrections such as "nog niet" followed by
+    "alsnog aangebracht ✓".
+    """
+    reflection = re.search(r"^##\s+Reflection\s*$", body, re.MULTILINE)
+    if not reflection:
+        return []
+    section = body[reflection.end():]
+    next_h2 = re.search(r"^##\s+", section, re.MULTILINE)
+    if next_h2:
+        section = section[:next_h2.start()]
+
+    headings = list(HABIT_DATE_HEADING_RE.finditer(section))
+    by_date = {}
+    for index, heading in enumerate(headings):
+        log_date = heading.group(1)
+        end = headings[index + 1].start() if index + 1 < len(headings) else len(section)
+        block = section[heading.end():end].strip()
+        fields = {m.group(1).lower(): m.group(2).strip()
+                  for m in HABIT_FIELD_RE.finditer(block)}
+
+        done = None
+        schema = "reflection-v1" if "done" in fields else "legacy-reflection"
+        if "done" in fields:
+            raw_done = fields["done"].lower()
+            if raw_done in {"true", "yes", "ja", "1", "done", "gedaan"}:
+                done = 1
+            elif raw_done in {"false", "no", "nee", "0", "missed", "niet gedaan"}:
+                done = 0
+        else:
+            for line in block.splitlines():
+                normalized = re.sub(r"\s+", " ", line.strip().lower())
+                if not normalized:
+                    continue
+                if ("✓" in line or "bevestigd" in normalized
+                        or "alsnog aangebracht" in normalized):
+                    done = 1
+                elif ("niet aangebracht" in normalized
+                      or "vandaag niet" in normalized
+                      or "nog niet aangebracht" in normalized):
+                    done = 0
+
+        amount = None
+        if fields.get("amount"):
+            try:
+                amount = float(fields["amount"].replace(",", "."))
+            except ValueError:
+                amount = None
+        note = fields.get("note")
+        if note is None and schema == "legacy-reflection" and done is not None:
+            note = re.sub(r"\s+", " ", block).strip() or None
+        trigger = fields.get("trigger")
+        if trigger is None and "close-session" in block.lower():
+            trigger = "close-session"
+
+        if done is not None or amount is not None:
+            by_date[log_date] = {
+                "log_date": log_date,
+                "done": done,
+                "amount": amount,
+                "unit": fields.get("unit") or None,
+                "trigger": trigger,
+                "note": note,
+                "log_schema": schema,
+            }
+    return [by_date[d] for d in sorted(by_date)]
+
+
 # Governance docs carry their metadata as a `- **Label:** value` bullet block right
 # under the H1 (these files have NO YAML frontmatter). Match a bullet whose first
 # token is a bold label ending in a colon.
@@ -961,6 +1078,25 @@ def main():
                 link_rows.append((table, slug, raw, tslug, ltype))
             rows += 1
         stats[table] = rows
+
+    # ---- habit logs (canonical dated check-ins in Habit ## Reflection) --------
+    # One row per habit/day. Structured reflection-v1 bullets are authoritative;
+    # parse_habit_reflections also recognizes a deliberately small legacy phrase
+    # set so existing crème confirmations are not lost. The table is regen-owned,
+    # therefore rerunning this script is idempotent and Markdown remains canonical.
+    habit_log_rows = 0
+    for path in md_files(ROOT / "PKM/My Life/Habits"):
+        fm, body = read_note(path)
+        slug = path.stem
+        rel = str(path.relative_to(ROOT))
+        for entry in parse_habit_reflections(body):
+            cur.execute(
+                "INSERT INTO habit_logs (habit_slug,log_date,done,amount,unit,trigger,note,log_schema,source_path)"
+                " VALUES (?,?,?,?,?,?,?,?,?)",
+                (slug, entry["log_date"], entry["done"], entry["amount"], entry["unit"],
+                 entry["trigger"], entry["note"], entry["log_schema"], rel))
+            habit_log_rows += 1
+    stats["habit_logs"] = habit_log_rows
 
     # ---- journal (recursive, dated) ------------------------------------------
     rows = 0

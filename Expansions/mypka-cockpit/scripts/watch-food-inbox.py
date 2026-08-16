@@ -38,7 +38,10 @@ def run(path, source_type, text=''):
         if target is not None:
             target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(path,target)
         mark(key,'done')
-    elif 'geen voedingsregistratie' in result.stderr: mark(key,'nonfood')
+        if source_type=='audio': path.unlink(missing_ok=True)
+    elif 'geen voedingsregistratie' in result.stderr:
+        mark(key,'nonfood')
+        if source_type=='audio': path.unlink(missing_ok=True)
     else: print(json.dumps({'event':'food_capture_failed','file':path.name,'error':result.stderr[-500:]}),file=sys.stderr)
 
 def scan():

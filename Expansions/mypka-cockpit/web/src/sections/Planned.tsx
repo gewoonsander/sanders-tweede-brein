@@ -87,6 +87,16 @@ export function Planned({
                     <p className="line-clamp-3 text-caption leading-relaxed text-fg-muted">{h.lead}</p>
                   )}
                   <OpenNoteLink note={{ type: 'habits', slug: h.slug }} label="Open habit" />
+                  {h.slug === 'dagelijks-opdrukken' && (
+                    <button
+                      type="button"
+                      onClick={() => navigate({ name: 'module', slug: 'tracking' })}
+                      className="inline-flex w-fit items-center gap-xs text-caption text-marker-text hover:underline focus-visible:underline"
+                    >
+                      Open trainingsregistratie
+                      <ArrowUpRight size={13} strokeWidth={1.5} aria-hidden="true" />
+                    </button>
+                  )}
                   {h.full && h.full.length > 0 && (
                     <FullTextLink title={h.name} subtitle="Why this habit" blocks={h.full} />
                   )}

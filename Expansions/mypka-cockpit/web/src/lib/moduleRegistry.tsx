@@ -140,7 +140,7 @@ export const COCKPIT_MODULES: readonly CockpitModule[] = [
   },
   { slug: 'health', navLabel: 'Health & Life', navIcon: HeartPulse, navSection: 'overview', View: DashboardView },
   { slug: 'tracking', navLabel: 'Tracking', navIcon: LineChart, navSection: 'overview', View: TrackingView },
-  { slug: 'workouts', navLabel: 'Workouts', navIcon: MapIcon, navSection: 'overview', View: WorkoutsView },
+  { slug: 'workouts', navLabel: 'Trainingen', navIcon: MapIcon, navSection: 'overview', View: WorkoutsView },
   // Darts — Darts Atlas rankings + tournament history, read from the scraped JSON
   // on disk (not mypka.db). Sits beside the other personal-record surfaces.
   { slug: 'darts', navLabel: 'Darts', navIcon: Target, navSection: 'overview', View: DartsView },

@@ -20,7 +20,7 @@ Elk open item krijgt precies dit blok:
 
 ```
 ─────────────────────────────────────
-🔶 4a3 · DECISION NEEDED · <korte titel>
+1 · 🔶 CLS · BESLISSING NODIG · <korte titel>
 <de vraag plus je aanbeveling in 1 tot 3 regels>
 ─────────────────────────────────────
 ```
@@ -35,10 +35,12 @@ Elk open item krijgt precies dit blok:
 
 - Eén blok per beslissing. Nooit twee beslissingen in één blok samenvoegen.
 - Alle blokken staan aan het **einde** van het antwoord, na de normale statusprosa — nooit halverwege de tekst, zodat ze nooit verstopt raken.
-- Elk 🔶- en 🔴-blok krijgt een korte unieke code van 3 tekens (alfanumeriek, bijv. `4a3`, `55w`, `k27`) direct achter de emoji. Sander kan dan met alleen de code antwoorden ("ga door met 4a3", "sla 55w over") in plaats van de beslissing opnieuw te formuleren.
-- Codes zijn uniek binnen een sessie en worden nooit hergebruikt voor een andere beslissing.
-- Komt dezelfde openstaande beslissing later in de sessie terug (bijv. omdat Sander er nog niet op reageerde), dan behoudt die zijn oorspronkelijke code.
-- Verwijst Sander naar een code, dan wordt die eerst herleid naar de exacte beslissing waar hij bij hoort, voordat er actie op volgt.
+- Elk 🔶- en 🔴-blok begint met een zichtbaar oplopend actienummer, gevolgd door de emoji en een herkenbare afkorting van drie letters, bijvoorbeeld `1 · 🔶 CLS`.
+- Actienummers lopen door over alle procedures en contexten binnen dezelfde sessie. Na `1 · 🔶 CLS` en `2 · 🔶 CLS` wordt een actie uit een andere procedure bijvoorbeeld `3 · 🔶 GIT`.
+- Ook een antwoordoptie wordt aan het actienummer gekoppeld. Bij J/N-vragen antwoordt Sander bijvoorbeeld met `1N, 2J`; bij A/B/C-keuzes met `3B`. Alleen `J`, `N`, `A`, `B` of `C` is bij meerdere open acties onvoldoende eenduidig.
+- Een blok met maar één actie krijgt eveneens een nummer; het nummer wordt nooit weggelaten. Actienummers zijn uniek binnen een sessie en worden nooit hergebruikt voor een andere beslissing.
+- Komt dezelfde openstaande beslissing later in de sessie terug, dan behoudt die haar oorspronkelijke actienummer en code.
+- Verwijst Sander naar een actienummer, dan wordt dit eerst herleid naar de exacte beslissing waar het bij hoort, voordat er actie op volgt.
 
 ## Relatie met GL-013
 

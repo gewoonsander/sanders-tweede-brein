@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  ACTIEF - geinstalleerd op de Mac mini, 2026-08-16.
+
+  Draait dagelijks om 07:00 lokaal scripts/youtube-samenvatting-ochtend.sh, dat voor elk
+  gevolgd kanaal in config/youtube-kanalen.json checkt op nieuwe video's via de bestaande
+  /transcribeer-skill, ze samenvat (Haiku-API, Keychain-key uit Expansions/audio-transcribe
+  hergebruikt) en wegschrijft als Outer World-item + dagstart-queue-entry. Zie
+  Deliverables/2026-08-16-youtube-kanaal-samenvatting-design.md voor het volledige ontwerp.
+
+  ExitTimeOut ruimer dan adc-verslag-ochtend (1800s i.p.v. 600s): een video zonder
+  ondertitels kan via de Whisper-terugval een paar minuten kosten, en er kunnen meerdere
+  nieuwe video's in één run zitten.
+
+  Handmatig draaien zonder op 07:00 te wachten:
+    launchctl kickstart gui/$(id -u)/nl.gewoonsander.youtube-samenvatting-ochtend
+
+  Tijdstip wijzigen: pas StartCalendarInterval aan (Hour 0-23, Minute 0-59), daarna:
+    launchctl bootout gui/$(id -u)/nl.gewoonsander.youtube-samenvatting-ochtend
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/nl.gewoonsander.youtube-samenvatting-ochtend.plist
+
+  Uitzetten:
+    launchctl bootout gui/$(id -u)/nl.gewoonsander.youtube-samenvatting-ochtend
+    rm ~/Library/LaunchAgents/nl.gewoonsander.youtube-samenvatting-ochtend.plist
+-->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>nl.gewoonsander.youtube-samenvatting-ochtend</string>
+
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/scripts/youtube-samenvatting-ochtend.sh</string>
+	</array>
+
+	<key>WorkingDirectory</key>
+	<string>/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein</string>
+
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Hour</key>
+		<integer>7</integer>
+		<key>Minute</key>
+		<integer>0</integer>
+	</dict>
+
+	<key>RunAtLoad</key>
+	<false/>
+
+	<key>ProcessType</key>
+	<string>Background</string>
+
+	<key>ExitTimeOut</key>
+	<integer>1800</integer>
+
+	<key>StandardOutPath</key>
+	<string>/Users/sandervanockenburg-zwaan/Library/Logs/youtube-samenvatting-ochtend.log</string>
+
+	<key>StandardErrorPath</key>
+	<string>/Users/sandervanockenburg-zwaan/Library/Logs/youtube-samenvatting-ochtend.err.log</string>
+</dict>
+</plist>

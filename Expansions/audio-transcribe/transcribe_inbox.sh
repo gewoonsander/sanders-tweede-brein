@@ -131,6 +131,15 @@ print(slug)
 
         echo "Opgeslagen: $output"
 
+        # Kopieer het transcript ook als platte tekst terug naar Team Inbox/Audio Captures/
+        # zodat de bestaande food-capture-pijplijn (watch-food-inbox.py, LaunchAgent
+        # nl.gewoonsander.food-capture, bewaakt deze map al) het oppikt. Die pijplijn
+        # bepaalt zelf via process-food-capture.py of het een voedingsregistratie is en
+        # filet direct in food_log.py — geen eigen classificatie hier nodig. Niet-eten
+        # transcripties worden door process-food-capture.py stil als "nonfood" gemarkeerd
+        # en genegeerd. watch-food-inbox.py ruimt dit .txt-bestand op na verwerking.
+        printf '%s' "$transcript" > "$INBOX/${name}.txt"
+
         # Bronbestand archiveren naar Mediahub zodra de transcriptie klaar is (SOP-013:
         # audio hoort in Mediahub, niet in Team Inbox). Pet/project-indeling kan dit
         # script niet betrouwbaar raden, dus naar 99_Inbox_Nog_Uitzoeken — Sander/Hermes

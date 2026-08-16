@@ -4,7 +4,7 @@
 - **Owners:** Penn (capture and writing), Hermes (routing and Librarian pass)
 - **References:** [[SOP-001-how-to-add-a-new-specialist]], [[GL-001-file-naming-conventions]], [[GL-020-informatie-invoer-uitvoer-en-levenscyclusregister]], [[Team/Penn - Journal Writer/AGENTS]], [[Team/Hermes - Orchestrator/AGENTS]]
 - **Trigger:** any user input that contains a thought, observation, encounter, screenshot, photo, or voice note.
-- **Version:** 1.2.0 (2026-08-16) — Team Inbox is now explicitly the only human review queue; technical intake routing resolves through GL-020.
+- **Version:** 1.2.2 (2026-08-16) — Reverted the 1.2.1 `Team Inbox/Voeding/` addition; food capture stays fully automated and never routes through a human-reviewed Team Inbox subfolder.
 
 ## Purpose
 
@@ -24,7 +24,7 @@ Hermes checks the routing cheatsheet in his AGENTS.md. Daily journaling triggers
 
 **Team Inbox is de enige menselijke inbox en omvat ook twee automatiseringssubmappen:** `Team Inbox/Screenshots/` en `Team Inbox/Documents/`, gevuld door de `nl.gewoonsander.downloads-router` launchd-agent vanuit technische aanvoerbron `~/Downloads`. Zie [[Team Inbox/README]] voor de aanvoer en [[GL-020-informatie-invoer-uitvoer-en-levenscyclusregister]] voor de canonieke routeringsgrens. Penn controleert root en beide submappen; hij verzint geen tweede uitzonderingswachtrij.
 
-Voedingsfoto's, gesproken eetregistraties en tekst over eten volgen de gespecialiseerde route [[WS-007-voeding-vastleggen-en-controleren]] en [[SOP-017-verwerk-voedingsregistratie]]. Het dagelijkse voedingslogboek is canoniek; deze Workstream dupliceert dat contract niet.
+Voedingsfoto's, gesproken eetregistraties en tekst over eten volgen de gespecialiseerde route [[WS-007-voeding-vastleggen-en-controleren]] en [[SOP-017-verwerk-voedingsregistratie]]. Dit loopt via de food-capture-pijplijn (`nl.gewoonsander.food-capture`), die `Team Inbox/Audio Captures/` en `Team Inbox/Documents/` zelf bewaakt en automatisch filet — geen aparte, door Penn te reviewen Team Inbox-submap. Het dagelijkse voedingslogboek is canoniek; deze Workstream dupliceert dat contract niet.
 
 ### Step 2 - Penn writes the Journal entry
 
@@ -109,6 +109,8 @@ All naming questions resolve to [[GL-001-file-naming-conventions]]. If you need 
 
 ## Changelog
 
+- **1.2.2 (2026-08-16)** — 1.2.1 teruggedraaid: `Team Inbox/Voeding/` als submap was fout, want het dupliceerde met eigen Larry-classificatie precies het patroon (`classify_food_inbox.sh`) dat op 2026-08-11 al was uitgefaseerd wegens verweesde bestanden. De echte fix zit in `audio-transcribe`: het schrijft het transcript nu ook als platte tekst terug naar `Team Inbox/Audio Captures/`, zodat de al bestaande, actieve food-capture-pijplijn (`nl.gewoonsander.food-capture`) het zelf oppikt, beoordeelt en direct filet — geen nieuwe submap, geen dubbele classificatie.
+- **1.2.1 (2026-08-16)** — (teruggedraaid, zie 1.2.2) `Team Inbox/Voeding/` toegevoegd als derde automatiseringssubmap. Ontdekt doordat een ingesproken ontbijt op 2026-08-16 wel werd getranscribeerd (`audio-transcribe`), maar nooit in het voedingslogboek belandde: het script kende geen "voeding"-bestemming en de output bleef inert in `Deliverables/` liggen, buiten het bereik van Penn's reguliere Team Inbox-verwerking. Root cause klopte, de gekozen oplossing niet — zie 1.2.2.
 - **1.2.0 (2026-08-16)** — Declared Team Inbox root plus its two automation-fed subfolders as one human inbox and linked routing to [[GL-020-informatie-invoer-uitvoer-en-levenscyclusregister]].
 - **1.1.1 (2026-08-11)** — Step 1 now names `Team Inbox/Screenshots/` and `Team Inbox/Documents/` as automation-fed subfolders Penn must also check, not just the flat root. Discovered when auditing why `Team Inbox/Screenshots/` always looked empty — the feeding launchd agent (`nl.gewoonsander.downloads-router`) was silently failing (TCC permission block), and even once fixed, nothing in WS-001 told Penn to look there.
 - **1.1.0 (2026-06-03)** — Step 4 routing rewritten to enforce the My Life doctrine. My Life is now framed as four buckets (Topics, Habits, Projects, Key Elements) plus Goals as the operating layer on top. Added Step 4b: the filter test, the anchoring law (every Goal → exactly one Key Element, never a Project/Topic), the single-carrier rule (Project OR Habit, siblings, never both), and Topic→Key-Element promotion with reverse archive. Routing-table notes for the five My Life types updated to match. Canonical examples woven in: the weight Goal ("lose 20 kg" → Key Element Health, carried by an 8-week Project or a 3-workouts-a-week Habit) and the French Topic (graduates into a Key Element once it becomes "reach B2 fluency").

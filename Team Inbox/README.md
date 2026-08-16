@@ -41,6 +41,20 @@ This is separate from a direct screen capture (Cmd+Shift+3/4/5), which macOS sav
 
 Whoever processes the inbox (see [[Team Knowledge/Workstreams/WS-001-daily-journaling]]) must check both subfolders, not just the root.
 
+## Voeding: machine-tot-machine, geen menselijke submap
+
+`Team Inbox/Audio Captures/` en `Team Inbox/Documents/` worden ook bewaakt door de
+food-capture-pijplijn (LaunchAgent `nl.gewoonsander.food-capture`, script
+`Expansions/mypka-cockpit/scripts/watch-food-inbox.py`): foto's in `Documents/` en
+transcripten in `Audio Captures/` worden automatisch beoordeeld en direct in het
+voedingslogboek gefiled (`process-food-capture.py` → `food_log.py`) — geen mensuele
+review, geen aparte `Voeding/`-submap. Zie [[SOP-017-verwerk-voedingsregistratie]] voor
+het contract en de volledige LaunchAgent-inventaris in
+[[Team Knowledge/Guidelines/GL-018-integratie-en-software-register]] voor wie wat
+bewaakt. Er heeft ooit een aparte `Team Inbox/Voeding/`-staging bestaan
+(`classify_food_inbox.sh`); die is op 2026-08-11 uitgefaseerd toen bleek dat hij
+verweesde bestanden achterliet die niemand oppikte — niet opnieuw invoeren.
+
 ## Technische bronnen zijn geen extra inboxen
 
 Downloads, e-mail, apparaatcaptures, werkmappen en tijdelijk iCloud `00-inbox`

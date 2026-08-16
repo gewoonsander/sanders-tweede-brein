@@ -7,6 +7,9 @@
 export interface HabitCell {
   date: string;
   done: 1 | 0 | null;
+  amount: number | null;
+  unit: string | null;
+  note: string | null;
   schema: string | null;
 }
 
@@ -14,6 +17,8 @@ export interface HabitStreak {
   current: number;
   totalDone: number;
   committedLogs: number;
+  lastAmount: number | null;
+  lastUnit: string | null;
   lastDate: string | null;
   daysSinceLast: number | null;
 }

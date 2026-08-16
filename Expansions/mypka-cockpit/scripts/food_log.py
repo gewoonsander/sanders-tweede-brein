@@ -7,6 +7,8 @@ import hashlib
 import json
 import os
 import re
+import subprocess
+import sys
 import tempfile
 from datetime import datetime
 from pathlib import Path
@@ -51,6 +53,17 @@ tags: [voeding, tracking]
 
 <!-- FOOD_AUDITS -->
 """
+
+
+def _regenerate_mirror() -> None:
+    """Best-effort refresh of mypka.db so the Cockpit reflects this write immediately.
+    Markdown stays canonical either way; a failed regen here never loses data,
+    it only means the dashboard lags until the next successful run."""
+    script = Path(__file__).with_name("regen-mypka-db.py")
+    try:
+        subprocess.run([sys.executable, str(script)], capture_output=True, timeout=30, check=True)
+    except Exception as exc:
+        print(f"WAARSCHUWING: mypka.db-mirror niet geregenereerd: {exc}", file=sys.stderr)
 
 
 def _atomic_write(path: Path, text: str) -> None:
@@ -117,6 +130,8 @@ def append_meal(payload: dict, vault: Path | None = None) -> Path:
     machine = "<!-- FOOD_ENTRY " + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + " -->\n"
     text = text.replace("<!-- FOOD_ENTRIES -->", human + machine + "\n<!-- FOOD_ENTRIES -->")
     _atomic_write(path, text)
+    if vault is None:
+        _regenerate_mirror()
     return path
 
 
@@ -132,6 +147,8 @@ def append_audit(log_date: str, complete: bool, confirmed_at: str | None = None,
     text = re.sub(r"(?m)^day_complete:.*$", f"day_complete: {'true' if complete else 'false'}", text, count=1)
     text = re.sub(r"(?m)^confirmed_at:.*$", f"confirmed_at: {stamp}", text, count=1)
     _atomic_write(path, text)
+    if vault is None:
+        _regenerate_mirror()
     return path
 
 

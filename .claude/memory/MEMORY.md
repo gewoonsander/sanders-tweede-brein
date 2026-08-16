@@ -20,3 +20,10 @@
 - [ADC-verslag: geen quote-placeholder](feedback_adc_verslag_geen_quote.md) — nooit een quote-van-de-winnaar element opnemen, Sander verwijdert het altijd zelf en er is nooit een quote
 - [Todoist-taken: letter + link](feedback_todoist_taaklijst_format.md) — altijd (A)(B)(C) label + klikbare Todoist-link per taak in elk taakoverzicht
 - [Familienaam-conventie](user_familienaam_conventie.md) — kinderen heten "van Ockenburg" (geen "-Zwaan"), alleen Sander/Marieke voeren de dubbele naam
+- [Machine-identiteit verifiëren](feedback_machine_identiteit_verifieren.md) — altijd hostname/system_profiler checken i.p.v. aannemen welke Mac een sessie draait
+- [SuperWhisper-plugin permanent uit](feedback_superwhisper_plugin_uit.md) — bewust uitgeschakeld in ~/.claude/settings.json wegens pop-ups, niet opnieuw voorstellen
+- [Transcribeer-skill op meerdere machines](project_transcribeer_skill_multi_machine.md) — /transcribeer staat nu op Mac Mini + MacBook Air, Whisper-terugval delegeert via SSH naar whisper_host
+- [macmini-SSH niet als fysieke aansluiting behandelen](feedback_macmini_ssh_niet_fysieke_aansluiting_aannemen.md) — Mediahub-werk vanaf MacBook Air kan via `ssh macmini`, niet aannemen dat lokale SSD-aansluiting nodig is
+- [Klikbare bestandslinks](feedback_klikbare_bestandslinks.md) — altijd file://-link bij genoemde lokale bestanden/mappen, zie GL-021
+- [GL-016: nummers i.p.v. codes](feedback_gl016_nummering_ipv_codes.md) — beslisblokken gebruiken oplopende nummers (1,2,3), geen alfanumerieke codes
+- [Mac mini Schermdeling nog aanzetten](project_macmini_schermdeling_aanzetten.md) — herinner Sander zodra sessie op Mac mini draait, éénmalige fysieke bevestiging nodig

@@ -3,6 +3,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from food_log import append_audit, append_meal, daily_path, parse
@@ -47,6 +48,23 @@ class FoodLogTests(unittest.TestCase):
 
     def test_rejects_unknown_category(self):
         with self.assertRaises(ValueError): append_meal(self.payload(meal="brunch"), self.vault)
+
+    def test_mirror_not_regenerated_against_explicit_test_vault(self):
+        # A test vault is never the real myPKA root, so a real regen would be
+        # both wasteful and pointless (it can't see data written to self.vault).
+        with patch("food_log._regenerate_mirror") as mock_regen:
+            append_meal(self.payload(), self.vault)
+            append_audit("2026-08-11", True, vault=self.vault)
+        mock_regen.assert_not_called()
+
+    def test_mirror_regenerated_for_default_vault(self):
+        # append_meal(payload) without a vault writes to the real myPKA root and
+        # must refresh the Cockpit's mirror so the dashboard reflects it immediately
+        # (this is what SOP-017 step 10 used to require as a manual, forgettable step).
+        with patch("food_log.daily_path", return_value=self.vault / "log.md"), \
+             patch("food_log._regenerate_mirror") as mock_regen:
+            append_meal(self.payload())
+        mock_regen.assert_called_once()
 
 
 if __name__ == "__main__": unittest.main()

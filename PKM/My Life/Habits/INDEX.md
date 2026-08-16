@@ -7,6 +7,10 @@ Recurring rhythms with a cadence and a definition of done. A Habit is not a Goal
 - [[morning-build-session]] — seeded course sample. The canonical shape every Habit file follows.
 - [[een-cursus-tegelijk]] — wekelijkse check op openstaande cursus-taken, tegengaan van versnippering.
 - [[schimmelcreme-gebruiken]] — dagelijks Healthypharm Antischimmelcrème aanbrengen, gestart 2026-07-02.
+- [[dagelijks-opdrukken]] — dagelijks minimaal 25 keer opdrukken als herstart van de challenge met Mattijs.
+- [[dagelijks-bewegen]] — iedere dag minimaal één bewust bewegingsmoment.
+- [[bodylotion-aanbrengen]] — dagelijks bodylotion aanbrengen als vaste verzorgingsroutine.
+- [[dagelijks-voldoende-drinken]] — dagelijks water en overige dranken apart registreren, met 2 liter water als persoonlijk doel.
 
 ## Naming
 

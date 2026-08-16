@@ -20,4 +20,16 @@ The concrete shape of the habit. Time of day, location, duration, what counts as
 
 ## Reflection
 
-A loose log. Not a daily streak tracker - just notes when something is worth writing down. What you noticed, what got in the way, what made it easier.
+Daily check-ins use this shape so the derived Tracking dashboard can mirror them:
+
+```markdown
+### YYYY-MM-DD
+
+- done: true
+- amount: 25
+- unit: herhalingen
+- trigger: close-session
+- note: optional context
+```
+
+Omit `amount`, `unit`, and `note` when they do not apply.

@@ -2,17 +2,18 @@
 
 _Auto-generated. Do not edit by hand. Run `SOP-rebuild-task-index` to regenerate._
 
-_Last rebuilt: 2026-08-13T10:58:31Z_
+_Last rebuilt: 2026-08-16T13:46:53Z_
 
 ## Summary
-- Open: 2
+- Open: 3
 - In progress: 2 (0 blocked)
-- Done (this month): 1
+- Done (this month): 2
 - Cancelled (this month): 0
 
-## Open (2)
+## Open (3)
 
 ### Priority 2 — high
+- [[tsk-2026-08-16-002-dranken-apart-registreren-in-voedingsdashboard]] — Dranken apart registreren in het voedings- en gewoontedashboard — assignee: daedalus — created 2026-08-16
 - [[tsk-2026-08-12-001-build-portable-dropbox-mcp]] — Build portable Dropbox MCP with approved mutation batches — assignee: daedalus — created 2026-08-12 — BLOCKED: Gepauzeerd op verzoek van Sander nadat Dropbox App Console herhaaldelijk geen app liet aanmaken; hervatten alleen wanneer Sander het Dropbox-traject opnieuw wil proberen
 
 ### Priority 4 — low
@@ -23,9 +24,10 @@ _Last rebuilt: 2026-08-13T10:58:31Z_
 - [[tsk-2026-08-11-001-mypka-cockpit-software-stack-tabblad]] — assignee: bezalel — claimed 2026-08-11
 
 ## By assignee
-- daedalus: 1 open, 0 in-progress
+- daedalus: 2 open, 0 in-progress
 - athena: 0 open, 1 in-progress
 - bezalel: 0 open, 1 in-progress
 
 ## Recently closed (last 7 days)
+- 2026-08-16 [[tsk-2026-08-16-001-activeer-gewoontetracking-in-cockpit]] — done — Daedalus
 - 2026-08-12 [[tsk-2026-08-08-001-scaffold-oude-teamnamen-opruimen]] — done — Hermes

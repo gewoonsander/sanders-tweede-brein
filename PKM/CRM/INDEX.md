@@ -10,6 +10,7 @@ People and Organizations the user interacts with. Cross-linked into Journal entr
 ## Active files
 
 ### People
+- [[john-lokken]] — hoofdcontact ADC Europe voor Sanders regiomanagement
 - [[michael-walstra]] — Toernooi Manager Café Kafé
 - [[stef-onderstal]] — Toernooi Manager Dartclub de Rijnvogels
 - [[sander-van-ockenburg-zwaan]] — eigenaar, ondernemer, coach
@@ -24,6 +25,7 @@ People and Organizations the user interacts with. Cross-linked into Journal entr
 - [[dr-schmidt]] — seeded course sample
 
 ### Organizations
+- [[het-twentse-ros]] — dart- en horecalocatie in Hengelo, ADC-toernooilocatie
 - [[rivierenland-darts-bond]] — RDB, dartsbond Nijmegen/Rivierenland
 - [[ndb-nederlandse-darts-bond]] — NDB, nationale dartsbond
 - [[dt-irritant]] — Sanders dartsteam RDB Eredivisie

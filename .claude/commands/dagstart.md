@@ -10,7 +10,7 @@ Proactieve ochtendroutine. Bereidt Sander voor op de dag — agenda, taken, inbo
 
 ## Wat er gebeurt
 
-Hermes doorloopt negen stappen in volgorde:
+Hermes doorloopt tien stappen in volgorde:
 
 ### Stap 1 — Agenda vandaag
 Haal de afspraken van vandaag op via Google Calendar. Toon: tijd, titel, locatie (indien aanwezig). Als er niets staat: meld dat expliciet ("Geen afspraken vandaag").
@@ -39,19 +39,27 @@ Controleer `ADC/Verslagen/` op bestanden met status `CONCEPT — ter review door
 
 Geen concepten van geen van beide types gevonden: sla deze stap stilzwijgend over, geen melding nodig.
 
-### Stap 7 — Deliverables die aandacht nodig hebben
+### Stap 7 — Nieuwe video-samenvattingen
+
+Controleer `PKM/Documents/YouTube-Kennis/_nieuw-voor-dagstart.md` (gegenereerd door de lokale LaunchAgent `nl.gewoonsander.youtube-samenvatting-ochtend` — dagelijks 07:00 op de Mac mini, niet zichtbaar in cloud-scheduled-tasks, zie [[Deliverables/2026-08-16-youtube-kanaal-samenvatting-design]]). Bestaat het bestand en heeft het inhoud onder de `CONCEPT`-status: meld per video kort het kanaal, onderwerp, relevantie-label en de reden (1 zin), met een link naar de volledige samenvatting (Outer World-item, `PKM/Outer World/`). Een **FOUT**-regel (mislukte run) meld je net zo expliciet als een geslaagde video-melding — dit signaleert dat de dagelijkse check niet gelukt is, geen ruis om te negeren.
+
+Na het melden: **wis de gemelde entries** uit het bestand (de queue leegt bij het melden, niet bij het schrijven — zo gaat er nooit iets verloren als er een paar dagen geen `/dagstart` gedraaid wordt).
+
+Geen bestand, of leeg onder de statusregel: sla deze stap stilzwijgend over, geen melding nodig.
+
+### Stap 8 — Deliverables die aandacht nodig hebben
 Controleer losstaande Deliverables (geen eigenaartaak, zie [[GL-004-task-resource-linking]]) ouder dan 30 dagen die niet aan één van de archiveercriteria uit [[SOP-020-losstaand-deliverable-archiveren]] voldoen. Meld ze in één regel per stuk (bestandsnaam + leeftijd). Dit is een melding, geen archivering — verplaats niets. Geen kandidaten: sla deze stap stilzwijgend over, geen melding nodig.
 
-### Stap 8 — Dagintentie (optioneel)
+### Stap 9 — Dagintentie (optioneel)
 Vraag: "Wat wil je vandaag bereiken?" — één open vraag. Als Sander antwoordt, geeft Penn het door als journal-notitie voor vandaag. Als Sander zegt "overslaan" of niets invult, ga verder.
 
-### Stap 9 — Tijdsblokken voorstellen (optioneel)
+### Stap 10 — Tijdsblokken voorstellen (optioneel)
 Als taken uit stap 3 `estimated_minutes` en een `scheduled_date` van vandaag hebben, stel concrete tijdsblokken voor om ze in de agenda te zetten. Nooit automatisch aanmaken — altijd eerst voorleggen en op akkoord wachten voor je iets in Google Calendar zet. Zijn er geen taken om te blokken: sla deze stap stilzwijgend over, geen melding nodig.
 
 ## Regels
 
 - Altijd in deze volgorde — nooit stappen samenvoegen of overslaan
 - Compact presenteren — geen lange uitleg, alleen de feiten
-- Stap 2 (bij geen verjaardagen), 4 (bij geen statuswijzigingen), 6 (bij geen concepten), 7 (bij geen kandidaten), 8 en 9 zijn optioneel/overslaanbaar — nooit opdringen
+- Stap 2 (bij geen verjaardagen), 4 (bij geen statuswijzigingen), 6 (bij geen concepten), 7 (bij geen nieuwe video's), 8 (bij geen kandidaten), 9 en 10 zijn optioneel/overslaanbaar — nooit opdringen
 - Geen acties uitvoeren zonder expliciete bevestiging (bijv. taken niet automatisch afsluiten, tijdsblokken niet automatisch aanmaken, berichten niet automatisch versturen, Deliverables niet automatisch archiveren)
 - Keuzeopties altijd met (A)(B)(C) labels

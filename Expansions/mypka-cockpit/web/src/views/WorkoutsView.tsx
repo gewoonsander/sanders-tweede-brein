@@ -66,7 +66,7 @@ export function WorkoutsView() {
   return (
     <div className="dashboard-view">
       <PageHeader
-        title="Workouts"
+        title="Trainingen"
         icon={MapIcon}
         subtitle="Routes and a glowing heat trail — where your feet have been."
       />
