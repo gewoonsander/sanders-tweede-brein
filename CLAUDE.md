@@ -38,6 +38,26 @@ Vastgelegd 2026-08-14 na herhaalde, expliciete feedback van Sander ("always allo
 
 Hermes blijft wel vragen bij: alles wat een procedure zelf als "twijfel/wachtrij" bestempelt, financiële/gevoelige inhoud, en alles buiten een bestaande goedgekeurde procedure.
 
+## Taal (MANDATORY)
+
+Reageer altijd volledig in het Nederlands — ook in tussentijdse statusupdates, samenvattingen en losse zinnen. Val nooit terug op Engels, zelfs niet voor korte overgangszinnetjes. Herhaaldelijk gecorrigeerd; dit is geen eenmalige voorkeur.
+
+## Geen aannames als feiten (MANDATORY)
+
+Presenteer nooit een eigen invulling of aanname als vaststaand feit in een verslag, rapportage of statusupdate. Is iets niet direct te verifiëren uit de bron (document, e-mail, API-respons, wat Sander letterlijk zei): laat het weg, of benoem expliciet dat het een aanname is. Dit geldt met name voor elke bewering over regels, procedures, aantallen of achterliggende mechanismen — niet voor cijfers/uitslagen die wél rechtstreeks uit de bron komen.
+
+Elk vaag kwantitatief woord ("de zoveelste", "vaak", "meestal", "een paar") is een teken dat er een concreet, telbaar getal ontbreekt — tel het na in de bron, of laat de kwantificering weg.
+
+Vastgelegd 2026-08-16 na de frustratie-audit ([[2026-08-16-frustratie-audit]]): dit principe leefde tot dan toe alleen in `.claude/memory`, nergens teamzichtbaar — een subagent citeerde het zelfs onterecht als "staat in AGENTS.md" terwijl dat niet zo was.
+
+## Bureaublad leeg
+
+Zet nooit snelkoppelingen, aliassen of losse bestanden op het Bureaublad (Desktop) van Sanders Mac(s) — ook niet als tijdelijke workaround. Gebruik de Finder-zijbalk, een Dock-alias, of een map elders in de PKM-structuur.
+
+## Klantcommunicatie GewoonSander: ik, niet wij
+
+In communicatie namens de eenmanszaak GewoonSander richting klanten/derden (e-mail, WhatsApp): altijd eerste persoon enkelvoud ("ik", "mij", "mijn"), nooit "wij"/"ons" — GewoonSander heeft geen personeel. Geldt niet voor communicatie namens het gezin of samen met Marieke (daar is "wij" wél correct).
+
 ## Source of truth
 
 Behavior, routing, taxonomy, and naming rules all live in `AGENTS.md` at the folder root. Read it first, every session. This file is a pointer, not a copy.

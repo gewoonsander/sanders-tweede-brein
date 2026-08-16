@@ -33,3 +33,15 @@ Filename pattern: `GL-NNN-<title>.md`.
 - Without it, you would copy-paste the same rule into multiple files.
 
 If you find yourself restating the same rule in two files, stop and write a Guideline. Then `[[wikilink]]` to it from both files.
+
+## Before creating any new register or "this is where X lives" file
+
+Vastgelegd 2026-08-16 na de frustratie-audit ([[2026-08-16-frustratie-audit]]): een sessie richtte `PKM/Documents/software-en-tools.md` in als dé plek voor software-tracking, zonder te weten dat [[GL-018-integratie-en-software-register]] zich al expliciet "de portable single source of truth" voor exact datzelfde onderwerp noemt. Twee registers voor hetzelfde ding, ontstaan puur omdat niemand eerst zocht.
+
+**Voordat je een nieuw bestand aanmaakt dat bedoeld is als vaste, doorlopend bij te werken lijst/register/overzicht van iets** (niet alleen een nieuwe Guideline — ook een los PKM/Documents-bestand, een nieuwe tabel, een nieuwe "inventaris"):
+
+```bash
+grep -rli "single source of truth\|enige bron\|de enige plek" "Team Knowledge/Guidelines"
+```
+
+Kom je een bestaand register tegen dat hetzelfde onderwerp claimt: gebruik dat, wikilink ernaartoe, voeg niets nieuws toe. Vind je niets: ga door, maar overweeg of dit een Guideline moet worden (zie hierboven) in plaats van een los PKM-document, juist om dit zelf straks als vindbare SSOT te laten gelden.

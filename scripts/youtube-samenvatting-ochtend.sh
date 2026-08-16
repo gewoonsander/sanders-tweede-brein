@@ -10,9 +10,12 @@
 #      mechanismen uit sync raken (zie Deliverables/2026-08-16-youtube-kanaal-samenvatting-
 #      design.md, Raad-uitspraak risico 2). "Nieuw" = een bestand dat na deze /transcribeer-
 #      aanroep bestaat en er vóór de aanroep nog niet was.
-#   2. Eén Haiku-call (zelfde Keychain-key als Expansions/audio-transcribe) levert een
-#      volwaardige PKM-samenvatting + een kort dagstart-relevantie-oordeel, gegrond in
-#      Sanders bestaande PKM-Topics/Projects (geen losse, apart te onderhouden themalijst).
+#   2. Eén samenvattingsstap levert een volwaardige PKM-samenvatting + een kort dagstart-
+#      relevantie-oordeel, gegrond in Sanders bestaande PKM-Topics/Projects (geen losse, apart
+#      te onderhouden themalijst). Methode instelbaar via config/youtube-kanalen.json ->
+#      samenvatting_methode: 'abonnement' (default, headless Claude Code CLI, geen aparte
+#      kosten) of 'api' (directe Anthropic-call, Haiku, Keychain-key uit audio-transcribe,
+#      kleine kosten per aanroep) — wisselen is een configwijziging, geen scriptwijziging.
 #   3. Samenvatting wordt weggeschreven als Outer World-item (PKM/Outer World/YYYY/MM/) —
 #      hergebruikt het bestaande "dingen die ik van buiten bewaar"-concept in de Cockpit.
 #   4. Een kort seintje gaat naar de dagstart-queue (PKM/Documents/YouTube-Kennis/
@@ -50,13 +53,6 @@ meld_fout() {
 
 log "start"
 
-ANTHROPIC_API_KEY="$(security find-generic-password -a "$(whoami)" -s "nl.gewoonsander.audio-transcribe.ANTHROPIC_API_KEY" -w 2>/dev/null)"
-export ANTHROPIC_API_KEY
-if [ -z "$ANTHROPIC_API_KEY" ]; then
-    meld_fout "kon ANTHROPIC_API_KEY niet uit Keychain lezen (item nl.gewoonsander.audio-transcribe.ANTHROPIC_API_KEY ontbreekt of Keychain is locked)."
-    exit 1
-fi
-
 if [ ! -f "$CONFIG" ]; then
     meld_fout "config ontbreekt: $CONFIG"
     exit 1
@@ -69,14 +65,20 @@ fi
 
 mkdir -p "$KENNIS_MAP" "$OUTER_WORLD/$JAAR_MAAND"
 
-# PKM-context voor het relevantie-oordeel: alleen bestandsnamen (geen inhoud), Topics + Projects.
-topics_lijst=$(ls "$TOPICS_DIR" 2>/dev/null | grep '\.md$' | grep -v '^INDEX.md$' | sed 's/\.md$//')
-projects_lijst=$(ls "$PROJECTS_DIR" 2>/dev/null | grep '\.md$' | grep -v '^INDEX.md$' | sed 's/\.md$//')
+# config uitlezen via stdin (cat | python3 -c ...) i.p.v. python zelf open('$CONFIG') te laten
+# doen: een LaunchAgent-Python-proces dat zelf een pad onder ~/Documents opent kan vastlopen op
+# een macOS TCC-toestemmingscontrole die nooit interactief afgehandeld kan worden (geconstateerd
+# 2026-08-16 — bash zelf heeft die toegang al wel, dus bash leest het bestand en pipet de inhoud
+# door). Zie Deliverables/2026-08-16-youtube-kanaal-samenvatting-design.md.
+SAMENVATTING_METHODE=$(cat "$CONFIG" | python3 -c "
+import json, sys
+data = json.load(sys.stdin)
+print(data.get('samenvatting_methode', 'abonnement'))
+")
 
-kanalen=$(python3 -c "
-import json
-with open('$CONFIG') as f:
-    data = json.load(f)
+kanalen=$(cat "$CONFIG" | python3 -c "
+import json, sys
+data = json.load(sys.stdin)
 for k in data.get('kanalen', []):
     print(k['naam'] + '|' + k['url'])
 ")
@@ -85,6 +87,27 @@ if [ -z "$kanalen" ]; then
     log "geen kanalen in config, klaar"
     exit 0
 fi
+
+# ANTHROPIC_API_KEY alleen nodig bij methode 'api' — bij 'abonnement' gebruikt de headless
+# Claude Code CLI Sanders ingelogde sessie, geen aparte key.
+if [ "$SAMENVATTING_METHODE" = "api" ]; then
+    ANTHROPIC_API_KEY="$(security find-generic-password -a "$(whoami)" -s "nl.gewoonsander.audio-transcribe.ANTHROPIC_API_KEY" -w 2>/dev/null)"
+    export ANTHROPIC_API_KEY
+    if [ -z "$ANTHROPIC_API_KEY" ]; then
+        meld_fout "kon ANTHROPIC_API_KEY niet uit Keychain lezen (item nl.gewoonsander.audio-transcribe.ANTHROPIC_API_KEY ontbreekt of Keychain is locked)."
+        exit 1
+    fi
+else
+    CLAUDE_BIN="${CLAUDE_BIN:-$HOME/.local/bin/claude}"
+    if [ ! -x "$CLAUDE_BIN" ]; then
+        meld_fout "samenvatting_methode staat op 'abonnement', maar de claude-CLI is niet gevonden op $CLAUDE_BIN."
+        exit 1
+    fi
+fi
+
+# PKM-context voor het relevantie-oordeel: alleen bestandsnamen (geen inhoud), Topics + Projects.
+topics_lijst=$(ls "$TOPICS_DIR" 2>/dev/null | grep '\.md$' | grep -v '^INDEX.md$' | sed 's/\.md$//')
+projects_lijst=$(ls "$PROJECTS_DIR" 2>/dev/null | grep '\.md$' | grep -v '^INDEX.md$' | sed 's/\.md$//')
 
 TOTAAL_NIEUW=0
 GEWIJZIGDE_BESTANDEN=()
@@ -150,8 +173,10 @@ while IFS='|' read -r naam url; do
         video_titel=$(echo "$transcript_inhoud" | head -1 | sed 's/^# //')
         video_url=$(echo "$transcript_inhoud" | grep -m1 '^\- \*\*Video:\*\*' | sed 's/^- \*\*Video:\*\* //')
 
-        haiku_output=$(python3 -c "
-import json, urllib.request, os
+        # Prompt éénmalig opbouwen (geen API-call hier) — daarna gebruikt door welke methode
+        # dan ook (abonnement via headless Claude Code, of de directe API).
+        prompt_text=$(python3 -c "
+import json
 
 transcript = '''$(echo "$transcript_inhoud" | sed "s/'/\\\\'/g")'''
 titel = '''$(echo "$video_titel" | sed "s/'/\\\\'/g")'''
@@ -195,12 +220,26 @@ pkm_samenvatting (string, mag markdown bevatten), dagstart_onderwerp (string, ma
 relevantie_label (\"hoog\"/\"gemiddeld\"/\"laag\"), relevantie_reden (1 zin), linked_topics
 (array van strings), linked_projects (array van strings)'''
 
+print(prompt)
+")
+
+        # Samenvatten: 'abonnement' (headless Claude Code, gebruikt Sanders Claude-abonnement,
+        # geen aparte kosten) of 'api' (directe Anthropic-call, Haiku, kleine kosten per aanroep).
+        # Instelbaar via config/youtube-kanalen.json -> samenvatting_methode, geen scriptwijziging
+        # nodig om te wisselen (bv. bij abonnements-limiet vaker geraakt worden).
+        if [ "$SAMENVATTING_METHODE" = "api" ]; then
+            haiku_output=$(python3 -c "
+import json, urllib.request, os
+prompt = '''$(echo "$prompt_text" | sed "s/'/\\\\'/g")'''
 data = json.dumps({'model': 'claude-haiku-4-5-20251001', 'max_tokens': 4096, 'messages': [{'role': 'user', 'content': prompt}]}).encode()
 api_key = os.environ.get('ANTHROPIC_API_KEY', '')
 req = urllib.request.Request('https://api.anthropic.com/v1/messages', data=data, headers={'x-api-key': api_key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json'})
 resp = json.loads(urllib.request.urlopen(req, timeout=120).read())
 print(resp['content'][0]['text'])
 " 2>&1)
+        else
+            haiku_output=$("$CLAUDE_BIN" -p "$prompt_text" --dangerously-skip-permissions 2>&1)
+        fi
 
         parsed_ok=$(python3 -c "
 import json, re, sys

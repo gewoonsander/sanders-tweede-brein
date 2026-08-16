@@ -42,6 +42,15 @@ tags: [voeding, tracking]
 - Betrouwbaarheid: low
 <!-- FOOD_ENTRY {"log_date":"2026-08-16","logged_at":"2026-08-16T22:00:00+02:00","meal_type":"snack","description":"Een droge metworst van De Drie Eiken, gekocht bij Aldi","source_type":"text","source_id":"2026-08-16-close-session-drie-eiken-droge-metworst","kcal":[650.0,1150.0],"protein_g":[35.0,65.0],"carbs_g":[1.0,10.0],"fat_g":[55.0,100.0],"confidence":"low","photo_path":null,"supersedes_entry_id":null,"entry_id":"02eaee592d16feba31c1"} -->
 
+### 23:45 — Diner
+- Bananenpannenkoek met salade
+- Energie: 450–750 kcal
+- Eiwit: 11–18 g
+- Koolhydraten: 65–105 g
+- Vet: 14–28 g
+- Betrouwbaarheid: low
+<!-- FOOD_ENTRY {"log_date":"2026-08-16","logged_at":"2026-08-16T23:45:00+02:00","meal_type":"dinner","description":"Bananenpannenkoek met salade","source_type":"text","source_id":"2026-08-16-close-session-bananenpannenkoek-salade","kcal":[450.0,750.0],"protein_g":[11.0,18.0],"carbs_g":[65.0,105.0],"fat_g":[14.0,28.0],"confidence":"low","photo_path":null,"supersedes_entry_id":null,"entry_id":"7c3a9f14e08b6d5a2f11"} -->
+
 <!-- FOOD_ENTRIES -->
 
 ## Completion audit
@@ -51,5 +60,8 @@ tags: [voeding, tracking]
 
 - 2026-08-16T15:45:53+02:00 — complete: yes — source: close-session
 <!-- FOOD_AUDIT {"confirmed_at":"2026-08-16T15:45:53+02:00","complete":true,"source":"close-session"} -->
+
+- 2026-08-16T23:45:00+02:00 — complete: yes — source: close-session
+<!-- FOOD_AUDIT {"confirmed_at":"2026-08-16T23:45:00+02:00","complete":true,"source":"close-session"} -->
 
 <!-- FOOD_AUDITS -->

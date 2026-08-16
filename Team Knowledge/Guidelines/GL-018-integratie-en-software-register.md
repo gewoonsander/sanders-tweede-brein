@@ -4,6 +4,7 @@ title: Integratie- en softwareregister
 status: active
 owner: daedalus
 last_verified: 2026-08-16
+merged_from: software-en-tools (2026-08-16)
 ---
 
 # GL-018 — Integratie- en softwareregister
@@ -336,6 +337,34 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
       "conflict_policy": "canonical-wins"
     },
     {
+      "integration_id": "google-people-api-mcp",
+      "name": "Google People API (MCP-connector)",
+      "kind": "mcp",
+      "purpose": "Leestoegang voor Hermes tot Google Contacts (contacts.readonly), zodat vóór een nieuwe PKM/CRM-stub eerst gecontroleerd kan worden of een contact al bestaat.",
+      "lifecycle": "active",
+      "owner": "daedalus",
+      "expected_devices": [],
+      "expected_runtimes": [
+        "claude-ai-connector"
+      ],
+      "auth_method": "oauth",
+      "secret_names": [],
+      "cost_model": "included",
+      "verification_profile": [
+        "manual"
+      ],
+      "dependencies": [],
+      "canonical_reference": "2026-06-23-00-13_Larry_google-contacts-koppeling-en-darts-onderzoek",
+      "next_action": "Bevestigd door Argus 2026-08-16: scopes minimaal (contacts.readonly + userinfo.profile), geen lokaal secret aangetroffen (repo-brede grep schoon), geen GL-017-entry nodig — volledig cloud-managed bij claude.ai/Google, geen lokaal MCP-transport. Revocatiepad: claude.ai Instellingen → Connectors → disconnect, of Google Account → Beveiliging → Derdenapp-toegang → verwijderen, of Google Cloud Console → OAuth-client verwijderen/roteren.",
+      "data_role": "source",
+      "sync_direction": "import",
+      "canonical_records": [],
+      "adapter_refs": [
+        "claude-connector:google-contacts"
+      ],
+      "conflict_policy": "canonical-wins"
+    },
+    {
       "integration_id": "dt-irritant-forms",
       "name": "D.T. Irritant Forms-automatisering",
       "kind": "webhook",
@@ -622,6 +651,83 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
         "food:reference-import"
       ],
       "conflict_policy": "canonical-wins"
+    },
+    {
+      "integration_id": "affinity-suite",
+      "name": "Affinity Suite (Photo/Designer/Publisher)",
+      "kind": "software",
+      "purpose": "Professionele designsoftware als alternatief voor Adobe, gebruikt in combinatie met Canva.",
+      "lifecycle": "active",
+      "owner": "sander",
+      "expected_devices": [
+        "primary-desktop"
+      ],
+      "expected_runtimes": [],
+      "auth_method": "license",
+      "secret_names": [],
+      "cost_model": "unknown",
+      "verification_profile": [
+        "manual"
+      ],
+      "dependencies": [],
+      "canonical_reference": "software-en-tools",
+      "next_action": "Licentievorm vaststellen (V2 Universal of losse apps).",
+      "data_role": "processor",
+      "sync_direction": "none",
+      "canonical_records": [],
+      "adapter_refs": [],
+      "conflict_policy": "canonical-wins"
+    },
+    {
+      "integration_id": "wpmu-dev",
+      "name": "WPMU Dev",
+      "kind": "software",
+      "purpose": "Dedicated hosting en premium plugins voor de RDB-website (rivierenlanddartsbond.nl) en andere WordPress-projecten.",
+      "lifecycle": "active",
+      "owner": "sander",
+      "expected_devices": [],
+      "expected_runtimes": [],
+      "auth_method": "account",
+      "secret_names": [],
+      "cost_model": "paid",
+      "verification_profile": [
+        "manual"
+      ],
+      "dependencies": [],
+      "canonical_reference": "software-en-tools",
+      "next_action": "Periodiek DNS, statistieken en plugin-updates controleren.",
+      "data_role": "destination",
+      "sync_direction": "export",
+      "canonical_records": [],
+      "adapter_refs": [],
+      "conflict_policy": "canonical-wins"
+    },
+    {
+      "integration_id": "rclone",
+      "name": "rclone",
+      "kind": "software",
+      "purpose": "Grote bestanden rechtstreeks van/naar Google Drive verplaatsen buiten de LLM-context om — nodig omdat de Drive-MCP-koppeling alleen kleine bestanden aankan.",
+      "lifecycle": "active",
+      "owner": "daedalus",
+      "expected_devices": [
+        "portable-computer"
+      ],
+      "expected_runtimes": [],
+      "auth_method": "oauth",
+      "secret_names": [],
+      "cost_model": "free",
+      "verification_profile": [
+        "config-present",
+        "manual"
+      ],
+      "dependencies": [],
+      "canonical_reference": "software-en-tools",
+      "next_action": "Ook installeren op de Mac mini; op termijn eigen Google OAuth-client aanmaken vóór de gedeelde rclone-client-ID in 2026 wordt uitgefaseerd.",
+      "data_role": "processor",
+      "sync_direction": "none",
+      "canonical_records": [],
+      "adapter_refs": [],
+      "conflict_policy": "canonical-wins"
     }
   ]
 }
@@ -660,3 +766,4 @@ geverifieerd.
 - [[SOP-019-controleer-integraties-en-software]]
 - [[2026-08-11-integratiecontrole-cockpit-design]]
 - [[2026-08-11-een-ssot-voor-software-en-koppelingen-design]]
+- [[2026-08-16-frustratie-audit]] — signaleerde dat `PKM/Documents/software-en-tools.md` los van dit register was blijven bestaan; Affinity, WPMU Dev en rclone zijn op 2026-08-16 hierin samengevoegd. Dat bestand is nu een doorverwijzing hierheen.
