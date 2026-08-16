@@ -1,13 +1,18 @@
 # Team Inbox
 
-Where you drop raw inputs for the team to process.
+Dit is de **enige inbox die Sander bewust hoeft te beoordelen**. Hier komen ruwe
+inputs en alle uitzonderingen terecht waarvoor het team nog geen zekere
+canonieke bestemming kan bepalen. De route en levenscyclus per informatietype
+staan canoniek in [[GL-020-informatie-invoer-uitvoer-en-levenscyclusregister]].
 
-Anything you throw in here gets filed. Screenshots, voice memos, business cards, PDFs, half-formed thoughts in a `.md` file, links to articles - drop it in, then say "Larry, process the inbox" (or just "Hi Larry, here's something new").
+Alles wat je hierin zet wordt beoordeeld en gerouteerd. Screenshots, voice
+memo's, visitekaartjes, PDF's, losse gedachten en links mogen rechtstreeks naar
+de root. Zeg daarna bijvoorbeeld: "Hermes, verwerk de Team Inbox."
 
 ## How it works
 
 - You drop a file (or paste content into a `.md` file)
-- **Larry** routes it to the right specialist (usually **Penn** for capture)
+- **Hermes** routeert het naar de juiste specialist (meestal **Penn** voor capture)
 - The specialist files it into PKM, CRM, Journal, or wherever it belongs
 - Cross-links via `[[wikilinks]]` get added automatically
 - The processed input gets removed from Team Inbox once filed
@@ -17,14 +22,17 @@ Anything you throw in here gets filed. Screenshots, voice memos, business cards,
 - Screenshots of conversations, business cards, whiteboard photos
 - Voice memos to be transcribed
 - Random ideas you want captured but don't want to file yourself
-- Links to articles for **Pax** to research deeper
+- Links naar artikelen voor **Athena** om verder te onderzoeken
 - A quick `.md` braindump at end of day for **Penn** to file across PKM
 
 If you know exactly where a note belongs, write it directly in PKM. Team Inbox is for *"I have something, not sure where, just take it."*
 
 ## Subfolders (automation-fed, not manual drop zones)
 
-Two subfolders exist alongside the flat root and are populated by the `nl.gewoonsander.downloads-router` launchd agent (`Expansions/downloads-router/route_downloads.sh`), which watches `~/Downloads` and moves matching files here automatically:
+De root en deze twee automatiseringssubmappen vormen samen één Team Inbox. De
+submappen worden gevuld door de `nl.gewoonsander.downloads-router` launchd-agent
+(`Expansions/downloads-router/route_downloads.sh`), die passende bestanden uit
+`~/Downloads` hierheen routeert:
 
 - `Team Inbox/Screenshots/` - screenshot-shaped files that land in Downloads (e.g. dragged out of Slack, saved from a browser, shared from another device), renamed to `YYYY-MM-DD_HHMM_omschrijving.ext`.
 - `Team Inbox/Documents/` - PDFs/docs/spreadsheets that land in Downloads, moved here unchanged.
@@ -32,3 +40,11 @@ Two subfolders exist alongside the flat root and are populated by the `nl.gewoon
 This is separate from a direct screen capture (Cmd+Shift+3/4/5), which macOS saves straight into the `Team Inbox/` root per the `com.apple.screencapture` default location - it never touches `Screenshots/`.
 
 Whoever processes the inbox (see [[Team Knowledge/Workstreams/WS-001-daily-journaling]]) must check both subfolders, not just the root.
+
+## Technische bronnen zijn geen extra inboxen
+
+Downloads, e-mail, apparaatcaptures, werkmappen en tijdelijk iCloud `00-inbox`
+kunnen invoer aanleveren. Sander hoeft die plekken niet als losse wachtrijen te
+controleren. Automatisering verwerkt alleen ondubbelzinnige gevallen; ieder
+twijfelgeval komt terug in deze Team Inbox met een reden. Na geslaagde routering
+en verificatie wordt het verwerkte invoerbestand verwijderd.

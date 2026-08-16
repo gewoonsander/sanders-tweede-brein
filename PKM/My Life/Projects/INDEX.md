@@ -4,6 +4,7 @@ Bounded efforts with a finish line — a set of deliverables you cross off when 
 
 ## Active files
 
+- [[sanders-tweede-brein-ingericht]] — tweede brein v1 afronden: SSOT, centrale Team Inbox, Mac Mini als uitvoerhost en heldere opslagroutes.
 - [[side-project-mvp]] — seeded course sample. The canonical shape every Project file follows.
 - [[workshop-aanmelding-automatisering]] — Plug&Pay → Mailblue → Excel koppeling zodat Erin en Ray automatisch de deelnemerslijst ontvangen. Status: planning.
 - [[project_praktijkvoluitleven-migratie]] — hosting-migratie en doorlopend klantbeheer voor [[heleen-van-den-berg]] (Praktijk Voluit Leven).

@@ -13,34 +13,46 @@ tags:
   - mediahub
   - downloads
   - werkwijze
-last_updated: 2026-06-28
+last_updated: 2026-08-16
 ---
 
 # SOP-013 — Inboxen verwerken
 
 ## Doel
 
-Bij elke inboxronde worden drie inboxen systematisch leeggemaakt. Niets blijft hangen. Elk bestand krijgt een definitieve bestemming.
+Bij iedere inboxronde wordt de **ene menselijke inbox**, `Team Inbox/`, verwerkt.
+Technische bronnen worden meegenomen zodat Sander ze niet als extra inbox hoeft
+te controleren. Ieder object krijgt een canonieke bestemming of blijft met een
+duidelijke reden in Team Inbox voor beoordeling. De algemene route en lifecycle
+staan in [[GL-020-informatie-invoer-uitvoer-en-levenscyclusregister]].
 
-De vier inboxen:
-1. **Downloads** (`~/Downloads`) — bestanden via browser of WhatsApp
-2. **Team Inbox** (`sanders-tweede-brein/Team Inbox/`) — drops voor het team
-3. **Werkarchief** (`~/Documents/Werkarchief`) — actieve docs, tijdelijk
-4. **Vault-root** (`sanders-tweede-brein/` zelf, los naast de vaste scaffold-bestanden) — bestanden die per ongeluk direct in de repo-root belanden in plaats van via Team Inbox. Toegevoegd 2026-08-14 na een concrete vondst (een lege `.md`, een lege `.canvas`, losse foto's/xlsx/een script). Herken dit aan: het bestand hoort niet bij de vaste scaffold-lijst (README/LICENSE/NOTICE/CHANGELOG*/CONTRIBUTING/ADAPTER-PROMPT/WAY-FORWARD/AGENTS.md/CLAUDE.md/VERSION/.scaffold-version/mypka.db/validation-script.sh) en niet bij een van de vaste topfolders (ADC/Deliverables/Expansions/PKM/Team/Team Inbox/Team Knowledge/scripts/github). Route zoals Team Inbox: zelfde beslisboom, zelfde bestemmingen.
+De locaties in deze ronde hebben verschillende rollen:
+
+1. **Team Inbox** (`sanders-tweede-brein/Team Inbox/`, inclusief
+   `Screenshots/` en `Documents/`) — de enige menselijke reviewqueue.
+2. **Downloads** (`~/Downloads`) — technische aanvoerbron.
+3. **Werkarchief** (`~/Documents/Werkarchief`) — tijdelijke werkruimte, geen
+   inbox die Sander periodiek hoeft te beoordelen.
+4. **Vault-root** (`sanders-tweede-brein/` zelf, los naast de vaste
+   scaffold-bestanden) — foutlocatie die tijdens de ronde op losse bestanden
+   wordt gecontroleerd. Herken dit aan: het bestand hoort niet bij de vaste
+   scaffold-lijst of een vaste topfolder.
 
 ---
 
-## Stap 1 — Inventariseer alle drie inboxen
+## Stap 1 — Inventariseer Team Inbox en technische bronnen
 
 Doe dit parallel:
 
 ```bash
 ls ~/Downloads
-ls "sanders-tweede-brein/Team Inbox/"
+find "sanders-tweede-brein/Team Inbox/" -maxdepth 2 -type f
 ls ~/Documents/Werkarchief 2>/dev/null
 ```
 
-Lijst elk bestand op met naam en datum. Rapporteer aan Sander wat er staat.
+Controleer daarnaast de vault-root op losse bestanden. Lijst elk gevonden item
+op met naam, datum en bronrol. Rapporteer één overzicht aan Sander; presenteer de
+technische bronnen niet als extra inboxen.
 
 ---
 
@@ -48,14 +60,30 @@ Lijst elk bestand op met naam en datum. Rapporteer aan Sander wat er staat.
 
 Doorloop voor elk bestand:
 
-### Vraag A: Wat voor type bestand is het?
+### Vraag A: Welk informatietype uit GL-020 is dit?
+
+Classificeer eerst volgens
+[[GL-020-informatie-invoer-uitvoer-en-levenscyclusregister]]. Onderstaande tabel
+is de uitvoeringsvertaling voor deze SOP, niet een tweede opslagregister.
 
 | Type | Route |
 |---|---|
-| Foto, video, audio, PDF, design-bestand | → **Mediahub** op Lexar SSD |
+| Creatieve foto, video, audio of design-bestand | → **Mediahub** op Lexar SSD |
+| Persoonlijke foto/videoherinnering | → **Apple Foto's** volgens de video-uitzondering |
+| Document | → **Google Drive-documentstructuur**; gevoelige/financiële items interactief beoordelen |
 | Tekst, notitie, idee, braindump | → **PKM** (Team Inbox → Penn) |
 | Actief werkdocument (nog niet klaar) | → **Werkarchief** (tijdelijk) |
 | Rommel / oud / dubbel | → **Verwijderen** (bevestiging vragen) |
+
+### Video-uitzondering: Mediahub of Apple Foto's?
+
+Niet iedere persoonlijke video hoort automatisch in iCloud Foto's. Routeer op functie:
+
+- **Content, bronmateriaal, opname, montagebestand of herbruikbare clip** → Mediahub, ook wanneer Sander zelf of zijn huis erop staat. Kies daarna de passende pet en submap volgens vraag B en C.
+- **Persoonlijke herinnering die in de Apple Foto's-tijdlijn thuishoort** → Apple Foto's via iCloud Foto's. Voorbeelden: gezinsmomenten, vakanties, verjaardagen en oude familiefilms.
+- **Eindproduct van professioneel videowerk** → `06_Exports` op de Mediahub; een eventuele Google Workspace-kopie is alleen een aanvullende cloudback-up van de export, niet de canonieke thuisbasis van raw footage of projectbestanden.
+
+Beslis dus op het beoogde gebruik, niet alleen op het label `Persoonlijk`.
 
 ### Vraag B (alleen bij Mediahub): Welke pet had Sander op?
 
@@ -108,15 +136,31 @@ Voorbeelden:
 
 ---
 
-## Stap 4 — Verplaatsen
+## Stap 4 — Veilig overdragen
 
-Verplaats elk bestand naar de definitieve bestemming op de Lexar:
+Voor Mediahub-items is de definitieve bestemming:
 
 ```
 /Volumes/Lexar SSD/Sander Mediahub/[rol]/[submap]/[bestandsnaam]
 ```
 
-Gebruik `mv` via Bash. Nooit kopiëren zonder het origineel daarna te verwijderen.
+Volg voor overdracht tussen volumes, apparaten of clouddiensten altijd de
+invariant uit GL-020:
+
+1. bevestig bron en canonieke bestemming;
+2. controleer dat de bestemmingsdienst of het doelvolume beschikbaar is;
+3. kopieer het bestand;
+4. verifieer minimaal bestaan en bestandsgrootte; gebruik bij grote, gevoelige
+   of belangrijke bestanden ook een checksum of itemtelling;
+5. verwijder pas daarna gericht het bronbestand wanneer de bestemming klopt;
+6. bij iedere onzekerheid: niet verwijderen, maar in Team Inbox zetten of laten
+   staan met reden `manual-review`.
+
+Een atomaire `mv` is alleen toegestaan wanneer bron en bestemming aantoonbaar
+op hetzelfde bestandssysteem liggen. Dit is nooit een reden om de
+bestemmingscontrole over te slaan.
+
+De Mediahub is op de Mac mini live beschikbaar op dit pad. Vanaf Sanders andere Mac kan de structuur via de bestaande Tailscale/SSH-verbinding en hostalias `macmini` worden gecontroleerd. Grote video-overdrachten via de tunnel kunnen traag zijn; bij meerdere gigabytes heeft lokaal aansluiten van de Lexar SSD de voorkeur. Zie [[SOP-016-remote-toegang-mac-mini-op-vakantie]].
 
 ---
 
@@ -126,20 +170,23 @@ Als er tekst of notities in de Team Inbox staan: route naar **Penn** (journal wr
 
 ---
 
-## Stap 6 — Bevestig dat inboxen leeg zijn
+## Stap 6 — Bevestig dat de menselijke inbox is afgehandeld
 
 ```bash
 ls ~/Downloads | grep -v ".DS_Store"
 ls "sanders-tweede-brein/Team Inbox/" | grep -v ".DS_Store" | grep -v "README.md" | grep -v "Audio Captures"
 ```
 
-Rapporteer: "Downloads leeg ✓ / Team Inbox leeg ✓"
+Rapporteer welke items canoniek zijn gerouteerd en geverifieerd, welke
+technische bronnen geen open invoer meer bevatten en welke items in Team Inbox
+op Sander wachten, inclusief reden. Team Inbox hoeft niet kunstmatig leeg te
+zijn: een verklaard `manual-review`-item is correct wachtend werk.
 
 ---
 
 ## Wanneer uitvoeren
 
-- **Automatisch, wekelijks (vrijdagochtend, 08:00)** — sinds 2026-08-14 draait `scripts/inbox-verwerken.mjs` via de `nl.gewoonsander.inbox-verwerken` LaunchAgent onbewaakt. Deze automatische run is **strenger** dan de interactieve procedure hierboven: hij verplaatst alleen ondubbelzinnige, niet-gevoelige media automatisch; alles met twijfel, financiële/gevoelige inhoud, mogelijke duplicaten of tekst-voor-Penn gaat in een wachtrij (`Team Inbox/_wekelijkse-inboxronde-laatste-run.md`) die `/dagstart` stap 4 meldt. Nooit automatisch verwijderen, ook geen evidente duplicaten. Zie `scripts/inbox-verwerken.prompt.md` voor de exacte grens.
+- **Automatisch, wekelijks (vrijdagochtend, 08:00)** — sinds 2026-08-14 draait `scripts/inbox-verwerken.mjs` via de `nl.gewoonsander.inbox-verwerken` LaunchAgent onbewaakt. Deze automatische run is **strenger** dan de interactieve procedure hierboven: hij verwerkt alleen ondubbelzinnige, niet-gevoelige media met een bekende canonieke bestemming en geslaagde verificatie; alles met twijfel, financiële/gevoelige inhoud, mogelijke duplicaten of tekst-voor-Penn blijft in Team Inbox en wordt vermeld in `Team Inbox/_wekelijkse-inboxronde-laatste-run.md`, die `/dagstart` stap 4 meldt. Nooit automatisch als rommel of duplicaat verwijderen. Alleen na een geslaagde overdracht mag het geverifieerde bronexemplaar volgens Stap 4 worden opgeruimd. Zie `scripts/inbox-verwerken.prompt.md` voor de exacte grens.
 - **Op verzoek** — zodra Sander "inboxen doornemen" of vergelijkbare trigger zegt. Dit is de volledige, interactieve procedure hierboven — inclusief de gevallen die de automatische run bewust liet liggen.
 - **Proactief** — als Hermes bij een andere taak bestanden in Downloads of Team Inbox signaleert
 

@@ -31,6 +31,10 @@ Bron: officiële bijsluiter Antischimmelcrème HTP Terbinafine HCl 10 mg/g (medi
 
 ## Reflection
 
+### 2026-08-16
+
+Bij close-session bevestigd: crème vandaag aangebracht ✓.
+
 ### 2026-07-02
 
 Gestart met de crème vandaag. Sander wil dagelijks even gevraagd worden of hij hem heeft aangebracht. Later op de dag bleek het geregistreerde product niet te kloppen — gecorrigeerd naar Terbinafine HCl 10 mg/g na foto in Team Inbox. Bij close-session bevestigd: crème vandaag aangebracht ✓.
@@ -38,6 +42,10 @@ Gestart met de crème vandaag. Sander wil dagelijks even gevraagd worden of hij 
 ### 2026-08-14
 
 Bij close-session: nog niet aangebracht vandaag.
+
+### 2026-08-15
+
+Bij close-session bevestigd: crème vandaag aangebracht ✓.
 
 ### 2026-07-03
 

@@ -1,7 +1,7 @@
 ---
 name: Computer georganiseerd en kluttervrij
 horizon: 2026-12-31
-key_element: growth
+key_element: groei
 status: active
 tags:
   - organisatie

@@ -11,6 +11,20 @@ tags:
 
 Overzicht van software en digitale tools die Sander actief gebruikt — inclusief licentievorm en context.
 
+**Registratie-afspraak:** zodra een specialist iets nieuws installeert op een van Sanders apparaten (een command line-programma, een los stukje software, een nieuwe koppeling) komt hier een kort blokje bij: wat het is, waarom het is geïnstalleerd, en op welk apparaat. Dat voorkomt dat we later niet meer weten wat er allemaal staat, of dat iemand per ongeluk hetzelfde nog een keer installeert. Simpele taal, geen technisch jargon nodig — Sander hoeft dit bestand te kunnen lezen zonder alles te begrijpen.
+
+## Command line-tools
+
+_(lokale programma's zonder abonnement, meestal via Homebrew geïnstalleerd — hier komen ze te staan zodra iemand ze installeert)_
+
+### rclone
+- **Wat het is:** een gratis programma dat grote bestanden rechtstreeks van/naar Google Drive (en andere cloudopslag) kan verplaatsen, zonder dat het via een chatgesprek hoeft — nodig omdat de normale Drive-koppeling alleen kleine bestanden aankan.
+- **Waarom geïnstalleerd:** de Drive-koppeling in Cowork kon geen video's van meerdere GB overzetten naar de Mediahub; rclone praat rechtstreeks met Google's servers en heeft die beperking niet.
+- **Apparaat:** MacBook Air (geïnstalleerd 2026-08-15 via Homebrew)
+- **Status:** actief en gekoppeld aan Sanders Google-account (ingelogd 2026-08-16 via zijn eigen, al-ingelogde browsersessie)
+- **Let op:** gebruikt rclone's gedeelde Google-inlogsleutel, die in de loop van 2026 wordt uitgefaseerd — kan dan een keer opnieuw ingesteld moeten worden met een eigen sleutel
+- **Ook nodig op:** Mac mini, voor dezelfde reden (nog niet gedaan)
+
 ## Design & Creatie
 
 ### Affinity (Serif)

@@ -126,11 +126,15 @@ Maak betalen en aanleveren aan Jortt afzonderlijk zichtbaar. Pieter betaalt nooi
 
 ## Bestellingen en verzendingen
 
-- Sander geeft Pieter doorlopende toestemming om historische, automatische bestelbevestigingen en logistieke statusmeldingen naar de Gmail-prullenbak te verplaatsen. Dit omvat onder meer: ontvangen, ingepakt, verwerkt, overgedragen, verzonden, onderweg, klaar voor afhalen en bezorgd.
+- Pieter volgt iedere lopende bestelling via de binnenkomende bestel- en logistieke mails. Hij legt leverancier, ordernummer (indien bekend), bestelling/pakket, besteldatum, laatst bekende status, statusdatum en eventuele verwachte bezorging canoniek vast in [[lopende-bestellingen]]. Gmail blijft alleen de tijdelijke bron.
+- Een nieuwe bestelbevestiging wordt eerst in [[lopende-bestellingen]] geregistreerd. Pieter meldt de bestelling bij de eerstvolgende `/dagstart`; Sander hoeft de bevestigingsmail niet zelf te lezen.
+- Bij iedere betekenisvolle statuswijziging — waaronder ontvangen, ingepakt, verwerkt, overgedragen aan vervoerder, verzonden, onderweg, klaar voor afhalen en bezorgd — werkt Pieter eerst [[lopende-bestellingen]] bij. De eerstvolgende `/dagstart` meldt per pakket compact wat de nieuwe status is en, indien bekend, wanneer het wordt bezorgd.
+- Zodra de relevante feiten veilig in [[lopende-bestellingen]] staan, geeft Sander Pieter doorlopende toestemming om de automatische bestelbevestiging of logistieke statusmail naar de Gmail-prullenbak te verplaatsen. De status zelf blijft daardoor beschikbaar zonder dat Sander de losse mails hoeft door te nemen.
+- Na de dagstart markeert Pieter de getoonde status in [[lopende-bestellingen]] als gemeld. Afgeleverde of geannuleerde bestellingen blijven kort als afgesloten regel staan en verdwijnen daarna uit het actieve overzicht tijdens een reguliere inboxreview.
 - Bewaar altijd facturen en gelijkwaardige financiële bewijsstukken, ook wanneer deze alleen via een werkende downloadlink beschikbaar zijn. Een factuurbijlage beschermt het volledige bericht tegen automatische verwijdering.
 - Een niet-financiële bijlage, zoals algemene voorwaarden, een retourformulier, pakbon of verzendlijst, maakt een achterhaalde statusmail niet duurzaam relevant; beoordeel zo'n bijlage wel eerst afzonderlijk voordat het bericht wordt verwijderd.
 - Bewaar echte correspondentie over een probleem, klacht, ontbrekende levering, retour, terugbetaling of geschil; deze valt niet onder de automatische statusregel.
-- Nieuwe bestelbevestigingen mogen nog niet automatisch verdwijnen. Pieter houdt ze vast totdat de relevante bestelgegevens canoniek in myPKA zijn vastgelegd via een nog te ontwerpen procedure; Hermes brengt dit ontwerp later met Sander in overleg.
+- Een mail met onduidelijke orderkoppeling, afwijkende betaling, gewijzigde inhoud, mislukte levering of andere twijfel wordt niet automatisch verwijderd maar door Hermes aan Sander voorgelegd.
 
 ## Verwerkingsmap → Todoist
 

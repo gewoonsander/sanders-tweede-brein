@@ -22,6 +22,7 @@ Filename pattern: `GL-NNN-<title>.md`.
 | GL-017 | [[GL-017-mcp-service-register]] | Portable SSOT voor MCP-services, endpoints, secretvariabelen, risicoklassen en adaptercontracten. |
 | GL-018 | [[GL-018-integratie-en-software-register]] | Portable inventaris van MCP's, API's, webhooks, databronnen en software met gewenste status, kosten en veilige verificatieprofielen. |
 | GL-019 | [[GL-019-persoonlijke-taakarchitectuur]] | GTD-statussen, Eisenhower, datumsemantiek, hiërarchie en wachten-op voor persoonlijke taken. |
+| GL-020 | [[GL-020-informatie-invoer-uitvoer-en-levenscyclusregister]] | Portable SSOT voor technische invoerbronnen, canonieke opslag, afgeleide kopieën, back-up en informatielevenscycli. |
 
 | GL-003 | [[GL-003-design-system]] | Multi-merk design-system hub (cold-start brand-rule + erf-model). Verwijst naar de losse merkbestanden in `GL-003-brands/` (ADC Regio Oost, DartsCoaching.nl, Dart Buddies, Van Gewoon Sander) — geen van deze bevat nog echte waarden. Geinstalleerd via het Designer Pack. |
 

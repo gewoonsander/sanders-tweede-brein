@@ -80,6 +80,7 @@ Zie ook: [[software-en-tools]] voor software en abonnementen.
 - **Aanschafdatum:** *aanvullen*
 - **Garantie t/m:** *aanvullen*
 - **Notities:** mapstructuur → zie video-systeem-design; altijd aangesloten tijdens werk
+- **Remote toegang:** live geverifieerd op 2026-08-15 via Tailscale/SSH-hostalias `macmini`; grote video-overdrachten bij voorkeur lokaal vanwege beperkte tunnelsnelheid
 
 ### Toshiba HDD ("Sander ")
 - **Mount:** `/Volumes/Sander ` *(let op: spatie aan het einde van de naam)*

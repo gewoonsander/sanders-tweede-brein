@@ -41,6 +41,8 @@ Een gesloten video-workflow waarmee Sander ideeën vangt, scripts schrijft, prod
 
 ## Opslagarchitectuur
 
+**Status 2026-08-15:** de Lexar Mediahub bestaat en is live geverifieerd op de Mac mini onder `/Volumes/Lexar SSD/Sander Mediahub/`. De volledige rolstructuur is aanwezig en vanaf de MacBook Air leesbaar via de bestaande Tailscale/SSH-hostalias `macmini`. Dit bevestigt de Mediahub als canonieke bestemming voor actieve videoprojecten en contentbestanden. De hieronder genoemde Google Workspace Shared Drive is een afzonderlijke export-back-uplaag; de actuele aanmaakstatus daarvan is in deze verificatie niet vastgesteld.
+
 ### Drie schijven, drie rollen
 
 | Schijf | Grootte | Rol |

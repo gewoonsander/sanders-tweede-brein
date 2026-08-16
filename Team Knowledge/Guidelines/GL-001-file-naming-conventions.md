@@ -155,7 +155,7 @@ Google Drive/Mijn Drive/documenten/
 └── admin/                 ← Paspoort, verzekeringen, identiteit
 ```
 
-**iCloud Drive** bevat alleen nog `00-inbox/` als tijdelijke landingsplek voor nog te sorteren bestanden. Vanuit daar routeer je door naar de juiste Key Element-map op Google Drive.
+**iCloud Drive `00-inbox/`** is alleen nog een technische aanvoerbron met status `retiring`, niet een inbox die Sander bewust hoeft te controleren. Nieuwe handmatige invoer gaat naar `Team Inbox/`. Bestaande inhoud wordt gecontroleerd gerouteerd volgens [[GL-020-informatie-invoer-uitvoer-en-levenscyclusregister]]; de map of inhoud wordt niet verwijderd voordat iedere overdracht is geverifieerd.
 
 **Foto's en video's** leven in Apple Foto's (iCloud Foto's) — een aparte iCloud-dienst, niet de iCloud Drive-mapstructuur. Verwerkte media krijgt bij import wel de naamgeving uit §12, maar de opslaglocatie is de Foto's-bibliotheek, geen Drive-map.
 

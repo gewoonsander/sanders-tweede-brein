@@ -18,6 +18,7 @@ People and Organizations the user interacts with. Cross-linked into Journal entr
 - [[merel-jasmijn-van-ockenburg-zwaan]] — dochter
 - [[xanne-lynn-van-ockenburg-zwaan]] — dochter (stub)
 - [[ralf-zwaan]] — zwager (broer Marieke), aannemer Bouwbedrijf Zwaan
+- [[esther]] — vrouw van Ralf, familie
 - [[marc-vleghert]] — SL-koppelpartner darts + coachee DartsCoaching.nl
 - [[nick-pol]] — huidig/aftredend voorzitter RDB
 - [[dr-schmidt]] — seeded course sample
