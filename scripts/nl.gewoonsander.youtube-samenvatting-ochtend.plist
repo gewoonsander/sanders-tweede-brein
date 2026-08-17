@@ -17,6 +17,12 @@
   ondertitels kan via de Whisper-terugval een paar minuten kosten, en er kunnen meerdere
   nieuwe video's in één run zitten.
 
+  StandardInPath toegevoegd 2026-08-17, proactief overgenomen van de adc-verslag-ochtend-
+  bugfix diezelfde dag: de headless `claude -p`-aanroep (bij samenvatting_methode:
+  "abonnement") bleef daar onder launchd urenlang hangen zonder expliciete stdin-redirect.
+  Zelfde onderliggende mechanisme hier, dus hier ook direct toegepast i.p.v. te wachten tot
+  dit script hetzelfde probleem zelf demonstreert.
+
   Handmatig draaien zonder op 07:00 te wachten:
     launchctl kickstart gui/$(id -u)/nl.gewoonsander.youtube-samenvatting-ochtend
 
@@ -58,6 +64,9 @@
 
 	<key>ExitTimeOut</key>
 	<integer>1800</integer>
+
+	<key>StandardInPath</key>
+	<string>/dev/null</string>
 
 	<key>StandardOutPath</key>
 	<string>/Users/sandervanockenburg-zwaan/Library/Logs/youtube-samenvatting-ochtend.log</string>
