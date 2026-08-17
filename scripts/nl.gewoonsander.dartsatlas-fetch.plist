@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  ACTIEF - geinstalleerd en geladen op deze Mac mini, 2026-08-11.
+  Herzien 2026-08-17 (Daedalus): draait nu via scripts/dartsatlas-fetch.sh.
+
+  Draait wekelijks (ma 08:00 lokaal) Expansions/mypka-cockpit/scripts/dartsatlas-fetch.mjs,
+  dat live HTTP-requests doet naar dartsatlas.com voor Sanders eigen player id
+  (n6oeItIbK1vl). dartsatlas.com's Terms of Use verbieden geautomatiseerde toegang
+  ("monitoring"); Sander heeft bewust en meermaals bevestigd dit toch te willen,
+  vooruitlopend op een lopend toestemmingsverzoek bij Darts Atlas support. Zie de
+  LEGAL NOTE in dartsatlas-fetch.mjs voor de volledige context.
+
+  LET OP - DEZE ROUTINE IS OP DIT MOMENT GEBLOKKEERD (2026-08-17):
+  Homebrew node krijgt onder launchd geen TCC-toegang tot ~/Documents en blijft daar
+  oneindig hangen op een toestemmingsdialoog die niemand kan wegklikken. Anders dan bij de
+  claude-CLI bestaat er geen alternatief gesigneerd pad naar dezelfde runtime, dus dit is
+  niet in software op te lossen. Vereist eenmalig handmatig:
+    Systeeminstellingen > Privacy en beveiliging > Volledige schijftoegang > +
+    (Cmd+Shift+G) /opt/homebrew/Cellar/node/26.4.0/bin/node
+  De bash-wrapper begrenst de hang wel met een watchdog, zodat de job altijd eindigt en
+  volgende geplande runs niet stilzwijgend worden overgeslagen.
+  Volledige analyse: scripts/lib/launchd-guard.sh.
+
+  WorkingDirectory staat bewust op /tmp: laat launchd niet zelf naar een TCC-beschermde
+  map chdir'en. Het script doet de cd naar de cockpit-map zelf.
+
+  Handmatig draaien zonder op maandag te wachten:
+    launchctl kickstart gui/$(id -u)/nl.gewoonsander.dartsatlas-fetch
+
+  Tijdstip wijzigen: pas StartCalendarInterval aan (Weekday 0=zondag .. 6=zaterdag,
+  Hour 0-23, Minute 0-59), daarna:
+    launchctl bootout gui/$(id -u)/nl.gewoonsander.dartsatlas-fetch
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/nl.gewoonsander.dartsatlas-fetch.plist
+
+  Uitzetten:
+    launchctl bootout gui/$(id -u)/nl.gewoonsander.dartsatlas-fetch
+    rm ~/Library/LaunchAgents/nl.gewoonsander.dartsatlas-fetch.plist
+-->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>nl.gewoonsander.dartsatlas-fetch</string>
+
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/scripts/dartsatlas-fetch.sh</string>
+	</array>
+
+	<key>WorkingDirectory</key>
+	<string>/tmp</string>
+
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Weekday</key>
+		<integer>1</integer>
+		<key>Hour</key>
+		<integer>8</integer>
+		<key>Minute</key>
+		<integer>0</integer>
+	</dict>
+
+	<key>RunAtLoad</key>
+	<false/>
+
+	<key>ProcessType</key>
+	<string>Background</string>
+
+	<key>ExitTimeOut</key>
+	<integer>300</integer>
+
+	<key>StandardInPath</key>
+	<string>/dev/null</string>
+
+	<key>StandardOutPath</key>
+	<string>/Users/sandervanockenburg-zwaan/Library/Logs/dartsatlas-fetch.log</string>
+
+	<key>StandardErrorPath</key>
+	<string>/Users/sandervanockenburg-zwaan/Library/Logs/dartsatlas-fetch.err.log</string>
+</dict>
+</plist>

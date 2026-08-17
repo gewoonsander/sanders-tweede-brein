@@ -31,6 +31,10 @@ Bron: officiële bijsluiter Antischimmelcrème HTP Terbinafine HCl 10 mg/g (medi
 
 ## Reflection
 
+### 2026-08-17
+
+Uit audiomemo (10:56u) ingesproken. Crème aangebracht.
+
 ### 2026-08-16
 
 Bij close-session bevestigd: crème vandaag aangebracht ✓.

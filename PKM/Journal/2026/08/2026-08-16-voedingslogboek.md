@@ -51,6 +51,28 @@ tags: [voeding, tracking]
 - Betrouwbaarheid: low
 <!-- FOOD_ENTRY {"log_date":"2026-08-16","logged_at":"2026-08-16T23:45:00+02:00","meal_type":"dinner","description":"Bananenpannenkoek met salade","source_type":"text","source_id":"2026-08-16-close-session-bananenpannenkoek-salade","kcal":[450.0,750.0],"protein_g":[11.0,18.0],"carbs_g":[65.0,105.0],"fat_g":[14.0,28.0],"confidence":"low","photo_path":null,"supersedes_entry_id":null,"entry_id":"7c3a9f14e08b6d5a2f11"} -->
 
+
+### 18:45 — Ontbijt
+- Pannenkoeken met blauwe bessen (blueberries), deels verbrand of met donkere vlekken. Lijkt op meerdere pannenkoeken die over elkaar heen liggen met verse blauwe bessen ertussen en eroverheen.
+- Energie: 400–550 kcal
+- Eiwit: 8–14 g
+- Koolhydraten: 55–75 g
+- Vet: 12–22 g
+- Betrouwbaarheid: medium
+- Foto: ![[Images/2026/08/2026-08-16-bc0ad0c2f0.jpeg]]
+<!-- FOOD_ENTRY {"log_date":"2026-08-16","logged_at":"2026-08-16T18:45:00+02:00","meal_type":"breakfast","description":"Pannenkoeken met blauwe bessen (blueberries), deels verbrand of met donkere vlekken. Lijkt op meerdere pannenkoeken die over elkaar heen liggen met verse blauwe bessen ertussen en eroverheen.","source_type":"photo","source_id":"ee25c5570392d89d5654","kcal":[400.0,550.0],"protein_g":[8.0,14.0],"carbs_g":[55.0,75.0],"fat_g":[12.0,22.0],"confidence":"medium","photo_path":"Images/2026/08/2026-08-16-bc0ad0c2f0.jpeg","supersedes_entry_id":null,"entry_id":"be50ad3b20dc6948bc16"} -->
+
+
+### 18:44 — Lunch
+- Gemengde salade met ijsbergsla, rode paprika, komkommer, zwarte olijven, blokjes kaas (jong belegen of cheddar), en wat lijkt op witte kaas of ui
+- Energie: 300–450 kcal
+- Eiwit: 15–22 g
+- Koolhydraten: 8–15 g
+- Vet: 22–35 g
+- Betrouwbaarheid: medium
+- Foto: ![[Images/2026/08/2026-08-16-d4c087f60c.jpeg]]
+<!-- FOOD_ENTRY {"log_date":"2026-08-16","logged_at":"2026-08-16T18:44:32+02:00","meal_type":"lunch","description":"Gemengde salade met ijsbergsla, rode paprika, komkommer, zwarte olijven, blokjes kaas (jong belegen of cheddar), en wat lijkt op witte kaas of ui","source_type":"photo","source_id":"1ac8eaf5783961d064aa","kcal":[300.0,450.0],"protein_g":[15.0,22.0],"carbs_g":[8.0,15.0],"fat_g":[22.0,35.0],"confidence":"medium","photo_path":"Images/2026/08/2026-08-16-d4c087f60c.jpeg","supersedes_entry_id":null,"entry_id":"549bf0c75eb03b00e8fe"} -->
+
 <!-- FOOD_ENTRIES -->
 
 ## Completion audit

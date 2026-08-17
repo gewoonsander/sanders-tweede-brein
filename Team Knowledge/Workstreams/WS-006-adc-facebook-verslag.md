@@ -5,7 +5,7 @@ owners:
   - Penn (schrijven)
   - Hermes (review en aanlevering aan Sander)
 tags: [ADC, darts, facebook, regio-oost, verslag, template, stijl]
-last_updated: 2026-08-03
+last_updated: 2026-08-17
 ---
 
 # WS-006 — ADC Facebook-bericht — stijlregels en invultemplate
@@ -141,7 +141,7 @@ Deel dit verslag gerust en tag de spelers erin — dat wordt gewaardeerd! 📲
 7. Hermes legt het voor aan Sander met een checklist van wat automatisch ingevuld is en wat nog ontbreekt (foto, eventuele quote).
 8. **Vaste stap (bijgewerkt 03-08-2026):** zodra het concept compleet is (incl. links naar volgende toernooien, zie [[WS-004-facebook-toernooi-verslag]] Fase 4), slaat Hermes het op in `ADC/Verslagen/facebook-verslag-[locatie]-YYYY-MM-DD.md`, gedateerd op de toernooidatum.
 
-Sander publiceert zelf — Penn en Hermes publiceren nooit rechtstreeks op Facebook.
+Sander publiceert zelf — Penn en Hermes publiceren nooit rechtstreeks op Facebook. Dit is bewust géén tijdelijke beperking maar een onderzochte, harde grens — zie [[WS-004-facebook-toernooi-verslag]] Fase 3 voor de drie geblokkeerde automatiseringsroutes (onderzocht 17-08-2026).
 
 ---
 

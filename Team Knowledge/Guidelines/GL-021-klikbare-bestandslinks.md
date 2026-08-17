@@ -14,6 +14,8 @@ created: 2026-08-16
 
 Wanneer Hermes of een specialist in een antwoord een specifiek bestand of een specifieke map op Sanders eigen schijf noemt (Downloads, Mediahub, Team Inbox, PKM, Werkarchief, of elders op de Mac), krijgt die vermelding altijd een klikbare link — nooit alleen platte tekst met een bestandsnaam of pad.
 
+⚠️ **Verbreed op 2026-08-17:** dit geldt sindsdien ook binnen de vault — taken (`PKM/Tasks/`), Deliverables, sessielogs, SOPs, Guidelines, Workstreams, kortom elk bestand dat in een antwoord genoemd wordt, ongeacht of het een wikilink-waardige PKM-notitie is. Reden: de Cockpit's `#/resolve/`-route (browser-klikbaar) werkt alleen voor het deel van de vault dat in `mypka.db` gemirrord is (geverifieerd: personen wél, Guidelines/Deliverables/taken niét) — een `file://`-link is de enige vorm die gegarandeerd voor alles werkt, zonder dat er per vermelding geverifieerd hoeft te worden of iets gemirrord is. Sander koos expliciet voor deze simpele, altijd-werkende variant boven een duurdere hybride met Cockpit-links waar mogelijk (optie B, afgewezen — extra tokens voor iets dat niet consistent werkt).
+
 ## Formaat
 
 Gebruik een Markdown-link met een `file://`-URI naar het absolute pad:
@@ -29,12 +31,14 @@ Gebruik een Markdown-link met een `file://`-URI naar het absolute pad:
 
 ## Wanneer van toepassing
 
-- Elk moment dat een concreet bestand of map wordt genoemd waar Sander mogelijk naartoe wil: opruimvoorstellen, inbox-verwerking, gevonden bestanden, logbestanden, gegenereerde deliverables die als lokaal bestand bestaan.
-- Geldt voor bestanden buiten de myPKA-vault (Downloads, Mediahub, externe schijven) én bestanden erbinnen die niet via een `[[wikilink]]` worden aangeduid (bijv. een los .DS_Store-restje of een tijdelijk scratchbestand).
+- **In elk antwoord aan Sander** (chatberichten, niet de inhoud van vastgelegde documenten zelf): elk moment dat een concreet bestand, map, taak, Deliverable, sessielog of ander vastgelegd document wordt genoemd — opruimvoorstellen, inbox-verwerking, gevonden bestanden, logbestanden, dagstart-taken, review-documenten, kortom alles waar Sander mogelijk naartoe wil of actie op wil ondernemen.
+- Geldt voor bestanden buiten de myPKA-vault (Downloads, Mediahub, externe schijven) én voor bestanden erbinnen (taken, Deliverables, Guidelines, SOPs, sessielogs, PKM-notities).
 
 ## Relatie met wikilinks
 
-Dit vervangt niet `[[wikilink]]`-verwijzingen tussen myPKA-notities (Hard rule 4 in AGENTS.md). Wikilinks blijven de manier om naar een canonieke PKM/Team Knowledge-notitie te verwijzen. GL-021 regelt specifiek verwijzingen naar **echte bestanden/mappen op schijf** die geen notitie in de vault zijn — een foto in Downloads, een map op de Mediahub-SSD, een export op een andere schijf.
+Binnen **vastgelegde documenten zelf** (een sessielog dat naar een SOP verwijst, een taakbestand dat naar een Project verwijst) blijft `[[wikilink]]` de juiste vorm — dat verandert niet (Hard rule 4 in AGENTS.md), en is hoe de vault z'n eigen graaf/backlinks opbouwt.
+
+GL-021 gaat over iets anders: **wat Hermes in een chatbericht aan Sander typt.** Daar is een `[[wikilink]]` niet klikbaar — die wordt dus altijd (ook) als `file://`-link gegeven, ongeacht of het bestand een PKM-notitie is of een los bestand op schijf.
 
 ## Wanneer deze Guideline gelezen wordt
 

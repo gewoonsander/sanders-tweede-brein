@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  ACTIEF - geinstalleerd op deze Mac mini, 2026-08-14.
+  Herzien 2026-08-17 (Daedalus): van node naar bash, zelfde TCC-fix als adc-verslag-ochtend.
+
+  Draait wekelijks op vrijdagochtend scripts/inbox-verwerken.sh, dat via de Claude Code
+  CLI (headless, -p) de drie inboxen uit SOP-013 doorloopt. Verplaatst alleen
+  ondubbelzinnige, niet-gevoelige media automatisch; al het andere (financieel/gevoelig,
+  twijfel, mogelijke duplicaten, tekst voor Penn) gaat in een wachtrij-verslag dat
+  /dagstart stap 4 vanzelf meldt. Nooit automatisch verwijderen.
+
+  Bewust lokaal (geen Anthropic cloud-routine), zelfde reden als adc-verslag-ochtend:
+  vendor lock-in vermijden, bestaande lokale toegang hergebruiken.
+
+  WAAROM /bin/bash EN NIET /opt/homebrew/bin/node (2026-08-17):
+  LaunchAgents hebben op deze Mac geen TCC-toegang tot ~/Documents. Node krijgt daar geen
+  nette foutmelding maar een toestemmingsdialoog en blijft oneindig hangen; een hangend
+  proces houdt de job "running", waardoor launchd elk volgend gepland interval
+  stilzwijgend overslaat. Het script draait de CLI via het app-bundle-pad, dat een
+  stabiele Anthropic-identiteit met Volledige Schijftoegang heeft die auto-updates
+  overleeft. Volledige uitleg: scripts/lib/launchd-guard.sh.
+
+  WorkingDirectory staat bewust op /tmp: laat launchd niet zelf naar een TCC-beschermde
+  map chdir'en. Het script doet de cd naar de repo zelf, na een leesbaarheidscheck.
+
+  Tijdstip is UUR:MINUUT hieronder — later dan adc-verslag-ochtend (07:00) om
+  overlap met die run te vermijden.
+
+  Handmatig draaien zonder op vrijdag te wachten:
+    launchctl kickstart gui/$(id -u)/nl.gewoonsander.inbox-verwerken
+
+  Uitzetten:
+    launchctl bootout gui/$(id -u)/nl.gewoonsander.inbox-verwerken
+    rm ~/Library/LaunchAgents/nl.gewoonsander.inbox-verwerken.plist
+-->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>nl.gewoonsander.inbox-verwerken</string>
+
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/scripts/inbox-verwerken.sh</string>
+	</array>
+
+	<key>WorkingDirectory</key>
+	<string>/tmp</string>
+
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Weekday</key>
+		<integer>5</integer>
+		<key>Hour</key>
+		<integer>8</integer>
+		<key>Minute</key>
+		<integer>0</integer>
+	</dict>
+
+	<key>RunAtLoad</key>
+	<false/>
+
+	<key>ProcessType</key>
+	<string>Background</string>
+
+	<key>ExitTimeOut</key>
+	<integer>1200</integer>
+
+	<!-- StandardInPath: de headless `claude -p`-aanroep wacht onder launchd anders op
+	     stdin en krijgt nooit EOF. Het script redirect stdin zelf ook al naar /dev/null. -->
+	<key>StandardInPath</key>
+	<string>/dev/null</string>
+
+	<key>StandardOutPath</key>
+	<string>/Users/sandervanockenburg-zwaan/Library/Logs/inbox-verwerken.log</string>
+
+	<key>StandardErrorPath</key>
+	<string>/Users/sandervanockenburg-zwaan/Library/Logs/inbox-verwerken.err.log</string>
+</dict>
+</plist>

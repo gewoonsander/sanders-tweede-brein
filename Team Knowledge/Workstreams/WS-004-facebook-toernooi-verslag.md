@@ -6,7 +6,7 @@ owners:
   - Daedalus (Dart Atlas datafetch)
   - Penn (schrijven Facebook-bericht)
 tags: [ADC, darts, facebook, dart-atlas, regio-oost, verslag]
-last_updated: 2026-06-20
+last_updated: 2026-08-17
 ---
 
 # WS-004 — Facebook-verslag na ADC-toernooi
@@ -225,6 +225,16 @@ Penn levert het concept-bericht aan Hermes. Hermes presenteert het aan Sander me
 
 Sander publiceert zelf — Hermes/Penn publiceren nooit rechtstreeks op Facebook.
 
+### Waarom dit niet te automatiseren is (onderzocht 17-08-2026)
+
+Sander vroeg expliciet om zo min mogelijk handmatig werk: liefst zet Hermes het verslag (en de foto) automatisch klaar in de groep-composer, zodat alleen nog op "Publiceren" klikken overblijft. Op 17-08-2026 zijn drie routes hiervoor onderzocht — alle drie geblokkeerd, elk om een andere, harde reden:
+
+1. **Claude in Chrome (browserextensie)** — navigatie naar facebook.com werd geweigerd ("Navigation to this domain is not allowed"). Test bevestigde dat dit geen Facebook-specifieke blokkade is: `google.com` werd in dezelfde sessie ook geweigerd. Het is een server-side domeinclassificatie van Anthropic zelf, zonder gebruikers-override op persoonlijke accounts — niet op te lossen via een instelling bij Sander.
+2. **Sandbox-browser (apart surface, geen domeinblokkade)** — kon wél naar de Facebook-groep navigeren, maar Facebook vroeg meteen om herverificatie met wachtwoord. Een wachtwoord invoeren is voor Hermes een harde, uitzonderingsloze regel (nooit, ook niet met toestemming) — deze route stopt daar.
+3. **n8n / Facebook Graph API** — Meta heeft de Groups API permanent stopgezet (22-04-2024), inclusief de `publish_to_groups`-permissie, voor alle third-party apps, ongeacht partnerschap. Zou wel werken voor een Facebook Pagina, niet voor een Groep — en de ADC Regio Oost-bestemming is een Groep (ID `4311576469163689`).
+
+**Conclusie:** er is met de huidige tools geen pad — technisch noch toegestaan — om het bericht automatisch in de groep-composer te zetten. De handmatige overdracht (Hermes levert tekst + foto, Sander plakt en publiceert zelf, zie tabel hieronder) blijft de enige werkende procedure. Alleen opnieuw onderzoeken bij een concrete aanleiding: (a) Anthropic voegt een domeinoverride toe voor personal accounts, of (b) Meta heropent de Groups API. Beide onwaarschijnlijk op korte termijn — niet proactief herhalen zonder zo'n aanleiding.
+
 ## Fase 4 — Opslaan in ADC/Verslagen (bijgewerkt 03-08-2026)
 
 Zodra het concept-bericht (inclusief eventuele links naar volgende toernooien) klaar is, slaat Hermes het op als `ADC/Verslagen/facebook-verslag-[locatie]-YYYY-MM-DD.md` — de datum is de toernooidatum, niet de dag van opstellen. Dit gebeurt ongeacht of Sander het bericht al heeft gepubliceerd; het is het archief van wat is opgesteld, niet van wat live staat.
@@ -240,7 +250,7 @@ Zodra het concept-bericht (inclusief eventuele links naar volgende toernooien) k
 | Element | Bron | Actie |
 |---|---|---|
 | Foto van winnaar | Sander / venue manager via WhatsApp | Sander levert aan |
-| Facebook-publicatie | Sander | Sander plaatst zelf |
+| Facebook-publicatie | Sander | Sander plaatst zelf (zie Fase 3 hierboven voor waarom dit niet te automatiseren is) |
 
 ---
 

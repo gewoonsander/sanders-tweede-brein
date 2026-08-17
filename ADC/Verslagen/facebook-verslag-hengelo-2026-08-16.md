@@ -1,6 +1,6 @@
 **Datum toernooi:** 16 augustus 2026
 **Venue:** Het Twentse Ros, Hengelo (toernooimanager: Dennis Geerdink)
-**Status: CONCEPT — ter review door Sander**
+**Status: GEPUBLICEERD — op Facebook geplaatst door Sander (17-08-2026)**
 
 ---
 
@@ -53,7 +53,7 @@ Deel dit verslag gerust en tag de spelers erin — dat wordt gewaardeerd! 📲
 ---
 
 **Nog nodig van Sander vóór publicatie:**
-- [ ] Foto van winnaar jeffrey mansveld (Dart Atlas heeft geen foto's)
+- [x] Foto van winnaar jeffrey mansveld — binnengekomen via Team Inbox (WhatsApp), verwerkt naar Mediahub: `03_ADC_Regio_Oost/07_Beeldbank/2026-08-16_ADC_winnaar-hengelo-jeffrey-mansveld_v01.jpeg`
 - [ ] Kwalificatie-implicatie (waar plaatst jeffrey mansveld zich voor met deze titel?) — niet automatisch te bevestigen uit Dart Atlas, Sander weet dit als regionaal manager
 
 **Datakanttekeningen (transparantie, niet voor in de publieke post):**

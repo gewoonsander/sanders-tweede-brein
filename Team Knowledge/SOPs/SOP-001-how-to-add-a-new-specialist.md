@@ -4,7 +4,7 @@
 - **Reusable by any agent.** This is a skill, not a 1:1 ownership. SOPs are procedures any agent can invoke when they need them. Jethro is the default executor for hiring, but any specialist running the procedure (e.g. when bootstrap mode re-engages and Jethro isn't available) follows the same steps.
 - **Co-owner for research step:** Athena
 - **Triggered by:** user request to hire, or Hermes detecting a gap
-- **References:** [[GL-001-file-naming-conventions]], [[Team/agent-index]]
+- **References:** [[GL-001-file-naming-conventions]], [[GL-002-frontmatter-conventions]], [[GL-015-agent-model-tier-review]], [[Team/agent-index]]
 
 ## Pre-hired team
 
@@ -81,6 +81,7 @@ Structural template (Claude Code example — translate the frontmatter conventio
 name: <slug>
 description: <Role>. Use proactively when <trigger patterns>. Owns <relevant SOP/WS>.
 tools: <minimal-tool-list>
+model: <concrete model resolved from the tier — see step 5b. NEVER omit this line>
 ---
 
 You are **<Name>, <Role> of myPKA**. <One-line operating principle.>
@@ -116,6 +117,29 @@ Rules (host-agnostic):
 
 Use any existing shim (`.claude/agents/atlas.md`, `.claude/agents/penn.md`, etc.) as the structural template for the body — adapt the frontmatter to the host's spec.
 
+### 5b. Assign the model tier (Jethro)
+
+**Mandatory. The hire is not complete without it.** A shim with no model field inherits the main session's model, so a mechanical specialist silently runs on the heaviest tier available. That is the exact leak [[GL-015-agent-model-tier-review]] exists to close, and omitting this step is how it reopens.
+
+Two artifacts, two notations — do not mix them up:
+
+| Artifact | Field | Value |
+|---|---|---|
+| `Team/<Name> - <Role>/AGENTS.md` (contract) | `model:` | Portable tier alias: `reasoning`, `balanced`, or `fast`. Stays provider-neutral per [[GL-002-frontmatter-conventions]]. |
+| `.claude/agents/<slug>.md` (shim) | `model:` | The concrete model the host resolves that alias to. |
+
+Pick the tier by asking one question: **what happens if this specialist gets it slightly wrong?**
+
+| Tier | Assign when | Typical work |
+|---|---|---|
+| `reasoning` | An error is expensive or hard to detect — it corrupts data, ships a security hole, or breaks an integration | Schema and migration work, API/OAuth wiring, code that others build on, security audits |
+| `balanced` | Judgment is needed but errors surface quickly in review | Research and cross-verification, QA passes, design-system authoring, drafting correspondence |
+| `fast` | The work follows a fixed template or procedure step by step, and deviation is immediately visible | Capture against a template, layout from existing tokens, procedural execution of an SOP, triage fan-out |
+
+When in doubt, start one tier lower than instinct says. Under-tiering surfaces as visibly weaker output and is corrected in one edit; over-tiering is invisible and is paid for on every single invocation.
+
+Record the new specialist and the chosen tier in the tiering table of [[GL-015-agent-model-tier-review]] in the same pass. A tier that only lives in the shim frontmatter is invisible at the next review.
+
 ### 6. Add the row to agent-index (Jethro)
 
 Edit [[Team/agent-index]]. Add a row with the specialist's name, role, folder link, and the user input patterns that should route to them.
@@ -147,6 +171,8 @@ Hermes writes a line in the next session log: "Hired <Name> as <Role> after rese
 
 - Skipping the Athena research step. Even for "obvious" roles, the research surfaces anti-patterns that prevent generic specs.
 - Pasting Athena's research brief into the AGENTS.md. The brief is reference material in `Deliverables/`. The AGENTS.md is the contract.
+- **Shipping a shim without a `model:` field.** The specialist then inherits the main session's model and runs at the heaviest tier on every invocation, silently and indefinitely. See step 5b. This is the single most expensive omission in this SOP because nothing about it is visible in the output.
+- **Recording the tier only in the shim and not in [[GL-015-agent-model-tier-review]].** The next review reads the Guideline table, not sixteen frontmatter blocks, so an unlisted specialist is never re-evaluated.
 - **Shipping the wiki contract without the matching host subagent shim(s).** The two artifacts go together for every activated host (Claude Code, Codex CLI, Gemini CLI). Without the shim, Hermes can only role-play the new specialist — not dispatch them as a parallel subagent in that host.
 - **Treating this as a Claude-only setup.** The principle is host-agnostic. Only the shim path and frontmatter convention is host-specific.
 - **Pasting the wiki contract into the host shim.** The shim references the contract via path. Don't duplicate.

@@ -27,3 +27,5 @@
 - [Klikbare bestandslinks](feedback_klikbare_bestandslinks.md) — altijd file://-link bij genoemde lokale bestanden/mappen, zie GL-021
 - [GL-016: actienummer vóór contextcode](feedback_gl016_nummering_ipv_codes.md) — beslisblokken beginnen met sessiebreed nummer, gevolgd door emoji + 3-letter code, bv. `1 · 🔶 CLS`
 - [Mac mini Schermdeling nog aanzetten](project_macmini_schermdeling_aanzetten.md) — herinner Sander zodra sessie op Mac mini draait, éénmalige fysieke bevestiging nodig
+- [DaVinci Resolve Studio 20.3.2](project_davinci_resolve_studio.md) — externe scripting-API werkt, Claude Code kan Resolve rechtstreeks aansturen
+- [Kill -9 en databehoud](feedback_kill_processen_databehoud.md) — nooit hele procesboom hard killen bij lopende bestandsverwerking; 2 voice-memo's onherstelbaar verloren op 2026-08-17

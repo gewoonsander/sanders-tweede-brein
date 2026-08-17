@@ -39,6 +39,19 @@ JAAR_MAAND=$(date "+%Y/%m")
 
 log() { echo "[youtube-samenvatting-ochtend] $(date -u +%Y-%m-%dT%H:%M:%SZ) $*"; }
 
+# Gedeelde LaunchAgent-helpers (TCC-stabiele claude-binary, preflight, watchdog).
+# Zie scripts/lib/launchd-guard.sh voor de achtergrond bij het TCC-probleem van 17-08-2026.
+source "$REPO/scripts/lib/launchd-guard.sh"
+guard_init "youtube-samenvatting-ochtend"
+
+# Apple's system-python in plaats van Homebrew python3. Onder launchd blokkeert de
+# Homebrew-build oneindig zodra hij iets in ~/Documents aanraakt (TCC-dialoog die niemand
+# wegklikt) — precies waar deze routine op 17-08-2026 op vastliep, al bij het inlezen van
+# de config. De Apple-gesigneerde build erft de Volledige Schijftoegang van /bin/bash en
+# werkt wel. Alle inline-python hieronder gebruikt uitsluitend stdlib (json, re, sys, os,
+# urllib), dus de wissel is functioneel neutraal.
+PY="${YOUTUBE_PYTHON:-/usr/bin/python3}"
+
 meld_fout() {
     # Schrijft een fout-regel naar de queue zodat een mislukte run nooit stilzwijgend
     # verdwijnt — dagstart ziet dit net als een geslaagde melding.
@@ -65,18 +78,18 @@ fi
 
 mkdir -p "$KENNIS_MAP" "$OUTER_WORLD/$JAAR_MAAND"
 
-# config uitlezen via stdin (cat | python3 -c ...) i.p.v. python zelf open('$CONFIG') te laten
+# config uitlezen via stdin (cat | "$PY" -c ...) i.p.v. python zelf open('$CONFIG') te laten
 # doen: een LaunchAgent-Python-proces dat zelf een pad onder ~/Documents opent kan vastlopen op
 # een macOS TCC-toestemmingscontrole die nooit interactief afgehandeld kan worden (geconstateerd
 # 2026-08-16 — bash zelf heeft die toegang al wel, dus bash leest het bestand en pipet de inhoud
 # door). Zie Deliverables/2026-08-16-youtube-kanaal-samenvatting-design.md.
-SAMENVATTING_METHODE=$(cat "$CONFIG" | python3 -c "
+SAMENVATTING_METHODE=$(cat "$CONFIG" | "$PY" -c "
 import json, sys
 data = json.load(sys.stdin)
 print(data.get('samenvatting_methode', 'abonnement'))
 ")
 
-kanalen=$(cat "$CONFIG" | python3 -c "
+kanalen=$(cat "$CONFIG" | "$PY" -c "
 import json, sys
 data = json.load(sys.stdin)
 for k in data.get('kanalen', []):
@@ -98,11 +111,18 @@ if [ "$SAMENVATTING_METHODE" = "api" ]; then
         exit 1
     fi
 else
-    CLAUDE_BIN="${CLAUDE_BIN:-$HOME/.local/bin/claude}"
-    if [ ! -x "$CLAUDE_BIN" ]; then
-        meld_fout "samenvatting_methode staat op 'abonnement', maar de claude-CLI is niet gevonden op $CLAUDE_BIN."
+    # Bewust NIET ~/.local/bin/claude: dat symlinkt naar een versiespecifiek pad
+    # (~/.local/share/claude/versions/<versie>) dat na elke auto-update voor macOS TCC een
+    # nieuwe, rechtenloze client is. Onder launchd levert dat geen foutmelding op maar een
+    # toestemmingsdialoog die niemand wegklikt, waardoor de run oneindig hangt.
+    # guard_claude_bin kiest het app-bundle-pad, met een stabiele Anthropic-identiteit die
+    # Volledige Schijftoegang heeft en auto-updates overleeft.
+    CLAUDE_BIN="$(guard_claude_bin)"
+    if [ -z "$CLAUDE_BIN" ] || [ ! -x "$CLAUDE_BIN" ]; then
+        meld_fout "samenvatting_methode staat op 'abonnement', maar er is geen bruikbare claude-CLI gevonden (bundle noch ${CLAUDE_BIN:-$HOME/.local/bin/claude})."
         exit 1
     fi
+    log "claude-binary: $CLAUDE_BIN"
 fi
 
 # PKM-context voor het relevantie-oordeel: alleen bestandsnamen (geen inhoud), Topics + Projects.
@@ -175,7 +195,7 @@ while IFS='|' read -r naam url; do
 
         # Prompt éénmalig opbouwen (geen API-call hier) — daarna gebruikt door welke methode
         # dan ook (abonnement via headless Claude Code, of de directe API).
-        prompt_text=$(python3 -c "
+        prompt_text=$("$PY" -c "
 import json
 
 transcript = '''$(echo "$transcript_inhoud" | sed "s/'/\\\\'/g")'''
@@ -228,7 +248,7 @@ print(prompt)
         # Instelbaar via config/youtube-kanalen.json -> samenvatting_methode, geen scriptwijziging
         # nodig om te wisselen (bv. bij abonnements-limiet vaker geraakt worden).
         if [ "$SAMENVATTING_METHODE" = "api" ]; then
-            haiku_output=$(python3 -c "
+            haiku_output=$("$PY" -c "
 import json, urllib.request, os
 prompt = '''$(echo "$prompt_text" | sed "s/'/\\\\'/g")'''
 data = json.dumps({'model': 'claude-haiku-4-5-20251001', 'max_tokens': 4096, 'messages': [{'role': 'user', 'content': prompt}]}).encode()
@@ -241,7 +261,7 @@ print(resp['content'][0]['text'])
             haiku_output=$("$CLAUDE_BIN" -p "$prompt_text" --dangerously-skip-permissions 2>&1)
         fi
 
-        parsed_ok=$(python3 -c "
+        parsed_ok=$("$PY" -c "
 import json, re, sys
 raw = '''$(echo "$haiku_output" | sed "s/'/\\\\'/g")'''
 match = re.search(r'\{.*\}', raw, re.DOTALL)
@@ -262,7 +282,7 @@ except Exception:
         fi
 
         # Velden uit de JSON halen.
-        slug=$(python3 -c "
+        slug=$("$PY" -c "
 import json, re
 raw = '''$(echo "$haiku_output" | sed "s/'/\\\\'/g")'''
 d = json.loads(re.search(r'\{.*\}', raw, re.DOTALL).group(0))
@@ -270,38 +290,38 @@ s = (d.get('slug') or 'youtube-video').lower()
 s = re.sub(r'[^a-z0-9]+', '-', s).strip('-')
 print(s or 'youtube-video')
 ")
-        pkm_samenvatting=$(python3 -c "
+        pkm_samenvatting=$("$PY" -c "
 import json, re
 raw = '''$(echo "$haiku_output" | sed "s/'/\\\\'/g")'''
 d = json.loads(re.search(r'\{.*\}', raw, re.DOTALL).group(0))
 print(d.get('pkm_samenvatting') or '')
 ")
-        dagstart_onderwerp=$(python3 -c "
+        dagstart_onderwerp=$("$PY" -c "
 import json, re
 raw = '''$(echo "$haiku_output" | sed "s/'/\\\\'/g")'''
 d = json.loads(re.search(r'\{.*\}', raw, re.DOTALL).group(0))
 print(d.get('dagstart_onderwerp') or '')
 ")
-        relevantie_label=$(python3 -c "
+        relevantie_label=$("$PY" -c "
 import json, re
 raw = '''$(echo "$haiku_output" | sed "s/'/\\\\'/g")'''
 d = json.loads(re.search(r'\{.*\}', raw, re.DOTALL).group(0))
 print(d.get('relevantie_label') or 'onbekend')
 ")
-        relevantie_reden=$(python3 -c "
+        relevantie_reden=$("$PY" -c "
 import json, re
 raw = '''$(echo "$haiku_output" | sed "s/'/\\\\'/g")'''
 d = json.loads(re.search(r'\{.*\}', raw, re.DOTALL).group(0))
 print(d.get('relevantie_reden') or '')
 ")
-        linked_topics_yaml=$(python3 -c "
+        linked_topics_yaml=$("$PY" -c "
 import json, re
 raw = '''$(echo "$haiku_output" | sed "s/'/\\\\'/g")'''
 d = json.loads(re.search(r'\{.*\}', raw, re.DOTALL).group(0))
 items = d.get('linked_topics') or []
 print('\n'.join(f'  - {i}' for i in items) if items else '  []')
 ")
-        linked_projects_yaml=$(python3 -c "
+        linked_projects_yaml=$("$PY" -c "
 import json, re
 raw = '''$(echo "$haiku_output" | sed "s/'/\\\\'/g")'''
 d = json.loads(re.search(r'\{.*\}', raw, re.DOTALL).group(0))

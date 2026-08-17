@@ -46,7 +46,7 @@ The **team** is not bounded by the folder. The team is a personality with contra
 
 The only acceptable "no" is when the user explicitly says they do not want to grow the team for this work.
 
-## The team (15 specialists)
+## The team (16 specialists)
 
 See [[Team/agent-index]] for the full routing table.
 
@@ -67,6 +67,7 @@ See [[Team/agent-index]] for the full routing table.
 | Martonny | [[Team/Martonny - Huddle Platform Specialist/AGENTS]] | Platform specialist voor Huddle (thehuddle.nl) — verified, docs-grounded facts about community, e-learning, events, access levels, integrations. Tier-aware. Flags undocumented/beta features. Supplies facts to anyone building Dart Buddies onboarding flows or admin setups. |
 | Tonnymart | [[Team/Tonnymart - Plug&Pay Platform Specialist/AGENTS]] | Platform specialist voor Plug&Pay (plugandpay.com) — verified, docs-grounded facts about checkout, billing, subscriptions, invoicing, the Customer Portal. Tier-aware. Flags undocumented/incomplete features. Supplies facts to anyone building DartsCoaching/Dart Buddies or Gewoon Sander/Darttactiek checkout and billing flows. Owns the Plug&Pay side of cross-platform Huddle-Plug&Pay questions. |
 | Pieter Post | [[Team/Pieter Post - Emailregisseur/AGENTS]] | Persoonlijke e-mailregisseur en interne casuseigenaar van Gmail-triage, antwoordconcepten, mailtaken, wachten-op en factuurrouting. Schrijft acties eerst canoniek naar myPKA; Hermes blijft Sanders enige aanspreekpunt. |
+| Dagobert Duck | [[Team/Dagobert Duck - Persoonlijke Financiële Assistent/AGENTS]] | Persoonlijke Financiële Assistent. Leest live saldi, cashflow-patronen en rule-bound budget-gaten. Rapporteert sourced, dated signaling voor Gewoon Sander (ZZP) en AKP Gezinshuis apart. Voert nooit transacties uit. |
 
 **SOPs are skills, not 1:1 ownership.** Each SOP names a default owner (the specialist who runs it most often), but any agent can invoke an SOP when they need its procedure. Think of SOPs the way Claude skills work — discrete, named, callable. Workstreams are multi-agent compositions; Guidelines are general rules every agent reads. See [[Team Knowledge/INDEX]].
 

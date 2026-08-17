@@ -423,9 +423,23 @@ tags:
 
 ## Specialist-contract frontmatter
 
-The schemas above govern PKM **entity notes**. Specialist **contracts** carry their own small set of frontmatter keys (`agent_version`, `agent_status`, `owner`, etc.). This section documents one optional contract-level field that is part of the v4 tool-agnostic core: `model`.
+The schemas above govern PKM **entity notes**. Specialist **contracts** carry their own small set of frontmatter keys that bind the wiki contract to the Claude Code shim and the agent registry. This section documents the core contract-level fields that every specialist carries.
+
+### Contract-level fields
+
+| Field | Required? | Type | Applies to | Purpose |
+|---|---|---|---|---|
+| `agent_status` | **Required** | Enum: `active` | Specialist contracts and shims | Explicit activation flag. Set to `active` for all operational specialists. Reserved for future status values (e.g. `paused`, `deprecated`). Present on all 17 active specialist contracts. |
+| `agent_type` | **Required** | Enum: `specialist` | Specialist contracts and shims | Declares the agent type. All operational team members are `specialist`. Reserved for future types (e.g. `system`, `coordinator`). Present on all 17 active specialist contracts. |
+| `title` | **Required** | String (format: `"<Name>, <Role>"`) | Specialist contracts and shims | The specialist's human-readable display title. Format: first name / identifier, followed by a comma and space, followed by the role title (e.g. `"Pieter Post, Emailregisseur"`). Present on all 17 active specialist contracts. |
+| `folder` | **Required** | Path (e.g. `"Team/Pieter Post - Emailregisseur"`) | Specialist contracts and shims | The canonical folder where the specialist's wiki contract lives (`Team/<Name> - <Role>`). Used for registry lookups and relative path resolution. Present on all 17 active specialist contracts. |
+| `agent_version` | **Optional** | Semver (e.g. `1.0.0`) | Specialist contracts and shims | Tracks contract/shim version. Optional; add to a specialist contract when you want to track breaking changes to the contract signature. Currently used by specialists with explicit version-management needs (e.g. Pieter Post). |
+| `owner` | **Optional** | Slug (e.g. `hermes`) | Specialist contracts and shims | The orchestrator or owner agent. Optional; add to a specialist contract to make the ownership relationship explicit in frontmatter. Currently used by specialists with explicit owner-tracking needs (e.g. Pieter Post). |
+| `model` | **Optional** | Portable tier alias or `provider/model-id` | Specialist contracts and shims | Model tier for this specialist. Defaults to session/harness default if omitted. See `model` section below for details. |
 
 ### `model` - optional
+
+When `model` is present, it controls the AI tier for this specialist. When absent, the specialist inherits the session/harness default. Most specialists should leave it unset.
 
 | Property | Value |
 |---|---|
@@ -493,6 +507,7 @@ If the rules change, update this file. Do not duplicate the change into SOPs, Wo
 
 ### Version history
 
+- **v2.7** - Specialist-contract frontmatter standardized. Documented the four required fields that now appear on all 17 active specialist contracts: `agent_status`, `agent_type`, `title`, and `folder`. These bind each specialist contract to the Claude Code shim registry and ensure every specialist's identity, location, and status are explicit and uniform in frontmatter. Also documented three optional fields (`agent_version`, `owner`, `model`) that specialists may add for explicit versioning, ownership tracking, or model-tier pinning. Authored 2026-08-17 following the frontmatter-standardization pass across all 17 active specialist contracts (see [[SOP-001-how-to-add-a-new-specialist]] Step 3 for contract-creation requirements). The four required fields are now present on all active contracts; the three optional fields remain additive and task-specific. Additive and backward-compatible - existing contracts are uniform on the four required fields.
 - **v2.6** - Added the **Deliverable** entity schema (`key_element` required, `project` optional). Closes the gap flagged in [[GL-004-task-resource-linking]]'s "orphan deliverables" section - Deliverables were the only resource type in the vault not anchored to the Key Element / Project graph that Goals, Habits, and Topics already use. Authored 2026-08-13 after a brainstorm with Sander about why `Deliverables/` felt like an unorganized warehouse; the answer was a missing link, not a missing folder structure. See [[SOP-020-losstaand-deliverable-archiveren]] (archiving criteria for orphan Deliverables) and [[WS-008-deliverables-en-projecten-audit]] (the periodic audit that mines the new fields for insights). Additive and backward-compatible - existing Deliverables without the field stay valid until next touched.
 - **v2.5** - Toegevoegd: entity schema **Weekly reports** (`type: weekly-report`, `PKM/Weekly Reports/YYYY/MM/<slug>/metadata.md`) voor The Week in Ink — de vrijdag-recap die de Cockpit samenstelt uit Journal/Images/Deliverables/session-logs. Overgenomen uit myPKA-scaffold v5.2.0 bij de selectieve Cockpit-integratie (04-08-2026, zie [[project_mypka_cockpit]]). Additief en backward-compatible.
 - **v2.4** - Added the **`model`** optional contract-level field (new section "Specialist-contract frontmatter"). `model` applies to specialist contracts (`Team/<Name> - <Role>/AGENTS.md`) and their `.claude/agents/<slug>.md` shims, not to PKM entity notes. Value is a portable tier alias (`reasoning` | `balanced` | `fast`); omit to inherit the session/harness default. The harness adapter resolves the alias to a concrete model (e.g. Claude Code maps `reasoning`/`balanced`/`fast` to Opus/Sonnet/Haiku in the shim); the contract stays provider-neutral. An explicit `provider/model-id` string is permitted but flagged by the agnosticism-audit as a coupling warning. OpenRouter documented as the supported BYO-key router (Anthropic-compatible endpoint via `ANTHROPIC_BASE_URL`), with alias-to-slug resolution living in the adapter. Added Lex's ToS INVARIANT: an Anthropic-resolved `model` called by our own code must use an API key / Bedrock / Vertex, never a subscription OAuth token, and never `~/.claude/.credentials.json` (co-enforced with Argus by the agnosticism-audit). Additive and backward-compatible - contracts without `model` stay valid and inherit the default.

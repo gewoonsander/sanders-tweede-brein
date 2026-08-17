@@ -33,8 +33,9 @@ Filename pattern: `SOP-NNN-<title>.md`. See [[GL-001-file-naming-conventions]] f
 | SOP-021 | [[SOP-021-audit-pkm-graafhygiene]] | Atlas (analyse) + Hermes (opvolging) + Sander (goedkeuring) | Alleen-lezen audit van geïsoleerde notities, gebroken/dubbelzinnige links, ontbrekende bijlagen en zwakke INDEX-verbindingen; nooit automatisch opschonen. |
 | SOP-022 | [[SOP-022-verwerk-persoonlijke-taak]] | Hermes | Persoonlijke taak capturen, verduidelijken, koppelen, plannen/delegeren, reviewen en sluiten. |
 | SOP-023 | [[SOP-023-synchroniseer-persoonlijke-taak-naar-todoist]] | Daedalus | Canonieke myPKA-taak idempotent naar Todoist projecteren en gebeurtenissen gecontroleerd terugverwerken. |
+| SOP-024 | [[SOP-024-video-monteren-in-davinci-resolve]] | Stephan Speelberg | Regieplan omzetten in een Resolve-timeline via de `davinci-resolve` MCP-koppeling: projectinstellingen vóór import, opbouw op framegetallen, visuele controle met `timeline_frame`, render. |
 
-*Reserved (genuinely open for future agents):* SOP-024+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
+*Reserved (genuinely open for future agents):* SOP-025+ (next free slot). Do not back-fill existing numbers without coordinating across the team.
 
 ## How to add a new SOP
 

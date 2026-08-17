@@ -5,7 +5,7 @@ owners:
   - Hermes (orchestrator, Dart Atlas datafetch)
   - Penn (schrijven Facebook-bericht)
 tags: [ADC, darts, facebook, dart-atlas, regio-oost, vooraankondiging]
-last_updated: 2026-08-16
+last_updated: 2026-08-17
 ---
 
 # WS-009 — Facebook-vooraankondiging vóór ADC-toernooi
@@ -66,7 +66,7 @@ Geen quote-placeholder (zelfde regel als WS-006 — nooit aangeleverd, altijd ge
 
 ## Fase 3 — Review door Sander
 
-Zelfde flow als WS-004 Fase 3: Hermes legt het concept voor met een checklist van wat automatisch is ingevuld en de vraag om akkoord vóór publicatie. Sander publiceert zelf.
+Zelfde flow als WS-004 Fase 3: Hermes legt het concept voor met een checklist van wat automatisch is ingevuld en de vraag om akkoord vóór publicatie. Sander publiceert zelf — zie [[WS-004-facebook-toernooi-verslag]] Fase 3 voor de drie onderzochte en geblokkeerde automatiseringsroutes (17-08-2026): Claude in Chrome (Anthropic-domeinbeleid, geen override), sandbox-browser (Facebook-wachtwoordmuur), n8n/Graph API (Meta's permanente Groups API-stop sinds 22-04-2024).
 
 ## Fase 4 — Opslaan
 

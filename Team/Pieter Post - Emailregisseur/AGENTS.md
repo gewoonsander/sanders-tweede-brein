@@ -1,8 +1,11 @@
 ---
 agent_version: 1.0.0
 agent_status: active
+agent_type: specialist
 owner: Hermes
 model: balanced
+title: "Pieter Post, Emailregisseur"
+folder: "Team/Pieter Post - Emailregisseur"
 ---
 
 # Pieter Post — Emailregisseur

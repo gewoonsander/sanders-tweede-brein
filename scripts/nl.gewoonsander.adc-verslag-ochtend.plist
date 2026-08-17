@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
-  ACTIEF - geinstalleerd op de Mac mini, 2026-08-11. StandardInPath toegevoegd 2026-08-17
-  (voorheen alleen rechtstreeks op de Mac mini bewerkt, nu ook hier in de repo als bron).
+  ACTIEF - geinstalleerd op deze Mac mini, 2026-08-11.
+  Herzien 2026-08-17 (Daedalus) na de stille vastloper van 12, 13 en 17 augustus.
 
-  Draait dagelijks om 07:00 lokaal scripts/adc-verslag-ochtend.mjs (node-wrapper, roept
-  scripts/adc-verslag-ochtend.prompt.md headless aan via de lokale Claude Code CLI), dat
-  checkt of er gisteren een ADC Regio Oost toernooi was en zo ja het Facebook-verslag
-  genereert + lokaal committet, en (sinds WS-009) ook of er vandaag een toernooi gepland
-  staat voor de vooraankondiging. Bewust lokaal (geen Anthropic cloud-routine) om vendor
-  lock-in te vermijden en omdat de bestaande git-toegang op deze Mac al werkt, zonder een
-  aparte GitHub-cloud-koppeling.
+  Draait dagelijks om 07:00 lokaal scripts/adc-verslag-ochtend.sh, dat via de Claude Code
+  CLI (headless, -p) checkt of er gisteren een ADC Regio Oost toernooi was en zo ja het
+  Facebook-verslag genereert + lokaal committet. Bewust lokaal (geen Anthropic cloud-
+  routine) om vendor lock-in te vermijden en omdat de bestaande git-toegang op deze Mac
+  al werkt, zonder een aparte GitHub-cloud-koppeling.
 
-  BUGFIX 2026-08-17 — StandardInPath: de headless `claude -p`-aanroep bleef onder launchd
-  soms urenlang hangen op 0% CPU (twee keer geconstateerd op 17-08). Gereproduceerd: dezelfde
-  aanroep met stdin expliciet op /dev/null werkte binnen enkele seconden, zonder redirect
-  bleef hij hangen. De CLI probeert kennelijk stdin te lezen (voor eventuele meegepipete
-  input); onder launchd krijgt het proces zonder StandardInPath geen nette EOF op stdin en
-  blijft daar voor altijd op wachten. execFileSync(..., {stdio: "inherit"}) in de .mjs geeft
-  het kind-proces letterlijk de stdin van de LaunchAgent zelf door — vandaar dat dit hier
-  moet worden opgelost, niet in het script. Zie het sessielog van 2026-08-17.
+  WAAROM /bin/bash EN NIET /opt/homebrew/bin/node (root cause 2026-08-17):
+  LaunchAgents hebben op deze Mac geen TCC-toegang tot ~/Documents. Apple-gesigneerde
+  binaries krijgen daar netjes EPERM; node en de losse claude-versiebinary krijgen een
+  toestemmingsdialoog en BLOKKEREN oneindig zolang niemand die wegklikt. Een hangend
+  proces houdt de job "running", waardoor launchd elk volgend 07:00-interval stilzwijgend
+  oversloeg - vandaar meerdere gemiste dagen achter elkaar.
+  Het script draait de CLI daarom via het app-bundle-pad
+  (~/.local/share/claude/ClaudeCode.app/Contents/MacOS/claude). Dat bundle heeft een
+  stabiele, door Anthropic gesigneerde identiteit (com.anthropic.claude-code) met
+  Volledige Schijftoegang, en die grant overleeft de auto-updates van de CLI.
+  Node zit niet meer in het pad. Zie de kop van scripts/adc-verslag-ochtend.sh.
+
+  WorkingDirectory staat bewust op /tmp: laat launchd niet zelf naar een TCC-beschermde
+  map chdir'en. Het script doet de cd naar de repo zelf, na een leesbaarheidscheck.
 
   Handmatig draaien zonder op 07:00 te wachten:
     launchctl kickstart gui/$(id -u)/nl.gewoonsander.adc-verslag-ochtend
@@ -39,12 +43,12 @@
 
 	<key>ProgramArguments</key>
 	<array>
-		<string>/opt/homebrew/bin/node</string>
-		<string>/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/scripts/adc-verslag-ochtend.mjs</string>
+		<string>/bin/bash</string>
+		<string>/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/scripts/adc-verslag-ochtend.sh</string>
 	</array>
 
 	<key>WorkingDirectory</key>
-	<string>/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein</string>
+	<string>/tmp</string>
 
 	<key>StartCalendarInterval</key>
 	<dict>
@@ -63,6 +67,9 @@
 	<key>ExitTimeOut</key>
 	<integer>600</integer>
 
+	<!-- StandardInPath: de headless `claude -p`-aanroep wacht onder launchd anders op
+	     stdin en krijgt nooit EOF. Het script redirect stdin zelf ook al naar /dev/null;
+	     dit is de gordel naast de bretels. Inzicht uit de parallelle sessie van 17-08. -->
 	<key>StandardInPath</key>
 	<string>/dev/null</string>
 

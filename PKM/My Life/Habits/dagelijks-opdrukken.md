@@ -24,6 +24,11 @@ Bij ziekte of lichamelijke klachten staat herstel voorop. Een onderbreking betek
 
 ## Reflection
 
+### 2026-08-17
+
+Uit audiomemo (10:56u) ingesproken. 26 push-ups gedaan — boven het minimum van 25.
+<!-- HABIT_LOG {"date":"2026-08-17","status":"done","amount":26,"unit":"herhalingen","source":"audio-memo"} -->
+
 ### 2026-08-16
 
 Bij close-session bevestigd: 25 keer opgedrukt ✓.

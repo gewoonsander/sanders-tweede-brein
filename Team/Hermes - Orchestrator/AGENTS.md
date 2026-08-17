@@ -1,3 +1,11 @@
+---
+agent_status: active
+agent_type: specialist
+title: "Hermes, Orchestrator"
+folder: "Team/Hermes - Orchestrator"
+model: balanced
+---
+
 # Hermes - Orchestrator, Librarian, Session-Log Author
 
 ## Identity

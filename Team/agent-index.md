@@ -13,12 +13,14 @@ Routing table voor de 15 specialisten van Sander & Co. Hermes leest dit bij elk 
 | Harmonia | Design System Architect | [[Team/Harmonia - Design System Architect/AGENTS]] | Visueel design system nodig, of deliverable auditen op design-system compliance. Owns [[GL-003-design-system]]. |
 | Charta | Infographic Designer | [[Team/Charta - Infographic Designer/AGENTS]] | Infographic, slide, diagram of gestructureerde visuele deliverable bouwen (HTML/CSS). |
 | Pixel | Visual Specialist | [[Team/Pixel - Visual Specialist/AGENTS]] | Afbeelding genereren of bestaande layout stileren (fotografisch, geïllustreerd, AI-rendered). |
+| Stephan Speelberg | Video-Regisseur | [[Team/Stephan Speelberg - Video-Regisseur/AGENTS]] | Sander wil sociale video's snijden voor Huddle-posting: hooks, platform-native exports, ondertiteling, pace. Direct inbound op "maak video voor [platform]" of "cut dit voor Huddle". |
 | Bezalel | Frontend Developer | [[Team/Bezalel - Frontend Developer/AGENTS]] | UI-component, pagina of layout bouwen; UI-bug fixen; legacy component migreren naar design system. |
 | Argus | Security Engineer | [[Team/Argus - Security Engineer/AGENTS]] | Integratie toevoegen, endpoint blootstellen, gebruikersdata opslaan, auth-flow bedraden, Expansion installeren. Security gate — audits, credential hygiene, GDPR technische controls. |
 | Nemesis | QA Specialist | [[Team/Nemesis - QA Specialist/AGENTS]] | Na afronding van visueel werk — component, pagina, redesign of CSS-fix. Niets visueel shippet zonder haar sign-off. WCAG 2.2 AA en responsive verificatie. |
 | Martonny | Huddle Platform Specialist | [[Team/Martonny - Huddle Platform Specialist/AGENTS]] | Gebruiker vraagt "kan Huddle X doen", heeft verified platform facts nodig, tier-gating vragen, of vermoeden van undocumented/beta feature. Grondvest alle antwoorden in official documentation. |
 | Tonnymart | Plug&Pay Platform Specialist | [[Team/Tonnymart - Plug&Pay Platform Specialist/AGENTS]] | Gebruiker vraagt "kan Plug&Pay X doen", heeft verified platform facts nodig, tier-gating vragen, of vermoeden van undocumented feature. Checkout/billing-flow specs. Cross-platform Huddle-Plug&Pay vragen → Tonnymart doet Plug&Pay half, Martonny doet Huddle half. |
 | Pieter Post | Emailregisseur | [[Team/Pieter Post - Emailregisseur/AGENTS]] | Gmail-triage, threadbewuste antwoordconcepten, acties uit mail, wachten-op, factuurrouting en dagelijkse/wekelijkse inboxreviews. Pieter beheert intern de e-mailcasus; Hermes blijft Sanders enige aanspreekpunt. |
+| Dagobert Duck | Persoonlijke Financiële Assistent | [[Team/Dagobert Duck - Persoonlijke Financiële Assistent/AGENTS]] | Saldo-checks, cashflow-rapportage, budget-rule-signalering, entity-scheiding (Gewoon Sander ZZP vs. AKP Gezinshuis). Leest via myPKA Cockpit read-only; voert zelf nooit transacties uit. |
 
 ## Bootstrap rule
 

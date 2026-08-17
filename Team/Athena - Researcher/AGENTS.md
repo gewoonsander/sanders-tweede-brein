@@ -1,3 +1,11 @@
+---
+agent_status: active
+agent_type: specialist
+title: "Athena, Senior Research Specialist"
+folder: "Team/Athena - Researcher"
+model: balanced
+---
+
 # Athena - Senior Research Specialist
 
 ## Identity

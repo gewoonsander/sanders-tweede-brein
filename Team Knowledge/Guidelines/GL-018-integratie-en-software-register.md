@@ -125,6 +125,65 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
       "conflict_policy": "canonical-wins"
     },
     {
+      "integration_id": "davinci-resolve-mcp",
+      "name": "DaVinci Resolve MCP",
+      "kind": "mcp",
+      "purpose": "DaVinci Resolve Studio aansturen vanuit de agentruntime: media importeren, timelines bouwen, retimen, graden, Fusion opbouwen en renderen.",
+      "lifecycle": "configured",
+      "owner": "daedalus",
+      "expected_devices": [
+        "portable-computer"
+      ],
+      "expected_runtimes": [
+        "local-agent-runtime"
+      ],
+      "auth_method": "none",
+      "secret_names": [],
+      "cost_model": "free",
+      "verification_profile": [
+        "config-present",
+        "mcp-registration"
+      ],
+      "dependencies": [
+        "davinci-resolve-studio"
+      ],
+      "canonical_reference": "davinci-resolve",
+      "next_action": "Na herstart van de runtime de toolinventaris ophalen en resolve_control read-only aanroepen; daarna lifecycle op active zetten.",
+      "data_role": "processor",
+      "sync_direction": "none",
+      "canonical_records": [],
+      "adapter_refs": [
+        "runtime-mcp:davinci-resolve"
+      ],
+      "conflict_policy": "canonical-wins"
+    },
+    {
+      "integration_id": "davinci-resolve-studio",
+      "name": "DaVinci Resolve Studio",
+      "kind": "software",
+      "purpose": "Videomontage, kleurbewerking, Fusion-compositing en export van social video.",
+      "lifecycle": "active",
+      "owner": "sander",
+      "expected_devices": [
+        "portable-computer"
+      ],
+      "expected_runtimes": [],
+      "auth_method": "license-key",
+      "secret_names": [],
+      "cost_model": "paid-onetime",
+      "verification_profile": [
+        "manual"
+      ],
+      "dependencies": [],
+      "canonical_reference": "davinci-resolve",
+      "next_action": "Geen. Versie 20.3.2.9 geverifieerd op 2026-08-17 via de scripting-API.",
+      "data_role": "processor",
+      "sync_direction": "none",
+      "canonical_records": [],
+      "adapter_refs": [],
+      "conflict_policy": "canonical-wins"
+    },
+    {
       "integration_id": "n8n-public-api",
       "name": "n8n Public API",
       "kind": "api",

@@ -3,7 +3,7 @@ id: GL-017
 title: MCP service register
 status: active
 owner: daedalus
-last_verified: 2026-08-11
+last_verified: 2026-08-17
 ---
 
 # GL-017 — MCP service register
@@ -81,6 +81,28 @@ Dit is de single source of truth voor externe MCP-diensten die agentruntimes bij
 | Verboden capabilities | vrije API-passthrough, permanent wissen, autonome goedkeuring, replay en standaard publieke links |
 | Healthcheck | toolinventaris, accountmetadata, rootlisting en testbatch in tijdelijke map |
 | Laatst geverifieerd | lokaal contract 2026-08-12; OAuth nog open |
+
+### davinci-resolve
+
+| Veld | Waarde |
+|---|---|
+| `service_id` | `davinci-resolve` |
+| Doel | DaVinci Resolve Studio aansturen vanuit een agentruntime: media importeren, timelines bouwen, retimen, graden, Fusion-composities opbouwen en renderen |
+| Eigenaar | Stephan Speelberg (gebruik), Daedalus (koppeling) |
+| Status | active |
+| Transport | `stdio` naar een lokale Python-server; geen netwerklistener |
+| Endpoint | Lokaal: `~/Tools/davinci-resolve-mcp/venv/bin/python ~/Tools/davinci-resolve-mcp/src/server.py` |
+| Herkomst | `samuelgursky/davinci-resolve-mcp`, MIT, derde partij — geen myICOR-Expansion |
+| Authenticatie | Geen. De server praat met een lokaal draaiende Resolve-instantie via de Blackmagic scripting-API |
+| Secretvariabele | n.v.t. — deze dienst heeft geen token |
+| Servermodus | **compound (35 tools)**. De granulaire modus (`--full`, 353 tools) niet inschakelen: die vult het contextvenster zonder functionele winst |
+| Vereisten | DaVinci Resolve **Studio** (externe scripting is sinds Resolve 19.1 Studio-only), Resolve draait op dezelfde machine, Preferences → System → General → External scripting using = **Local** |
+| Risicoklasse | hoog — draait met Sanders volledige gebruikersrechten, kan buiten Resolve-projectmappen lezen en schrijven, en kan renders starten |
+| Schrijfbeleid | Montage-, kleur- en renderacties binnen een expliciet gevraagde opdracht mogen zonder tussentijdse bevestiging. Verwijderen van clips of timelines, overschrijven van bestaand bronmateriaal en het installeren van `script_plugin`/`dctl`/`fuse_plugin`-bestanden blijven bevestigingsplichtig |
+| Telemetrie | Uitgezet via `DAVINCI_RESOLVE_MCP_UPDATE_CHECK=0`. Zonder die variabele doet de server één GET per 24 uur naar de GitHub releases-API — geen projectdata, geen machine-identifiers (vastgesteld door Argus) |
+| Securityreview | Argus, 2026-08-17: **geel — installeerbaar mits voorwaarden**. Geen `eval`/`exec`/`os.system`/`pickle.loads`, nergens `shell=True`, geen secrets, geen typosquats, geen netwerklistener in de standaardserver. Restrisico: brede bestandssysteemtoegang (inherent aan de functie) en losse dependencypins (`>=`, geen lockfile) |
+| Healthcheck | Resolve starten, dan `resolve_control` aanroepen; `GetProductName()` hoort `DaVinci Resolve Studio` terug te geven. Faalt de verbinding, dan draait Resolve niet of staat scripting niet op Local |
+| Laatst geverifieerd | 2026-08-17 — MCP-handshake geslaagd, 35 tools, Resolve Studio 20.3.2.9 |
 
 ## Adaptercontract
 
