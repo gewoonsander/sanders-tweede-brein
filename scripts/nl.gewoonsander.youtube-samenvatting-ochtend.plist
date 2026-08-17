@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
-  ACTIEF - geinstalleerd op de Mac mini, 2026-08-16.
+  ACTIEF - geinstalleerd op de Mac mini, 2026-08-17 (het bestand lag hier al sinds 16-08
+  met een "ACTIEF"-comment, maar is toen nooit daadwerkelijk gebootstrapt — ontdekt tijdens
+  een dagstart-vervolgvraag op 17-08).
 
   Draait dagelijks om 07:00 lokaal scripts/youtube-samenvatting-ochtend.sh, dat voor elk
   gevolgd kanaal in config/youtube-kanalen.json checkt op nieuwe video's via de bestaande
-  /transcribeer-skill, ze samenvat (Haiku-API, Keychain-key uit Expansions/audio-transcribe
-  hergebruikt) en wegschrijft als Outer World-item + dagstart-queue-entry. Zie
-  Deliverables/2026-08-16-youtube-kanaal-samenvatting-design.md voor het volledige ontwerp.
+  /transcribeer-skill en ze samenvat. Samenvattingsmethode staat in
+  config/youtube-kanalen.json -> samenvatting_methode: momenteel "abonnement" (lokale
+  headless Claude Code CLI, geen aparte kosten) — niet de Haiku-API die in een eerdere
+  versie van dit ontwerp stond. Schrijft weg als Outer World-item + dagstart-queue-entry.
+  Zie Deliverables/2026-08-16-youtube-kanaal-samenvatting-design.md voor het volledige ontwerp.
 
   ExitTimeOut ruimer dan adc-verslag-ochtend (1800s i.p.v. 600s): een video zonder
   ondertitels kan via de Whisper-terugval een paar minuten kosten, en er kunnen meerdere
