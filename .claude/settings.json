@@ -139,7 +139,9 @@
       "mcp__6b0d982b-9531-4059-8cb7-00cff63457d7__get_message",
       "mcp__Claude_Browser__read_console_messages",
       "mcp__computer-use__scroll",
-      "mcp__ccd_session__mark_chapter"
+      "mcp__ccd_session__mark_chapter",
+      "mcp__scheduled-tasks__list_scheduled_tasks",
+      "mcp__Claude_Browser__read_network_requests"
     ]
   },
   "hooks": {

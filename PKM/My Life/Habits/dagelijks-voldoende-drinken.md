@@ -27,3 +27,9 @@ Bron: [Vochtbalans — Voedingscentrum](https://www.voedingscentrum.nl/encyclope
 Bij medische vochtbeperkingen of aandoeningen waarbij vochtinname belangrijk is, gaat persoonlijk advies van arts of diëtist voor.
 
 ## Reflection
+
+### 2026-08-17
+
+- done: false
+- trigger: close-session
+- note: bij afsluiten aangegeven dat het vandaag niet gelukt is
