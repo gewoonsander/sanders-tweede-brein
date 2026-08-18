@@ -201,7 +201,17 @@ Elke eerste reply van een nieuwe sessie begint met datum, tijdstip en onderwerp,
 
 Gebruik de werkelijke lokale tijd van de machine (controleer die, ga niet uit van de tijd in de systeemcontext). Het onderwerp is een korte omschrijving van waar de sessie over gaat; is dat bij de eerste reply nog onduidelijk, gebruik dan Sanders openingsvraag als onderwerp en scherp het aan zodra het duidelijk wordt.
 
+Direct na die eerste reply zet Hermes ook meteen de **sessietitel** op het afgesproken formaat `YYYY-MM-DD HH:MM · <onderwerp>`, met de starttijd van de sessie (`createdAt` uit `get_session`; heeft de host dat veld niet, dan de lokale tijd van de eerste reply). Wacht hier niet mee tot close-session — zie hard rule 12a.
+
 Reden: Sander gebruikt de zijbalk om te zien welke sessies hij heeft gevoerd en wanneer. Vastgelegd 2026-08-18.
+
+### 12a. Sessietitel wordt bij de start gezet, niet pas bij het afsluiten (mandatory)
+
+De titelregel grijpt bij **sessiestart**, niet uitsluitend bij close-session. Aanleiding: op 2026-08-18 bleken drie sessies van dezelfde dag nog de automatische app-titel te dragen (waaronder één met een typefout uit Sanders openingsbericht), simpelweg omdat ze nooit waren afgesloten. Een regel die alleen bij het afsluiten grijpt, laat elke blijven liggende sessie ongestempeld.
+
+- Zet de titel bij de eerste reply, volgens hard rule 12.
+- Bij close-session wordt de titel alleen nog **aangescherpt** als het onderwerp intussen verschoven is; is hij nog passend, dan blijft hij staan.
+- Hosts zonder sessiebeheer slaan het titelgedeelte over (de stempelregel in de reply zelf blijft wel verplicht).
 
 ## Session-Log Triggers (LLM-agnostic)
 
@@ -287,9 +297,9 @@ When running in Claude Code (or any host with the `fewer-permission-prompts` ski
 
 ### Close-session sessietitel bijwerken (mandatory, hosts met sessiebeheer)
 
-Voor de git-backup werkt Hermes de titel van de sessie bij naar het formaat `YYYY-MM-DD HH:MM · <onderwerp>`, met de **starttijd** van de sessie (`createdAt`), niet het moment van afsluiten. Zo staat de zijbalk in dezelfde volgorde en notatie als de session-logs.
+De titel is normaal gesproken al bij de sessiestart gezet (hard rule 12/12a). Voor de git-backup controleert Hermes hem nog een keer en scherpt het onderwerp aan als de sessie intussen ergens anders over ging. Het formaat blijft `YYYY-MM-DD HH:MM · <onderwerp>`, met de **starttijd** van de sessie (`createdAt`), niet het moment van afsluiten. Zo staat de zijbalk in dezelfde volgorde en notatie als de session-logs. Staat er nog een automatische app-titel (sessie is nooit door de start-regel gegaan), dan wordt die hier alsnog omgezet.
 
-- De lopende sessie kan door de host zelf niet hernoemd worden; Hermes meldt de gewenste titel dan aan Sander zodat hij die handmatig kan zetten, of doet het vanuit een volgende sessie.
+- De lopende sessie hernoemt zichzelf met `session_id: "self"` (op 2026-08-18 geverifieerd dat dit werkt); een andere actieve sessie kan gewoon via haar eigen id. Weigert de host het toch, dan meldt Hermes de gewenste titel aan Sander of zet die vanuit een volgende sessie.
 - Titels die Sander zelf heeft gezet worden door de host bewaard en dus niet overschreven — Hermes meldt dat en vraagt of die alsnog om moet.
 - Zet nooit een duur in de titel: aanmaaktijd en laatste activiteit zeggen niets over de werkelijke gesprekstijd (een sessie kan dagen stilstaan).
 

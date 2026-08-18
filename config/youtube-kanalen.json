@@ -3,6 +3,13 @@
   "samenvatting_methode": "abonnement",
   "_samenvatting_methode_comment": "abonnement = headless Claude Code CLI (gebruikt Sanders Claude-abonnement, geen aparte kosten, wel abonnements-gebruiksruimte). api = directe Anthropic API-call (Haiku, Keychain-key, kleine kosten per aanroep, geen abonnementsruimte). Wissel door deze waarde aan te passen — geen scriptwijziging nodig.",
   "kanalen": [
-    { "naam": "ICOR with Tom AI Productivity", "url": "https://www.youtube.com/@myicor" }
+    {
+      "naam": "ICOR with Tom AI Productivity",
+      "url": "https://www.youtube.com/@myicor"
+    },
+    {
+      "naam": "Dartpraat Podcast",
+      "url": "https://www.youtube.com/playlist?list=PLcMCUTNwW4SMkRGfWOkod5shtjmcPkM_c"
+    }
   ]
 }

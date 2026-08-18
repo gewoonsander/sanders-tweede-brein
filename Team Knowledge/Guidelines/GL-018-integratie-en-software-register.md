@@ -46,6 +46,34 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
   wanneer twee kanten een wijziging kunnen voorstellen. Stil `last-write-wins`
   is verboden.
 
+## Toegestane veldwaarden (enums)
+
+Het JSON-blok hieronder wordt strikt gevalideerd door
+`Expansions/mypka-cockpit/server/integrationRegistry.js`. Eén ongeldige waarde
+laat het hele register vallen: de Cockpit-pagina *Koppelingen & software* geeft
+dan HTTP 500 en toont geen enkele integratie meer. Gebruik uitsluitend:
+
+| Veld | Toegestane waarden |
+|---|---|
+| `kind` | `mcp` · `api` · `webhook` · `data-source` · `software` |
+| `lifecycle` | `idea` · `planned` · `configured` · `active` · `paused` · `retired` |
+| `cost_model` | `free` · `paid` · `lifetime` · `included` · `usage-based` · `unknown` |
+| `data_role` | `source` · `destination` · `processor` · `presentation` · `vault` |
+| `sync_direction` | `none` · `import` · `export` · `bidirectional` |
+| `conflict_policy` | `canonical-wins` · `manual-review` |
+| `verification_profile` | `config-present` · `secret-present` · `mcp-registration` · `connector-readonly` · `process-health` · `manual` |
+
+Let op bij `cost_model`: een eenmalige, eeuwigdurende aankoop is `lifetime`
+(niet `paid-onetime` — die waarde bestaat niet en blokkeerde op 2026-08-18 het
+hele dashboard).
+
+Aanvullende regels die de validator afdwingt: `integration_id` is
+kleine letters/cijfers/koppeltekens, `secret_names` is HOOFDLETTERS met
+underscores, elke `dependencies`-verwijzing moet naar een bestaand
+`integration_id` wijzen, `canonical_records` mag alleen bij `data_role: source`
+(en die vereist `sync_direction` `import` of `bidirectional`), en
+`bidirectional` vereist `conflict_policy: manual-review`.
+
 ## Register
 
 <!-- integration-register:start -->
@@ -170,7 +198,7 @@ gedateerde handmatige controle kan een koppeling operationeel groen maken.
       "expected_runtimes": [],
       "auth_method": "license-key",
       "secret_names": [],
-      "cost_model": "paid-onetime",
+      "cost_model": "lifetime",
       "verification_profile": [
         "manual"
       ],

@@ -278,7 +278,7 @@ Deze video heeft geen dialoog en geen voice-over. Dat betekent dat de wolkjes ni
 
 ## 8 · Werkorder in DaVinci Resolve
 
-Uitgangspunt: Studio 21.0.4. Waar een stap ook in de gratis 20.3.2 werkt, staat dat erbij. De volledige handleiding staat op je eigen machine — het pad staat in [[2026-08-17-campingdarts-filmscript]].
+Uitgangspunt: **Studio 21.0.4**, geïnstalleerd en geactiveerd op de MacBook Air (geverifieerd 2026-08-18 om 17:12 in het opstartlog van Resolve). De kanttekeningen "werkt ook in de gratis versie" hieronder kloppen op zichzelf, maar zijn voor deze machine niet van belang — elke Studio-functie uit dit plan is beschikbaar. De volledige handleiding staat op je eigen machine — het pad staat in [[2026-08-17-campingdarts-filmscript]].
 
 ### 0 · Project opzetten (vóór je iets importeert)
 
@@ -345,7 +345,7 @@ Dit is het grootste stuk werk en de reden dat de video er cartoonachtig uitziet.
 - **Magic Mask op precies drie shots: S4, S12 en S13.** Doel: het wolkje kan achter je schouder of hoofd wegvallen. **Magic Mask is een Studio-functie** (in de gratis versie is hij niet beschikbaar). Blijf bij drie shots — meer is op een MacBook Air veel rekentijd voor weinig extra effect. Bestaat er een snellere kwaliteitsstand in jouw versie, kies die; op 1080-uitvoer zie je het verschil niet.
 - **Stilisatie alleen op S1 en S13**, zoals afgesproken. Twee routes:
   - **Route A, versie-onafhankelijk:** een lijntekening-laag bouwen in Fusion met `Highpass` → `BrightnessContrast` → ontzadigen → luma-key, en die als donkere lijnen over het beeld mergen. Daaronder in Color een stevige contrast- en saturatieduw voor het vlakke, geposteriseerde gevoel. Alle gebruikte nodes zitten in de gratis Fusion.
-  - **Route B, sneller als het kan:** kijk in je Effects-lijst onder ResolveFX Stylize wat er in jouw build zit. **Welke van die effecten Studio-only zijn kan ik niet zonder controle vaststellen** — de gratis versie laat Studio-effecten wel zien maar niet bruikbaar renderen, dus je ziet het direct als je er een op een clip zet.
+  - **Route B, sneller als het kan:** kijk in je Effects-lijst onder ResolveFX Stylize wat er in jouw build zit. Op deze machine draait Studio, dus de hele ResolveFX Stylize-categorie is bruikbaar; de eerdere slag om de arm over Studio-only effecten is hier niet meer van toepassing.
 - **Render cache aanzetten** (Playback → Render Cache → Smart) voordat je met Magic Mask begint, anders wordt scrubben onwerkbaar.
 
 ### 6 · Fairlight — kort maar niet overslaan

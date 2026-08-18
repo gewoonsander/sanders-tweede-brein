@@ -3,8 +3,8 @@ date: 2026-08-18
 type: food-log
 key_element: gezondheid
 goal: gewicht-aanpakken
-day_complete: false
-confirmed_at: 2026-08-18T12:26:18+02:00
+day_complete: true
+confirmed_at: 2026-08-18T17:30:38+02:00
 tags: [voeding, tracking]
 ---
 
@@ -46,5 +46,8 @@ tags: [voeding, tracking]
 
 - 2026-08-18T13:48:41+02:00 — overgeslagen: lunch — source: close-session
 <!-- FOOD_SKIP {"log_date":"2026-08-18","meal_type":"lunch","recorded_at":"2026-08-18T13:48:41+02:00","source":"close-session"} -->
+
+- 2026-08-18T17:30:38+02:00 — complete: yes — source: close-session
+<!-- FOOD_AUDIT {"confirmed_at":"2026-08-18T17:30:38+02:00","complete":true,"source":"close-session"} -->
 
 <!-- FOOD_AUDITS -->

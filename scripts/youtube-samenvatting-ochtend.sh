@@ -125,6 +125,22 @@ else
     log "claude-binary: $CLAUDE_BIN"
 fi
 
+# FIRECRAWL_API_KEY — /transcribeer heeft sinds 2026-08-18 een Firecrawl-route die YouTube's
+# IP-blokkade omzeilt. Die blokkade is de oorzaak van de vastgelopen runs op 17 en 18 augustus:
+# zonder alternatief bleef de ondertitelroute hangen tot de 900s-timeout toesloeg. launchd geeft
+# dit script een kale omgeving, dus de key komt hier uit de Keychain (zelfde patroon als
+# ANTHROPIC_API_KEY hierboven). Ontbreekt de key, dan is dat geen harde fout — /transcribeer valt
+# dan terug op ondertitels + Whisper, precies zoals voorheen; wel loggen zodat het zichtbaar is.
+if [ -z "$FIRECRAWL_API_KEY" ]; then
+    FIRECRAWL_API_KEY="$(security find-generic-password -a "$(whoami)" -s "nl.gewoonsander.firecrawl.FIRECRAWL_API_KEY" -w 2>/dev/null)"
+fi
+if [ -n "$FIRECRAWL_API_KEY" ]; then
+    export FIRECRAWL_API_KEY
+    log "Firecrawl-route beschikbaar (key uit Keychain of omgeving)"
+else
+    log "WAARSCHUWING: geen FIRECRAWL_API_KEY gevonden (Keychain-item nl.gewoonsander.firecrawl.FIRECRAWL_API_KEY ontbreekt) — /transcribeer draait zonder Firecrawl-terugval en kan opnieuw vastlopen op een YouTube-IP-blokkade"
+fi
+
 # PKM-context voor het relevantie-oordeel: alleen bestandsnamen (geen inhoud), Topics + Projects.
 topics_lijst=$(ls "$TOPICS_DIR" 2>/dev/null | grep '\.md$' | grep -v '^INDEX.md$' | sed 's/\.md$//')
 projects_lijst=$(ls "$PROJECTS_DIR" 2>/dev/null | grep '\.md$' | grep -v '^INDEX.md$' | sed 's/\.md$//')

@@ -2,7 +2,10 @@ import { useMemo, useRef, useState } from 'react';
 import { Activity, CheckCircle2, CircleAlert, CircleDashed, Plug, RefreshCw, ShieldAlert, Wrench } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
 import { cockpitWrite } from '../lib/useCockpitWrite';
-import type { IntegrationItem, IntegrationsResponse, OverallStatus } from '../lib/integrations';
+import type {
+  IntegrationItem, IntegrationsResponse, IntegrationUsage, IntegrationUsageResponse,
+  OverallStatus, UsageMeter,
+} from '../lib/integrations';
 import { ConnectionsView } from './ConnectionsView';
 import { StackView } from './StackView';
 import './integrations.css';
@@ -32,6 +35,12 @@ const CONFLICT_POLICY = {
 export function IntegrationsView() {
   const [revision, setRevision] = useState(0);
   const { data, loading, error } = useFetch<IntegrationsResponse>(`/api/cockpit/integrations?r=${revision}`);
+  // Tegoedstand is een LOSSE read: valt de leverancier weg, dan mist alleen de
+  // meter — de rest van de pagina blijft staan. Bij 'Nu veilig controleren'
+  // (revision++) halen we hem vers op i.p.v. uit de servercache van 5 minuten.
+  const { data: usageData } = useFetch<IntegrationUsageResponse>(
+    `/api/cockpit/integrations/usage${revision ? `?refresh=1&r=${revision}` : ''}`,
+  );
   const [kind, setKind] = useState('all');
   const [status, setStatus] = useState('all');
   const [checking, setChecking] = useState(false);
@@ -107,6 +116,7 @@ export function IntegrationsView() {
         {items.map((item) => <IntegrationCard
           key={item.integrationId}
           item={item}
+          usage={usageData?.usage[item.integrationId]}
           checking={checkingId === item.integrationId}
           onCheck={() => runChecks(item.integrationId)}
           onConnect={() => reveal(connectPanel)}
@@ -128,8 +138,9 @@ export function IntegrationsView() {
   );
 }
 
-function IntegrationCard({ item, checking, onCheck, onConnect, onDetails }: {
+function IntegrationCard({ item, usage, checking, onCheck, onConnect, onDetails }: {
   item: IntegrationItem;
+  usage?: IntegrationUsage;
   checking: boolean;
   onCheck: () => void;
   onConnect: () => void;
@@ -160,6 +171,7 @@ function IntegrationCard({ item, checking, onCheck, onConnect, onDetails }: {
           <ul>{item.observations.map((row) => <li key={row.probe_id}><code>{row.probe_id}</code> — {row.status} · {row.evidence_code}</li>)}</ul>
         </details>
       )}
+      {usage && <UsagePanel usage={usage} />}
       <div className="intg-next"><strong>Volgende actie</strong><span>{item.nextAction}</span></div>
       {item.overallStatus === 'not_checked' ? (
         <button className="intg-action" type="button" onClick={onCheck} disabled={checking}>
@@ -176,5 +188,67 @@ function IntegrationCard({ item, checking, onCheck, onConnect, onDetails }: {
         <button className="intg-action intg-action--secondary" type="button" onClick={onDetails}>Details bekijken</button>
       )}
     </article>
+  );
+}
+
+// Kleurregel (afspraak met Sander): groen zolang er ruim tegoed is, oranje zodra
+// de helft van het pakket bereikt is, rood als het op is. Bij een leverancier
+// zonder pakketgrootte kunnen we geen helft berekenen — dan alleen groen/rood.
+function level(meter: UsageMeter): 'ok' | 'warn' | 'out' {
+  if (meter.remaining <= 0) return 'out';
+  if (meter.pct !== null && meter.pct <= 50) return 'warn';
+  return 'ok';
+}
+
+const LEVEL_LABEL = { ok: 'ruim tegoed', warn: 'helft bereikt', out: 'tegoed op' } as const;
+const nl = new Intl.NumberFormat('nl-NL');
+
+function UsageBar({ label, meter }: { label: string; meter: UsageMeter }) {
+  const state = level(meter);
+  const width = meter.pct === null ? 100 : Math.min(100, Math.max(0, meter.pct));
+  const text = meter.plan
+    ? `${nl.format(meter.remaining)} van ${nl.format(meter.plan)} ${label.toLowerCase()} over`
+    : `${nl.format(meter.remaining)} ${label.toLowerCase()} over`;
+  return (
+    <div className={`intg-usage-row intg-usage--${state}`}>
+      <div className="intg-usage-line">
+        <span>{label}</span>
+        <strong>{nl.format(meter.remaining)}{meter.plan ? ` / ${nl.format(meter.plan)}` : ''}</strong>
+      </div>
+      <div
+        className="intg-usage-bar"
+        role="meter"
+        aria-valuenow={meter.pct ?? meter.remaining}
+        aria-valuemin={0}
+        aria-valuemax={meter.pct === null ? meter.remaining : 100}
+        aria-label={`${text} — ${LEVEL_LABEL[state]}`}
+      >
+        <span style={{ width: `${width}%` }} />
+      </div>
+    </div>
+  );
+}
+
+function UsagePanel({ usage }: { usage: IntegrationUsage }) {
+  if (!usage.ok) {
+    const why = usage.reason === 'no-key' ? 'geen sleutel ingesteld'
+      : usage.reason === 'unauthorized' ? 'sleutel geweigerd'
+      : usage.reason === 'timeout' ? 'leverancier reageerde niet op tijd'
+      : 'leverancier onbereikbaar';
+    return <div className="intg-usage"><p className="intg-usage-off">Tegoed niet op te halen — {why}.</p></div>;
+  }
+  return (
+    <div className="intg-usage">
+      <div className="intg-usage-head">
+        <strong>Tegoed {usage.provider}</strong>
+        {usage.periodEnd && <span>t/m {new Date(usage.periodEnd).toLocaleDateString('nl-NL')}</span>}
+      </div>
+      {usage.credits && <UsageBar label="Credits" meter={usage.credits} />}
+      {usage.tokens && <UsageBar label="Tokens" meter={usage.tokens} />}
+      <p className="intg-usage-foot">
+        {usage.fetchedAt ? `Stand van ${new Date(usage.fetchedAt).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}` : ''}
+        {usage.cached ? ' (uit buffer)' : ''}
+      </p>
+    </div>
   );
 }

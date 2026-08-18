@@ -15,7 +15,7 @@ De secondes per shot hieronder zijn de ruwe opzet (samen 43,6 sec). Stephan heef
 | Onderdeel | Keuze |
 |---|---|
 | Opnamemiddel | Alleen telefoon, verticaal 9:16 |
-| Montage | DaVinci Resolve (Studio 21.0.4, wordt vandaag geïnstalleerd) |
+| Montage | DaVinci Resolve Studio 21.0.4 — geïnstalleerd en geactiveerd op de MacBook Air |
 | Cartoonaanpak | Denkwolkjes en tekst in Fusion, Magic Mask op enkele shots, stilisatie alleen op openings- en slotshot |
 | Geluid | Geen dialoog, geen voice-over — de wolkjes vertellen het verhaal. Muziek gratis uit de YouTube Audio Library of Pixabay |
 | Doelplatforms | Facebook (Reels/feed) en Huddle |
@@ -52,11 +52,13 @@ Handig bij het bouwen van de Fusion-template — je hoeft dan alleen de tekst te
 4. Standaard ✓ Mat ✓ Verstand ✗
 5. Nog niets.
 6. …Serieus.
-7. Hier heb ik 'm voor gekocht.
+7. Hiervoor dus.
 8. Gasfles heen, darts terug.
 9. 180?
 10. Vakantie geslaagd.
 11. Wie komt darten op veld C?
+
+Plus één tekst die geen wolkje is: de notificatiebanner in shot 7, *"Bezorgd — 3 minuten geleden"*. Die schuift bovenin het kader in en blijft staan tot de snit, dus hij overlapt bewust met wolkje 6.
 
 ## Zet dit goed vóór je begint
 
@@ -76,13 +78,13 @@ Handig bij het bouwen van de Fusion-template — je hoeft dan alleen de tekst te
 ## Werkorder in DaVinci Resolve
 
 1. **Project opzetten.** Project Settings (tandwiel rechtsonder) → Timeline resolution op Custom 1080x1920. Zet de framerate gelijk aan die van je telefoonopnames *voordat* je importeert; de framerate is later niet meer te wijzigen.
-2. **Ruwe montage op de Cut-pagina.** Voor een clip van vijftig seconden sneller dan de Edit-pagina. In- en uitpunten zetten, shots in de nummering hierboven achter elkaar plakken.
+2. **Ruwe montage op de Cut-pagina.** Voor een clip van veertig seconden sneller dan de Edit-pagina. In- en uitpunten zetten, shots in de nummering hierboven achter elkaar plakken.
 3. **Fijnslag op de Edit-pagina.** Snap-zooms via Inspector → Transform → Zoom met twee keyframes. Speed ramp op de worp via rechtsklik → Retime Controls.
 4. **Denkwolkjes in Fusion.** Bouw er één: een `Background` (wit) met drie of vier `Ellipse`-masks die samen de wolkvorm vormen, een `Text+` erover, samengevoegd in een `Merge`, en een `Transform` om hem te laten opploppen. Sla het op en wissel daarna alleen de tekst. Dertien wolkjes voor de prijs van één.
 5. **Color-pagina.** Contrast omhoog, saturatie iets omhoog, wat extra sharpness. De cartoon zit in de wolkjes en het tempo, niet in het beeld.
 6. **Deliver.** H.264, 1080x1920, rond de 10 Mbps. Eén export per platform.
 
-Fusion zit volledig in de gratis versie van Resolve, dus stap 4 werkt ook als de Studio-installatie nog niet af is. Wat Studio 21.0.4 extra brengt voor deze video: Magic Mask (een wolkje áchter je hoofd zetten zonder rotoscopen), Speed Warp (vloeiende slow motion op de worp) en Voice Isolation (campinggeluid wegfilteren als er later toch een voice-over komt). Welke stilisatie-effecten uit ResolveFX in jouw build zitten, staat in de Effects-lijst — dat is niet zonder controle vast te stellen.
+Op de MacBook Air staat DaVinci Resolve Studio 21.0.4, geactiveerd — geverifieerd op 2026-08-18 om 17:12 in het opstartlog van Resolve. Alles wat het regieplan vraagt is dus beschikbaar: Magic Mask (een wolkje áchter je hoofd zetten zonder rotoscopen), Speed Warp (vloeiende slow motion op de worp) en Voice Isolation (campinggeluid wegfilteren als er later toch een voice-over komt), plus de volledige ResolveFX-collectie inclusief de stilisatie-effecten. De kanttekeningen in het regieplan over wat óók in de gratis versie werkt, kun je negeren: ze zijn geschreven toen nog niet vaststond welke editie op deze machine stond.
 
 De volledige handleiding staat lokaal: `/Applications/DaVinci Resolve/DaVinci Resolve Manual.pdf`.
 

@@ -44,3 +44,26 @@ export interface IntegrationsResponse {
   summary: Partial<Record<OverallStatus, number>>;
   integrations: IntegrationItem[];
 }
+
+/** Live tegoed bij een leverancier — zie server/integrationUsage.js. */
+export interface UsageMeter {
+  remaining: number;
+  plan: number | null;
+  pct: number | null;
+}
+
+export interface IntegrationUsage {
+  ok: boolean;
+  reason?: string;
+  provider?: string;
+  unit?: string;
+  credits?: UsageMeter | null;
+  tokens?: UsageMeter | null;
+  periodEnd?: string | null;
+  fetchedAt?: string;
+  cached?: boolean;
+}
+
+export interface IntegrationUsageResponse {
+  usage: Record<string, IntegrationUsage>;
+}

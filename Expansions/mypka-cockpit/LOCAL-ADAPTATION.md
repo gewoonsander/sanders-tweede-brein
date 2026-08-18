@@ -48,3 +48,15 @@ enables them. Credentials are never part of this document or the manifest.
   command, URL, header or secret.
 - Status responses contain bounded evidence codes, never response bodies or
   credential values.
+- **Live tegoedstand (`GET /api/cockpit/integrations/usage`, 2026-08-18).** Voor
+  leveranciers met een account-endpoint haalt de server de resterende credits op
+  — nu alleen Firecrawl (`api.firecrawl.dev/v2/team/credit-usage` en
+  `/token-usage`). Dit is de enige route in het integratiedashboard die met een
+  sleutel naar buiten belt; ze doet dat uitsluitend naar het saldo-endpoint van
+  de leverancier, kost zelf geen credits en stuurt geen enkele
+  scrape-/gebruikersdata mee. De sleutel wordt per aanvraag uit
+  `Team Knowledge/.env` gelezen via `connectors/env.js` en verlaat de server
+  nooit; de browser krijgt alleen kale getallen. Antwoorden worden 5 minuten
+  gebufferd, hebben een timeout van 8 seconden en falen zacht
+  (`{ ok:false, reason }`) zodat een onbereikbare leverancier de pagina niet
+  leegtrekt.

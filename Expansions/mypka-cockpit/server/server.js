@@ -39,6 +39,7 @@ import { describeRegistry, taskConnectors, labelForSource } from './connectors/r
 import { setEnvKey, clearEnvKey, getAgenda, listStoredKeyNames } from './connectorAdmin.js';
 import { describeStack } from './stackInventory.js';
 import { getIntegrations, getIntegrationHistory, runIntegrationChecks, recordManualProbe } from './integrationsApi.js';
+import { getIntegrationUsage } from './integrationUsage.js';
 import { registerPlannerRoutes } from './plannerRoutes.js';
 import { registerWellnessRoutes } from './wellness.js';
 import { registerFileTreeRoutes } from './filetree.js';
@@ -699,6 +700,15 @@ app.get('/api/cockpit/stack', safe(() => describeStack()));
 // passive probes selected by known IDs; the browser can never supply a command,
 // URL, header or credential.
 app.get('/api/cockpit/integrations', safe(() => getIntegrations()));
+
+// GET /api/cockpit/integrations/usage[?refresh=1]
+// Live tegoedstand bij leveranciers die een account-endpoint hebben (nu: Firecrawl).
+// De sleutel blijft server-side; de browser krijgt alleen getallen. Fail-soft:
+// een onbereikbare leverancier levert { ok:false, reason }, nooit een 500 die de
+// hele koppelingenpagina leegtrekt.
+app.get('/api/cockpit/integrations/usage', safeAsync((req) => (
+  getIntegrationUsage({ refresh: req.query.refresh === '1' })
+)));
 
 app.get('/api/cockpit/integrations/:id/history', (req, res) => {
   try {

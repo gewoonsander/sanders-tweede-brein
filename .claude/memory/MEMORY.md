@@ -31,6 +31,6 @@
 - [Kill -9 en databehoud](feedback_kill_processen_databehoud.md) — nooit hele procesboom hard killen bij lopende bestandsverwerking; 2 voice-memo's onherstelbaar verloren op 2026-08-17
 - [Drinkt alleen zwarte koffie](user_drinkt_alleen_zwarte_koffie.md) — ~99,9% van zijn drankgebruik, nooit naar melk/suiker vragen
 - [Sessiestempel bij sessiestart](feedback_sessiestempel_bij_sessiestart.md) — eerste reply begint met datum, tijdstip en onderwerp
-- [Sessietitel bij close-session](feedback_sessietitel_bij_close_session.md) — titel omzetten naar `YYYY-MM-DD HH:MM · onderwerp` met de starttijd
+- [Sessietitel-formaat](feedback_sessietitel_formaat.md) — `YYYY-MM-DD HH:MM · onderwerp` met de starttijd, gezet bij de eerste reply, niet pas bij close-session
 - [Drankjes loggen via chat](feedback_drankjes_loggen_via_chat.md) — meldt hij een drankje, log direct een `- drink:`-regel en regenereer de spiegel
 - [Claude-abonnement tijdelijk op Max](project_claude_abonnement_tijdelijk_max.md) — bewust tijdelijk (camping), rond 2026-09-18 terug naar goedkoper plan
