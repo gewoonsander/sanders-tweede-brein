@@ -34,6 +34,16 @@ tags: [voeding, tracking]
 - Foto: ![[Images/2026/08/2026-08-18-3169ef85f5.jpeg]]
 <!-- FOOD_ENTRY {"log_date":"2026-08-18","logged_at":"2026-08-18T10:47:37+02:00","meal_type":"breakfast","description":"Bakje AH Cottage Cheese (naturel), geschat 150-200 g","source_type":"photo","source_id":"3169ef85f558eae47752659f8b17721423af0726eb9e445e9efd4f72ed0b4011-corr-breakfast","photo_path":"Images/2026/08/2026-08-18-3169ef85f5.jpeg","kcal":[135.0,200.0],"protein_g":[16.0,26.0],"carbs_g":[4.0,8.0],"fat_g":[5.0,7.0],"confidence":"medium","supersedes_entry_id":"aa212b56d951314ebe53","entry_id":"c88a38cc80020d99a8c4"} -->
 
+
+### 21:36 — Avondeten
+- Gehaktbal, aardappelkraté en bietensalade
+- Energie: 430–630 kcal
+- Eiwit: 18–26 g
+- Koolhydraten: 31–50 g
+- Vet: 23–39 g
+- Betrouwbaarheid: low
+<!-- FOOD_ENTRY {"log_date":"2026-08-18","logged_at":"2026-08-18T21:36:00+02:00","meal_type":"dinner","description":"Gehaktbal, aardappelkraté en bietensalade","source_type":"chat","source_id":"close-session-2026-08-18-dinner","kcal":[430.0,630.0],"protein_g":[18.0,26.0],"carbs_g":[31.0,50.0],"fat_g":[23.0,39.0],"confidence":"low","photo_path":null,"supersedes_entry_id":null,"entry_id":"6d149aa4e60a1afc65e5"} -->
+
 <!-- FOOD_ENTRIES -->
 
 ## Completion audit

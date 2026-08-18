@@ -5,7 +5,9 @@ owner: stephan-speelberg
 status: active
 triggers:
   - een regieplan is klaar en het beeldmateriaal staat op de machine
-  - "monteer deze video", "zet dit in Resolve", "bouw de timeline"
+  - "monteer deze video"
+  - "zet dit in Resolve"
+  - "bouw de timeline"
   - een bestaande Resolve-montage moet aangepast, geretimed of opnieuw geëxporteerd worden
 reusable_by: any-agent
 ---
