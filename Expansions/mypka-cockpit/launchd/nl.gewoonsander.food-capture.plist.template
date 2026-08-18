@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Placeholders filled in by scripts/install-food-capture-macos.sh:
+    __ROOT__     the iCloud-synced vault (canonical markdown lives here)
+    __RUNTIME__  local-only deploy dir the scripts actually run from
+    __PYTHON__   interpreter resolved at install time
+
+  Why the scripts do NOT run from the vault (2026-08-18): the vault is
+  iCloud-synced, and an open() against an iCloud-backed path can wedge in the
+  kernel indefinitely. It happened twice — the interpreter blocked in __open
+  while loading the script itself, before executing a single line, and because
+  launchd never starts a second instance of a running job the whole pipeline sat
+  dead for two days without one error line. Running from local-only storage
+  removes that failure mode; GEWOONSANDER_VAULT points the scripts back at the
+  vault for reading photos and writing markdown.
+
+  The perl alarm is the second line of defence: pending alarms survive exec, so
+  the timer applies to python itself. If any single run exceeds the timeout it is
+  killed, and the next StartInterval tick gets a clean slate. A wedge can now
+  cost one interval, never two days.
+-->
 <plist version="1.0"><dict>
   <key>Label</key><string>nl.gewoonsander.food-capture</string>
-  <key>ProgramArguments</key><array><string>/bin/zsh</string><string>-lc</string><string>source "$HOME/.config/gewoonsander/env" 2&gt;/dev/null || true; python3 "__ROOT__/Expansions/mypka-cockpit/scripts/watch-food-inbox.py"</string></array>
+  <key>ProgramArguments</key><array>
+    <string>/bin/zsh</string>
+    <string>-lc</string>
+    <string>source "$HOME/.config/gewoonsander/env" 2&gt;/dev/null || true; export GEWOONSANDER_VAULT="__ROOT__"; exec /usr/bin/perl -e 'alarm shift; exec @ARGV' 300 "__PYTHON__" "__RUNTIME__/watch-food-inbox.py"</string>
+  </array>
   <key>WatchPaths</key><array><string>__ROOT__/Team Inbox/Documents</string><string>__ROOT__/Team Inbox/Audio Captures</string></array>
   <key>StandardOutPath</key><string>/tmp/gewoonsander-food-capture.log</string>
   <key>StandardErrorPath</key><string>/tmp/gewoonsander-food-capture.err</string>

@@ -25,6 +25,12 @@ MEAL_LABELS = {"breakfast": "ontbijt", "lunch": "lunch", "dinner": "avondeten", 
 
 
 def root() -> Path:
+    """Vault root. GEWOONSANDER_VAULT wins so a deployed copy outside the
+    iCloud-synced vault still writes to the canonical markdown. See the note in
+    watch-food-inbox.py for why deployed copies exist."""
+    override = os.environ.get("GEWOONSANDER_VAULT")
+    if override:
+        return Path(override).resolve()
     return Path(__file__).resolve().parents[3]
 
 

@@ -56,6 +56,7 @@ SCHEMA
 from __future__ import annotations
 
 import json
+import os
 import re
 import sqlite3
 import sys
@@ -71,8 +72,12 @@ except ImportError:
         "then re-run this script."
     )
 
-# The script lives at <root>/Expansions/mypka-cockpit/scripts/regen-mypka-db.py
-ROOT = Path(__file__).resolve().parents[3]
+# The script lives at <root>/Expansions/mypka-cockpit/scripts/regen-mypka-db.py,
+# unless it is a deployed copy outside the iCloud-synced vault — then
+# GEWOONSANDER_VAULT points back at the real root.
+ROOT = (Path(os.environ["GEWOONSANDER_VAULT"]).resolve()
+        if os.environ.get("GEWOONSANDER_VAULT")
+        else Path(__file__).resolve().parents[3])
 DB_PATH = ROOT / "mypka.db"
 
 # Tables this script owns: dropped + rebuilt on every run. NOTHING ELSE in the

@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 """One-shot idempotent inbox scan; launchd WatchPaths invokes this on the Mac mini."""
 from __future__ import annotations
-import json, shutil, subprocess, sys, time
+import json, os, shutil, subprocess, sys, time
 from datetime import datetime
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parents[3]; STATE=Path.home()/'.local/state/gewoonsander/food-capture'
+# GEWOONSANDER_VAULT lets a DEPLOYED copy of this script live outside the vault.
+# That matters: the vault is iCloud-synced, and an open() against an iCloud-backed
+# path can wedge in the kernel forever (observed 2026-08-16 and 2026-08-18 — the
+# interpreter hung before executing a single line, blocking every later run
+# because launchd will not start a second instance). Deployed copies run from
+# local-only storage and point back at the vault through this variable. Without
+# it, the in-repo layout <vault>/Expansions/mypka-cockpit/scripts/ still resolves.
+ROOT=Path(os.environ['GEWOONSANDER_VAULT']).resolve() if os.environ.get('GEWOONSANDER_VAULT') else Path(__file__).resolve().parents[3]
+STATE=Path.home()/'.local/state/gewoonsander/food-capture'
 PROCESS=Path(__file__).with_name('process-food-capture.py')
 
 def digest(path, attempts=3, initial_delay=1):
