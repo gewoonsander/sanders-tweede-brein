@@ -128,17 +128,24 @@ fi
 # FIRECRAWL_API_KEY — /transcribeer heeft sinds 2026-08-18 een Firecrawl-route die YouTube's
 # IP-blokkade omzeilt. Die blokkade is de oorzaak van de vastgelopen runs op 17 en 18 augustus:
 # zonder alternatief bleef de ondertitelroute hangen tot de 900s-timeout toesloeg. launchd geeft
-# dit script een kale omgeving, dus de key komt hier uit de Keychain (zelfde patroon als
-# ANTHROPIC_API_KEY hierboven). Ontbreekt de key, dan is dat geen harde fout — /transcribeer valt
-# dan terug op ondertitels + Whisper, precies zoals voorheen; wel loggen zodat het zichtbaar is.
+# dit script een kale omgeving, dus de key komt hier uit de Keychain. Ontbreekt de key, dan is
+# dat geen harde fout — /transcribeer valt dan terug op ondertitels + Whisper, precies zoals
+# voorheen; wel loggen zodat het zichtbaar is.
+# Twee bekende plekken (2026-08-18, Mac Mini-audit): het "abonnement"-patroon
+# (nl.gewoonsander.FIRECRAWL_API_KEY, account = volledige gebruikersnaam, zelfde stijl als
+# ANTHROPIC_API_KEY hierboven) en een ouder item uit de Firecrawl-MCP-koppeling
+# (mcp-firecrawl-api-key, account "sander"). Probeer beide, in die volgorde.
 if [ -z "$FIRECRAWL_API_KEY" ]; then
-    FIRECRAWL_API_KEY="$(security find-generic-password -a "$(whoami)" -s "nl.gewoonsander.firecrawl.FIRECRAWL_API_KEY" -w 2>/dev/null)"
+    FIRECRAWL_API_KEY="$(security find-generic-password -a "$(whoami)" -s "nl.gewoonsander.FIRECRAWL_API_KEY" -w 2>/dev/null)"
+fi
+if [ -z "$FIRECRAWL_API_KEY" ]; then
+    FIRECRAWL_API_KEY="$(security find-generic-password -a "sander" -s "mcp-firecrawl-api-key" -w 2>/dev/null)"
 fi
 if [ -n "$FIRECRAWL_API_KEY" ]; then
     export FIRECRAWL_API_KEY
     log "Firecrawl-route beschikbaar (key uit Keychain of omgeving)"
 else
-    log "WAARSCHUWING: geen FIRECRAWL_API_KEY gevonden (Keychain-item nl.gewoonsander.firecrawl.FIRECRAWL_API_KEY ontbreekt) — /transcribeer draait zonder Firecrawl-terugval en kan opnieuw vastlopen op een YouTube-IP-blokkade"
+    log "WAARSCHUWING: geen FIRECRAWL_API_KEY gevonden (geen van beide Keychain-items aanwezig: nl.gewoonsander.FIRECRAWL_API_KEY of mcp-firecrawl-api-key) — /transcribeer draait zonder Firecrawl-terugval en kan opnieuw vastlopen op een YouTube-IP-blokkade"
 fi
 
 # PKM-context voor het relevantie-oordeel: alleen bestandsnamen (geen inhoud), Topics + Projects.
