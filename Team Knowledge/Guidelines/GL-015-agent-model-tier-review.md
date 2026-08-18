@@ -34,31 +34,29 @@ Bij een review: loop de tabel hieronder langs, vraag per specialist "is dit nog 
 
 ## Huidige tiering
 
-| Specialist | Model | Rationale |
-|---|---|---|
-**Laatste volledige herbeoordeling: 2026-08-17.** Alle zestien specialisten zijn langs de keuzevraag uit [[SOP-001-how-to-add-a-new-specialist]] stap 5b gelegd: *wat gebeurt er als deze specialist het nét verkeerd doet?*
+**Laatste volledige herbeoordeling: 2026-08-18.** Alle zestien specialisten zijn langs de keuzevraag uit [[SOP-001-how-to-add-a-new-specialist]] stap 5b gelegd: *wat gebeurt er als deze specialist het nét verkeerd doet?*
 
 | Specialist | Shim-model | Contract-alias | Rationale |
 |---|---|---|---|
 | Atlas (Silas) | Opus | `reasoning` | Schema- en migratiewerk, foutgevoelige parsing. Een fout vervuilt data die de rest van het systeem als waarheid leest |
 | Daedalus (Mack) | Opus | `reasoning` | API-, OAuth- en MCP-integraties. Een fout breekt een koppeling of raakt credentials |
 | Bezalel (Felix) | Opus | `reasoning` | Frontend-code waar anderen op voortbouwen; herstelkosten van zwak werk overtreffen de modelkosten ruim |
-| Argus (Vex) | Opus | `reasoning` | **Gewijzigd 2026-08-17** — een gemiste kwetsbaarheid is het schoolvoorbeeld van "duur én moeilijk te zien". Sonnet paste niet bij de eigen keuzevraag |
+| Argus (Vex) | Opus | `reasoning` | **Gewijzigd 2026-08-18** — een gemiste kwetsbaarheid is het schoolvoorbeeld van "duur én moeilijk te zien". Sonnet paste niet bij de eigen keuzevraag |
 | Athena (Pax) | Sonnet | `balanced` | Research en cross-verificatie; oordeel nodig, fouten komen bij het nalezen van de bronnen boven |
 | Nemesis (Vera) | Sonnet | `balanced` | QA- en toegankelijkheidscontroles tegen een vast kader |
 | Harmonia | Sonnet | `balanced` | Design-system authoring; afwijkingen zijn zichtbaar in de uitkomst |
 | Pieter Post | Sonnet | `balanced` | Conceptantwoorden die Sander vóór verzending leest — de review vangt fouten af |
 | Dagobert Duck | Sonnet | `balanced` | Financiële rapportage uit vastgelegde bronnen: cijfers moeten kloppen, maar elke bewering is tegen de bron te leggen |
-| Jethro (Nolan) | Sonnet | `balanced` | **Gewijzigd 2026-08-17** — SOP-001 is zwaarder geworden: Jethro schrijft nu contracten uit onderzoek én maakt de tierkeuze in stap 5b. Dat is oordeel, geen sjabloonwerk |
-| Martonny | Sonnet | `balanced` | **Gewijzigd 2026-08-17** — levert geverifieerde platformfeiten. Een verzonnen capaciteit is precies de fout die niemand opmerkt; dit is de rol waar "geen aannames als feiten" het hardst telt |
-| Tonnymart | Sonnet | `balanced` | **Gewijzigd 2026-08-17** — zelfde redenering als Martonny |
-| Stephan Speelberg | Sonnet | `balanced` | **Gewijzigd 2026-08-17** — montagefouten zie je bij het terugkijken meteen, en Resolve-scripting is opnieuw te draaien. Opus was zwaarder dan de foutkosten rechtvaardigen |
+| Jethro (Nolan) | Sonnet | `balanced` | **Gewijzigd 2026-08-18** — SOP-001 is zwaarder geworden: Jethro schrijft nu contracten uit onderzoek én maakt de tierkeuze in stap 5b. Dat is oordeel, geen sjabloonwerk |
+| Martonny | Sonnet | `balanced` | **Gewijzigd 2026-08-18** — levert geverifieerde platformfeiten. Een verzonnen capaciteit is precies de fout die niemand opmerkt; dit is de rol waar "geen aannames als feiten" het hardst telt |
+| Tonnymart | Sonnet | `balanced` | **Gewijzigd 2026-08-18** — zelfde redenering als Martonny |
+| Stephan Speelberg | Sonnet | `balanced` | **Gewijzigd 2026-08-18** — montagefouten zie je bij het terugkijken meteen, en Resolve-scripting is opnieuw te draaien. Opus was zwaarder dan de foutkosten rechtvaardigen |
 | Penn | Haiku | `fast` | Journal-capture volgens vaste template |
 | Charta | Haiku | `fast` | Infographic-layout met bestaande GL-003-tokens |
 | Pixel | Haiku | `fast` | Image-gen orchestratie |
 | Hermes (orchestrator, hoofdsessie) | n.v.t. — sessiemodel | `balanced` | Routeert en vat samen. Advies blijft de midden-tier met medium/low effort; de hoofdsessie kiest Sander zelf in de interface, dit veld is dus adviserend en niet bindend |
 
-Status: **actief — alle 16 `.claude/agents/*.md`-shims dragen een `model:`-veld, en alle 17 specialist-contracten dragen de portable alias (stand 2026-08-17).**
+Status: **actief — alle 16 `.claude/agents/*.md`-shims dragen een `model:`-veld, en alle 17 specialist-contracten dragen de portable alias (stand 2026-08-18).**
 
 ### Openstaand na deze ronde
 
@@ -83,5 +81,5 @@ Wijzig de tabel hierboven bij elke review. Noteer kort waarom een tier verandert
 
 ### Reviewgeschiedenis
 
-- **2026-08-17 — volledige herbeoordeling.** Aanleiding: bij het aannemen van Dagobert Duck bleek dat zijn shim geen `model:`-veld had en hij dus het hoofdmodel erfde — hetzelfde lek dat deze Guideline op 2026-07-07 moest dichten. Oorzaak: de tierkeuze stond alleen hier en niet in de aanneemprocedure, dus wie SOP-001 netjes volgde kwam modellen nooit tegen. Structureel opgelost met stap 5b in [[SOP-001-how-to-add-a-new-specialist]], plus twee regels in de "Common mistakes"-lijst daar. Inhoudelijk: vier specialisten die na 2026-07-07 waren aangenomen zijn alsnog in de tabel opgenomen, en alle zestien zijn opnieuw langs de keuzevraag gelegd. Vier tiers gewijzigd (Argus omhoog, Jethro/Martonny/Tonnymart omhoog, Stephan Speelberg omlaag). Alle 17 contracten hebben nu de portable alias, zodat een modelwissel voortaan één vertaaltabel raakt in plaats van zestien bestanden.
+- **2026-08-18 — volledige herbeoordeling.** Aanleiding: bij het aannemen van Dagobert Duck bleek dat zijn shim geen `model:`-veld had en hij dus het hoofdmodel erfde — hetzelfde lek dat deze Guideline op 2026-07-07 moest dichten. Oorzaak: de tierkeuze stond alleen hier en niet in de aanneemprocedure, dus wie SOP-001 netjes volgde kwam modellen nooit tegen. Structureel opgelost met stap 5b in [[SOP-001-how-to-add-a-new-specialist]], plus twee regels in de "Common mistakes"-lijst daar. Inhoudelijk: vier specialisten die na 2026-07-07 waren aangenomen zijn alsnog in de tabel opgenomen, en alle zestien zijn opnieuw langs de keuzevraag gelegd. Vier tiers gewijzigd (Argus omhoog, Jethro/Martonny/Tonnymart omhoog, Stephan Speelberg omlaag). Alle 17 contracten hebben nu de portable alias, zodat een modelwissel voortaan één vertaaltabel raakt in plaats van zestien bestanden.
 - **2026-07-07 — invoering.** Elf specialisten getierd om te voorkomen dat elke subagent het hoofdmodel erft.

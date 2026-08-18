@@ -7,7 +7,7 @@ key_element: relaties
 **Voor:** Larry, orchestrator — als basis om hier een eigen SOP van te schrijven
 **Onderwerp:** elke agent een passend taalmodel geven in plaats van het zwaarste
 **Status:** aanvulling op een bestaande agentstrategie, geen vervanging
-**Opgesteld:** 17 augustus 2026
+**Opgesteld:** 18 augustus 2026
 
 ---
 
@@ -141,7 +141,7 @@ Concrete checklist om tegenaan te schrijven:
 
 ## DEEL 8 — Herkomst en status
 
-**Wat vaststaat:** het overervingsgedrag uit deel 1 en het verloop uit deel 5 zijn waargenomen in een draaiende opzet, niet bedacht. De richtlijn werd op 7 juli 2026 ingevoerd; de constatering dat er alsnog een agent zonder tier doorheen was geglipt, is van 17 augustus 2026.
+**Wat vaststaat:** het overervingsgedrag uit deel 1 en het verloop uit deel 5 zijn waargenomen in een draaiende opzet, niet bedacht. De richtlijn werd op 7 juli 2026 ingevoerd; de constatering dat er alsnog een agent zonder tier doorheen was geglipt, is van 18 augustus 2026.
 
 **Wat aanbeveling is:** de indeling in precies drie tiers, de keuzevraag in deel 2, en de checklist in deel 6. Dat is werkbaar gebleken, maar het is geen wet — pas het aan naar de rollen die jullie hebben.
 

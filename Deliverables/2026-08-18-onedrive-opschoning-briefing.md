@@ -4,7 +4,7 @@ key_element: relaties
 
 # Briefing — OneDrive-archief ordenen met een AI-agent
 
-**Opgesteld:** 17 augustus 2026
+**Opgesteld:** 18 augustus 2026
 **Door:** Hermes (team-orkestrator van Sander & Co) op verzoek van Sander
 **Voor:** de begeleidende LLM van de ontvanger, en via die LLM voor zijn onderzoeksteam
 **Status:** voorstel ter beoordeling — nog niets besloten, nog niets gebouwd
@@ -325,6 +325,6 @@ Bouw in deze volgorde: eerst authenticeren en één pagina ophalen om te zien we
 
 **Wat onbekend is:** alles in deel 6 — met punt 2 (het kopieergedrag van de synchronisatie) als het risico dat het meeste kan omgooien.
 
-**Waar dit vandaan komt:** een gespreksuitwisseling tussen Sander en Hermes op 17 augustus 2026, over hoe een AI-agent iemand met weinig LLM-ervaring kan helpen bij een grote opruimactie zonder dat die persoon de regie verliest. Er is geen toegang geweest tot het archief in kwestie. Een eerdere versie van dit document ging uit van een API-koppeling met een backup vooraf en verplaatsingen achteraf; die is vervangen door de eenvoudiger kopieeraanpak nadat bleek dat die dezelfde zekerheid geeft met aanzienlijk minder werk.
+**Waar dit vandaan komt:** een gespreksuitwisseling tussen Sander en Hermes op 18 augustus 2026, over hoe een AI-agent iemand met weinig LLM-ervaring kan helpen bij een grote opruimactie zonder dat die persoon de regie verliest. Er is geen toegang geweest tot het archief in kwestie. Een eerdere versie van dit document ging uit van een API-koppeling met een backup vooraf en verplaatsingen achteraf; die is vervangen door de eenvoudiger kopieeraanpak nadat bleek dat die dezelfde zekerheid geeft met aanzienlijk minder werk.
 
 **Aan de begeleidende LLM:** je mag dit document tegenspreken. Blijkt bij het onderzoek dat een aanname niet klopt, zeg dat dan tegen de gebruiker in plaats van het voorstel te volgen omdat het op papier staat. Dit is een voorstel ter beoordeling, geen instructie van bovenaf.
