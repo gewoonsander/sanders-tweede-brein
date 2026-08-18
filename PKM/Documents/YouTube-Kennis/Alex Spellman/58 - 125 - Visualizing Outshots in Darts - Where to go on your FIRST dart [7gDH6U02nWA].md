@@ -1,54 +1,71 @@
 # 125 - Visualizing Outshots in Darts - Where to go on your FIRST dart
 
 - **Video:** https://www.youtube.com/watch?v=7gDH6U02nWA
-- **Ondertitel-taal:** nl (lokale Whisper-transcriptie, geen ondertitels beschikbaar)
-- **Bron:** Lokale Whisper-transcriptie (large-v3)
+- **Ondertitel-taal:** en (via Firecrawl (YouTube-verwerker))
+- **Bron:** Firecrawl (YouTube-verwerker)
 
 ---
 
-Hallo iedereen, Spellman hier met nog een nummer in onze serie op waar je moet beginnen.
-En vandaag hebben we 125.
-In deze nummer kan ik eigenlijk een beetje langer praten, want er is geen heleboel te praten over.
-Nogmaals, er is een heleboel blauw en er zijn hier maar twee opties voor je.
-Dus laten we praten met de minderste van hen, de 15.
-Ga 15, je hebt 110, 60 bull.
-Je hebt een 45, je hebt 80, trip 20, double bull, sorry, trip 20, double 10, trip 16, double 16,
-of misschien zelfs twee double 20's om dat uit te nemen.
-Maar nogmaals, misschien niet de laagste route hier.
-Maar laten we kijken naar de 18's.
-Dus 18, je hebt de enkele, 107, triple 19, bull.
-Je hebt een 54, je hebt 71, wat betekent dat je nog een triple moet hitten.
-Trip 17, double 10, triple 13, double 16, iets anders.
-Zoals dat.
-Nu, wat ik ga doen, en wat de meeste hoogteleven spelers gaan doen,
-is dat we niet gaan kijken naar niets, zonder dat bull.
-De 25 gaat je 100 laten, dus nu heb je gewoon een trip 20, double 20.
-Dus je gaat gewoon de ladder erop klimmen.
-Maar nu moet je alleen één triple hitten, ongeveer de andere omgevingen waar je twee moet hitten.
-Je moet alleen één triple hitten, en dat is een triple die veel van ons in de trip 20 leuk vindt.
-Als je de bull haalt, ga je 75 laten.
-Dus nu heb je wat opties.
-Je hebt wat opties hier, afhankelijk van waar je tegenwoordig is, misschien verandert dat wat je doet.
-Als je dat 50 haalt, dan heb je 75.
-Als je niet nodig hebt om de finish te gaan, triple 17, double 12.
-Dat is de route die ik op 75 neem.
-Je kunt ook gewoon blijven op de bull.
-Je haalt de double, je haalt de single, en nu heb je 50 nog.
-Je gaat er gewoon in, je hebt twee markers erin.
-Het lijkt een leuke trickshot, en een show-off kind van shot,
-maar het is echt de beste shot die je kunt nemen.
-In dit scenario.
-Alles andere behoort een double of een triple.
-Anders heb je geen opties meer.
-En deze opties hier, zoals ik al zei, je moet nog een double of triple hitten,
-na de triple.
-En met de bull-area, je hoeft dat zelfs niet te doen.
-Dus probeer het.
-Kijk wat je voelt comfortabel.
-Misschien ben je niet op het niveau waar je die shot wilt nemen.
-Nou, wacht eens.
-Je kunt nog steeds de 18 route gaan.
-Je kunt nog steeds de fat 18 hitten om een triple of een double te laten.
-Dus dat is de potentiële veilige route.
-Maar andere dan dat, ga naar de boel.
-Tot morgen.
+Hey everyone, Spellman here with yet
+another number in our series on where to
+start. And today we have 125. This one I
+can actually talk a little bit slower on
+because well, there ain't a whole lot to
+talk about. Again, there is a whole lot
+of blue and there are only two options
+here for you. So, let's talk with the
+lesser of them, the 15. Go 15, you've
+got 110 60 bull. You get a 45, you're at
+80. Trip 20 double bull or sorry, trip
+20 double 10. uh trip 16, double 16, or
+maybe even two double 20s to uh take
+that one out. But again, uh maybe not
+the easiest route here, but let's take a
+look at the 18s. So 18, you hit the
+single 107, triple 19, bull, you hit a
+54, you're at 71, which means you're
+going to have to hit another triple.
+Trip 17, double 10, triple 13, double
+16, something like that. Now, what I'm
+going to do and what most high level
+players are going to do is we are not
+going to look at anything except for
+that bowl. The 25 is going to leave you
+100. So now you just have a trip 20
+double 20. So you're just kind of
+climbing the ladder there. But now you
+only have to hit one triple unlike the
+other areas where you're having to hit
+two. You only have to hit one triple and
+it's a triple that a lot of us like in
+the trip 20. If you hit the bull, you
+leave 75. So now you have some options
+here. Depending on where your opponent
+is, uh maybe it changes what you do. If
+you hit that 50, only leave 75. If uh
+you don't need to go for the finish,
+triple 17, double 12. That's the route
+I'm taking on 75. Uh you could also just
+stay on the bull. You hit the double,
+you hit the single, and now you've got
+50 left. You go right in. You got two
+markers in there. Uh, it looks like a
+fun trick shot and like a showoffy kind
+of shot, but it's really the best shot
+you can take in this scenario.
+Everything else requires a double or a
+triple. Otherwise, you've got no options
+left. And these options here, well, like
+I said, you got to hit another double or
+triple after you hit a triple. And uh,
+with the bull area, you don't even have
+to do that. So,
+try it out. See what makes you feel
+comfortable. Maybe you're not quite at
+the level where you want to shoot that
+shot. Well, guess what? You can still go
+the 18 route. You can still hit the fat
+18 to leave a triple to a double. Uh so
+that that is the potential safer route.
+But other than that, go to the bull. See
+you tomorrow.

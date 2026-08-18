@@ -1,59 +1,93 @@
 # 63 - Visualizing Outshots in Darts
 
 - **Video:** https://www.youtube.com/watch?v=p8Tq9vlP5oU
-- **Ondertitel-taal:** nl (lokale Whisper-transcriptie, geen ondertitels beschikbaar)
-- **Bron:** Lokale Whisper-transcriptie (large-v3)
+- **Ondertitel-taal:** en (via Firecrawl (YouTube-verwerker))
+- **Bron:** Firecrawl (YouTube-verwerker)
 
 ---
 
-Hallo iedereen, Spellman hier met onze volgende nummer in onze serie over waar je moet beginnen.
-Vandaag hebben we de nummer 63 en laten we een kijkje doen op het bord.
-Dus met alles wat we hier zien, weer, elke nummer die we kijken,
-er zal geen enkele buurt buiten de boel zijn die je een einde laat.
-Dus we gaan niet kijken naar de enkele secties, laten we een kijkje doen op de triple secties
-om te zien wat we hebben.
-Dus, starten we op de 20, een beetje vloeiend rond, oké, triple 13 leeft 24, we kunnen terugkomen naar dat.
-Als we nog steeds rondkomen, er zijn er wat, ik bedoel, als je de 12 en 6 leuk vindt,
-deze kunnen opties zijn, maar nogmaals, als we een kijkje doen hier,
-dat enkele 2 leeft 61, net zoals we het besproken hebben, en 61 en 62.
-We willen proberen dat het tenminste 60 en onder is, want dat is een mooie enkele bij een dubbel.
-Ja, een enkele buurt, een enkele buurt, ik weet het, iedereen die dit van Europa kijkt,
-het is...
-De manier waarop de Amerikanen het begrijpen, omdat we cricket spelen,
-een enkele buurt is een enkele, een dubbele buurt is een dubbele,
-en als je me op me wilt vechten, dan kun je de game op de centraal buurt eindigen.
-Ja, dat kan je, dus wacht eens, het is een dubbele.
-Anyway.
-Dus als we nog steeds rondkomen, rondkomen, dus zelfs dit is waarschijnlijk een betere optie dan zelfs dit.
-Nu, ik denk niet dat mensen zouden willen leven, dubbele 3 op doel,
-dus laten we dat een beetje veranderen.
-Als we nog steeds rondkomen, oké, we hebben een triple 9 om 36 te leven,
-en alle opties hier blijven je onder, onder dat 61.
-Dus het kan zijn dat als je wilt leven, de buurt te leven, om 38 te leven,
-en laten we zeggen dat je twee gegarandeerde doeltjes aan de buurt wilt,
-of sorry, aan een dubbele,
-je kunt voor de enkele buurt om 38 te leven, twee doeltjes aan de dubbele 19 te hebben.
-Als je dat niet wilt doen, dan gaan we focussen op de 13 en de 9.
-Dus, kom je over naar de 13,
-wat mijn preferentie is, persoonlijk, als je iemand is die dubbele 9 houdt,
-misschien je jef smith, misschien is dubbele 9 je optie hier.
-Maar voor de 13, 13, 13, als ik de single haal, heb ik 50 aan de hand,
-kan ik dat op 18, 16, 10, 20 leven, als ik de triple haal, heb ik 24, en ik hou van 24.
-Misschien houd je van 24, in ieder geval kun je de andere optie nemen.
-Maar zoals met de andere, dit is het gebied waar we ons op focussen,
-elke keer dat je 63 hebt.
-Er is geen meer maat meer.
-Het is gewoon een patroon.
-Ik heb 63, ik ga voor de triple 13.
-Nu nogmaals, je kan deze nummers hier niet herinneren,
-boven en onder, zoals je dit nummer hier herinnert.
-Dus je zou misschien wat matematiek moeten doen.
-Maar als je die missen kan herinneren,
-dan blijft het je in de flow van het spel een beetje meer houden.
-En dan hierboven is het hetzelfde ding.
-Alles is een mooie single, single to a double.
-Dus als je 36 wilt, ga voor de triple 9.
-Als je de triple 13 wilt, of sorry, als je 24 wilt, ga voor de triple 13.
-Zo veel nummers, het is gemakkelijk om mijn tong op te rippen,
-zelfs als ik ze in de voorzijde van mij kan zien.
-Dus ik zie je in een paar dagen met de nummer 64.
+Everybody's Spellman here with our next
+number in our series on where to start.
+Today we have the number 63 and let's
+take a look at the board. So, with
+everything that we see here, again,
+every single number that we look at,
+there's not going to be a single outside
+of the outside of the bull
+that leaves you a finish. So, we're not
+going to look at the single section. So,
+let's take a look at the triple sections
+to see what we have. So, starting on the
+20, kind of floating around. Okay,
+triple 13 leaves 24. We can come back to
+that one. Uh if we keep coming around,
+there's some I mean, if you like the 12
+and 6, these these could be options, but
+again, if we take a look over here, that
+single two leaves 61, just as we
+discussed, and 61 and 62. We want to try
+to at very least be 60 and below because
+that's a nice single to a double. Yes, a
+single bull. Single bull, I know.
+Everybody watching this from Europe and
+that that it's the way the Americans
+understand it cuz we play cricket. A
+single bull is a single, a double bull
+is a double, and if you want to fight me
+on it, well, can you finish the game on
+the center bull? Yes, you can. So, guess
+what? It's a double.
+Uh anyway,
+uh so, kind of we keep coming around,
+coming around. So, even this is probably
+a better option than even this. Now, I
+don't think people would want to leave
+double three on purpose though. Uh so,
+let's kind of skip that one. If we keep
+coming around, okay, we have
+uh triple nine to leave 36, and all the
+options here leave you below
+uh
+below that 61. So, it might be that if
+you want to leave hit the bull to leave
+38, let's say you want two guaran-
+guaranteed darts to the bull, or sorry,
+at a double.
+You could go for the the the single bull
+to leave 38, have two darts at double
+19. If you don't want to do that though,
+we're going to focus on the 13 and the
+nine.
+So, coming over to the 13, which is my
+preference personally. If you're someone
+who loves double nine, maybe you're Jeff
+Smith, maybe double triple nine is your
+option here. But, for triple 13, if I
+hit the single, I've got 50 left, I can
+clean that up 18 double 16 10 double 20.
+If I hit the triple, well, I have 24,
+and I like 24. Maybe you hate 24, in
+which case you can take the other
+option. But,
+as with the other ones, this is the area
+that we're focusing on every single time
+that you have 63. There's no more math
+anymore, it's just pattern. I have 63,
+I'm going for the triple 13. Now, again,
+you may not memorize these numbers right
+here above and below it as well as you
+just remember this number right here.
+So, you might have to do a little bit of
+math, but if you can remember those
+misses, it's going to keep you in the
+flow of the game a little bit more.
+And then over here, it's the same thing.
+Everything is a nice single
+single to a double. So, you like 36, go
+triple nine. If you like triple 13,
+sorry, if you like 24, go triple 13. So
+many numbers, easy to trip my my tongue
+up even when I can see them right in
+front of me. So,
+I will see you in a couple days with the
+number 64.
