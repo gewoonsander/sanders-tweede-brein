@@ -31,7 +31,7 @@
 .intg-action { min-height:44px; display:flex; align-items:center; justify-content:center; gap:.45rem; border:1px solid var(--accent); border-radius:.65rem; padding:.62rem .8rem; background:var(--accent); color:var(--accent-contrast,#fff); font-weight:700; cursor:pointer; }
 .intg-action:disabled { opacity:.6; cursor:wait; }
 .intg-action--secondary { border-color:var(--border-strong); background:var(--surface-raised); color:var(--fg); }
-.intg-action--urgent { border-color:var(--status-error); background:var(--status-error); }
+.intg-action--urgent { border-color:var(--status-error-strong); background:var(--status-error-strong); }
 .intg-panel { scroll-margin-top:1rem; border:1px solid var(--border-subtle); border-radius:.85rem; background:var(--surface); overflow:clip; }
 .intg-panel>summary { min-height:48px; display:flex; align-items:center; gap:.55rem; padding:.8rem 1rem; font-weight:750; cursor:pointer; }
 .intg-panel>summary:focus-visible,.intg-action:focus-visible { outline:3px solid color-mix(in oklch,var(--accent) 55%,transparent); outline-offset:2px; }

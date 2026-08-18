@@ -60,3 +60,19 @@ enables them. Credentials are never part of this document or the manifest.
   gebufferd, hebben een timeout van 8 seconden en falen zacht
   (`{ ok:false, reason }`) zodat een onbereikbare leverancier de pagina niet
   leegtrekt.
+
+## Accessibility fixes for the integration dashboard
+
+- **`--status-error-strong` token (2026-08-18).** De knop "Probleem oplossen"
+  (`.intg-action--urgent` in `web/src/views/integrations.css`) gebruikte wit op
+  `var(--status-error)` (`#D64545`, identiek in beide thema's). Gemeten
+  contrast: 4,38:1 — onder de WCAG AA-eis van 4,5:1 voor tekst van dit formaat
+  (17px/700 zit onder de grote-tekst-drempel van ~18,7px vet). De bestaande
+  ruling A146/A147 in `web/src/index.css` had al een apart, donkerder
+  tekst-token (`--status-error-text`) voor #D64545-als-tekst, maar geen
+  equivalent voor #D64545-als-gevuld-vlak-met-witte-tekst erop. Harmonia voegde
+  `--status-error-strong: #C53F3F` toe — #D64545 uniform verdonkerd (zelfde
+  R:G:B-verhouding, dezelfde roodfamilie), identiek in beide thema's omdat de
+  knoptekst altijd wit is. Gemeten contrast na de wijziging: 5,05:1. De knop is
+  het enige component dat is aangepast; de tegoedbalk (`.intg-usage--out`) heeft
+  geen tekst op het gekleurde vlak en bleef op `--status-error` staan.

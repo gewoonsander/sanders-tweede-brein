@@ -150,6 +150,12 @@
   /* Status semantics - functional only, never decorative (§2.5).
      - error/destructive keeps its red (#D64545); small destructive TEXT steps
        to --status-error-text (rulings A146/A147).
+     - error as a FILLED SURFACE (a button/chip background) with white text on
+       top steps to --status-error-strong instead: #D64545 under white body
+       text (~4.38:1) undershoots the 4.5:1 text minimum, so the fill goes one
+       step darker/more saturated in the same red family - same hue, lower L,
+       identical R:G:B ratio to #D64545 - restoring >=4.5:1 (extends A146/A147
+       to the surface case; #D64545 itself never carries body text directly).
      - warning is a STATE (A152): the amber lives on the ICON/countdown only;
        warning TEXT rides the quiet ink voice.
      - success speaks the quiet ink voice (A127): text = paper_dim; identity
@@ -161,6 +167,7 @@
   --status-warning: #C2A35C;
   --status-error: #D64545;
   --status-error-text: #E36350;
+  --status-error-strong: #C53F3F; /* fill-only red; white text on this hits ~5.05:1 (A146/A147 extension) */
   --status-info: #C9C4B8;
 
   /* soft status tints for calm chips (low alpha, same hue; success/info chips
@@ -571,12 +578,16 @@
 
   --planner-rail-meeting: #565E7E;                /* cat_bkm dusty indigo, light */
 
-  /* Status - §2.5 light column. */
+  /* Status - §2.5 light column. --status-error-strong is the fill-only red
+     for buttons/chips carrying white body text (A146/A147 extension, see
+     dark column above); same hue/ratio as --status-error, just darker, so
+     white on top clears 4.5:1 instead of the ~4.38:1 #D64545 gives. */
   --status-success: #67645A;
   --status-success-dot: #5E7A60;
   --status-warning: #8A6F33;
   --status-error: #D64545;
   --status-error-text: #B33A2B;
+  --status-error-strong: #C53F3F; /* ~5.05:1 vs white, same red family as #D64545 */
   --status-info: #67645A;
 
   --status-success-soft: rgba(23, 26, 32, 0.06);
