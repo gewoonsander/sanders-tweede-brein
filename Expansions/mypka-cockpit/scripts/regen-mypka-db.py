@@ -229,6 +229,11 @@ CREATE TABLE habits (
   -- additive + harmless when empty (NULL on a habit note that omits them).
   id INTEGER PRIMARY KEY, slug TEXT NOT NULL, name TEXT, cadence TEXT,
   started_on TEXT, status TEXT,
+  -- daily_target / daily_target_unit drive the hydration-style gauge in the
+  -- Tracking panel: a habit that declares a numeric daily goal in frontmatter
+  -- renders as a filling meter instead of a plain done/not-done streak. Both
+  -- are additive and NULL on every habit that omits them.
+  daily_target REAL, daily_target_unit TEXT,
   body TEXT, file_path TEXT, raw_frontmatter TEXT);
 CREATE TABLE documents (
   id INTEGER PRIMARY KEY, slug TEXT NOT NULL, title TEXT, doc_type TEXT,
@@ -831,8 +836,36 @@ HABIT_FIELD_RE = re.compile(
     re.MULTILINE | re.IGNORECASE,
 )
 
+# Repeatable per-serving line, e.g. "- drink: 250 ml zwarte koffie". Unlike the
+# single-value fields above, EVERY match in a dated block counts: the servings
+# are summed into that day's amount. This is what lets the hydration gauge fill
+# up cup by cup instead of being overwritten by the last check-in of the day.
+HABIT_SERVING_RE = re.compile(
+    r"^\s*-\s*drink\s*:\s*([0-9]+(?:[.,][0-9]+)?)\s*(ml|l|liter)?\b\s*(.*?)\s*$",
+    re.MULTILINE | re.IGNORECASE,
+)
 
-def parse_habit_reflections(body: str):
+
+def sum_servings(block: str):
+    """Total millilitres across all "- drink:" lines in one dated block.
+
+    Returns (total_ml, count) or (None, 0) when the block has no serving lines.
+    A bare number without a unit is read as millilitres; "l"/"liter" scales by
+    1000. Malformed numbers are skipped rather than aborting the whole day.
+    """
+    total, count = 0.0, 0
+    for m in HABIT_SERVING_RE.finditer(block):
+        try:
+            value = float(m.group(1).replace(",", "."))
+        except ValueError:
+            continue
+        unit = (m.group(2) or "ml").lower()
+        total += value * 1000.0 if unit in {"l", "liter"} else value
+        count += 1
+    return (total, count) if count else (None, 0)
+
+
+def parse_habit_reflections(body: str, daily_target: float = None):
     """Return one authoritative check-in per dated Reflection block.
 
     New entries use human-readable ``- field: value`` bullets. Older prose is
@@ -885,7 +918,26 @@ def parse_habit_reflections(body: str):
                 amount = float(fields["amount"].replace(",", "."))
             except ValueError:
                 amount = None
+
+        # Serving lines win over a manual "- amount:" for the day: they are the
+        # running tally the gauge reads, and they cannot silently drift.
+        served_ml, serving_count = sum_servings(block)
+        if served_ml is not None:
+            amount = served_ml
+            if not fields.get("unit"):
+                fields["unit"] = "ml"
+
+        # A habit with a daily target decides done/not-done by itself, so the
+        # gauge and the streak never disagree. An explicit "- done:" still wins.
+        if daily_target and amount is not None and "done" not in fields:
+            done = 1 if amount >= float(daily_target) else 0
+            if schema == "legacy-reflection":
+                schema = "reflection-v1"
+
         note = fields.get("note")
+        if note is None and served_ml is not None:
+            note = "%d %s gelogd" % (
+                serving_count, "portie" if serving_count == 1 else "porties")
         if note is None and schema == "legacy-reflection" and done is not None:
             note = re.sub(r"\s+", " ", block).strip() or None
         trigger = fields.get("trigger")
@@ -1046,11 +1098,15 @@ def main():
                      "status": fm_str(fm, "status")})
             elif table == "habits":
                 cur.execute(
-                    "INSERT INTO habits (slug, name, cadence, started_on, status, body, file_path, raw_frontmatter)"
-                    " VALUES (:slug, :t, :cadence, :started_on, :status, :body, :file_path, :raw_frontmatter)",
+                    "INSERT INTO habits (slug, name, cadence, started_on, status,"
+                    " daily_target, daily_target_unit, body, file_path, raw_frontmatter)"
+                    " VALUES (:slug, :t, :cadence, :started_on, :status,"
+                    " :daily_target, :daily_target_unit, :body, :file_path, :raw_frontmatter)",
                     {**common, "t": title, "cadence": fm_str(fm, "cadence"),
                      "started_on": fm_str(fm, "started_on"),
-                     "status": fm_str(fm, "status")})
+                     "status": fm_str(fm, "status"),
+                     "daily_target": fm_float(fm, "daily_target"),
+                     "daily_target_unit": fm_str(fm, "daily_target_unit")})
             elif table == "documents":
                 cur.execute(
                     "INSERT INTO documents (slug, title, doc_type, amount, currency,"
@@ -1089,7 +1145,7 @@ def main():
         fm, body = read_note(path)
         slug = path.stem
         rel = str(path.relative_to(ROOT))
-        for entry in parse_habit_reflections(body):
+        for entry in parse_habit_reflections(body, fm_float(fm, "daily_target")):
             cur.execute(
                 "INSERT INTO habit_logs (habit_slug,log_date,done,amount,unit,trigger,note,log_schema,source_path)"
                 " VALUES (?,?,?,?,?,?,?,?,?)",

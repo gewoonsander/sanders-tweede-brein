@@ -23,9 +23,18 @@ export interface HabitStreak {
   daysSinceLast: number | null;
 }
 
+// A numeric daily goal declared in the habit's frontmatter (daily_target /
+// daily_target_unit). Present only on habits that opt in; null means this habit
+// renders as a plain streak, exactly as before.
+export interface HabitTarget {
+  amount: number;
+  unit: string | null;
+}
+
 export interface HabitTracking {
   slug: string;
   name: string;
+  target: HabitTarget | null;
   streak: HabitStreak | null; // null when the habit has only pending (null-done) cells
   cells: HabitCell[];
 }

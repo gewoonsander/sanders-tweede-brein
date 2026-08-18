@@ -38,9 +38,24 @@ const heatmapStmt = optionalStmt(`
   ORDER BY habit_slug, log_date
 `);
 
+// Habits that declare a numeric daily goal in frontmatter. These render as a
+// filling gauge in the Tracking panel rather than a plain streak — the point is
+// to see how much is left today, not only whether the day was ticked off.
+// Absent column / absent table both degrade to an empty list via optionalStmt.
+const habitTargetsStmt = optionalStmt(`
+  SELECT slug, daily_target, daily_target_unit
+  FROM habits WHERE daily_target IS NOT NULL
+`);
+
 export function getHabitTracking() {
   const streaks = streaksStmt.all();
   const heatRows = heatmapStmt.all();
+  const targets = new Map(
+    habitTargetsStmt.all().map((r) => [r.slug, {
+      amount: Number(r.daily_target),
+      unit: r.daily_target_unit || null,
+    }]),
+  );
 
   // Group heatmap cells per habit. A habit can appear in the heatmap with logs
   // but NOT in v_habit_streaks (e.g. only NULL-done pending rows) — and vice
@@ -48,7 +63,10 @@ export function getHabitTracking() {
   const byHabit = new Map();
   const ensure = (slug, name) => {
     if (!byHabit.has(slug)) {
-      byHabit.set(slug, { slug, name: name || slug, streak: null, cells: [] });
+      byHabit.set(slug, {
+        slug, name: name || slug, streak: null, cells: [],
+        target: targets.get(slug) || null,
+      });
     }
     const h = byHabit.get(slug);
     if (name && (!h.name || h.name === slug)) h.name = name;

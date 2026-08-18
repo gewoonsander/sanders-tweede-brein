@@ -68,4 +68,4 @@ Running in Cowork mode (Claude desktop app), powered by the Claude Agent SDK. Th
 
 Specialists are bound as host subagents in `.claude/agents/<slug>.md`. Hermes dispatches them via the host's parallel-agent tool. Multiple specialists run in parallel when called from a single message.
 
-The `/close-session` slash command is available at `.claude/commands/close-session.md` as a convenience wrapper around the canonical close-session protocol in `AGENTS.md`. The natural-language triggers ("close session", "wrap", "wrap up", "log this session", "end session") are always in effect regardless.
+The `/close-session` slash command is available at `.claude/commands/close-session.md` as a convenience wrapper around the canonical close-session protocol in `AGENTS.md`. The natural-language triggers ("close session", "wrap", "wrap up", "log this session", "end session") are always in effect regardless. De verkorte variant — `/close-session snel`, of "snel afsluiten" / "sluit snel" / "wrap snel" — slaat de vier controlevragen over en behoudt session-log, sessietitel en git-backup; zie de close-sessionsecties in `AGENTS.md`.

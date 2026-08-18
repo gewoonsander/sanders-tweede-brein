@@ -24,10 +24,23 @@ Bij ziekte of lichamelijke klachten staat herstel voorop. Een onderbreking betek
 
 ## Reflection
 
+### 2026-08-18
+
+- done: true
+- amount: 30
+- unit: herhalingen
+- trigger: chat
+- note: in chat gemeld: 30 keer opgedrukt, boven het minimum van 25
+
+
 ### 2026-08-17
 
-Uit audiomemo (10:56u) ingesproken. 26 push-ups gedaan — boven het minimum van 25.
-<!-- HABIT_LOG {"date":"2026-08-17","status":"done","amount":26,"unit":"herhalingen","source":"audio-memo"} -->
+- done: true
+- amount: 26
+- unit: herhalingen
+- trigger: audio-memo
+- note: uit audiomemo (10:56u): 26 push-ups, boven het minimum van 25
+
 
 ### 2026-08-16
 

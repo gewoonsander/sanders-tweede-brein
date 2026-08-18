@@ -16,6 +16,12 @@ from pathlib import Path
 MEAL_TYPES = {"breakfast", "lunch", "dinner", "snack"}
 ENTRY_RE = re.compile(r"<!-- FOOD_ENTRY (\{.*\}) -->")
 AUDIT_RE = re.compile(r"<!-- FOOD_AUDIT (\{.*\}) -->")
+SKIP_RE = re.compile(r"<!-- FOOD_SKIP (\{.*\}) -->")
+
+# Welke maaltijden op welk uur verwacht mogen worden. Snacks staan er bewust
+# niet in: een tussendoortje heeft geen tijdvenster en valt niet af te dwingen.
+MEAL_WINDOWS = (("breakfast", 0), ("lunch", 12), ("dinner", 18))
+MEAL_LABELS = {"breakfast": "ontbijt", "lunch": "lunch", "dinner": "avondeten", "snack": "tussendoor"}
 
 
 def root() -> Path:
@@ -84,10 +90,11 @@ def parse(path: Path) -> dict:
     text = path.read_text(encoding="utf-8") if path.exists() else ""
     entries = [json.loads(m.group(1)) for m in ENTRY_RE.finditer(text)]
     audits = [json.loads(m.group(1)) for m in AUDIT_RE.finditer(text)]
+    skips = [json.loads(m.group(1)) for m in SKIP_RE.finditer(text)]
     superseded = {e.get("supersedes_entry_id") for e in entries if e.get("supersedes_entry_id")}
     active = [e for e in entries if e["entry_id"] not in superseded]
     return {"text": text, "entries": entries, "active": active, "audits": audits,
-            "latest_audit": audits[-1] if audits else None}
+            "skips": skips, "latest_audit": audits[-1] if audits else None}
 
 
 def _validate_range(name: str, value) -> list[float]:
@@ -152,17 +159,72 @@ def append_audit(log_date: str, complete: bool, confirmed_at: str | None = None,
     return path
 
 
+def expected_meals(at: datetime | None = None) -> list[str]:
+    """Maaltijden die op dit uur van de dag geweest hadden kunnen zijn."""
+    hour = (at or datetime.now().astimezone()).hour
+    return [meal for meal, start in MEAL_WINDOWS if hour >= start]
+
+
+def meal_status(log_date: str, at: datetime | None = None, vault: Path | None = None) -> dict:
+    """Per verwachte maaltijd: logged, skipped of missing.
+
+    De close-session-check draait hierop, zodat er alleen gevraagd wordt naar wat
+    op dat uur ontbreekt — niet naar de hele dag.
+    """
+    state = parse(daily_path(log_date, vault))
+    logged = {e["meal_type"] for e in state["active"]}
+    skipped = {s["meal_type"] for s in state["skips"]} - logged
+    expected = expected_meals(at)
+    return {"date": log_date, "expected": expected,
+            "logged": sorted(logged), "skipped": sorted(skipped),
+            "missing": [m for m in expected if m not in logged and m not in skipped],
+            "day_complete": bool(state["latest_audit"] and state["latest_audit"]["complete"])}
+
+
+def append_skip(log_date: str, meal_type: str, at: str | None = None,
+                vault: Path | None = None) -> Path:
+    """Leg vast dat een maaltijd bewust is overgeslagen of nog niet gegeten.
+
+    Zonder deze status komt dezelfde vraag bij elke close-session van dezelfde dag
+    terug. Een skip vervuilt de nutrientencijfers niet: het is geen maaltijd-entry.
+    """
+    if meal_type not in MEAL_TYPES:
+        raise ValueError(f"unknown meal_type {meal_type}")
+    path = daily_path(log_date, vault)
+    state = parse(path)
+    if any(s["meal_type"] == meal_type for s in state["skips"]):
+        return path
+    text = state["text"] or _template(log_date)
+    stamp = at or datetime.now().astimezone().isoformat(timespec="seconds")
+    skip = {"log_date": log_date, "meal_type": meal_type, "recorded_at": stamp,
+            "source": "close-session"}
+    machine = "<!-- FOOD_SKIP " + json.dumps(skip, separators=(",", ":")) + " -->"
+    label = MEAL_LABELS.get(meal_type, meal_type)
+    text = text.replace("<!-- FOOD_AUDITS -->",
+                        f"- {stamp} — overgeslagen: {label} — source: close-session\n{machine}\n\n<!-- FOOD_AUDITS -->")
+    _atomic_write(path, text)
+    if vault is None:
+        _regenerate_mirror()
+    return path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="command", required=True)
     meal = sub.add_parser("append-meal"); meal.add_argument("json_file")
     audit = sub.add_parser("audit"); audit.add_argument("date"); audit.add_argument("complete", choices=["yes", "no"])
     show = sub.add_parser("show"); show.add_argument("date")
+    skip = sub.add_parser("skip"); skip.add_argument("date"); skip.add_argument("meal_type", choices=sorted(MEAL_TYPES))
+    status = sub.add_parser("status"); status.add_argument("date")
     args = parser.parse_args()
     if args.command == "append-meal":
         print(append_meal(json.loads(Path(args.json_file).read_text(encoding="utf-8"))))
     elif args.command == "audit":
         print(append_audit(args.date, args.complete == "yes"))
+    elif args.command == "skip":
+        print(append_skip(args.date, args.meal_type))
+    elif args.command == "status":
+        print(json.dumps(meal_status(args.date), ensure_ascii=False, indent=2))
     else:
         print(json.dumps(parse(daily_path(args.date)), ensure_ascii=False, default=str, indent=2))
 

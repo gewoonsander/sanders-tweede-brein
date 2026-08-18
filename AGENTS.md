@@ -191,6 +191,16 @@ Before starting work that could overlap with other active work on the same machi
 
 Not required for routine, self-contained work (a single file edit, a research question) — only when the task's blast radius could plausibly touch something another live session is also working on.
 
+### 12. Sessiestempel bij elke sessiestart (mandatory)
+
+Elke eerste reply van een nieuwe sessie begint met datum, tijdstip en onderwerp, op een eigen regel boven de rest van het antwoord:
+
+`**18 augustus 2026, 09:12 — <onderwerp van de sessie>**`
+
+Gebruik de werkelijke lokale tijd van de machine (controleer die, ga niet uit van de tijd in de systeemcontext). Het onderwerp is een korte omschrijving van waar de sessie over gaat; is dat bij de eerste reply nog onduidelijk, gebruik dan Sanders openingsvraag als onderwerp en scherp het aan zodra het duidelijk wordt.
+
+Reden: Sander gebruikt de zijbalk om te zien welke sessies hij heeft gevoerd en wanneer. Vastgelegd 2026-08-18.
+
 ## Session-Log Triggers (LLM-agnostic)
 
 Any LLM working in this myPKA MUST honor these natural-language triggers and write a corresponding entry to `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-HH-MM_<agent>_<topic-slug>.md` following the `_template.md` schema.
@@ -201,6 +211,7 @@ Trigger phrases → action:
 |---|---|---|
 | "close session", "close this session", "wrap", "wrap up", "log this session", "end session", "we're done for today", "let's stop here" | `close-session` | Full session summary: what we did, decisions, insights, open threads, next steps |
 | "that's it" | `close-session` (met bevestiging) | Hermes vraagt eerst: "Wil je de sessie afsluiten?" — pas na bevestiging start het sluitprotocol. Zelfde inhoud als close-session. |
+| "close session snel", "snel afsluiten", "sluit snel", "wrap snel", `/close-session snel` | `close-session` (snelle variant) | Zelfde session-log en git-backup, maar zonder de vier controlevragen — zie de sectie hieronder |
 | "keep this in mind", "remember this", "don't forget", "note this down", "save this" | `proactive` | The specific insight verbatim + why it matters + which agent/area it applies to |
 | "let's realign", "actually I want", "scratch that, instead", "no wait, do X instead", "change of plans" | `realignment` | Original direction, the correction, why the user changed course |
 | (LLM-detected — non-obvious insight surfaces during work) | `mid-session-insight` | The insight + how we got there + downstream implications |
@@ -208,6 +219,19 @@ Trigger phrases → action:
 Triggers are case-insensitive. Phrasings above are illustrative; the LLM should pattern-match intent, not literal strings. When in doubt, write the entry — over-capture is preferred to under-capture.
 
 Set-in-stone information graduates from session-logs into SOPs / Guidelines / Workstreams; if a captured insight reaches "this is now a permanent rule" status, propose graduating it instead of letting it stagnate in session-logs.
+
+### Close-session snel (verkorte variant)
+
+Voor het geval dat Sander de dag al op orde heeft en alleen wil afsluiten. De variant slaat de vier **vragen** over en behoudt alles wat **schrijft** — dat onderscheid is de hele bedoeling: de vragen kosten hem een antwoord, de schrijfstappen kosten hem niets en zijn de reden dat het protocol bestaat.
+
+Overgeslagen: journaalvraag, habit-vraag, voedselvraag, permissie-skill.
+Behouden: session-log schrijven, `git pull` → `add -A` → `commit` → `push`, en de afsluitende meldregel.
+
+Aanvullend, en niet optioneel: Hermes controleert de overgeslagen items alsnog **read-only** (habit-bestanden op een entry van vandaag, `food_log.py status <datum>`) en meldt in één regel wat er openstaat — bijvoorbeeld "Overgeslagen: opdrukken en bodylotion nog niet gelogd, lunch ontbreekt." Geen vraag, geen beslisblok, geen wachten op antwoord. Sander mag het negeren; hij hoort het alleen te wéten. Blind overslaan is geen snelheid maar dataverlies, zeker bij de laatste sessie van de dag.
+
+Noem deze variant nooit "final" of iets van gelijke strekking. Dat leest als *laatste sessie van de dag*, en juist dan zijn de habit- en voedselcheck het hardst nodig — de naam zou het tegenovergestelde beloven van wat de variant doet.
+
+Bij twijfel over welke variant Sander bedoelt: draai de volledige close-session. Over-vragen is hersteldbaar, een gemiste dagregistratie niet.
 
 ### Close-session journal check (mandatory, before git backup)
 
@@ -240,16 +264,34 @@ This replaces any time-of-day trigger (e.g. "after 21:00") — checking "already
 
 ### Close-session food-log check (mandatory, folded into the same check)
 
-Hermes asks in the same combined close-session message: **"Heb je vandaag alles wat je hebt gegeten gelogd?"** using GL-013 `J/N` choices and a GL-016 decision block.
+Hermes vraagt **niet** meer of de hele dag gelogd is. In plaats daarvan bepaalt hij eerst welke maaltijden op dit uur van de dag geweest kunnen zijn en welke daarvan al vastliggen:
 
-- **J:** Penn appends a `complete: yes` audit to today's `PKM/Journal/YYYY/MM/YYYY-MM-DD-voedingslogboek.md` via [[SOP-017-verwerk-voedingsregistratie]]. No content follow-up.
-- **N:** Penn asks one open recall question: "Wat kun je je nog herinneren van wat je vandaag hebt gegeten of gedronken?" Penn processes the answer via SOP-017, then asks `J/N` again whether the day is now complete.
-- The newest completion audit is authoritative. This check happens at every true close-session because food may have been eaten after an earlier same-day confirmation.
-- The git backup remains the final step, after food capture and its mirror regeneration.
+```
+python3 Expansions/mypka-cockpit/scripts/food_log.py status YYYY-MM-DD
+```
+
+Tijdvensters (uit `MEAL_WINDOWS` in `food_log.py`, dat is de SSOT): vóór 12:00 alleen ontbijt, vanaf 12:00 ook lunch, vanaf 18:00 ook avondeten. Naar snacks wordt nooit gevraagd — een tussendoortje heeft geen tijdvenster.
+
+- **`missing` is leeg** — geen vraag. Hermes appendt stil een `complete: yes` audit en meldt in één regel wat er staat, bijvoorbeeld "Voeding: ontbijt en lunch gelogd."
+- **`missing` is niet leeg** — één gecombineerde vraag over uitsluitend de ontbrekende maaltijden, in hetzelfde bericht als de journaal- en habitvraag, met GL-013-opties per maaltijd: *beschrijven* (Penn verwerkt het via [[SOP-017-verwerk-voedingsregistratie]]), *nog niet gegeten / overgeslagen* (`food_log.py skip <datum> <meal_type>`), of *later*.
+- **"Nog niet gegeten" wordt vastgelegd, niet genegeerd.** Zonder die skip-status komt dezelfde vraag bij elke volgende close-session van die dag terug. Een skip is geen maaltijd-entry en vervuilt de nutriëntencijfers dus niet.
+- Een later alsnog gelogde maaltijd wint van een eerdere skip; `meal_status` rekent dat zelf uit.
+- Bevestig nooit een dag als compleet terwijl er niets gelogd staat. Op 2026-08-18 stond het logboek om 09:07 op `day_complete: true` met nul entries — dat is precies wat de oude J/N-vraag mogelijk maakte en deze check voorkomt.
+- De git-backup blijft de laatste stap, na de voedselvastlegging en de mirror-regeneratie.
 
 ### Close-session permission-prompts check (mandatory, Claude-Code hosts only)
 
 When running in Claude Code (or any host with the `fewer-permission-prompts` skill available), Hermes asks, in the same close-session pass as the journal/habit check: "Zal ik de fewer-permission-prompts-skill even laten draaien om de allowlist bij te werken op basis van deze sessie?" If the user confirms, Hermes runs the `fewer-permission-prompts` skill before the git backup step, so any resulting `.claude/settings.json` changes are included in that backup's commit. If the user declines, skip silently and proceed. Hosts without this skill skip the question entirely.
+
+### Close-session sessietitel bijwerken (mandatory, hosts met sessiebeheer)
+
+Voor de git-backup werkt Hermes de titel van de sessie bij naar het formaat `YYYY-MM-DD HH:MM · <onderwerp>`, met de **starttijd** van de sessie (`createdAt`), niet het moment van afsluiten. Zo staat de zijbalk in dezelfde volgorde en notatie als de session-logs.
+
+- De lopende sessie kan door de host zelf niet hernoemd worden; Hermes meldt de gewenste titel dan aan Sander zodat hij die handmatig kan zetten, of doet het vanuit een volgende sessie.
+- Titels die Sander zelf heeft gezet worden door de host bewaard en dus niet overschreven — Hermes meldt dat en vraagt of die alsnog om moet.
+- Zet nooit een duur in de titel: aanmaaktijd en laatste activiteit zeggen niets over de werkelijke gesprekstijd (een sessie kan dagen stilstaan).
+
+Hosts zonder sessiebeheer slaan deze stap over.
 
 ### Close-session git backup (mandatory final step)
 

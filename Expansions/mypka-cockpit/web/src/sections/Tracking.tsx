@@ -9,6 +9,7 @@
 import { Flame, Repeat2, Camera } from 'lucide-react';
 import { Card, Section } from '../components/ui';
 import { HabitHeatmap } from '../components/HabitHeatmap';
+import { HydrationGauge } from '../components/HydrationGauge';
 import { FoodGallery } from '../components/FoodGallery';
 import { navigate } from '../lib/router';
 import type { HabitTracking, FoodLog } from '../lib/trackingTypes';
@@ -53,6 +54,13 @@ function HabitStreakCard({ habit }: { habit: HabitTracking }) {
           {streakLine(habit)}
         </span>
       </div>
+
+      {/* A habit with a numeric daily goal leads with the gauge: mid-day it is the
+          only view that says anything actionable. The heatmap still follows for
+          the longer arc. */}
+      {habit.target && (
+        <HydrationGauge cells={habit.cells} target={habit.target} />
+      )}
 
       {hasCells ? (
         <HabitHeatmap cells={habit.cells} />

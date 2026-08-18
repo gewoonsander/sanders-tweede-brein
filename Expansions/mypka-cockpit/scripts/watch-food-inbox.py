@@ -21,6 +21,23 @@ def done(key): return (STATE/f'{key}.done').exists() or (STATE/f'{key}.nonfood')
 def mark(key,status):
     STATE.mkdir(parents=True,exist_ok=True)
     (STATE/f'{key}.{status}').write_text(datetime.now().astimezone().isoformat(),encoding='utf-8')
+def discard(path):
+    """Naar de prullenmand in plaats van hard verwijderen.
+
+    Een ingesproken memo die hier als 'geen voedingsregistratie' langskomt is vaak
+    geen mislukte eetregistratie maar een opdracht of gedachte. Die mag niet
+    onherstelbaar verdwijnen: op 2026-08-18 bleek een Gemma 4-onderzoeksverzoek
+    langs deze weg gewist te zijn, en op 2026-08-17 gingen al twee memo's verloren.
+    """
+    trash=Path.home()/'.Trash'
+    if not trash.is_dir():
+        path.unlink(missing_ok=True); return
+    target=trash/path.name; counter=1
+    while target.exists():
+        target=trash/f'{path.stem} ({counter}){path.suffix}'; counter+=1
+    try: path.replace(target)
+    except OSError: shutil.move(str(path),str(target))
+
 def run(path, source_type, text=''):
     try: key=digest(path)
     except (OSError, subprocess.SubprocessError) as exc:
@@ -38,10 +55,10 @@ def run(path, source_type, text=''):
         if target is not None:
             target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(path,target)
         mark(key,'done')
-        if source_type=='audio': path.unlink(missing_ok=True)
+        if source_type=='audio': discard(path)
     elif 'geen voedingsregistratie' in result.stderr:
         mark(key,'nonfood')
-        if source_type=='audio': path.unlink(missing_ok=True)
+        if source_type=='audio': discard(path)
     else: print(json.dumps({'event':'food_capture_failed','file':path.name,'error':result.stderr[-500:]}),file=sys.stderr)
 
 def scan():

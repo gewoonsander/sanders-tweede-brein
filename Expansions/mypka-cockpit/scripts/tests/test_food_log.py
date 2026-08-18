@@ -2,11 +2,13 @@ import json
 import sys
 import tempfile
 import unittest
+from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from food_log import append_audit, append_meal, daily_path, parse
+from food_log import (append_audit, append_meal, append_skip, daily_path,
+                      expected_meals, meal_status, parse)
 
 
 class FoodLogTests(unittest.TestCase):
@@ -66,5 +68,59 @@ class FoodLogTests(unittest.TestCase):
             append_meal(self.payload())
         mock_regen.assert_called_once()
 
+
+
+class MealWindowTests(unittest.TestCase):
+    """Tijdvenster-check voor close-session: vraag alleen naar wat op dit uur ontbreekt."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.vault = Path(self.tmp.name)
+
+    def tearDown(self): self.tmp.cleanup()
+
+    def at(self, hour): return datetime(2026, 8, 18, hour, 0, 0)
+
+    def payload(self, meal, source):
+        return {"log_date":"2026-08-18","logged_at":"2026-08-18T12:30:00+02:00",
+                "meal_type":meal,"description":"Iets te eten","source_type":"text",
+                "source_id":source,"kcal":[95,135],"protein_g":[1,1.8],
+                "carbs_g":[23,32],"fat_g":[0.2,0.5],"confidence":"medium"}
+
+    def test_expected_meals_grow_through_the_day(self):
+        self.assertEqual(["breakfast"], expected_meals(self.at(9)))
+        self.assertEqual(["breakfast", "lunch"], expected_meals(self.at(13)))
+        self.assertEqual(["breakfast", "lunch", "dinner"], expected_meals(self.at(19)))
+
+    def test_only_missing_meals_are_reported(self):
+        append_meal(self.payload("breakfast", "b1"), self.vault)
+        status = meal_status("2026-08-18", self.at(13), self.vault)
+        self.assertEqual(["lunch"], status["missing"])
+
+    def test_skip_removes_a_meal_from_missing_and_is_idempotent(self):
+        append_skip("2026-08-18", "breakfast", vault=self.vault)
+        path = daily_path("2026-08-18", self.vault)
+        before = path.read_bytes()
+        append_skip("2026-08-18", "breakfast", vault=self.vault)
+        self.assertEqual(before, path.read_bytes())
+        status = meal_status("2026-08-18", self.at(9), self.vault)
+        self.assertEqual([], status["missing"])
+        self.assertEqual(["breakfast"], status["skipped"])
+
+    def test_logged_meal_wins_from_an_earlier_skip(self):
+        append_skip("2026-08-18", "breakfast", vault=self.vault)
+        append_meal(self.payload("breakfast", "b2"), self.vault)
+        status = meal_status("2026-08-18", self.at(9), self.vault)
+        self.assertEqual(["breakfast"], status["logged"])
+        self.assertEqual([], status["skipped"])
+
+    def test_snacks_are_never_expected(self):
+        self.assertNotIn("snack", expected_meals(self.at(23)))
+
+    def test_skip_does_not_create_a_meal_entry(self):
+        append_skip("2026-08-18", "lunch", vault=self.vault)
+        state = parse(daily_path("2026-08-18", self.vault))
+        self.assertEqual([], state["active"])
+        self.assertEqual(1, len(state["skips"]))
 
 if __name__ == "__main__": unittest.main()

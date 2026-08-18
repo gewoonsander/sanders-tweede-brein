@@ -1,6 +1,6 @@
 **Datum toernooi:** 17 augustus 2026
 **Venue:** Dartcafe Dubbel 10, Arnhem
-**Status: CONCEPT — ter review door Sander**
+**Status: GEPUBLICEERD — op Facebook geplaatst door Sander**
 
 ---
 

@@ -33,11 +33,17 @@ Zet een foto, gesproken invoer of tekst om in één append-only maaltijdregistra
 
 De mirror-regeneratie is sinds 2026-08-16 geen handmatige stap meer — `food_log.py` roept `regen-mypka-db.py` automatisch aan na elke `append_meal`/`append_audit` (alleen wanneer geen expliciete `vault` is meegegeven, dus nooit tijdens tests). Ontdekt doordat een handmatig via deze SOP gelogd ontbijt niet in de Cockpit verscheen: de markdown klopte, maar niemand had de mirror ververst. Zie [[Team Knowledge/Guidelines/GL-018-integratie-en-software-register]] voor de achtergrond.
 
-## Close-session
+## Close-session — tijdvenstercheck
 
-- `J` op “Heb je vandaag alles wat je hebt gegeten gelogd?” appendt een completion-audit met `complete: yes`; geen inhoudelijke vervolgvraag.
-- `N` start één open herinneringsvraag. Verwerk het antwoord volgens deze SOP en vraag daarna opnieuw `J/N`.
-- De nieuwste auditregel is leidend.
+Sinds 2026-08-18 vervangt een tijdgebonden check de oude `J/N`-vraag "Heb je vandaag alles wat je hebt gegeten gelogd?". Die vraag stelde zichzelf onvoorwaardelijk en liet toe dat een dag als compleet werd afgevinkt terwijl er nul entries stonden (18-08 om 09:07 gebeurde precies dat).
+
+1. Draai `python3 Expansions/mypka-cockpit/scripts/food_log.py status <datum>`. Dat geeft `expected`, `logged`, `skipped` en `missing`.
+2. Verwachte maaltijden per uur — vóór 12:00 `breakfast`, vanaf 12:00 ook `lunch`, vanaf 18:00 ook `dinner`. Snacks zijn nooit verwacht: een tussendoortje heeft geen tijdvenster. De SSOT is `MEAL_WINDOWS` in `food_log.py`, niet deze zin.
+3. `missing` leeg → geen vraag stellen. Append stil de completion-audit en meld in één regel wat er gelogd staat.
+4. `missing` niet leeg → vraag in één bericht naar uitsluitend die maaltijden, met GL-013-opties: beschrijven, nog niet gegeten, of later.
+5. "Nog niet gegeten / overgeslagen" leg je vast met `food_log.py skip <datum> <meal_type>`. Doe je dat niet, dan stelt de volgende close-session diezelfde dag exact dezelfde vraag opnieuw.
+6. Een skip is **geen** maaltijd-entry: hij landt in de auditsectie en telt niet mee in de nutriëntencijfers. Wordt de maaltijd later alsnog gelogd, dan wint de entry — `meal_status` verrekent dat zelf.
+7. De nieuwste auditregel blijft leidend.
 
 ## Kwaliteitsregels
 
