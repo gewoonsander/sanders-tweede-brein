@@ -22,7 +22,7 @@ In de halve finales was Lo Wolswijk met 63.51 gemiddeld te sterk voor Sjors Kath
 
 **Finale**
 
-In de finale, best of 7, trok Raoul Hendriks aan het langste eind: 4-2 tegen Lo Wolswijk, met gemiddeldes van 64.73 tegenover 65.12.
+In de finale, best of 7, ontliepen beide spelers elkaar nauwelijks: Lo Wolswijk kwam uit op 65.12 gemiddeld, Raoul Hendriks op 64.73. Het verschil zat in de legs die ertoe deden — Raoul Hendriks won met 4-2.
 
 **Statistieken — 180's**
 
@@ -37,7 +37,7 @@ Samen goed voor 2 maximums, met Kevin Neijenhuis en Raoul Hendriks als topscorer
 
 **Winnaar in de spotlight** 🏆
 
-Raoul Hendriks pakte in Arnhem de titel: derde in de groepsfase (65.18 gemiddeld, 2-2), overtuigende zeges op weg naar de finale via Joy kempers en Mitch Olijslager, en de titel met een spannende 4-2 zege op Lo Wolswijk. Van harte gefeliciteerd, Raoul!
+Raoul Hendriks pakte in Arnhem de titel: derde in de groepsfase (65.18 gemiddeld, 2-2), zeges op weg naar de finale via Joy kempers en Mitch Olijslager, en een spannende 4-2 in de finale tegen Lo Wolswijk. Over het hele toernooi kwam hij uit op een gemiddelde van 66.79 met een first-9 van 73.91, goed voor 28x 100+, 7x 140+ en een 180. Van harte gefeliciteerd, Raoul!
 
 **Volgende toernooien in Regio Oost**
 
@@ -52,7 +52,7 @@ Deel dit verslag gerust en tag de spelers erin — dat wordt gewaardeerd! 📲
 ---
 
 **Nog nodig van Sander vóór publicatie:**
-- [ ] Foto van winnaar Raoul Hendriks (Dart Atlas heeft geen foto's)
+- [x] Foto van winnaar Raoul Hendriks — aangeleverd door Sander: `~/Downloads/2026-08-17_ADC_winnaar-arnhem-raoul-hendriks_v01.jpeg`
 - [ ] Kwalificatie-implicatie (waar plaatst Raoul Hendriks zich voor met deze titel?) — niet automatisch te bevestigen uit Dart Atlas, Sander weet dit als regionaal manager
 
 **Datakanttekeningen (transparantie, niet voor in de publieke post):**

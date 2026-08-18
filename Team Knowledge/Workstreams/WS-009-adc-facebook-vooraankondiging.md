@@ -5,7 +5,7 @@ owners:
   - Hermes (orchestrator, Dart Atlas datafetch)
   - Penn (schrijven Facebook-bericht)
 tags: [ADC, darts, facebook, dart-atlas, regio-oost, vooraankondiging]
-last_updated: 2026-08-17
+last_updated: 2026-08-18
 ---
 
 # WS-009 — Facebook-vooraankondiging vóór ADC-toernooi
@@ -73,6 +73,23 @@ Zelfde flow als WS-004 Fase 3: Hermes legt het concept voor met een checklist va
 Zelfde locatie en naamconventie als WS-004 Fase 4, apart type: `ADC/Verslagen/facebook-vooraankondiging-[locatie]-YYYY-MM-DD.md` — datum is de toernooidatum. Bovenaan `**Status: CONCEPT — ter review door Sander**`, na publicatie bijwerken naar `**Status: GEPUBLICEERD — op Facebook geplaatst door Sander**` (zelfde patroon als de verslagen, zie [[dagstart]] stap 6).
 
 ⚠️ Geen Bash-controle vooraf — zelfde regel als WS-004 Fase 4. Write maakt ontbrekende mappen zelf aan; de routine draait onbemand.
+
+## Uitzondering — toernooi te vroeg gestart, opnieuw aangemaakt
+
+Vastgelegd 18-08-2026 na Arnhem 17-08-2026. De toernooimanager zette het toernooi per ongeluk op "gestart" in Dart Atlas, waardoor inschrijven onmogelijk werd. Sander moest het toernooi verwijderen, waarna alle deelnemers automatisch hun inschrijfgeld terugkregen, en een vervangend toernooi aanmaken met een nieuw ID. De vooraankondiging van 07:00 stond toen al klaar met de oude, dode inschrijflink.
+
+**Signaal:** de inschrijflink in een al gemaakte vooraankondiging geeft geen toernooipagina meer, of Sander meldt dat een toernooi opnieuw is aangemaakt.
+
+**Herstelstappen:**
+
+1. **Nieuw toernooi-ID ophalen** — via de seizoenskalender (`/seasons/[SEIZOEN_ID]/tournaments/schedule`). Let op: het vervangende toernooi krijgt vaak een gewijzigde naam (bv. "Arnhem" wordt "Arnhem 2"), terwijl een ander, later toernooi de oorspronkelijke naam kan houden. Ga af op de datum, niet op de naam.
+2. **Inschrijflink in de vooraankondiging vervangen** en de waarschuwing bovenaan de post zetten, vóór het inhoudelijke haakje — mensen die scrollen missen hem anders. Vermeld expliciet dat een eerdere inschrijving is vervallen en het geld is teruggestort, en dat opnieuw inschrijven én opnieuw betalen nodig is. Zet ook aanmeldtijd op locatie en het inschrijfgeld erbij; die zijn dan opeens weer relevant.
+3. **Noem de toernooimanager niet bij naam** in publieke communicatie. Sander schrijft in de ik-vorm als regionaal manager en neemt de fout op zich.
+4. **Oude deelnemerslijst reconstrueren** — de verwijderde toernooipagina is weg, maar de inschrijfnotificaties van `notifier@dartsatlas.com` staan nog in de mailbox. Zoek op `from:notifier@dartsatlas.com "[LOCATIE] player registration"`. Vergelijk die namen met de entries-pagina van het nieuwe toernooi; het verschil is de lijst mensen die persoonlijk benaderd moet worden. Let op: spelers die handmatig door de organisatie zijn overgezet staan wél op de entries-pagina maar hebben géén notificatiemail.
+5. **Persoonlijk bericht sturen** naar iedereen die nog niet opnieuw is ingeschreven. Een groepspost alleen is onvoldoende — deze mensen hádden al betaald en verliezen hun plek zonder dat het aan hen lag.
+6. **Na afloop controleren** wie er uiteindelijk niet is komen opdagen, en die persoon een bericht sturen met de link naar het eerstvolgende toernooi.
+
+Zie [[aankomstlijst-arnhem-2026-08-17]] en [[uitnodigingslijst-arnhem-2026-08-17]] als uitgewerkt voorbeeld.
 
 ## Verhouding tot WS-004/WS-006
 
