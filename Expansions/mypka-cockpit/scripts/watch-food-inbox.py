@@ -46,22 +46,55 @@ def discard(path):
     try: path.replace(target)
     except OSError: shutil.move(str(path),str(target))
 
+def archive(path, target):
+    """Copy the source photo to its permanent home. Idempotent: an existing
+    target is left alone, so a repair pass never rewrites a good archive."""
+    if target is None or target.exists(): return
+    target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(path,target)
+
+def already_logged(key, stamp):
+    """Is this exact file already an entry in that day's food log?
+
+    The marker file and the log entry are written by two separate steps, so a
+    run killed between them leaves the entry present but unmarked. Asking the
+    log directly turns that into a repairable state instead of a reason to pay
+    for the vision call twice. Any failure answers False, which costs at most a
+    redundant run — never a lost entry."""
+    try:
+        sys.path.insert(0,str(Path(__file__).resolve().parent))
+        from food_log import daily_path, parse
+        return any(e.get('source_id')==key for e in parse(daily_path(stamp.strftime('%Y-%m-%d')))['entries'])
+    except Exception:
+        return False
+
 def run(path, source_type, text=''):
     try: key=digest(path)
     except (OSError, subprocess.SubprocessError) as exc:
         print(json.dumps({'event':'food_capture_deferred','file':path.name,'error':str(exc)}),file=sys.stderr)
         return
     if done(key): return
-    cmd=[sys.executable,str(PROCESS),'--source-type',source_type,'--source-id',key,'--logged-at',datetime.fromtimestamp(path.stat().st_mtime).astimezone().isoformat()]
+    stamp=datetime.fromtimestamp(path.stat().st_mtime).astimezone()
     target=None
     if source_type=='photo':
-        target=ROOT/'PKM/Images'/datetime.fromtimestamp(path.stat().st_mtime).strftime('%Y/%m')/(datetime.fromtimestamp(path.stat().st_mtime).strftime('%Y-%m-%d-')+key[:10]+path.suffix.lower())
-        cmd += ['--photo',str(path),'--photo-path',str(target.relative_to(ROOT/'PKM'))]
+        target=ROOT/'PKM/Images'/stamp.strftime('%Y/%m')/(stamp.strftime('%Y-%m-%d-')+key[:10]+path.suffix.lower())
+
+    # Repair path for a run that died after writing the entry but before
+    # archiving the photo or dropping the marker (observed 2026-08-18: two
+    # photos archived and logged, zero markers). append_meal already refuses a
+    # duplicate source_id, so re-running the vision call would change nothing
+    # except the bill — finish the interrupted steps instead.
+    if already_logged(key,stamp):
+        archive(path,target)
+        mark(key,'done')
+        print(json.dumps({'event':'food_capture_repaired','file':path.name}),file=sys.stderr)
+        return
+
+    cmd=[sys.executable,str(PROCESS),'--source-type',source_type,'--source-id',key,'--logged-at',stamp.isoformat()]
+    if target is not None: cmd += ['--photo',str(path),'--photo-path',str(target.relative_to(ROOT/'PKM'))]
     else: cmd += ['--text',text]
     result=subprocess.run(cmd,capture_output=True,text=True)
     if result.returncode==0:
-        if target is not None:
-            target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(path,target)
+        archive(path,target)
         mark(key,'done')
         if source_type=='audio': discard(path)
     elif 'geen voedingsregistratie' in result.stderr:
