@@ -26,6 +26,7 @@ Gegroepeerd per type (progressive disclosure, laag 0). Groeit een categorie voor
 - [Sessiestempel bij sessiestart](feedback_sessiestempel_bij_sessiestart.md) — eerste reply begint met datum, tijdstip en onderwerp
 - [Sessietitel-formaat](feedback_sessietitel_formaat.md) — `YYYY-MM-DD HH:MM · onderwerp` met de starttijd, gezet bij de eerste reply, niet pas bij close-session
 - [Drankjes loggen via chat](feedback_drankjes_loggen_via_chat.md) — meldt hij een drankje, log direct een `- drink:`-regel en regenereer de spiegel
+- [Transcriptie alleen bij gezien](feedback_transcriptie_alleen_bij_gezien.md) — nooit blanket transcriberen op basis van abonnement, alleen na daadwerkelijke consumptie (afgeluisterd/gezien)
 
 ## Projecten
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  nl.gewoonsander.podcast-transcribe — transcribe an episode ONLY after Sander
+  has actually listened to it. Companion to nl.gewoonsander.podcast-sync.
+
+  NOT INSTALLED AUTOMATICALLY. Daedalus announces runtimes; Sander installs
+  them. Install only when he says so:
+
+    sed -e "s|__VAULT__|$PWD|g" -e "s|__PY__|/opt/homebrew/bin/python3|g" \
+        -e "s|__HOME__|$HOME|g" \
+        Expansions/mypka-cockpit/launchd/nl.gewoonsander.podcast-transcribe.plist.template \
+      > ~/Library/LaunchAgents/nl.gewoonsander.podcast-transcribe.plist
+    launchctl unload ~/Library/LaunchAgents/nl.gewoonsander.podcast-transcribe.plist 2>/dev/null
+    launchctl load   ~/Library/LaunchAgents/nl.gewoonsander.podcast-transcribe.plist
+
+  ── ARM IT FIRST, or nothing is safe ────────────────────────────────────────
+  Before loading this job, the watermark MUST exist:
+
+    python3 Expansions/mypka-cockpit/scripts/podcast-transcribe-on-watch.py --seed
+
+  Armed 2026-08-19 with 14 already-seen episodes frozen as history. The seed run
+  transcribes zero by design — see the script's docstring, guard 1. If the
+  watermark is ever missing the script re-seeds and transcribes nothing, so a
+  lost state file fails safe, never open.
+
+  ── Why 3600 and an offset from the sync ────────────────────────────────────
+  The sync (StartInterval 2700) is what turns an episode "played" in the mirror;
+  this job only reads that result. Running it slightly slower than the sync
+  means every tick sees a settled mirror instead of racing it. A tick with an
+  empty queue costs one read-only sqlite query and exits — no network at all.
+
+  ── Why the perl alarm wrapper ──────────────────────────────────────────────
+  Same reason as podcast-sync: the vault sits under an iCloud-backed ~/Documents
+  and an open() there can wedge in the kernel indefinitely, and launchd will not
+  start a second instance of a job that never exited. 3600 s is generous on
+  purpose — a Whisper fallback on a 55-minute episode is legitimately slow.
+
+  ── Why --max 3 ─────────────────────────────────────────────────────────────
+  Blast-radius bound (guard 4). Well above Sander's real listening rate, far
+  below "an archive". Anything above the cap simply waits for the next tick.
+-->
+<plist version="1.0"><dict>
+  <key>Label</key><string>nl.gewoonsander.podcast-transcribe</string>
+  <key>ProgramArguments</key><array>
+    <string>/usr/bin/perl</string>
+    <string>-e</string>
+    <string>alarm shift; exec @ARGV</string>
+    <string>3600</string>
+    <string>__PY__</string>
+    <string>__VAULT__/Expansions/mypka-cockpit/scripts/podcast-transcribe-on-watch.py</string>
+    <string>--run</string>
+    <string>--max</string>
+    <string>3</string>
+    <string>--json</string>
+  </array>
+  <key>WorkingDirectory</key><string>__VAULT__</string>
+  <key>EnvironmentVariables</key><dict>
+    <key>PATH</key><string>/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+  <key>StartInterval</key><integer>3600</integer>
+  <key>RunAtLoad</key><false/>
+  <key>ProcessType</key><string>Background</string>
+  <key>LowPriorityIO</key><true/>
+  <key>StandardOutPath</key><string>__HOME__/Library/Logs/mypka-podcast-transcribe.log</string>
+  <key>StandardErrorPath</key><string>__HOME__/Library/Logs/mypka-podcast-transcribe.err.log</string>
+</dict></plist>
