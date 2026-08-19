@@ -1,46 +1,30 @@
-# Tasks Index
+# Team Knowledge/tasks/ — INDEX
 
-_Auto-generated. Do not edit by hand. Run `SOP-rebuild-task-index` to regenerate._
-
-_Last rebuilt: 2026-08-19T11:31:00Z_
-
-## Summary
-- Open: 11 (1 blocked)
-- In progress: 2 (0 blocked)
-- Done (this month): 3
-- Cancelled (this month): 0
+Taakstaat per 2026-08-19 16:16.
+Last rebuilt: 2026-08-19 16:16:14Z
 
 ## Open (11)
 
-### Priority 2 — high
-- [[tsk-2026-08-12-001-build-portable-dropbox-mcp]] — Build portable Dropbox MCP with approved mutation batches — assignee: daedalus — created 2026-08-12 — BLOCKED: Gepauzeerd op verzoek van Sander nadat Dropbox App Console herhaaldelijk geen app liet aanmaken; hervatten alleen wanneer Sander het Dropbox-traject opnieuw wil proberen
-- [[tsk-2026-08-16-002-dranken-apart-registreren-in-voedingsdashboard]] — Dranken apart registreren in het voedings- en gewoontedashboard — assignee: daedalus — created 2026-08-16
-- [[tsk-2026-08-16-003-status-tracking-wekelijkse-inboxronde-per-machine]] — Statusregister + Cockpit-indicator voor de wekelijkse inbox-verwerkronde per machine — assignee: daedalus — created 2026-08-16
-- [[tsk-2026-08-17-002-downgrade-claude-abonnement]] — Herinner Sander: downgrade Claude-abonnement terug naar normaal niveau — assignee: hermes — created 2026-08-17 — due 2026-09-07
-
-### Priority 3 — normal
-- [[tsk-2026-08-15-001-video-s-in-downloads-filen-naar-mediahub]] — 5 video's uit Downloads filen naar de Mediahub zodra de Lexar SSD lokaal aangesloten is — assignee: unassigned — created 2026-08-15
-- [[tsk-2026-08-17-001-bouw-bunq-saldo-cockpit-connector]] — Bouw bunq-saldo Cockpit-connector (read-only) volgens goedgekeurd ontwerp + Argus-eisen — assignee: daedalus — created 2026-08-17
-- [[tsk-2026-08-18-001-google-drive-root-opruimen-naar-documenten-structuur]] — 945 losse root-bestanden en 27 mappen in Google Drive routeren naar de bestaande documenten/-structuur — assignee: unassigned — created 2026-08-18
-- [[tsk-2026-08-18-002-sop-013-inboxronde-downloads-werkarchief-vault-root]] — SOP-013 volledige inboxronde: Downloads, Werkarchief en losse video in vault-root — assignee: unassigned — created 2026-08-18
-- [[tsk-2026-08-19-003-sop-diagrammen-visualisatie-mypka-cockpit]] — Diagram-weergave toevoegen voor SOP's, Workstreams en Guidelines in mypka-cockpit — assignee: bezalel — created 2026-08-19
-
-### Priority 4 — low
-- [[tsk-2026-08-13-001-workstream-guardian-en-sessie-orkestratie-onderzoeken]] — Onderzoek Workstream Guardian-achtige check en Tom's sessie-orkestratie ("Orchestration 2.0") toepassen op eigen structuur — assignee: unassigned — created 2026-08-13
-- [[tsk-2026-08-19-002-youtube-als-library-in-dashboard]] — YouTube als eigen library-categorie toevoegen aan mypka-cockpit dashboard — assignee: unassigned — created 2026-08-19
+- [tsk-2026-08-12-001-build-portable-dropbox-mcp](open/tsk-2026-08-12-001-build-portable-dropbox-mcp.md) — Build portable Dropbox MCP with approved mutation batches | daedalus | P2 | 🔴 BLOCKED
+- [tsk-2026-08-13-001-workstream-guardian-en-sessie-orkestratie-onderzoeken](open/tsk-2026-08-13-001-workstream-guardian-en-sessie-orkestratie-onderzoeken.md) — Onderzoek Workstream Guardian-achtige check en Tom's sessie- | unassigned | P4 | ✓
+- [tsk-2026-08-15-001-video-s-in-downloads-filen-naar-mediahub](open/tsk-2026-08-15-001-video-s-in-downloads-filen-naar-mediahub.md) — 5 video's uit Downloads filen naar de Mediahub zodra de Lexa | unassigned | P3 | ✓
+- [tsk-2026-08-16-002-dranken-apart-registreren-in-voedingsdashboard](open/tsk-2026-08-16-002-dranken-apart-registreren-in-voedingsdashboard.md) — Dranken apart registreren in het voedings- en gewoontedashbo | daedalus | P2 | ✓
+- [tsk-2026-08-16-003-status-tracking-wekelijkse-inboxronde-per-machine](open/tsk-2026-08-16-003-status-tracking-wekelijkse-inboxronde-per-machine.md) — Statusregister + Cockpit-indicator voor de wekelijkse inbox- | daedalus | P2 | ✓
+- [tsk-2026-08-17-001-bouw-bunq-saldo-cockpit-connector](open/tsk-2026-08-17-001-bouw-bunq-saldo-cockpit-connector.md) — Bouw bunq-saldo Cockpit-connector (read-only) volgens goedge | daedalus | P3 | ✓
+- [tsk-2026-08-17-002-downgrade-claude-abonnement](open/tsk-2026-08-17-002-downgrade-claude-abonnement.md) — Herinner Sander: downgrade Claude-abonnement terug naar norm | hermes | P2 | ✓
+- [tsk-2026-08-18-001-google-drive-root-opruimen-naar-documenten-structuur](open/tsk-2026-08-18-001-google-drive-root-opruimen-naar-documenten-structuur.md) — 945 losse root-bestanden en 27 mappen in Google Drive router | unassigned | P3 | ✓
+- [tsk-2026-08-18-002-sop-013-inboxronde-downloads-werkarchief-vault-root](open/tsk-2026-08-18-002-sop-013-inboxronde-downloads-werkarchief-vault-root.md) — SOP-013 volledige inboxronde: Downloads, Werkarchief en loss | unassigned | P3 | ✓
+- [tsk-2026-08-19-002-youtube-als-library-in-dashboard](open/tsk-2026-08-19-002-youtube-als-library-in-dashboard.md) — YouTube als eigen library-categorie toevoegen aan mypka-cock | unassigned | P4 | ✓
+- [tsk-2026-08-19-003-sop-diagrammen-visualisatie-mypka-cockpit](open/tsk-2026-08-19-003-sop-diagrammen-visualisatie-mypka-cockpit.md) — Diagram-weergave toevoegen voor SOP's, Workstreams en Guidel | bezalel | P3 | ✓
 
 ## In progress (2)
-- [[tsk-2026-08-12-001-teambeheer-scraper-database-onderzoek]] — assignee: athena — claimed 2026-08-12
-- [[tsk-2026-08-11-001-mypka-cockpit-software-stack-tabblad]] — assignee: bezalel — claimed 2026-08-11
 
-## By assignee
-- daedalus: 4 open, 0 in-progress (1 blocked)
-- hermes: 1 open, 0 in-progress
-- unassigned: 5 open, 0 in-progress
-- bezalel: 1 open, 1 in-progress
-- athena: 0 open, 1 in-progress
+- [tsk-2026-08-11-001-mypka-cockpit-software-stack-tabblad](in-progress/tsk-2026-08-11-001-mypka-cockpit-software-stack-tabblad.md) — myPKA Cockpit: nieuw tabblad 'Software-stack' voor overzicht | bezalel | ▶️
+- [tsk-2026-08-12-001-teambeheer-scraper-database-onderzoek](in-progress/tsk-2026-08-12-001-teambeheer-scraper-database-onderzoek.md) — Onderzoek Teambeheer-scraper en continu bijgewerkte dartdata | athena | ▶️
 
-## Recently closed (last 7 days)
-- 2026-08-19 [[tsk-2026-08-19-001-skills-overzicht-mypka-cockpit]] — done — Bezalel
-- 2026-08-16 [[tsk-2026-08-16-001-activeer-gewoontetracking-in-cockpit]] — done — Daedalus
-- 2026-08-12 [[tsk-2026-08-08-001-scaffold-oude-teamnamen-opruimen]] — done — Hermes
+## Done (4)
+
+- [tsk-2026-07-02-001-pkm-oude-teamnamen-opruimen](done/../tsk-2026-07-02-001-pkm-oude-teamnamen-opruimen.md) — Cosmetische PKM-vermeldingen van oude teamnamen opruimen
+- [tsk-2026-08-08-001-scaffold-oude-teamnamen-opruimen](done/../tsk-2026-08-08-001-scaffold-oude-teamnamen-opruimen.md) — Vanilla-scaffold-laag opschonen van oude teamnamen (Larry/No
+- [tsk-2026-08-16-001-activeer-gewoontetracking-in-cockpit](done/../tsk-2026-08-16-001-activeer-gewoontetracking-in-cockpit.md) — Activeer gewoontetracking in de myPKA-cockpit
+- [tsk-2026-08-19-001-skills-overzicht-mypka-cockpit](done/../tsk-2026-08-19-001-skills-overzicht-mypka-cockpit.md) — Skills-overzicht toevoegen aan Mijn AI-team menu in mypka-co
