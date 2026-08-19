@@ -1,0 +1,9 @@
+# Become a darts master Level 2
+
+- **Video:** https://www.youtube.com/watch?v=ZKssLqOIh0E
+- **Ondertitel-taal:** en
+- **Bron:** YouTube-ondertitels
+
+---
+
+they're gonna need a good into TV welcome to video 2 and level 2 congratulations if you completed level 1 if you haven't go back I said don't skip the levels do level 1 what we're going to do now is we're going to do it the same sort of game but slightly different so this time again we're going to put the walls in you can do this one of two ways you can use the paper like we said before or masking tape if you've got it again you've got the admitting numbers which are here going across 11 to 6 and then on the corners of the 13 and 14 and the corners of the 8 and the 10 so that gives us roughly about two and a half numbers with the little bits that we lose in between this is important now it's important to stay straight which is what we worked on first but it's important not to forget a horizontal training quite often we might be left on tops a lot of finishes leaders on tops so we need to start being able to get that line right same across the bottom with the threes and also with some of the troubles that we go for sometimes we're gonna switch over to the 18s and 16 they're all quite a horizontal line so we need to get the horizontal training going same game as before 15 darts in the section if you burst the tape or break the walls start again I'll give you a quick demo you can use the ball is a bit of a focal point that's three remember I need to try and get myself to 15 points in a row so I'm thrown away if I burst the tape I'm back down to zero and there's one point again so 15 hits in a room without bursting the walls congratulations if he was able to complete level to make sure you move on to level 3 10 levels in total fee to either go out right here on Edgar TV and don't forget to subscribe where we play games like this some of the time

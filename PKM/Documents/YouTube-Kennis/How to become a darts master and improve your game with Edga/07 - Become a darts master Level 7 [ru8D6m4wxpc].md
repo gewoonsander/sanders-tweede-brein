@@ -1,0 +1,9 @@
+# Become a darts master Level 7
+
+- **Video:** https://www.youtube.com/watch?v=ru8D6m4wxpc
+- **Ondertitel-taal:** en
+- **Bron:** YouTube-ondertitels
+
+---
+
+they're gonna need a good into TV well done if you've got this far if you're watching this video if I haven't completed the other levels go back stop skip in levels okay this is another around-the-clock game but this is a scoring system so now this worksheet at one point in the segment two points for hitting the double three points for hitting the treble you get three ducks at every single sections in your three at one 333 before they're even three or four and so on all the way around they're 20 and when I was here now working on the 33% basis I'll give you a hundred average which is two singles and the treble 33% gives you the hundred average what I'm going to do is I'm going to give you the hundred average want to take of 20% so to complete this round you have to score 80 points that's either the singles two doubles the troubles over that is however you want to do them 80 points needed which will roughly mean to complete this challenge you'll need to be about an 80 average sort of player if not better to get through let me show you I need to get to 80 points so I start obviously on the ones first that's three points four points five points on one target at the moment that chap on time to beat that by quite a bit okay then I move to the twos one I effect I get another signal that's two that's my five I want seven points even if I do miss with all three it doesn't affect my school it just means I've still got seven okay so you'll just keep going get the scores up we're now on level seven so if you haven't yet hit that subscribe button or headed over to Twitter and follow that the edgar 501 what are you playing at cuz you're on level seven you should have done this by now that's seven opportunities you have had getting sorted

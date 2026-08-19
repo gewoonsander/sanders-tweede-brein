@@ -1,0 +1,9 @@
+# Become a darts master level 9
+
+- **Video:** https://www.youtube.com/watch?v=Vd0yx2w3gqA
+- **Ondertitel-taal:** en
+- **Bron:** YouTube-ondertitels
+
+---
+
+[Music] level 9 and this is the last game before you go and take on the boss if this was mortal kombat this is the guy who's got like four or five arms i can't remember his name it's probably six arms and it wouldn't have odd but yeah anyway uh this game i use myself before i play a match i play this in my own head all the time so what you're doing is you're starting on 61 points you've got to chip out 61 anywhere you want whenever you take a finish out you go up in five you come down in ones the idea to complete this game is you need to break 100 so that means at some point you're gonna have to take out somewhere between the 95 to 100 finish or you're gonna have to take a couple of lower ones to keep pumping you back in there okay uh once you break 100 you completed it but keep going to see what your maximum score is i've at my best i've done 107 points on this so i took out the 102 went 207 then came back down again as soon as i dropped below 100 i stopped playing it so once i go over i have one life to get as high as i can but anyway that's irrelevant the game you've got to do is you're going to break 100 points start on 61 up in fives down in ones let's have a quick look as if so you see there i've hit the 61 finish which means next time i come back i'm on 66. yeah opposite way round as you do okay i take out the 66 i move up to 71. now for the purposes of this video if i come up and i miss this time oh dear oh no missed i go down to 70. so it's up five down ones do this and you can take on the boss battle edgar tv and that's it that's the final round so now you can go and take on the boss and if you still haven't subscribed yet why not because you're on level 9 you've watched at least nine of my videos get it sorted

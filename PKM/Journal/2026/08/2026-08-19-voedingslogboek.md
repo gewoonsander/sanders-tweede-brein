@@ -54,6 +54,16 @@ tags: [voeding, tracking]
 - Foto: ![[Images/2026/08/2026-08-19-da52528a42.jpeg]]
 <!-- FOOD_ENTRY {"log_date":"2026-08-19","logged_at":"2026-08-19T14:24:53+02:00","meal_type":"lunch","description":"Pakje ALDI gerookte zalm, 100 g (op basis van voedingswaarde-etiket)","source_type":"photo","source_id":"da52528a42b5df7d44467101314eaf1c3e26553534ef3aa2bb9f2b166e1fb954","photo_path":"Images/2026/08/2026-08-19-da52528a42.jpeg","kcal":[203.0,203.0],"protein_g":[20.0,20.0],"carbs_g":[0.0,0.0],"fat_g":[14.0,14.0],"confidence":"high","supersedes_entry_id":null,"entry_id":"d9b03d6a3214b21c7e7b"} -->
 
+
+### 16:01 — Tussendoor
+- Appel als tussendoortje (spraakmemo: “Ik heb als tussendoortje een appel gegeten”)
+- Energie: 70–110 kcal
+- Eiwit: 0–1 g
+- Koolhydraten: 18–28 g
+- Vet: 0–1 g
+- Betrouwbaarheid: medium
+<!-- FOOD_ENTRY {"log_date":"2026-08-19","logged_at":"2026-08-19T16:01:48+02:00","meal_type":"snack","description":"Appel als tussendoortje (spraakmemo: “Ik heb als tussendoortje een appel gegeten”)","source_type":"audio","source_id":"bebc92b3f3f66ab79ccc","kcal":[70.0,110.0],"protein_g":[0.0,1.0],"carbs_g":[18.0,28.0],"fat_g":[0.0,1.0],"confidence":"medium","photo_path":null,"supersedes_entry_id":null,"entry_id":"cf3bebebee1265b500f6"} -->
+
 <!-- FOOD_ENTRIES -->
 
 ## Completion audit

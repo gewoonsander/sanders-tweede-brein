@@ -1,0 +1,9 @@
+# Become a darts master Level 3
+
+- **Video:** https://www.youtube.com/watch?v=NjmAWLd8sJ0
+- **Ondertitel-taal:** en
+- **Bron:** YouTube-ondertitels
+
+---
+
+they're gonna need a good into TV hello and welcome to level three congratulations so far if you're flying through these fantastic we didn't start being harder now we're going to now start to look at condensing this down into the sections and the segments on the board now I'm gonna give you a very into this game as well so you can do it two ways so it's a two parter part number one gives you three lives so it's a round-the-clock game all you got to do is hit the 1 into 2 into 3 to the 4 to the 5 into 6 all the way around till you get the 22 in all 20 segments in the sequence ascending order okay with three lives that means I throw a 1 a 2 a mystery I've got two more dogs that can throw and miss I miss I drop back to number two okay gives me three lives to hit that fight of it my second night I react to make my three lines again when I move around the board your variant for this so stage two part of this video is you don't get that fallback factor so you've got no one you look go to you've got a three or four if you miss for your back to three so two different stages make sure you do both giving yourself a good couple of laps around the board miss the - okay still gives me two lives hit the trebles you can hit the double check the singles whatever you want to do three reactivate three lives again I miss I've got to I mix I've got one I hit I go to four but back to three lives again and here's your variant so this is round two of this stage I hit the one I moved to to hit the two I moved to three I've missed the three I go back to two I don't have three lives I'll go get all the way around forwards and backwards with no cushion Edgar TV okay that's round one two and three over you get the idea how this works let's take it up a notch round four ding ding
