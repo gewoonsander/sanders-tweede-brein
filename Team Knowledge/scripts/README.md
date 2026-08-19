@@ -261,3 +261,33 @@ clearing it first.
 - To revoke access entirely: Google Account → Security → Third-party
   access → remove the app, then delete
   `Team Knowledge/.secrets/google-authorized-user.json`.
+
+---
+
+## `modus-super-series-averages.py`
+
+**Status:** actief en herhaalbaar. Hoort bij [[tsk-2026-08-19-004]].
+
+Haalt de speler-gemiddelden van de MODUS Super Series op van
+[modussuperseries.com](https://modussuperseries.com/) en aggregeert ze per Series.
+Alleen Python-stdlib, geen API-sleutel, geen JavaScript-rendering nodig.
+
+```bash
+python3 "Team Knowledge/scripts/modus-super-series-averages.py" \
+  --uit "Deliverables/2026-08-19-modus-super-series-averages"
+```
+
+Schrijft drie CSV's (per Series, per week, all-time) plus een rapport met de
+uitgevoerde controles op stdout. Opties: `--cache MAP` bewaart de opgehaalde HTML
+zodat een herdraai de site niet opnieuw belast, `--series 1 2 3` beperkt de run,
+`--vertraging` regelt de pauze tussen verzoeken (default 0,4 s).
+
+**Let op bij het lezen van de brondata:** de tabel die de site "Accumulative
+Averages" noemt is cumulatief binnen één week, niet over een hele Series — elke
+week heeft een eigen spelersveld. Het Series-gemiddelde wordt daarom berekend als
+3 × (som punten) / (som darts) over alle weken. De volledige onderbouwing en de
+bronbeperkingen staan in de README bij de dataset.
+
+De Series-lijst wordt uit de dropdown van de site gelezen en de status
+afgerond/lopend uit de Honours Board, dus een nieuwe Series wordt zonder
+codewijziging meegenomen.
