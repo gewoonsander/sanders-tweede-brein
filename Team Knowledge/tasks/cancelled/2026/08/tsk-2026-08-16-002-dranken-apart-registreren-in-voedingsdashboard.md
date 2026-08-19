@@ -8,13 +8,13 @@ assignee: daedalus
 priority: 2
 
 # Status (mirrors folder location)
-status: open
+status: cancelled
 blocked_reason: null
 blocked_by: null
 
 # Time
 created: 2026-08-16T13:46:53Z
-updated: 2026-08-16T13:46:53Z
+updated: 2026-08-19T20:06:07Z
 due: null
 
 # Provenance
@@ -60,7 +60,18 @@ Breid de voedingsregistratie uit zodat dranken niet meer tussen de maaltijden ve
 ## Updates
 
 - 2026-08-16 15:46 (hermes) — created after Sander requested separate beverage tracking and an evidence-based daily drinking target.
+- 2026-08-19 20:06 (hermes) — Sander asked "dit is toch al af?"; audit against the literal success criteria showed the task was never picked up, but a simpler, different feature (the hydration habit-tracker) shipped in the meantime and covers the practical need. Sander chose to cancel rather than finish the original scope.
 
-## Outcome
+## Outcome (cancelled)
 
-_(filled when status flips to done — see SOP-close-task)_
+Reden: op 2026-08-17/18 is een losstaande, eenvoudigere oplossing gebouwd — de gewoonte [[dagelijks-voldoende-drinken]] met de `HydrationGauge`-component in het gewoontedashboard (`Expansions/mypka-cockpit/web/src/components/HydrationGauge.tsx`, getoond via `Tracking.tsx`). Sander logt een slok via de chat ("kop koffie"), Hermes voegt een `- drink: 250 ml`-regel toe aan het Habit-bestand, en de meter vult zich richting het dagdoel van 2.000 ml.
+
+Dat dekt het praktische doel (zichtbare voortgang naar een dagdoel), maar niet de letterlijke scope van deze taak:
+- Geen `meal`/`beverage`-onderscheid in `food_log.py` (`MEAL_TYPES` blijft breakfast/lunch/dinner/snack).
+- Geen dranken als structured food-log-entry met eigen kcal/eiwit/koolhydraten/vet.
+- Water wordt bewust **niet** apart van het totaal bijgehouden — Sander koos op 2026-08-18 expliciet het tegenovergestelde van succescriterium "Water en totaal gedronken volume worden afzonderlijk opgeteld", omdat een aparte watermeter bij hem structureel op nul zou blijven staan.
+- Dranken staan niet naast de maaltijden in het voedingsdashboard; het is een generieke Habit-widget, los van de maaltijdenlijst.
+
+Superseded by: geen apart taakbestand — gebouwd tijdens sessie [[2026-08-17-17-30_hermes_adc-arnhem-hydratatiemeter-voedingspijplijn]], vastgelegd in [[dagelijks-voldoende-drinken]] en [[feedback_drankjes_loggen_via_chat]].
+
+Follow-ups: geen. Mocht Sander later alsnog per-drank voedingswaarden of een echte `beverage`-entry in het voedingslogboek willen, dan is dat een nieuwe taak met `parent: tsk-2026-08-16-002`, niet een heropening van deze.

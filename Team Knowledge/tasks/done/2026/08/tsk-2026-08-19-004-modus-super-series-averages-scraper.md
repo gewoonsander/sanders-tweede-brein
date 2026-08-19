@@ -8,13 +8,13 @@ assignee: daedalus
 priority: 3
 
 # Status (mirrors folder location)
-status: in-progress
+status: done
 blocked_reason: null
 blocked_by: null
 
 # Time
 created: 2026-08-19T14:26:21Z
-updated: 2026-08-19T16:58:00Z
+updated: 2026-08-19T20:11:21Z
 due: null
 
 # Provenance
@@ -111,13 +111,21 @@ Controles: weekgemiddelde vs. herberekend 3 × punten / darts over alle 2182 rij
 - [x] Voor elke afgeronde Series (1 t/m 14) is het eindgemiddelde per speler opgehaald (positie, naam, gespeeld, gemiddelde, en punten/darts waar beschikbaar).
 - [x] Series 15 wordt apart gemarkeerd als "lopend, tussenstand" i.p.v. stilzwijgend meegeteld als afgerond seizoen.
 - [x] Double Trouble wordt apart vermeld (het is geen genummerde Series in dezelfde reeks).
-- [x] Resultaat is een spreadsheet (CSV/Excel of Google Sheet — vorm nog niet vastgesteld met Sander, mag simpel) met minimaal: Series, speler, gespeeld, gemiddelde. → drie CSV's opgeleverd.
+- [x] Resultaat is een spreadsheet (CSV/Excel of Google Sheet — vorm nog niet vastgesteld met Sander, mag simpel) met minimaal: Series, speler, gespeeld, gemiddelde. → drie CSV's, plus xlsx en Google Sheet opgeleverd.
 - [x] De twee open onzekerheden hierboven (kolomverschil, series_id 16-25) zijn tijdens de bouw kort gecheckt en het resultaat is teruggekoppeld aan Sander — niet stilzwijgend genegeerd.
-- [ ] **Sander heeft het eindresultaat gezien en goedgekeurd voordat de taak als afgerond geldt.** ← enige openstaande punt
+- [x] Sander heeft het eindresultaat gezien en goedgekeurd voordat de taak als afgerond geldt.
 
 ## Updates
 - 2026-08-19 14:26 (hermes) — created, na haalbaarheidsonderzoek in chatsessie. Sander koos expliciet voor "vastleggen als taak voor terminal-sessie" i.p.v. nu meteen bouwen.
 - 2026-08-19 16:58 (hermes) — picked up en gebouwd in terminal-sessie. Script + dataset opgeleverd, beide open onzekerheden beantwoord, en één kernaanname uit het oorspronkelijke onderzoek gecorrigeerd (zie "Bevindingen tijdens de bouw"). Status op in-progress i.p.v. done: het laatste success criterion vraagt om Sanders goedkeuring van het eindresultaat.
+- 2026-08-19 20:11 (hermes) — Sander vroeg in de Cowork-sessie na te trekken of de taak al was opgepakt; bleek al gebouwd, gemerged naar main en zelfs uitgebreid met xlsx + Google Sheet (commits `a473842`, `170cf02`, `fb0765d`, `fba01ba`, `23a4f3b`). Drie CSV's + README naar Sander gestuurd ter beoordeling; Sander keurde goed ("a"). Taak op done.
 
 ## Outcome
-_(filled when status flips to done — see SOP-close-task)_
+
+What shipped: een herbruikbare Python-stdlib scraper (`Team Knowledge/scripts/modus-super-series-averages.py`) voor alle speler-gemiddelden van de MODUS Super Series, plus een dataset van 16 onderdelen (Series 1-14 afgerond, Series 15 lopend/tussenstand, Double Trouble los) in drie vormen: 3 CSV's (per-series hoofdbestand 1937 rijen, per-week brondata 2182 rijen, all-time 593 spelers), een xlsx-werkmap met drie tabbladen, en een Google Sheet in Drive (`documenten/03-passie/modus-super-series/`). Tijdens de bouw is een kernaanname uit het oorspronkelijke haalbaarheidsonderzoek gecorrigeerd (de "Accumulative Averages"-tabel is cumulatief per week, niet per Series) en zijn beide open onzekerheden uit dat onderzoek beantwoord. Alle 2182 weekrijen en 1937 Series-rijen zijn tegen herberekening geverifieerd, 0 afwijkingen.
+
+Where it lives: `Deliverables/2026-08-19-modus-super-series-averages/` (CSV's, xlsx, README) + [Google Sheet](https://docs.google.com/spreadsheets/d/1O2TrBcqUXj5YvmZ_I92rpBDY8pC240E6VQOzDrbordQ/edit). Commits op main: `a473842` (scraper + dataset), `170cf02` (HTML-entiteiten fix), `fb0765d` (merge), `fba01ba` (index-opruiming), `23a4f3b` (xlsx + Google Sheet). Gebouwd in een losstaande terminal-sessie, niet in deze Cowork-sessie.
+
+Follow-ups: geen. De Google Sheet is een momentopname van 2026-08-19 — bij een herdraai van het script ververst alleen de lokale data, de Sheet moet dan handmatig opnieuw geüpload worden (staat in de Deliverables-README).
+
+Lessons: geen apart journal-entry geschreven; de correctie op het oorspronkelijke onderzoek staat vastgelegd in dit taakbestand zelf onder "Bevindingen tijdens de bouw".
