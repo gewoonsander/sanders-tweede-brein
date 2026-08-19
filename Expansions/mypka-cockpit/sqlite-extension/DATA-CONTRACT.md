@@ -1450,8 +1450,14 @@ episodes have no transcript and never will.
 
 A match is an **inference**, and is stored as one:
 
-- `transcript_match_method` ∈ `season_episode` | `normalized_title_exact` |
-  `fuzzy_title` | `manual` (CHECK-enforced);
+- `transcript_match_method` ∈ `season_episode` | `episode_ordinal` |
+  `normalized_title_exact` | `fuzzy_title` | `manual` (CHECK-enforced). **This
+  list is a COPY of the matcher's tier list in §18.7 — extend both in the same
+  change.** It was not, once: `episode_ordinal` shipped in the cascade (§18.7
+  tier 2) but was missing from the CHECK, and because `apply_matches()` writes
+  every link in ONE transaction, the 14 ordinal rows took the other 53 down with
+  them on rollback. All 2968 rows kept `transcript_path` NULL while the matcher's
+  own report read 67/67. Fixed 2026-08-19;
 - `transcript_match_score` REAL 0..1.
 
 **A UI showing a transcript link must render anything below 0.95 as a *probable*

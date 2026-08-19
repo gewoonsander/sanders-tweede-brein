@@ -593,7 +593,8 @@ export type PodcastEpisodeState =
 /** How the transcript link was established. The match is an INFERENCE and is
  *  carried as one — see `transcript_match_score`. */
 export type PodcastTranscriptMethod =
-  | 'season_episode' | 'normalized_title_exact' | 'fuzzy_title' | 'manual';
+  | 'season_episode' | 'episode_ordinal' | 'normalized_title_exact'
+  | 'fuzzy_title' | 'manual';
 
 /** Whether the ONE write channel (the manual tick) is live right now.
  *  `available:false` means render the checkbox read-only, NOT broken. */

@@ -44,6 +44,26 @@ tags: [voeding, tracking]
 - Betrouwbaarheid: low
 <!-- FOOD_ENTRY {"log_date":"2026-08-18","logged_at":"2026-08-18T21:36:00+02:00","meal_type":"dinner","description":"Gehaktbal, aardappelkraté en bietensalade","source_type":"chat","source_id":"close-session-2026-08-18-dinner","kcal":[430.0,630.0],"protein_g":[18.0,26.0],"carbs_g":[31.0,50.0],"fat_g":[23.0,39.0],"confidence":"low","photo_path":null,"supersedes_entry_id":null,"entry_id":"6d149aa4e60a1afc65e5"} -->
 
+
+### 22:00 — Tussendoor
+- Grote patat speciaal en een bamischijf (in chat gemeld, geen foto/portie-detail)
+- Energie: 1100–1400 kcal
+- Eiwit: 14–22 g
+- Koolhydraten: 110–140 g
+- Vet: 60–85 g
+- Betrouwbaarheid: low
+<!-- FOOD_ENTRY {"log_date":"2026-08-18","logged_at":"2026-08-18T22:00:00+02:00","meal_type":"snack","description":"Grote patat speciaal en een bamischijf (in chat gemeld, geen foto/portie-detail)","source_type":"chat","source_id":"chat-2026-08-19-patat-speciaal-bamischijf","kcal":[1100.0,1400.0],"protein_g":[14.0,22.0],"carbs_g":[110.0,140.0],"fat_g":[60.0,85.0],"confidence":"low","photo_path":null,"supersedes_entry_id":null,"entry_id":"51226964aabe73fb2ad7"} -->
+
+
+### 22:15 — Tussendoor
+- Oubliehoorn met zacht ijsje (in chat gemeld, geen foto/portie-detail)
+- Energie: 150–250 kcal
+- Eiwit: 2–4 g
+- Koolhydraten: 20–30 g
+- Vet: 6–10 g
+- Betrouwbaarheid: low
+<!-- FOOD_ENTRY {"log_date":"2026-08-18","logged_at":"2026-08-18T22:15:00+02:00","meal_type":"snack","description":"Oubliehoorn met zacht ijsje (in chat gemeld, geen foto/portie-detail)","source_type":"chat","source_id":"chat-2026-08-19-oubliehoorn-zacht-ijsje","kcal":[150.0,250.0],"protein_g":[2.0,4.0],"carbs_g":[20.0,30.0],"fat_g":[6.0,10.0],"confidence":"low","photo_path":null,"supersedes_entry_id":null,"entry_id":"6584d6ec0105a0cc4fcf"} -->
+
 <!-- FOOD_ENTRIES -->
 
 ## Completion audit

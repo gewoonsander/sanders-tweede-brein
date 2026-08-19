@@ -88,6 +88,7 @@ USAGE
 from __future__ import annotations
 
 import argparse
+import re
 import sqlite3
 import subprocess
 import sys
@@ -406,9 +407,20 @@ CREATE TABLE podcast_episodes (
   CHECK (status IS play_state),
   CHECK (play_state IS NULL OR play_state IN ('unplayed', 'in-progress', 'played')),
   CHECK (transcript_match_method IS NULL OR transcript_match_method IN
-         ('season_episode', 'normalized_title_exact', 'fuzzy_title', 'manual')))
+         ('season_episode', 'episode_ordinal', 'normalized_title_exact',
+          'fuzzy_title', 'manual')))
 """,
 }
+
+# The closed vocabulary of `podcast_episodes.transcript_match_method`, in the
+# matcher's own tier order. SINGLE SOURCE for both the CREATE above and the
+# upgrade path below, so a future method can never be added to one and forgotten
+# in the other. It must stay in lockstep with the tiers implemented in
+# `scripts/lib/podcast_transcript_match.py`.
+TRANSCRIPT_MATCH_METHODS = (
+    "season_episode", "episode_ordinal", "normalized_title_exact",
+    "fuzzy_title", "manual",
+)
 
 # The Inner-World ANNOTATION layer on `podcast_episodes` — Sander's hand-set
 # "ook gezien via een ander platform" tick (2026-08-19). Apple's store systematically
@@ -746,6 +758,88 @@ def ensure_columns(cur, table, columns, plan, dry):
             cur.execute(f"ALTER TABLE {table} ADD COLUMN {col} {coltype}")
 
 
+# The one CHECK on `podcast_episodes` that has ever needed WIDENING rather than
+# adding. Matched loosely (any whitespace, any value list) so it is found in both
+# the current DDL and the 2026-08-19 shape that lacked 'episode_ordinal'.
+TRANSCRIPT_METHOD_CHECK_RE = re.compile(
+    r"CHECK\s*\(\s*transcript_match_method\s+IS\s+NULL\s+OR\s+"
+    r"transcript_match_method\s+IN\s*\(\s*(?P<list>[^)]*?)\s*\)\s*\)",
+    re.IGNORECASE | re.DOTALL)
+
+
+def ensure_transcript_match_method_check(cur, tables_now, plan, dry):
+    """Widen `podcast_episodes`'s transcript_match_method CHECK in place.
+
+    WHY THIS EXISTS (bug, 2026-08-19). The CHECK shipped without
+    'episode_ordinal', a method `scripts/lib/podcast_transcript_match.py` emits on
+    its tier-2 path (14 of 67 Dartpraat matches). apply_matches() writes every link
+    in ONE transaction, so the first rejected row raised IntegrityError and rolled
+    the WHOLE batch back: `transcript_path` stayed NULL on all 2968 live rows while
+    the matcher's report kept reading 67/67. The constraint has to be widened on
+    EXISTING databases, not only in the CREATE, or a re-install fixes nothing.
+
+    WHY `PRAGMA writable_schema` AND NOT THE 12-STEP REBUILD. A table-level CHECK
+    cannot be reached by ALTER TABLE (that is why the annotation columns above were
+    deliberately written as COLUMN constraints — but this one predates that rule and
+    is a table constraint). The two options are then SQLite's 12-step
+    create-copy-drop-rename or a schema-text rewrite. The rebuild moves 2968 rows
+    including their `body` show-notes text and, worse, would have to reproduce the
+    LIVE column order — which differs from the canonical CREATE above, because the
+    manual_watched* columns were appended by ALTER on this database and sit mid-list
+    in the CREATE. An `INSERT … SELECT *` across that mismatch silently shifts every
+    value one column over. The schema-text rewrite touches ZERO data pages, cannot
+    reorder anything, and is a pure constraint relaxation: every existing row already
+    satisfies the widened CHECK by construction (a superset of the old vocabulary).
+    Guarded by an integrity_check afterwards, and idempotent — it no-ops once the
+    vocabulary is complete.
+    """
+    if "podcast_episodes" not in tables_now:
+        return
+    row = cur.execute("SELECT sql FROM sqlite_master WHERE type = 'table'"
+                      " AND name = 'podcast_episodes'").fetchone()
+    sql = row[0] if row and row[0] else None
+    if not sql:
+        return
+    m = TRANSCRIPT_METHOD_CHECK_RE.search(sql)
+    if not m:
+        # No such CHECK at all (a hand-edited DB). Nothing to widen; adding a
+        # table constraint is out of scope for an additive installer.
+        plan.have("podcast_episodes CHECK transcript_match_method (absent)")
+        return
+    present = set(re.findall(r"'([a-z_]+)'", m.group("list")))
+    missing = [v for v in TRANSCRIPT_MATCH_METHODS if v not in present]
+    if not missing:
+        plan.have("podcast_episodes CHECK transcript_match_method")
+        return
+    plan.add("podcast_episodes CHECK transcript_match_method (+ "
+             + ", ".join(missing) + ")")
+    if dry:
+        return
+    values = ", ".join(f"'{v}'" for v in TRANSCRIPT_MATCH_METHODS)
+    new_check = ("CHECK (transcript_match_method IS NULL OR "
+                 f"transcript_match_method IN ({values}))")
+    new_sql = sql[:m.start()] + new_check + sql[m.end():]
+
+    con = cur.connection
+    con.commit()                      # land any open work before schema surgery
+    cur.execute("PRAGMA writable_schema = ON")
+    try:
+        cur.execute("UPDATE sqlite_master SET sql = ? WHERE type = 'table'"
+                    " AND name = 'podcast_episodes'", (new_sql,))
+        version = cur.execute("PRAGMA schema_version").fetchone()[0]
+        con.commit()
+        # Bump the cookie so every other connection re-parses instead of caching
+        # the old, narrower constraint.
+        cur.execute(f"PRAGMA schema_version = {version + 1}")
+    finally:
+        cur.execute("PRAGMA writable_schema = OFF")
+    ok = cur.execute("PRAGMA integrity_check").fetchone()[0]
+    if ok != "ok":
+        raise SystemExit(
+            "  ABORT: integrity_check failed after widening the "
+            f"transcript_match_method CHECK ({ok}). Restore your mypka.db backup.")
+
+
 def ensure_views(cur, views, plan, dry):
     """Views carry no data — drop+recreate is always lossless, keeps them fresh."""
     for name, ddl in views.items():
@@ -843,6 +937,10 @@ def install_podcasts(cur, tables_now, plan, dry):
     if had_episodes:
         ensure_columns(cur, "podcast_episodes",
                        PODCAST_EPISODE_ANNOTATION_COLUMNS, plan, dry)
+        # Upgrade path for installations whose transcript_match_method CHECK
+        # predates 'episode_ordinal' (bug fixed 2026-08-19 — see the function's
+        # docstring). No-ops once the vocabulary is complete.
+        ensure_transcript_match_method_check(cur, tables_now, plan, dry)
     if not dry:
         for idx, table, col, where, unique in PODCAST_INDEXES:
             if table not in tables_now:

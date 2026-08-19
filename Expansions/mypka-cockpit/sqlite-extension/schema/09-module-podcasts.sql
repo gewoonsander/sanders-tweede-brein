@@ -282,14 +282,23 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_podcasts_feed_url ON podcasts (feed_url);
 --                     PKM/Documents/YouTube-Kennis/<Channel>/, or NULL. NULLABLE BY
 --                     DESIGN: most episodes have no transcript and never will.
 --   transcript_match_method  HOW the link was established — the match is an
---                     INFERENCE and is stored as one, never as a bare fact:
+--                     INFERENCE and is stored as one, never as a bare fact.
+--                     The vocabulary IS the matcher's tier list in
+--                     `scripts/lib/podcast_transcript_match.py`; the two must be
+--                     kept in lockstep (see the note under the CHECK below):
 --                       'season_episode'         SxxEyy token equal on both sides
+--                       'episode_ordinal'        bare episode ordinal equal on both
+--                                                sides ("Dartpraat 33" vs
+--                                                "Aflevering 33"), accepted only
+--                                                when corroborated by pubdate or
+--                                                token overlap
 --                       'normalized_title_exact' normalized titles equal
 --                       'fuzzy_title'            similarity above threshold
 --                       'manual'                 a human asserted it
 --                     NULL when transcript_path is NULL.
 --   transcript_match_score   REAL 0..1 confidence for that method. 1.0 for
---                     season_episode and manual; the similarity ratio for fuzzy.
+--                     season_episode and manual; 0.90 for episode_ordinal; the
+--                     similarity ratio for fuzzy.
 --                     A UI that shows a transcript link SHOULD show anything below
 --                     0.95 as "probable match", not as a certainty.
 --   transcript_matched_at    ISO datetime the match was last computed.
@@ -359,8 +368,19 @@ CREATE TABLE IF NOT EXISTS podcast_episodes (
   -- Closed vocabulary. A future Apple state lands in apple_play_state_raw and
   -- fails LOUDLY here rather than entering the mirror as an unknown token.
   CHECK (play_state IS NULL OR play_state IN ('unplayed', 'in-progress', 'played')),
+  -- Closed vocabulary, and it MUST list every method the matcher can emit.
+  -- ⚠️  BUG HISTORY (fixed 2026-08-19): 'episode_ordinal' was missing here while
+  --   podcast_transcript_match.py had been emitting it since day one (tier 2, 14
+  --   of 67 Dartpraat matches). Because apply_matches() writes all links in ONE
+  --   transaction, a single rejected row raised IntegrityError and rolled back
+  --   ALL of them — so `transcript_path` stayed NULL on every one of the 2968
+  --   live rows while the matcher's own report kept saying 67/67. A too-narrow
+  --   CHECK does not fail on the rows it rejects; it fails on the whole batch.
+  --   Lesson to carry forward: when a writer's vocabulary lives in code, this
+  --   list is a COPY of it. Extend both in the same change, or don't extend.
   CHECK (transcript_match_method IS NULL OR transcript_match_method IN
-         ('season_episode', 'normalized_title_exact', 'fuzzy_title', 'manual'))
+         ('season_episode', 'episode_ordinal', 'normalized_title_exact',
+          'fuzzy_title', 'manual'))
 );
 
 -- ── Indexes ──────────────────────────────────────────────────────────────────
