@@ -460,7 +460,9 @@ function oneLine(v, max) {
   if (v === undefined || v === null) return '';
   return String(v)
     .replace(/<!--|-->/g, ' ')
-    .replace(/[\r\n  ]+/g, ' ')
+    // \u2028 / \u2029 are line separators too: stripping only \r\n would leave
+    // them in, and they terminate a line for several markdown renderers.
+    .replace(/[\r\n\u2028\u2029]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim()
     .slice(0, max)

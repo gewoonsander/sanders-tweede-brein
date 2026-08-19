@@ -51,6 +51,7 @@ import { registerLibraryRoutes } from './libraryApi.js';
 import { registerAudiobooksRoutes } from './audiobooksApi.js';
 import { registerPodcastsRoutes } from './podcastsApi.js';
 import { registerDartsatlasRoutes } from './dartsatlasApi.js';
+import { registerDartsTrainingRoutes } from './dartsTrainingApi.js';
 import { registerOuterWorldRoutes } from './outerWorldApi.js';
 import { registerAgentRoutes } from './agentApi.js';
 import { registerSessionLogsRoutes } from './sessionLogsApi.js';
@@ -1234,6 +1235,24 @@ registerPodcastsRoutes(app, { safe, sessionOrLoopback, localWriteGuard, express 
 // calm { available:false, reason } envelope when nothing has been scraped yet.
 // File reads live in dartsatlasApi.js.
 registerDartsatlasRoutes(app, { safe });
+// Darts TRAINING dashboard — the tracking half of the `darts_exercises` library
+// that the generic library grid cannot express (progress per exercise over time,
+// the day 1-4 course overview, and the session log form).
+//
+// Two sources on purpose: the exercise DEFINITIONS come from mypka.db, the
+// LOGS are parsed straight out of each note's `## Logboek` section on disk.
+// `darts_exercise_logs` is regen-owned (OWNED_TABLES in regen-mypka-db.py), so
+// the mirror is behind the truth between a log and the next regen — reading the
+// files makes a just-logged session visible immediately, the same file-layer
+// answer journalEntries.js already uses for fresh journal entries.
+//
+// The WRITE appends a `### YYYY-MM-DD` block to the note. It does NOT insert
+// into `darts_exercise_logs`: that row would be dropped by the next regen. The
+// podcasts carve-out above does not apply here for exactly that reason. It rides
+// the standard WORKBENCH_WRITE_STACK verbatim (write gate → session/loopback →
+// CSRF header+origin → scoped parser), passed in so the module cannot weaken it,
+// and is path-jailed to PKM/My Life/Darts Exercises/ inside dartsTrainingApi.js.
+registerDartsTrainingRoutes(app, { safe, writeStack: WORKBENCH_WRITE_STACK });
 // Outer World module (DATA-CONTRACT §14): the mymind-style saved-content card
 // grid (enumerate, body-less) + one-item-by-slug (card → detail-large). Read-only
 // over mypka.db; embed_image/_favicon are LOCAL paths served via the existing
