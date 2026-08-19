@@ -36,7 +36,7 @@
 import type { ComponentType } from 'react';
 import { lazy } from 'react';
 import type { LucideIcon } from 'lucide-react';
-import { Globe, Headphones, HeartPulse, Inbox, Library as LibraryIcon, LineChart, ListTodo, Map as MapIcon, Package, Podcast as PodcastIcon, Target } from 'lucide-react';
+import { Dumbbell, Globe, Headphones, HeartPulse, Inbox, Library as LibraryIcon, LineChart, ListTodo, Map as MapIcon, Package, Podcast as PodcastIcon, Target } from 'lucide-react';
 
 // Heavy module views go behind a lazy boundary (same idiom as the Workbench /
 // Board views in App.tsx) so they never enter the eager bundle. A React.lazy
@@ -91,6 +91,17 @@ const PodcastsView = lazy(() =>
 // on disk (data/dartsatlas/<player>/latest.json) by scripts/dartsatlas-fetch.mjs
 // and served read-only by GET /api/cockpit/darts (server/dartsatlasApi.js).
 const DartsView = lazy(() => import('../views/DartsView').then((m) => ({ default: m.DartsView })));
+// Darts TRAINING module — the tracking surface over the `darts_exercises`
+// library: the day 1-4 course overview, a score chart per exercise, the
+// "langst niet gedaan" prompt, and the form that logs a session. Distinct from
+// DartsView above: that one is Sander's competitive record (Darts Atlas), this
+// one is his practice. Logging writes to the exercise NOTE's `## Logboek`
+// section, never to the regen-owned `darts_exercise_logs` table — see
+// server/dartsTrainingApi.js. Lazy so its Recharts chunk never enters the eager
+// bundle.
+const DartsTrainingView = lazy(() =>
+  import('../views/DartsTrainingView').then((m) => ({ default: m.DartsTrainingView })),
+);
 
 // The sidebar groups an extension module can attach to. These mirror the
 // existing <div className="sidebar-group"> sections in Sidebar.tsx.
@@ -154,6 +165,16 @@ export const COCKPIT_MODULES: readonly CockpitModule[] = [
   // Darts — Darts Atlas rankings + tournament history, read from the scraped JSON
   // on disk (not mypka.db). Sits beside the other personal-record surfaces.
   { slug: 'darts', navLabel: 'Darts', navIcon: Target, navSection: 'overview', View: DartsView },
+  // Darts training — the practice dashboard (course days, score progression per
+  // exercise, session logging). Sits directly beside Darts: same domain, other
+  // question ("hoe traint hij?" instead of "hoe presteert hij?").
+  {
+    slug: 'darts-training',
+    navLabel: 'Dartstraining',
+    navIcon: Dumbbell,
+    navSection: 'overview',
+    View: DartsTrainingView,
+  },
   // Library surface — the data-driven collection browser (recipes, movies, books,
   // …). Lands in the sidebar 'library' group. Always present so the surface (with
   // its first-class empty state) is one click away even on a bare scaffold; the

@@ -1,0 +1,330 @@
+/* darts-training.css — the Darts TRAINING dashboard (#/darts-training).
+
+   Tokens only: every colour is a var() from index.css, every radius/duration
+   comes from the same set the rest of the Cockpit uses (10px cards like
+   .library-picker-card, --dur-fast + --ease for hover). No hardcoded hex.
+
+   Focus is the pen (§6.2): every interactive element gets a 2px
+   --accent-marker outline on :focus-visible, never a removed outline. */
+
+.dt-view { display: flex; flex-direction: column; }
+
+.dt-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+}
+
+/* Read-only notice — calm, informational, never an alarm block. */
+.dt-readonly-note {
+  margin-top: var(--space-sm);
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--fg-muted);
+  font-size: 0.8125rem;
+}
+
+/* ---- "Langst niet gedaan" --------------------------------------------------- */
+.dt-neglected {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dt-neglected-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  padding: 8px 2px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.dt-neglected-row:last-child { border-bottom: none; }
+
+.dt-neglected-day {
+  flex: 0 0 auto;
+  min-width: 3.5rem;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-subtle);
+}
+.dt-neglected-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--fg);
+  font-size: 0.875rem;
+}
+.dt-neglected-since {
+  flex: 0 0 auto;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+/* "nog nooit gedaan" is the one state worth a warm nudge — the marker's soft
+   step, not a status colour: this is an invitation, not an error. */
+.dt-neglected-since.is-never { color: var(--accent-marker-text); }
+
+/* ---- Card grid -------------------------------------------------------------- */
+.dt-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-md);
+}
+.dt-card-li { list-style: none; min-width: 0; }
+
+.dt-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  height: 100%;
+}
+
+.dt-card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+/* The exercise number as a quiet counter, aria-hidden (the accessible name
+   carries "Oefening N" as real text in the heading). */
+.dt-card-num {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  min-width: 22px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent-marker-soft);
+  color: var(--accent-marker-text);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.dt-card-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 520;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+
+/* ---- Sparkline (decorative; the numbers live in .dt-stats) ------------------ */
+.dt-spark { flex: 0 0 auto; display: block; overflow: visible; }
+.dt-spark-line {
+  fill: none;
+  stroke: var(--accent-marker);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.dt-spark-dot { fill: var(--accent-marker); }
+
+/* ---- Stats ------------------------------------------------------------------ */
+.dt-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px var(--space-md);
+  margin: 0;
+}
+@media (min-width: 480px) {
+  .dt-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.dt-stat { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.dt-stat dt {
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-microlabel);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+.dt-stat dd {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+  overflow-wrap: anywhere;
+}
+
+.dt-card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Success confirmation after a log. role="status", so it is announced; styled
+   as a quiet line rather than a banner. */
+.dt-flash {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--accent-marker-text);
+}
+
+/* ---- Actions ---------------------------------------------------------------- */
+.dt-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: auto;
+  padding-top: 2px;
+}
+
+.dt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--fg-muted);
+  font-size: 0.8125rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease);
+}
+.dt-btn:hover:not(:disabled) {
+  border-color: var(--border-emphasis);
+  background: var(--surface-3);
+  color: var(--fg);
+}
+.dt-btn:focus-visible {
+  outline: 2px solid var(--accent-marker);
+  outline-offset: 2px;
+}
+.dt-btn:disabled { opacity: 0.55; cursor: default; }
+
+.dt-btn--primary {
+  border-color: var(--accent-marker);
+  background: var(--accent-marker-soft);
+  color: var(--accent-marker-text);
+}
+.dt-btn--primary:hover:not(:disabled) {
+  background: var(--accent-marker);
+  color: var(--text-on-marker);
+  border-color: var(--accent-marker);
+}
+
+.dt-btn-chevron { transition: transform var(--dur-fast) var(--ease); }
+.dt-btn-chevron.is-open { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) {
+  .dt-btn, .dt-btn-chevron { transition: none; }
+}
+
+.dt-card-link {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 6px 4px;
+  font-size: 0.8125rem;
+  color: var(--fg-subtle);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.dt-card-link:hover { color: var(--fg-muted); border-bottom-color: var(--border-emphasis); }
+.dt-card-link:focus-visible {
+  outline: 2px solid var(--accent-marker);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.dt-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--fg-subtle);
+}
+
+/* ---- Log form --------------------------------------------------------------- */
+.dt-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+
+/* auto-fit, not a fixed 2-up: the card is as narrow as 300px on a phone, where
+   a date field and a score field side by side would each be ~135px and clip.
+   auto-fit collapses to one column on its own, so no breakpoint has to guess. */
+.dt-form-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  border: none;
+  min-inline-size: 0; /* a fieldset will not shrink below its content without this */
+}
+
+.dt-field { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.dt-field--wide { grid-column: 1 / -1; }
+
+.dt-field label {
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-microlabel);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+.dt-field input,
+.dt-field textarea {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  background: var(--surface-input);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.dt-field textarea { resize: vertical; }
+.dt-field input:focus-visible,
+.dt-field textarea:focus-visible {
+  outline: 2px solid var(--accent-marker);
+  outline-offset: 1px;
+  border-color: var(--accent-marker);
+}
+.dt-field input::placeholder,
+.dt-field textarea::placeholder { color: var(--fg-subtle); }
+.dt-form-fields:disabled .dt-field input,
+.dt-form-fields:disabled .dt-field textarea { opacity: 0.6; }
+
+.dt-form-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--status-error-text);
+}
+
+.dt-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.dt-form-actions .dt-hint { margin-right: auto; }
+
+/* ---- Progress chart --------------------------------------------------------- */
+.dt-chart { margin-top: var(--space-sm); }
+.dt-chart-canvas { height: 180px; width: 100%; }
+.dt-chart-empty,
+.dt-chart-note {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.75rem;
+  color: var(--fg-subtle);
+}

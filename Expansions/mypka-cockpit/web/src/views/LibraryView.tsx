@@ -345,27 +345,12 @@ function LibraryItemView({ lib, itemSlug }: { lib: string; itemSlug: string }) {
   const topRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => { topRef.current?.scrollIntoView({ block: 'start' }); }, [lib, itemSlug]);
 
-  if (loading) return <ViewSkeleton />;
-  if (error) return <div role="alert" className="view-error">Could not load this item: {error}</div>;
-  if (!data || !data.found || !data.item) {
-    return (
-      <div className="note-view">
-        <a className="back-button" href={hrefFor({ name: 'library', lib })}>
-          <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" /> Back
-        </a>
-        <p className="note-empty">No item found for <span className="font-mono">{itemSlug}</span>.</p>
-      </div>
-    );
-  }
-
-  const item: LibraryItemDetail = data.item;
-  const header = data.library;
-  const typeLabel = header?.navLabel || lib;
-  const body = typeof item.body === 'string' ? item.body : '';
-
-  // The structured header fields (typed axis columns) for the meta panel — every
-  // non-axis-excluded scalar column the row carries, in row order.
+  // Every hook must run on every render regardless of loading/error/not-found
+  // state (Rules of Hooks) — so metaRows is computed here, before any early
+  // return, and guards internally for a not-yet-loaded item instead.
+  const item: LibraryItemDetail | undefined = data?.item;
   const metaRows = useMemo(() => {
+    if (!item) return [];
     const rows: Array<[string, string]> = [];
     for (const [k, v] of Object.entries(item)) {
       if (k === 'body' || k === 'raw_frontmatter' || k === 'id' || k === 'slug' || k === 'file_path' || k === 'title') continue;
@@ -378,6 +363,23 @@ function LibraryItemView({ lib, itemSlug }: { lib: string; itemSlug: string }) {
     }
     return rows;
   }, [item]);
+
+  if (loading) return <ViewSkeleton />;
+  if (error) return <div role="alert" className="view-error">Could not load this item: {error}</div>;
+  if (!data || !data.found || !item) {
+    return (
+      <div className="note-view">
+        <a className="back-button" href={hrefFor({ name: 'library', lib })}>
+          <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" /> Back
+        </a>
+        <p className="note-empty">No item found for <span className="font-mono">{itemSlug}</span>.</p>
+      </div>
+    );
+  }
+
+  const header = data.library;
+  const typeLabel = header?.navLabel || lib;
+  const body = typeof item.body === 'string' ? item.body : '';
 
   return (
     <article ref={topRef} className="note-view library-item-view animate-fade-rise">
