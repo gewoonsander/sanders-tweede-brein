@@ -25,6 +25,7 @@ Then open the new file and edit. The Properties tab in mypka-interface will popu
 | [[Templates/habit]] | Habit | `PKM/My Life/Habits/<slug>.md` |
 | [[Templates/topic]] | Topic | `PKM/My Life/Topics/<slug>.md` |
 | [[Templates/key-element]] | Key Element | `PKM/My Life/Key Elements/<slug>.md` |
+| [[Templates/darts-exercise]] | Darts exercise | `PKM/My Life/Darts Exercises/<slug>.md` |
 | [[Templates/document]] | Document | `PKM/Documents/<slug>.md` |
 | [[Templates/personal-task]] | Personal task | `PKM/Tasks/<status>/tsk-YYYY-MM-DD-NNN-<actie-slug>.md` |
 

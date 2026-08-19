@@ -39,6 +39,8 @@ SCHEMA
     PKM/Outer World/YYYY/MM/    -> outer_world (md-first, doc_type: outer-world)
     PKM/My Life/Recipes/        -> recipes  (library; doc_type: recipe)
     PKM/My Life/Movies/         -> movies   (library; doc_type: movie)
+    PKM/My Life/Darts Exercises/-> darts_exercises (library; doc_type: darts-exercise)
+                                   (+ darts_exercise_logs from each note's ## Logboek)
     (any PKM/<Library>/         -> a mirror table, per the LIBRARIES config block)
     PKM/Journal/YYYY/MM/        -> journal (+ journal_media from ## Media)
     Deliverables/               -> deliverables
@@ -99,6 +101,11 @@ OWNED_TABLES = [
     # built-in libraries. A user-added library's table name (from LIBRARIES below)
     # is appended at runtime so the regen rebuilds it each run — see main().
     "library_registry", "recipes", "movies",
+    # Darts exercises (10-module-darts-exercises.sql): the definition library +
+    # its own log table. Same two-table shape as habits/habit_logs — the library
+    # mirror is filled by the generic LIBRARIES pass, the log table by its own
+    # `## Logboek` parsing pass in main().
+    "darts_exercises", "darts_exercise_logs",
     # Global full-text search (item-8): the FTS5 virtual table over the searchable
     # corpus (titles + bodies of every entity/library/journal/deliverable). Standalone
     # (own-content) FTS5 — dropped + rebuilt each run like any owned table. See the
@@ -113,6 +120,7 @@ OWNED_VIEWS = [
     "v_open_invoices", "v_reimbursement_pending", "v_invoice_payment_trail",
     "v_habit_heatmap", "v_habit_streaks", "v_food_day_totals",
     "v_food_log_calendar",
+    "v_darts_exercise_log", "v_darts_exercise_progress",
 ]
 
 # Entity folders -> (table, title column). Missing folders are skipped quietly
@@ -193,6 +201,31 @@ LIBRARIES = [
             ("total_seasons", "int", "total_seasons"),
             ("episodes_watched", "int", "episodes_watched"),
             ("verdict", "raw", "verdict"),
+        ],
+    },
+    {
+        # Trackbare dart-oefeningen (schema/10-module-darts-exercises.sql). Third
+        # worked library, and the first one that carries a SIBLING LOG TABLE:
+        # darts_exercise_logs is filled by its own pass in main(), not from here.
+        # `course` is already an axis column so a second imported course is a new
+        # VALUE, not a schema change.
+        "table": "darts_exercises",
+        "folder": Path("PKM/My Life/Darts Exercises"),
+        "doc_type": "darts-exercise",
+        "nav_label": "Dartsoefeningen",
+        "nav_icon": "Target",
+        "sort_order": 30,
+        "columns": [
+            ("exercise_name", "str", "exercise_name"),
+            ("course", "str", "course"),
+            ("course_module", "str", "course_module"),
+            ("training_day", "int", "training_day"),
+            ("exercise_number", "int", "exercise_number"),
+            ("key_element", "str", "key_element"),
+            ("source_platform", "str", "source_platform"),
+            ("source_course_id", "str", "source_course_id"),
+            ("source_lesson_id", "str", "source_lesson_id"),
+            ("imported_on", "str", "imported_on"),
         ],
     },
 ]
@@ -411,6 +444,52 @@ CREATE TABLE movies (
   genre TEXT, director_creator TEXT, platform TEXT, date_watched TEXT,
   progress TEXT, total_seasons INTEGER, episodes_watched INTEGER, verdict TEXT,
   tags TEXT, body TEXT, file_path TEXT, raw_frontmatter TEXT);
+-- ── Darts exercises (schema/10-module-darts-exercises.sql) ─────────────────────
+-- The DEFINITION half of a habits/habit_logs-shaped pair: one row per exercise
+-- note in PKM/My Life/Darts Exercises/ (doc_type: darts-exercise), filled by the
+-- generic LIBRARIES pass. Its FACT half is darts_exercise_logs below.
+--   exercise_name    just the exercise ('Bulls Basic') without the day prefix in
+--                    `title`. Several days repeat the SAME exercise, so this is
+--                    the column you group on to see progress across the course.
+--   course           slug of the source-course note (FK -> documents.slug). It
+--                    exists from day one so importing a SECOND course later is a
+--                    new value, never a schema migration.
+--   course_module    module name as a LABEL, not an FK — there is no module note.
+--   training_day     day number within the course; INTEGER so it sorts correctly.
+--   exercise_number  order within that day; NULL for an unnumbered item
+--                    ('Dag 4 - Wedstrijd'), which is why it is not NOT NULL.
+--   source_*         provenance (Huddle platform, course id, lesson id) so a
+--                    re-import can find the same lesson even after it is renamed
+--                    upstream. Stored as TEXT: these are opaque foreign ids, not
+--                    numbers we ever do arithmetic on.
+CREATE TABLE darts_exercises (
+  id INTEGER PRIMARY KEY, slug TEXT NOT NULL, title TEXT,
+  exercise_name TEXT, status TEXT,
+  course TEXT, course_module TEXT, training_day INTEGER, exercise_number INTEGER,
+  key_element TEXT,
+  source_platform TEXT, source_course_id TEXT, source_lesson_id TEXT,
+  imported_on TEXT,
+  tags TEXT, body TEXT, file_path TEXT, raw_frontmatter TEXT);
+-- The FACT half: one row per performed session, parsed from the `## Logboek`
+-- section of the same note (dated `### YYYY-MM-DD` heading + `- key: value`
+-- bullets — deliberately the same shape as a Habit's `## Reflection` check-in).
+--   seq          0-based order of this block WITHIN its date. There is NO
+--                UNIQUE(exercise_slug, log_date) on purpose: doing an exercise
+--                twice in a day yields TWO results, not a correction of the
+--                first. That is the one place this diverges from habit_logs,
+--                where the last check-in of the day deliberately wins.
+--   score/unit   the measured result and its unit. Both NULL-able: "I did it"
+--                with no number is a valid log, and every exercise scores in a
+--                different unit (punten / darts / legs), so unit is free text.
+--   result       short textual outcome for exercises one number cannot express
+--                ('best of 5 gewonnen', 'tot dubbel 14 gekomen').
+--   source_path  the markdown file this row was derived from — every row stays
+--                traceable back to its canonical source.
+CREATE TABLE darts_exercise_logs (
+  id INTEGER PRIMARY KEY, exercise_slug TEXT NOT NULL, log_date TEXT NOT NULL,
+  seq INTEGER NOT NULL DEFAULT 0,
+  score REAL, unit TEXT, result TEXT, trigger TEXT, note TEXT,
+  source_path TEXT NOT NULL);
 -- ── Governance docs (Team Knowledge browser) ──────────────────────────────────
 -- workstreams / sops / guidelines mirror the three Team Knowledge doc families. These
 -- files carry NO YAML frontmatter: their metadata lives in a `- **Label:** value`
@@ -504,6 +583,8 @@ CREATE INDEX idx_sops_doc_id ON sops (doc_id);
 CREATE INDEX idx_guidelines_doc_id ON guidelines (doc_id);
 CREATE INDEX idx_habit_logs_slug_date ON habit_logs (habit_slug, log_date);
 CREATE INDEX idx_food_logs_date ON food_logs (log_date, meal_type, logged_at);
+CREATE INDEX idx_darts_exercise_logs_slug_date
+  ON darts_exercise_logs (exercise_slug, log_date);
 
 CREATE VIEW v_habit_heatmap AS
 SELECT hl.habit_slug, h.name AS habit_name, hl.log_date, hl.done,
@@ -550,6 +631,39 @@ CREATE VIEW v_food_log_calendar AS
 SELECT log_date, meal_type, description, kcal_min, kcal_max, protein_g_min, protein_g_max,
        carbs_g_min, carbs_g_max, fat_g_min, fat_g_max, confidence, photo_path, journal_slug
 FROM food_logs WHERE is_active = 1 ORDER BY log_date DESC, logged_at;
+
+-- ── Darts-exercise views (the analogues of v_habit_heatmap / v_habit_streaks) ──
+-- Flat read of every logged session, with the exercise's own name joined in.
+CREATE VIEW v_darts_exercise_log AS
+SELECT l.exercise_slug, e.title AS exercise_title, e.exercise_name,
+       e.training_day, e.course,
+       l.log_date, l.seq, l.score, l.unit, l.result, l.trigger, l.note
+FROM darts_exercise_logs l
+LEFT JOIN darts_exercises e ON e.slug = l.exercise_slug
+ORDER BY l.log_date DESC, l.exercise_slug, l.seq;
+-- One row per exercise: how often done, when last, best and most recent score.
+-- No streak logic — an exercise has no daily expectation you can miss, so a
+-- streak would be a number without a meaning. Exercises with ZERO logs are
+-- included (LEFT JOIN from the definition side, sessions = 0): "never done yet"
+-- is the single most useful row in this view.
+CREATE VIEW v_darts_exercise_progress AS
+SELECT e.slug AS exercise_slug, e.title AS exercise_title, e.exercise_name,
+       e.training_day, e.exercise_number, e.course, e.status,
+       COUNT(l.id) AS sessions,
+       MIN(l.log_date) AS first_logged,
+       MAX(l.log_date) AS last_logged,
+       MAX(l.score) AS best_score,
+       (SELECT l2.score FROM darts_exercise_logs l2
+         WHERE l2.exercise_slug = e.slug
+         ORDER BY l2.log_date DESC, l2.seq DESC LIMIT 1) AS last_score,
+       (SELECT l2.unit FROM darts_exercise_logs l2
+         WHERE l2.exercise_slug = e.slug
+         ORDER BY l2.log_date DESC, l2.seq DESC LIMIT 1) AS last_unit,
+       CAST(julianday('now') - julianday(MAX(l.log_date)) AS INTEGER)
+         AS days_since_last_log
+FROM darts_exercises e
+LEFT JOIN darts_exercise_logs l ON l.exercise_slug = e.slug
+GROUP BY e.slug;
 
 -- ── Invoice views (Silas-owned; OWNED_VIEWS) ───────────────────────────────────
 -- Open invoices with DERIVED due-state. Overdue / due-soon are computed here from
@@ -987,6 +1101,69 @@ def parse_habit_reflections(body: str, daily_target: float = None):
                 "log_schema": schema,
             }
     return [by_date[d] for d in sorted(by_date)]
+
+
+DARTS_LOG_FIELD_RE = re.compile(
+    r"^\s*-\s*(score|unit|result|trigger|note)\s*:\s*(.*?)\s*$",
+    re.MULTILINE | re.IGNORECASE,
+)
+HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
+
+
+def parse_exercise_logs(body: str):
+    """Return every logged session in a Darts-Exercise note's ``## Logboek``.
+
+    Same authoring shape as a Habit's ``## Reflection`` check-in: a dated ``###``
+    heading with ``- key: value`` bullets underneath. Two deliberate differences:
+
+    1. A bare date heading with NO bullets still yields a row. For a habit the
+       question is "did you?"; for an exercise the heading itself IS the answer —
+       you only write a date down because you did it that day.
+    2. Repeated dates are KEPT, each with its own ``seq``, instead of the last
+       one overwriting the earlier. Two sessions in a day are two results.
+
+    HTML comments are stripped first: every exercise note ships a commented-out
+    worked example of the log shape, and that example must never be mistaken for
+    a real session (it carries a real-looking date).
+    """
+    heading = re.search(r"^##\s+Logboek\s*$", body, re.MULTILINE)
+    if not heading:
+        return []
+    section = body[heading.end():]
+    next_h2 = re.search(r"^##\s+", section, re.MULTILINE)
+    if next_h2:
+        section = section[:next_h2.start()]
+    section = HTML_COMMENT_RE.sub("", section)
+
+    headings = list(HABIT_DATE_HEADING_RE.finditer(section))
+    out, seen_per_date = [], {}
+    for index, h in enumerate(headings):
+        log_date = h.group(1)
+        end = headings[index + 1].start() if index + 1 < len(headings) else len(section)
+        block = section[h.end():end].strip()
+        fields = {m.group(1).lower(): m.group(2).strip()
+                  for m in DARTS_LOG_FIELD_RE.finditer(block)}
+
+        score = None
+        if fields.get("score"):
+            try:
+                score = float(fields["score"].replace(",", "."))
+            except ValueError:
+                # A non-numeric "score:" is not dropped — it survives as `result`
+                # so nothing the user typed disappears from the mirror.
+                fields.setdefault("result", fields["score"])
+        seq = seen_per_date.get(log_date, 0)
+        seen_per_date[log_date] = seq + 1
+        out.append({
+            "log_date": log_date,
+            "seq": seq,
+            "score": score,
+            "unit": fields.get("unit") or None,
+            "result": fields.get("result") or None,
+            "trigger": fields.get("trigger") or None,
+            "note": fields.get("note") or None,
+        })
+    return out
 
 
 # Governance docs carry their metadata as a `- **Label:** value` bullet block right
@@ -1524,6 +1701,31 @@ def main():
             (table, lib["nav_label"], lib["nav_icon"], str(lib["folder"]),
              lib["doc_type"], "title", lib.get("sort_order", 0)))
 
+    # ---- darts-exercise logs (dated sessions in a note's ## Logboek) -----------
+    # The FACT half of the darts_exercises library, exactly as habit_logs is the
+    # fact half of habits. The DEFINITION rows were just written by the generic
+    # LIBRARIES pass above; this pass walks the same folder a second time and
+    # pulls each note's `## Logboek` section. Regen-owned, so re-running is
+    # idempotent and the markdown stays canonical: adding a session means adding
+    # a dated heading to the note, never an INSERT here.
+    darts_log_rows = 0
+    for path in md_files(ROOT / "PKM/My Life/Darts Exercises"):
+        fm, body = read_note(path)
+        if (fm_str(fm, "doc_type") or "").lower() != "darts-exercise":
+            continue  # already warned about by the LIBRARIES pass
+        slug = path.stem
+        rel = str(path.relative_to(ROOT))
+        for entry in parse_exercise_logs(body):
+            cur.execute(
+                "INSERT INTO darts_exercise_logs (exercise_slug, log_date, seq,"
+                " score, unit, result, trigger, note, source_path)"
+                " VALUES (?,?,?,?,?,?,?,?,?)",
+                (slug, entry["log_date"], entry["seq"], entry["score"],
+                 entry["unit"], entry["result"], entry["trigger"],
+                 entry["note"], rel))
+            darts_log_rows += 1
+    stats["darts_exercise_logs"] = darts_log_rows
+
     # ---- external (source-derived) libraries: re-seed their registry rows -------
     # Their TABLES are not owned by this regen (never dropped, never filled here);
     # only the regen-owned `library_registry` row is re-created, so the library
@@ -1791,6 +1993,8 @@ def main():
     for lib in LIBRARIES:
         t = lib["table"]
         print(f"    {t:<14} {stats.get(t, 0):>6} rows  (library)")
+    print(f"    {'habit_logs':<14} {stats.get('habit_logs', 0):>6} rows")
+    print(f"    {'darts_ex_logs':<14} {stats.get('darts_exercise_logs', 0):>6} rows")
     print(f"    {'notes_fts':<14} {stats.get('notes_fts', 0):>6} rows  (full-text search)")
     if foreign:
         print(f"    preserved (not owned by this script): {', '.join(foreign)}")

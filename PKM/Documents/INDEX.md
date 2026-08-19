@@ -23,6 +23,7 @@ Markdown stubs that describe and point at the user's real documents (passports, 
 - [[2026-07-21-rijnstate-oogheelkunde-brief-sander]] — Poliklinische update-brief oogheelkunde, corpus alienum cornea (staalsplinter bij klussen).
 - [[2026-07-31-dartbonden-nederland]] — Overzicht Nederlandse dartbonden (CSV-referentiedata).
 - [[2026-07-31-hotels-portsmouth-modus]] — Hotelopties Portsmouth voor de MODUS Super Series.
+- [[jouw-dartstraining]] — cursusinhoud van de door Sander beheerde Huddle-cursus "Jouw Dartstraining": modulestructuur en alle niet-oefening-lessen. De 22 trainbare oefeningen staan apart in [[PKM/My Life/Darts Exercises/INDEX|Darts Exercises]].
 
 ### Geïmporteerd uit Apple Notities (6 juli 2026)
 

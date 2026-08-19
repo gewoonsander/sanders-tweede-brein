@@ -14,6 +14,12 @@ There are four buckets — Topics, Habits, Projects, Key Elements — and Goals 
 - **Habits/** - recurring rhythms. The other carrier shape for a Goal.
 - **Goals/** - the operating layer: what you are actively driving toward. Anchors to one Key Element; carried by one Project or one Habit.
 
+## Bibliotheken
+
+Naast de buckets staan hier **bibliotheken**: verzamelingen herhaalbare items met een eigen logboek. Geen vijfde bucket — een bibliotheek beantwoordt "wat heb ik gedaan en met welk resultaat", niet "welk deel van mijn leven is dit".
+
+- **[[PKM/My Life/Darts Exercises/INDEX|Darts Exercises/]]** - trainbare dart-oefeningen met een `## Logboek` per oefening. Bron: de cursus [[jouw-dartstraining]]. Schema in [[GL-002-frontmatter-conventions]].
+
 ## Active files
 
 Each subsection ships one seeded course sample, plus its own `INDEX.md`:

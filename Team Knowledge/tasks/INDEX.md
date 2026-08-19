@@ -1,9 +1,9 @@
 # Team Knowledge/tasks/ — INDEX
 
-Taakstaat per 2026-08-19 16:16.
-Last rebuilt: 2026-08-19 16:16:14Z
+Taakstaat per 2026-08-19 14:26.
+Last rebuilt: 2026-08-19 14:26:21Z
 
-## Open (11)
+## Open (12)
 
 - [tsk-2026-08-12-001-build-portable-dropbox-mcp](open/tsk-2026-08-12-001-build-portable-dropbox-mcp.md) — Build portable Dropbox MCP with approved mutation batches | daedalus | P2 | 🔴 BLOCKED
 - [tsk-2026-08-13-001-workstream-guardian-en-sessie-orkestratie-onderzoeken](open/tsk-2026-08-13-001-workstream-guardian-en-sessie-orkestratie-onderzoeken.md) — Onderzoek Workstream Guardian-achtige check en Tom's sessie- | unassigned | P4 | ✓
@@ -16,6 +16,7 @@ Last rebuilt: 2026-08-19 16:16:14Z
 - [tsk-2026-08-18-002-sop-013-inboxronde-downloads-werkarchief-vault-root](open/tsk-2026-08-18-002-sop-013-inboxronde-downloads-werkarchief-vault-root.md) — SOP-013 volledige inboxronde: Downloads, Werkarchief en loss | unassigned | P3 | ✓
 - [tsk-2026-08-19-002-youtube-als-library-in-dashboard](open/tsk-2026-08-19-002-youtube-als-library-in-dashboard.md) — YouTube als eigen library-categorie toevoegen aan mypka-cock | unassigned | P4 | ✓
 - [tsk-2026-08-19-003-sop-diagrammen-visualisatie-mypka-cockpit](open/tsk-2026-08-19-003-sop-diagrammen-visualisatie-mypka-cockpit.md) — Diagram-weergave toevoegen voor SOP's, Workstreams en Guidel | bezalel | P3 | ✓
+- [tsk-2026-08-19-004-modus-super-series-averages-scraper](open/tsk-2026-08-19-004-modus-super-series-averages-scraper.md) — Scraper + spreadsheet bouwen: alle speler-gemiddelden per Ser | daedalus | P3 | ✓
 
 ## In progress (2)
 

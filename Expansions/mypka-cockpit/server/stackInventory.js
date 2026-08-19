@@ -34,6 +34,7 @@
 // claude_desktop_config.json), which lives outside the jail and may hold
 // literal secrets.
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { REPO_ROOT } from './repoRoot.js';
 import { ENV_PATH, hasEnv } from './connectors/env.js';
@@ -151,6 +152,18 @@ function maskArg(arg) {
 }
 
 /**
+ * Replace the home directory with `~`. A stdio server's command is an absolute
+ * path, which carries the account name — not a secret, but this module's stated
+ * posture is that no display string exposes a home dir, and a screen-shared or
+ * screenshotted dashboard shouldn't hand it out either. `~/Tools/...` reads the
+ * same to the user who has to recognise the tool.
+ */
+function tildeHome(value) {
+  const home = os.homedir();
+  return home ? String(value).split(home).join('~') : String(value);
+}
+
+/**
  * Strip everything a URL can hide a credential in (userinfo, query, fragment),
  * keeping the part a human recognises. Returns null for a non-http(s) or
  * unparseable URL rather than echoing an unknown string.
@@ -228,7 +241,7 @@ export function describeMcpServers() {
     servers.push({
       id: String(id).slice(0, 64),
       transport: 'stdio',
-      target: [command, ...args].filter(Boolean).join(' ').slice(0, 200),
+      target: tildeHome([command, ...args].filter(Boolean).join(' ')).slice(0, 200),
       link: null,
       envRefs,
     });

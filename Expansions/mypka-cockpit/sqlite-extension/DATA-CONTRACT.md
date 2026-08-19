@@ -1764,3 +1764,39 @@ Machineleesbare `FOOD_ENTRY`- en `FOOD_AUDIT`-JSON-comments worden door
 min/max-ranges; `kcal_mid` is uitsluitend een afgeleide presentatiewaarde.
 Correcties gebruiken `supersedes_entry_id`; de vervangen rij blijft behouden
 met `is_active = 0`. De browser-API is read-only.
+
+---
+
+# Dartsoefeningen (lokale uitbreiding 2026-08-19)
+
+Markdown is canoniek in `PKM/My Life/Darts Exercises/<slug>.md` (`doc_type:
+darts-exercise`; schema in [[GL-002-frontmatter-conventions]]). Twee tabellen,
+beide regen-owned en gedefinieerd in `schema/10-module-darts-exercises.sql`:
+
+- **`darts_exercises`** — de definitie, één rij per oefeningnotitie. Tevens een
+  library-mirror: `regen-mypka-db.py` schrijft een `library_registry`-rij
+  (`nav_label: Dartsoefeningen`, `sort_order: 30`), dus de Cockpit-nav pikt hem
+  data-driven op zonder UI-code.
+- **`darts_exercise_logs`** — één rij per uitgevoerde sessie, geparsed uit de
+  `## Logboek`-sectie van diezelfde notitie (gedateerde `###`-kop + optionele
+  `- score/unit/result/trigger/note`-regels).
+
+Twee bewuste afwijkingen van `habits` / `habit_logs`, de tabellen waar dit paar
+verder exact op lijkt:
+
+1. **Geen `UNIQUE(exercise_slug, log_date)`.** Een oefening kan twee keer op één
+   dag gedaan worden; dat zijn twee resultaten, geen correctie op elkaar. De
+   kolom `seq` legt de volgorde binnen de dag vast. Bij een habit wint juist de
+   laatste check-in van de dag.
+2. **Geen `done`-kolom.** Bij een habit is de vraag "heb ik het vandaag gedaan?";
+   bij een oefening is het bestaan van de datumkop het antwoord en is de vraag
+   "wat scoorde ik?". `score` mag NULL zijn — een kale datumkop is een geldige
+   log.
+
+Views: `v_darts_exercise_log` (platte leesweergave, analoog aan
+`v_habit_heatmap`) en `v_darts_exercise_progress` (één rij per oefening met
+sessies/eerste/laatste/beste/laatste score; oefeningen zonder log komen er
+met `sessions = 0` in — "nog nooit gedaan" is de nuttigste rij van allemaal).
+
+Elke oefeningnotitie draagt een `course`-slug; een tweede geïmporteerde cursus is
+daarmee een nieuwe waarde in plaats van een schemawijziging.

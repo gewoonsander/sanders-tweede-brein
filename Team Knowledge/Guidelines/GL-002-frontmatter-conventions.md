@@ -88,6 +88,7 @@ Per entity, the required field is the one that names the thing:
 | Habit | `name` |
 | Topic | `name` |
 | Key Element | `name` |
+| Darts exercise | `doc_type`, `title` |
 | Document | `title` |
 | Personal task | `type`, `task_id`, `title`, `status`, `created`, `updated`, `key_element`, `owner`, `gtd_context`, `eisenhower`, `estimated_minutes` |
 
@@ -309,6 +310,52 @@ Notes:
 - **`promoted_from`** is the reverse pointer of a Topic's `promoted_to`. When a Topic graduates into this Key Element (see the Topics schema - the "French" example), set `promoted_from: <topic-slug>` so the lineage is queryable from both ends. Left blank for Key Elements that were domains from day one.
 - Body section conventions: `## What this covers`, `## What good looks like`, `## What I am ignoring`.
 
+### Darts exercises - `PKM/My Life/Darts Exercises/<slug>.md`
+
+Een **trainbare oefening**: een herhaalbaar item met een meetbaar resultaat per uitvoering. Geen vijfde My Life-bucket, maar een **bibliotheek** — dezelfde vorm als de Recipes/Movies-collecties die de Cockpit spiegelt. Het discriminatorveld is `doc_type: darts-exercise`; een notitie in deze map zonder dat veld wordt niet gespiegeld.
+
+```yaml
+---
+doc_type: darts-exercise                   # required, letterlijk 'darts-exercise'
+title: Dag 1 - Oefening 1 - Bulls Basic    # required
+exercise_name: Bulls Basic                 # alleen de oefeningnaam, zonder dagprefix
+status: active                             # active | paused | archived
+course: jouw-dartstraining                 # slug van de broncursus-notitie
+course_module: "Dag 1 : Rust, Ritme & Richting"   # modulenaam als LABEL, geen FK
+training_day: 1                            # integer, dagnummer binnen de cursus
+exercise_number: 1                         # integer, volgnummer binnen die dag
+key_element: passie                        # slug van een Key Element
+source_platform: huddle                    # bronplatform
+source_course_id: 142760                   # bron-id van de cursus
+source_lesson_id: 2502702                  # bron-id van de les
+imported_on: 2026-08-19                    # ISO-datum van de import
+tags:
+  - darts
+---
+```
+
+Notes:
+
+- **Waarom dit geen Habit is.** Een Habit beantwoordt "heb ik het vandaag gedaan?" (ja/nee, op een cadans). Een oefening beantwoordt "wat scoorde ik toen ik hem deed?" — geen cadans, geen dagelijkse verwachting, wél een meetbaar resultaat per uitvoering. Daarom `score` in plaats van `done`, en geen `cadence`.
+- `title` draagt de volledige weergavenaam inclusief dagprefix; `exercise_name` alleen de oefening zelf. Meerdere dagen herhalen dezelfde oefening, dus `exercise_name` is het veld waarop je groepeert als je progressie over de hele cursus wilt zien.
+- `course` slaat de **slug** van de broncursus-notitie op per rule 4. Het veld bestaat vanaf dag één zodat een tweede geïmporteerde cursus later een nieuwe *waarde* is en geen schemawijziging.
+- `course_module` is een label, geen foreign key: er bestaat geen modulenotitie. Bevat vaak een dubbele punt en moet dan gequote worden (rule 3).
+- `exercise_number` mag ontbreken — niet elk item in een cursus is genummerd (bijvoorbeeld "Dag 4 - Wedstrijd").
+- `source_course_id` / `source_lesson_id` bewaren de herkomst zodat een herimport dezelfde les terugvindt, ook als de lesnaam op het bronplatform verandert.
+- Body-conventies: de volledige oefeninstructie met de eigen kopjes van de bron, gevolgd door een afsluitende `## Logboek`.
+- **Sessies loggen onder `## Logboek`** gebruikt een gedateerde H3 met leesbare veldregels — bewust dezelfde vorm als de dagelijkse check-in van een Habit. Dit is de canonieke bron voor de afgeleide `darts_exercise_logs`-spiegel:
+  ```markdown
+  ### 2026-08-19
+
+  - score: 22
+  - unit: punten
+  - result: 22 punten over 10 beurten
+  - trigger: chat
+  - note: ritme voelde beter na beurt 5
+  ```
+  Alleen de datumkop is verplicht; alle vijf de veldregels zijn optioneel. Een kale datumkop is een geldige log — je schrijft een datum alleen op omdat je de oefening die dag gedaan hebt.
+- **Twee blokken met dezelfde datum blijven allebei staan.** Anders dan bij een Habit, waar de laatste check-in van de dag de vorige overschrijft, zijn twee sessies op één dag twee resultaten en geen correctie op elkaar.
+
 ### Documents - `PKM/Documents/<slug>.md`
 
 ```yaml
@@ -507,6 +554,7 @@ If the rules change, update this file. Do not duplicate the change into SOPs, Wo
 
 ### Version history
 
+- **v2.8** - Toegevoegd: entity schema **Darts exercises** (`doc_type: darts-exercise`, `PKM/My Life/Darts Exercises/<slug>.md`) plus de `## Logboek`-body-conventie voor sessieregistratie. Aanleiding: de import van de Huddle-cursus "Jouw Dartstraining" (22 oefeningen) op 2026-08-19, waar Sander niet alleen de inhoud wilde lezen maar ook per uitvoering een resultaat wilde vastleggen. De vorm volgt bewust `habits` + `habit_logs`: één definitie-notitie met een gedateerd logblok eronder, gespiegeld naar `darts_exercises` + `darts_exercise_logs` in `mypka.db` (zie `Expansions/mypka-cockpit/sqlite-extension/schema/10-module-darts-exercises.sql`). Het is geen vijfde My Life-bucket maar een bibliotheek naast Recipes/Movies — het onderscheid met een Habit staat in de notes van het schema. Additief en backward-compatible.
 - **v2.7** - Specialist-contract frontmatter standardized. Documented the four required fields that now appear on all 17 active specialist contracts: `agent_status`, `agent_type`, `title`, and `folder`. These bind each specialist contract to the Claude Code shim registry and ensure every specialist's identity, location, and status are explicit and uniform in frontmatter. Also documented three optional fields (`agent_version`, `owner`, `model`) that specialists may add for explicit versioning, ownership tracking, or model-tier pinning. Authored 2026-08-17 following the frontmatter-standardization pass across all 17 active specialist contracts (see [[SOP-001-how-to-add-a-new-specialist]] Step 3 for contract-creation requirements). The four required fields are now present on all active contracts; the three optional fields remain additive and task-specific. Additive and backward-compatible - existing contracts are uniform on the four required fields.
 - **v2.6** - Added the **Deliverable** entity schema (`key_element` required, `project` optional). Closes the gap flagged in [[GL-004-task-resource-linking]]'s "orphan deliverables" section - Deliverables were the only resource type in the vault not anchored to the Key Element / Project graph that Goals, Habits, and Topics already use. Authored 2026-08-13 after a brainstorm with Sander about why `Deliverables/` felt like an unorganized warehouse; the answer was a missing link, not a missing folder structure. See [[SOP-020-losstaand-deliverable-archiveren]] (archiving criteria for orphan Deliverables) and [[WS-008-deliverables-en-projecten-audit]] (the periodic audit that mines the new fields for insights). Additive and backward-compatible - existing Deliverables without the field stay valid until next touched.
 - **v2.5** - Toegevoegd: entity schema **Weekly reports** (`type: weekly-report`, `PKM/Weekly Reports/YYYY/MM/<slug>/metadata.md`) voor The Week in Ink — de vrijdag-recap die de Cockpit samenstelt uit Journal/Images/Deliverables/session-logs. Overgenomen uit myPKA-scaffold v5.2.0 bij de selectieve Cockpit-integratie (04-08-2026, zie [[project_mypka_cockpit]]). Additief en backward-compatible.
