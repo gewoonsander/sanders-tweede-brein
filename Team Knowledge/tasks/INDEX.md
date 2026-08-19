@@ -1,9 +1,9 @@
 # Team Knowledge/tasks/ — INDEX
 
-Taakstaat per 2026-08-19 14:26.
-Last rebuilt: 2026-08-19 14:26:21Z
+Taakstaat per 2026-08-19 21:52.
+Last rebuilt: 2026-08-19 19:52:00Z
 
-## Open (12)
+## Open (11)
 
 - [tsk-2026-08-12-001-build-portable-dropbox-mcp](open/tsk-2026-08-12-001-build-portable-dropbox-mcp.md) — Build portable Dropbox MCP with approved mutation batches | daedalus | P2 | 🔴 BLOCKED
 - [tsk-2026-08-13-001-workstream-guardian-en-sessie-orkestratie-onderzoeken](open/tsk-2026-08-13-001-workstream-guardian-en-sessie-orkestratie-onderzoeken.md) — Onderzoek Workstream Guardian-achtige check en Tom's sessie- | unassigned | P4 | ✓
@@ -16,12 +16,12 @@ Last rebuilt: 2026-08-19 14:26:21Z
 - [tsk-2026-08-18-002-sop-013-inboxronde-downloads-werkarchief-vault-root](open/tsk-2026-08-18-002-sop-013-inboxronde-downloads-werkarchief-vault-root.md) — SOP-013 volledige inboxronde: Downloads, Werkarchief en loss | unassigned | P3 | ✓
 - [tsk-2026-08-19-002-youtube-als-library-in-dashboard](open/tsk-2026-08-19-002-youtube-als-library-in-dashboard.md) — YouTube als eigen library-categorie toevoegen aan mypka-cock | unassigned | P4 | ✓
 - [tsk-2026-08-19-003-sop-diagrammen-visualisatie-mypka-cockpit](open/tsk-2026-08-19-003-sop-diagrammen-visualisatie-mypka-cockpit.md) — Diagram-weergave toevoegen voor SOP's, Workstreams en Guidel | bezalel | P3 | ✓
-- [tsk-2026-08-19-004-modus-super-series-averages-scraper](open/tsk-2026-08-19-004-modus-super-series-averages-scraper.md) — Scraper + spreadsheet bouwen: alle speler-gemiddelden per Ser | daedalus | P3 | ✓
 
-## In progress (2)
+## In progress (3)
 
 - [tsk-2026-08-11-001-mypka-cockpit-software-stack-tabblad](in-progress/tsk-2026-08-11-001-mypka-cockpit-software-stack-tabblad.md) — myPKA Cockpit: nieuw tabblad 'Software-stack' voor overzicht | bezalel | ▶️
 - [tsk-2026-08-12-001-teambeheer-scraper-database-onderzoek](in-progress/tsk-2026-08-12-001-teambeheer-scraper-database-onderzoek.md) — Onderzoek Teambeheer-scraper en continu bijgewerkte dartdata | athena | ▶️
+- [tsk-2026-08-19-004-modus-super-series-averages-scraper](in-progress/tsk-2026-08-19-004-modus-super-series-averages-scraper.md) — Scraper + spreadsheet bouwen: alle speler-gemiddelden per Ser | daedalus | ▶️
 
 ## Done (4)
 
