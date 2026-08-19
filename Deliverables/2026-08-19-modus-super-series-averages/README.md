@@ -70,6 +70,10 @@ het klopt zodra Series 15 afloopt.
   spaties. De onbewerkte brontekst staat in de kolom `speler_bron` van
   `per-week.csv`. De bron doet dit consistent: vóór en ná normalisatie zijn het
   593 unieke spelers, er zijn dus geen dubbele varianten samengevoegd.
+- **HTML-entiteiten in namen.** De bron levert apostrofs als `&#039;`
+  (`Tony O&#039;Shea`) — 5 spelers. Die worden nu gedecodeerd naar een echte
+  apostrof. Dit is op 2026-08-19 hersteld nadat het in de eerste versie van de
+  dataset nog onvertaald in de CSV's stond.
 - **Spelers worden op naam samengevoegd**, niet op een spelers-ID (de site biedt er
   geen). Twee verschillende spelers met exact dezelfde naam zouden samenvallen; dat
   is niet gecontroleerd.

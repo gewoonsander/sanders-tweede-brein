@@ -40,6 +40,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from html import unescape  # als functie geimporteerd: 'html' is hier een parameternaam
 from pathlib import Path
 
 BASIS_URL = "https://modussuperseries.com"
@@ -108,7 +109,7 @@ def lees_dropdown(html: str, select_id: str) -> list[tuple[int, str]]:
     if not treffer:
         return []
     return [
-        (int(waarde), re.sub(r"\s+", " ", label).strip())
+        (int(waarde), re.sub(r"\s+", " ", unescape(label)).strip())
         for waarde, _sel, label in OPTIE_RE.findall(treffer.group(0))
     ]
 
@@ -126,7 +127,8 @@ def normaliseer_naam(naam: str) -> str:
 def lees_rijen(html: str) -> list[dict]:
     rijen = []
     for positie, naam, gespeeld, punten, darts, gemiddelde in RIJ_RE.findall(html):
-        bron_naam = re.sub(r"\s+", " ", naam).strip()
+        # unescape is nodig: de site levert apostrofs als &#039; (Tony O&#039;Shea).
+        bron_naam = re.sub(r"\s+", " ", unescape(naam)).strip()
         rijen.append(
             {
                 "positie": int(positie.strip()),
