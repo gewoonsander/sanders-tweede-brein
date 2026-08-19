@@ -35,3 +35,4 @@
 - [Drankjes loggen via chat](feedback_drankjes_loggen_via_chat.md) — meldt hij een drankje, log direct een `- drink:`-regel en regenereer de spiegel
 - [Claude-abonnement tijdelijk op Max](project_claude_abonnement_tijdelijk_max.md) — bewust tijdelijk (camping), rond 2026-09-18 terug naar goedkoper plan
 - [Dartsnaam Sander Vos](user_dartsnaam_sander_vos.md) — in dartscontext heet hij "Sander Vos" (met z), niet Van Ockenburg-Zwaan
+- [Huddle/Dartbuddies automatisering](project_huddle_dartbuddies_automatisering.md) — Huddle heeft geen API/MCP/webhook-events voor content of auto-reply, alleen gebruikersbeheer

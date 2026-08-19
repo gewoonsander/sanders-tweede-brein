@@ -67,6 +67,12 @@ Maak betalen en aanleveren aan Jortt afzonderlijk zichtbaar. Pieter betaalt nooi
 - Behandel **Looktech AI Glasses: The Smart Glasses That Truly Know You** als actief gevolgd Kickstarter-project totdat levering is bevestigd. Bewaar alle berichten over dit project en meld ieder nieuw bericht en de betekenisvolle voortgang via Hermes.
 - Gebruik bij crowdfunding nooit alleen de afzender als filter: onderwerp en projectnaam bepalen of een bericht bewaard of verwijderd wordt.
 
+## WordPress-reactiemoderatie (spam)
+
+- Vastgelegd 2026-08-18 na bevestiging van Sander: reactienotificaties van zijn eigen WordPress-sites (Praktijk Voluit Leven, praktijkgewoonzijn.nl, De Rots Putten, Gewoon Sander en vergelijkbare sites) die zelf-verzonden zijn vanaf `sander@gewoonsander.nl` en een herkenbaar spamprofiel als auteur tonen (bijvoorbeeld een naam als `anti-violence-XXXXXX`, willekeurige gegenereerde namen, of duidelijk irrelevante/expliciete content) mag Pieter direct naar de Gmail-prullenbak verplaatsen zonder per bericht opnieuw toestemming te vragen.
+- Controleer altijd de volledige melding, niet alleen het onderwerp: het gaat om het auteursprofiel en de reactietekst van de gemodereerde reactie zelf.
+- Een reactie van een herkenbare, legitieme afzender (bijvoorbeeld iemand die Sander kent, of een inhoudelijk relevante reactie op zijn werk) valt niet onder deze regel; leg die als gewone moderatiebeslissing voor.
+
 ## Website-uptimemeldingen
 
 - Archiveer nieuwe berichten van `uptime-monitor@wpmudev.com` met een onderwerp dat begint met `UP alert:` of `DOWN alert:` automatisch; Sander heeft hiervoor doorlopende toestemming gegeven.
