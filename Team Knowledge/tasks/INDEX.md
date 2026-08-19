@@ -2,15 +2,15 @@
 
 _Auto-generated. Do not edit by hand. Run `SOP-rebuild-task-index` to regenerate._
 
-_Last rebuilt: 2026-08-19T11:11:45Z_
+_Last rebuilt: 2026-08-19T11:31:00Z_
 
 ## Summary
-- Open: 10 (1 blocked)
+- Open: 11 (1 blocked)
 - In progress: 2 (0 blocked)
 - Done (this month): 3
 - Cancelled (this month): 0
 
-## Open (10)
+## Open (11)
 
 ### Priority 2 — high
 - [[tsk-2026-08-12-001-build-portable-dropbox-mcp]] — Build portable Dropbox MCP with approved mutation batches — assignee: daedalus — created 2026-08-12 — BLOCKED: Gepauzeerd op verzoek van Sander nadat Dropbox App Console herhaaldelijk geen app liet aanmaken; hervatten alleen wanneer Sander het Dropbox-traject opnieuw wil proberen
@@ -23,6 +23,7 @@ _Last rebuilt: 2026-08-19T11:11:45Z_
 - [[tsk-2026-08-17-001-bouw-bunq-saldo-cockpit-connector]] — Bouw bunq-saldo Cockpit-connector (read-only) volgens goedgekeurd ontwerp + Argus-eisen — assignee: daedalus — created 2026-08-17
 - [[tsk-2026-08-18-001-google-drive-root-opruimen-naar-documenten-structuur]] — 945 losse root-bestanden en 27 mappen in Google Drive routeren naar de bestaande documenten/-structuur — assignee: unassigned — created 2026-08-18
 - [[tsk-2026-08-18-002-sop-013-inboxronde-downloads-werkarchief-vault-root]] — SOP-013 volledige inboxronde: Downloads, Werkarchief en losse video in vault-root — assignee: unassigned — created 2026-08-18
+- [[tsk-2026-08-19-003-sop-diagrammen-visualisatie-mypka-cockpit]] — Diagram-weergave toevoegen voor SOP's, Workstreams en Guidelines in mypka-cockpit — assignee: bezalel — created 2026-08-19
 
 ### Priority 4 — low
 - [[tsk-2026-08-13-001-workstream-guardian-en-sessie-orkestratie-onderzoeken]] — Onderzoek Workstream Guardian-achtige check en Tom's sessie-orkestratie ("Orchestration 2.0") toepassen op eigen structuur — assignee: unassigned — created 2026-08-13
@@ -36,8 +37,8 @@ _Last rebuilt: 2026-08-19T11:11:45Z_
 - daedalus: 4 open, 0 in-progress (1 blocked)
 - hermes: 1 open, 0 in-progress
 - unassigned: 5 open, 0 in-progress
+- bezalel: 1 open, 1 in-progress
 - athena: 0 open, 1 in-progress
-- bezalel: 0 open, 1 in-progress
 
 ## Recently closed (last 7 days)
 - 2026-08-19 [[tsk-2026-08-19-001-skills-overzicht-mypka-cockpit]] — done — Bezalel
