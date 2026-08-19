@@ -11,6 +11,17 @@ van [modussuperseries.com](https://modussuperseries.com/). Hoort bij taak
 | `modus-super-series-per-series.csv` | **Hoofdresultaat.** Eén rij per speler per Series, met het Series-eindgemiddelde. | 1937 |
 | `modus-super-series-per-week.csv` | Ruwe brondata: één rij per speler per week, precies zoals de site die toont. | 2182 |
 | `modus-super-series-alltime.csv` | Eén rij per speler over alle Series samen. | 593 |
+| `modus-super-series-averages.xlsx` | Alle drie bovenstaande bestanden als één werkmap met drie tabbladen. | — |
+
+## Google Sheet
+
+Dezelfde werkmap staat als Google Sheet in Drive, op verzoek van Sander (2026-08-19):
+
+[MODUS Super Series — speler-gemiddelden](https://docs.google.com/spreadsheets/d/1O2TrBcqUXj5YvmZ_I92rpBDY8pC240E6VQOzDrbordQ/edit)
+— `documenten/03-passie/modus-super-series/`
+
+Die Sheet is een momentopname van 2026-08-19. Bij een herdraai van het script worden
+alleen de lokale bestanden ververst; de Sheet moet dan handmatig opnieuw geüpload worden.
 
 Kolommen in het hoofdbestand: `series`, `series_id`, `series_status`, `positie`,
 `speler`, `weken_gespeeld`, `gespeeld`, `punten`, `darts`, `gemiddelde`.
