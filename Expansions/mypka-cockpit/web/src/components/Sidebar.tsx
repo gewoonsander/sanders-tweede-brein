@@ -10,7 +10,8 @@ import {
   NotebookPen, Users, Hash, FolderKanban,
   KeyRound, Repeat2, Target, Building2, FileText, Package, PanelLeftClose,
   UsersRound, LayoutDashboard, StickyNote, SlidersHorizontal, Search,
-  ScrollText, ListChecks, BookText, ChevronRight, BarChart3, Activity, Brain
+  ScrollText, ListChecks, BookText, ChevronRight, BarChart3, Activity, Brain,
+  ClipboardList, Sparkles
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { NavType, EntityType } from '../lib/cockpitTypes';
@@ -45,9 +46,13 @@ interface SidebarProps {
 // still the most reliable client-side OS hint for this cosmetic shortcut badge.
 const IS_MAC = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform);
 
-// The five routes the "My AI Team" fly-out leads to. The trigger row stays lit
-// while any of them is the active route.
-const TEAM_ROUTES = ['roster', 'session-log', 'team-analytics', 'workstreams', 'sops', 'guidelines'] as const;
+// The routes the "My AI Team" fly-out leads to. The trigger row stays lit while
+// any of them is the active route. Keep this in step with TEAM_FLYOUT_ITEMS
+// below — a route missing here leaves the trigger unlit on its own page.
+const TEAM_ROUTES = [
+  'roster', 'session-log', 'team-analytics', 'workstreams', 'sops', 'guidelines',
+  'team-tasks', 'skills',
+] as const;
 function isTeamRoute(route: Route): boolean {
   return (TEAM_ROUTES as readonly string[]).includes(route.name);
 }
@@ -56,6 +61,14 @@ function isActive(route: Route, target: Route): boolean {
   // The "Fleeting Notes" nav (target #/notes) stays lit inside an open doc
   // and on a whiteboard too.
   if (target.name === 'notes' && (route.name === 'notes-doc' || route.name === 'board')) return true;
+  // Some registry modules exist ONLY to get a nav row: their rendering is a
+  // PARAMETERIZED core route of the same name (library, outer-world, podcasts).
+  // Their nav row targets #/<slug>, which parseHash resolves to that core route,
+  // so a plain name comparison never lights them up — the row stayed dead on
+  // every one of those surfaces. Matching the module slug against the core route
+  // name fixes all three at once and cannot affect a module that really does
+  // render through { name: 'module' } (there route.name IS 'module').
+  if (target.name === 'module' && route.name === target.slug) return true;
   if (route.name !== target.name) return false;
   if (target.name === 'type' && route.name === 'type') return route.type === target.type;
   // Drop-in modules disambiguate by slug (one nav row per module).
@@ -106,11 +119,17 @@ function ModuleRows({
   );
 }
 
-// The five fly-out destinations under "My AI Team", in display order. Each is a
-// core Route the App's ContentRouter renders as its own full page.
+// The fly-out destinations under "My AI Team", in display order. Each is a core
+// Route the App's ContentRouter renders as its own full page.
 // The label is a TRANSLATION KEY, not a string: this list is module-level (built
 // once at import time) while the locale can change at runtime, so the key is
 // resolved with `t()` inside the render instead of baked in here.
+//
+// Order note: the six governance destinations come first, then the two live-from-
+// disk pages (Tasks, Skills). Those two are last because they are the newest and
+// because everything above them is mirror-backed — the split is meaningful, not
+// cosmetic. Every icon must be unique within this list; the fly-out is scanned by
+// icon as much as by label.
 const TEAM_FLYOUT_ITEMS: ReadonlyArray<{ route: Route; labelKey: TranslationKey; icon: LucideIcon }> = [
   { route: { name: 'roster' }, labelKey: 'team.flyoutRoster', icon: UsersRound },
   { route: { name: 'session-log' }, labelKey: 'team.flyoutSessionLog', icon: ScrollText },
@@ -118,10 +137,12 @@ const TEAM_FLYOUT_ITEMS: ReadonlyArray<{ route: Route; labelKey: TranslationKey;
   { route: { name: 'workstreams' }, labelKey: 'team.flyoutWorkstreams', icon: Repeat2 },
   { route: { name: 'sops' }, labelKey: 'team.flyoutSops', icon: ListChecks },
   { route: { name: 'guidelines' }, labelKey: 'team.flyoutGuidelines', icon: BookText },
+  { route: { name: 'team-tasks' }, labelKey: 'team.flyoutTasks', icon: ClipboardList },
+  { route: { name: 'skills' }, labelKey: 'team.flyoutSkills', icon: Sparkles },
 ];
 
 // "My AI Team" — a fly-out trigger. Clicking the row opens a submenu (a fly-out
-// panel) anchored to the row, offering the five team destinations. Accessibility
+// panel) anchored to the row, offering the team destinations. Accessibility
 // mirrors the cockpit's existing menu popovers (BoardView): aria-haspopup +
 // aria-expanded on the trigger, a role="menu" panel of role="menuitem" links,
 // Escape closes + returns focus, outside-click + route-change close, Up/Down/
@@ -384,8 +405,9 @@ export function Sidebar({ navTypes, route, open, onToggle, onNavigate, onOpenSea
               active={isActive(route, { name: 'integrations' }) || route.name === 'connections' || route.name === 'stack'} onClick={onNavigate}
             />
             {/* "My AI Team" — a fly-out trigger (not a plain link). Opens a submenu
-                of the five team destinations (Roster / Session Log / Workstreams /
-                SOPs / Guidelines). */}
+                of the team destinations listed in TEAM_FLYOUT_ITEMS (Roster /
+                Session Log / Analytics / Workstreams / SOPs / Guidelines / Tasks /
+                Skills). That array is the single source of truth for the list. */}
             <TeamFlyout route={route} onNavigate={onNavigate} />
             <NavRow
               icon={SlidersHorizontal} label={t('nav.settings')} href={hrefFor({ name: 'settings' })}

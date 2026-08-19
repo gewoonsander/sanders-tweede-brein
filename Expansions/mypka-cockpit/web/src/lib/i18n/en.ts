@@ -133,6 +133,39 @@ export const en = {
   'team.guidelinesEmptySub': 'Your team’s reference guidelines appear here once they’re authored and the mirror is refreshed.',
   'team.guidelinesLoadError': 'Could not load the guidelines',
 
+  // ---- Tasks (live from disk — NOT the mirror) ------------------------------
+  // Deliberately no "once the mirror is refreshed" phrasing anywhere in this
+  // block: this page reads Team Knowledge/tasks/ on every request, so that
+  // sentence would be untrue. Same for the skills block below.
+  'team.flyoutTasks': 'Tasks',
+  'team.tasksTitle': 'Team Tasks',
+  'team.tasksSub': 'Open work from your AI team.',
+  'team.tasksEmpty': 'No tasks yet',
+  'team.tasksEmptySub': 'Tasks your team opens appear here the moment the file lands in Team Knowledge/tasks/.',
+  'team.tasksLoadError': 'Could not load the tasks',
+  'team.tasksGroupInProgress': 'In progress',
+  'team.tasksGroupOpen': 'Open',
+  'team.tasksGroupDone': 'Recently closed',
+  'team.tasksGroupCancelled': 'Cancelled',
+  'team.tasksBlocked': 'Blocked',
+  'team.tasksUnassigned': 'unassigned',
+  'team.tasksPriority': 'P{value}',
+  'team.tasksDue': 'due {value}',
+  'team.tasksClosedTruncated': 'Showing the most recent {count} only.',
+
+  // ---- Skills (live from disk — NOT the mirror) -----------------------------
+  'team.flyoutSkills': 'Skills',
+  'team.skillsTitle': 'Skills',
+  'team.skillsSub': 'What your team can actually invoke.',
+  'team.skillsEmpty': 'No skills found',
+  'team.skillsEmptySub': 'Domain skills, slash commands and installed plugin skills appear here as soon as they exist on this machine.',
+  'team.skillsLoadError': 'Could not load the skills',
+  'team.skillsGroupDomainSkill': 'Domain skills',
+  'team.skillsGroupSlashCommand': 'Slash commands',
+  'team.skillsGroupPluginSkill': 'Plugin skills',
+  'team.skillsDisabled': 'disabled',
+  'team.skillsSourceMissing': 'Not present on this machine.',
+
   'team.knowledgeSubCount': '{count} {noun} · {sub}',
   'team.feedOrigin': 'the beginning of your team’s log',
 
@@ -761,6 +794,113 @@ export const en = {
   'typeList.sort': 'Sort',
   'typeList.openRow': 'Open {title}',
   'typeList.newTab': '{label} — opens in a new tab',
+
+  // ---- Podcasts (DATA-CONTRACT §18) ---------------------------------------
+  // Note: "Apple Podcasts", "YouTube" and "Spotify" are proper nouns and are
+  // never translated; only the surrounding copy is.
+  'podcasts.title': 'Podcasts',
+  'podcasts.loadError': 'Could not load your podcasts: {error}',
+  'podcasts.notLoadedTitle': 'The podcast endpoints are not loaded yet',
+  'podcasts.notLoadedSub':
+    'The running cockpit server was started before this module existed. Restart it and the shows appear here.',
+  'podcasts.unavailableTitle': 'Podcasts are not in your mirror yet',
+  'podcasts.unavailableSub':
+    'This surface reads the podcasts tables in mypka.db. Once the Apple Podcasts sync has run, your shows show up here.',
+  'podcasts.emptyTitle': 'No shows yet',
+  'podcasts.emptySub': 'Shows appear here after the first sync.',
+  'podcasts.untitledShow': 'Untitled podcast',
+  'podcasts.showsCountOne': '{count} show',
+  'podcasts.showsCountOther': '{count} shows',
+  'podcasts.episodesCountOne': '{count} episode',
+  'podcasts.episodesCountOther': '{count} episodes',
+  'podcasts.playedCount': '{count} listened',
+  'podcasts.manualCount': '{count} marked by hand',
+  'podcasts.transcriptCount': '{count} with a transcript',
+  'podcasts.transcriptCountNone': 'no transcripts linked yet',
+  'podcasts.allEpisodes': 'All episodes',
+  'podcasts.allEpisodesSub': 'Across every show, with the same filters.',
+  'podcasts.backToShows': 'All podcasts',
+  'podcasts.backToEpisodes': 'Back to the episodes',
+  'podcasts.openShow': 'Open {show}',
+
+  // Episode list + pagination
+  'podcasts.searchPlaceholder': 'Search episode titles…',
+  'podcasts.searchAria': 'Search episodes',
+  'podcasts.stateLabel': 'Status',
+  'podcasts.stateAria': 'Filter by listening status',
+  'podcasts.stateListened': 'Listened (any)',
+  'podcasts.statePlayed': 'Fully listened',
+  'podcasts.stateInProgress': 'In progress',
+  'podcasts.stateUnplayed': 'Not listened',
+  'podcasts.stateManual': 'Marked by hand',
+  'podcasts.stateAll': 'Everything',
+  'podcasts.noResults': 'No episodes match these filters.',
+  'podcasts.pagerAria': 'Episode pagination',
+  'podcasts.pageRange': '{from}–{to} of {total}',
+  'podcasts.prevPage': 'Previous',
+  'podcasts.nextPage': 'Next',
+
+  // Effective status (the four view fields — never recomputed in the client)
+  'podcasts.badgePlayed': 'Listened',
+  'podcasts.badgeInProgress': 'In progress',
+  'podcasts.badgeUnplayed': 'Not listened',
+  'podcasts.badgeUnknown': 'Status unknown',
+  'podcasts.sourceApple': 'via Apple',
+  'podcasts.sourceManual': 'by hand',
+  'podcasts.sourceBoth': 'Apple + by hand',
+  'podcasts.sourceAppleTitle': 'Apple Podcasts counts this one as played.',
+  'podcasts.sourceManualTitle': 'You marked this one yourself ({platform}); Apple does not have it as played.',
+  'podcasts.sourceBothTitle': 'Apple counts this one as played and you also marked it yourself ({platform}).',
+  'podcasts.progressAria': '{percent}% listened',
+
+  // Transcript bridge
+  'podcasts.transcript': 'Transcript',
+  'podcasts.transcriptOpen': 'Open the transcript',
+  'podcasts.transcriptNone': 'No transcript available',
+  'podcasts.transcriptNoneHint':
+    'No transcript is linked to this episode. The matcher links them automatically when it finds one.',
+  'podcasts.transcriptProbable': 'probable match ({score})',
+  'podcasts.transcriptProbableTitle':
+    'Matched by {method} with a confidence of {score} — check it is the right transcript.',
+
+  // The manual tick (the one write channel)
+  'podcasts.watchLabel': 'Also seen elsewhere',
+  // WCAG 2.5.3: opens with the VISIBLE label text, verbatim, then disambiguates.
+  'podcasts.watchAria': 'Also seen elsewhere — {title}',
+  'podcasts.watchPlatformLabel': 'Platform',
+  'podcasts.watchPlatformAria': 'Platform — {title}',
+  'podcasts.watchPlatformLocked': 'Where you recorded it. To change it, untick and tick again.',
+  'podcasts.platformWeb': 'Web',
+  'podcasts.platformOther': 'Somewhere else',
+  'podcasts.watchSaving': 'Saving…',
+  'podcasts.watchNoop': 'Apple already counts this one as played — the tick records where, not whether.',
+  'podcasts.watchDisabledTitle': 'Marking by hand is off right now',
+  'podcasts.watchDisabledWrite':
+    'The write channel is disabled (PODCAST_WATCH_WRITE_ENABLED=0). The checkboxes read your saved state but cannot change it.',
+  'podcasts.watchDisabledModule':
+    'The podcast tables are not in this mirror, so there is nothing to mark.',
+  'podcasts.watchDisabledOther': 'The write channel is unavailable: {reason}',
+  'podcasts.watchErrorNotFound': 'This episode is no longer in the mirror. Refresh the page.',
+  'podcasts.watchErrorConflict': 'The episode changed underneath. Refresh the page and try again.',
+  'podcasts.watchErrorAuth': 'Your session expired. Sign in again.',
+  'podcasts.watchErrorDisabled': 'Marking by hand is off (the server refused the write).',
+  'podcasts.watchError': 'Could not save: {message}',
+
+  // Episode detail
+  'podcasts.detailNotFound': 'No episode found for {slug}.',
+  'podcasts.showNotes': 'Show notes',
+  'podcasts.noShowNotes': 'This episode has no show notes.',
+  'podcasts.details': 'Details',
+  'podcasts.fieldShow': 'Show',
+  'podcasts.fieldPublished': 'Published',
+  'podcasts.fieldDuration': 'Duration',
+  'podcasts.fieldNumbering': 'Season / episode',
+  'podcasts.fieldLastPlayed': 'Last played',
+  'podcasts.fieldMarkedAt': 'Marked by hand on',
+  'podcasts.fieldApple': 'Apple status',
+  'podcasts.openWebPage': 'Episode page',
+  'podcasts.openShowPage': 'Podcast page',
+  'podcasts.newTab': 'opens in a new tab',
 } as const;
 
 export type TranslationKey = keyof typeof en;

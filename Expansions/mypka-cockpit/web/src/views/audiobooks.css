@@ -25,7 +25,12 @@
 }
 
 /* ── Card ────────────────────────────────────────────────────────────────────── */
-.ab-card-li { list-style: none; }
+/* Same grid-item overflow guard as .pod-show-li: without min-width: 0 the
+   nowrap .ab-card-authors / .ab-card-series lines set the track's minimum. */
+.ab-card-li {
+  list-style: none;
+  min-width: 0;
+}
 
 .ab-card {
   display: flex;

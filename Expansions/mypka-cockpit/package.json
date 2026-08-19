@@ -2,7 +2,7 @@
   "name": "mypka-cockpit",
   "private": true,
   "version": "1.5.3",
-  "description": "myPKA Cockpit — a navigable, wikilink-aware viewer over your myPKA. Reads mypka.db read-only; Fleeting Notes is the only write surface (PKM/Fleeting Notes/).",
+  "description": "myPKA Cockpit — a navigable, wikilink-aware viewer over your myPKA. Reads mypka.db read-only, with one documented carve-out: the three podcast_episodes.manual_watched* columns (DATA-CONTRACT §18.9, server/podcastsDb.js). Markdown write surface is Fleeting Notes only (PKM/Fleeting Notes/).",
   "type": "module",
   "scripts": {
     "install:all": "npm install && npm --prefix web install",
@@ -23,6 +23,7 @@
     ,"test:integrations": "node --test server/integrationRegistry.test.mjs server/integrationChecks.test.mjs server/integrationsApi.test.mjs"
     ,"food:test": "python3 -m unittest discover -s scripts/tests -p 'test_food_*.py' && node --test server/tracking.food.test.mjs"
     ,"habit:test": "python3 -m unittest discover -s scripts/tests -p 'test_habit_*.py' && node --test server/tracking.habits.test.mjs"
+    ,"podcasts:test": "node --test server/podcastsDb.test.mjs server/podcastsApi.test.mjs"
     ,"food:capture-status": "bash -lc 'launchctl list 2>/dev/null | grep nl.gewoonsander.food-capture || echo food-capture-not-loaded'"
   },
   "dependencies": {

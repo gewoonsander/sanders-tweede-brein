@@ -397,6 +397,7 @@
 .team-solo-col {
   flex: 1 1 auto;
   min-height: 0;
+  min-width: 0;           /* see the narrow-viewport note below .tk-rows */
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -406,6 +407,7 @@
 .team-solo-scroll {
   flex: 1 1 auto;
   min-height: 0;
+  min-width: 0;           /* see the narrow-viewport note below .tk-rows */
   overflow-y: auto;
   overscroll-behavior: contain;
   padding-right: 6px;     /* room for the scrollbar so cards aren't clipped */
@@ -417,13 +419,39 @@
    (status / owner / version), and a two-line clamped summary. The whole row is a
    link to the file-reading page when a file_path is present. GL-003 tokens only;
    the `truncate` class is never used (a -webkit-line-clamp is). */
-.tk-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.tk-row-li { list-style: none; }
+/* ---- NARROW-VIEWPORT CONTAINMENT (the min-width: 0 chain) ------------------
+   Every flex item below carries `min-width: 0`, and it is load-bearing, not
+   defensive noise. A flex item's default `min-width: auto` refuses to shrink
+   below its max-content width, so ONE long unbroken string — a task title, a
+   wikilink-free summary, a 40-character skill description — makes the whole card
+   wider than the viewport and the page scrolls sideways. The chain has to be
+   unbroken: a single ancestor without it re-establishes the floor and the fix
+   below it does nothing.
+
+   Chain: .team-solo-col > .team-solo-scroll > .tk-rows > .tk-row-li > .tk-row >
+          .tk-row-head > .tk-row-title (and the same for -meta / -summary).
+
+   `overflow-wrap: anywhere` (NOT break-word) is the partner rule on the text
+   nodes: only `anywhere` also lowers the element's intrinsic min-content size,
+   which is what actually lets the flex item shrink. `break-word` wraps visually
+   but leaves the min-content floor intact, so it does not fix the overflow.
+
+   Verified at 320 / 375 / 414 / 768 / 1280px on all five pages that use these
+   classes (Workstreams, SOPs, Guidelines, Tasks, Skills). Regression found by
+   Nemesis 2026-08-19; it predated the Tasks/Skills pages and affected the three
+   governance pages too, so the fix lives here rather than in any one view. */
+.tk-rows {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 10px;
+  min-width: 0;
+}
+.tk-row-li { list-style: none; min-width: 0; }
 
 .tk-row {
   display: flex;
   flex-direction: column;
   gap: 7px;
+  min-width: 0;
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
   background: var(--surface-1);
@@ -438,26 +466,143 @@
 .tk-row--nav:hover { border-color: var(--border-emphasis); background: var(--surface-2); }
 .tk-row--nav:focus-visible { outline: 2px solid var(--accent-marker); outline-offset: 2px; }
 
-.tk-row-head { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+.tk-row-head { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; min-width: 0; }
 .tk-row-id {
+  /* Deliberately does NOT shrink (it is a short, scannable identifier), so it
+     needs its own ceiling instead: cap at the row width and let it wrap rather
+     than let a long id push the card sideways. */
   flex: 0 0 auto;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   font-family: 'Spline Sans Mono Variable', 'Spline Sans Mono', ui-monospace, monospace;
   font-size: 0.6875rem; letter-spacing: 0.03em;
   padding: 2px 8px; border-radius: 999px;
   background: var(--accent-marker-soft); color: var(--accent-marker-text);
 }
-.tk-row-title { font-size: 0.9375rem; font-weight: 520; color: var(--fg); line-height: 1.3; }
+.tk-row-title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 0.9375rem; font-weight: 520; color: var(--fg); line-height: 1.3;
+}
 .tk-row-arrow { flex: 0 0 auto; color: var(--fg-subtle); margin-left: auto; }
 
-.tk-row-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.tk-row-meta { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
 .tk-meta-chip {
+  max-width: 100%;
+  overflow-wrap: anywhere;
   font-size: 0.6875rem; letter-spacing: 0.03em;
   padding: 2px 8px; border-radius: 999px;
   border: 1px solid var(--border-subtle); color: var(--fg-subtle);
 }
 .tk-meta-chip--status { border-color: var(--accent-marker); color: var(--accent-marker-text); }
 
+/* ---- Task + Skill chips (live-from-disk team pages) -----------------------
+   Same pill geometry as .tk-meta-chip above; only the colour role differs.
+   Tokens only — every value below resolves through index.css and is defined for
+   BOTH themes, so nothing here needs a dark-mode override. */
+
+/* Blocked is the one chip that must read as a WARNING rather than as metadata:
+   it is the reason a task isn't moving. Filled (not just outlined) so it wins
+   the row's first glance, using the error role's own text token so contrast
+   holds in light and dark alike. */
+.tk-meta-chip--blocked {
+  border-color: transparent;
+  background: var(--status-error-soft);
+  color: var(--status-error-text);
+  font-weight: 560;
+}
+.tk-meta-chip--assignee { border-color: var(--border-emphasis); color: var(--fg-muted); }
+.tk-meta-chip--priority { border-color: var(--accent-marker); color: var(--accent-marker-text); }
+.tk-meta-chip--due { border-color: var(--border-emphasis); color: var(--fg-muted); }
+/* An installed-but-switched-off plugin skill. Warning, not error: nothing is
+   broken, it simply isn't available right now. */
+.tk-meta-chip--disabled {
+  border-color: transparent;
+  background: var(--status-warning-soft);
+  color: var(--fg-muted);
+  font-weight: 560;
+}
+.tk-meta-chip--plugin { border-color: var(--border-subtle); color: var(--fg-subtle); }
+
+/* The blocked REASON, on its own line under the chips. The chip says "blocked";
+   this says why, which is the part that is actually actionable. */
+.tk-row-blocked {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--status-error-text);
+}
+.tk-row-blocked svg { flex: 0 0 auto; margin-top: 2px; }
+/* The reason text is free-form prose from a task file — the most likely place a
+   long unbroken path or wikilink shows up. */
+.tk-row-blocked > span { min-width: 0; overflow-wrap: anywhere; }
+
+/* A disabled row is dimmed as a whole, but only its CHROME — the text keeps full
+   contrast because it is still information the reader needs. Dimming the text
+   itself would trade an accessibility floor for a visual cue. */
+.tk-row--muted { border-style: dashed; }
+
+/* ---- Grouped sections (status groups, skill-kind groups) ------------------- */
+.tk-source { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.tk-source + .tk-source { margin-top: 22px; }
+.tk-source-head {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 0.9375rem;
+  font-weight: 560;
+  color: var(--fg);
+}
+
+.tk-group { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.tk-group + .tk-group { margin-top: 18px; }
+
+.tk-group-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Wraps so a long heading + its count chip never force the column wider at
+     320px; the count then sits under the label instead of off-screen. */
+  flex-wrap: wrap;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 560;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+.tk-group-icon { flex: 0 0 auto; color: var(--fg-subtle); }
+
+/* The count rides in the heading so a screen reader announces "Open 11" as one
+   line, and sighted users get the tally without a second row of chrome. */
+.tk-group-count {
+  font-family: 'Spline Sans Mono Variable', 'Spline Sans Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--fg-muted);
+  text-transform: none;
+}
+
+.tk-group-note {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
 .tk-row-summary {
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-size: 0.875rem; line-height: 1.5; color: var(--fg-muted);
   display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2;
   -webkit-box-orient: vertical; overflow: hidden;

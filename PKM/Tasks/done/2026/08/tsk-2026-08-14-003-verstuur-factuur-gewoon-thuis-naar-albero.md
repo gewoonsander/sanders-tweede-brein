@@ -2,9 +2,9 @@
 type: personal-task
 task_id: tsk-2026-08-14-003
 title: Verstuur factuur van Gezinshuis Gewoon Thuis naar Albero
-status: scheduled
+status: done
 created: 2026-08-14
-updated: 2026-08-17
+updated: 2026-08-19
 key_element: financien
 owner: sander
 gtd_context: computer
@@ -42,3 +42,4 @@ Open de administratie van Gezinshuis Gewoon Thuis, haal de juiste factuur eruit,
 - 2026-08-14 — Door Pieter vastgelegd vanuit het gesprek met Sander en gepland voor 2026-08-15.
 - 2026-08-14 — Geprojecteerd naar Todoist-project 👤 Persoonlijk voor 2026-08-15, met label `sander`, prioriteit P1 en Todoist-ID `6hGvppgj9ChjFvWH`.
 - 2026-08-17 — Sander verplaatste deze taak in Todoist naar vandaag; `scheduled_date` hier bijgewerkt om de canonieke bron weer gelijk te trekken met Todoist. Ontdekt doordat dagstart de Todoist-crosscheck had overgeslagen — zie [[GL-019-persoonlijke-taakarchitectuur]].
+- 2026-08-19 — Gesloten op `done`. Sander had de taak op 2026-08-17 06:47 al in Todoist afgevinkt (`checked: true`); myPKA liep hier twee dagen op achter omdat er geen sync terug van Todoist-voltooiing naar myPKA bestaat. Gevonden tijdens een ICOR-Refine-doorloop van het systeem; zie [[tsk-2026-08-19-001-sync-gap-todoist-voltooiing-naar-mypka]] voor de structurele opvolging.

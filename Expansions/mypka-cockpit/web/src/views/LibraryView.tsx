@@ -23,6 +23,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Library as LibraryIcon, Search, ArrowLeft, ChevronRight, Info, Headphones,
   ChefHat, Clapperboard, BookOpen, Wine, Dices, Gamepad2, Disc3, Map as MapIcon,
+  Podcast as PodcastIcon,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useFetch } from '../lib/useCockpit';
@@ -45,6 +46,12 @@ import './library.css';
 const LIBRARY_ICONS: Record<string, LucideIcon> = {
   ChefHat, Clapperboard, BookOpen, Wine, Dices, Gamepad2, Disc3, Map: MapIcon,
   Library: LibraryIcon,
+  // `podcast_episodes` registers itself in library_registry with nav_icon
+  // "Podcast" (schema/09-module-podcasts.sql). Without this entry the row fell
+  // back to the generic library mark. Note the picker card still routes to the
+  // GENERIC library grid, which shows Apple's `status` only — the manual
+  // override is invisible there. The real surface is #/podcasts (PodcastsView).
+  Podcast: PodcastIcon,
 };
 function iconFor(name: string | null | undefined): LucideIcon {
   if (name && LIBRARY_ICONS[name]) return LIBRARY_ICONS[name];

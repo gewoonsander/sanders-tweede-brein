@@ -36,7 +36,7 @@
 import type { ComponentType } from 'react';
 import { lazy } from 'react';
 import type { LucideIcon } from 'lucide-react';
-import { Globe, Headphones, HeartPulse, Inbox, Library as LibraryIcon, LineChart, ListTodo, Map as MapIcon, Package, Target } from 'lucide-react';
+import { Globe, Headphones, HeartPulse, Inbox, Library as LibraryIcon, LineChart, ListTodo, Map as MapIcon, Package, Podcast as PodcastIcon, Target } from 'lucide-react';
 
 // Heavy module views go behind a lazy boundary (same idiom as the Workbench /
 // Board views in App.tsx) so they never enter the eager bundle. A React.lazy
@@ -75,6 +75,16 @@ const OuterWorldView = lazy(() =>
 // Reads from GET /api/cockpit/audiobooks (server/audiobooksApi.js).
 const AudiobooksView = lazy(() =>
   import('../views/AudiobooksView').then((m) => ({ default: m.AudiobooksView })),
+);
+// Podcasts module (DATA-CONTRACT §18) — the shows overview, the paginated
+// episode list and the episode detail-large. Registered here only to get the
+// sidebar nav ROW (in the 'library' group); the actual rendering is the
+// parameterized `podcasts` core route (router.ts + App), which deep-links
+// #/podcasts/show/:slug and #/podcasts/episode/:slug. The bare nav link targets
+// #/podcasts (the shows overview). Lazy so its chunk — including WikiMarkdown's
+// markdown bundle, pulled in by the episode detail — never enters the eager one.
+const PodcastsView = lazy(() =>
+  import('../views/PodcastsView').then((m) => ({ default: m.PodcastsView })),
 );
 // Darts module — Sander's Darts Atlas profile (rankings + tournament history).
 // The ONE module that does not read mypka.db: its data is scraped to plain JSON
@@ -154,6 +164,14 @@ export const COCKPIT_MODULES: readonly CockpitModule[] = [
   // sidebar row. hideFromNav keeps it out of the sidebar while the route
   // and lazy bundle remain fully active.
   { slug: 'audiobooks', navLabel: 'Audiobooks', navIcon: Headphones, navSection: 'library', View: AudiobooksView, hideFromNav: true },
+  // Podcasts — the Apple Podcasts mirror plus the hand-owned "ook elders gezien"
+  // override. Sits in the 'library' group beside Library and Audiobooks: it is a
+  // collection Sander browses, not a dashboard. Sidebar row is visible (unlike
+  // Audiobooks) because this surface is a destination in its own right, not a
+  // card inside the Library picker. Always present so its first-class empty
+  // state ("podcasts are not in your mirror yet") is one click away even on a
+  // bare scaffold.
+  { slug: 'podcasts', navLabel: 'Podcasts', navIcon: PodcastIcon, navSection: 'library', View: PodcastsView },
   // Outer World — the mymind-style store of saved external content (articles,
   // posts, videos, books, ideas, news). Lands in the sidebar 'library' group
   // beside Library. fullBleed: the masonry card grid owns its own width (the

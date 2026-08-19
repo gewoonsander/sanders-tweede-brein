@@ -49,11 +49,14 @@ import { registerInvoicesRoutes } from './invoicesApi.js';
 import { registerSerendipityRoutes } from './serendipityApi.js';
 import { registerLibraryRoutes } from './libraryApi.js';
 import { registerAudiobooksRoutes } from './audiobooksApi.js';
+import { registerPodcastsRoutes } from './podcastsApi.js';
 import { registerDartsatlasRoutes } from './dartsatlasApi.js';
 import { registerOuterWorldRoutes } from './outerWorldApi.js';
 import { registerAgentRoutes } from './agentApi.js';
 import { registerSessionLogsRoutes } from './sessionLogsApi.js';
 import { registerTeamKnowledgeRoutes } from './teamKnowledgeApi.js';
+import { registerTeamTasksRoutes } from './teamTasksApi.js';
+import { registerSkillsRoutes } from './skillsApi.js';
 import { registerCockpitSettingsRoutes } from './cockpitSettingsRoutes.js';
 import {
   isPinConfigured, resolvePinHash, verifyPin,
@@ -1208,6 +1211,23 @@ registerLibraryRoutes(app, { safe });
 // (which uses asin as PK and doesn't participate in library_registry). Degrades
 // to { available:false } when the table is absent. Queries in audiobooksApi.js.
 registerAudiobooksRoutes(app, { safe });
+// Podcasts module (DATA-CONTRACT §18) — dedicated endpoints because the generic
+// library grid cannot serve this table: libraryApi.js projects the TABLE (Apple's
+// state only, so a YouTube-watched episode reads as `unplayed`) and has no LIMIT
+// over 4732 rows. Reads here come from the effective VIEW, paginated.
+//
+// This module carries the cockpit's ONLY write into mypka.db: the three
+// `manual_watched*` columns of §18.9, Sander's "ook gezien via een ander
+// platform" tick. Route A, chosen 2026-08-19. The write lives on a SEPARATE
+// read-write connection in podcastsDb.js — db.js stays {readonly:true} +
+// query_only for everything else, and that carve-out is documented in
+// podcastsDb.js's header. The write route rides the same guard stack as every
+// other cockpit write (session/loopback → CSRF header+origin → scoped parser),
+// and podcastsDb.js is structurally bounded to those three columns: no SQL,
+// table name or column name crosses its module boundary, and a boot-time proof
+// over its two SQL literals refuses to start the server if one ever assigns a
+// fourth column. Kill switch: PODCAST_WATCH_WRITE_ENABLED=0.
+registerPodcastsRoutes(app, { safe, sessionOrLoopback, localWriteGuard, express });
 // Darts module — read-only, and deliberately NOT a mypka.db reader: the Darts
 // Atlas payload lives as plain JSON on disk (data/dartsatlas/<player>/latest.json,
 // written by scripts/dartsatlas-fetch.mjs on a weekly LaunchAgent). Degrades to a
@@ -1235,6 +1255,19 @@ registerSessionLogsRoutes(app, { safe });
 // calm { available:false } envelope when a family's table is absent on a leaner
 // mirror (regen predating these tables). Queries live in teamKnowledgeApi.js.
 registerTeamKnowledgeRoutes(app, { safe });
+// The team's markdown task tracker (Team Knowledge/tasks/). Read-only, and the
+// ONE Team-Knowledge surface that does NOT read mypka.db: task status changes
+// several times a day while the mirror is only regenerated on demand, so this
+// reads the folder live. Which folders it walks is configuration, not code —
+// see taskSources.js. Walker + shaping live in teamTasksApi.js.
+registerTeamTasksRoutes(app, { safe });
+// The capabilities the team can invoke: domain skills (~/.claude/skills), this
+// repo's slash-commands, and INSTALLED plugin skills. Live from disk for the same
+// reason tasks are — Sander ruled out a mirror for this surface on 2026-08-19.
+// Two things are excluded on purpose and the reasoning lives in skillSources.js:
+// the three scheduled-task routines, and the 32-entry marketplace CATALOGUE of
+// merely installable plugins. Reader + shaping live in skillsApi.js.
+registerSkillsRoutes(app, { safe });
 // Runtime Hub-module toggles (Settings page). Read always-on; the PUT rides the
 // cockpit's standard local-write guard stack (session/loopback → CSRF → parser),
 // writing ONLY to mypka-cockpit.db's module_prefs table — never mypka.db.

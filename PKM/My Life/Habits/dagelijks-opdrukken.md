@@ -24,6 +24,14 @@ Bij ziekte of lichamelijke klachten staat herstel voorop. Een onderbreking betek
 
 ## Reflection
 
+### 2026-08-19
+
+- done: true
+- amount: 31
+- unit: herhalingen
+- trigger: chat
+- note: in chat gemeld: 31 keer opgedrukt, boven het minimum van 25
+
 ### 2026-08-18
 
 - done: true

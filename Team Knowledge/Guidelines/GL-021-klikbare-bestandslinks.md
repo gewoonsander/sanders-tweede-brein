@@ -34,6 +34,12 @@ Gebruik een Markdown-link met een `file://`-URI naar het absolute pad:
 - **In elk antwoord aan Sander** (chatberichten, niet de inhoud van vastgelegde documenten zelf): elk moment dat een concreet bestand, map, taak, Deliverable, sessielog of ander vastgelegd document wordt genoemd — opruimvoorstellen, inbox-verwerking, gevonden bestanden, logbestanden, dagstart-taken, review-documenten, kortom alles waar Sander mogelijk naartoe wil of actie op wil ondernemen.
 - Geldt voor bestanden buiten de myPKA-vault (Downloads, Mediahub, externe schijven) én voor bestanden erbinnen (taken, Deliverables, Guidelines, SOPs, sessielogs, PKM-notities).
 
+## Concepten in externe systemen (bv. Gmail-drafts)
+
+⚠️ **Verbreed op 2026-08-19:** dit principe geldt niet alleen voor bestanden op schijf, maar voor elk concept dat wordt aangemaakt in een extern systeem waar Sander anders zelf handmatig naartoe zou moeten zoeken (Gmail-concepten, Google Drive-bestanden, Canva-designs, etc.). Reden: Sander wil na "maak een conceptmail" niet zelf in Gmail's UI naar het net gemaakte concept hoeven zoeken.
+
+Voor Gmail-concepten specifiek: zie [[feedback_gmail_links]] voor het exacte format (`#drafts/[thread_id]`, opgehaald via `list_drafts` — de `draftId` uit `create_draft`/`update_draft` is niet bruikbaar in de link).
+
 ## Relatie met wikilinks
 
 Binnen **vastgelegde documenten zelf** (een sessielog dat naar een SOP verwijst, een taakbestand dat naar een Project verwijst) blijft `[[wikilink]]` de juiste vorm — dat verandert niet (Hard rule 4 in AGENTS.md), en is hoe de vault z'n eigen graaf/backlinks opbouwt.

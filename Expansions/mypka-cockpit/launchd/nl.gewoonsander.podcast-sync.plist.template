@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  nl.gewoonsander.podcast-sync — periodic Apple Podcasts → mypka.db mirror.
+
+  Placeholders to fill when installing this template:
+    __ROOT__    the myPKA vault root (…/sanders-tweede-brein)
+    __PYTHON__  interpreter that has PyYAML (the regen subprocess needs it)
+    __HOME__    the user's home directory (plists do NOT expand ~)
+
+  Install:
+    sed -e "s|__ROOT__|$PWD|g" -e "s|__PYTHON__|/opt/homebrew/bin/python3|g" \
+        -e "s|__HOME__|$HOME|g" \
+        Expansions/mypka-cockpit/launchd/nl.gewoonsander.podcast-sync.plist.template \
+      > ~/Library/LaunchAgents/nl.gewoonsander.podcast-sync.plist
+    launchctl unload ~/Library/LaunchAgents/nl.gewoonsander.podcast-sync.plist 2>/dev/null
+    launchctl load   ~/Library/LaunchAgents/nl.gewoonsander.podcast-sync.plist
+
+  ── StartInterval 2700 (45 min) ─────────────────────────────────────────────
+  Apple Podcasts pushes listening state through iCloud on its own schedule, so
+  polling faster buys latency that the upstream sync does not actually deliver.
+  A full run costs ~350 ms (4732 episodes, diffed, zero writes when nothing
+  changed), so the job is effectively free at this cadence. No other job in
+  ~/Library/LaunchAgents uses StartInterval — downloads-router is WatchPaths-
+  driven and mypka-cockpit is a KeepAlive server — so there is no timer to
+  collide with.
+
+  ── Why the perl alarm wrapper ──────────────────────────────────────────────
+  The vault lives under ~/Documents, and "Desktop & Documents" iCloud sync is
+  ON (verified 2026-08-19: ~/Library/Mobile Documents/com~apple~CloudDocs/
+  Documents exists). An open() against an iCloud-backed path can wedge in the
+  kernel indefinitely — it happened twice to the food-capture job, which sat
+  dead for two days without emitting one error line, because launchd never
+  starts a second instance of a job that is still "running".
+
+  Pending alarms survive exec, so the timer applies to python itself. Any run
+  exceeding 300 s is killed and the next tick gets a clean slate: a wedge now
+  costs one interval instead of two days. The script's own flock is the
+  complementary guard (it prevents OVERLAP); the alarm is what guarantees the
+  lock is ever released again.
+
+  ── Why --regen and not a separate regen job ────────────────────────────────
+  regen-mypka-db.py does NOT own the podcast tables (DATA-CONTRACT §18.2); it
+  only re-seeds the library_registry row. The sync therefore invokes it ITSELF,
+  and only when the sync actually changed something — the regen drops and
+  rebuilds every owned table via executescript(), which implicitly commits, so
+  it has a window in which those tables do not exist. Firing that window every
+  45 minutes for an unchanged library would hand the running cockpit a periodic
+  chance to 500 for no benefit.
+-->
+<plist version="1.0"><dict>
+  <key>Label</key><string>nl.gewoonsander.podcast-sync</string>
+  <key>ProgramArguments</key><array>
+    <string>/usr/bin/perl</string>
+    <string>-e</string>
+    <string>alarm shift; exec @ARGV</string>
+    <string>300</string>
+    <string>__PYTHON__</string>
+    <string>__ROOT__/Expansions/mypka-cockpit/scripts/sync-podcasts.py</string>
+    <string>--regen</string>
+    <string>--json</string>
+  </array>
+  <key>WorkingDirectory</key><string>__ROOT__</string>
+  <key>StartInterval</key><integer>2700</integer>
+  <key>RunAtLoad</key><true/>
+  <key>ProcessType</key><string>Background</string>
+  <key>LowPriorityIO</key><true/>
+  <key>StandardOutPath</key><string>__HOME__/Library/Logs/mypka-podcast-sync.log</string>
+  <key>StandardErrorPath</key><string>__HOME__/Library/Logs/mypka-podcast-sync.err.log</string>
+</dict></plist>

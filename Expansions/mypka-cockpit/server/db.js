@@ -1,6 +1,16 @@
-// db.js — opens mypka.db READ-ONLY. The cockpit never writes to the database.
-// Markdown is canonical; mypka.db is a derived mirror (regenerable at any time
-// via Expansions/mypka-cockpit/scripts/regen-mypka-db.py).
+// db.js — opens mypka.db READ-ONLY. Markdown is canonical; mypka.db is a derived
+// mirror (regenerable at any time via
+// Expansions/mypka-cockpit/scripts/regen-mypka-db.py), so a write through THIS
+// connection would be destroyed by the next regen. Hence readonly + query_only.
+//
+// ONE DOCUMENTED CARVE-OUT (2026-08-19, DATA-CONTRACT §18.9): server/podcastsDb.js
+// opens its own read-write connection to the same file, bounded — structurally, by
+// a whitelist plus a boot-time proof over its SQL — to exactly three columns:
+// podcast_episodes.manual_watched{,_platform,_at}. Those columns are NOT derived
+// from markdown and NOT regen-owned (§18.2), and hold a fact no sync can ever
+// refill (Sander watched the episode on YouTube; Apple's store cannot know).
+// That module does NOT import this one. Everything else in the cockpit reads
+// mypka.db through here, read-only. Do not widen this connection.
 import Database from 'better-sqlite3';
 import path from 'node:path';
 import fs from 'node:fs';

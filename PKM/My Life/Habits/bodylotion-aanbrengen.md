@@ -21,6 +21,12 @@ Iedere dag eenmaal bodylotion aanbrengen. Het moment van de dag is vrij; bij de 
 
 ## Reflection
 
+### 2026-08-19
+
+- done: true
+- trigger: chat
+- note: in chat gemeld: bodylotion aangebracht
+
 ### 2026-08-18
 
 - done: true

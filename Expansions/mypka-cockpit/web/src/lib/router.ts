@@ -14,6 +14,10 @@
 //   #/note/:type/:slug          -> open a PKM note by explicit type+slug
 //   #/resolve/:slug             -> resolve a [[wikilink]] slug (collision-aware)
 //   #/file/:src                 -> routed reading page for a raw file (FileView)
+//   #/podcasts                  -> podcast shows overview
+//   #/podcasts/all              -> every episode, paginated
+//   #/podcasts/show/:slug       -> one show's episodes, paginated
+//   #/podcasts/episode/:slug    -> one episode (detail-large)
 //   #/<module-slug>             -> a drop-in extension module (see moduleRegistry)
 //
 // File-route src encoding (the `src` of { name: 'file' }):
@@ -38,11 +42,18 @@ export type Route =
   // to one of these full pages. `roster` (the team grid) and `session-log` split
   // the old combined RosterView into two distinct pages; `workstreams` / `sops` /
   // `guidelines` list the three Team-Knowledge doc families from mypka.db.
+  //
+  // `team-tasks` and `skills` are the exception to that last sentence: they do
+  // NOT read the mirror. Both read their source files live from disk on every
+  // request, because their data changes several times a day while the mirror is
+  // only regenerated on demand. See server/teamTasksApi.js + server/skillsApi.js.
   | { name: 'roster' }
   | { name: 'session-log' | 'team-analytics' }
   | { name: 'workstreams' }
   | { name: 'sops' }
   | { name: 'guidelines' }
+  | { name: 'team-tasks' }
+  | { name: 'skills' }
   | { name: 'connections' }
   // The WIDER software inventory (stored key names + MCP servers). Its own
   // route, not a tab inside 'connections': different data source, different
@@ -71,6 +82,18 @@ export type Route =
   // (the embed header + tom_context body + linked entities). Deep-linkable; the
   // Outer World nav row (moduleRegistry) targets the bare #/outer-world.
   | { name: 'outer-world'; slug?: string }
+  // Podcasts module (DATA-CONTRACT §18). Four deep-linkable surfaces on one
+  // route name, exactly like `library` above:
+  //   #/podcasts                    -> the SHOWS overview (the picker)
+  //   #/podcasts/all                -> every episode, paginated  (pane:'episodes')
+  //   #/podcasts/show/:slug         -> one show's episodes, paginated
+  //   #/podcasts/episode/:slug      -> one episode in the large detail view
+  // The second segment is an explicit NAMESPACE discriminator ('all' | 'show' |
+  // 'episode') rather than a bare slug: show slugs and episode slugs live in
+  // different namespaces and either could otherwise shadow the "all episodes"
+  // view. `pane` distinguishes the bare overview from the all-episodes list,
+  // which carry the same (absent) show/episode fields.
+  | { name: 'podcasts'; pane?: 'episodes'; show?: string; episode?: string }
   // A raw file rendered as a routed in-app reading page (FileView). See the
   // "File-route src encoding" note in the header comment.
   | { name: 'file'; src: string };
@@ -104,6 +127,8 @@ export function parseHash(hash: string): Route {
   if (parts[0] === 'workstreams') return { name: 'workstreams' };
   if (parts[0] === 'sops') return { name: 'sops' };
   if (parts[0] === 'guidelines') return { name: 'guidelines' };
+  if (parts[0] === 'team-tasks') return { name: 'team-tasks' };
+  if (parts[0] === 'skills') return { name: 'skills' };
   if (parts[0] === 'connections') return { name: 'connections' };
   if (parts[0] === 'stack') return { name: 'stack' };
   if (parts[0] === 'integrations') return { name: 'integrations' };
@@ -132,6 +157,17 @@ export function parseHash(hash: string): Route {
     if (parts[1]) return { name: 'outer-world', slug: parts[1] };
     return { name: 'outer-world' };
   }
+  // Podcasts module. Matched BEFORE the module-registry check for the same
+  // reason as Library/Outer World: the parameterized forms must never be
+  // shadowed by the same-named module slug (which only exists to get a nav row).
+  // An unrecognised second segment falls back to the overview rather than the
+  // Hub, so a stale/hand-typed #/podcasts/… still lands on the module.
+  if (parts[0] === 'podcasts') {
+    if (parts[1] === 'episode' && parts[2]) return { name: 'podcasts', episode: parts[2] };
+    if (parts[1] === 'show' && parts[2]) return { name: 'podcasts', pane: 'episodes', show: parts[2] };
+    if (parts[1] === 'all') return { name: 'podcasts', pane: 'episodes' };
+    return { name: 'podcasts' };
+  }
   // Extension-module slugs resolve through the registry (gate-aware). Checked
   // before the parameterized core routes so a module slug can't be shadowed.
   if (parts[0] && moduleForSlug(parts[0])) return { name: 'module', slug: parts[0] };
@@ -151,6 +187,8 @@ export function hrefFor(route: Route): string {
     case 'workstreams': return '#/workstreams';
     case 'sops': return '#/sops';
     case 'guidelines': return '#/guidelines';
+    case 'team-tasks': return '#/team-tasks';
+    case 'skills': return '#/skills';
     case 'connections': return '#/connections';
     case 'stack': return '#/stack';
     case 'integrations': return '#/integrations';
@@ -171,6 +209,13 @@ export function hrefFor(route: Route): string {
     case 'outer-world':
       if (route.slug) return `#/outer-world/${encodeURIComponent(route.slug)}`;
       return '#/outer-world';
+    case 'podcasts':
+      // Order matters: the most specific surface wins, so a route object that
+      // carries both `episode` and `show` still round-trips to the episode.
+      if (route.episode) return `#/podcasts/episode/${encodeURIComponent(route.episode)}`;
+      if (route.show) return `#/podcasts/show/${encodeURIComponent(route.show)}`;
+      if (route.pane === 'episodes') return '#/podcasts/all';
+      return '#/podcasts';
   }
 }
 

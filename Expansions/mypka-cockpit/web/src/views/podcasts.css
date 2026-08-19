@@ -1,0 +1,501 @@
+/* podcasts.css — the Podcasts surface (DATA-CONTRACT §18).
+
+   TOKENS ONLY. Every colour is a var() from index.css's INKLINE token layer, so
+   the whole surface flips with `:root[data-theme='light']` without a single
+   media query here. No hex, no rgba(), no Tailwind palette.
+
+   Depends on cockpit.css for the shared chrome this surface reuses verbatim:
+   .filter-bar, .filter-search, .filter-search-icon, .filter-search-input,
+   .filter-facet, .filter-facet-label, .filter-select, .library-empty*,
+   .library-noresults, .list-skeleton, .skeleton-block, .skeleton-line,
+   .view-error, .back-button, .page-header, .note-view, .note-header,
+   .note-header-row, .note-type-pill, .note-title, .note-grid, .note-body-col,
+   .note-side, .side-panel, .side-panel-title, .side-empty, .meta-list,
+   .meta-row, .module-empty*, .animate-fade-rise, .sr-only, .font-mono.
+
+   A NOTE ON THE STATUS VOCABULARY (§18.9): "Apple says played" and "I ticked
+   this myself" must never look identical, so they are two separate marks — a
+   solid badge for the effective STATE, and a quieter outlined chip for the
+   SOURCE, with the manual source carrying the marker accent. Colour is never the
+   only carrier: each chip also has its own text label and title. */
+
+/* ── View wrapper ─────────────────────────────────────────────────────────── */
+.pod-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* ── Artwork ──────────────────────────────────────────────────────────────── */
+.pod-art {
+  display: block;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.pod-art--lg { height: 56px; width: 56px; }
+.pod-art--sm { height: 40px; width: 40px; }
+.pod-art--fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-marker-text);
+  background: var(--accent-marker-soft);
+}
+
+/* ── (1) Shows overview ───────────────────────────────────────────────────── */
+.pod-show-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+/* min-width: 0 overrules the grid item's default `min-width: auto`. Without it
+   the track sizes to the min-content of a nowrap author line ("Joshua Fields
+   Millburn, Ryan Nicodemus, T.K. Coleman"), which widens the grid past the
+   viewport at 375px and makes the ellipsis on .pod-show-sub unreachable. */
+.pod-show-li {
+  list-style: none;
+  min-width: 0;
+}
+
+.pod-show-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  height: 100%;
+  padding: var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-1);
+  color: var(--fg);
+  text-decoration: none;
+  transition: border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+}
+.pod-show-card:hover {
+  border-color: var(--border-emphasis);
+  background: var(--surface-2);
+}
+.pod-show-card:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* The cross-show entry point reads as a sibling of the shows, not as a banner:
+   same card, marker-tinted edge so it is findable without shouting. */
+.pod-show-card--all { border-color: var(--accent-marker-border); }
+
+.pod-show-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.pod-show-title {
+  font-size: 0.9375rem;
+  font-weight: 520;
+  color: var(--fg);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+/* A show with no title at all: the placeholder must not masquerade as a real
+   name, so it takes the quiet voice and its slug carries the identity below. */
+.pod-show-title--fallback {
+  color: var(--fg-muted);
+  font-style: italic;
+}
+.pod-show-sub {
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pod-show-meta { font-size: 0.75rem; color: var(--fg-subtle); }
+.pod-show-meta--quiet { color: var(--fg-subtle); }
+.pod-show-chevron { flex-shrink: 0; color: var(--fg-subtle); }
+
+/* ── (2) Episode list ─────────────────────────────────────────────────────── */
+.pod-episode-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface-1);
+}
+
+.pod-episode {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.pod-episode:last-child { border-bottom: none; }
+.pod-episode:hover { background: var(--surface-2); }
+/* Keyboard parity with hover: tabbing through the rows has to be as legible as
+   mousing over them, so a focused descendant lifts the whole row. */
+.pod-episode:focus-within { background: var(--surface-2); }
+
+.pod-episode-main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /* flex-basis 0, NOT auto: with `auto` the column's basis is its CONTENT width,
+     so under the narrow-screen `flex-wrap: wrap` a long episode title pushes the
+     whole column onto its own line and the artwork is left stranded above it.
+     A zero basis keeps art and text side by side and lets only the actions wrap. */
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.pod-episode-title {
+  font-size: 0.9375rem;
+  font-weight: 520;
+  line-height: 1.35;
+  color: var(--fg);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.pod-episode-title:hover { color: var(--accent-marker-text); text-decoration: underline; }
+.pod-episode-title:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.pod-episode-meta {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--fg-subtle);
+}
+
+.pod-episode-state {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.pod-episode-actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 2px;
+}
+
+/* ── Status badges — effective state (solid) + watch source (outlined) ─────── */
+.pod-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pod-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 0.6875rem;
+  font-weight: 540;
+  line-height: 1.6;
+  border: 1px solid transparent;
+}
+.pod-badge--played {
+  background: var(--status-success-soft);
+  color: var(--status-success);
+  border-color: var(--border);
+}
+.pod-badge--in-progress {
+  background: var(--status-warning-soft);
+  color: var(--status-warning);
+  border-color: var(--border);
+}
+.pod-badge--unplayed {
+  background: var(--surface-2);
+  color: var(--fg-subtle);
+  border-color: var(--border);
+}
+/* A NULL play_state is not "unplayed" — the mirror genuinely does not know, and
+   the badge says so rather than inventing a state. */
+.pod-badge--unknown {
+  background: transparent;
+  color: var(--fg-subtle);
+  border-color: var(--border-subtle);
+  font-style: italic;
+}
+
+.pod-source {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 7px;
+  font-size: 0.6875rem;
+  line-height: 1.7;
+  border: 1px solid var(--border);
+  color: var(--fg-subtle);
+  background: transparent;
+}
+/* The manual override is the one thing on this page Sander put there himself —
+   it carries the marker so it is instantly separable from Apple telemetry. */
+.pod-source--manual,
+.pod-source--both {
+  color: var(--accent-marker-text);
+  border-color: var(--accent-marker-border);
+  background: var(--accent-marker-soft);
+}
+
+/* ── Progress (in-progress episodes only) ─────────────────────────────────── */
+.pod-progress {
+  display: inline-block;
+  width: 96px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.pod-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent-marker);
+  transition: width var(--dur-base) var(--ease);
+}
+
+/* ── Transcript bridge ────────────────────────────────────────────────────── */
+.pod-transcript {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  flex-wrap: wrap;
+}
+/* 0 of 4732 episodes carry a transcript today, so THIS is the branch that
+   renders. It has to read as a calm fact, not as an error. */
+.pod-transcript--none { color: var(--fg-subtle); font-style: italic; }
+
+.pod-transcript-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent-marker-text);
+  text-decoration: none;
+}
+.pod-transcript-link:hover { text-decoration: underline; }
+.pod-transcript-link:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* A sub-threshold match is an inference; it is labelled as one. */
+.pod-transcript-caveat { color: var(--fg-subtle); font-style: italic; }
+
+/* ── The manual tick ──────────────────────────────────────────────────────── */
+.pod-watch { display: flex; flex-direction: column; gap: 4px; }
+
+.pod-watch-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.pod-watch-check {
+  height: 16px;
+  width: 16px;
+  flex-shrink: 0;
+  margin: 0;
+  /* Native control, natively tinted — no reimplemented checkbox, so Space,
+     the checked semantics and the SR role all stay correct for free. */
+  accent-color: var(--accent-marker);
+  cursor: pointer;
+}
+.pod-watch-check:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+/* Two "unavailable" states, deliberately different mechanisms: `:disabled` is the
+   stable page-level read-only mode, `[aria-disabled]` is the in-flight moment
+   (which must stay focusable — see the comment on the input). */
+.pod-watch-check:disabled { cursor: not-allowed; opacity: 0.55; }
+.pod-watch-check[aria-disabled='true'] { cursor: progress; }
+
+.pod-watch-label {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.pod-watch-check:disabled + .pod-watch-label { color: var(--fg-subtle); cursor: not-allowed; }
+
+.pod-watch-platform {
+  font-family: inherit;
+  font-size: 0.6875rem;
+  color: var(--fg-muted);
+  background: var(--surface-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+.pod-watch-platform:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.pod-watch-platform:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* The recorded platform, once the tick is set: a read-only fact, not a control.
+   Marker-tinted like the "handmatig" source chip, because it belongs to the same
+   hand-owned layer. */
+.pod-watch-platform-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 7px;
+  font-size: 0.6875rem;
+  line-height: 1.7;
+  color: var(--accent-marker-text);
+  border: 1px solid var(--accent-marker-border);
+  background: var(--accent-marker-soft);
+}
+
+.pod-watch-pending { display: inline-flex; color: var(--fg-subtle); }
+.pod-spin { animation: pod-spin 900ms linear infinite; }
+@keyframes pod-spin { to { transform: rotate(360deg); } }
+/* Respect the OS-level reduced-motion preference: the spinner's job is "busy",
+   which the role="status" text already carries. */
+@media (prefers-reduced-motion: reduce) {
+  .pod-spin { animation: none; }
+  .pod-progress-fill { transition: none; }
+}
+
+.pod-watch-note {
+  margin: 0;
+  font-size: 0.6875rem;
+  color: var(--fg-subtle);
+  max-width: 44ch;
+  line-height: 1.5;
+}
+.pod-watch-error {
+  margin: 0;
+  font-size: 0.6875rem;
+  color: var(--status-error-text);
+  max-width: 44ch;
+  line-height: 1.5;
+}
+
+/* The one page-level "why is this read-only" panel. Warning tone, not error:
+   nothing is broken, the channel is simply closed right now. */
+.pod-write-notice {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px var(--space-md);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--status-warning);
+  border-radius: 10px;
+  background: var(--status-warning-soft);
+}
+.pod-write-notice-title { font-size: 0.8125rem; font-weight: 540; color: var(--fg); }
+.pod-write-notice-body { font-size: 0.8125rem; line-height: 1.55; color: var(--fg-muted); max-width: 68ch; }
+
+/* ── Pagination ───────────────────────────────────────────────────────────── */
+.pod-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding-top: var(--space-sm);
+}
+
+.pod-pager-btn {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: var(--fg);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+}
+.pod-pager-btn:hover:not([aria-disabled='true']) {
+  border-color: var(--border-emphasis);
+  background: var(--surface-2);
+}
+.pod-pager-btn:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+/* aria-disabled, not :disabled — the button stays focusable on purpose (see the
+   pager comment in PodcastsView.tsx), so the unavailable LOOK has to key off the
+   ARIA state instead of the DOM one. */
+.pod-pager-btn[aria-disabled='true'] {
+  color: var(--fg-subtle);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pod-pager-range {
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 12ch;
+  text-align: center;
+}
+
+/* ── (3) Episode detail ───────────────────────────────────────────────────── */
+.pod-detail .back-button { text-decoration: none; }
+.pod-detail .note-header-row { gap: var(--space-sm); }
+.pod-detail .note-header .pod-progress { margin-top: var(--space-sm); }
+
+.pod-detail-subhead {
+  margin: 0 0 var(--space-sm);
+  font-size: 0.8125rem;
+  font-weight: 540;
+  letter-spacing: var(--tracking-microlabel);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+.pod-detail-watch {
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.pod-links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pod-ext-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--accent-marker-text);
+  text-decoration: none;
+}
+.pod-ext-link:hover { text-decoration: underline; }
+.pod-ext-link:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: 4px; }
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+/* Below the tablet breakpoint the row stacks: the checkbox moves under the
+   episode instead of fighting the title for width. */
+@media (max-width: 640px) {
+  .pod-episode {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+  .pod-episode-actions {
+    flex-basis: 100%;
+    padding-top: 0;
+    padding-left: calc(40px + var(--space-md));
+  }
+  .pod-show-grid { grid-template-columns: 1fr; }
+  .pod-pager { gap: var(--space-sm); }
+  .pod-pager-range { min-width: 0; }
+}

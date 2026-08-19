@@ -45,6 +45,12 @@ Bij medische vochtbeperkingen of aandoeningen waarbij vochtinname belangrijk is,
 
 ## Reflection
 
+### 2026-08-19
+
+- trigger: chat
+- drink: 250 ml water
+- drink: 250 ml zwarte koffie
+
 ### 2026-08-18
 
 - trigger: chat

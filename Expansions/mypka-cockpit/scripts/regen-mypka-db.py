@@ -197,6 +197,33 @@ LIBRARIES = [
     },
 ]
 
+# ── EXTERNAL (source-derived) LIBRARIES ──────────────────────────────────────
+# A library whose canonical source is NOT markdown but an external application
+# database, filled by its own periodic sync instead of by this regen. The regen
+# does NOT own those mirror tables: they are deliberately absent from
+# OWNED_TABLES, so they are PRESERVED across every run (same as `audiobooks`).
+#
+# But `library_registry` IS regen-owned — dropped and rebuilt every run. Without
+# this block, a registry row written by an installer or a sync would silently
+# VANISH on the next regen and the library would drop out of the cockpit nav with
+# no error anywhere. So the regen re-seeds the registry rows for these libraries
+# while leaving their data untouched. Registration survives; data is never touched.
+#
+# Each entry: (library_slug == mirror table name, nav_label, nav_icon, pkm_folder,
+#              doc_type, sort_order). doc_type is None — there is no frontmatter
+# discriminator, because there is no markdown to discriminate.
+#
+# A row is only written when the mirror table actually exists, so a scaffold that
+# never installed the module gets an honest empty nav instead of a dead entry.
+EXTERNAL_LIBRARIES = [
+    # Apple Podcasts listening history. Tables: podcasts + podcast_episodes.
+    # Schema: sqlite-extension/schema/09-module-podcasts.sql. Source:
+    # ~/Library/Group Containers/243LU875E5.groups.com.apple.podcasts/Documents/
+    # MTLibrary.sqlite (undocumented Apple CoreData store, read read-only).
+    ("podcast_episodes", "Podcasts", "Podcast",
+     "PKM/Documents/YouTube-Kennis", None, 30),
+]
+
 SCHEMA = """
 CREATE TABLE people (
   -- social_links: JSON array of {label,url} the cockpit renders as clickable
@@ -1496,6 +1523,23 @@ def main():
             " pkm_folder, doc_type, title_field, sort_order) VALUES (?,?,?,?,?,?,?)",
             (table, lib["nav_label"], lib["nav_icon"], str(lib["folder"]),
              lib["doc_type"], "title", lib.get("sort_order", 0)))
+
+    # ---- external (source-derived) libraries: re-seed their registry rows -------
+    # Their TABLES are not owned by this regen (never dropped, never filled here);
+    # only the regen-owned `library_registry` row is re-created, so the library
+    # stays in the cockpit nav after every regen. See EXTERNAL_LIBRARIES above.
+    existing_tables = {r[0] for r in cur.execute(
+        "SELECT name FROM sqlite_master WHERE type = 'table'")}
+    for slug, label, icon, folder, doc_type, order in EXTERNAL_LIBRARIES:
+        if slug not in existing_tables:
+            warnings.append(
+                f"external library '{slug}' registered but its mirror table is "
+                f"absent — skipped (run install-extensions.py --with-{slug.split('_')[0]}s)")
+            continue
+        cur.execute(
+            "INSERT INTO library_registry (library_slug, nav_label, nav_icon,"
+            " pkm_folder, doc_type, title_field, sort_order) VALUES (?,?,?,?,?,?,?)",
+            (slug, label, icon, folder, doc_type, "title", order))
 
     # ---- agents (Team/<Name - Role>/AGENTS.md) ---------------------------------
     rows = 0

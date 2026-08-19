@@ -131,6 +131,39 @@ export const nl: Record<TranslationKey, string> = {
   'team.guidelinesEmptySub': 'De naslag-guidelines van je team verschijnen hier zodra ze geschreven zijn en de mirror is ververst.',
   'team.guidelinesLoadError': 'Kon de guidelines niet laden',
 
+  // ---- Taken (live van schijf — NIET uit de mirror) -------------------------
+  // Bewust nergens "zodra de mirror is ververst" in dit blok: deze pagina leest
+  // Team Knowledge/tasks/ bij elke aanvraag, dus die zin zou onwaar zijn.
+  // Hetzelfde geldt voor het skills-blok hieronder.
+  'team.flyoutTasks': 'Taken',
+  'team.tasksTitle': 'Teamtaken',
+  'team.tasksSub': 'Openstaand werk van je AI-team.',
+  'team.tasksEmpty': 'Nog geen taken',
+  'team.tasksEmptySub': 'Taken die je team opent verschijnen hier zodra het bestand in Team Knowledge/tasks/ staat.',
+  'team.tasksLoadError': 'Kon de taken niet laden',
+  'team.tasksGroupInProgress': 'In behandeling',
+  'team.tasksGroupOpen': 'Open',
+  'team.tasksGroupDone': 'Recent afgerond',
+  'team.tasksGroupCancelled': 'Geannuleerd',
+  'team.tasksBlocked': 'Geblokkeerd',
+  'team.tasksUnassigned': 'niet toegewezen',
+  'team.tasksPriority': 'P{value}',
+  'team.tasksDue': 'deadline {value}',
+  'team.tasksClosedTruncated': 'Alleen de {count} meest recente worden getoond.',
+
+  // ---- Skills (live van schijf — NIET uit de mirror) ------------------------
+  'team.flyoutSkills': 'Skills',
+  'team.skillsTitle': 'Skills',
+  'team.skillsSub': 'Wat je team daadwerkelijk kan aanroepen.',
+  'team.skillsEmpty': 'Geen skills gevonden',
+  'team.skillsEmptySub': 'Domeinskills, slash-commands en geïnstalleerde plugin-skills verschijnen hier zodra ze op deze machine bestaan.',
+  'team.skillsLoadError': 'Kon de skills niet laden',
+  'team.skillsGroupDomainSkill': 'Domeinskills',
+  'team.skillsGroupSlashCommand': 'Slash-commands',
+  'team.skillsGroupPluginSkill': 'Plugin-skills',
+  'team.skillsDisabled': 'uitgeschakeld',
+  'team.skillsSourceMissing': 'Niet aanwezig op deze machine.',
+
   'team.knowledgeSubCount': '{count} {noun} · {sub}',
   'team.feedOrigin': 'het begin van het logboek van je team',
 
@@ -755,4 +788,109 @@ export const nl: Record<TranslationKey, string> = {
   'typeList.sort': 'Sorteren',
   'typeList.openRow': '{title} openen',
   'typeList.newTab': '{label} — opent in een nieuw tabblad',
+
+  // ---- Podcasts (DATA-CONTRACT §18) ---------------------------------------
+  'podcasts.title': 'Podcasts',
+  'podcasts.loadError': 'Podcasts konden niet worden geladen: {error}',
+  'podcasts.notLoadedTitle': 'De podcast-endpoints zijn nog niet geladen',
+  'podcasts.notLoadedSub':
+    'De draaiende cockpit-server is gestart voordat deze module bestond. Herstart hem en je shows verschijnen hier.',
+  'podcasts.unavailableTitle': 'Podcasts staan nog niet in je mirror',
+  'podcasts.unavailableSub':
+    'Deze pagina leest de podcast-tabellen in mypka.db. Zodra de Apple Podcasts-sync heeft gedraaid, staan je shows hier.',
+  'podcasts.emptyTitle': 'Nog geen shows',
+  'podcasts.emptySub': 'Shows verschijnen hier na de eerste sync.',
+  'podcasts.untitledShow': 'Naamloze podcast',
+  'podcasts.showsCountOne': '{count} show',
+  'podcasts.showsCountOther': '{count} shows',
+  'podcasts.episodesCountOne': '{count} aflevering',
+  'podcasts.episodesCountOther': '{count} afleveringen',
+  'podcasts.playedCount': '{count} beluisterd',
+  'podcasts.manualCount': '{count} handmatig gemarkeerd',
+  'podcasts.transcriptCount': '{count} met transcript',
+  'podcasts.transcriptCountNone': 'nog geen transcripts gekoppeld',
+  'podcasts.allEpisodes': 'Alle afleveringen',
+  'podcasts.allEpisodesSub': 'Over alle shows heen, met dezelfde filters.',
+  'podcasts.backToShows': 'Alle podcasts',
+  'podcasts.backToEpisodes': 'Terug naar de afleveringen',
+  'podcasts.openShow': '{show} openen',
+
+  // Afleveringenlijst + paginering
+  'podcasts.searchPlaceholder': 'Zoek in afleveringstitels…',
+  'podcasts.searchAria': 'Zoek afleveringen',
+  'podcasts.stateLabel': 'Status',
+  'podcasts.stateAria': 'Filter op luisterstatus',
+  'podcasts.stateListened': 'Beluisterd (alles)',
+  'podcasts.statePlayed': 'Helemaal beluisterd',
+  'podcasts.stateInProgress': 'Mee bezig',
+  'podcasts.stateUnplayed': 'Niet beluisterd',
+  'podcasts.stateManual': 'Handmatig gemarkeerd',
+  'podcasts.stateAll': 'Alles',
+  'podcasts.noResults': 'Geen afleveringen met deze filters.',
+  'podcasts.pagerAria': 'Paginering afleveringen',
+  'podcasts.pageRange': '{from}–{to} van {total}',
+  'podcasts.prevPage': 'Vorige',
+  'podcasts.nextPage': 'Volgende',
+
+  // Effectieve status (de vier view-velden — nooit in de client herberekend)
+  'podcasts.badgePlayed': 'Beluisterd',
+  'podcasts.badgeInProgress': 'Mee bezig',
+  'podcasts.badgeUnplayed': 'Niet beluisterd',
+  'podcasts.badgeUnknown': 'Status onbekend',
+  'podcasts.sourceApple': 'via Apple',
+  'podcasts.sourceManual': 'handmatig',
+  'podcasts.sourceBoth': 'Apple + handmatig',
+  'podcasts.sourceAppleTitle': 'Apple Podcasts telt deze als gespeeld.',
+  'podcasts.sourceManualTitle': 'Je hebt deze zelf gemarkeerd ({platform}); Apple heeft hem niet als gespeeld.',
+  'podcasts.sourceBothTitle': 'Apple telt deze als gespeeld én je hebt hem zelf gemarkeerd ({platform}).',
+  'podcasts.progressAria': '{percent}% beluisterd',
+
+  // Transcriptbrug
+  'podcasts.transcript': 'Transcript',
+  'podcasts.transcriptOpen': 'Transcript openen',
+  'podcasts.transcriptNone': 'Geen transcript beschikbaar',
+  'podcasts.transcriptNoneHint':
+    'Er is geen transcript aan deze aflevering gekoppeld. De matcher koppelt ze automatisch zodra hij er een vindt.',
+  'podcasts.transcriptProbable': 'waarschijnlijke match ({score})',
+  'podcasts.transcriptProbableTitle':
+    'Gematcht op {method} met een zekerheid van {score} — controleer of dit het juiste transcript is.',
+
+  // Het handmatige vinkje (het enige schrijfkanaal)
+  'podcasts.watchLabel': 'Ook elders gezien',
+  // WCAG 2.5.3: begint woordelijk met de zichtbare labeltekst, dan pas de titel.
+  'podcasts.watchAria': 'Ook elders gezien — {title}',
+  'podcasts.watchPlatformLabel': 'Platform',
+  'podcasts.watchPlatformAria': 'Platform — {title}',
+  'podcasts.watchPlatformLocked': 'Waar je hem hebt vastgelegd. Wil je dit wijzigen: vinkje uit en weer aan.',
+  'podcasts.platformWeb': 'Web',
+  'podcasts.platformOther': 'Ergens anders',
+  'podcasts.watchSaving': 'Opslaan…',
+  'podcasts.watchNoop': 'Apple telt deze al als gespeeld — het vinkje legt vast wáár, niet óf.',
+  'podcasts.watchDisabledTitle': 'Handmatig markeren staat nu uit',
+  'podcasts.watchDisabledWrite':
+    'Het schrijfkanaal staat uit (PODCAST_WATCH_WRITE_ENABLED=0). De vinkjes tonen je opgeslagen status, maar kunnen die niet wijzigen.',
+  'podcasts.watchDisabledModule':
+    'De podcast-tabellen staan niet in deze mirror, dus er valt niets te markeren.',
+  'podcasts.watchDisabledOther': 'Het schrijfkanaal is niet beschikbaar: {reason}',
+  'podcasts.watchErrorNotFound': 'Deze aflevering staat niet meer in de mirror. Ververs de pagina.',
+  'podcasts.watchErrorConflict': 'De aflevering is intussen gewijzigd. Ververs de pagina en probeer opnieuw.',
+  'podcasts.watchErrorAuth': 'Je sessie is verlopen. Log opnieuw in.',
+  'podcasts.watchErrorDisabled': 'Handmatig markeren staat uit (de server weigerde de schrijfactie).',
+  'podcasts.watchError': 'Opslaan mislukt: {message}',
+
+  // Afleveringsdetail
+  'podcasts.detailNotFound': 'Geen aflevering gevonden voor {slug}.',
+  'podcasts.showNotes': 'Shownotes',
+  'podcasts.noShowNotes': 'Deze aflevering heeft geen shownotes.',
+  'podcasts.details': 'Details',
+  'podcasts.fieldShow': 'Show',
+  'podcasts.fieldPublished': 'Gepubliceerd',
+  'podcasts.fieldDuration': 'Duur',
+  'podcasts.fieldNumbering': 'Seizoen / aflevering',
+  'podcasts.fieldLastPlayed': 'Laatst gespeeld',
+  'podcasts.fieldMarkedAt': 'Handmatig gemarkeerd op',
+  'podcasts.fieldApple': 'Apple-status',
+  'podcasts.openWebPage': 'Afleveringspagina',
+  'podcasts.openShowPage': 'Podcastpagina',
+  'podcasts.newTab': 'opent in een nieuw tabblad',
 };

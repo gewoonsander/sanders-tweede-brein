@@ -564,3 +564,167 @@ export interface AudiobookDetailResponse {
   found: boolean;
   audiobook?: Audiobook;
 }
+
+// ── Podcasts module (DATA-CONTRACT §18) ───────────────────────────────────────
+//
+// Mirrors server/podcastsApi.js verbatim. The four `effective_*` fields are
+// computed ONCE, in SQL, by `v_podcast_episodes_effective` (schema/09-module-
+// podcasts.sql). They are the ONLY fields the UI may read for a human-visible
+// "gezien": re-deriving them in TypeScript would be a second truth that rots on
+// the next sync. `play_state` / `percent_complete` / `is_finished` stay pure
+// Apple mirrors and are surfaced only where the provenance itself is the point.
+
+/** Apple's normalised listening token. NULL is a real, legal value (§18.9). */
+export type PodcastPlayState = 'unplayed' | 'in-progress' | 'played';
+
+/** WHY an episode counts as watched — lets the UI badge it honestly instead of
+ *  presenting a hand-set flag as Apple telemetry. NULL when not watched at all. */
+export type PodcastWatchSource = 'apple' | 'manual' | 'both';
+
+/** The closed platform vocabulary of the manual override (podcastsDb.js
+ *  ALLOWED_PLATFORMS). The server rejects anything else with a 400. */
+export type PodcastWatchPlatform = 'youtube' | 'spotify' | 'web' | 'other';
+
+/** The `state` query parameter of the episode list. Named for what the human
+ *  sees; the SQL predicate lives server-side in STATE_FILTERS. */
+export type PodcastEpisodeState =
+  | 'listened' | 'played' | 'in-progress' | 'unplayed' | 'manual' | 'all';
+
+/** How the transcript link was established. The match is an INFERENCE and is
+ *  carried as one — see `transcript_match_score`. */
+export type PodcastTranscriptMethod =
+  | 'season_episode' | 'normalized_title_exact' | 'fuzzy_title' | 'manual';
+
+/** Whether the ONE write channel (the manual tick) is live right now.
+ *  `available:false` means render the checkbox read-only, NOT broken. */
+export interface PodcastWriteStatus {
+  available: boolean;
+  /** 'module-absent' | 'write-disabled' | a connection error message. */
+  reason: string | null;
+}
+
+/** One row of the shows overview (podcastsApi.js getPodcastsOverview). The four
+ *  counts are SQL aggregates over the effective view, not client-side tallies. */
+export interface PodcastShow {
+  slug: string;
+  /** NULLABLE and, on the live mirror, empty for at least one row — always
+   *  render a fallback label rather than an empty heading. */
+  title: string | null;
+  author: string | null;
+  artwork_url: string | null;
+  web_page_url: string | null;
+  category: string | null;
+  is_subscribed: number | null;
+  last_played_date: string | null;
+  episode_count: number;
+  played_count: number | null;
+  in_progress_count: number | null;
+  manual_count: number | null;
+}
+
+/** Library-wide totals. Every SUM() is NULL on an empty table, never 0. */
+export interface PodcastTotals {
+  episode_count: number;
+  played_count: number | null;
+  manual_count: number | null;
+  transcript_count: number | null;
+}
+
+/** One episode as the LIST projection shapes it (LIST_COLUMNS + shapeEpisode).
+ *  `body` / `raw_frontmatter` are deliberately absent from this payload. */
+export interface PodcastEpisode {
+  slug: string;
+  guid: string;
+  title: string | null;
+  podcast_slug: string | null;
+  pubdate: string | null;
+  duration_seconds: number | null;
+  season_number: number | null;
+  episode_number: number | null;
+  /** Already falls back to the show's artwork server-side (§18.5). */
+  artwork_url: string | null;
+  web_page_url: string | null;
+  /** Apple's own state — provenance only. Render `effective_play_state`. */
+  play_state: PodcastPlayState | null;
+  percent_complete: number | null;
+  last_played_date: string | null;
+  /** The hand-owned override. Server normalises SQLite's 0/1 to a boolean. */
+  manual_watched: boolean;
+  manual_watched_platform: PodcastWatchPlatform | null;
+  manual_watched_at: string | null;
+  /** THE four display fields — computed in SQL, never recomputed here. */
+  effective_play_state: PodcastPlayState | null;
+  effective_is_finished: boolean;
+  effective_watch_source: PodcastWatchSource | null;
+  effective_percent_complete: number | null;
+  /** Repo-root-relative ("PKM/Documents/YouTube-Kennis/…"), or NULL. NULL is the
+   *  overwhelming majority case by design — most episodes never get one. */
+  transcript_path: string | null;
+  transcript_match_method: PodcastTranscriptMethod | null;
+  /** 0..1 confidence. Anything below 0.95 must read as "probable match". */
+  transcript_match_score: number | null;
+  tags: string[];
+  show_title: string | null;
+  show_artwork_url: string | null;
+  show_author: string | null;
+}
+
+/** The detail fetch is `SELECT e.*`, so it adds the rendered show notes plus the
+ *  provenance columns the list projection leaves out. */
+export interface PodcastEpisodeDetail extends PodcastEpisode {
+  body: string | null;
+  file_path: string | null;
+  enclosure_url: string | null;
+  episode_type: string | null;
+  is_saved: number | null;
+  is_bookmarked: number | null;
+  is_downloaded: number | null;
+  play_count: number | null;
+  transcript_matched_at: string | null;
+  source_synced_at: string | null;
+  show_web_page_url: string | null;
+}
+
+/** GET /api/cockpit/podcasts — the shows overview + the write-channel status.
+ *  On a mirror without the module every field degrades: `available:false`,
+ *  `shows:[]`, `totals:null`, and `platforms` absent entirely. */
+export interface PodcastsOverviewResponse {
+  available: boolean;
+  shows: PodcastShow[];
+  totals: PodcastTotals | null;
+  platforms?: PodcastWatchPlatform[];
+  write: PodcastWriteStatus;
+}
+
+/** GET /api/cockpit/podcasts/episodes — the PAGINATED grid. `limit` defaults to
+ *  100 and is hard-capped at 500 server-side: there are 4732 episodes and the
+ *  number grows every sync, so there is no "show everything" mode. */
+export interface PodcastEpisodesResponse {
+  available: boolean;
+  /** The state the server actually applied (an unknown value falls back to
+   *  'listened'), so the UI can reflect reality rather than its own request. */
+  state?: PodcastEpisodeState;
+  show?: string | null;
+  total: number;
+  limit?: number;
+  offset?: number;
+  hasMore?: boolean;
+  episodes: PodcastEpisode[];
+  write?: PodcastWriteStatus;
+}
+
+/** GET /api/cockpit/podcasts/episodes/:slug — one episode (detail-large). */
+export interface PodcastEpisodeResponse {
+  available: boolean;
+  found: boolean;
+  episode?: PodcastEpisodeDetail;
+  platforms?: PodcastWatchPlatform[];
+  write?: PodcastWriteStatus;
+}
+
+/** PATCH …/watched — the server echoes the row back FROM THE VIEW, so the UI
+ *  takes its new effective state from the database, never from a local guess. */
+export interface PodcastWatchWriteResult {
+  ok: true;
+  episode: PodcastEpisodeDetail;
+}

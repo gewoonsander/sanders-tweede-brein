@@ -40,6 +40,25 @@ Visual evidence is the foundation of every finding. Without it, the gate is just
 
 If browser-automation tooling isn't available in your runtime, ask the user to provide screenshots. Don't run the gate from imagination — visual inspection requires visual evidence.
 
+### Known pitfall — `chrome --headless --screenshot` + `--virtual-time-budget` gives false-positive overflow on this app
+
+Confirmed 2026-08-19 during the Team Tasks / Skills QA gate (`TeamTasksView.tsx` / `SkillsView.tsx` in the myPKA Cockpit, `Expansions/mypka-cockpit/web/src/views/`): capturing screenshots via
+
+```
+chrome --headless --screenshot=out.png --window-size=<w>,<h> --virtual-time-budget=4000 <url>
+```
+
+produced *identical, reproducible-looking* horizontal-overflow / mid-word-clipped-text screenshots at narrow widths (320–414px) both **before and after** a real fix was applied to the underlying CSS. The `--virtual-time-budget` flag advances a virtual clock rather than real wall time, which races against real font loading (`@font-face` swap) and the app's own `fetch()`-based data loading — the screenshot can be taken against a transiently-unsettled layout that never actually renders that way for a real user.
+
+**The reliable alternative for this app** — used to both find genuine bugs and disprove a suspected false positive — is the Chrome DevTools Protocol (CDP) directly, via `--remote-debugging-port` + a small script (Node's built-in `WebSocket` needs no extra dependency, since Playwright/Puppeteer are not installed in this repo):
+
+1. Launch once, keep it running: `chrome --headless=new --remote-debugging-port=<port> --disable-gpu about:blank &`
+2. Per breakpoint: `Emulation.setDeviceMetricsOverride({width, height, deviceScaleFactor:1, mobile: width<768})`, then `Page.navigate`, then wait in **real** time (`setTimeout`, not `--virtual-time-budget`) and `await document.fonts.ready` before measuring.
+3. Measure objectively with `Runtime.evaluate`: compare `document.documentElement.scrollWidth` to `window.innerWidth` (any positive delta is a real overflow), and/or walk `document.querySelectorAll('*')` for any `getBoundingClientRect().right > innerWidth`.
+4. Capture visual evidence with `Page.captureScreenshot` (native CDP screenshot) rather than the CLI `--screenshot` flag — it reflects the same settled DOM state you just measured.
+
+Rule of thumb: if a `--screenshot`-flag finding looks suspiciously identical before and after a fix that should plausibly have resolved it, cross-check with the CDP method above before either confirming or reversing a verdict. Don't trust a single capture method when the two disagree — resolve the disagreement with the more rigorous one (CDP) rather than picking whichever result you expected.
+
 ### Phase 3 — Visual analysis
 
 For every screenshot, walk through these checks:

@@ -31,6 +31,12 @@ Bron: officiële bijsluiter Antischimmelcrème HTP Terbinafine HCl 10 mg/g (medi
 
 ## Reflection
 
+### 2026-08-19
+
+- done: true
+- trigger: chat
+- note: in chat gemeld: schimmelzalf gebruikt
+
 ### 2026-08-18
 
 - done: true

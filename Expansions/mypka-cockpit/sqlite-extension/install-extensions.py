@@ -36,6 +36,9 @@ WHAT IT DOES, EXACTLY
                         empty tables, regen fills them from PKM/<Library>/ markdown)
        --with-outer-world  outer_world (mymind-style saved-content module; empty table,
                         regen fills it from PKM/Outer World/ markdown)
+       --with-podcasts  podcasts + podcast_episodes (Apple Podcasts listening history;
+                        SOURCE-DERIVED — a periodic sync fills them read-only from
+                        MTLibrary.sqlite, the regen never owns them)
        --with-health    health_metric / health_sleep / health_mood
        --with-workouts  health_workout / health_workout_route
        --with-habits    habit_logs (+ v_habit_heatmap, v_habit_streaks)
@@ -342,6 +345,153 @@ CREATE TABLE outer_world (
 OUTER_WORLD_INDEXES = [
     ("idx_outer_world_captured_on", "outer_world", "captured_on"),
     ("idx_outer_world_source_type", "outer_world", "source_type"),
+]
+
+# ---------------------------------------------------------------------------
+# Podcasts module (schema/09-module-podcasts.sql). SOURCE-DERIVED, not md-first:
+# the canonical source is Apple Podcasts' local CoreData store
+# (~/Library/Group Containers/243LU875E5.groups.com.apple.podcasts/Documents/
+#  MTLibrary.sqlite), read read-only by a periodic sync — same posture as the
+# `audiobooks` table, NOT the md-first library pattern.
+#
+# Created EMPTY here (and by --with-podcasts / --all); the sync fills them. The
+# regen does NOT own these tables (they are absent from its OWNED_TABLES), so
+# they survive every regen — but `library_registry` IS regen-owned, which is why
+# the registry row is ALSO re-seeded from the regen's EXTERNAL_LIBRARIES block.
+# Seeding it here only covers the non-regen install path.
+#
+# ⚠️  The source format is undocumented and unofficial; Apple can break it in any
+# OS update. See the header of schema/09-module-podcasts.sql for the full risk
+# note and the empirically-verified column semantics.
+# ---------------------------------------------------------------------------
+PODCAST_TABLES = {
+    "podcasts": """
+CREATE TABLE podcasts (
+  id INTEGER PRIMARY KEY, slug TEXT NOT NULL,
+  apple_pk INTEGER, apple_uuid TEXT,
+  title TEXT, author TEXT, feed_url TEXT, store_collection_id INTEGER,
+  web_page_url TEXT, artwork_url TEXT, category TEXT,
+  is_subscribed INTEGER DEFAULT 0, is_implicitly_followed INTEGER DEFAULT 0,
+  episode_count INTEGER, added_on TEXT, last_played_date TEXT,
+  linked_topics TEXT, linked_key_elements TEXT, linked_projects TEXT,
+  linked_people TEXT,
+  source_synced_at TEXT, source_db_path TEXT)
+""",
+    "podcast_episodes": """
+CREATE TABLE podcast_episodes (
+  id INTEGER PRIMARY KEY,
+  slug TEXT NOT NULL, title TEXT, status TEXT, tags TEXT, body TEXT,
+  file_path TEXT, raw_frontmatter TEXT,
+  guid TEXT NOT NULL, apple_pk INTEGER, podcast_slug TEXT,
+  apple_podcast_pk INTEGER, apple_podcast_uuid TEXT,
+  enclosure_url TEXT, web_page_url TEXT, artwork_url TEXT,
+  season_number INTEGER, episode_number INTEGER, episode_type TEXT,
+  duration_seconds REAL, pubdate TEXT,
+  play_state TEXT, apple_play_state_raw INTEGER, playhead_seconds REAL,
+  percent_complete REAL, is_finished INTEGER DEFAULT 0, play_count INTEGER,
+  last_played_date TEXT,
+  is_saved INTEGER DEFAULT 0, is_bookmarked INTEGER DEFAULT 0,
+  is_downloaded INTEGER DEFAULT 0,
+  manual_watched INTEGER NOT NULL DEFAULT 0
+    CHECK (manual_watched IN (0, 1)),
+  manual_watched_platform TEXT
+    CHECK (manual_watched_platform IS NULL OR manual_watched = 1)
+    CHECK (manual_watched_platform IS NULL OR manual_watched_platform IN
+           ('youtube', 'spotify', 'web', 'other')),
+  manual_watched_at TEXT
+    CHECK ((manual_watched = 1) = (manual_watched_at IS NOT NULL)),
+  transcript_path TEXT, transcript_match_method TEXT,
+  transcript_match_score REAL, transcript_matched_at TEXT,
+  source_synced_at TEXT, source_db_path TEXT,
+  CHECK (status IS play_state),
+  CHECK (play_state IS NULL OR play_state IN ('unplayed', 'in-progress', 'played')),
+  CHECK (transcript_match_method IS NULL OR transcript_match_method IN
+         ('season_episode', 'normalized_title_exact', 'fuzzy_title', 'manual')))
+""",
+}
+
+# The Inner-World ANNOTATION layer on `podcast_episodes` — Sander's hand-set
+# "ook gezien via een ander platform" tick (2026-08-19). Apple's store systematically
+# misses episodes watched on YouTube, so the automatic mirror needs a human layer
+# ON TOP of it — never a patch INTO it. See schema/09-module-podcasts.sql design
+# decision 4 and DATA-CONTRACT.md §18.9.
+#
+# This list is the UPGRADE path for a database where `podcast_episodes` already
+# exists from an earlier install: ALTER TABLE ADD COLUMN, guarded by PRAGMA.
+# The constraints are written as COLUMN constraints (not table constraints) so the
+# ALTER path produces the SAME enforcement as the CREATE above — SQLite accepts a
+# column-level CHECK in ADD COLUMN but cannot add a table-level one. `NOT NULL
+# DEFAULT 0` is likewise legal in ADD COLUMN because the default is non-NULL, so
+# existing rows land on "not manually watched" without a rewrite.
+PODCAST_EPISODE_ANNOTATION_COLUMNS = [
+    ("manual_watched",
+     "INTEGER NOT NULL DEFAULT 0 CHECK (manual_watched IN (0, 1))"),
+    ("manual_watched_platform",
+     "TEXT CHECK (manual_watched_platform IS NULL OR manual_watched = 1)"
+     " CHECK (manual_watched_platform IS NULL OR manual_watched_platform IN"
+     " ('youtube', 'spotify', 'web', 'other'))"),
+    ("manual_watched_at",
+     "TEXT CHECK ((manual_watched = 1) = (manual_watched_at IS NOT NULL))"),
+]
+
+# The single place the "Apple state OR manual tick" rule is computed. A VIEW rather
+# than a stored column: the answer is a pure function of two stored facts, so
+# storing it would create a third copy that goes stale on the next sync or the next
+# tick. Views hold no rows, so drop+recreate via ensure_views() is lossless and
+# keeps the definition fresh on every install run.
+PODCAST_VIEWS = {
+    "v_podcast_episodes_effective": """
+CREATE VIEW v_podcast_episodes_effective AS
+SELECT
+  e.*,
+  CASE
+    WHEN e.play_state = 'played' THEN 'played'
+    WHEN e.manual_watched = 1    THEN 'played'
+    ELSE e.play_state
+  END AS effective_play_state,
+  CASE
+    WHEN e.play_state = 'played' OR e.manual_watched = 1 THEN 1
+    ELSE 0
+  END AS effective_is_finished,
+  CASE
+    WHEN e.play_state = 'played' AND e.manual_watched = 1 THEN 'both'
+    WHEN e.play_state = 'played'                          THEN 'apple'
+    WHEN e.manual_watched = 1                             THEN 'manual'
+    ELSE NULL
+  END AS effective_watch_source,
+  CASE
+    WHEN e.play_state = 'played' THEN e.percent_complete
+    WHEN e.manual_watched = 1    THEN 100.0
+    ELSE e.percent_complete
+  END AS effective_percent_complete
+FROM podcast_episodes e
+""",
+}
+
+# (index_name, table, column_expr, where_clause_or_None, unique)
+PODCAST_INDEXES = [
+    ("idx_podcasts_slug", "podcasts", "slug", None, True),
+    ("idx_podcasts_feed_url", "podcasts", "feed_url", None, True),
+    ("idx_podcast_episodes_guid", "podcast_episodes", "guid", None, True),
+    ("idx_podcast_episodes_slug", "podcast_episodes", "slug", None, True),
+    ("idx_podcast_episodes_play_state", "podcast_episodes", "play_state", None, False),
+    ("idx_podcast_episodes_podcast_slug", "podcast_episodes", "podcast_slug", None, False),
+    ("idx_podcast_episodes_last_played", "podcast_episodes", "last_played_date", None, False),
+    ("idx_podcast_episodes_transcript", "podcast_episodes", "transcript_path",
+     "transcript_path IS NOT NULL", False),
+    # Partial: the tick is set on a handful of rows out of ~4700, so the index is
+    # roughly the size of the answer instead of the size of the table.
+    ("idx_podcast_episodes_manual_watched", "podcast_episodes", "manual_watched",
+     "manual_watched = 1", False),
+]
+
+# The registry row that puts Podcasts in the data-driven Library nav. `doc_type`
+# is NULL: these rows are not mirrored from markdown, so no frontmatter
+# discriminator applies. `pkm_folder` names the transcript folder — the only
+# PKM-side folder this library touches.
+PODCAST_REGISTRY_SEED = [
+    ("podcast_episodes", "Podcasts", "Podcast",
+     "PKM/Documents/YouTube-Kennis", None, 30),
 ]
 
 TRANSACTIONS_CREATE = """
@@ -672,6 +822,63 @@ def install_libraries(cur, tables_now, plan, dry):
             plan.add(f"library_registry row {slug} (if absent)")
 
 
+def install_podcasts(cur, tables_now, plan, dry):
+    """Podcasts module backing (Apple Podcasts listening history). Creates the empty
+    `podcasts` + `podcast_episodes` tables, their indexes, and the
+    `library_registry` row. --with-podcasts (or --all).
+
+    SOURCE-DERIVED: a periodic sync fills these from MTLibrary.sqlite (read-only);
+    the regen never touches them. Additive + idempotent: tables are
+    CREATE-if-absent, indexes are CREATE … IF NOT EXISTS, the registry row is
+    inserted ONLY when that library_slug is absent."""
+    # Whether the episodes table PRE-existed decides which path installs the
+    # annotation columns: a fresh CREATE already carries them, an older table needs
+    # the ALTER upgrade. Captured before ensure_table() mutates tables_now, so the
+    # --dry-run output does not claim three ALTERs that a CREATE would have covered.
+    had_episodes = "podcast_episodes" in tables_now
+    for name, ddl in PODCAST_TABLES.items():
+        ensure_table(cur, name, ddl, tables_now, plan, dry)
+    # Upgrade path for installations that predate the manual-override layer
+    # (2026-08-19). Additive, lossless, re-runnable.
+    if had_episodes:
+        ensure_columns(cur, "podcast_episodes",
+                       PODCAST_EPISODE_ANNOTATION_COLUMNS, plan, dry)
+    if not dry:
+        for idx, table, col, where, unique in PODCAST_INDEXES:
+            if table not in tables_now:
+                continue
+            uniq = "UNIQUE " if unique else ""
+            tail = f" WHERE {where}" if where else ""
+            cur.execute(f"CREATE {uniq}INDEX IF NOT EXISTS {idx} ON {table} ({col}){tail}")
+    # The effective-status view. MUST come after the annotation columns exist — it
+    # references manual_watched, and SQLite only resolves a view's column names when
+    # the view is QUERIED, so a view created too early would fail silently at
+    # install time and loudly on the first read.
+    if "podcast_episodes" in tables_now:
+        ensure_views(cur, PODCAST_VIEWS, plan, dry)
+    # Registry row — only meaningful once library_registry exists (it is created by
+    # install_libraries, which runs first under --all). Under an explicit
+    # --with-podcasts WITHOUT --with-libraries the registry may be absent; that is
+    # not an error, the tables still install and the regen's EXTERNAL_LIBRARIES
+    # block will seed the row on the next regen.
+    if not dry and "library_registry" in tables_now:
+        have_slugs = {r[0] for r in cur.execute(
+            "SELECT library_slug FROM library_registry")}
+        for slug, label, icon, folder, doc_type, order in PODCAST_REGISTRY_SEED:
+            if slug in have_slugs:
+                plan.have(f"library_registry row {slug}")
+                continue
+            plan.add(f"library_registry row {slug}")
+            cur.execute(
+                "INSERT INTO library_registry (library_slug, nav_label, nav_icon,"
+                " pkm_folder, doc_type, title_field, sort_order)"
+                " VALUES (?,?,?,?,?,?,?)",
+                (slug, label, icon, folder, doc_type, "title", order))
+    elif dry:
+        for slug, *_ in PODCAST_REGISTRY_SEED:
+            plan.add(f"library_registry row {slug} (if absent)")
+
+
 def install_outer_world(cur, tables_now, plan, dry):
     """Outer World module backing (mymind-style saved external content). Creates the
     empty `outer_world` table + its two indexes; the regen fills it from
@@ -698,6 +905,9 @@ def main():
     ap.add_argument("--with-outer-world", action="store_true",
                     help="add the `outer_world` table (mymind-style saved-content module; "
                          "regen fills it from PKM/Outer World/ markdown)")
+    ap.add_argument("--with-podcasts", action="store_true",
+                    help="add `podcasts` + `podcast_episodes` (Apple Podcasts listening "
+                         "history; a periodic sync fills them from MTLibrary.sqlite)")
     ap.add_argument("--with-health", action="store_true",
                     help="add health_metric / health_sleep / health_mood + habits.started_on/status")
     ap.add_argument("--with-workouts", action="store_true",
@@ -746,6 +956,7 @@ def main():
     # data source is a few unused EMPTY tables — never a dropped table, never a
     # modified or deleted row.
     module_flags = (args.with_quotes or args.with_libraries or args.with_outer_world
+                    or args.with_podcasts
                     or args.with_health or args.with_workouts or args.with_habits
                     or args.with_food)
     install_all = args.all or not module_flags  # no explicit selection ⇒ all
@@ -753,6 +964,7 @@ def main():
     with_quotes = args.with_quotes or install_all
     with_libraries = args.with_libraries or install_all
     with_outer_world = args.with_outer_world or install_all
+    with_podcasts = args.with_podcasts or install_all
     with_health = args.with_health or install_all
     with_workouts = args.with_workouts or install_all
     with_habits = args.with_habits or install_all
@@ -791,6 +1003,10 @@ def main():
         install_libraries(cur, tables_now, plan, args.dry_run)
     if with_outer_world:
         install_outer_world(cur, tables_now, plan, args.dry_run)
+    # Podcasts AFTER libraries: it seeds a library_registry row, which requires the
+    # registry table install_libraries creates.
+    if with_podcasts:
+        install_podcasts(cur, tables_now, plan, args.dry_run)
     if with_health:
         ensure_columns(cur, "habits", HABITS_EXTRA_COLUMNS, plan, args.dry_run)
         for name, ddl in HEALTH_TABLES.items():

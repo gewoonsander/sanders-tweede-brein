@@ -42,6 +42,7 @@ ignored; **fewer** columns break the query.
 | **Hub — random quote** | `quotes` | — | `quotes(slug, quote_text, author, author_slug, source, quote_year, tags, file_path)` (see §8) | `doc_type: quote`, `author` (string or `[[wikilink]]`), `source`, `tags`, `year`; body = quote text |
 | **Library** (recipes, movies, + adapted) | `library_registry`, `recipes`, `movies` (+ any adapted library table) | — | `library_registry(library_slug, nav_label, nav_icon, doc_type, sort_order)`; per-library invariant cols + axis cols (see §11) | `doc_type: <recipe\|movie\|…>` discriminator + the library's axis frontmatter fields; body = item detail |
 | **Outer World** (mymind-style saved content) | `outer_world` | — | `outer_world(slug, title, captured_on, source_url, source_type, source_author, embed_*, tom_context, tags, linked_topics, linked_key_elements, linked_projects, linked_people, linked_organizations, body, file_path)` (see §14) | `doc_type: outer-world`, `source_url`, `source_type`, `captured_on`, the FLAT `embed_*` card fields, `tom_context`, `tags`, `linked_*`; body = `## Summary`/`## Clip`/`## Context` |
+| **Podcasts** (Apple Podcasts listening history) | `podcasts`, `podcast_episodes` (+ a `library_registry` row) | — | `podcast_episodes(slug, title, status, play_state, percent_complete, is_finished, playhead_seconds, duration_seconds, pubdate, last_played_date, podcast_slug, guid, enclosure_url, transcript_path, transcript_match_method, transcript_match_score, file_path)`; `podcasts(slug, title, author, artwork_url, is_subscribed, is_implicitly_followed)` (see §18) | **NOT from markdown** — a periodic sync reads Apple's undocumented `MTLibrary.sqlite` **read-only**. `transcript_path` is matched against existing transcripts in `PKM/Documents/YouTube-Kennis/`. |
 | **Graph views** (core) | `links`, entity tables | — | `goals.key_element`, `goals.linked_projects`, `topics.key_element`, `json_extract(raw_frontmatter,'$.lifecycle' / '$.promoted_to' / '$.linked_habits')` | `key_element`, `linked_projects`, `lifecycle`, `promoted_to`, `linked_habits` |
 | **Team Knowledge browser** (governance docs) | `workstreams`, `sops`, `guidelines`, `links` | — | `<table>(slug, doc_id, title, status, owner, doc_type, summary, version, triggered_by, tags, body, file_path, raw_frontmatter)` (see §17); `links WHERE source_table IN ('workstreams','sops','guidelines')` for outbound refs + backlinks | **No YAML frontmatter** — parsed from the `- **Label:** value` header bullet block under the H1 (Status/Owner(s)/Default owner/Type/Version/Triggered by/References). Sources `Team Knowledge/Workstreams\|SOPs\|Guidelines/**`. |
 | **Team roster** (core) | `agents` | — | `slug, name, folder, agent_status, bio, avatar_path, owner` (only `agent_status='active'`) | the `Team/<Name - Role>/AGENTS.md` frontmatter |
@@ -1330,6 +1331,423 @@ Indexes: `idx_<table>_doc_id` on `(doc_id)` each.
 > contract. Field names are the agreed names — change them only by editing the
 > regen + this contract together (append-only; never rename a shipped column
 > silently).
+---
+
+## 18. Podcasts — `podcasts` + `podcast_episodes` (Apple Podcasts listening history)
+
+Defined in `schema/09-module-podcasts.sql`; created empty by
+`install-extensions.py --with-podcasts` (or `--all`); filled by a periodic sync
+(Daedalus). Transcript links are computed by
+`scripts/lib/podcast_transcript_match.py`.
+
+### 18.1 Source, and the risk that comes with it
+
+Apple Podcasts syncs the iPhone's listening state via iCloud into a local
+CoreData store on the Mac:
+
+```
+~/Library/Group Containers/243LU875E5.groups.com.apple.podcasts/Documents/MTLibrary.sqlite
+```
+
+**This is an undocumented, unofficial, private Apple format.** There is no
+published contract. A macOS or Podcasts update can rename a table, renumber
+`ZPLAYSTATE`, or move the file with no notice. Everything below was established
+**empirically on 2026-08-19** against a live store, not from documentation.
+
+Three consequences are designed in rather than hoped away:
+
+- the sync opens the source **read-only** (`file:<path>?mode=ro`) — the Podcasts
+  app holds it open and writes to it;
+- both tables carry `source_synced_at` / `source_db_path`, so a stale or
+  half-broken sync is visible **in the data**;
+- `apple_play_state_raw` keeps Apple's original integer beside the normalized
+  token, so a future renumbering is diagnosable from the mirror alone.
+
+### 18.2 Source-derived, not md-first — and what that means for the regen
+
+Unlike every md-first table, the canonical source here is another application's
+database. So:
+
+- the regen does **not** own `podcasts` / `podcast_episodes`. They are absent
+  from `OWNED_TABLES` and therefore **preserved** across every regen — the same
+  posture as `audiobooks`.
+- but `library_registry` **is** regen-owned (dropped and rebuilt each run). A
+  registry row written only by the installer would silently vanish on the next
+  regen and the library would drop out of the nav with no error anywhere. The
+  regen therefore carries an **`EXTERNAL_LIBRARIES`** block that re-seeds registry
+  rows for source-derived libraries while leaving their data untouched.
+  **Registration survives; data is never touched.**
+
+### 18.3 Registered as a library (unlike `audiobooks`)
+
+`podcast_episodes` carries the full §11.2 invariant column set and gets a
+`library_registry` row, so the already-shipped generic read surface in
+`server/libraryApi.js` serves it with **zero new server code**:
+`/api/cockpit/libraries`, `/api/cockpit/library/podcast_episodes`,
+`/api/cockpit/library/podcast_episodes/item/:slug`.
+
+`audiobooks` chose the opposite (own PK `asin`, own endpoint family, no registry
+row) and paid for it with a bespoke API module. That precedent is deliberately
+**not** repeated.
+
+Because `libraryApi.js` interpolates `library_slug` as a table identifier, the
+registry slug **must** equal the table name — so the route is
+`#/podcast_episodes`, not `#/podcasts`. `podcasts` is the show dimension and is
+intentionally **not** registered: it is a join target, not a browsable grid.
+
+### 18.4 Normalized play state (never Apple's raw integer)
+
+| `play_state` | Apple `ZPLAYSTATE` | verified count (2026-08-19) |
+|---|---|---|
+| `unplayed` | 0 | 4665 |
+| `in-progress` | 1 | 46 |
+| `played` | 2 | 21 |
+
+`status` (the library-foundation invariant) carries the **identical** token,
+enforced by `CHECK (status IS play_state)` — the aliasing is a database
+constraint, not a convention a sync script can forget. A closed-vocabulary CHECK
+rejects anything outside the three tokens, so a raw `0`/`1`/`2` written by
+mistake fails loudly instead of entering the mirror.
+
+> **These five columns are a PURE Apple mirror.** `play_state`,
+> `apple_play_state_raw`, `status`, `is_finished` and `percent_complete` never
+> carry a human decision. What Sander watched elsewhere lives in the separate
+> annotation layer of **§18.9**, and the OR of the two is read from the view
+> `v_podcast_episodes_effective`. Never write a manual override into these five.
+
+**`playhead_seconds` is not progress.** A fully-played episode usually has
+playhead `0.0` (Apple resets it on completion). Read `percent_complete`, which
+the sync computes from `play_state`: `played` → 100.0; `in-progress` →
+`round(playhead/duration*100, 1)` (NULL when duration is NULL/0); `unplayed` →
+0.0. `is_finished` is INTEGER 0/1 (not the TEXT `'True'` that `audiobooks`
+inherited from the Audible TSV and has to coerce on every read).
+
+### 18.5 Columns to treat as unreliable
+
+Fill rates measured across all 4732 episode rows:
+
+| Column | Populated | Note |
+|---|---|---|
+| `guid`, `enclosure_url` | 4732 / 4732 | `guid` is the identity/upsert key |
+| `body` (show notes) | 4730 / 4732 | |
+| `web_page_url` | 4030 / 4732 | |
+| `episode_number` | 2865 / 4732 | **also wrong on real rows** — see below |
+| `artwork_url` | 2131 / 4732 | fall back to show artwork |
+| `season_number` | 986 / 4732 | never read a NULL as "season 1" |
+| `last_played_date` | 77 / 4732 | sparse — fine for "recently listened", useless as a primary sort |
+
+Apple's structured season/episode columns are not merely sparse, they are
+**incorrect** on real rows: Dartpraat's *"Dartpraat 18"* carries
+`ZEPISODENUMBER` 21 and *"Dartpraat 28"* carries 27. The title token is
+authoritative; the structured columns are a last-resort fallback only. This is
+why the matcher parses titles.
+
+### 18.6 `transcript_path` — the bridge back to canonical markdown
+
+`transcript_path` is a root-relative path to an existing transcript under
+`PKM/Documents/YouTube-Kennis/<Channel>/`, or NULL. **NULLABLE BY DESIGN** — most
+episodes have no transcript and never will.
+
+A match is an **inference**, and is stored as one:
+
+- `transcript_match_method` ∈ `season_episode` | `normalized_title_exact` |
+  `fuzzy_title` | `manual` (CHECK-enforced);
+- `transcript_match_score` REAL 0..1.
+
+**A UI showing a transcript link must render anything below 0.95 as a *probable*
+match, never as a certainty.**
+
+`manual` outranks everything: the matcher never overwrites or clears a row whose
+method is `manual`.
+
+### 18.7 The match cascade
+
+Scoped per show via an explicit channel → podcast map (`TRANSCRIPT_SOURCES`); an
+unmapped transcript folder is skipped and reported, never guessed into a show.
+Assignment is one-to-one and greedy by descending score.
+
+1. **`season_episode` (1.0)** — equal `SxxEyy` token, parsed from the **title**.
+2. **`episode_ordinal` (0.90)** — neither side has a season token but both expose
+   a bare ordinal (`Dartpraat 33 - …` vs `… Aflevering 33 …`). Accepted **only**
+   when corroborated by a publication date within 7 days, or a ≥0.30 token
+   overlap on the rest of the title. Uncorroborated ordinal equality is
+   *rejected*, not downgraded.
+3. **`normalized_title_exact` (0.95)** — normalized titles equal.
+4. **`fuzzy_title` (ratio, from 0.82)** — `SequenceMatcher`, guarded by ≥0.50
+   token Jaccard overlap so short titles can't false-positive.
+5. **Tiebreakers** when candidates fall within 0.02: publication date first, then
+   a title-similarity margin of ≥0.05; otherwise the pair is reported
+   **ambiguous and left unmatched**. No link is better than a coin-flip link.
+
+The transcript files carry **no YAML frontmatter** (a known GL-002 deviation), so
+the publication date is parsed out of the **title**, where many channels put it:
+`[02-05-2024]`, `[13 juli 2023]`, `[17/8/23]`, `[21 sept 2023]` (Dutch month
+names and three separator styles handled).
+
+### 18.8 Known scaling caveat for the UI
+
+`listLibraryItems()` in `libraryApi.js` has no LIMIT — it projects every row of a
+library. That is correct for recipes/movies (tens of rows) but this table holds
+~4700 rows and grows with every sync. Before the podcasts grid ships, either
+paginate that endpoint or have the view filter server-side on
+`play_state <> 'unplayed'`. Flagged, not fixed here — it is a shared endpoint.
+
+Also: `nav_icon` is `Podcast`, which is **not** in `LibraryView.tsx`'s curated
+`LIBRARY_ICONS` allow-list. It degrades to the generic library icon (by design,
+no crash); adding one line to that map is a frontend follow-up.
+
+### 18.9 Handmatige override — "ook gezien via een ander platform" (2026-08-19)
+
+**The problem.** Sander watches some shows (Dartpraat) partly in the Apple
+Podcasts app and partly on YouTube — per episode, unpredictably. Apple's store
+knows nothing about the YouTube half, so `ZPLAYSTATE` stays `0` forever on those
+episodes. The automatic mirror is therefore not wrong, it is **systematically
+incomplete**, and no amount of better syncing fixes it.
+
+**The shape of the fix: an annotation layer, not a patch.** This reuses the
+layering the Outer World already established (**§14.1**): an immutable SOURCE
+record with an Inner-World **ANNOTATION** layer laid on top of it, in the same
+row, under separately-named columns. Apple's five state columns (§18.4) stay a
+pure mirror; the human layer sits beside them; the combination is computed once,
+in SQL.
+
+| Column | Type | Meaning |
+|---|---|---|
+| `manual_watched` | INTEGER `NOT NULL DEFAULT 0`, CHECK `IN (0,1)` | Sander's tick: "ook gezien via een ander platform" |
+| `manual_watched_platform` | TEXT, CHECK `IN ('youtube','spotify','web','other')` | where he watched it; NULL when the tick is off |
+| `manual_watched_at` | TEXT ISO-8601 UTC | when the tick was set; NULL when off |
+
+Two coherence CHECKs make the trio impossible to leave half-set:
+`manual_watched_platform IS NULL OR manual_watched = 1`, and
+`(manual_watched = 1) = (manual_watched_at IS NOT NULL)`. **Consequence for the
+API: unticking is ONE `UPDATE` that nulls all three columns.** Clearing only
+`manual_watched` raises a CHECK failure by design, rather than leaving a ghost
+platform on an unticked row.
+
+#### Why a boolean and not an enum
+
+- The override is **monotone by requirement**: it may only ever ADD "gezien",
+  never take it away. A boolean has no value that can contradict Apple. A
+  `manual_play_state` enum would immediately admit `'unplayed'` — a state a
+  checkbox cannot express — and would force a precedence rule ("who wins when
+  Apple says played and the human says unplayed?") that the requirement
+  explicitly rules out. Do not model states already decided to be illegal.
+- The control Sander asked for is literally one checkbox. One bit of truth, one
+  bit of storage.
+- A future *downgrading* override ("Apple says played but it ran in the
+  background") is a different requirement and would get its own column. The
+  boolean does not block that; a prematurely-general enum would already have
+  baked in the wrong precedence.
+- **The platform IS an enum**, though: where he watched it is genuinely
+  multi-valued and will grow. A `watched_on_youtube` boolean would cost a schema
+  migration on the first Spotify episode. **Boolean for the fact, vocabulary for
+  the dimension.** Extending the vocabulary is a one-line CHECK edit in
+  `schema/09-module-podcasts.sql` plus the same line in `install-extensions.py`.
+
+#### The effective status — `v_podcast_episodes_effective`
+
+The OR is computed **once, in the database**, and must not be re-implemented in
+JavaScript. The view is a pure function of two stored facts, so it can never go
+stale; a stored `effective_*` column would be a third copy that rots on the next
+sync or the next tick.
+
+| `play_state` | `manual_watched` | `effective_play_state` | `effective_is_finished` | `effective_watch_source` |
+|---|---|---|---|---|
+| `unplayed` | 1 | `played` | 1 | `manual` |
+| `in-progress` | 1 | `played` | 1 | `manual` |
+| `played` | 1 | `played` | 1 | `both` |
+| `played` | 0 | `played` | 1 | `apple` |
+| `in-progress` | 0 | `in-progress` | 0 | NULL |
+| NULL | 0 | NULL | 0 | NULL |
+
+`effective_percent_complete` is Apple's `percent_complete` except when the tick
+is the only reason the row counts as watched, in which case it reads `100.0`.
+`effective_watch_source` exists so the UI can badge a hand-set row honestly
+("ook via YouTube") instead of presenting a human decision as Apple telemetry.
+
+The view uses `SELECT e.*`, and SQLite re-expands the star at prepare time, so
+columns a later sync version adds flow through with no view migration. The view
+is **not** in the regen's `OWNED_VIEWS`, so it survives every regen like the
+tables do.
+
+#### Contract for the sync (Daedalus)
+
+The upsert on `guid` lists **source columns only**. These are hand-owned and must
+never appear in an `ON CONFLICT … DO UPDATE SET` clause:
+
+```
+tags, manual_watched, manual_watched_platform, manual_watched_at,
+transcript_* (when transcript_match_method = 'manual'),
+podcasts.linked_topics / linked_key_elements / linked_projects / linked_people
+```
+
+The sync needs **no** knowledge of the override beyond not clobbering it. It
+keeps filling the automatic fields exactly as specified in §18.4.
+
+#### Contract for `podcastsApi.js` (BUILT 2026-08-19) — copy these verbatim
+
+**Read (grid / detail).** Query the view, never the table, wherever a
+human-visible listening state is shown:
+
+```sql
+SELECT slug, guid, title, podcast_slug, pubdate, duration_seconds,
+       play_state, manual_watched, manual_watched_platform, manual_watched_at,
+       effective_play_state, effective_is_finished, effective_watch_source,
+       effective_percent_complete
+  FROM v_podcast_episodes_effective
+ WHERE effective_play_state IS NOT 'unplayed'
+ ORDER BY COALESCE(manual_watched_at, last_played_date, pubdate) DESC
+ LIMIT :limit OFFSET :offset;
+```
+
+(`IS NOT` rather than `<>` so rows with a NULL state are not silently dropped.
+The `LIMIT` is not optional — see §18.8.)
+
+**Write — set the tick.** Key on `guid`, the immutable identity column; `slug` is
+derived and may be regenerated by a future sync, so a tick keyed on `slug` can
+follow the wrong row. The UI route key IS `slug`, so resolve it first, inside one
+transaction:
+
+```sql
+-- 1) resolve the route key to the identity key
+SELECT guid FROM podcast_episodes WHERE slug = :slug LIMIT 1;
+-- 2) set the tick (:platform ∈ 'youtube'|'spotify'|'web'|'other';
+--    :now = ISO-8601 UTC computed app-side, like plannerDb.js does)
+UPDATE podcast_episodes
+   SET manual_watched          = 1,
+       manual_watched_platform = :platform,
+       manual_watched_at       = :now
+ WHERE guid = :guid;
+```
+
+**Write — clear the tick.** One statement, all three columns:
+
+```sql
+UPDATE podcast_episodes
+   SET manual_watched          = 0,
+       manual_watched_platform = NULL,
+       manual_watched_at       = NULL
+ WHERE guid = :guid;
+```
+
+#### The read-only carve-out — RESOLVED 2026-08-19: route A
+
+`server/db.js` opens `mypka.db` with `{readonly: true}` **and** `query_only =
+true`, on the documented ground that "markdown is canonical; mypka.db is a
+derived mirror." That forbade the two `UPDATE`s above. Two ways forward were put
+to Sander:
+
+- **A — a narrowly-scoped write module** (`server/podcastsDb.js`) that opens
+  `mypka.db` read-write on its own connection, mirroring `plannerDb.js`'s
+  separate-connection discipline, and is permitted to touch **only** the three
+  `manual_watched*` columns. The read-only rule exists because writes to a
+  *derived* table are destroyed by the next regen — and `podcast_episodes` is
+  explicitly **not** derived and **not** regen-owned (§18.2), so the rationale
+  does not apply to this table. This keeps one home for the fact (SSOT) and needs
+  no cross-database join. It does require an explicit, documented carve-out in
+  `db.js`'s doctrine.
+- **B — a cockpit-owned side table** `podcast_manual_watch(guid PRIMARY KEY, …)`
+  in `mypka-cockpit.db` (read-write, numbered migration, structurally
+  regen-proof), with the effective status assembled in JS. Breaks no existing
+  invariant, but splits one fact across two database files and puts the OR back
+  into JavaScript — the exact duplication the view was built to prevent.
+
+**Sander chose A on 2026-08-19** and it is implemented in
+`server/podcastsDb.js`. The carve-out is narrow and its narrowness is
+**structural, not conventional** — four independent layers:
+
+1. **No SQL crosses the module boundary.** Every exported function takes typed
+   scalars (`slug`, `guid`, `platform`). Nothing accepts a table name, a column
+   name, a WHERE fragment or SQL. A client cannot express a statement the module
+   has not pre-written.
+2. **Two frozen SQL literals**, prepared once, all values bound as parameters.
+3. **A boot-time proof** (`assertScopedUpdate`) parses both literals at module
+   load and throws unless each is a single statement, targets
+   `podcast_episodes`, keys on `guid = @guid`, and assigns only the three
+   whitelisted columns. Widen the SQL and the server refuses to start, naming the
+   offending column. Asserted in `server/podcastsDb.test.mjs`.
+4. **The schema's CHECK constraints** as the last net — a second belt, never a
+   substitute for layers 1–3.
+
+Further discipline: the read-write connection is opened **lazily on the first
+write** (no read-write handle exists until Sander ticks something), the module
+never imports `db.js`, and `journal_mode` is deliberately left alone — flipping
+`mypka.db` to WAL from a three-column write path would change conditions for
+`regen-mypka-db.py` and for `db.js`'s readonly handle. Kill switch:
+`PODCAST_WATCH_WRITE_ENABLED=0` disables every write and makes the API report
+`write.available:false` so the UI can degrade to a read-only badge.
+
+**`db.js` stays readonly for everything else.** This is a carve-out for one
+table's three hand-owned columns, not a repeal.
+
+#### Consequence for the generic library grid
+
+`libraryApi.js` projects columns from the **table** and resolves `library_slug`
+via `sqlite_master WHERE type = 'table'` — it cannot be pointed at a view. Its
+grid therefore shows `status`, i.e. Apple's state only, and a YouTube-watched
+episode reads as `unplayed` there. The podcasts view must consume
+`podcastsApi.js` / the effective view instead of the generic
+`/api/cockpit/library/podcast_episodes` endpoint. That was already necessary for
+the missing-`LIMIT` reason in §18.8; the override makes it non-negotiable.
+
+### 18.10 The HTTP surface (built 2026-08-19) — what Bezalel codes against
+
+Four endpoints in `server/podcastsApi.js`, mounted by `server.js`. All reads come
+from `v_podcast_episodes_effective`; the one write is delegated to
+`server/podcastsDb.js`. Every endpoint returns `{ available: false, … }` rather
+than a 500 when the podcasts module is absent from the mirror.
+
+| Method | URL | Purpose |
+|---|---|---|
+| GET | `/api/cockpit/podcasts` | Overview: shows + per-show counts, totals, the platform vocabulary, write status |
+| GET | `/api/cockpit/podcasts/episodes` | The grid. Query: `show`, `state`, `q`, `limit`, `offset` |
+| GET | `/api/cockpit/podcasts/episodes/:slug` | One episode, full row incl. `body` + transcript inference |
+| PATCH | `/api/cockpit/podcasts/episodes/:slug/watched` | Set or clear the §18.9 tick |
+
+**`state`** ∈ `listened` (default — `effective_play_state IS NOT 'unplayed'` and
+not NULL) · `played` · `in-progress` · `unplayed` · `manual` (only hand-set rows,
+the audit view for the override) · `all`.
+
+**`limit`** defaults to 100 and is hard-capped at 500 (§18.8 — the LIMIT is not
+optional). The list envelope carries `total`, `limit`, `offset` and `hasMore` so
+pagination is honest rather than inferred from a short page.
+
+**The PATCH body is scope-locked**; unknown fields are a 400, never dropped:
+
+```jsonc
+{ "watched": true,  "platform": "youtube" }   // platform REQUIRED when true
+{ "watched": false }                          // platform must be ABSENT when false
+{ "watched": true, "platform": "web", "guid": "…" }  // optional identity pin
+```
+
+`guid` is optional and exists for stale clients: if the slug no longer resolves
+to that guid the write is refused with **409** rather than ticking the wrong
+episode. Status codes: `200` ok · `400` malformed body / bad platform · `403`
+missing `X-Cockpit: 1` or bad origin · `404` unknown slug · `409` guid mismatch ·
+`503` writes disabled. The 200 response echoes the row **back from the view**, so
+the UI takes its new effective state from the database instead of guessing
+optimistically.
+
+The write rides the cockpit's standard guard stack (`sessionOrLoopback` →
+`localWriteGuard` → scoped 4kb JSON parser), so the client must send the
+`X-Cockpit: 1` header like every other cockpit write.
+
+**Do not use the generic library endpoint for this module.** `libraryApi.js`
+projects columns from the **table** and resolves `library_slug` via
+`sqlite_master WHERE type = 'table'` — it cannot be pointed at a view. Its grid
+therefore shows `status`, i.e. Apple's state only, and a YouTube-watched episode
+reads as `unplayed` there. `/api/cockpit/library/podcast_episodes` also has no
+LIMIT over 4732 rows (§18.8). Both reasons point the same way; the override makes
+it non-negotiable.
+
+> **Coordination:** Atlas owns the schema, the matcher, the registration and the
+> write channel. Daedalus owns the periodic sync that fills these tables from
+> MTLibrary.sqlite. Bezalel owns the view. The column names and the endpoint
+> shapes above are the agreed contract — change them only by editing the schema +
+> this contract together.
+
+---
+
 # Voedingslogboek (lokale uitbreiding 2026-08-11)
 
 Markdown is canoniek in `PKM/Journal/YYYY/MM/YYYY-MM-DD-voedingslogboek.md`.

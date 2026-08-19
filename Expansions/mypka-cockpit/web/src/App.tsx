@@ -17,6 +17,8 @@ import { RosterView } from './views/RosterView';
 import { SessionLogView } from './views/SessionLogView';
 import { TeamAnalyticsView } from './views/TeamAnalyticsView';
 import { TeamKnowledgeListView } from './views/TeamKnowledgeListView';
+import { TeamTasksView } from './views/TeamTasksView';
+import { SkillsView } from './views/SkillsView';
 import { IntegrationsView } from './views/IntegrationsView';
 import { SettingsView } from './views/SettingsView';
 import { TypeListView } from './views/TypeListView';
@@ -45,6 +47,12 @@ const LibraryView = lazy(() =>
 // WikiMarkdown's markdown chunk never enter the eager bundle.
 const OuterWorldView = lazy(() =>
   import('./views/OuterWorldView').then((m) => ({ default: m.OuterWorldView })),
+);
+// Podcasts module (DATA-CONTRACT §18) — lazy for the same reason as the two
+// above: the shows/episode-list/detail code plus WikiMarkdown's markdown chunk
+// stay out of the eager bundle until someone opens #/podcasts.
+const PodcastsView = lazy(() =>
+  import('./views/PodcastsView').then((m) => ({ default: m.PodcastsView })),
 );
 
 interface NavResponse { types: NavType[] }
@@ -103,8 +111,9 @@ export default function App() {
     (route.name === 'outer-world' && !route.slug && moduleForSlug('outer-world')?.fullBleed);
 
   // Full-HEIGHT "My AI Team" surfaces (roster / session log / workstreams / sops /
-  // guidelines). These keep the centered reading column BUT must fill the viewport
-  // height so their inner panel scrolls instead of leaving a short floating card.
+  // guidelines / team tasks / skills). These keep the centered reading column BUT
+  // must fill the viewport height so their inner panel scrolls instead of leaving a
+  // short floating card.
   // The class makes .cockpit-content a flex column that fills .cockpit-main's height
   // (cockpit.css .cockpit-content--team); the team view owns the inner scroll.
   const teamFull =
@@ -113,7 +122,9 @@ export default function App() {
     route.name === 'team-analytics' ||
     route.name === 'workstreams' ||
     route.name === 'sops' ||
-    route.name === 'guidelines';
+    route.name === 'guidelines' ||
+    route.name === 'team-tasks' ||
+    route.name === 'skills';
 
   return (
     <div className={`cockpit-shell ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
@@ -160,6 +171,10 @@ function ContentRouter({ route }: { route: ReturnType<typeof useRoute> }) {
     case 'workstreams': return <TeamKnowledgeListView family="workstreams" />;
     case 'sops': return <TeamKnowledgeListView family="sops" />;
     case 'guidelines': return <TeamKnowledgeListView family="guidelines" />;
+    // The two live-from-disk team pages. Unlike the three families above they do
+    // NOT read mypka.db — see server/teamTasksApi.js and server/skillsApi.js.
+    case 'team-tasks': return <TeamTasksView />;
+    case 'skills': return <SkillsView />;
     case 'connections': return <IntegrationsView />;
     case 'stack': return <IntegrationsView />;
     case 'integrations': return <IntegrationsView />;
@@ -216,6 +231,14 @@ function ContentRouter({ route }: { route: ReturnType<typeof useRoute> }) {
       return (
         <Suspense fallback={<LazyFallback />}>
           <OuterWorldView />
+        </Suspense>
+      );
+    case 'podcasts':
+      // PodcastsView reads the current route itself (useRoute), so it satisfies
+      // both this core-route case and the zero-prop moduleRegistry View type.
+      return (
+        <Suspense fallback={<LazyFallback />}>
+          <PodcastsView />
         </Suspense>
       );
     default: return <HubView />;
