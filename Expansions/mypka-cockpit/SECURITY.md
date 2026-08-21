@@ -65,6 +65,23 @@ connector or pack built on it.
 - The cockpit is **not** a hosting product. It is run by one user, for that user,
   on their own machine — not as a service for other people.
 
+### Read surfaces stay inside the scaffold — with one named exception
+
+- Every file-serving route is jailed to a folder inside the myPKA scaffold
+  (`PKM/`, `Deliverables/`, `Team Knowledge/`, `Team/`, `Team Inbox/`), resolved
+  with `path.relative()` containment, never a string prefix.
+- The single exception is `GET /api/cockpit/skill-file`, which lets the Skills
+  page open a domain skill. It serves **exactly**
+  `~/.claude/skills/<slug>/SKILL.md`, read-only. It accepts no path: the request
+  carries one slug from a closed alphabet (`[A-Za-z0-9_-]`, no dot, no slash),
+  the slug must match a real non-symlinked folder in that directory, the
+  filename is a server constant, and containment is re-checked against the
+  `realpath` of both the target and the jail root — so a symlinked `SKILL.md`
+  cannot reach anything else in `~/.claude`. Every rejection is the same generic
+  404 carrying no path information.
+- That route is disengageable with `COCKPIT_SKILL_FILES_ENABLED=0`, which stops
+  it from being registered at all.
+
 ### Write surfaces are narrow and local
 
 - The cockpit reads `mypka.db` strictly **read-only**.

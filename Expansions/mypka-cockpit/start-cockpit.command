@@ -61,4 +61,4 @@ fi
 
 open "http://127.0.0.1:$PORT/" || true
 echo "Starting the Cockpit on http://127.0.0.1:$PORT/ — close this window to stop it."
-NODE_ENV=production PORT="$PORT" WORKBENCH_WRITE_ENABLED=1 PLAN_WRITE_ENABLED=1 exec node server/server.js
+NODE_ENV=production PORT="$PORT" WORKBENCH_WRITE_ENABLED=1 PLAN_WRITE_ENABLED=1 COCKPIT_SKILL_FILES_ENABLED=1 exec node server/server.js

@@ -9,10 +9,16 @@
 //   1. A skill that is installed but DISABLED is shown, marked disabled — not
 //      quietly listed as if it were available (superwhisper is exactly this) and
 //      not hidden either. Both alternatives would misrepresent the team's reach.
-//   2. Only files that live inside the myPKA scaffold get a link. Everything
-//      under ~/.claude is outside the cockpit's jailed /api/cockpit/file
-//      endpoint, so those rows are non-navigable cards. A link that 403s is
-//      worse than no link.
+//   2. A row is a link ONLY when there is genuinely something to open — a link
+//      that 403s is worse than no link. Two routes satisfy that now:
+//        * repo files (the slash-commands) via /api/cockpit/file;
+//        * domain skills via /api/cockpit/skill-file?skill=<slug>, the purpose-
+//          built jail for ~/.claude/skills/<slug>/SKILL.md (Argus's design of
+//          2026-08-21; server/skillFileApi.js).
+//      PLUGIN skills stay non-navigable cards ON PURPOSE. Their location comes
+//      from installed_plugins.json — arbitrary absolute paths — so serving them
+//      would make that JSON file an arbitrary-read primitive. Not an oversight;
+//      do not "complete" it (design §7.2).
 //
 // What is deliberately absent, and why, is documented in server/skillSources.js:
 // the three scheduled-task routines (Sander excluded them), the 32-entry
@@ -41,7 +47,10 @@ interface SkillItem {
   sourceId: string;
   pluginName: string | null;
   enabled: boolean;
+  /** Repo-relative path servable by /api/cockpit/file — repo commands only. */
   filePath: string | null;
+  /** One slug servable by /api/cockpit/skill-file — ~/.claude/skills rows only. */
+  skillSlug: string | null;
 }
 
 interface SkillGroup {
@@ -69,9 +78,13 @@ const KIND_META: Record<SkillKind, { icon: LucideIcon; headingKey: TranslationKe
   'plugin-skill': { icon: Puzzle, headingKey: 'team.skillsGroupPluginSkill' },
 };
 
+// Which of the two openable shapes this row has, if either. The order is not
+// arbitrary: filePath is the narrower, repo-jailed claim, so it wins whenever a
+// row somehow carries both. A row with neither (plugin skills) stays a card.
 function fileHrefFor(item: SkillItem): string | null {
-  if (!item.filePath) return null;
-  return hrefFor({ name: 'file', src: fileRouteSrc('file', item.filePath) });
+  if (item.filePath) return hrefFor({ name: 'file', src: fileRouteSrc('file', item.filePath) });
+  if (item.skillSlug) return hrefFor({ name: 'file', src: fileRouteSrc('skill-file', item.skillSlug) });
+  return null;
 }
 
 // A slash command's H1 is almost always just its own slug ("# brainstorm"), so

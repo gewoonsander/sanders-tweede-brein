@@ -6,7 +6,8 @@
 //
 // Route: #/file/<encodeURIComponent(src)> -> { name: 'file'; src }.
 // The src codec (plain path -> /api/cockpit/file, 'inbox:' prefix ->
-// /api/cockpit/inbox-file) lives in lib/router.ts — see "File-route src
+// /api/cockpit/inbox-file, 'skill:' prefix -> /api/cockpit/skill-file, which
+// takes a SLUG rather than a path) lives in lib/router.ts — see "File-route src
 // encoding" there. md/txt are fetched as text and rendered through the
 // sanitized WikiMarkdown (.note-prose) in a centered reading column; pdf /
 // images embed full-width below the header on the same jailed URL. A small
@@ -42,11 +43,24 @@ function extOf(name: string): string {
 }
 
 // Map a file-route src/path to the REPO-relative path the discuss endpoint
-// expects. The /api/cockpit/file jail convention: 'inbox:' paths ("Team Inbox/…"),
+// expects, or null when this file HAS no repo-relative path.
+//
+// The /api/cockpit/file jail convention: 'inbox:' paths ("Team Inbox/…"),
 // Deliverables/ paths, and Team Knowledge/ paths are already repo-relative;
 // everything else is PKM/-relative (see server.js "Three jails with DIFFERENT base
 // conventions").
-function repoRelativeFor(src: string, path: string): string {
+//
+// 'skill:' MUST return null and is the reason this function is nullable at all.
+// A skill file lives at ~/.claude/skills/<slug>/SKILL.md — OUTSIDE the repo — so
+// the PKM/ fallback below would hand the discuss route "PKM/<slug>/SKILL.md":
+// a path that passes the server's containedRepoRelative() check and then opens a
+// Terminal session pointed at a file that does not exist (Argus 2026-08-21,
+// finding B-4). Callers skip the button when this is null — the same treatment
+// "Visualiseer" gets for a non-procedural document. Do NOT "fix" this by passing
+// the absolute ~/.claude path instead: the discuss route is repo-jailed by
+// construction, and widening it is a separate, much bigger decision.
+function repoRelativeFor(src: string, path: string): string | null {
+  if (src.startsWith('skill:')) return null;
   if (src.startsWith('inbox:')) return path;
   const norm = path.replace(/\\/g, '/');
   if (norm === 'Deliverables' || norm.startsWith('Deliverables/')) return path;
@@ -60,6 +74,8 @@ export function FileView({ route }: { route: Extract<Route, { name: 'file' }> })
   const ext = extOf(name);
   const kind = previewKindFor(name);
   const FileIcon = fileIconFor(name);
+  // null for a skill file — no repo-relative path exists, so no Discuss button.
+  const discussFile = repoRelativeFor(route.src, path);
   const topRef = useRef<HTMLElement | null>(null);
 
   // md/txt: fetched as text. A 404 flips the calm not-found state below.
@@ -162,7 +178,7 @@ export function FileView({ route }: { route: Extract<Route, { name: 'file' }> })
             Visualiseer
           </button>
         )}
-        {!missing && <DiscussButton file={repoRelativeFor(route.src, path)} subject={name} />}
+        {!missing && discussFile && <DiscussButton file={discussFile} subject={name} />}
       </header>
       <p className="file-view-path">{path}</p>
 

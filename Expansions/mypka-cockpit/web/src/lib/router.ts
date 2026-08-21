@@ -21,12 +21,17 @@
 //   #/<module-slug>             -> a drop-in extension module (see moduleRegistry)
 //
 // File-route src encoding (the `src` of { name: 'file' }):
-//   The cockpit serves raw files through two jailed API routes, so `src` is the
+//   The cockpit serves raw files through three jailed API routes, so `src` is the
 //   repo-relative path with a compact source discriminator prefix:
 //     'Deliverables/2026-…/notes.md'   -> /api/cockpit/file?path=…       (the
 //        default; NO prefix — this route serves both Deliverables/ paths and
 //        PKM document paths, so the path alone is the src)
 //     'inbox:Team Inbox/photo.png'     -> /api/cockpit/inbox-file?path=…
+//     'skill:wdf-regels'               -> /api/cockpit/skill-file?skill=…
+//        The odd one out ON PURPOSE: this src carries a SLUG, not a path. That
+//        route reads ~/.claude/skills/<slug>/SKILL.md — the only jail outside
+//        the scaffold — and it accepts no path argument at all; the server
+//        hardcodes the SKILL.md filename. See server/skillFileApi.js.
 //   In the hash the whole src rides as ONE segment via encodeURIComponent
 //   ('/' -> %2F), e.g. #/file/Deliverables%2F2026-…%2Fnotes.md. parseHash is
 //   lenient and also accepts hand-typed unencoded slashes (#/file/a/b/c.md)
@@ -100,18 +105,40 @@ export type Route =
 
 // ---- file-route src codec ---------------------------------------------------
 // Which jailed server route serves the file's bytes.
-export type FileSource = 'file' | 'inbox-file';
+export type FileSource = 'file' | 'inbox-file' | 'skill-file';
 
-/** Build the `src` for a { name: 'file' } route from a serving route + path. */
-export function fileRouteSrc(source: FileSource, path: string): string {
-  return source === 'inbox-file' ? `inbox:${path}` : path;
+/**
+ * Build the `src` for a { name: 'file' } route.
+ *
+ * For 'file' and 'inbox-file' the second argument is a repo-relative PATH; for
+ * 'skill-file' it is a SKILL SLUG (one segment — the server appends SKILL.md).
+ */
+export function fileRouteSrc(source: FileSource, pathOrSlug: string): string {
+  if (source === 'inbox-file') return `inbox:${pathOrSlug}`;
+  if (source === 'skill-file') return `skill:${pathOrSlug}`;
+  return pathOrSlug;
 }
 
-/** Decode a file-route `src` back into the display path + jailed serving URL. */
+/**
+ * Decode a file-route `src` back into the display path + jailed serving URL.
+ *
+ * The skill branch is the only one where `path` is NOT what travels to the
+ * server: the request carries the slug alone, and `path` exists purely so the
+ * reading page has an honest name to show. It must end in `.md`, because
+ * previewKindFor() keys off the extension — a name without one renders "No
+ * inline view" instead of the skill (finding B-6).
+ */
 export function parseFileSrc(src: string): { path: string; fileUrl: string } {
   if (src.startsWith('inbox:')) {
     const path = src.slice('inbox:'.length);
     return { path, fileUrl: `/api/cockpit/inbox-file?path=${encodeURIComponent(path)}` };
+  }
+  if (src.startsWith('skill:')) {
+    const slug = src.slice('skill:'.length);
+    return {
+      path: `${slug}/SKILL.md`,
+      fileUrl: `/api/cockpit/skill-file?skill=${encodeURIComponent(slug)}`,
+    };
   }
   return { path: src, fileUrl: `/api/cockpit/file?path=${encodeURIComponent(src)}` };
 }

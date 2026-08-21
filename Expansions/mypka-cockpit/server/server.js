@@ -58,6 +58,7 @@ import { registerSessionLogsRoutes } from './sessionLogsApi.js';
 import { registerTeamKnowledgeRoutes } from './teamKnowledgeApi.js';
 import { registerTeamTasksRoutes } from './teamTasksApi.js';
 import { registerSkillsRoutes } from './skillsApi.js';
+import { registerSkillFileRoutes } from './skillFileApi.js';
 import { registerCockpitSettingsRoutes } from './cockpitSettingsRoutes.js';
 import {
   isPinConfigured, resolvePinHash, verifyPin,
@@ -1287,6 +1288,19 @@ registerTeamTasksRoutes(app, { safe });
 // the three scheduled-task routines, and the 32-entry marketplace CATALOGUE of
 // merely installable plugins. Reader + shaping live in skillsApi.js.
 registerSkillsRoutes(app, { safe });
+// GET /api/cockpit/skill-file?skill=<slug> — the ONLY cockpit route that reads
+// outside REPO_ROOT, and deliberately NOT a fourth branch of /api/cockpit/file:
+// the one jail that knows $HOME must not share a dispatcher with the jails that
+// stay in the repo. It takes a SLUG, never a path, and hardcodes the filename
+// (SKILL.md). Full rationale + the mandatory C0..C10 checks live in
+// server/skillFileApi.js and in Argus's design of 2026-08-21. Set
+// COCKPIT_SKILL_FILES_ENABLED=0 and the route is not mounted at all.
+const SKILL_FILES_ON = registerSkillFileRoutes(app);
+console.log(
+  SKILL_FILES_ON
+    ? '  skills: SKILL.md preview enabled (read-only, ~/.claude/skills/<slug>/SKILL.md only)'
+    : '  skills: SKILL.md preview disabled (COCKPIT_SKILL_FILES_ENABLED=0)'
+);
 // Runtime Hub-module toggles (Settings page). Read always-on; the PUT rides the
 // cockpit's standard local-write guard stack (session/loopback → CSRF → parser),
 // writing ONLY to mypka-cockpit.db's module_prefs table — never mypka.db.

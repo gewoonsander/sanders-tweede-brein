@@ -141,11 +141,24 @@ function shape({ abs, slug, source, enabled = true, pluginName = null }) {
 
   // Only files inside the scaffold are reachable by the cockpit's jailed #/file
   // endpoint. Everything under ~/.claude is outside it, so we emit filePath:null
-  // and the view renders a non-navigable card instead of a link that would 403.
+  // and the view routes those rows through skillSlug instead (see below).
   let filePath = null;
   if (source.repoRelative && containedIn(REPO_ROOT, abs)) {
     filePath = path.relative(REPO_ROOT, abs).split(path.sep).join('/');
   }
+
+  // A SEPARATE field, never a second meaning stuffed into filePath. filePath's
+  // contract is "repo-relative path servable by /api/cockpit/file"; skillSlug's
+  // is "one segment servable by /api/cockpit/skill-file, which hardcodes the
+  // SKILL.md filename itself". Mixing them would be the routing confusion of
+  // Argus's design §4.1, but in the data model.
+  //
+  // Bound to id === 'user-skills', NOT to kind === 'domain-skill': PLUGIN skills
+  // stay deliberately unlinkable. readPluginSkills() takes installPath from
+  // ~/.claude/plugins/installed_plugins.json — arbitrary absolute paths — so
+  // serving those would turn that JSON file into an arbitrary-read primitive.
+  // Do not "improve" this into a kind check (design §7.2).
+  const skillSlug = source.id === 'user-skills' ? slug : null;
 
   return {
     // Namespaced so a slug collision across sources (a `brainstorm` skill AND a
@@ -161,6 +174,7 @@ function shape({ abs, slug, source, enabled = true, pluginName = null }) {
     pluginName,
     enabled,
     filePath,
+    skillSlug,
   };
 }
 
