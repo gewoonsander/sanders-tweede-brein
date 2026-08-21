@@ -80,11 +80,14 @@ connector or pack built on it.
   cannot reach anything else in `~/.claude`. Every rejection is the same generic
   404 carrying no path information.
 - That route is **off unless explicitly armed** with
-  `COCKPIT_SKILL_FILES_ENABLED=1`, in the process environment or in
-  `Team Knowledge/.env`. Any other value — and the absence of the key — stops it
-  from being registered at all. The double-click launcher sets `1`; a bare
-  `npm start` or `npm run serve:lan` therefore starts without it. The key is in
-  `PROTECTED_KEYS`, so the Connections page cannot write it.
+  `COCKPIT_SKILL_FILES_ENABLED=1` in `Team Knowledge/.env`. Any other value — and
+  the absence of the key — stops it from being registered at all. **No start path
+  turns it on for you:** the double-click launcher, `npm start` and
+  `npm run serve:lan` all leave the flag unset, so a stock install has this route
+  unmounted until the user arms it themselves. That also means setting `0` in
+  `Team Knowledge/.env` genuinely disarms it again — the switch works in both
+  directions, from one file. The key is in `PROTECTED_KEYS`, so the Connections
+  page cannot write it.
 
 ### Write surfaces are narrow and local
 

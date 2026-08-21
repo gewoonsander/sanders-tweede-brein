@@ -61,4 +61,10 @@ fi
 
 open "http://127.0.0.1:$PORT/" || true
 echo "Starting the Cockpit on http://127.0.0.1:$PORT/ — close this window to stop it."
-NODE_ENV=production PORT="$PORT" WORKBENCH_WRITE_ENABLED=1 PLAN_WRITE_ENABLED=1 COCKPIT_SKILL_FILES_ENABLED=1 exec node server/server.js
+# Deliberately NOT set here: COCKPIT_SKILL_FILES_ENABLED. That flag governs the
+# only read route reaching outside the scaffold, and `Team Knowledge/.env` is its
+# single source of truth. The process environment WINS over that file, so setting
+# it here would make the documented off-switch unusable on this start path.
+# Want the Skills SKILL.md preview? Put COCKPIT_SKILL_FILES_ENABLED=1 in
+# Team Knowledge/.env and restart. Absent = off (fail-closed).
+NODE_ENV=production PORT="$PORT" WORKBENCH_WRITE_ENABLED=1 PLAN_WRITE_ENABLED=1 exec node server/server.js

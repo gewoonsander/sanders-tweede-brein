@@ -20,6 +20,7 @@ import type { CockpitSettingsResponse } from '../lib/cockpitExtras';
 import { MODULE_KEYS } from '../lib/cockpitExtras';
 import { HubSection } from './hub/HubSection';
 import { OpenInvoicesCard } from './hub/OpenInvoicesCard';
+import { BunqBalanceCard } from './hub/BunqBalanceCard';
 import { RecentlyScannedCard } from './hub/RecentlyScannedCard';
 import { RandomQuoteCard } from './hub/RandomQuoteCard';
 import { OnThisDayCard } from './hub/OnThisDayCard';
@@ -185,6 +186,7 @@ function LatestJournalModule({ data }: { data: HubData }) {
 // historical hardcoded order so behaviour is unchanged without a saved order.
 const DEFAULT_MODULE_ORDER: string[] = [
   MODULE_KEYS.openInvoices,
+  MODULE_KEYS.bunqBalance,
   MODULE_KEYS.buckets,
   MODULE_KEYS.recentlyScanned,
   MODULE_KEYS.pinned,
@@ -227,6 +229,7 @@ export function HubView() {
   // in `order` not present here (e.g. a future server-only module) is skipped.
   const renderers: Record<string, () => ReactNode> = {
     [MODULE_KEYS.openInvoices]: () => <OpenInvoicesCard />,
+    [MODULE_KEYS.bunqBalance]: () => <BunqBalanceCard />,
     [MODULE_KEYS.buckets]: () => <BucketsModule data={data} />,
     [MODULE_KEYS.recentlyScanned]: () => <RecentlyScannedCard />,
     [MODULE_KEYS.pinned]: () => <PinnedModule data={data} />,

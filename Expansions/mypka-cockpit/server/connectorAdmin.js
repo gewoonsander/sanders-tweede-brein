@@ -30,6 +30,14 @@ export const PROTECTED_KEYS = new Set([
   // the one route that reads outside the scaffold. Same reason
   // WORKBENCH_WRITE_ENABLED is on this list.
   'COCKPIT_SKILL_FILES_ENABLED',
+  // Same class of hole as B-9b above, found while building the bunq connector
+  // (2026-08-21). BUNQ_ALLOW_LAN is the server-side gate that keeps the bank
+  // balance off the LAN (audit 2026-08-17 §4, server/connectors/bunq/bunqBalance.js).
+  // Without this line validKeyName() accepts it, so anyone reaching the
+  // Connections page over the LAN — which requires only the shared PIN — could
+  // set BUNQ_ALLOW_LAN=1 and unlock the very data the gate exists to hide.
+  // It is an operational posture switch, not a tool credential: .env only.
+  'BUNQ_ALLOW_LAN',
 ]);
 const MAX_VALUE_LEN = 4096;
 

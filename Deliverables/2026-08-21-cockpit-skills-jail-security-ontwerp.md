@@ -678,3 +678,130 @@ Groen zodra:
 Punt 1 en 2 zijn samen ongeveer vijf regels code. Er is geen ROOD: geen gecommitteerd secret, geen gepoolde sleutel, geen bereikbaar bestand buiten `<slug>/SKILL.md`, geen schrijfroute, geen enumeratie. R-1 en R-2 uit §9 blijven staan zoals Sander ze heeft geaccepteerd; B-9 verandert die risico's niet, alleen de betrouwbaarheid van de knop waarmee hij ze kan uitzetten.
 
 *Testbestand: `Expansions/mypka-cockpit/server/skillFileApi.test.mjs`. Geen secrets in dit document; canary-waarden in de testfixture zijn synthetisch en de echte `Team Knowledge/.env` is tijdens deze audit niet gelezen of aangeraakt.*
+
+---
+
+## 15. Hergate na Bezalels B-9-fix (Argus, 2026-08-21, laatste controleronde)
+
+Scope: de vier groen-condities uit 14.7, plus de drie punten die Bezalel expliciet terugkaatste. Alles hieronder is opnieuw zelf gemeten — Bezalels beschrijving is als claim behandeld, niet als bewijs.
+
+### 15.1 B-9 — GESLOTEN, met eigen bewijs
+
+`skillFileApi.js:114-116` is nu:
+
+```js
+export function skillFilesEnabled() {
+  return readEnvKey('COCKPIT_SKILL_FILES_ENABLED') === '1';
+}
+```
+
+Strikte gelijkheid, juiste richting, en de waarde komt uit `readEnvKey` — precies de fix uit 14.4. De pre-fix regel is opgehaald uit commit `34ae7b6` en luidde `process.env.COCKPIT_SKILL_FILES_ENABLED !== '0'`; dat is dus daadwerkelijk vervangen, niet omheen gebouwd.
+
+Reproductie van de bevinding uit de vorige ronde, in een eigen wegwerp-scaffold via `MYPKA_ROOT`, met een minimale Express-stand-in zodat óók zichtbaar is welke routes werkelijk geregistreerd worden:
+
+```
+A  .env=0, sleutel afwezig in process.env
+   enabled=false  mounted=false  routes=[]          <-- was true in de vorige ronde
+B  .env=1, sleutel afwezig in process.env
+   enabled=true   mounted=true   routes=["/api/cockpit/skill-file"]
+C  sleutel afwezig in .env én process.env
+   enabled=false  mounted=false  routes=[]
+```
+
+A is de exacte situatie die in 14.4 nog `true` gaf. De gedocumenteerde `.env`-uitschakelaar werkt nu, en de afwezige sleutel faalt gesloten.
+
+### 15.2 B-9b — GESLOTEN in de code, met een gat in de test
+
+`connectorAdmin.js:32` bevat `'COCKPIT_SKILL_FILES_ENABLED'` in `PROTECTED_KEYS`, en de handhavingsketen is intact — zelf regel voor regel nagelopen:
+
+- `validKeyName()` (regel 37-39) doet `!PROTECTED_KEYS.has(key)`;
+- `setEnvKey()` (regel 45) geeft `{ ok: 'bad-key' }` terug zodra `validKeyName` faalt.
+
+De Connections-pagina kan de poort dus niet meer aanzetten. Zie 15.4 punt 2 voor het testgat dat hier wél nog aan hangt.
+
+### 15.3 Testsuite — 23/23, zelf gedraaid
+
+`node --test server/skillFileApi.test.mjs` vanuit `Expansions/mypka-cockpit`: **23 pass, 0 fail**, duur 739 ms. Case 15/19 meldt onderweg "7 skills served, 18 skill rows, 1 plugin rows all skillSlug:null" — de scherprechtertests (case 9, 10, 11, 17) draaien dus tegen een levende fixture, niet tegen een lege map.
+
+### 15.4 De drie teruggekaatste punten
+
+**1. Case 18 wijkt af van mijn letterlijke specificatie — VERBETERING, aangenomen. Eén van zijn twee argumenten klopt niet.**
+
+Zijn argument *"mijn variant zou tegen zowel de kapotte als de gefixte code slagen"* is feitelijk onjuist. Tegen de pre-fix regel `process.env.X !== '0'` levert een niet-gezette sleutel `undefined !== '0'` → `true`, terwijl de assertie `false` eist. Die test zou de bug dus wél hebben gevangen.
+
+Zijn ándere argument is juist en op zichzelf beslissend: met de sleutel verwijderd uit `process.env` valt `readEnvKey` door naar de échte `Team Knowledge/.env`. Dat bestand staat op mode `0600` en bevat live credentials (sleutelnámen gecontroleerd, waarden niet gelezen: `TODOIST_API_KEY`, `JORTT_GEWOON_SANDER_CLIENT_SECRET`, `FIRECRAWL_API_KEY`, `PERPLEXITY_API_KEY`, `N8N_API_KEY`). Een securitysuite hoort dat bestand niet als bijwerking te openen, en de uitkomst van de assertie zou van de inhoud ervan afhangen. Mijn §12-specificatie was op dit punt slordig.
+
+Wat hij ervoor in de plaats zette (`skillFileApi.test.mjs:514-537`) dekt in een kindproces tegen een wegwerp-`MYPKA_ROOT` drie legs af — `=1` → true, `=0` → false, afwezig → false — plus de in-proces matrix op regel 499 die `''`, `'false'`, `'no'`, `'00'`, `'off'`, `'true'`, `'TRUE'`, `'yes'`, `'on'` allemaal op `false` vastlegt. Dat is strikt sterker dan mijn one-liner. **De specificatie wordt gecorrigeerd, niet de test.**
+
+**2. B-9b op source in plaats van op gedrag — AKKOORD, met één goedkope aanscherping.**
+
+Zijn premisse is nagetrokken en klopt: `connectorAdmin.js` → `integrationChecks.js` → `integrationStatusDb.js`, en daar staat op regel 103 `const db = new Database(INTEGRATION_DB_PATH)` op moduleniveau, gevolgd door `db.pragma('journal_mode = WAL')`, met bovendien `import './plannerDb.js'` dat migraties toepast. Erger nog dan hij schetst: `INTEGRATION_DB_PATH = path.resolve(__dirname, '..', 'mypka-cockpit.db')` hangt aan de cockpitmap zelf en is **niet** om te leiden met `MYPKA_ROOT`. Een test die dit importeert schrijft dus gegarandeerd in Sanders live cockpit-database. Terecht geweigerd.
+
+Het gat: de source-scan bewijst dat de sleutel in de *verzameling* staat, niet dat de verzameling nog *gehandhaafd* wordt. Een refactor die `!PROTECTED_KEYS.has(key)` uit `validKeyName()` haalt, laat case 18 groen. Twee regels erbij, zelfde bestand, zelfde `codeOf()`-helper, geen database:
+
+```js
+assert.match(adminCode, /function validKeyName\([\s\S]*?PROTECTED_KEYS\.has\(/);
+assert.match(adminCode, /function setEnvKey\([\s\S]*?validKeyName\(/);
+```
+
+Geen groen-conditie: het afgedekte risico is een toekomstige refactor, geen nu-exploiteerbaar gat, en ik heb de handhaving deze ronde zelf in de code gelezen (15.2).
+
+**3. `readEnvKey` trimt whitespace, dus `" 1 "` telt als aan — AKKOORD, laten staan; een strengere variant zou ik afwijzen.**
+
+Twee redenen. Ten eerste: de trim kan de poort niet tégen de bedoeling in openzetten. Er bestaat geen whitespace-spelling van "uit" die naar `"1"` trimt; elke waarde waarvan de niet-whitespace-inhoud niet exact `1` is faalt gesloten — bewezen in de matrix op regel 499. `" 1 "` → aan ís wat de operator bedoelde. Ten tweede: `readEnvKey` is de gedeelde lezer van elke poort in deze codebase. Hem omzeilen om de trim kwijt te raken betekent voor deze ene sleutel een eigen leespad bouwen — exact de divergentie waar B-9 uit voortkwam.
+
+### 15.5 B-11 (MEDIUM, nieuw-restant) — de launcher overschaduwt de gedocumenteerde uit-knop
+
+`readEnvKey` geeft `process.env` **voorrang** boven `Team Knowledge/.env` (`connectors/env.js:24-26`), en `start-cockpit.command:64` hardcodeert `COCKPIT_SKILL_FILES_ENABLED=1`. Bewezen, vierde meting uit dezelfde probe:
+
+```
+D  .env=0  én  process.env=1  (de dubbelklik-launcher)
+   enabled=true   mounted=true   routes=["/api/cockpit/skill-file"]
+```
+
+Op Sanders enige ondersteunde startpad zet `COCKPIT_SKILL_FILES_ENABLED=0` in `Team Knowledge/.env` de route dus **niet** uit. Ik noemde dit in 14.4 al ("de enige werkende manier om de route uit te zetten is het launcher-script bewerken"), en groen-conditie 1 vroeg expliciet om bijgewerkte tekst in `.env.example` en `SECURITY.md`. De richting is netjes omgedraaid, maar het uit-pad staat er nog steeds niet in. `.env.example:128-133` zegt in de ene zin *"Anything else — 0, empty, or this line absent — means the route is not registered at all"* en in de volgende *"start-cockpit.command exports 1, so the normal double-click launcher has it on"*. Vanuit de lezersstoel spreken die twee zinnen elkaar tegen, en de eerste is degene die hij onthoudt.
+
+Dit is géén faalt-open: de default is nu dicht en het aanzetten is een bewuste handeling (de dubbelklik). Het defect is dat het gedocumenteerde uit-mechanisme niet bedienbaar is op het pad dat hij gebruikt.
+
+Twee mogelijke fixes:
+
+- **(a) Aanbevolen.** Haal `COCKPIT_SKILL_FILES_ENABLED=1` weg uit `start-cockpit.command:64`. `Team Knowledge/.env` wordt dan de enige bron en de knop werkt in beide richtingen. Prijs: de route staat uit tot Sander daar eenmalig `=1` zet — wat exact is wat "uit tenzij expliciet aangezet" hoort te betekenen.
+- **(b) Minimaal.** Launcher-hardcode blijft, en `.env.example` + `SECURITY.md` vertellen de waarheid: procesomgeving wint van `Team Knowledge/.env`, en uitzetten onder de launcher betekent regel 64 aanpassen.
+
+### 15.6 Nevenbevindingen, buiten deze poort maar niet weggegooid
+
+- **B-12 (MEDIUM, bestaand).** `WORKBENCH_WRITE_ENABLED` wordt uitsluitend uit `process.env` gelezen (`server.js:501`, `dartsTrainingApi.js:503`), terwijl `.env.example:115-117` de sleutel in `Team Knowledge/.env` declareert met *"set 0 for a read-only cockpit"*. Dat is dezelfde inerte-uitknop als B-9, alleen met een fail-closed default, dus een veilige verrassing in plaats van een onveilige. `PLAN_WRITE_ENABLED` idem. Na deze klus is de skill-poort de énige van de drie launcher-vlaggen die `Team Knowledge/.env` werkelijk raadpleegt.
+- **Testdekking `PROTECTED_KEYS` (MEDIUM, bestaand).** Er bestaat in de hele cockpit géén gedragsmatige test op `validKeyName()` of `PROTECTED_KEYS` — gecontroleerd over alle vijftien `server/*.test.mjs`-bestanden; de enige treffers staan in `skillFileApi.test.mjs` en zijn de source-scan uit 15.4. Dat raakt ook `COCKPIT_PIN_HASH`, een gevoeliger sleutel dan deze poort. Hoort bij B-10.
+- **`readEnvKey`-randgevallen (LAAG, bestaand, geldt voor élke sleutel).** Inline commentaar wordt niet gestript: `KEY=1 # aan` levert de waarde `"1 # aan"` (hier fail-closed, maar voor een tokensleutel stil kapot). En bij dubbele regels wint de éérste treffer: een `=0` ónder een bestaande `=1` plakken laat de poort aan staan. Gemitigeerd doordat `setEnvKey()` upsert in plaats van appendt, dus de UI-weg produceert geen duplicaten.
+- **INFO.** De generieke `/api`-404 spiegelt de ruwe queryinput terug in `path` en draagt geen `X-Content-Type-Options: nosniff`. Inert bij `application/json`, bestaand, geen actie voor deze klus. De skill-route zelf heeft zijn eigen 404 mét nosniff (C8) en raakt dit niet.
+
+### 15.7 Stand van de vier groen-condities
+
+| # | Conditie (14.7) | Status |
+|---|---|---|
+| 1 | B-9 gefixt: `readEnvKey()` + "uit tenzij expliciet `1`", tekst bijgewerkt | **Code groen** (15.1). Tekst: richting klopt, uit-pad ontbreekt → B-11 |
+| 2 | B-9b: sleutel in `PROTECTED_KEYS` | **Groen** (15.2) |
+| 3 | Case 18 meegedraaid, suite groen | **Groen** — 23/23 zelf gedraaid (15.3) |
+| 4 | Cockpit herstart | **Niet gedaan.** PID 85462 draait sinds 11:25:48; de fix staat sinds 19:20 op schijf |
+
+Conditie 4, gemeten op de draaiende instantie (poort 4317):
+
+```
+GET /api/cockpit/skill-file?skill=wdf-regels  ->  404 {"error":"unknown api route", ...}
+GET /api/cockpit/skills                       ->  200
+```
+
+De route bestaat in het levende proces dus helemaal niet. Dat is de véilige stand — geen blootstelling — maar het betekent ook dat de functie nog niet werkt. Het is een functionele conditie, geen securityconditie.
+
+### 15.8 Eindverdict van de hergate
+
+**GEEL — één stap van groen.** De blokkerende conditie uit 14.7 is weg: de kill switch faalt niet meer open, en dat is met eigen bewijs vastgesteld, niet op Bezalels woord. De jail zelf is deze ronde niet opnieuw ter discussie gesteld en blijft goed gebouwd. Geen ROOD: geen gecommitteerd secret, geen gepoolde sleutel, geen bereikbaar bestand buiten `<slug>/SKILL.md`, geen schrijfroute, geen enumeratie.
+
+Groen zodra:
+
+1. **B-11** is geadresseerd — fix (a) of (b) uit 15.5. Sanders keuze; ik beveel (a) aan.
+2. De cockpit is **herstart** via `start-cockpit.command` (conditie 4).
+
+Aanbevolen maar geen groen-conditie: de twee extra assertieregels uit 15.4 punt 2.
+
+*Geen secrets in dit document. Tijdens deze ronde is `Team Knowledge/.env` uitsluitend op sleutelnámen gecontroleerd; geen enkele waarde is gelezen, gelogd of geëchood. Alle `.env`-metingen liepen tegen wegwerp-scaffolds in de scratchpad, die daarna zijn opgeruimd.*

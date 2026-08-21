@@ -65,6 +65,11 @@ function nowIso() {
 // ============================================================================
 export const KNOWN_MODULES = [
   { key: 'open_invoices',     label: 'Open Invoices',            hint: 'Overdue and due-soon invoices, loudest first.' },
+  // This toggle is ordinary visibility, NOT the security control. Bank data is
+  // kept off the LAN server-side by bunqBalance.js (BUNQ_ALLOW_LAN in .env, a
+  // PROTECTED_KEY the browser cannot write). Hiding a card client-side is
+  // cosmetics; the gate that matters sits in front of the data.
+  { key: 'bunq_balance',      label: 'Bunq balance',             hint: 'Live balance per bunq account. Hidden over LAN unless explicitly allowed.' },
   { key: 'recently_scanned',  label: 'Recently Scanned Documents', hint: 'The freshest scans, receipts and invoices.' },
   { key: 'buckets',           label: 'My Life bucket cards',     hint: 'Projects · Key Elements · Topics · Goals · Habits.' },
   { key: 'pinned',            label: 'Pinned fleeting notes',    hint: 'Work-in-progress stickies you keep coming back to.' },

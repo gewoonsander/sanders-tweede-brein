@@ -28,6 +28,35 @@ export interface OpenInvoicesResponse {
   total: number;
 }
 
+// ---- bunq balance (GET /api/cockpit/bunq/balance) ---------------------------
+// Read-only, one account per row (no summing — that was Sander's explicit choice
+// in the design). `available` is false for every failure path, and `reason` says
+// which one, so the card can be honest instead of silently empty:
+//   'not-configured' — setup has not run (`npm run setup:bunq`)
+//   'lan-hidden'     — reached over the LAN while BUNQ_ALLOW_LAN is not set
+//   'no-user-id'     — credentials present but BUNQ_USER_ID missing
+//   'error'          — bunq unreachable / rate-limited / session refused
+export interface BunqAccount {
+  accountId: number | null;
+  accountType: string;          // MonetaryAccountBank | ...Savings | ...Joint
+  description: string | null;
+  iban: string | null;
+  balance: number | null;
+  balanceRaw: string | null;    // bunq's exact decimal string, unrounded
+  currency: string;             // ISO code, default 'EUR'
+  status: string | null;
+}
+
+export interface BunqBalanceResponse {
+  available: boolean;
+  items: BunqAccount[];
+  total: number;
+  reason?: 'not-configured' | 'lan-hidden' | 'no-user-id' | 'error';
+  detail?: string;              // secret-free error text, capped server-side
+  environment?: 'sandbox' | 'production';
+  fetchedAt?: string;           // ISO timestamp of the upstream read
+}
+
 // ---- Runtime Hub-module prefs (GET/PUT /api/cockpit/settings) ----------------
 // `modules` is a full, default-filled map { moduleKey: boolean }; `catalogue`
 // is the server's KNOWN_MODULES — the single source for what the Settings page
@@ -79,6 +108,7 @@ export function saveModuleOrder(
 // KNOWN_MODULES (cockpitSettingsDb.js) — the closed set the PUT validator allows.
 export const MODULE_KEYS = {
   openInvoices: 'open_invoices',
+  bunqBalance: 'bunq_balance',
   recentlyScanned: 'recently_scanned',
   buckets: 'buckets',
   pinned: 'pinned',

@@ -1019,28 +1019,36 @@ underscores, elke `dependencies`-verwijzing moet naar een bestaand
     },
     {
       "integration_id": "bunq-api",
-      "name": "bunq API",
+      "name": "bunq API (saldo, read-only)",
       "kind": "api",
-      "purpose": "Bonnetjes en transacties voor het Gezinshuis koppelen.",
+      "purpose": "Actueel saldo per bunq-rekening tonen op de Cockpit Hub. Read-only, GET-only, exact een endpoint (monetary-account). Bonnetjes/transacties vallen hier NIET onder: dat is een apart ontwerp met een eigen audit (GL-022).",
       "lifecycle": "planned",
       "owner": "daedalus",
       "expected_devices": [],
       "expected_runtimes": [
-        "automation-platform"
+        "mypka-cockpit"
       ],
       "auth_method": "api-key",
-      "secret_names": [],
+      "secret_names": [
+        "BUNQ_ENV",
+        "BUNQ_API_KEY",
+        "BUNQ_PRIVATE_KEY_B64",
+        "BUNQ_INSTALLATION_TOKEN",
+        "BUNQ_DEVICE_SERVER_ID",
+        "BUNQ_USER_ID",
+        "BUNQ_ALLOW_LAN"
+      ],
       "cost_model": "included",
       "verification_profile": [
         "manual"
       ],
       "dependencies": [],
       "canonical_reference": "bunq",
-      "next_action": "Beslis pas na security- en boekhoudkundige review over aansluiting.",
+      "next_action": "Code is gebouwd en getest (2026-08-21, Expansions/mypka-cockpit/server/connectors/bunq/, 40 tests groen). Nog niet aangesloten: geen sleutel, geen sandboxronde. Twee open poorten voor activatie: (1) volledige sandboxronde incl. verificatie van de session-server rate-limit-bucket, (2) tweede Argus-audit voor de eerste productiesleutel. Blijft lifecycle=planned tot beide gehaald zijn.",
       "data_role": "source",
       "sync_direction": "import",
       "canonical_records": [
-        "bank-transactions"
+        "bank-balances"
       ],
       "adapter_refs": [],
       "conflict_policy": "canonical-wins"

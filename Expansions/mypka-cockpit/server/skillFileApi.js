@@ -102,10 +102,18 @@ export const SKILL_FILE_HEADERS = Object.freeze({
  * 2. The default DIRECTION. "On unless 0" makes every misconfiguration fail
  *    OPEN — the one route that reads outside the scaffold stays live while the
  *    user believes it is off. "Off unless 1" is the WORKBENCH_WRITE_ENABLED
- *    posture and costs nothing operationally, because start-cockpit.command
- *    already exports =1. It does mean a bare `npm start` / `npm run serve:lan`
- *    leaves the route off — deliberately, since serve:lan is exactly restrisico
- *    R-2.
+ *    posture. It means EVERY start path — start-cockpit.command, `npm start`,
+ *    `npm run serve:lan` — begins with this route unmounted until the user puts
+ *    =1 in `Team Knowledge/.env`. Deliberate, and serve:lan is exactly
+ *    restrisico R-2.
+ *
+ * AND THE FIX FOR FINDING B-11: start-cockpit.command used to hardcode
+ * COCKPIT_SKILL_FILES_ENABLED=1 in its process environment. Since readEnvKey
+ * checks process.env BEFORE `Team Knowledge/.env`, that made =0 in the .env
+ * inert on the one start path the user actually uses — the documented
+ * off-switch could not be operated. The launcher no longer sets the flag at
+ * all, so this file is read from exactly one place. Do NOT re-add it to any
+ * launcher, npm script or launchd plist.
  *
  * Because the value now genuinely comes from `Team Knowledge/.env`, this key is
  * also in PROTECTED_KEYS (connectorAdmin.js) — otherwise the Connections page

@@ -119,13 +119,17 @@ not drop a step.
    Open it slightly BEFORE or just after starting the server — the SPA retries
    until the API is up, so a half-second race is invisible.
 6. **Start the server** loopback-only with the right env:
-   `node server/server.js` with `PORT`, `WORKBENCH_WRITE_ENABLED=1`,
-   `PLAN_WRITE_ENABLED=1` and `COCKPIT_SKILL_FILES_ENABLED=1` (the documented
-   launcher defaults — set `0` for a fully read-only cockpit; the third one
-   governs the single read route that reaches outside the scaffold, serving only
-   `~/.claude/skills/<slug>/SKILL.md`). Do NOT drop that third assignment as
-   "redundant": it is FAIL-CLOSED, so only an explicit `1` mounts the route and a
-   launcher without it starts with the Skills preview dead. Then `MYPKA_ROOT`
+   `node server/server.js` with `PORT`, `WORKBENCH_WRITE_ENABLED=1` and
+   `PLAN_WRITE_ENABLED=1` (the documented launcher defaults — set `0` for a fully
+   read-only cockpit). **Do NOT set `COCKPIT_SKILL_FILES_ENABLED` in the
+   launcher.** That flag governs the single read route reaching outside the
+   scaffold (serving only `~/.claude/skills/<slug>/SKILL.md`), and
+   `Team Knowledge/.env` is its one source of truth. The process environment
+   takes precedence over that file, so a launcher that exports the flag makes the
+   documented off-switch unusable on the very path the user actually starts from.
+   It is FAIL-CLOSED, so leaving it out means the Skills preview is off until the
+   user puts `COCKPIT_SKILL_FILES_ENABLED=1` in `Team Knowledge/.env` — which is
+   exactly the intended default. Then `MYPKA_ROOT`
    only if the user set one, and
    `COCKPIT_LLM_CMD` only if the user runs a non-`claude` CLI (defaults to
    `claude` when unset). Do NOT pass

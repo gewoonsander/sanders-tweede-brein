@@ -26,7 +26,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import express from 'express';
 
@@ -484,36 +484,86 @@ test('case 17: every rejection is byte-identical and leaks nothing', async () =>
 // ---------------------------------------------------------------------------
 // Case 18 - the kill switch (section 8)
 // ---------------------------------------------------------------------------
-test('case 18: COCKPIT_SKILL_FILES_ENABLED=0 leaves the route unmounted', async () => {
+test('case 18: the kill switch is FAIL-CLOSED — only an explicit 1 mounts it', async () => {
   assert.equal(offEnabled, false, 'skillFilesEnabled() must be false when the switch is 0');
   assert.equal(offMounted, false, 'registerSkillFileRoutes must report it did not mount');
   const r = await fetch(OFF_BASE + '/api/cockpit/skill-file?skill=wdf-regels');
   assert.equal(r.status, 404);
   const body = await r.text();
   assert.ok(!body.includes('legitimate skill body'), 'file served while the switch was off');
-  // Switch semantics AS BUILT: ON unless process.env holds exactly the string '0'.
-  //
-  // ARGUS 2026-08-21, OPEN FINDING B-9: this reads process.env ONLY, while
-  // .env.example and SECURITY.md tell the user to put the key in
-  // `Team Knowledge/.env` — a file the cockpit never loads into process.env
-  // (connectors/env.js: "We never load the whole .env into process.env"). So the
-  // documented off-switch does nothing and the gate fails OPEN. The fix is the
-  // CONNECTORS_ENABLED idiom of connectors/registry.js:46 plus the
-  // WORKBENCH_WRITE_ENABLED default direction:
-  //
-  //   return readEnvKey('COCKPIT_SKILL_FILES_ENABLED') === '1';
-  //
-  // WHEN THAT LANDS, this table flips to [['1', true], everything-else false]
-  // and COCKPIT_SKILL_FILES_ENABLED must join PROTECTED_KEYS in connectorAdmin.js
-  // (otherwise the Connections page can write the key and re-arm the gate).
-  // Until then this asserts what is actually shipped, not what should ship.
-  const cases = [['0', false], ['1', true], ['', true], ['false', true], ['no', true], ['00', true], ['off', true]];
+
+  // Switch semantics AS BUILT (B-9 fixed 2026-08-21): OFF unless the value is
+  // exactly '1'. Only the first row may be true; every other spelling of "yes"
+  // must fail closed, because a gate that guesses at "true"/"on"/"yes" is a gate
+  // whose state the reader cannot predict.
+  const cases = [['1', true], ['0', false], ['', false], ['false', false], ['no', false], ['00', false], ['off', false], ['true', false], ['TRUE', false], ['yes', false], ['on', false], [' 1 ', true]];
   for (const [value, expected] of cases) {
     process.env.COCKPIT_SKILL_FILES_ENABLED = value;
     assert.equal(skillFilesEnabled(), expected, 'COCKPIT_SKILL_FILES_ENABLED=' + JSON.stringify(value));
   }
-  delete process.env.COCKPIT_SKILL_FILES_ENABLED;
-  assert.equal(skillFilesEnabled(), true, 'unset must be ON (the documented default)');
+  process.env.COCKPIT_SKILL_FILES_ENABLED = '1'; // restore the suite's armed state
+
+  // --- B-9 REGRESSION, the actual bug -------------------------------------
+  // The gate used to read process.env ONLY, while .env.example and SECURITY.md
+  // send the user to `Team Knowledge/.env` — a file nothing in server/ loads
+  // into process.env. So the documented switch was inert and the gate failed
+  // OPEN. These two runs prove the .env leg is really wired, in a child process
+  // against a THROWAWAY scaffold (MYPKA_ROOT), with the key absent from the
+  // child's environment so readEnvKey cannot short-circuit on process.env.
+  // A child is required because REPO_ROOT is resolved once at module load.
+  const probe = (envValue) => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'argus-b9-'));
+    fs.mkdirSync(path.join(root, 'PKM'), { recursive: true });
+    fs.mkdirSync(path.join(root, 'Team Knowledge'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'AGENTS.md'), '# throwaway scaffold\n');
+    fs.writeFileSync(
+      path.join(root, 'Team Knowledge', '.env'),
+      envValue === null ? 'SOME_OTHER_KEY=x\n' : `COCKPIT_SKILL_FILES_ENABLED=${envValue}\n`
+    );
+    const env = { ...process.env, MYPKA_ROOT: root };
+    delete env.COCKPIT_SKILL_FILES_ENABLED; // force the .env leg
+    const mod = pathToFileURL(path.join(HERE, 'skillFileApi.js')).href;
+    const r2 = spawnSync(
+      process.execPath,
+      ['-e', `import(${JSON.stringify(mod)}).then((m) => console.log(JSON.stringify(m.skillFilesEnabled())))`],
+      { cwd: HERE, encoding: 'utf8', env }
+    );
+    fs.rmSync(root, { recursive: true, force: true });
+    assert.equal(r2.status, 0, 'probe failed: ' + r2.stdout + ' ' + r2.stderr);
+    return JSON.parse(r2.stdout.trim());
+  };
+  assert.equal(probe('1'), true, 'Team Knowledge/.env must be able to turn the route ON');
+  assert.equal(probe('0'), false, 'the DOCUMENTED off-switch in Team Knowledge/.env must actually switch it off');
+  assert.equal(probe(null), false, 'absent from both env and .env must fail CLOSED');
+
+  // B-9b: because the value now genuinely comes from Team Knowledge/.env, the
+  // Connections page must not be able to write it back on. Asserted on SOURCE,
+  // not by importing connectorAdmin.js — that module's import graph reaches
+  // integrationStatusDb.js, which opens a real database at module load, and a
+  // test must not touch the user's live DB. codeOf() strips comments, so the
+  // rationale comment next to the key cannot satisfy this on its own.
+  const adminCode = codeOf(path.join(HERE, 'connectorAdmin.js'));
+  const protectedBlock = adminCode.match(/PROTECTED_KEYS = new Set\(\[(.*?)\]\)/s);
+  assert.ok(protectedBlock, 'PROTECTED_KEYS block not found in connectorAdmin.js');
+  assert.ok(
+    protectedBlock[1].includes("'COCKPIT_SKILL_FILES_ENABLED'"),
+    'B-9b: the gate key must be in PROTECTED_KEYS or the Connections page can re-arm it'
+  );
+  // Membership alone only proves the key is IN the set, not that the set is
+  // still ENFORCED. A refactor that drops the PROTECTED_KEYS check out of
+  // validKeyName(), or lets setEnvKey() write without consulting it, would leave
+  // the assertion above green while the hole is wide open. Asserted on source
+  // for the same reason as above: importing connectorAdmin.js opens the live DB.
+  assert.match(
+    adminCode,
+    /function validKeyName\([\s\S]*?PROTECTED_KEYS\.has\(/,
+    'B-9b: validKeyName() must still consult PROTECTED_KEYS'
+  );
+  assert.match(
+    adminCode,
+    /function setEnvKey\([\s\S]*?validKeyName\(/,
+    'B-9b: setEnvKey() must still gate on validKeyName()'
+  );
 });
 
 // ---------------------------------------------------------------------------

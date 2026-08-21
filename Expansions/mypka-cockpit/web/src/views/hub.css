@@ -486,3 +486,70 @@ a.hub-quote-author:hover { color: var(--accent-marker-text); text-decoration: un
   font-size: 0.8125rem;
   color: var(--fg-subtle);
 }
+
+/* ── Bunq balance ──────────────────────────────────────────────────────────
+   Same visual grammar as .hub-invoice, one column lighter (no due-date, no
+   arrow — a monetary account has no note to open). Loudness is reserved for a
+   NEGATIVE balance, mirroring how the invoices card reserves it for overdue.
+   Token-only — no hardcoded hex. */
+.hub-balances { display: flex; flex-direction: column; gap: 8px; }
+
+.hub-balance {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-1);
+  color: var(--fg);
+}
+
+/* Negative: the one loud state this card has. */
+.hub-balance[data-state='negative'] {
+  border-color: var(--status-error);
+  background: var(--status-error-soft);
+}
+
+.hub-balance-glyph { display: inline-flex; color: var(--fg-subtle); }
+.hub-balance[data-state='negative'] .hub-balance-glyph { color: var(--status-error-text); }
+
+.hub-balance-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.hub-balance-name {
+  font-size: 0.9375rem;
+  color: var(--fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hub-balance-sub {
+  display: flex;
+  gap: 10px;
+  font-size: 0.8125rem;
+  color: var(--fg-subtle);
+}
+.hub-balance-iban { font-variant-numeric: tabular-nums; }
+.hub-balance-status { text-transform: lowercase; }
+
+.hub-balance-amount {
+  font-size: 0.9375rem;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+.hub-balance-amount[data-state='negative'] { color: var(--status-error-text); }
+
+/* Sandbox badge: these numbers are fake, and the card must never let that be
+   mistaken for a real balance. Warning register, always beside the title. */
+.hub-balance-badge {
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklch, var(--status-warning) 60%, var(--border));
+  background: var(--status-warning-soft);
+  color: var(--status-warning);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}

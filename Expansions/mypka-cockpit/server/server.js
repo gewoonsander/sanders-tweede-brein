@@ -46,6 +46,11 @@ import { registerFileTreeRoutes } from './filetree.js';
 import { registerDocumentsRoutes } from './documentsApi.js';
 import { registerJournalFeed } from './journalFeed.js';
 import { registerInvoicesRoutes } from './invoicesApi.js';
+// bunq balance — read-only, GET-only, one allowlisted endpoint. Follows the
+// Open-Invoices precedent (own module + own route + own Hub card), deliberately
+// NOT the task/calendar connector registry: a balance is neither.
+// See Team Knowledge/Guidelines/GL-022-financiele-koppelingen-dashboard-scope.md
+import { registerBunqBalanceRoutes } from './connectors/bunq/bunqBalance.js';
 import { registerSerendipityRoutes } from './serendipityApi.js';
 import { registerLibraryRoutes } from './libraryApi.js';
 import { registerAudiobooksRoutes } from './audiobooksApi.js';
@@ -1200,6 +1205,12 @@ registerFileTreeRoutes(app, { safe, sessionOrLoopback, localWriteGuard });
 registerDocumentsRoutes(app, { safe });
 registerJournalFeed(app, { safe });
 registerInvoicesRoutes(app, { safe });
+// bunq balance. safeAsync (not safe) because the read is a live HTTP call, and
+// isLoopbackHost is handed in rather than reimplemented so the card's LAN gate
+// can never drift from the auth middleware's definition of "loopback".
+// The route degrades to { available:false } instead of throwing — a bank outage
+// must never 500 the Hub.
+registerBunqBalanceRoutes(app, { safeAsync, isLoopbackHost });
 // Serendipity Hub modules: random quote + On This Day (both read-only over
 // mypka.db, both degrade to an honest empty state when their backing data is
 // absent — see serendipityApi.js).
@@ -1294,13 +1305,14 @@ registerSkillsRoutes(app, { safe });
 // stay in the repo. It takes a SLUG, never a path, and hardcodes the filename
 // (SKILL.md). Full rationale + the mandatory C0..C10 checks live in
 // server/skillFileApi.js and in Argus's design of 2026-08-21. FAIL-CLOSED: the
-// route mounts ONLY with an explicit COCKPIT_SKILL_FILES_ENABLED=1 (process env
-// or Team Knowledge/.env); anything else leaves it unmounted (finding B-9).
+// route mounts ONLY with an explicit COCKPIT_SKILL_FILES_ENABLED=1 (finding
+// B-9). `Team Knowledge/.env` is the single switch — no launcher or npm script
+// sets this flag, so it stays unmounted until the user arms it there (B-11).
 const SKILL_FILES_ON = registerSkillFileRoutes(app);
 console.log(
   SKILL_FILES_ON
     ? '  skills: SKILL.md preview enabled (read-only, ~/.claude/skills/<slug>/SKILL.md only)'
-    : '  skills: SKILL.md preview disabled (set COCKPIT_SKILL_FILES_ENABLED=1 to enable)'
+    : '  skills: SKILL.md preview disabled (set COCKPIT_SKILL_FILES_ENABLED=1 in Team Knowledge/.env to enable)'
 );
 // Runtime Hub-module toggles (Settings page). Read always-on; the PUT rides the
 // cockpit's standard local-write guard stack (session/loopback → CSRF → parser),
