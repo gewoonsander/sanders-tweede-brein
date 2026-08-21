@@ -25,6 +25,14 @@ Markdown stubs that describe and point at the user's real documents (passports, 
 - [[2026-07-31-hotels-portsmouth-modus]] — Hotelopties Portsmouth voor de MODUS Super Series.
 - [[jouw-dartstraining]] — cursusinhoud van de door Sander beheerde Huddle-cursus "Jouw Dartstraining": modulestructuur en alle niet-oefening-lessen. De 22 trainbare oefeningen staan apart in [[PKM/My Life/Darts Exercises/INDEX|Darts Exercises]].
 
+### Kennisarchieven (submappen met een eigen index)
+
+Externe kennisbases die als geheel zijn opgehaald en gesynthetiseerd. Elk archief bewaart de onbewerkte brondocumenten naast de markdown-synthese.
+
+- [[PKM/Documents/NDB-Kennis/INDEX|NDB-Kennis]] — het volledige reglementenbestand van de [[ndb-nederlandse-darts-bond]] (35 documenten, opgehaald 2026-08-21), in vier clusters: statuten en algemeen, selectie en jeugd, competities/ranking/paradarts, tuchtrechtspraak. Inclusief een register van openstaande onduidelijkheden.
+- [[PKM/Documents/WDF-Kennis/INDEX|WDF-Kennis]] — spelregels, kwalificatiecriteria, ranking- en cup-reglementen van de World Darts Federation (15 kennisbestanden + 14 bron-PDF's, opgehaald 2026-08-21), plat georganiseerd met een numeriek voorvoegsel per categorie: spelregels, kwalificatie, ranking, cups, organisatie. Inclusief revisieregister en een expliciete scope-afbakening.
+- `YouTube-Kennis/` — getranscribeerde kennis per YouTube-kanaal, opgehaald via de `/transcribeer`-skill. Nog zonder eigen `INDEX.md`.
+
 ### Geïmporteerd uit Apple Notities (6 juli 2026)
 
 - [[ideeenbus]] — ideeën voor content rond Dart Buddies-robotjes en quotes.
