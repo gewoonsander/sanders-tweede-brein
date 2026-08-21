@@ -21,6 +21,14 @@ Iedere dag minimaal één bewust bewegingsmoment. Dat kan onder andere opdrukken
 
 ## Reflection
 
+### 2026-08-21
+
+- done: true
+- amount: 31
+- unit: opdrukherhalingen
+- trigger: close-session
+- note: bewegingsmoment behaald met opdrukken, zie [[dagelijks-opdrukken]]
+
 ### 2026-08-19
 
 - done: true

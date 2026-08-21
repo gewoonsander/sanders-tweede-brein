@@ -45,6 +45,13 @@ Bij medische vochtbeperkingen of aandoeningen waarbij vochtinname belangrijk is,
 
 ## Reflection
 
+### 2026-08-21
+
+- trigger: close-session
+- drink: 250 ml zwarte koffie
+- drink: 250 ml zwarte koffie
+- drink: 1 glas bier (hoeveelheid niet gespecificeerd — of dit meetelt voor het vochtdoel is niet vastgelegd in deze gewoonte)
+
 ### 2026-08-19
 
 - trigger: chat

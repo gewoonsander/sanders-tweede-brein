@@ -554,15 +554,19 @@ test('case 18: the kill switch is FAIL-CLOSED — only an explicit 1 mounts it',
   // validKeyName(), or lets setEnvKey() write without consulting it, would leave
   // the assertion above green while the hole is wide open. Asserted on source
   // for the same reason as above: importing connectorAdmin.js opens the live DB.
+  // Both patterns stop at the first `}` on purpose. A lazy [\s\S]*? would happily
+  // skip a deleted check and match a LATER, unrelated PROTECTED_KEYS.has() further
+  // down the file (there is one in the unknown-key scan), which would defeat the
+  // whole point of asserting enforcement.
   assert.match(
     adminCode,
-    /function validKeyName\([\s\S]*?PROTECTED_KEYS\.has\(/,
+    /function validKeyName\([^)]*\)\s*\{[^}]*PROTECTED_KEYS\.has\(/,
     'B-9b: validKeyName() must still consult PROTECTED_KEYS'
   );
   assert.match(
     adminCode,
-    /function setEnvKey\([\s\S]*?validKeyName\(/,
-    'B-9b: setEnvKey() must still gate on validKeyName()'
+    /function setEnvKey\([^)]*\)\s*\{[^}]*validKeyName\(/,
+    'B-9b: setEnvKey() must still reject before doing anything else'
   );
 });
 

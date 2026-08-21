@@ -21,6 +21,12 @@ Iedere dag eenmaal bodylotion aanbrengen. Het moment van de dag is vrij; bij de 
 
 ## Reflection
 
+### 2026-08-21
+
+- done: true
+- trigger: close-session
+- note: bij afsluiten gemeld: bodylotion aangebracht
+
 ### 2026-08-19
 
 - done: true
