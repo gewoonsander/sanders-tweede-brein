@@ -3,7 +3,7 @@
 //
 // Fase 1 shipped three converters that each knew their own document by heart.
 // This module knows none of them. It asks procedureReader.ts what structure the
-// document has and draws that, which is why it works on all 33 SOPs and all 9
+// document has and draws that, which is why it works on all 34 SOPs and all 9
 // Workstreams without a per-document line of code.
 //
 // Two contracts it keeps, both non-negotiable:

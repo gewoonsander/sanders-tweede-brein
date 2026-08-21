@@ -8,7 +8,7 @@
 // markdown ("this heading is numbered", "this table's first column is a
 // condition"), never about pixels.
 //
-// The heuristics were derived by reading all 33 SOPs and all 9 Workstreams in
+// The heuristics were derived by reading all 34 SOPs and all 9 Workstreams in
 // Team Knowledge/ and cataloguing how they actually write themselves down. They
 // are ordered as a CASCADE, strongest structure first, so a document that has a
 // §-split is never mistaken for a flat list and a document with nothing but
@@ -80,10 +80,10 @@ const END_HEADING =
  * off the end of the spine over dashed exception edges — the vocabulary fase 1
  * already established for non-primary paths.
  *
- * "Common mistakes" / "Veelgemaakte fouten" is deliberately NOT here: it appears
- * in 20 of the 33 SOPs and is advice for the person WRITING the procedure, not a
- * path through it. Including it would end every single diagram with the same
- * meaningless node.
+ * "Common mistakes" / "Veelgemaakte fouten" is deliberately NOT here: it is a
+ * top-level section in 15 of the 34 SOPs (counted 2026-08-21) and it is advice
+ * for the person WRITING the procedure, not a path through it. Including it
+ * would end nearly half the diagrams with the same meaningless node.
  */
 const EXCEPTION_HEADING =
   /^(rollback|foutbeleid|fouten en herstel|troubleshooting|valkuilen|waarschuwingen|known pitfall|pitfalls?|uitzondering|edge cases|failure)/i;
