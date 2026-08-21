@@ -234,6 +234,12 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  /* A token wider than the card ("voorstel-/inzichtendocument", WS-008 step 3)
+     cannot wrap, so `overflow: hidden` chops it flush at the border with no
+     ellipsis — it reads as a rendering fault rather than as a truncation.
+     Breaking inside the word lets the line clamp do its job and show the "…".
+     Same reasoning, same one-liner, as .dg-title above. */
+  overflow-wrap: anywhere;
 }
 
 /* Start / end bookend the spine: base plane, quiet left edge, heavier label. */
@@ -263,6 +269,21 @@
 
 /* Handoff to another specialist: neutral, the glyph does the talking. */
 .dg-node[data-kind='handoff'] { border-left-color: var(--fg-subtle); }
+
+/* Swimlane header (fase 2): the column caption naming whose lane this is. It is
+   a HEADER, not a step, so it reads as chrome rather than as work — one surface
+   step up, a heavier label, and no accent of its own. Same two existing tokens
+   the decision card uses for its plane and the start/end cards use for their
+   edge; nothing new was minted for it. */
+.dg-node[data-kind='lane'] {
+  min-height: 0;
+  background: var(--surface-2);
+  border-left-color: var(--border);
+}
+.dg-node[data-kind='lane'] .dg-node-label {
+  font-weight: 560;
+  letter-spacing: 0.01em;
+}
 
 /* The two signal states. Tint is REINFORCEMENT — the glyph (TriangleAlert /
    CircleX) and the caption already say it without any colour. */

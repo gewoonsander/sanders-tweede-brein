@@ -48,6 +48,8 @@ tonen of opslaan.
 Volg voor MCP-secrets [[SOP-018-registreer-mcp-service-bij-agent-runtime]].
 Werk eerst LastPass bij, daarna iedere lokale secret store en trek het oude
 providertoken pas in wanneer alle afhankelijke apparaten zijn gemigreerd.
+Herstart daarna de sessie of de betrokken runtime, anders draait de oude
+waarde door.
 
 ## Rollback
 

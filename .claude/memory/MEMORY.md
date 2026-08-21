@@ -39,6 +39,7 @@ Gegroepeerd per type (progressive disclosure, laag 0). Groeit een categorie voor
 - [DaVinci Resolve Studio 20.3.2](project_davinci_resolve_studio.md) — externe scripting-API werkt, Claude Code kan Resolve rechtstreeks aansturen
 - [Claude-abonnement tijdelijk op Max](project_claude_abonnement_tijdelijk_max.md) — bewust tijdelijk (camping), rond 2026-09-18 terug naar goedkoper plan
 - [Huddle/Dartbuddies automatisering](project_huddle_dartbuddies_automatisering.md) — Huddle heeft geen API/MCP/webhook-events voor content of auto-reply, alleen gebruikersbeheer
+- [Plug&Pay MCP-onderzoek](project_plugandpay_mcp_onderzoek.md) — officiële MCP live maar scope-beperkt (pagina's/funnels/orders), volledige billingdata vereist eigen MCP op de REST-API/SDK, multi-account ongetest
 
 ## User
 

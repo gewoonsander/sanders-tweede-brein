@@ -531,16 +531,24 @@
    4.91:1 - without touching --text-on-marker or any call site; every
    existing `var(--accent-marker)` consumer inherits the fix. The pre-fix
    local noodgreep in integrations.css .intg-action (swapping in
-   --accent-marker-up as the resting fill) is now redundant and can revert
-   to --accent-marker + --text-on-marker. --accent-marker-up (#B93613) and
-   --accent-marker-muted (#8F2E10) stay untouched and still read as
-   progressively darker hover/de-emphasis steps below the new resting value.
-   The low-alpha tint siblings (--accent-marker-soft/-bg/-bg-emphasis/-border,
-   --room-wash, --rail-wash, --graph-focus-glow, ::selection) keep their old
-   literal rgba(212, 63, 22, ...) base on purpose - they carry no text, their
-   own contrast math is untouched by this fix, and the drift from the new
-   base is imperceptible at those alphas; flagged here for a future cleanup
-   pass rather than folded into this fix silently.
+   --accent-marker-up as the resting fill) is now redundant and reverted to
+   --accent-marker + --text-on-marker (Bezalel, 2026-08-21).
+
+   Two follow-ups surfaced by that revert, same-day, same gate:
+   1. The low-alpha tint siblings (--accent-marker-soft/-bg/-bg-emphasis/
+      -border, --room-wash, --rail-wash, --graph-focus-glow, light-room
+      ::selection) still carried the OLD literal rgba(212, 63, 22, ...) base
+      - rebased to rgba(197, 59, 20, ...), the new #C53B14 in decimal, so the
+      whole marker family shares one underlying tint again.
+   2. --accent-marker-up (#B93613, hover) sat only 1.11:1 self-contrast from
+      the new #C53B14 rest value (was 1.26:1 against the old #D43F16 rest) -
+      a visibly flattened hover step on any button that shows one (the
+      koppelingen page's .intg-action has no hover rule, so unaffected there,
+      but .page-action-btn/.prompt-input-submit/etc. do). Darkened to
+      #A03010 - same hue family, restores 1.37:1 self-contrast against rest
+      (better than the pre-fix 1.26:1) while clearing --text-on-marker at
+      6.73:1 (up from 5.47:1) and staying safely above --accent-marker-muted
+      (#8F2E10, unchanged) in the rest > hover > muted ladder.
    =========================================================================== */
 :root[data-theme='light'] {
   color-scheme: light;
@@ -566,19 +574,23 @@
   --accent-marker: #C53B14;                        /* marker_on_paper - display/fills/non-text; darkened from #D43F16
                                                        2026-08-21 to clear 4.5:1 with --text-on-marker (see header
                                                        comment above) - measures 4.91:1, was 4.35:1 */
-  --accent-marker-up: #B93613;                     /* hover */
+  --accent-marker-up: #A03010;                     /* hover; darkened from #B93613 2026-08-21 alongside the rest-value
+                                                       fix - self-contrast rest→hover was 1.11:1 (barely perceptible)
+                                                       once rest moved to #C53B14, was 1.26:1 before that. #A03010
+                                                       restores 1.37:1 against the new rest, clearing text-on-marker
+                                                       at 6.73:1 (up from 5.47:1) */
   --accent-marker-muted: #8F2E10;                  /* muted */
-  --accent-marker-soft: rgba(212, 63, 22, 0.08);   /* bg */
-  --accent-marker-bg: rgba(212, 63, 22, 0.08);
-  --accent-marker-bg-emphasis: rgba(212, 63, 22, 0.14);
-  --accent-marker-border: rgba(212, 63, 22, 0.35);
+  --accent-marker-soft: rgba(197, 59, 20, 0.08);   /* bg - rebased to the new #C53B14 solid 2026-08-21 (was 212,63,22 / #D43F16) */
+  --accent-marker-bg: rgba(197, 59, 20, 0.08);
+  --accent-marker-bg-emphasis: rgba(197, 59, 20, 0.14);
+  --accent-marker-border: rgba(197, 59, 20, 0.35);
   --accent-marker-text: #B93613;                   /* marker_text_on_paper (A148) */
   --text-on-marker: #FFF6F0;
 
   /* Room chrome, paper (ruling A150). */
-  --room-wash: rgba(212, 63, 22, 0.03);
+  --room-wash: rgba(197, 59, 20, 0.03);
   --room-pool: rgba(23, 26, 32, 0.03);
-  --rail-wash: rgba(212, 63, 22, 0.02);
+  --rail-wash: rgba(197, 59, 20, 0.02);
   --topbar-bg: rgba(246, 243, 236, 0.9);   /* light nav glass - the room's own ground */
   --scrim: rgba(23, 26, 32, 0.45);         /* light scrim_modal - warm ink, never #000 */
   --focus-ring: var(--accent-marker);
@@ -668,7 +680,7 @@
   /* Knowledge-graph Gen-2 recede - anchors already flipped; restated for intent. */
   --graph-gen2-fill:   color-mix(in oklch, var(--surface-1) 78%, var(--surface-bg));
   --graph-gen2-border: color-mix(in oklch, var(--border-subtle) 78%, transparent);
-  --graph-focus-glow: 0 0 0 1px rgba(212, 63, 22, 0.30);
+  --graph-focus-glow: 0 0 0 1px rgba(197, 59, 20, 0.30);
 
   /* Concept palette - hue kept, deepened one step for the 3:1 non-text floor
      on cream (canonized GL-003 v5.33 A159; key-element on dusty indigo). */
@@ -753,7 +765,7 @@ h4, h5 {
   color: var(--fg);
 }
 :root[data-theme='light'] ::selection {
-  background: rgba(212, 63, 22, 0.25);
+  background: rgba(197, 59, 20, 0.25);
   color: #171A20;
 }
 

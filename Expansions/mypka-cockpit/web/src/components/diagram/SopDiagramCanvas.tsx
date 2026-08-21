@@ -87,7 +87,12 @@ function buildFlow(spec: DiagramSpec): BuiltFlow {
     // and enters the next card from the top like any other spine edge —
     // entering from the left made smoothstep detour far to the left of the
     // spine before doubling back, which read as a stray line.
-    const sideways = source && target ? target.col > source.col : false;
+    //
+    // A converter can override the guess with `enter`, which the sub-procedure
+    // fan-out needs: see DiagramEdge.enter for why crossing a sibling's face is
+    // not a cosmetic problem there but a wrong sentence.
+    const inferred = source && target ? target.col > source.col : false;
+    const sideways = e.enter ? e.enter === 'side' : inferred;
     return {
       id: e.id,
       source: e.source,

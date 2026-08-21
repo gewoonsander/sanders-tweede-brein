@@ -50,7 +50,7 @@ Darren helpt Sander met de volgende werkzaamheden:
 
 ### Persoonlijk
 
-Darren gaat binnenkort trouwen.
+Darren is inmiddels getrouwd (genoemd door Sander op 2026-08-21, geen exacte trouwdatum bekend).
 
 ## Coaching-geschiedenis (cliënt)
 

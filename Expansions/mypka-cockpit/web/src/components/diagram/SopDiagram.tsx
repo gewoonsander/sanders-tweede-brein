@@ -22,6 +22,7 @@ import {
   Minimize2,
   Split,
   TriangleAlert,
+  Users,
   Workflow,
   type LucideIcon,
 } from 'lucide-react';
@@ -36,6 +37,7 @@ const LEGEND_ICON: Record<DiagramNodeKind, LucideIcon> = {
   decision: GitBranch,
   branch: Split,
   handoff: ArrowRightLeft,
+  lane: Users,
   warning: TriangleAlert,
   error: CircleX,
   end: CircleCheck,
@@ -43,6 +45,7 @@ const LEGEND_ICON: Record<DiagramNodeKind, LucideIcon> = {
 
 /** Legend order = reading order of the procedure, not alphabetical. */
 const LEGEND_ORDER: DiagramNodeKind[] = [
+  'lane',
   'start',
   'step',
   'decision',
@@ -56,6 +59,11 @@ const LEGEND_ORDER: DiagramNodeKind[] = [
 function Legend({ spec }: { spec: DiagramSpec }) {
   const present = new Set(spec.nodes.map((n) => n.kind));
   const kinds = LEGEND_ORDER.filter((k) => present.has(k));
+  // The dash entry is conditional since fase 2: the generic parser produces
+  // plenty of diagrams with no exception path at all (every swimlane, most
+  // linear SOPs), and a legend that explains a line the canvas never draws is
+  // noise the reader has to rule out by hand.
+  const hasException = spec.edges.some((e) => e.kind === 'exception');
   return (
     <ul className="dg-legend">
       {kinds.map((kind) => {
@@ -67,10 +75,12 @@ function Legend({ spec }: { spec: DiagramSpec }) {
           </li>
         );
       })}
-      <li className="dg-legend-item dg-legend-item--edge">
-        <span className="dg-legend-dash" aria-hidden="true" />
-        Uitzonderingspad
-      </li>
+      {hasException && (
+        <li className="dg-legend-item dg-legend-item--edge">
+          <span className="dg-legend-dash" aria-hidden="true" />
+          Uitzonderingspad
+        </li>
+      )}
     </ul>
   );
 }

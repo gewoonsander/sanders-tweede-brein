@@ -13,12 +13,16 @@
 // "Raw" link keeps the native-URL escape hatch. A missing file gets a calm
 // not-found state, never a broken embed.
 //
-// "Visualiseer" (tsk-2026-08-19-003, fase 1) sits next to Raw/Discuss and only
-// appears when components/diagram/sopDiagrams.ts can actually turn THIS
-// document into diagram data. It toggles a React Flow panel above the prose —
-// full width, not inside the 68ch reading column — and the prose stays put
-// underneath, because the diagram is a view of the document, not a replacement
-// for it. Fase 1 covers three pilot SOPs; a generic parser is fase 2.
+// "Visualiseer" sits next to Raw/Discuss and appears when
+// components/diagram/sopDiagrams.ts can turn THIS document into diagram data.
+// It toggles a React Flow panel above the prose — full width, not inside the
+// 68ch reading column — and the prose stays put underneath, because the diagram
+// is a view of the document, not a replacement for it.
+//
+// Since fase 2 (tsk-2026-08-21-001) that is every SOP and every Workstream, via
+// the generic parser; three pilot SOPs keep their richer fase-1 converters as
+// overrides. Guidelines deliberately still get nothing — see the note on
+// documentKind() in sopDiagrams.ts.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, Workflow } from 'lucide-react';
 import { parseFileSrc, type Route } from '../lib/router';
@@ -97,10 +101,15 @@ export function FileView({ route }: { route: Extract<Route, { name: 'file' }> })
   // Navigating to another file must never leave a stale diagram open.
   useEffect(() => { setShowDiagram(false); }, [route.src]);
 
-  // Markdown → diagram data (tsk-2026-08-19-003, fase 1). `null` means either
-  // "no fase-1 converter for this file" or "the document no longer has the
-  // structure its converter expects" — both hide the button entirely, so a
+  // Markdown → diagram data. `null` means either "this file is not a procedure
+  // document" or "nothing could read it" — both hide the button entirely, so a
   // missing diagram is the failure mode, never a wrong one.
+  //
+  // Synchronous on purpose. The whole conversion layer is 20.7 kB minified /
+  // 7.9 kB gzip of pure string work over a document that is already in memory;
+  // deferring it behind an import() would buy ~4 kB on a bundle served over
+  // loopback and cost a loading state, a navigation race, and a button that
+  // appears a frame late.
   const diagramSpec = useMemo(
     () => (ext === 'md' && text && hasDiagramConverter(path) ? buildDiagramSpec(path, text) : null),
     [ext, text, path],

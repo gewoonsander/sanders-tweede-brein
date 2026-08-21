@@ -161,12 +161,16 @@
       "Bash(ps aux *)",
       "Bash(pgrep -f *)",
       "Bash(curl -w *)"
+    ],
+    "deny": [
+      "mcp__claude_ai_Todoist__delete-object",
+      "mcp__claude_ai_Todoist__add-projects"
     ]
   },
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "mcp__claude_ai_Todoist__add-tasks|mcp__038b67df-1277-4cd5-b6e4-150bccb71b78__add-tasks",
+        "matcher": "mcp__claude_ai_Todoist__add-tasks|mcp__038b67df-1277-4cd5-b6e4-150bccb71b78__add-tasks|mcp__claude_ai_Todoist__update-tasks|mcp__038b67df-1277-4cd5-b6e4-150bccb71b78__update-tasks",
         "hooks": [
           {
             "type": "command",
@@ -193,6 +197,11 @@
           {
             "type": "command",
             "command": "python3 \"/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/.claude/hooks/check-lettered-options.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python3 \"/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/.claude/hooks/check-session-stamp.py\"",
             "timeout": 10
           }
         ]

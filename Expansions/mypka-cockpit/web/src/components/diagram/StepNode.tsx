@@ -20,6 +20,7 @@ import {
   ListChecks,
   Split,
   TriangleAlert,
+  Users,
   type LucideIcon,
 } from 'lucide-react';
 import { KIND_LABEL, type DiagramNodeKind } from './diagramTypes';
@@ -30,6 +31,9 @@ const KIND_ICON: Record<DiagramNodeKind, LucideIcon> = {
   decision: GitBranch,
   branch: Split,
   handoff: ArrowRightLeft,
+  // `Users` extends Harmonia's vocabulary for the fase-2 swimlane header: it
+  // names WHOSE column this is, which is a role, not an action.
+  lane: Users,
   warning: TriangleAlert,
   error: CircleX,
   end: CircleCheck,

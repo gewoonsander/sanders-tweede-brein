@@ -1,12 +1,16 @@
 // markdownShapes.ts — the small, shared markdown-reading helpers the three
 // fase-1 converters (sopDiagrams.ts) are built from.
 //
-// SCOPE (tsk-2026-08-19-003, fase 1): these are STRUCTURE readers, not a generic
-// SOP parser. They answer narrow questions — "which `## Stap N` sections does
-// this document have", "what are the rows of this table", "which arrow lines sit
-// inside this fenced block" — and each converter composes them into the shape it
-// knows its own document has. A generic parser that works on every SOP is
-// explicitly fase 2.
+// SCOPE: these are STRUCTURE readers, not a parser. They answer narrow
+// questions — "which `## Stap N` sections does this document have", "what are
+// the rows of this table", "which arrow lines sit inside this fenced block" —
+// and a converter composes them into a shape.
+//
+// Fase 1 (tsk-2026-08-19-003) composed them by hand, per pilot document.
+// Fase 2 (tsk-2026-08-21-001) added genericParser.ts, which composes the SAME
+// helpers behind a cascade of heuristics so any SOP or Workstream gets a
+// diagram. These readers did not change for it — only `withoutFrontmatter` and
+// `frontmatterBlock` moved in, from sopDiagrams.ts.
 //
 // Everything here is pure and fence-aware: a `#` or a `|` inside a ``` block is
 // never mistaken for a heading or a table row.
@@ -16,6 +20,33 @@ export interface MdSection {
   heading: string;
   /** Everything until the next heading at this level or shallower. */
   body: string;
+}
+
+/**
+ * Drop the YAML frontmatter block so headings, lists and tables inside it are
+ * never read as document structure. Lived privately in sopDiagrams.ts through
+ * fase 1; promoted here in fase 2 because the generic parser needs the same
+ * guarantee and two copies of "where does the body start" is one too many.
+ */
+export function withoutFrontmatter(md: string): string {
+  if (!md.startsWith('---')) return md;
+  const end = md.indexOf('\n---', 3);
+  if (end < 0) return md;
+  const after = md.indexOf('\n', end + 1);
+  return after < 0 ? '' : md.slice(after + 1);
+}
+
+/**
+ * The raw frontmatter block (without the `---` fences), or '' when there is
+ * none. Used by the Workstream parser to read `owners:`, which is the only
+ * place several Workstreams name their specialists explicitly.
+ */
+export function frontmatterBlock(md: string): string {
+  if (!md.startsWith('---')) return '';
+  const end = md.indexOf('\n---', 3);
+  if (end < 0) return '';
+  const first = md.indexOf('\n');
+  return first < 0 || first > end ? '' : md.slice(first + 1, end + 1);
 }
 
 /**

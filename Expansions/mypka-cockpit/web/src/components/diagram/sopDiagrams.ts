@@ -1,26 +1,28 @@
-// sopDiagrams.ts — the markdown → diagram-data conversion step (fase 1 of
-// tsk-2026-08-19-003).
+// sopDiagrams.ts — the markdown → diagram-data conversion step, and the registry
+// that decides which converter draws a given file.
 //
-// SCOPE, on purpose (YAGNI, straight out of the task):
-//   Fase 1 = three PILOT documents, each in a DIFFERENT diagram shape, so the
-//   pattern gets tested three ways instead of once:
-//     • SOP-013-inboxen-verwerken      → decision-tree     (Vraag A/B/C + routes)
-//     • SOP-004-argus-security-audit   → phased-pipeline   (4 blocking phases)
-//     • SOP-017-verwerk-voedingsregistratie → steps-with-fork (steps + tweesprong)
-//   A GENERIC parser that works on any SOP/Workstream/Guideline is fase 2 and is
-//   deliberately NOT attempted here.
+// TWO LAYERS, since fase 2 (tsk-2026-08-21-001):
+//
+//   1. SPECIFIC OVERRIDES — the three fase-1 converters below. Each knows its own
+//      pilot document by heart and draws a richer diagram than any heuristic can
+//      (SOP-013's Vraag A→B→C gating and its video exception, SOP-004's severity
+//      ladder and CRITICAL escalation, SOP-017's named tweesprong arms). Their
+//      output carries Nemesis's fase-1 sign-off, so they stay put and keep
+//      winning for their three files.
+//   2. THE GENERIC PARSER — genericParser.ts, for every other SOP and Workstream.
 //
 // Each converter READS THE REAL FILE. The cockpit already has the markdown in
 // hand (FileView fetches it), so the spec is derived from the live document, not
 // from a snapshot pasted in here. That has a real consequence: when a document is
-// rewritten past recognition, its converter returns `null` and the "Visualiseer"
-// button simply does not appear — a missing diagram, never a wrong one. Each
-// converter therefore starts with a structural guard.
+// rewritten past recognition, its override returns `null` — and since fase 2 that
+// is not the end of the road, because the generic parser then gets a turn. The
+// button only disappears when NOTHING can read the file.
 //
-// Layout convention shared by all three: the SPINE runs down column 0; anything
-// that branches off it fans to the right (column 1, occasionally 2), one row per
-// branch. Rows are floats so a decision can sit level with its first outcome.
-import type { DiagramEdge, DiagramNode, DiagramNodeKind, DiagramSpec } from './diagramTypes';
+// Layout convention shared by every converter here and in genericParser.ts: the
+// SPINE runs down column 0; anything that branches off it fans to the right
+// (column 1, occasionally 2), one row per branch. Rows are floats so a decision
+// can sit level with its first outcome.
+import type { DiagramNode, DiagramNodeKind, DiagramSpec } from './diagramTypes';
 import {
   arrowPairs,
   bulletItems,
@@ -32,27 +34,15 @@ import {
   sentenceCase,
   shortLabel,
   tableRows,
+  withoutFrontmatter,
 } from './markdownShapes';
+import { SpecBuilder } from './specBuilder';
+import { buildGenericSopSpec, buildGenericWorkstreamSpec } from './genericParser';
+import { documentTitle } from './procedureReader';
 
 // ---------------------------------------------------------------------------
 // Shared bits
 // ---------------------------------------------------------------------------
-
-/** Drop the YAML frontmatter block so headings/lists inside it are never read. */
-function withoutFrontmatter(md: string): string {
-  if (!md.startsWith('---')) return md;
-  const end = md.indexOf('\n---', 3);
-  if (end < 0) return md;
-  const after = md.indexOf('\n', end + 1);
-  return after < 0 ? '' : md.slice(after + 1);
-}
-
-/** "SOP-013 — Inboxen verwerken" / "SOP: Security Audit" → the bare title. */
-function documentTitle(md: string, fallback: string): string {
-  const h1 = headingSections(md, 1)[0];
-  if (!h1) return fallback;
-  return plain(h1.heading).replace(/^SOP[-\s]?\d*\s*[:—–-]\s*/, '').trim() || fallback;
-}
 
 /**
  * Which signal a routing destination carries. Read off the destination text
@@ -67,34 +57,6 @@ function routeKind(text: string): DiagramNodeKind {
     return 'warning';
   }
   return 'branch';
-}
-
-/** Warning/error targets are reached over the dashed exception path. */
-function edgeKindFor(target: DiagramNodeKind): DiagramEdge['kind'] {
-  return target === 'warning' || target === 'error' ? 'exception' : 'flow';
-}
-
-/** Small builder so the converters below read as the shape they describe. */
-class SpecBuilder {
-  readonly nodes: DiagramNode[] = [];
-  readonly edges: DiagramEdge[] = [];
-  private seq = 0;
-
-  node(n: Omit<DiagramNode, 'id'> & { id?: string }): DiagramNode {
-    const node: DiagramNode = { ...n, id: n.id ?? `n${this.seq++}` };
-    this.nodes.push(node);
-    return node;
-  }
-
-  link(source: DiagramNode, target: DiagramNode, label?: string, kind?: DiagramEdge['kind']): void {
-    this.edges.push({
-      id: `e:${source.id}->${target.id}`,
-      source: source.id,
-      target: target.id,
-      label,
-      kind: kind ?? edgeKindFor(target.kind),
-    });
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -527,34 +489,88 @@ function buildFoodLogDiagram(md: string): DiagramSpec | null {
 }
 
 // ---------------------------------------------------------------------------
-// Registry — the fase-1 allow-list
+// Registry — specific overrides first, generic parser second
 // ---------------------------------------------------------------------------
 
 type Converter = (md: string) => DiagramSpec | null;
 
-/** Keyed by file BASENAME, so the diagram survives a folder move. */
-const CONVERTERS: Record<string, Converter> = {
+/**
+ * Document-specific overrides, keyed by file BASENAME so a diagram survives a
+ * folder move.
+ *
+ * WHY THESE THREE STAYED (fase-2 decision, tsk-2026-08-21-001): the generic
+ * parser handles all three without crashing, but it draws them thinner —
+ * SOP-013 comes out as one decision with five routes instead of the three
+ * chained Vraag A→B→C gates plus the video exception; SOP-004 loses the
+ * severity ladder and the CRITICAL escalation; SOP-017 loses the two named arms
+ * of the tweesprong and their merge. That richness is exactly what these
+ * converters were written for, and their output already carries Nemesis's
+ * fase-1 sign-off. Replacing a signed-off diagram with a thinner one to delete
+ * 400 lines would be a trade in the wrong direction.
+ *
+ * The layering is also the migration path: delete an entry here and that file
+ * silently falls through to the generic parser. Nothing else has to change.
+ */
+const OVERRIDES: Record<string, Converter> = {
   'SOP-013-inboxen-verwerken.md': buildInboxDiagram,
   'SOP-004-argus-security-audit.md': buildSecurityAuditDiagram,
   'SOP-017-verwerk-voedingsregistratie.md': buildFoodLogDiagram,
 };
 
-/** Does fase 1 know how to draw this file at all? Cheap; no markdown needed. */
+/**
+ * Is this file a procedure document we draw at all?
+ *
+ * Both a folder test AND a filename test, because the cockpit reaches these
+ * files through two different jails: `Team Knowledge/SOPs/…` from the folder
+ * tree, and occasionally a bare basename from a wikilink. `INDEX.md` is
+ * excluded in both folders — it is a hub listing, not a procedure, and a
+ * "diagram" of it would just be its own table of contents drawn twice.
+ *
+ * Guidelines are deliberately absent. Fase 1's research concluded they mostly
+ * should NOT get a diagram (only the few that describe an architecture, e.g.
+ * GL-005), and that is a per-document editorial call, not a pattern a parser
+ * can make. Adding one is a line in OVERRIDES, on purpose.
+ */
+export function documentKind(path: string): 'sop' | 'workstream' | null {
+  const norm = path.replace(/\\/g, '/');
+  const base = norm.split('/').pop() ?? norm;
+  if (!/\.md$/i.test(base)) return null;
+  if (/^INDEX\.md$/i.test(base)) return null;
+  if (/(^|\/)SOPs\//.test(norm) || /^SOP[-\s]/i.test(base)) return 'sop';
+  if (/(^|\/)Workstreams\//.test(norm) || /^WS-/i.test(base)) return 'workstream';
+  return null;
+}
+
+/** Can this file be drawn at all? Cheap; deliberately needs no markdown. */
 export function hasDiagramConverter(path: string): boolean {
-  return (path.split('/').pop() ?? path) in CONVERTERS;
+  const base = path.split('/').pop() ?? path;
+  return base in OVERRIDES || documentKind(path) !== null;
 }
 
 /**
- * Convert a document to a DiagramSpec, or null when this file has no fase-1
- * converter OR its structure no longer matches what the converter expects. A
- * throw inside a converter is caught and treated the same way: a missing diagram
- * must never take the reading page down with it.
+ * Convert a document to a DiagramSpec, or null when nothing can read it.
+ *
+ * Order: the document-specific override, then the generic parser for the
+ * document's kind. An override that returns null (its document was rewritten
+ * past recognition) falls through to the generic parser rather than losing the
+ * diagram entirely.
+ *
+ * A throw anywhere in here is caught and answered with null. A broken parse must
+ * never take the reading page down with it — the prose is the source of record
+ * and it has to stay reachable.
  */
 export function buildDiagramSpec(path: string, markdown: string): DiagramSpec | null {
-  const converter = CONVERTERS[path.split('/').pop() ?? path];
-  if (!converter) return null;
+  const base = path.split('/').pop() ?? path;
   try {
-    return converter(markdown);
+    const override = OVERRIDES[base];
+    if (override) {
+      const spec = override(markdown);
+      if (spec) return spec;
+    }
+    const kind = documentKind(path);
+    if (kind === 'workstream') return buildGenericWorkstreamSpec(base, markdown);
+    if (kind === 'sop') return buildGenericSopSpec(base, markdown);
+    return null;
   } catch {
     return null;
   }

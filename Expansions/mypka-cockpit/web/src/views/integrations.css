@@ -1,54 +1,260 @@
-.intg { display:grid; gap:1.25rem; padding-bottom:3rem; }
+/* Koppelingen & software — GL-003 v5 "INKLINE" tokens.
+
+   TOKENREPARATIE (2026-08-21, Bezalel). Dit bestand verwees naar zes tokens die
+   in het designsysteem NIET bestaan: --surface, --surface-raised, --border-strong,
+   --accent, --accent-contrast en --font-mono. Een var() zonder definitie en zonder
+   fallback valt terug op de initiële waarde, dus in de praktijk stond hier
+   "achtergrond: transparant, rand: geen". Het ergste geval was .intg-action:
+   `background: var(--accent); color: var(--accent-contrast, #fff)` gaf een
+   transparante knop met WITTE tekst — onleesbaar in het lichte thema (paper
+   room, #F6F3EC). Alles is nu op de echte tokens uit src/index.css gezet:
+     --surface        → --surface-1        (kaartgrond)
+     --surface-raised → --surface-2        (verdiepte/gedempte grond)
+     --border-strong  → --border-emphasis
+     --accent         → --accent-marker
+     --accent-contrast→ --text-on-marker
+     --font-mono      → de volledige Spline Sans Mono-stack (huisnotatie)
+   Focusringen rijden nu op --focus-ring, de huisrecept-variant. */
+
+/* `grid-template-columns: minmax(0,1fr)` is GEEN cosmetica maar de guard tegen
+   grid-blowout (Nemesis-keuring 2026-08-21, HOOG). Een `display:grid` zonder
+   kolomdefinitie krijgt één impliciete `auto`-track, en `auto` betekent
+   min-content als ondergrens: de brede tabel rekte daardoor de hele track — en
+   dus de paginabreedte — open, waardoor koptekst en werkbalk tussen ~641 en
+   1024px van het scherm schoven. minmax(0,1fr) legt de ondergrens op 0, zodat
+   de track de beschikbare breedte volgt en de tabel binnen zijn eigen kader
+   moet passen. */
+.intg { display:grid; grid-template-columns:minmax(0,1fr); gap:1.25rem; padding-bottom:3rem; }
 .intg-head { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; }
 .intg-head h1 { display:flex; align-items:center; gap:.55rem; margin:0; font-size:1.65rem; }
 .intg-head p { color:var(--fg-muted); margin:.35rem 0 0; }
-.intg-check { display:flex; align-items:center; gap:.45rem; border:1px solid var(--border-strong); border-radius:.7rem; padding:.65rem .85rem; background:var(--surface-raised); color:var(--fg); font-weight:650; cursor:pointer; }
+.intg-check { display:flex; align-items:center; gap:.45rem; border:1px solid var(--border-emphasis); border-radius:.7rem; padding:.65rem .85rem; background:var(--surface-2); color:var(--fg); font-weight:650; cursor:pointer; }
 .intg-check:disabled { opacity:.6; cursor:wait; }
 .is-spinning { animation:intg-spin .8s linear infinite; }
 @keyframes intg-spin { to { transform:rotate(360deg); } }
 .intg-summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(105px,1fr)); gap:.65rem; }
-.intg-summary>div { border:1px solid var(--border-subtle); background:var(--surface); border-radius:.8rem; padding:.8rem; display:grid; gap:.15rem; }
+.intg-summary>div { border:1px solid var(--border-subtle); background:var(--surface-1); border-radius:.8rem; padding:.8rem; display:grid; gap:.15rem; }
 .intg-summary strong { font-size:1.35rem; }
 .intg-summary span { color:var(--fg-muted); font-size:.78rem; }
-.intg-progress { border-color:color-mix(in oklch,var(--accent) 45%,var(--border-subtle))!important; }
+.intg-progress { border-color:color-mix(in oklch,var(--accent-marker) 45%,var(--border-subtle))!important; }
+
+/* Werkbalk: filters links, weergaveschakelaar rechts. */
+.intg-toolbar { display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:.75rem; }
 .intg-filters { display:flex; flex-wrap:wrap; gap:.75rem; }
 .intg-filters label { display:grid; gap:.25rem; color:var(--fg-muted); font-size:.78rem; }
-.intg-filters select { min-width:160px; border:1px solid var(--border-subtle); border-radius:.55rem; padding:.5rem; color:var(--fg); background:var(--surface); }
+.intg-filters select { min-width:160px; border:1px solid var(--border-subtle); border-radius:.55rem; padding:.5rem; color:var(--fg); background:var(--surface-1); }
+.intg-filters select:focus-visible { outline:2px solid var(--focus-ring); outline-offset:1px; }
+
+/* Segmentschakelaar lijst/kaarten — zelfde recept als de huis-.sort-pill:
+   de actieve stand is het enige markermoment in deze balk (§2.3). */
+.intg-viewswitch { display:inline-flex; gap:.25rem; padding:.2rem; border:1px solid var(--border-subtle); border-radius:.6rem; background:var(--surface-1); }
+.intg-viewbtn { display:inline-flex; align-items:center; gap:.35rem; min-height:32px; padding:.3rem .65rem; border:0; border-radius:.45rem; background:transparent; color:var(--fg-muted); font:inherit; font-size:.8125rem; cursor:pointer; transition:background-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease); }
+.intg-viewbtn:hover { color:var(--fg); background:var(--surface-2); }
+.intg-viewbtn[aria-pressed='true'] { background:var(--accent-marker-soft); color:var(--accent-marker-text); }
+.intg-viewbtn:focus-visible { outline:2px solid var(--focus-ring); outline-offset:1px; }
+
+/* ---- Het icoontje per koppeling ------------------------------------------
+   Afgeronde vierkante tegel, monochroom, kleur van de tekstlaag eromheen.
+   Zie components/IntegrationMark.tsx voor waarom hier geen merklogo's in
+   volle kleur staan. Onbekend integration_id → monogram in dezelfde tegel,
+   zodat de uitlijning per rij identiek blijft. */
+.intg-mark {
+  flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  width:26px; height:26px; border-radius:7px;
+  background:var(--surface-2); border:1px solid var(--border-subtle);
+  color:var(--fg-muted);
+  transition:color var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease);
+}
+.intg-mark--monogram { font-size:.75rem; font-weight:640; line-height:1; }
+.intg-row:hover .intg-mark { color:var(--fg); border-color:var(--border-emphasis); }
+
+/* ---- Compacte lijstweergave (standaard) ---------------------------------- */
+/* `min-width:0` + `overflow-x:auto` i.p.v. het oude `overflow:clip`: mocht de
+   tabel in een smal kader tóch niet passen, dan scrolt hij BINNEN zijn eigen
+   kaart in plaats van de pagina mee te sleuren. De afgeronde hoeken blijven
+   werken — een scroll-container klipt gewoon op zijn padding-box. */
+.intg-table-wrap { width:100%; min-width:0; border:1px solid var(--border-subtle); border-radius:.85rem; background:var(--surface-1); overflow-x:auto; }
+/* `table-layout:fixed` laat de kolombreedtes uit <colgroup> écht gelden i.p.v.
+   ze door de min-content-breedte van de inhoud te laten overrulen (~705px was
+   de gemeten min-content — breder dan de contentkolom op tablet). Nu krimpen
+   de kolommen mee en wikkelt de tekst. */
+.intg-table { width:100%; table-layout:fixed; border-collapse:collapse; font-size:.8125rem; }
+.intg-table thead th { text-align:left; font-weight:460; color:var(--fg-muted); border-bottom:1px solid var(--border); padding:.6rem .75rem; }
+/* GEEN `overflow-wrap:anywhere`: dat brak "Software" af als "Softwa/re" zodra
+   de kolom krap werd. Gewoon woordafbreking op spaties volstaat — "Niet
+   gecontroleerd" wikkelt netjes, korte typelabels blijven heel. */
+.intg-table tbody td { padding:.25rem .75rem; border-bottom:1px solid var(--border-subtle); vertical-align:middle; color:var(--fg-muted); }
+.intg-table tbody tr:last-child>td { border-bottom:0; }
+.intg-row { transition:background-color var(--dur-fast) var(--ease); }
+.intg-row:hover { background:var(--surface-2); }
+/* Randaccent alleen waar er iets mís is; werkende regels blijven rustig. */
+.intg-row--broken>td:first-child { box-shadow:inset 3px 0 0 var(--status-error); }
+.intg-row--warn>td:first-child { box-shadow:inset 3px 0 0 var(--status-warning); }
+/* Kolombreedtes leven op de <colgroup> — onder `table-layout:fixed` is dat de
+   enige plek die telt (een width op een tbody-td wordt genegeerd). */
+/* Verdeling afgestemd op de LANGSTE labels, niet op het gemiddelde: de
+   actiekolom moet "Aansluiting voltooien" op één regel kwijt kunnen, want een
+   over twee regels gebroken knoplabel leest slechter dan een over twee regels
+   gebroken statuslabel. Vandaar dat actie ruimer is dan je op het oog zou
+   inschatten en `kind` (max "Webhook"/"Databron") juist krap. */
+.intg-col-name { width:37%; }
+.intg-col-kind { width:14%; }
+.intg-col-status { width:22%; }
+.intg-col-action { width:27%; }
+.intg-td-action { text-align:right; }
+
+.intg-row-toggle {
+  display:flex; align-items:center; gap:.55rem; width:100%; min-height:40px;
+  padding:.35rem .1rem; background:transparent; border:0; border-radius:10px;
+  color:var(--fg); font:inherit; font-size:.875rem; text-align:left; cursor:pointer;
+}
+.intg-row-toggle:focus-visible { outline:2px solid var(--focus-ring); outline-offset:-2px; }
+.intg-row-chevron { flex:0 0 auto; color:var(--fg-subtle); transition:transform var(--dur-fast) var(--ease); }
+.intg-row-chevron.is-open { transform:rotate(90deg); }
+.intg-row-title { min-width:0; }
+
+/* Statuscel: glyph draagt de identiteit, tekst rijdt de rustige inktstem
+   (GL-003 ruling A127/A152). Kleur is nooit het enige signaal — elke status
+   heeft een eigen glyph én een uitgeschreven label. */
+.intg-state { display:inline-flex; align-items:center; gap:.4rem; color:var(--fg-muted); }
+.intg-state svg { flex:0 0 auto; }
+.intg-state--working svg { color:var(--status-success-dot); }
+.intg-state--action_needed svg,.intg-state--not_checked svg { color:var(--status-warning); }
+.intg-state--broken { color:var(--status-error-text); }
+.intg-state--broken svg { color:var(--status-error); }
+.intg-state--planned svg { color:var(--status-info); }
+.intg-state--paused svg,.intg-state--retired svg { color:var(--fg-subtle); }
+
+/* De uitklap onder een regel: exact hetzelfde detailblok als de kaart.
+   Selector bewust met `.intg-table` ervoor: `.intg-table tbody td` is (0,2,1)
+   en zou een kalere `.intg-row-detail>td` (0,1,1) op padding/rand verslaan. */
+.intg-table .intg-row-detail>td { padding:0 .75rem .9rem 2.05rem; background:var(--surface-2); border-bottom:1px solid var(--border-subtle); }
+.intg-detail-purpose { margin:0 0 .7rem; color:var(--fg-muted); }
+.intg-details { display:grid; gap:.7rem; }
+
+/* ---- Kaartweergave ------------------------------------------------------- */
 .intg-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:.85rem; }
-.intg-card { border:1px solid var(--border-subtle); border-left:4px solid var(--border-strong); border-radius:.85rem; padding:1rem; background:var(--surface); display:grid; gap:.75rem; }
+.intg-card { border:1px solid var(--border-subtle); border-left:4px solid var(--border-emphasis); border-radius:.85rem; padding:1rem; background:var(--surface-1); display:grid; gap:.75rem; }
 .intg-card h2,.intg-card p { margin:0; }
 .intg-card p { color:var(--fg-muted); }
+.intg-card-title { display:flex; align-items:center; gap:.5rem; font-size:1.05rem; }
 .intg-card-top { display:flex; justify-content:space-between; gap:.5rem; align-items:center; }
-.intg-kind { font:600 .7rem var(--font-mono); text-transform:uppercase; letter-spacing:.06em; color:var(--fg-muted); }
+.intg-kind { font:600 .7rem 'Spline Sans Mono Variable','Spline Sans Mono',ui-monospace,monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--fg-muted); }
 .intg-badge { display:flex; gap:.3rem; align-items:center; font-size:.76rem; font-weight:650; }
-.intg-card dl { margin:0; display:grid; gap:.35rem; }
-.intg-card dl div { display:flex; justify-content:space-between; gap:1rem; }
-.intg-card dt { color:var(--fg-muted); }
-.intg-card dd { margin:0; text-align:right; }
-.intg-card details { border-top:1px solid var(--border-subtle); padding-top:.6rem; }
-.intg-card details ul { padding-left:1.2rem; margin:.5rem 0 0; font-size:.78rem; }
-.intg-next { display:grid; gap:.2rem; border-radius:.6rem; padding:.65rem; background:var(--surface-raised); font-size:.82rem; }
-.intg-action { min-height:44px; display:flex; align-items:center; justify-content:center; gap:.45rem; border:1px solid var(--accent); border-radius:.65rem; padding:.62rem .8rem; background:var(--accent); color:var(--accent-contrast,#fff); font-weight:700; cursor:pointer; }
+
+/* Detailblok — gedeeld door kaart en uitgeklapte regel (één bron). */
+.intg-details dl { margin:0; display:grid; gap:.35rem; }
+.intg-details dl div { display:flex; justify-content:space-between; gap:1rem; }
+.intg-details dt { color:var(--fg-muted); }
+.intg-details dd { margin:0; text-align:right; color:var(--fg); }
+.intg-details details { border-top:1px solid var(--border-subtle); padding-top:.6rem; }
+.intg-details summary { cursor:pointer; }
+.intg-details summary:focus-visible { outline:2px solid var(--focus-ring); outline-offset:2px; border-radius:.35rem; }
+.intg-details details ul { padding-left:1.2rem; margin:.5rem 0 0; font-size:.78rem; }
+.intg-next { display:grid; gap:.2rem; border-radius:.6rem; padding:.65rem; background:var(--surface-1); border:1px solid var(--border-subtle); font-size:.82rem; }
+.intg-card .intg-next { background:var(--surface-2); }
+
+/* ---- Acties -------------------------------------------------------------- */
+/* Gewoon het standaardpaar --accent-marker / --text-on-marker.
+   Hier stond tijdelijk --accent-marker-up als vulling, omdat het standaardpaar
+   in de paper room op 4,35:1 uitkwam — onder de 4,5:1 die geldt voor deze 17px
+   bold tekst. Dat was een lokale noodgreep om een APP-BREED gat te omzeilen.
+   Harmonia heeft het gat op 2026-08-21 bij de bron gedicht: het lichte
+   --accent-marker ging van #D43F16 naar #C53B14 in src/index.css, waarmee het
+   paar zelf 4,91:1 haalt. De noodgreep is daarmee overbodig en teruggedraaid —
+   deze knop rijdt weer op de reguliere marker, net als elke andere primaire
+   actie in de app. Gemeten na de wijziging: donker 6,11:1, licht 4,91:1. */
+.intg-action { min-height:44px; display:inline-flex; align-items:center; justify-content:center; gap:.45rem; border:1px solid var(--accent-marker); border-radius:.65rem; padding:.62rem .8rem; background:var(--accent-marker); color:var(--text-on-marker); font:inherit; font-weight:700; cursor:pointer; }
 .intg-action:disabled { opacity:.6; cursor:wait; }
-.intg-action--secondary { border-color:var(--border-strong); background:var(--surface-raised); color:var(--fg); }
-.intg-action--urgent { border-color:var(--status-error-strong); background:var(--status-error-strong); }
-.intg-panel { scroll-margin-top:1rem; border:1px solid var(--border-subtle); border-radius:.85rem; background:var(--surface); overflow:clip; }
+.intg-action--secondary { border-color:var(--border-emphasis); background:var(--surface-2); color:var(--fg); }
+/* "Probleem oplossen" was een RODE VULLING met een hardgecodeerde witte tekst
+   (`var(--accent-contrast,#fff)` — een niet-bestaand token met #fff als
+   fallback). Het designsysteem kent wel de vulkleur --status-error-strong maar
+   GEEN bijbehorend `--text-on-error`; dat gat is geparkeerd bij Harmonia.
+   Tot die er is rijdt deze knop op de wél gesanctioneerde route (A146/A147):
+   destructieve TEKST in --status-error-text op een kalme grond, met een rode
+   rand. Haalt AA in beide thema's en houdt zich aan §2.3 (hooguit één luid
+   moment per view — dat is hier de rode randstreep van de regel zelf). */
+.intg-action--urgent { border-color:var(--status-error); background:var(--surface-2); color:var(--status-error-text); }
+.intg-action--urgent:hover { border-color:var(--status-error-strong); }
+/* Compacte variant in de tabel: 32px hoog haalt WCAG 2.2 §2.5.8 (24×24) ruim
+   en houdt de regelhoogte laag — zelfde maat als de huis-.sort-pill. */
+/* GEEN white-space:nowrap meer: onder `table-layout:fixed` krimpt de actiekolom
+   mee, en een niet-wikkelende "Aansluiting voltooien" zou dan uit zijn cel
+   steken. Wikkelen mag; de 32px blijft de ondergrens. */
+.intg-action--row { min-height:32px; padding:.35rem .6rem; border-radius:.5rem; font-size:.78rem; font-weight:650; text-align:center; }
+.intg-action:focus-visible { outline:2px solid var(--focus-ring); outline-offset:2px; }
+
+/* ---- Uitklappanelen onderaan --------------------------------------------- */
+.intg-panel { scroll-margin-top:1rem; border:1px solid var(--border-subtle); border-radius:.85rem; background:var(--surface-1); overflow:clip; }
 .intg-panel>summary { min-height:48px; display:flex; align-items:center; gap:.55rem; padding:.8rem 1rem; font-weight:750; cursor:pointer; }
-.intg-panel>summary:focus-visible,.intg-action:focus-visible { outline:3px solid color-mix(in oklch,var(--accent) 55%,transparent); outline-offset:2px; }
+.intg-panel>summary:focus-visible { outline:2px solid var(--focus-ring); outline-offset:-2px; }
 .intg-panel-body { border-top:1px solid var(--border-subtle); padding:1rem; }
+
+/* Kaartrand per status (kaartweergave + samenvattingstegels). */
 .intg-status--working { border-left-color:var(--status-success)!important; }
 .intg-status--action_needed,.intg-status--not_checked { border-left-color:var(--status-warning)!important; }
 .intg-status--broken { border-left-color:var(--status-error)!important; }
-.intg-status--planned { border-left-color:var(--accent)!important; }
+.intg-status--planned { border-left-color:var(--accent-marker)!important; }
 .intg-error { color:var(--status-error-text); }
 .intg-empty { color:var(--fg-muted); }
-@media (max-width:700px) { .intg-head { flex-direction:column; } .intg-check,.intg-action { width:100%; justify-content:center; } .intg-filters { display:grid; grid-template-columns:1fr; } .intg-filters select { width:100%; } .intg-panel-body { padding:.75rem; } }
-@media (prefers-reduced-motion:reduce) { .is-spinning { animation:none; } }
+
+/* Eén smalle-layout-breekpunt voor de hele view, gelijk aan dat van de tabel
+   hieronder. Stond op 700px, waardoor de kop op de tablet-checkpoint (768px)
+   nog naast de knop stond en allebei over twee regels braken. */
+@media (max-width:860px) {
+  .intg-head { flex-direction:column; }
+  .intg-check { width:100%; justify-content:center; }
+  .intg-card .intg-action { width:100%; }
+  .intg-toolbar { display:grid; grid-template-columns:1fr; align-items:stretch; }
+  .intg-filters { display:grid; grid-template-columns:1fr; }
+  .intg-filters select { width:100%; }
+  .intg-viewswitch { justify-self:start; }
+  .intg-panel-body { padding:.75rem; }
+}
+
+/* Onder 860px klapt de tabel om naar een blok per koppeling (huispatroon van
+   .type-table): de kolomkoppen verdwijnen naar de schermlezer, naam bovenaan,
+   type + status eronder, actie als laatste. Geen horizontale scroll, geen
+   weggelaten data.
+
+   WAAROM 860 EN NIET 640 (Nemesis-keuring 2026-08-21, HOOG). De guards
+   hierboven maken de tabel op 768px technisch pasklaar, maar niet leesbaar:
+   met de zijbalk in beeld blijft daar ±460px contentbreedte over, en daarin
+   wikkelt "Niet gecontroleerd" én "Aansluiting voltooien" allebei over twee
+   regels. Vier kolommen zijn dan geen tabel meer, alleen nog een raster van
+   afgebroken woorden. Vandaar dat de tablet-checkpoint de gestapelde variant
+   krijgt — dezelfde data, één koppeling per blok. Dit gaat verder dan de drie
+   voorgestelde deelfixes; als Nemesis op 768px liever de echte tabel ziet, is
+   dit één getal terugdraaien naar 640. */
+@media (max-width:860px) {
+  .intg-table { border-collapse:separate; border-spacing:0; table-layout:auto; }
+  .intg-table thead { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .intg-table,.intg-table tbody,.intg-table .intg-row,.intg-table .intg-row>td { display:block; width:100%; }
+  .intg-table .intg-row { padding:.35rem .6rem .6rem; border-bottom:1px solid var(--border-subtle); }
+  .intg-table .intg-row>td { border-bottom:0; padding:.15rem 0; }
+  .intg-table .intg-row--broken>td:first-child,.intg-table .intg-row--warn>td:first-child { box-shadow:none; }
+  .intg-table .intg-row--broken { border-left:3px solid var(--status-error); }
+  .intg-table .intg-row--warn { border-left:3px solid var(--status-warning); }
+  .intg-table .intg-row>.intg-td-kind,.intg-table .intg-row>.intg-td-status { display:inline-block; width:auto; padding-right:.9rem; }
+  .intg-table .intg-row>.intg-td-action { text-align:left; }
+  /* `hidden` blijft leidend: alleen de OPEN detailregel krijgt display:block. */
+  .intg-table .intg-row-detail:not([hidden]) { display:block; }
+  .intg-table .intg-row-detail>td { display:block; padding:.6rem .6rem .9rem; }
+  .intg-details dl div { flex-direction:column; gap:0; }
+  .intg-details dd { text-align:left; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .is-spinning { animation:none; }
+  .intg-row-chevron,.intg-row,.intg-viewbtn,.intg-mark { transition:none; }
+}
 
 /* Tegoedmeter per koppeling (Firecrawl-credits) — groen boven de helft,
    oranje vanaf de helft, rood als het op is. Kleur is nooit het enige signaal:
    het cijfer en het aria-label zeggen hetzelfde. */
-.intg-usage { display:grid; gap:.55rem; border:1px solid var(--border-subtle); border-radius:.6rem; padding:.65rem; background:var(--surface-raised); }
+.intg-usage { display:grid; gap:.55rem; border:1px solid var(--border-subtle); border-radius:.6rem; padding:.65rem; background:var(--surface-1); }
+.intg-card .intg-usage { background:var(--surface-2); }
 .intg-usage-head { display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; font-size:.82rem; }
 .intg-usage-head span { color:var(--fg-muted); font-size:.75rem; }
 .intg-usage-row { display:grid; gap:.3rem; }

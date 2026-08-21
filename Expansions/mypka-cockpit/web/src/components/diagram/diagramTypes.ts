@@ -21,9 +21,16 @@
  *  - `decision`  — a branch point; the ONE brass moment  (GitBranch)
  *  - `branch`    — an outcome of a decision              (Split)
  *  - `handoff`   — routed to another specialist          (ArrowRightLeft)
+ *  - `lane`      — a swimlane header: whose column is this (Users)
  *  - `warning`   — needs human judgement / parked        (TriangleAlert, --status-warning)
  *  - `error`     — destructive or blocking outcome       (CircleX, --status-error)
  *  - `end`       — the procedure is done                 (CircleCheck)
+ *
+ * `lane` arrived with the fase-2 Workstream parser (tsk-2026-08-21-001). It is
+ * a HEADER, not a step: it labels the column a specialist owns so the swimlane
+ * reads as lanes rather than as a scatter of cards. Like every other kind it
+ * carries no hue of its own — it sits one surface step up and is identified by
+ * its glyph and its caption.
  */
 export type DiagramNodeKind =
   | 'start'
@@ -31,6 +38,7 @@ export type DiagramNodeKind =
   | 'decision'
   | 'branch'
   | 'handoff'
+  | 'lane'
   | 'warning'
   | 'error'
   | 'end';
@@ -71,10 +79,38 @@ export interface DiagramEdge {
   /** Optional edge caption ("missing leeg", "blokkeert"). Kept very short. */
   label?: string;
   kind: DiagramEdgeKind;
+  /**
+   * Which side of the target card this edge enters. Leave unset and the canvas
+   * infers it from the grid (rightwards = enter from the left), which is right
+   * for a branch that hangs off the spine one row down.
+   *
+   * Set it to `'top'` for a FAN-OUT across a row of siblings — a §A/§B/§C
+   * header row, say. Inferred routing sends the edge to §C along §C's own row,
+   * straight across the face of §B, and the result reads as "§B, then §C" when
+   * the two are alternatives. Entering from above keeps the horizontal run in
+   * the empty row above the siblings, where it crosses nothing.
+   */
+  enter?: 'top' | 'side';
 }
 
-/** The three shapes fase 1 covers. Recorded so the canvas can announce it. */
-export type DiagramShape = 'decision-tree' | 'phased-pipeline' | 'steps-with-fork';
+/**
+ * The shape a document turned out to have. Recorded so the canvas can announce
+ * it, and so a reader knows what they are looking at before they read it.
+ *
+ * The first three came from the fase-1 pilots (one per pilot document). The
+ * last three came from fase 2, where the generic parser had to name what it
+ * found rather than what it was told:
+ *   - `linear-steps`   — a sequence with no branch worth drawing
+ *   - `sub-procedures` — a document split into §A/§B/§C parallel procedures
+ *   - `swimlanes`      — a Workstream: one column per specialist
+ */
+export type DiagramShape =
+  | 'decision-tree'
+  | 'phased-pipeline'
+  | 'steps-with-fork'
+  | 'linear-steps'
+  | 'sub-procedures'
+  | 'swimlanes';
 
 export interface DiagramSpec {
   /** Matches the source document's basename without extension. */
@@ -92,6 +128,9 @@ export const SHAPE_LABEL: Record<DiagramShape, string> = {
   'decision-tree': 'Beslisboom',
   'phased-pipeline': 'Gefaseerde pipeline',
   'steps-with-fork': 'Stappen met tweesprong',
+  'linear-steps': 'Lineaire stappen',
+  'sub-procedures': 'Sub-procedures',
+  swimlanes: 'Zwembanen per specialist',
 };
 
 /** Screen-reader name per node kind. Also used in the node's aria-label. */
@@ -101,6 +140,7 @@ export const KIND_LABEL: Record<DiagramNodeKind, string> = {
   decision: 'Beslismoment',
   branch: 'Route',
   handoff: 'Overdracht',
+  lane: 'Baan',
   warning: 'Let op',
   error: 'Blokkerend',
   end: 'Einde',
