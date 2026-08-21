@@ -1,7 +1,7 @@
 # Team Knowledge/tasks/ — INDEX
 
-Taakstaat per 2026-08-21 10:41Z.
-Last rebuilt: 2026-08-21 10:41:00Z
+Taakstaat per 2026-08-21 14:37Z.
+Last rebuilt: 2026-08-21 14:37:00Z
 
 ## Open (9)
 
@@ -15,14 +15,15 @@ Last rebuilt: 2026-08-21 10:41:00Z
 - [tsk-2026-08-18-002-sop-013-inboxronde-downloads-werkarchief-vault-root](open/tsk-2026-08-18-002-sop-013-inboxronde-downloads-werkarchief-vault-root.md) — SOP-013 volledige inboxronde: Downloads, Werkarchief en loss | unassigned | P3 | ✓
 - [tsk-2026-08-19-002-youtube-als-library-in-dashboard](open/tsk-2026-08-19-002-youtube-als-library-in-dashboard.md) — YouTube als eigen library-categorie toevoegen aan mypka-cock | unassigned | P4 | ✓
 
-## In progress (3)
+## In progress (2)
 
-- [tsk-2026-08-21-001-sop-diagrammen-fase2-generieke-parser](in-progress/tsk-2026-08-21-001-sop-diagrammen-fase2-generieke-parser.md) — Generieke markdown-naar-diagram-parser voor SOP's en Workstr | bezalel | ▶️
 - [tsk-2026-08-11-001-mypka-cockpit-software-stack-tabblad](in-progress/tsk-2026-08-11-001-mypka-cockpit-software-stack-tabblad.md) — myPKA Cockpit: nieuw tabblad 'Software-stack' voor overzicht | bezalel | ▶️
 - [tsk-2026-08-12-001-teambeheer-scraper-database-onderzoek](in-progress/tsk-2026-08-12-001-teambeheer-scraper-database-onderzoek.md) — Onderzoek Teambeheer-scraper en continu bijgewerkte dartdata | athena | ▶️
 
-## Done (6)
+## Done (8)
 
+- [tsk-2026-08-21-001-sop-diagrammen-fase2-generieke-parser](done/2026/08/tsk-2026-08-21-001-sop-diagrammen-fase2-generieke-parser.md) — Generieke markdown-naar-diagram-parser voor SOP's en Workstr
+- [tsk-2026-08-21-002-wdf-regels-kennisskill-bouwen](done/2026/08/tsk-2026-08-21-002-wdf-regels-kennisskill-bouwen.md) — WDF-regels kennis-skill bouwen vanaf dartswdf.com
 - [tsk-2026-07-02-001-pkm-oude-teamnamen-opruimen](done/../tsk-2026-07-02-001-pkm-oude-teamnamen-opruimen.md) — Cosmetische PKM-vermeldingen van oude teamnamen opruimen
 - [tsk-2026-08-08-001-scaffold-oude-teamnamen-opruimen](done/../tsk-2026-08-08-001-scaffold-oude-teamnamen-opruimen.md) — Vanilla-scaffold-laag opschonen van oude teamnamen (Larry/No
 - [tsk-2026-08-16-001-activeer-gewoontetracking-in-cockpit](done/../tsk-2026-08-16-001-activeer-gewoontetracking-in-cockpit.md) — Activeer gewoontetracking in de myPKA-cockpit
