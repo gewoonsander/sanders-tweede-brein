@@ -18,6 +18,16 @@
 //           containment idiom as /api/cockpit/file, same inert no-script CSP,
 //           but its OWN jail (Team Inbox/) and a TIGHTER allowlist:
 //           pdf / images / text / markdown only.
+//   POST /api/cockpit/inbox/trash    body { path }
+//        -> moves ONE existing "Team Inbox/" file to the host machine's OWN
+//           macOS Trash (~/.Trash) — the SAME discard-not-destroy idiom as
+//           scripts/watch-food-inbox.py's discard(), just from the Node side.
+//           The file simply leaves the jail entirely, so it disappears from
+//           the tree on the next fetch with zero tree-walk changes needed.
+//           Recovery + retention are Finder's job from here: the user empties
+//           Trash manually, or macOS's own "Remove items from the Trash after
+//           30 days" (Finder > Settings > Advanced) purges it — no cron of
+//           ours, no second "trash" concept to maintain inside the vault.
 //
 // REPO_ROOT comes from the shared resolver (repoRoot.js), NOT from db.js — this
 // module carries zero database coupling. The resolver is the one place the
@@ -25,6 +35,7 @@
 import express from 'express';
 import path from 'node:path';
 import fs from 'node:fs';
+import os from 'node:os';
 import crypto from 'node:crypto';
 // Shared resolver — see repoRoot.js for the MYPKA_ROOT → fingerprint → fallback order.
 import { REPO_ROOT } from './repoRoot.js';
@@ -239,6 +250,61 @@ function decodeBase64Payload(dataBase64) {
   return { buf };
 }
 
+// ---- Move-to-OS-Trash (the inbox "delete" button) ------------------------------
+// Same discard-not-destroy idiom as scripts/watch-food-inbox.py's discard():
+// a name collision in ~/.Trash gets a " (n)" counter (Finder's own convention),
+// and a cross-device Trash (vault on a different volume than the home dir) falls
+// back from rename to copy+unlink — mirrors that script's replace()/shutil.move
+// fallback. No "no ~/.Trash" fallback to a hard delete here: unlike an unattended
+// scanner, an interactive delete button should surface an error rather than
+// silently do the one thing ("recoverable") it explicitly promised not to do.
+function uniqueTrashTarget(trashDir, filename) {
+  const ext = path.extname(filename);
+  const stem = filename.slice(0, filename.length - ext.length);
+  let candidate = path.join(trashDir, filename);
+  let counter = 1;
+  while (fs.existsSync(candidate)) {
+    candidate = path.join(trashDir, `${stem} (${counter})${ext}`);
+    counter += 1;
+  }
+  return candidate;
+}
+
+function moveToOsTrash(abs) {
+  const trashDir = path.join(os.homedir(), '.Trash');
+  if (!fs.existsSync(trashDir) || !fs.statSync(trashDir).isDirectory()) {
+    return { error: 'no-trash' };
+  }
+  // Reconfirm right before the mutating call (TOCTOU close-out — same posture
+  // as workbench.js's reconfirmContained): must still be a real file, not a
+  // symlink swapped in since the route handler's own check.
+  let stat;
+  try {
+    stat = fs.lstatSync(abs);
+  } catch {
+    return { error: 'missing' };
+  }
+  if (!stat.isFile()) return { error: 'not-a-file' };
+
+  const target = uniqueTrashTarget(trashDir, path.basename(abs));
+  try {
+    fs.renameSync(abs, target);
+  } catch (err) {
+    if (err && err.code === 'EXDEV') {
+      // Vault and ~/.Trash live on different volumes — copy, then remove the source.
+      try {
+        fs.copyFileSync(abs, target);
+        fs.unlinkSync(abs);
+      } catch (copyErr) {
+        return { error: copyErr.message };
+      }
+    } else {
+      return { error: err.message };
+    }
+  }
+  return { ok: true, target };
+}
+
 // ---- Route registration ----------------------------------------------------------
 // server.js wires this with its own guard stack:
 //   registerFileTreeRoutes(app, { safe, sessionOrLoopback, localWriteGuard });
@@ -333,4 +399,43 @@ export function registerFileTreeRoutes(app, { safe, sessionOrLoopback, localWrit
     res.set('X-Content-Type-Options', 'nosniff');
     res.sendFile(abs);
   });
+
+  // -- POST /api/cockpit/inbox/trash (delete button — moves to ~/.Trash) -----
+  const trashJson = express.json({ limit: '2kb' }); // body is one short path string
+  app.post('/api/cockpit/inbox/trash', sessionOrLoopback, localWriteGuard, trashJson, (req, res) => {
+    const body = req.body;
+    if (body === null || typeof body !== 'object' || Array.isArray(body)) {
+      return res.status(400).json({ ok: false, error: 'body must be a JSON object' });
+    }
+    const extras = Object.keys(body).filter((k) => k !== 'path');
+    if (extras.length) {
+      return res.status(400).json({ ok: false, error: `unexpected field(s): ${extras.join(', ')}` });
+    }
+    if (typeof body.path !== 'string' || !body.path.trim()) {
+      return res.status(400).json({ ok: false, error: 'path is required (non-empty string)' });
+    }
+
+    const abs = containedInboxPath(body.path);
+    if (!abs) return res.status(403).json({ ok: false, error: 'forbidden' });
+    if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) {
+      return res.status(404).json({ ok: false, error: 'not found' });
+    }
+
+    const result = moveToOsTrash(abs);
+    if (result.error === 'no-trash') {
+      return res.status(500).json({ ok: false, error: 'macOS Trash folder not found (~/.Trash)' });
+    }
+    if (result.error === 'missing' || result.error === 'not-a-file') {
+      return res.status(404).json({ ok: false, error: 'not found' });
+    }
+    if (result.error) {
+      console.error('[POST /api/cockpit/inbox/trash]', result.error);
+      return res.status(500).json({ ok: false, error: 'move to trash failed' });
+    }
+
+    return res.status(200).json({ ok: true, path: body.path });
+  });
 }
+
+// Test-only seam (mirrors workbench.js's __test export) — no HTTP, no server boot.
+export const __test = { containedInboxPath, uniqueTrashTarget, moveToOsTrash, INBOX_DIR };

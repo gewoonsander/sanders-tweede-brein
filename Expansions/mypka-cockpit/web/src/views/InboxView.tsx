@@ -48,11 +48,38 @@ export function InboxView() {
   const [chips, setChips] = useState<UploadChip[]>([]);
   const [dragging, setDragging] = useState(false);
   const [reloadToken, setReloadToken] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const dragDepth = useRef(0);
   const pickRef = useRef<HTMLInputElement | null>(null);
 
-  const onFileOpen = useCallback((path: string) => setOpenPath(path), []);
+  const onFileOpen = useCallback((path: string) => {
+    setDeleteError(null);
+    setOpenPath(path);
+  }, []);
   const onClose = useCallback(() => setOpenPath(null), []);
+
+  // Delete button: moves the open file straight to the host Mac's own Trash
+  // (server-side /api/cockpit/inbox/trash). No confirmation prompt — the
+  // whole point is a one-click "get it out of my sight", and it's recoverable
+  // from Finder's Trash for as long as macOS keeps it there.
+  const onDelete = useCallback(async () => {
+    if (!openPath) return;
+    setDeleting(true);
+    setDeleteError(null);
+    const result = await cockpitWrite('/api/cockpit/inbox/trash', 'POST', { path: openPath });
+    setDeleting(false);
+    if (result.kind === 'ok') {
+      setOpenPath(null);
+      setReloadToken((t) => t + 1);
+    } else if (result.kind === 'auth') {
+      setDeleteError('session expired — log in again');
+    } else if (result.kind === 'error') {
+      setDeleteError(result.message);
+    } else {
+      setDeleteError('could not move the file to the Trash');
+    }
+  }, [openPath]);
 
   const patchChip = useCallback((id: string, patch: Partial<UploadChip>) => {
     setChips((prev) => prev.map((c) => (c.id === id ? { ...c, ...patch } : c)));
@@ -208,7 +235,12 @@ export function InboxView() {
             fileUrl={`/api/cockpit/inbox-file?path=${encodeURIComponent(openPath)}`}
             src={fileRouteSrc('inbox-file', openPath)}
             onClose={onClose}
+            onDelete={onDelete}
+            deleting={deleting}
           />
+        )}
+        {deleteError && (
+          <p role="alert" className="view-error">Could not move to the Trash: {deleteError}</p>
         )}
       </div>
     </section>

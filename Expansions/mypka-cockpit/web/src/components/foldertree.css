@@ -168,6 +168,21 @@
   cursor: pointer;
 }
 .ft-preview-close:hover { background: var(--surface-2); color: var(--fg); }
+.ft-preview-trash {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--fg-subtle);
+  cursor: pointer;
+}
+.ft-preview-trash:hover:not(:disabled) { background: var(--status-error-soft); color: var(--status-error-text); }
+.ft-preview-trash:disabled { opacity: 0.5; cursor: default; }
 
 .ft-preview-body {
   padding: 14px;
@@ -359,6 +374,43 @@ button.ft-preview-open:focus-visible {
 }
 .file-view-raw:hover { color: var(--accent-marker-text); background: var(--accent-marker-soft); }
 .file-view-raw:focus-visible { outline: 2px solid var(--accent-marker); outline-offset: 1px; }
+
+/* "Visualiseer" — the diagram toggle (tsk-2026-08-19-003). Same quiet-pill
+   register as .discuss-trigger beside it, so the three header affordances
+   (Raw / Visualiseer / Discuss) read as one row. It is a DISCLOSURE, so the
+   open state rides aria-expanded and is mirrored visually with the marker-soft
+   fill the app already uses for "this is on" — never by colour alone, since
+   aria-expanded states it for anyone not reading the fill. */
+.file-view-visualise {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 460;
+  color: var(--fg-muted);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 4px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.file-view-visualise:hover {
+  color: var(--accent-marker-text);
+  background: var(--accent-marker-soft);
+  border-color: var(--accent-marker);
+}
+.file-view-visualise:focus-visible {
+  outline: 2px solid var(--accent-marker);
+  outline-offset: 1px;
+}
+.file-view-visualise[aria-expanded='true'] {
+  color: var(--accent-marker-text);
+  background: var(--accent-marker-soft);
+  border-color: var(--accent-marker-border);
+}
 
 /* Repo-relative path under the title — mono, quiet. */
 .file-view-path {

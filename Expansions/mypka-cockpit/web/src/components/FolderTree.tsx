@@ -33,6 +33,7 @@ import {
   Folder,
   FolderOpen,
   Maximize2,
+  Trash2,
   X,
 } from 'lucide-react';
 import { WikiMarkdown } from './WikiMarkdown';
@@ -308,6 +309,8 @@ export function FilePreviewPanel({
   fileUrl,
   src,
   onClose,
+  onDelete,
+  deleting = false,
 }: {
   /** Repo-relative path (display + ext detection). */
   path: string;
@@ -316,6 +319,10 @@ export function FilePreviewPanel({
   /** File-route src for the "Large" reading page (build with fileRouteSrc). */
   src: string;
   onClose: () => void;
+  /** Present only for views that support deleting (Team Inbox). Omit to hide the trash button entirely. */
+  onDelete?: () => void;
+  /** Disables the trash button + shows a busy state while a delete is in flight. */
+  deleting?: boolean;
 }) {
   const name = path.split('/').pop() || path;
   const ext = extOf(name);
@@ -356,6 +363,18 @@ export function FilePreviewPanel({
             title="Open the large reading page"
           >
             <Maximize2 size={14} strokeWidth={1.5} aria-hidden="true" /> Large
+          </button>
+        )}
+        {onDelete && (
+          <button
+            type="button"
+            className="ft-preview-trash"
+            onClick={onDelete}
+            disabled={deleting}
+            aria-label={`Move ${name} to the Trash`}
+            title="Move to the Trash"
+          >
+            <Trash2 size={14} strokeWidth={1.5} aria-hidden="true" />
           </button>
         )}
         <button type="button" className="ft-preview-close" onClick={onClose} aria-label="Close preview">
