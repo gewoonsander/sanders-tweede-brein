@@ -79,8 +79,12 @@ connector or pack built on it.
   `realpath` of both the target and the jail root — so a symlinked `SKILL.md`
   cannot reach anything else in `~/.claude`. Every rejection is the same generic
   404 carrying no path information.
-- That route is disengageable with `COCKPIT_SKILL_FILES_ENABLED=0`, which stops
-  it from being registered at all.
+- That route is **off unless explicitly armed** with
+  `COCKPIT_SKILL_FILES_ENABLED=1`, in the process environment or in
+  `Team Knowledge/.env`. Any other value — and the absence of the key — stops it
+  from being registered at all. The double-click launcher sets `1`; a bare
+  `npm start` or `npm run serve:lan` therefore starts without it. The key is in
+  `PROTECTED_KEYS`, so the Connections page cannot write it.
 
 ### Write surfaces are narrow and local
 

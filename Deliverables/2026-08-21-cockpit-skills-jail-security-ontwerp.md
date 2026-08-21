@@ -499,3 +499,182 @@ Zonder punt 6 is er geen groen licht — niet omdat het risico groot is, maar om
 ---
 
 *Bewijsmateriaal en reproductiescript voor §0.2: `<scratchpad>/jailproof/proof.mjs`. Geen secrets in dit document; waar config-inhoud ter sprake komt zijn uitsluitend sleutelnamen genoemd, nooit waarden.*
+
+---
+
+## 14. Validatieronde na implementatie (Argus, 2026-08-21, na Bezalels bouw)
+
+Dit deel is toegevoegd ná de bouw. Niets in §0 t/m §13 is gewijzigd; dat blijft het ontwerp zoals het aan Bezalel is meegegeven. Wat hieronder staat is de hergate uit §12.
+
+**Uitgangspunt (mandatory):** Bezalels eigen testresultaten zijn hier niet overgenomen als feit. Alles hieronder is opnieuw gedraaid of opnieuw in de code nagelezen. Waar ik iets niet zelf heb kunnen waarnemen, staat dat er expliciet bij.
+
+### 14.1 C0-C10: implementatie geverifieerd, regel voor regel
+
+`server/skillFileApi.js` (229 regels) is volledig gelezen. Alle elf checks zitten erin, in de normatieve volgorde uit §5.
+
+| Check | Waar | Volgorde correct | Oordeel |
+|---|---|---|---|
+| C0 | `server.js:1298` registreert via `app.get`; auth-middleware staat op `server.js:202` (`app.use('/api', ...)`), dus vóór de route. Niet in `AUTH_PUBLIC` (`server.js:201`), niet door `safe()` gehaald | ja | correct |
+| C1 | `skillFileApi.js:131` — `typeof raw !== 'string'`, geen `String()`-coercie | 1e | correct |
+| C2 | `:134` `SLUG_RE.test(raw)` — vóór élke FS-aanroep | 2e | correct |
+| C3 | `:148-155` `readdirSync` + `isDirectory() && !isSymbolicLink()` | 3e | correct |
+| C4 | `:161-163` pad geconstrueerd, `SKILL_FILENAME` is serverconstante (`:52`), gelijkheidstest op de vorm | 4e | correct |
+| C5 | `:173-181` `realpathSync` op **beide** kanten, per verzoek berekend, niet bij boot gecachet | 5e | correct |
+| C6 | `:189-196` `statSync` + `isFile()` + groottelimiet + `readFileSync(real)`, geen `res.sendFile()` | 6e | correct |
+| C7 | `:69-76` bevroren headerobject, zes headers, geen MIME-tabel | bij 200 | correct |
+| C8 | `:201-203` één `notFound()`, altijd dezelfde body | overal | correct |
+| C9 | alleen `app.get` (`:217`); geen enkele schrijf-FS-aanroep in het bestand | n.v.t. | correct |
+| C10 | geen listingroute; zonder `?skill=` valt hij door naar C1 en 404't | n.v.t. | correct |
+
+Drie dingen die ik expliciet heb nagetrokken omdat ze makkelijk mis te bouwen zijn:
+
+1. **`skillsJailRoot()` wordt ná C2 aangeroepen** (`:137`), niet ervoor. Een vijandige invoer raakt dus inderdaad geen enkele padberekening. Dat is strenger dan mijn eigen §5 vereiste en het is de juiste kant op.
+2. **De jail-root wordt zelf ge-realpath** (`:176`). Dit is niet cosmetisch: de testfixture draait onder `/var/folders/...` en `/var` is op macOS zelf een symlink naar `/private/var`. Een bouw die alleen het doel resolvet, 404't daar élke legitieme skill. Mijn suite bewijst dat dat niet gebeurt.
+3. **De SSOT-binding is correct**: `id === 'user-skills'` (niet `kind`), `repoRelative === true` faalt gesloten, geen eigen `os.homedir()`-aanroep in het bestand. Alle drie geassert in de testsuite, zodat een latere "vereenvoudiging" er tegenaan loopt.
+
+### 14.2 De testsuite en het resultaat
+
+`Expansions/mypka-cockpit/server/skillFileApi.test.mjs` — 528 regels, onafhankelijk geschreven, Bezalels harness niet ingezien of hergebruikt. Draaien met:
+
+```
+cd Expansions/mypka-cockpit && node --test server/skillFileApi.test.mjs
+```
+
+**Resultaat: 23 tests, 23 geslaagd, 0 gefaald** (duur 0,5 s). 72 assertieplaatsen, 53 verschillende query-strings.
+
+Opzet, en waarom:
+
+- **Fixture-HOME.** `skillsJailRoot()` komt via `skillSources.js` uit `os.homedir()`, en Node leest daarvoor op POSIX `$HOME`. De suite zet `HOME` naar een wegwerpmap vóór de eerste import van `skillFileApi.js` en bouwt daar een complete namaak-`~/.claude`. Dat is de enige eerlijke manier om vijandige symlinks te planten zonder Sanders echte `~/.claude` te vandaliseren. Er is geverifieerd dat de override daadwerkelijk pakt; zonder die assertie zou de hele suite een leugen kunnen zijn.
+- **Canaries.** De namaak-`settings.json` en `history.jsonl` bevatten unieke merkstrings. Elke 404-controle test óók dat die strings nergens in de body staan. Een lek is daardoor niet "een test die faalt", maar aantoonbaar de inhoud van het verkeerde bestand.
+- **Echte HTTP.** De route wordt op een echte Express-instantie gemonteerd en over loopback bevraagd, zodat headers, methodes en foutbodies getest worden zoals een client ze ziet — niet alleen de functie eronder.
+- **Twee cases tegen de échte machine.** Case 15 en 19 draaien in een childproces met de onaangeroerde `HOME`.
+
+| # | Case | Uitkomst |
+|---|---|---|
+| 1 | `?skill=../../settings.json` | 404 |
+| 2 | percent-, dubbel- en prefix-encoded traversal (4 varianten) | 404 |
+| 3 | punt-segmenten en punt-in-slug (8 varianten) | 404 |
+| 4 | leeg, afwezig, waardeloos, verkeerde parameternaam | 404 |
+| 5 | array- en objectvormen (5 HTTP + 5 direct op de functie) | 404 / `null` |
+| 6 | NUL, newline, tab, spatie (7 varianten) | 404 |
+| 7 | absoluut pad, tilde, `%24HOME`, backslash, overlong UTF-8, alfabetranden (11 varianten) | 404 |
+| 8 | onbekende slug, map zonder `SKILL.md`, los bestand in `skills/` | 404 |
+| 9 | symlink-map `evil-root` naar `~/.claude` | 404 |
+| **10** | **`SKILL.md` als symlink naar `settings.json`, `history.jsonl`, buurbestand `config.json`, relatief `../../settings.json`, hele map, dangling** | **6/6 404, geen canary in de body** |
+| 11 | `?skill=transcribeer` geeft `SKILL.md`, nooit `config.json` | 200, byte-identiek |
+| 12 | `WDF-REGELS` en `Wdf-Regels` bij map `wdf-regels` op APFS | 404 (fail-closed) |
+| 13 | kale route + `/api/cockpit/skill-files` | 404, geen enumeratie |
+| 14 | POST/PUT/DELETE/PATCH; bestand op schijf onveranderd; broncode-scan op schrijfaanroepen | geen 200, geen wijziging |
+| 15 | alle 7 echte skills op deze machine | 200, byte-identiek |
+| 16 | de zes C7-headers | alle zes exact, geen CORS-header |
+| 17 | 20 afwijzingen naast elkaar | 1 unieke body, geen pad/`ENOENT`/slug |
+| 18 | kill switch `=0` | route niet gemonteerd |
+| 19 | plugin- en repo-rijen | `skillSlug: null` (1 plugin-rij, 18 rijen totaal) |
+| 20 | `skillsApi.test.mjs` | groen |
+
+Plus drie tests buiten de matrix: de groottegrens op de rand (exact 1 MB serveert, 1 MB + 1 byte niet), het realpath-en van de jail-root zelf, en de C0/SSOT-eigenschappen als broncode-assertie.
+
+**Case 10 was de scherprechter en die slaagt.** Vier van de zes varianten zijn geverifieerd *levend* voordat ze bevraagd worden: de test leest de symlink eerst zelf uit en eist dat de canary er doorheen komt. Anders bewijst een 404 niets — dan kan de symlink net zo goed kapot zijn.
+
+**Twee testfalen waren van mij, niet van Bezalel.** Mijn eerste run gaf 2 rode tests: broncode-scans op `writeFile` en `homedir` sloegen aan op de *commentaartekst* van `skillFileApi.js`, dat woordelijk documenteert dat het die dingen níet doet. Ik heb de scan aangepast zodat hij commentaar strippt. De implementatie was op beide punten correct. Ik noem dit omdat het precies de reden is dat een auditor zijn eigen tests draait en leest in plaats van een groene uitslag aan te nemen — ook zijn eigen.
+
+### 14.3 C0 empirisch, en een operationele constatering
+
+Ik heb de draaiende cockpit (PID 85462, `127.0.0.1:4317`) bevraagd:
+
+```
+GET /api/cockpit/skill-file?skill=wdf-regels   Host: evil.example.com
+-> 401 {"error":"unauthorized","auth":"pin-required"}
+```
+
+Dat bewijst C0 op de échte server: de poort van `server.js:202` grijpt op dit exacte pad, vóór routing, en de DNS-rebinding-guard doet zijn werk.
+
+**Wel dit, en het is geen bevinding maar een operationeel feit:** die draaiende instantie is een **oudere build**. Ze beantwoordt `?skill=wdf-regels` met de generieke `unknown api route`-body van `server.js:1416`, niet met de 404 van deze route. De cockpit moet dus herstart worden voordat de functie live is. Ik heb bewust géén tweede serverinstantie gestart om een 200 van de echte server te zien: die zou `mypka-cockpit.db` delen met Sanders lopende sessie. Het 200-pad is daarom geverifieerd tegen de module op een eigen Express-instantie én tegen de echte bestanden op schijf (case 15), niet tegen de draaiende server.
+
+### 14.4 B-9 (MEDIUM, nieuw) — de gedocumenteerde kill switch werkt niet en faalt open
+
+Dit is de enige echte bevinding van de validatieronde. Het zit niet in de jail; het zit in de schakelaar eromheen.
+
+**Wat de documentatie belooft.** `.env.example` opent met: zet je sleutels in `Team Knowledge/.env` en herstart. Bezalel heeft `COCKPIT_SKILL_FILES_ENABLED` netjes in dat bestand gedeclareerd. `SECURITY.md` zegt: *"That route is disengageable with COCKPIT_SKILL_FILES_ENABLED=0, which stops it from being registered at all."*
+
+**Wat de code doet.** `skillFileApi.js:87` leest uitsluitend `process.env.COCKPIT_SKILL_FILES_ENABLED`. En `connectors/env.js` zegt in zijn eigen kopcommentaar: *"We never load the whole .env into process.env — only the one key a connector needs ever enters the cockpit process."* Er is geen dotenv-lader in de hele `server/`-map; geverifieerd met een grep op `dotenv`, `process.env[key] =` en `Object.assign(process.env`: nul treffers.
+
+**Bewijs, niet theorie.** Met een wegwerp-scaffold via `MYPKA_ROOT`, waarvan `Team Knowledge/.env` de regel `COCKPIT_SKILL_FILES_ENABLED=0` bevat:
+
+```
+.env says              : COCKPIT_SKILL_FILES_ENABLED=0
+process.env says       : undefined
+skillFilesEnabled()    : true      <-- de gebruiker denkt dat de route UIT staat
+```
+
+Daar komt bij dat `start-cockpit.command` de variabele hardcodeert op `1`. De enige werkende manier om de route uit te zetten is dus het launcher-script bewerken — niet de weg die `.env.example` en `SECURITY.md` aanwijzen.
+
+**Waarom dit ernstiger is dan bij de andere vlaggen.** `WORKBENCH_WRITE_ENABLED` en `PLAN_WRITE_ENABLED` hebben exact hetzelfde mechanisme, maar hun default is *uit tenzij expliciet `1`*. Wie hun `.env`-regel niet ziet aankomen, houdt een capaciteit die uit blijft — een veilige verrassing. Deze vlag staat *aan tenzij expliciet `0`*, dus dezelfde misconfiguratie levert een onveilige verrassing: de enige route die buiten de scaffold leest staat aan terwijl de gebruiker denkt van niet.
+
+**De fix, in het idioom dat deze codebase al heeft.** `connectors/registry.js:46` doet het al goed voor `CONNECTORS_ENABLED`: kijk in `process.env` én in `Team Knowledge/.env`. Gecombineerd met de default-richting van `WORKBENCH_WRITE_ENABLED`:
+
+```js
+import { readEnvKey } from './connectors/env.js';
+
+export function skillFilesEnabled() {
+  // readEnvKey kijkt zelf eerst in process.env, daarna in Team Knowledge/.env.
+  return readEnvKey('COCKPIT_SKILL_FILES_ENABLED') === '1';
+}
+```
+
+Dat kost operationeel niets: `start-cockpit.command` zet de variabele al expliciet op `1`. Wat het oplevert: elke misconfiguratie, elk ontbrekend launcher-script, elke `npm start` en elke `npm run serve:lan` faalt vanaf dan **gesloten** — en `serve:lan` is precies het scenario van restrisico R-2.
+
+**Aan deze fix hangt B-9b, en die is niet optioneel als B-9 wordt doorgevoerd:** zodra `Team Knowledge/.env` wél wordt geraadpleegd, moet `COCKPIT_SKILL_FILES_ENABLED` in `PROTECTED_KEYS` (`connectorAdmin.js:22`). Zonder dat accepteert `validKeyName()` de sleutel — geverifieerd: `validKeyName('COCKPIT_SKILL_FILES_ENABLED')` geeft `true` — en kan de Connections-pagina een securitypoort schrijven. `WORKBENCH_WRITE_ENABLED` staat er om precies die reden wél in.
+
+### 14.5 B-10 (MEDIUM, bestaand, buiten scope) — `CONNECTORS_ENABLED` is UI-schrijfbaar
+
+Tijdens 14.4 tegengekomen, en het raakt deze klus niet, maar ik laat het niet liggen. `connectors/registry.js:46` leest de master-connectorpoort óók uit `Team Knowledge/.env` via `readEnvKey`, en `CONNECTORS_ENABLED` staat **niet** in `PROTECTED_KEYS`. Geverifieerd:
+
+```
+WORKBENCH protected?   : true
+CONNECTORS protected?  : false
+SKILL_FILES protected? : false
+```
+
+Een schrijfactie via de Connections-pagina kan de master-connectorpoort dus omzetten; die wordt bij module-load geëvalueerd, dus het effect valt op de eerstvolgende start. Aparte taak, samen met B-3 (de vijf lexicale jails).
+
+### 14.6 Bezalels vijf afwijkingen, elk beoordeeld
+
+**1. Kill-switch-default "aan tenzij `0`" — MOET OM, maar niet om de reden die op tafel lag.**
+Mijn eigen §8 was hier dubbelzinnig ("launcher zet `1` ... `0` registreert de route niet"), dus Bezalels lezing was verdedigbaar; ik reken hem geen spec-afwijking aan. De reden dat het tóch om moet is B-9: het gedocumenteerde `.env`-pad is niet aangesloten, waardoor deze default open faalt in plaats van dicht. Voer de fix uit 14.4 door (default `=== '1'` én `readEnvKey`), plus B-9b, plus de bijbehorende tekstcorrectie in `.env.example` en `SECURITY.md` naar "uit tenzij expliciet `1`". Case 18 in de testsuite moet dan meeveranderen; wat hij moet worden staat in een commentaarblok in het testbestand zelf.
+
+**2. `parseFileSrc` geeft `path: '<slug>/SKILL.md'` in plaats van `'SKILL.md'` — AKKOORD.**
+Nagelopen op alle padconsumenten in `FileView`, want dit is precies het soort wijziging dat elders stilletjes ergens anders uitkomt:
+- `name = path.split('/').pop()` blijft `SKILL.md`, dus `previewKindFor()` geeft nog steeds `text` — B-6 blijft afgedekt.
+- `repoRelativeFor()` test `src.startsWith('skill:')` en geeft `null` vóór de `PKM/`-prefix — dus de langere `path` bereikt de discuss-route niet. B-4 blijft afgedekt.
+- `hasDiagramConverter(path)`: `documentKind()` kan `<slug>/SKILL.md` niet matchen, tenzij de skill-map letterlijk `SOPs` of `Workstreams` heet. Zelfs dan valt `buildDiagramSpec()` terug op `null` en verdwijnt de knop. Cosmetisch, zelfherstellend.
+- `WikiMarkdown` krijgt alleen `body`, geen basispad, dus wikilink-resolutie verandert niet.
+Geen enkele servercall neemt `path` aan. Zijn UX-argument (§7.4b liet de keuze open, en anders leest elke skill-paginaregel identiek) is geldig. Goedgekeurd.
+
+**3. Boot-logregel — AKKOORD, en beter dan mijn spec.**
+`server.js:1299-1303` print alleen de poortstatus, met een letterlijke string zonder interpolatie; er komt geen opgelost pad in het log. Ik heb dat als assertie in de suite gezet zodat het zo blijft. Een securitypoort waarvan de stand bij het opstarten onzichtbaar is, is een poort die niemand controleert. Overname aanbevolen.
+
+**4. `COCKPIT_SKILL_FILES_ENABLED` niet in `PROTECTED_KEYS` — KLOPT NU, MOET OM ZODRA #1 LANDT.**
+Zijn analyse is op dit moment correct: omdat `skillFilesEnabled()` `Team Knowledge/.env` helemaal niet leest, verandert een UI-schrijfactie op die sleutel vandaag niets aan de poort. Geen hygiëne-kwestie dus, maar een terechte inschatting. Zodra de fix uit 14.4 landt, kantelt dat en wordt `PROTECTED_KEYS` verplicht (B-9b). Zijn zijopmerking dat `CONNECTORS_ENABLED` er ook niet in staat is geen verzachtende omstandigheid maar een eigen bevinding — zie B-10.
+
+**5a. ETag en X-Powered-By bovenop de zes C7-headers — AKKOORD, feitelijk juist.**
+Zelf nagemeten: Express voegt `etag` en `x-powered-by` toe. Mijn §12 case 16 ("bevat exact de zes") was dus niet haalbaar zoals geformuleerd. De suite test nu op "bevat alle zes met exact de ontworpen waarden" plus de aanvullende eis dat er géén CORS-header bij zit. Geen van beide extra headers ondermijnt de inertie: `ETag` naast `Cache-Control: no-store` is betekenisloos.
+*Bijvangst, INFO:* `x-powered-by` staat in de hele cockpit aan — er is nergens een `app.disable('x-powered-by')`. Puur fingerprinting, bestaand, geen actie voor deze klus.
+
+**5b. B-8 is zwakker dan ik schreef — AKKOORD, feitelijk juist.**
+Nagemeten: `~/.claude/skills/transcribeer/SKILL.md` noemt `whisper_host` en de default `macmini` op drie regels in gewone lopende tekst (regels 14, 116, 129). Het serveren van `SKILL.md` onthult die SSH-hostaanduiding dus sowieso. Correctie op §10: B-8's kern klopt (`config.json` blijft onbereikbaar, bewezen in case 11), maar mijn framing "infrastructuurdisclosure die niet op een dashboardpagina hoort" was overtrokken voor déze sleutel — hij staat al in het bestand dat we nu bewust wél serveren. Het exact-bestandsnaamfilter blijft gerechtvaardigd door de `.py`-bestanden, de twee `.backup-*`-bestanden en elk toekomstig buurbestand; niet door `whisper_host`.
+
+### 14.7 Eindverdict van de validatieronde
+
+**GEEL.** De jail zelf is goed gebouwd — beter dan de vijf die er al waren, en de scherprechtertest slaagt aantoonbaar. Er is één blokkerende conditie over, en die zit in de schakelaar, niet in het slot.
+
+Groen zodra:
+
+1. **B-9** is gefixt: `skillFilesEnabled()` gaat via `readEnvKey()` en wordt "uit tenzij expliciet `1`", met bijgewerkte tekst in `.env.example` en `SECURITY.md`.
+2. **B-9b** is gefixt: `COCKPIT_SKILL_FILES_ENABLED` in `PROTECTED_KEYS` (`connectorAdmin.js:22`).
+3. Case 18 in `skillFileApi.test.mjs` is meegedraaid met de nieuwe semantiek en de suite is opnieuw groen.
+4. De cockpit is herstart (14.3), anders is de functie niet live.
+
+Punt 1 en 2 zijn samen ongeveer vijf regels code. Er is geen ROOD: geen gecommitteerd secret, geen gepoolde sleutel, geen bereikbaar bestand buiten `<slug>/SKILL.md`, geen schrijfroute, geen enumeratie. R-1 en R-2 uit §9 blijven staan zoals Sander ze heeft geaccepteerd; B-9 verandert die risico's niet, alleen de betrouwbaarheid van de knop waarmee hij ze kan uitzetten.
+
+*Testbestand: `Expansions/mypka-cockpit/server/skillFileApi.test.mjs`. Geen secrets in dit document; canary-waarden in de testfixture zijn synthetisch en de echte `Team Knowledge/.env` is tijdens deze audit niet gelezen of aangeraakt.*

@@ -123,7 +123,10 @@ not drop a step.
    `PLAN_WRITE_ENABLED=1` and `COCKPIT_SKILL_FILES_ENABLED=1` (the documented
    launcher defaults — set `0` for a fully read-only cockpit; the third one
    governs the single read route that reaches outside the scaffold, serving only
-   `~/.claude/skills/<slug>/SKILL.md`), `MYPKA_ROOT` only if the user set one, and
+   `~/.claude/skills/<slug>/SKILL.md`). Do NOT drop that third assignment as
+   "redundant": it is FAIL-CLOSED, so only an explicit `1` mounts the route and a
+   launcher without it starts with the Skills preview dead. Then `MYPKA_ROOT`
+   only if the user set one, and
    `COCKPIT_LLM_CMD` only if the user runs a non-`claude` CLI (defaults to
    `claude` when unset). Do NOT pass
    `COCKPIT_BIND_LAN` here — LAN mode is a separate, PIN-gated opt-in (see below).

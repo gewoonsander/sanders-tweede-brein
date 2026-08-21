@@ -39,11 +39,17 @@
 //     path, no slug, no err.message (C8). This route deliberately does NOT ride
 //     server.js's safe() helper, which answers 500 { error: err.message } — an
 //     fs error carries the absolute path in that message (finding B-2).
-//   * Kill switch: COCKPIT_SKILL_FILES_ENABLED=0 does not register the route at
-//     all, so it 404s from the generic /api handler as if it never existed (§8).
+//   * Kill switch: FAIL-CLOSED. Without an explicit COCKPIT_SKILL_FILES_ENABLED=1
+//     the route is not registered at all, so it 404s from the generic /api
+//     handler as if it never existed (§8, and finding B-9 of 2026-08-21).
 import fs from 'node:fs';
 import path from 'node:path';
 import { SKILL_SOURCES } from './skillSources.js';
+// The narrow single-key reader every other gate in this codebase uses. It looks
+// in process.env FIRST and then in ONE matching line of `Team Knowledge/.env` —
+// it never bulk-loads that file into the process. See the B-9 note below for why
+// reading process.env directly here was a bug.
+import { readEnvKey } from './connectors/env.js';
 
 // The file part is a SERVER CONSTANT. It never comes from the request — that is
 // the whole point of C4. ~/.claude/skills/transcribeer/ also holds config.json
@@ -76,15 +82,37 @@ export const SKILL_FILE_HEADERS = Object.freeze({
 });
 
 /**
- * Is the route enabled? (§8)
+ * Is the route enabled? (§8) — OFF unless explicitly armed with
+ * COCKPIT_SKILL_FILES_ENABLED=1. Anything else (0, empty, "true", absent,
+ * unreadable .env) leaves the route unregistered: no 403 branch, no route, just
+ * the generic /api 404.
  *
- * ON unless explicitly switched OFF with COCKPIT_SKILL_FILES_ENABLED=0, and the
- * launcher additionally sets =1 explicitly so the intent is visible in the
- * process env. `0` means the route is never registered — no 403 branch, no
- * route, just the generic /api 404.
+ * TWO THINGS HERE ARE THE FIX FOR FINDING B-9 (Argus, 2026-08-21) — do not
+ * "simplify" either of them back:
+ *
+ * 1. readEnvKey, NOT process.env. This used to read process.env directly while
+ *    .env.example and SECURITY.md told the user to put the key in
+ *    `Team Knowledge/.env` — a file nothing in server/ ever loads into
+ *    process.env (connectors/env.js: "We never load the whole .env into
+ *    process.env"). The documented off-switch was therefore inert: setting =0
+ *    there left skillFilesEnabled() returning true. readEnvKey is the idiom
+ *    connectors/registry.js already uses for CONNECTORS_ENABLED and consults
+ *    both surfaces.
+ *
+ * 2. The default DIRECTION. "On unless 0" makes every misconfiguration fail
+ *    OPEN — the one route that reads outside the scaffold stays live while the
+ *    user believes it is off. "Off unless 1" is the WORKBENCH_WRITE_ENABLED
+ *    posture and costs nothing operationally, because start-cockpit.command
+ *    already exports =1. It does mean a bare `npm start` / `npm run serve:lan`
+ *    leaves the route off — deliberately, since serve:lan is exactly restrisico
+ *    R-2.
+ *
+ * Because the value now genuinely comes from `Team Knowledge/.env`, this key is
+ * also in PROTECTED_KEYS (connectorAdmin.js) — otherwise the Connections page
+ * could write the gate back on. That pairing is B-9b and is not optional.
  */
 export function skillFilesEnabled() {
-  return process.env.COCKPIT_SKILL_FILES_ENABLED !== '0';
+  return readEnvKey('COCKPIT_SKILL_FILES_ENABLED') === '1';
 }
 
 /**

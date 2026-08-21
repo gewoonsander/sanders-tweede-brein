@@ -1293,13 +1293,14 @@ registerSkillsRoutes(app, { safe });
 // the one jail that knows $HOME must not share a dispatcher with the jails that
 // stay in the repo. It takes a SLUG, never a path, and hardcodes the filename
 // (SKILL.md). Full rationale + the mandatory C0..C10 checks live in
-// server/skillFileApi.js and in Argus's design of 2026-08-21. Set
-// COCKPIT_SKILL_FILES_ENABLED=0 and the route is not mounted at all.
+// server/skillFileApi.js and in Argus's design of 2026-08-21. FAIL-CLOSED: the
+// route mounts ONLY with an explicit COCKPIT_SKILL_FILES_ENABLED=1 (process env
+// or Team Knowledge/.env); anything else leaves it unmounted (finding B-9).
 const SKILL_FILES_ON = registerSkillFileRoutes(app);
 console.log(
   SKILL_FILES_ON
     ? '  skills: SKILL.md preview enabled (read-only, ~/.claude/skills/<slug>/SKILL.md only)'
-    : '  skills: SKILL.md preview disabled (COCKPIT_SKILL_FILES_ENABLED=0)'
+    : '  skills: SKILL.md preview disabled (set COCKPIT_SKILL_FILES_ENABLED=1 to enable)'
 );
 // Runtime Hub-module toggles (Settings page). Read always-on; the PUT rides the
 // cockpit's standard local-write guard stack (session/loopback → CSRF → parser),

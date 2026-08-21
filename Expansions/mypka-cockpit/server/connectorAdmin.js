@@ -24,6 +24,12 @@ export const PROTECTED_KEYS = new Set([
   'COCKPIT_PIN_HASH', 'COCKPIT_BIND_LAN', 'COCKPIT_USE_TLS',
   'COCKPIT_TLS_CERT', 'COCKPIT_TLS_KEY', 'WORKBENCH_WRITE_ENABLED',
   'PLAN_WRITE_ENABLED', 'SOURCE_WRITE_ENABLED', 'PORT',
+  // B-9b (Argus, 2026-08-21). skillFilesEnabled() resolves through readEnvKey(),
+  // so this key IS read from Team Knowledge/.env — the file this page writes to.
+  // Without this line validKeyName() accepts it and the Connections UI can arm
+  // the one route that reads outside the scaffold. Same reason
+  // WORKBENCH_WRITE_ENABLED is on this list.
+  'COCKPIT_SKILL_FILES_ENABLED',
 ]);
 const MAX_VALUE_LEN = 4096;
 
