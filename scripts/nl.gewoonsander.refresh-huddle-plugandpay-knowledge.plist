@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Aangemaakt 2026-08-21. Draait elk kwartaal (14 jan/apr/jul/okt, 09:00 lokaal)
+  scripts/refresh-huddle-plugandpay-knowledge.sh, dat via de Claude Code CLI (headless, -p)
+  SOP-014 uitvoert voor beide platform-kennisdossiers (Huddle/Martonny, Plug&Pay/Tonnymart).
+
+  Vervangt de Anthropic-cloud scheduled task `refresh-huddle-plugandpay-knowledge` die het
+  sessielog van 2026-07-14 als "aangemaakt" beschreef, maar die op 2026-08-21 niet meer
+  bleek te bestaan (niet in de scheduled-tasks-lijst, geen map op schijf). Bewust lokaal
+  i.p.v. cloud — zie Team Knowledge/Guidelines/GL-005-llm-agnostic-portable-core.md Rule 5:
+  dit is het tweede onafhankelijke geval van een cloud scheduled task die stilzwijgend
+  verdween (eerste geval: adc-oost-verslag-ochtend, ontdekt 2026-08-11).
+
+  14e van de maand (i.p.v. de 21e van de agent-contract-hygiene-audit-routine) om de
+  oorspronkelijk gecommuniceerde cadans uit het 2026-07-14-sessielog aan te houden, en om
+  de twee kwartaal-routines te spreiden.
+
+  Zelfde TCC-workaround als nl.gewoonsander.adc-verslag-ochtend.plist (zie de uitgebreide
+  toelichting daar en in scripts/lib/launchd-guard.sh): /bin/bash i.p.v. node/losse
+  claude-binary, WorkingDirectory op /tmp zodat launchd niet zelf naar een TCC-beschermde
+  map hoeft te chdir'en (het script doet de cd zelf, na een leesbaarheidscheck).
+
+  ExitTimeOut ruimer dan de audit-routine (1800s i.p.v. 1200s): twee dossiers, elk met
+  meerdere WebFetch-aanroepen naar externe help centers, kan trager zijn dan een pure
+  repo-lezing.
+
+  Handmatig draaien zonder op de volgende kwartaaldatum te wachten:
+    launchctl kickstart gui/$(id -u)/nl.gewoonsander.refresh-huddle-plugandpay-knowledge
+
+  Tijdstip/datum wijzigen: pas StartCalendarInterval aan, daarna:
+    launchctl bootout gui/$(id -u)/nl.gewoonsander.refresh-huddle-plugandpay-knowledge
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/nl.gewoonsander.refresh-huddle-plugandpay-knowledge.plist
+
+  Uitzetten:
+    launchctl bootout gui/$(id -u)/nl.gewoonsander.refresh-huddle-plugandpay-knowledge
+    rm ~/Library/LaunchAgents/nl.gewoonsander.refresh-huddle-plugandpay-knowledge.plist
+-->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>nl.gewoonsander.refresh-huddle-plugandpay-knowledge</string>
+
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/scripts/refresh-huddle-plugandpay-knowledge.sh</string>
+	</array>
+
+	<key>WorkingDirectory</key>
+	<string>/tmp</string>
+
+	<key>StartCalendarInterval</key>
+	<array>
+		<dict>
+			<key>Month</key>
+			<integer>1</integer>
+			<key>Day</key>
+			<integer>14</integer>
+			<key>Hour</key>
+			<integer>9</integer>
+			<key>Minute</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Month</key>
+			<integer>4</integer>
+			<key>Day</key>
+			<integer>14</integer>
+			<key>Hour</key>
+			<integer>9</integer>
+			<key>Minute</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Month</key>
+			<integer>7</integer>
+			<key>Day</key>
+			<integer>14</integer>
+			<key>Hour</key>
+			<integer>9</integer>
+			<key>Minute</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Month</key>
+			<integer>10</integer>
+			<key>Day</key>
+			<integer>14</integer>
+			<key>Hour</key>
+			<integer>9</integer>
+			<key>Minute</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+
+	<key>RunAtLoad</key>
+	<false/>
+
+	<key>ProcessType</key>
+	<string>Background</string>
+
+	<key>ExitTimeOut</key>
+	<integer>1800</integer>
+
+	<key>StandardInPath</key>
+	<string>/dev/null</string>
+
+	<key>StandardOutPath</key>
+	<string>/Users/sandervanockenburg-zwaan/Library/Logs/refresh-huddle-plugandpay-knowledge.log</string>
+
+	<key>StandardErrorPath</key>
+	<string>/Users/sandervanockenburg-zwaan/Library/Logs/refresh-huddle-plugandpay-knowledge.err.log</string>
+</dict>
+</plist>

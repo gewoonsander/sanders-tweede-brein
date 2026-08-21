@@ -26,6 +26,7 @@ Filename pattern: `GL-NNN-<title>.md`.
 | GL-021 | [[GL-021-klikbare-bestandslinks]] | Elk genoemd bestand of map in een antwoord krijgt een klikbare `file://`-link met absoluut pad. |
 | GL-022 | [[GL-022-financiele-koppelingen-dashboard-scope]] | Financiële data: alleen read-only, server-side Cockpit-connectors (Open-Invoices-patroon). Geen MCP-bankkoppelingen, geen browser-naar-bank-calls, geen schrijf-operaties zonder eigen ontwerp + Argus-audit. |
 | GL-023 | [[GL-023-eenvoudige-taal]] | Hertaalregels voor jip-en-janneketaal: 10-12 woorden per zin, verbindingswoorden verplicht, actief, vakwoorden mét uitleg, getallen/paden/commando's woordelijk exact. Aangeroepen via `/jip`. |
+| GL-024 | [[GL-024-reverse-prompting-bij-vage-taken]] | Wanneer Hermes bij een vage taak (duidelijk doel, open pad) eerst een kleine set blokkerende vragen stelt i.p.v. blind uitvoeren of alles laten voorspecificeren — grens met Auto Mode expliciet benoemd. |
 
 | GL-003 | [[GL-003-design-system]] | Multi-merk design-system hub (cold-start brand-rule + erf-model). Verwijst naar de losse merkbestanden in `GL-003-brands/` (ADC Regio Oost, DartsCoaching.nl, Dart Buddies, Van Gewoon Sander) — geen van deze bevat nog echte waarden. Geinstalleerd via het Designer Pack. |
 

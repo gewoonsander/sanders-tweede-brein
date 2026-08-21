@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Aangemaakt 2026-08-21. Draait elk kwartaal (21 jan/apr/jul/okt, 09:00 lokaal)
+  scripts/agent-contract-hygiene-audit.sh, dat via de Claude Code CLI (headless, -p)
+  SOP-025 uitvoert: contract-shim-sync, wikilink-integriteit en routing-check voor de 16
+  specialist-contracten.
+
+  Vervangt een Anthropic-cloud scheduled task die voor deze routine was opgezet en niet
+  bleek te bestaan. Bewust lokaal (geen cloud-routine) — zie
+  Team Knowledge/Guidelines/GL-005-llm-agnostic-portable-core.md Rule 5: een tweede,
+  onafhankelijk geval (na de adc-oost-verslag-ochtend-cloud-routine op 2026-08-11) van een
+  cloud scheduled task die stilzwijgend verdween.
+
+  Zelfde TCC-workaround als nl.gewoonsander.adc-verslag-ochtend.plist (zie de uitgebreide
+  toelichting daar en in scripts/lib/launchd-guard.sh): /bin/bash i.p.v. node/losse
+  claude-binary, WorkingDirectory op /tmp zodat launchd niet zelf naar een TCC-beschermde
+  map hoeft te chdir'en (het script doet de cd zelf, na een leesbaarheidscheck).
+
+  Handmatig draaien zonder op de volgende kwartaaldatum te wachten:
+    launchctl kickstart gui/$(id -u)/nl.gewoonsander.agent-contract-hygiene-audit
+
+  Tijdstip/datum wijzigen: pas StartCalendarInterval aan, daarna:
+    launchctl bootout gui/$(id -u)/nl.gewoonsander.agent-contract-hygiene-audit
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/nl.gewoonsander.agent-contract-hygiene-audit.plist
+
+  Uitzetten:
+    launchctl bootout gui/$(id -u)/nl.gewoonsander.agent-contract-hygiene-audit
+    rm ~/Library/LaunchAgents/nl.gewoonsander.agent-contract-hygiene-audit.plist
+-->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>nl.gewoonsander.agent-contract-hygiene-audit</string>
+
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>/Users/sandervanockenburg-zwaan/Documents/sanders-tweede-brein/scripts/agent-contract-hygiene-audit.sh</string>
+	</array>
+
+	<key>WorkingDirectory</key>
+	<string>/tmp</string>
+
+	<key>StartCalendarInterval</key>
+	<array>
+		<dict>
+			<key>Month</key>
+			<integer>1</integer>
+			<key>Day</key>
+			<integer>21</integer>
+			<key>Hour</key>
+			<integer>9</integer>
+			<key>Minute</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Month</key>
+			<integer>4</integer>
+			<key>Day</key>
+			<integer>21</integer>
+			<key>Hour</key>
+			<integer>9</integer>
+			<key>Minute</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Month</key>
+			<integer>7</integer>
+			<key>Day</key>
+			<integer>21</integer>
+			<key>Hour</key>
+			<integer>9</integer>
+			<key>Minute</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Month</key>
+			<integer>10</integer>
+			<key>Day</key>
+			<integer>21</integer>
+			<key>Hour</key>
+			<integer>9</integer>
+			<key>Minute</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+
+	<key>RunAtLoad</key>
+	<false/>
+
+	<key>ProcessType</key>
+	<string>Background</string>
+
+	<key>ExitTimeOut</key>
+	<integer>1200</integer>
+
+	<key>StandardInPath</key>
+	<string>/dev/null</string>
+
+	<key>StandardOutPath</key>
+	<string>/Users/sandervanockenburg-zwaan/Library/Logs/agent-contract-hygiene-audit.log</string>
+
+	<key>StandardErrorPath</key>
+	<string>/Users/sandervanockenburg-zwaan/Library/Logs/agent-contract-hygiene-audit.err.log</string>
+</dict>
+</plist>

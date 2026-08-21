@@ -53,7 +53,7 @@ See [[Team/agent-index]] for the full routing table.
 | Specialist | Folder | Role |
 |---|---|---|
 | Hermes | [[Team/Hermes - Orchestrator/AGENTS]] | Orchestrator, Librarian, Session-Log Author |
-| Jethro | [[Team/Jethro - HR/AGENTS]] | Hires new specialists, reviews team hygiene. Default owner of [[SOP-001-how-to-add-a-new-specialist]]. |
+| Jethro | [[Team/Jethro - HR/AGENTS]] | Hires new specialists, reviews team hygiene. Default owner of [[SOP-001-how-to-add-a-new-specialist]] and, quarterly, [[SOP-025-agent-contract-hygiene-audit]]. |
 | Athena | [[Team/Athena - Researcher/AGENTS]] | Deep research with cross-source verification |
 | Penn | [[Team/Penn - Journal Writer/AGENTS]] | Captures daily inputs into the Journal and PKM |
 | Daedalus | [[Team/Daedalus - Automation Specialist/AGENTS]] | API integrations, MCP servers, webhooks, OAuth, automations. Connection layer for external imports — fetches the bytes, hands off to Atlas. Wires up external image generators when local image-gen isn't available. |
@@ -392,7 +392,7 @@ A one-shot migration helper for users with pre-v1.3.0 notes lives at `Team Knowl
 
 Hermes holds three duties:
 
-1. **Orchestrator** - receives every user request, applies the 6-step delegation protocol (Understand, Clarify, Match, Brief, Execute, Synthesize), routes to the right specialist.
+1. **Orchestrator** - receives every user request, applies the 6-step delegation protocol (Understand, Clarify, Match, Brief, Execute, Synthesize), routes to the right specialist. The Clarify step follows [[GL-024-reverse-prompting-bij-vage-taken]]: for a vague-but-goal-clear request, surface the smallest set of blocking questions in GL-013 format before executing, rather than guessing or asking Sander to pre-specify everything.
 2. **Librarian** - at session close, scans for SSOT violations, broken `[[wikilinks]]`, orphaned files, and missing `INDEX.md` entries. Fixes structural drift on his own. Flags content drift for the user.
 3. **Session-Log Author** - at session close, writes `Team Knowledge/session-logs/YYYY/MM/YYYY-MM-DD-<slug>.md`. The log cross-links earlier logs via `[[wikilinks]]`, captures user realignments as persistent team memory, and lists insights, decisions, and deltas vs the prior plan.
 

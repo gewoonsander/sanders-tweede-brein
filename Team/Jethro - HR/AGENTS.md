@@ -50,6 +50,14 @@ When you **create** a task during your work, follow [[SOP-create-task]] — popu
 
 When you **close** a task, follow [[SOP-close-task]] — write the `## Outcome` and, if you learned something durable, write a journal entry per [[SOP-write-journal-entry]] and add it to the closed task's `linked_journal_entries`.
 
+## Ongoing duty: quarterly contract hygiene
+
+Beyond hiring, you own [[SOP-025-agent-contract-hygiene-audit]] — a quarterly (or on-demand)
+pass over all 16 wiki contracts and their host shims: description/tools sync, wikilink
+integrity within each contract, and routing accuracy in root-`AGENTS.md` and [[agent-index]].
+This is not the same as [[GL-015-agent-model-tier-review]] (model tiering, separate owner and
+cadence) or [[SOP-014-refresh-platform-specialist-knowledge]] (platform-knowledge dossiers).
+
 ## Naming
 
 Filenames and slugs follow [[GL-001-file-naming-conventions]]. Read it. Do not duplicate the rules here.

@@ -74,7 +74,21 @@ Korte entry in de eerstvolgende sessielog: welk platform, welke datum, kernbevin
 
 ## Scheduled task
 
-Een scheduled task draait deze procedure elk kwartaal automatisch voor zowel Martonny (Huddle) als Tonnymart (Plug&Pay). Zie de scheduled-tasks-registratie voor de exacte cron-configuratie. Bij afronding rapporteert de task kort aan Sander: welke platformen gecheckt zijn en of er iets substantieels veranderd is.
+**Actief sinds 2026-08-21, als lokale LaunchAgent** — niet als Anthropic-cloud scheduled
+task. Een eerdere cloud-versie van deze taak (aangemaakt 2026-07-14, zie sessielog) bleek op
+2026-08-21 zonder waarschuwing verdwenen: niet meer in de scheduled-tasks-lijst, geen map op
+schijf. Zie [[GL-005-llm-agnostic-portable-core]] Rule 5 voor het principe en de precedent
+(hetzelfde overkwam eerder de `adc-oost-verslag-ochtend`-cloud-routine, ontdekt 2026-08-11).
+
+LaunchAgent `nl.gewoonsander.refresh-huddle-plugandpay-knowledge`
+(`scripts/nl.gewoonsander.refresh-huddle-plugandpay-knowledge.plist`, geïnstalleerd op de Mac
+mini), draait `scripts/refresh-huddle-plugandpay-knowledge.sh` →
+`scripts/refresh-huddle-plugandpay-knowledge.prompt.md` voor beide dossiers. Cadans: 14
+jan/apr/jul/okt, 09:00 lokale tijd. Eerstvolgende run: 14 oktober 2026. Bij afronding
+rapporteert de routine kort naar `~/Library/Logs/refresh-huddle-plugandpay-knowledge.log`:
+welke platformen gecheckt zijn en of er iets substantieels veranderd is. Verifiëren dat de
+job leeft: `launchctl print gui/$(id -u)/nl.gewoonsander.refresh-huddle-plugandpay-knowledge`
+op de Mac mini.
 
 ## Generiek voor toekomstige platform-specialisten
 

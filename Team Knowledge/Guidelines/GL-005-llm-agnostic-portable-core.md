@@ -51,6 +51,33 @@ This is why every SOP and Workstream documents its trigger as intent ("when the 
 
 No file in the portable core pins a specific model id, model family, or provider. Model selection is a runtime/adapter concern. A contract may describe the SHAPE of work a role needs (deep research, fast lookup, long-context synthesis); it may not name the model that does it.
 
+### Rule 5 - No harness-native cloud scheduler for durable recurring automations
+
+Confirmed twice — 2026-08-11 (the `adc-oost-verslag-ochtend` cloud routine) and 2026-08-21
+(the SOP-014 `refresh-huddle-plugandpay-knowledge` cloud routine) — that a harness's own
+cloud scheduled-task mechanism can silently stop existing: the routine simply disappears
+from the harness's task list, with no local trace, no warning, and no failed-run signal.
+Two independent occurrences of the same failure is not a fluke, it is the mechanism's
+actual reliability profile.
+
+A recurring myPKA automation that lives only inside one harness's cloud scheduler is
+fragile (it can vanish unnoticed) and a Rule 1 violation in spirit: it makes a portable
+procedure's cadence depend on one vendor's infrastructure to ever fire at all.
+
+**Any recurring myPKA automation** (an SOP that runs on a cadence, a daily/weekly/quarterly
+routine) is implemented as a **local, OS-level scheduler entry** (a macOS LaunchAgent on
+this install) that invokes the harness headless — see `scripts/lib/launchd-guard.sh` and
+the existing `nl.gewoonsander.*` LaunchAgents (`adc-verslag-ochtend`,
+`youtube-samenvatting-ochtend`, `inbox-verwerken`) as the reference pattern. A harness's
+own "scheduled task" / cloud-cron feature may still be used for a one-off reminder or
+exploratory scheduling, but never as the sole mechanism behind a documented, relied-upon
+SOP cadence.
+
+Enforcement is currently manual, not mechanical: when an SOP or Guideline documents a
+"scheduled, automatisch" cadence, verify a live local LaunchAgent actually backs that claim
+(`launchctl print gui/$(id -u)/nl.gewoonsander.<label>` on the machine that runs it) rather
+than trusting the SOP text or an old session-log entry.
+
 ## How this is enforced
 
 The `agnosticism-audit` section of `validation-script.sh` is the mechanical gate (Atlas owns the script). It scans the portable core and **hard-fails** on Claude-coupling: a harness brand name, a host-specific tool name, a slash command presented as a sole trigger, or a hardcoded model id found anywhere in `PKM/`, `Team Knowledge/`, or the body of a `Team/*/AGENTS.md`. A failing audit blocks the release. The adapter directories (`.claude/`, `.codex/`, `.cursor/`) are exempt by design - that is exactly where the coupling is supposed to live.
