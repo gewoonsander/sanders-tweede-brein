@@ -12,13 +12,25 @@
 // images embed full-width below the header on the same jailed URL. A small
 // "Raw" link keeps the native-URL escape hatch. A missing file gets a calm
 // not-found state, never a broken embed.
-import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft } from 'lucide-react';
+//
+// "Visualiseer" (tsk-2026-08-19-003, fase 1) sits next to Raw/Discuss and only
+// appears when components/diagram/sopDiagrams.ts can actually turn THIS
+// document into diagram data. It toggles a React Flow panel above the prose —
+// full width, not inside the 68ch reading column — and the prose stays put
+// underneath, because the diagram is a view of the document, not a replacement
+// for it. Fase 1 covers three pilot SOPs; a generic parser is fase 2.
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { ArrowLeft, Workflow } from 'lucide-react';
 import { parseFileSrc, type Route } from '../lib/router';
 import { WikiMarkdown } from '../components/WikiMarkdown';
 import { DiscussButton } from '../components/DiscussButton';
 import { fileIconFor, previewKindFor } from '../components/FolderTree';
+import { SopDiagram } from '../components/diagram/SopDiagram';
+import { buildDiagramSpec, hasDiagramConverter } from '../components/diagram/sopDiagrams';
 import '../components/foldertree.css';
+
+// One panel per page, so a constant id is enough for the toggle's aria-controls.
+const DIAGRAM_PANEL_ID = 'file-view-diagram';
 
 function extOf(name: string): string {
   const i = name.lastIndexOf('.');
@@ -51,6 +63,10 @@ export function FileView({ route }: { route: Extract<Route, { name: 'file' }> })
   const [notFound, setNotFound] = useState(false);
   const [textError, setTextError] = useState<string | null>(null);
   const [embedFailed, setEmbedFailed] = useState(false);
+  // "Visualiseer" is a toggle, not a route: the prose stays on the page and the
+  // diagram opens above it. Closed by default — the reading page is a reading
+  // page first, and the heavy React Flow chunk only loads once it is opened.
+  const [showDiagram, setShowDiagram] = useState(false);
 
   useEffect(() => {
     setText(null);
@@ -78,6 +94,18 @@ export function FileView({ route }: { route: Extract<Route, { name: 'file' }> })
     topRef.current?.scrollIntoView({ block: 'start' });
   }, [route.src]);
 
+  // Navigating to another file must never leave a stale diagram open.
+  useEffect(() => { setShowDiagram(false); }, [route.src]);
+
+  // Markdown → diagram data (tsk-2026-08-19-003, fase 1). `null` means either
+  // "no fase-1 converter for this file" or "the document no longer has the
+  // structure its converter expects" — both hide the button entirely, so a
+  // missing diagram is the failure mode, never a wrong one.
+  const diagramSpec = useMemo(
+    () => (ext === 'md' && text && hasDiagramConverter(path) ? buildDiagramSpec(path, text) : null),
+    [ext, text, path],
+  );
+
   const missing = notFound || embedFailed;
 
   return (
@@ -87,10 +115,17 @@ export function FileView({ route }: { route: Extract<Route, { name: 'file' }> })
       </button>
 
       <header className="file-view-head">
-        <span className="file-view-glyph" aria-hidden="true">
-          <FileIcon size={18} strokeWidth={1.5} />
+        {/* Glyph + title are ONE flex child, not two. The header wraps (see
+            .file-view-head in foldertree.css), and as separate children the
+            18px glyph and the title get line-broken apart — the icon strands on
+            a row of its own above the filename. Grouping them is the same move
+            .dg-heading makes for the diagram's title + notation badge. */}
+        <span className="file-view-heading">
+          <span className="file-view-glyph" aria-hidden="true">
+            <FileIcon size={18} strokeWidth={1.5} />
+          </span>
+          <h1 className="file-view-title">{name}</h1>
         </span>
-        <h1 className="file-view-title">{name}</h1>
         {!missing && kind !== 'none' && (
           <a
             href={fileUrl}
@@ -102,9 +137,29 @@ export function FileView({ route }: { route: Extract<Route, { name: 'file' }> })
             Raw
           </a>
         )}
+        {!missing && diagramSpec && (
+          <button
+            type="button"
+            className="file-view-visualise"
+            // Disclosure, not a toggle button: this shows/hides a controlled
+            // region, so the pairing is aria-expanded + aria-controls
+            // (aria-pressed would describe the button's own on/off state).
+            aria-expanded={showDiagram}
+            aria-controls={DIAGRAM_PANEL_ID}
+            onClick={() => setShowDiagram((v) => !v)}
+            title={showDiagram ? 'Diagram verbergen' : 'Toon dit document als diagram'}
+          >
+            <Workflow size={13} strokeWidth={1.75} aria-hidden="true" />
+            Visualiseer
+          </button>
+        )}
         {!missing && <DiscussButton file={repoRelativeFor(route.src, path)} subject={name} />}
       </header>
       <p className="file-view-path">{path}</p>
+
+      {!missing && diagramSpec && showDiagram && (
+        <SopDiagram spec={diagramSpec} id={DIAGRAM_PANEL_ID} />
+      )}
 
       {missing && (
         <div className="file-view-reading">

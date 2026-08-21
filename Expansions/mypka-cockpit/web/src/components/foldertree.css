@@ -339,12 +339,42 @@ button.ft-preview-open:focus-visible {
   outline-offset: 1px;
 }
 
-/* Header row: brass file glyph, filename as the page title, quiet Raw link. */
+/* Header row: brass file glyph, filename as the page title, quiet Raw link.
+
+   WRAPPING IS LOAD-BEARING, not a nicety. This row mixes one shrinkable item
+   (the title, flex 1 1 auto) with N fixed-width ones (Raw, Visualiseer,
+   Discuss — all flex: none). On a nowrap line the flex algorithm can only take
+   the deficit out of the one item that shrinks, so every button added to the
+   right makes the title box narrower; at 375px with three buttons it collapsed
+   to 16px and `word-break: break-word` walked the filename down the page one
+   letter per line (Nemesis, SOP-005 gate 2026-08-21). Wrapping moves the
+   overflow into a second row instead of into the title, and the min-width floor
+   below stops the title from being squeezed into a letter column before the
+   wrap can happen. Deliberately unconditional rather than behind a media query:
+   the trigger is "title + buttons are wider than the column", which depends on
+   the filename and the number of buttons, not on the viewport — a breakpoint
+   would guess at that and be wrong for long names on wide screens. */
 .file-view-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-sm);
   min-width: 0;
+}
+/* Glyph + title as ONE flex child of the wrapping header row, so the icon can
+   never be line-broken away from the name it belongs to. This is also where the
+   shrink floor lives: the title itself keeps min-width: 0 (it must be free to
+   shrink INSIDE this box), and the box refuses to go under ~13rem, which is the
+   width where a 2rem filename still breaks at hyphens instead of at glyphs. The
+   min() guard means the floor can never exceed the header's own width, so a
+   genuinely tiny column degrades to "title takes the whole row" rather than to
+   horizontal overflow. */
+.file-view-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1 1 auto;
+  min-width: min(100%, 13rem);
 }
 .file-view-glyph {
   flex: none;
@@ -354,6 +384,7 @@ button.ft-preview-open:focus-visible {
 /* Same ladder as NoteView's .note-title (cockpit.css) — this page IS the
    note-style reading view for raw files. */
 .file-view-title {
+  /* Free to shrink inside .file-view-heading — that wrapper carries the floor. */
   min-width: 0;
   flex: 1 1 auto;
   margin: 0;

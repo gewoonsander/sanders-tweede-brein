@@ -168,6 +168,12 @@
   --status-error: #D64545;
   --status-error-text: #E36350;
   --status-error-strong: #C53F3F; /* fill-only red; white text on this hits ~5.05:1 (A146/A147 extension) */
+  --text-on-error: #FFFDFB;       /* on_error - type on --status-error-strong fills ONLY (never on plain --status-error).
+                                      Warm near-white (never clinical #fff, same discipline as --text-on-marker) -
+                                      measures ~4.98:1 on #C53F3F, same value in both rooms (the fill itself doesn't
+                                      change between rooms). Closes the gap the previous hardcoded `#fff` papered over;
+                                      see integrations.css .intg-action--urgent for the calm-ground alternative route
+                                      (A146/A147) this token now makes optional there. */
   --status-info: #C9C4B8;
 
   /* soft status tints for calm chips (low alpha, same hue; success/info chips
@@ -227,6 +233,22 @@
   --graph-edge-far: var(--border-subtle);
   --graph-edge-hover: var(--fg-muted);
   --graph-edge-dash: 4 3;
+
+  /* SOP / procedure diagram edges (dg-*, tsk-2026-08-19-003) - a SEPARATE ink
+     from --graph-edge on purpose. On the knowledge graph a line is a hint about
+     proximity that you brighten on hover (--graph-edge-hover, .mg-edge--emphasis);
+     on a flowchart the line IS the content - it carries "and then", "unless",
+     "back to" - so WCAG 2.2 SC 1.4.11 applies to it as a "graphical object
+     required to understand the content" (3:1 floor), and these diagrams have no
+     hover-emphasis state to lean on (edgesFocusable is off - the cards are the
+     interactive layer, not the lines). Re-using the decorative --border hairline
+     here measured 1.42:1 dark / 1.33:1 light (Nemesis, SOP-005 gate 2026-08-21).
+     So the diagram takes the paper ladder's terminal quiet step at FULL alpha
+     (§2.8: quiet is a token STEP, never an opacity dial): --fg-subtle, which is
+     5.6:1 on ink and 5.3:1 on paper against --surface-bg. Exception paths ride
+     the SAME ink and are told apart by the dash pattern, never by being fainter
+     - a faint line is not a quieter meaning, it is an unreadable one. */
+  --diagram-edge: var(--fg-subtle);
 
   /* non-marker hover border on Gen-1/Gen-2 */
   --graph-node-hover-border: var(--fg-subtle);
@@ -490,12 +512,35 @@
    overridden - geometry/motion/spring/structural tokens inherit.
 
    Two-ink accent discipline (rulings A148 + A133):
-   • --accent-marker (#D43F16, marker_on_paper) = large-scale display, fills,
+   • --accent-marker (#C53B14, marker_on_paper) = large-scale display, fills,
      meaningful non-text. NOT a small-text ink.
    • --accent-marker-text (#B93613, marker_text_on_paper) = every small marker
      TEXT string (>= 4.5:1 on all five paper grounds).
    • --fg-subtle (#67645A) is the light faint voice (A133-corrected).
    Glow is an ink-room device (A154): --glow-signal is none here.
+
+   --accent-marker DARKENED 2026-08-21 (Nemesis SOP-005 gate, Harmonia fix):
+   was #D43F16. --text-on-marker (#FFF6F0) on the OLD value measured 4.35:1 -
+   under the 4.5:1 floor for the app's 17px-bold / <24px action-button labels
+   (no large-text exemption), a systemic gap hitting 13 app-wide call sites
+   (.page-action-btn, .prompt-input-submit, .roster-sheet-large-btn, and
+   others - anywhere `background: var(--accent-marker); color:
+   var(--text-on-marker);` pairs). Same hue, one step darker (R:G:B ratio
+   held near-identical to the original, same technique as the
+   --status-error-strong extension below) restores >=4.5:1 - measures
+   4.91:1 - without touching --text-on-marker or any call site; every
+   existing `var(--accent-marker)` consumer inherits the fix. The pre-fix
+   local noodgreep in integrations.css .intg-action (swapping in
+   --accent-marker-up as the resting fill) is now redundant and can revert
+   to --accent-marker + --text-on-marker. --accent-marker-up (#B93613) and
+   --accent-marker-muted (#8F2E10) stay untouched and still read as
+   progressively darker hover/de-emphasis steps below the new resting value.
+   The low-alpha tint siblings (--accent-marker-soft/-bg/-bg-emphasis/-border,
+   --room-wash, --rail-wash, --graph-focus-glow, ::selection) keep their old
+   literal rgba(212, 63, 22, ...) base on purpose - they carry no text, their
+   own contrast math is untouched by this fix, and the drift from the new
+   base is imperceptible at those alphas; flagged here for a future cleanup
+   pass rather than folded into this fix silently.
    =========================================================================== */
 :root[data-theme='light'] {
   color-scheme: light;
@@ -518,7 +563,9 @@
   --fg-subtle: #67645A; /* light paper_faint (A133) - the terminal quiet step */
 
   /* Accent - the marker on paper (§2.2). */
-  --accent-marker: #D43F16;                        /* marker_on_paper - display/fills/non-text */
+  --accent-marker: #C53B14;                        /* marker_on_paper - display/fills/non-text; darkened from #D43F16
+                                                       2026-08-21 to clear 4.5:1 with --text-on-marker (see header
+                                                       comment above) - measures 4.91:1, was 4.35:1 */
   --accent-marker-up: #B93613;                     /* hover */
   --accent-marker-muted: #8F2E10;                  /* muted */
   --accent-marker-soft: rgba(212, 63, 22, 0.08);   /* bg */
@@ -588,6 +635,8 @@
   --status-error: #D64545;
   --status-error-text: #B33A2B;
   --status-error-strong: #C53F3F; /* ~5.05:1 vs white, same red family as #D64545 */
+  --text-on-error: #FFFDFB;       /* on_error - identical to the dark-room value; the fill (#C53F3F) doesn't change
+                                      between rooms so neither does its text ink. ~4.98:1, see dark-column comment. */
   --status-info: #67645A;
 
   --status-success-soft: rgba(23, 26, 32, 0.06);
