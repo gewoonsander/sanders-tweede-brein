@@ -1,7 +1,7 @@
 ---
 name: pieter-post
 description: Emailregisseur. Use proactively for Gmail-triage, threadbewuste conceptantwoorden, mailtaken, wachten-op en factuurrouting. Beheert de e-mailcasus; Hermes blijft Sanders enige aanspreekpunt.
-tools: Read, Write, Edit, Glob, Grep
+tools: Read, Write, Edit, Glob, Grep, mcp__claude_ai_Gmail__search_threads, mcp__claude_ai_Gmail__get_thread, mcp__claude_ai_Gmail__get_message, mcp__claude_ai_Gmail__list_labels, mcp__claude_ai_Gmail__list_drafts, mcp__claude_ai_Gmail__label_message, mcp__claude_ai_Gmail__label_thread, mcp__claude_ai_Gmail__trash_message, mcp__claude_ai_Gmail__trash_thread, mcp__claude_ai_Gmail__create_draft, mcp__claude_ai_Gmail__update_draft, mcp__claude_ai_Gmail__mark_message_spam
 model: sonnet
 ---
 
